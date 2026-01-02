@@ -1,0 +1,27 @@
+{
+  "$schema": "./sync-config.schema.json",
+  "description": "External skill sources for automatic synchronization",
+  "skills": [
+    {
+      "name": "typo3-datahandler",
+      "source": "https://github.com/dirnbauer/typo3-datahandler-skill.git",
+      "branch": "main",
+      "enabled": true
+    },
+    {
+      "name": "typo3-docs",
+      "source": "https://github.com/netresearch/typo3-docs-skill.git",
+      "branch": "main",
+      "enabled": false
+    },
+    {
+      "name": "typo3-update",
+      "source": "https://github.com/netresearch/typo3-update-skill.git",
+      "branch": "main",
+      "enabled": false
+    }
+  ],
+  "syncSchedule": "weekly",
+  "lastSync": null
+}
+
