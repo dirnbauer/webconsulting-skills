@@ -26,6 +26,7 @@ Adapted by webconsulting.at for this skill collection
 | Skill | Description | Version | Triggers |
 |-------|-------------|---------|----------|
 | `webconsulting-branding` | Enforces webconsulting.at design system, color palettes, typography, and MDX component structures | 1.0.0 | frontend, design, branding, ui, components |
+| `ui-design-patterns` | Practical UI design patterns for polished, accessible interfaces (based on Refactoring UI + Practical UI) | 1.1.0 | ui, design, layout, spacing, typography, color, hierarchy, accessibility, usability |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations (v13/v14) | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV (v13/v14) | 2.0.0 | ddev, local, development, docker |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags (v13/v14) | 2.0.0 | seo, sitemap, meta, robots |
@@ -37,6 +38,7 @@ Adapted by webconsulting.at for this skill collection
 
 ### Frontend Development
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
+- **ui-design-patterns**: Practical UI design principles—hierarchy, spacing, color, typography, depth, accessibility, copywriting
 
 ### Backend Development
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
@@ -64,8 +66,8 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 For optimal performance, limit active skills per session:
 
 ### Frontend Session
-Active: `webconsulting-branding`  
-Use case: UI development, styling, component creation
+Active: `webconsulting-branding`, `ui-design-patterns`  
+Use case: UI development, styling, component creation, visual design
 
 ### Backend Session
 Active: `typo3-datahandler`, `typo3-ddev`, `typo3-update`  
@@ -83,6 +85,7 @@ Use case: TYPO3 version migrations, dual-version compatibility
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
 |-------|-----------|-----------|---------|---------|---------|
+| ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
