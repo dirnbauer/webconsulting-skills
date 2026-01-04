@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [3.0.0] - 2026-01-04
+
+### Added
+
+- **11 new skills from Netresearch** - Major expansion of skill library
+  - `context7`: Library documentation lookup via Context7 REST API
+  - `cli-tools`: CLI tool management and auto-installation
+  - `security-audit`: Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS)
+  - `typo3-conformance`: Extension standards compliance checker
+  - `enterprise-readiness`: OpenSSF, SLSA, supply chain security
+  - `typo3-testing`: Unit, functional, E2E, architecture, mutation testing
+  - `typo3-extension-upgrade`: Systematic extension upgrades (Rector, Fractor)
+  - `typo3-docs`: Documentation using docs.typo3.org standards
+  - `php-modernization`: PHP 8.x patterns, PHPStan level 10, DTOs, enums
+  - `typo3-core-contributions`: TYPO3 Core contribution workflow (Gerrit, Forge)
+
+### Changed
+
+- **README.md**: Added Netresearch attribution section, composer-agent-skill-plugin documentation, and links to original Netresearch repositories
+- **AGENTS.md**: Reorganized with new skill categories, updated session profiles, expanded compatibility matrix
+- **typo3-ddev**: Added multi-version testing section for extension development, container priority guidance
+
+### Attribution
+
+This release incorporates skills derived from [Netresearch DTT GmbH](https://github.com/netresearch). 
+We recommend using their original repositories for the latest updates.
+
 ## [2.0.0] - 2026-01-02
 
 ### Changed
@@ -33,7 +60,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Cursor IDE integration with master architect rule
 - Installation script (`install.sh`)
 
-[Unreleased]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/releases/tag/v1.0.0
 

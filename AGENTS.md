@@ -13,8 +13,9 @@ We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)*
 outstanding contributions to the TYPO3 community. Their excellent methodology and best practices
 have been invaluable in shaping these guidelines.
 
-Netresearch has been a leading force in TYPO3 development, and their commitment to sharing
-knowledge has benefited the entire community. Thank you, Netresearch, for your exceptional work!
+The majority of skills in this repository are derived from Netresearch's open-source skill
+repositories. We recommend checking their original repositories for the latest updates:
+https://github.com/netresearch
 
 **Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
 Adapted by webconsulting.at for this skill collection
@@ -25,35 +26,59 @@ Adapted by webconsulting.at for this skill collection
 
 | Skill | Description | Version | Triggers |
 |-------|-------------|---------|----------|
-| `webconsulting-branding` | Enforces webconsulting.at design system, color palettes, typography, and MDX component structures | 1.0.0 | frontend, design, branding, ui, components |
-| `ui-design-patterns` | Practical UI design patterns for polished, accessible interfaces (based on Refactoring UI + Practical UI) | 1.1.0 | ui, design, layout, spacing, typography, color, hierarchy, accessibility, usability |
-| `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations (v13/v14) | 2.0.0 | database, datahandler, tcemain, records |
-| `typo3-ddev` | TYPO3 local development with DDEV (v13/v14) | 2.0.0 | ddev, local, development, docker |
-| `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags (v13/v14) | 2.0.0 | seo, sitemap, meta, robots |
-| `typo3-security` | Security hardening checklist and best practices (v13/v14) | 2.0.0 | security, hardening, permissions |
+| **TYPO3 Development** | | | |
+| `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
+| `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
+| `typo3-testing` | Unit, functional, E2E, architecture, mutation testing | 1.0.0 | testing, phpunit, playwright, phpat |
+| `typo3-conformance` | Extension standards compliance checker | 1.0.0 | conformance, standards, quality |
+| `typo3-docs` | Documentation using docs.typo3.org standards | 1.0.0 | documentation, rst, docs |
+| `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | 1.0.0 | core, contributions, gerrit, forge |
+| **Upgrade & Migration** | | | |
 | `typo3-rector` | TYPO3 upgrade patterns using Rector for dual-version support | 2.0.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v13/v14 dual-version development guide | 2.0.0 | update, upgrade, v13, v14 |
+| `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
+| **Security & Operations** | | | |
+| `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
+| `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
+| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
+| `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
+| **PHP & Tools** | | | |
+| `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
+| `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
+| `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
+| **Frontend Development** | | | |
+| `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
+| `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
 
 ## Skill Categories
 
+### TYPO3 Development
+- **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
+- **typo3-ddev**: Local development environment setup with multi-version testing
+- **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
+- **typo3-conformance**: Extension quality assessment and standards compliance
+- **typo3-docs**: Official documentation standards with RST and TYPO3 directives
+- **typo3-core-contributions**: Contributing to TYPO3 Core via Gerrit and Forge
+
+### Upgrade & Migration
+- **typo3-rector**: Automated code refactoring with Rector for dual-version support
+- **typo3-update**: Version migration and compatibility strategies for v13/v14
+- **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
+
+### Security & Operations
+- **typo3-security**: Production hardening checklist for v13/v14
+- **typo3-seo**: Search engine optimization with EXT:seo
+- **security-audit**: Deep security audits aligned with OWASP Top 10
+- **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
+
+### PHP & Tools
+- **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
+- **cli-tools**: CLI tool management, auto-installation on "command not found"
+- **context7**: Library documentation lookup via Context7 REST API
+
 ### Frontend Development
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
-- **ui-design-patterns**: Practical UI design principles—hierarchy, spacing, color, typography, depth, accessibility, copywriting
-
-### Backend Development
-- **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
-- **typo3-update**: Dual-version compatible code patterns for v13/v14
-
-### DevOps & Infrastructure
-- **typo3-ddev**: Local development environment setup for v13/v14
-- **typo3-security**: Production hardening for v13/v14
-
-### SEO & Content
-- **typo3-seo**: Search engine optimization configuration
-
-### Upgrades & Maintenance
-- **typo3-rector**: Automated code refactoring with Rector for dual-version support
-- **typo3-update**: Version migration and compatibility strategies
+- **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
 
 ## Usage
 
@@ -70,28 +95,47 @@ Active: `webconsulting-branding`, `ui-design-patterns`
 Use case: UI development, styling, component creation, visual design
 
 ### Backend Session
-Active: `typo3-datahandler`, `typo3-ddev`, `typo3-update`  
+Active: `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
 Use case: Extension development, database operations, v13/v14 compatible code
 
 ### Ops Session
-Active: `typo3-security`, `typo3-ddev`  
-Use case: Server configuration, deployment, hardening
+Active: `typo3-security`, `security-audit`, `enterprise-readiness`, `typo3-ddev`  
+Use case: Server configuration, deployment, hardening, security audits
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-update`  
-Use case: TYPO3 version migrations, dual-version compatibility
+Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `php-modernization`  
+Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility
+
+### Documentation Session
+Active: `typo3-docs`, `typo3-conformance`  
+Use case: Extension documentation, quality assessment, standards compliance
+
+### Core Contribution Session
+Active: `typo3-core-contributions`, `typo3-testing`, `typo3-conformance`  
+Use case: Contributing patches to TYPO3 Core via Gerrit
 
 ## Version Compatibility Matrix
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
 |-------|-----------|-----------|---------|---------|---------|
-| ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-conformance | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-docs | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-core-contributions | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-rector | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-update | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
+| security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
+| enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
+| php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
+| cli-tools | ✓ | ✓ | ✓ | ✓ | ✓ |
+| context7 | ✓ | ✓ | ✓ | ✓ | ✓ |
+| webconsulting-branding | ✓ | ✓ | ✓ | ✓ | ✓ |
+| ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
@@ -103,4 +147,3 @@ Use case: TYPO3 version migrations, dual-version compatibility
 
 ---
 *Generated by webconsulting Claude Marketplace*
-

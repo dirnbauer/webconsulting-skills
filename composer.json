@@ -1,0 +1,30 @@
+{
+    "name": "webconsulting/claude-typo3-skills",
+    "description": "AI Agent Skills for TYPO3 development with Claude/Cursor",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Netresearch DTT GmbH",
+            "email": "plugins@netresearch.de",
+            "role": "Original skill methodology"
+        },
+        {
+            "name": "webconsulting.at",
+            "homepage": "https://webconsulting.at",
+            "role": "Adaptation and additional skills"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "composer-plugin-api": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WebConsulting\\AgentSkills\\": "src/"
+        }
+    },
+    "extra": {
+        "class": "WebConsulting\\AgentSkills\\SkillInstallerPlugin"
+    }
+}

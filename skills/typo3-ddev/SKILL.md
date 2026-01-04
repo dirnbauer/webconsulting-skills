@@ -1,7 +1,7 @@
 ---
 name: typo3-ddev
-description: Best practices for TYPO3 local development with DDEV, including configuration, database management, and common workflows for v13/v14.
-version: 2.0.0
+description: Best practices for TYPO3 local development with DDEV, including configuration, database management, multi-version testing, and common workflows for v13/v14.
+version: 2.1.0
 typo3_compatibility: "13.0 - 14.x"
 triggers:
   - ddev
@@ -9,12 +9,23 @@ triggers:
   - development
   - docker
   - environment
+  - multi-version
 ---
 
 # TYPO3 DDEV Local Development
 
 > **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
 > All configurations in this skill support both TYPO3 v13 and v14.
+
+## Container Priority
+
+**Always check for existing containers first:**
+
+1. Check `.ddev/` exists → use `ddev exec`
+2. Check `docker-compose.yml` exists → use `docker compose exec`
+3. Only use system tools if no container environment
+
+> **Critical**: Use the project's configured PHP version, not system PHP.
 
 ## 1. Project Initialization
 
@@ -492,16 +503,75 @@ $apiKey = $_ENV['MY_API_KEY'];
 2. **Don't use** DDEV in production
 3. **Rotate** any sensitive data in development databases
 
+## 13. Multi-Version Testing (Extension Development)
+
+When developing extensions that need to work across multiple TYPO3 versions:
+
+### Setup for Multi-Version Testing
+
+```yaml
+# .ddev/config.yaml
+name: my-extension
+type: php
+docroot: ""
+php_version: "8.3"
+
+additional_hostnames:
+  - v13
+  - v14
+```
+
+### Install Multiple TYPO3 Versions
+
+```bash
+# Create version-specific directories
+mkdir -p v13 v14
+
+# Install TYPO3 v13
+cd v13
+ddev composer create "typo3/cms-base-distribution:^13"
+cd ..
+
+# Install TYPO3 v14
+cd v14
+ddev composer create "typo3/cms-base-distribution:^14"
+cd ..
+
+# Symlink extension
+ln -s ../../../ v13/packages/my_extension
+ln -s ../../../ v14/packages/my_extension
+```
+
+### Access URLs
+
+| Environment | URL |
+|-------------|-----|
+| TYPO3 v13 | `https://v13.my-extension.ddev.site/typo3/` |
+| TYPO3 v14 | `https://v14.my-extension.ddev.site/typo3/` |
+
+**Default Credentials**: admin / Joh316!
+
+### Version-Specific Commands
+
+```bash
+# Run tests on v13
+ddev exec -d /var/www/html/v13 vendor/bin/phpunit
+
+# Run tests on v14
+ddev exec -d /var/www/html/v14 vendor/bin/phpunit
+
+# Clear cache for specific version
+ddev exec -d /var/www/html/v13 vendor/bin/typo3 cache:flush
+```
+
 ---
 
 ## Credits & Attribution
 
 This skill is based on the excellent TYPO3 best practices and methodology developed by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**. We are deeply grateful for their
-outstanding contributions to the TYPO3 community and their commitment to sharing knowledge.
+**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
 
-Netresearch has been a leading force in TYPO3 development, and their expertise has been
-invaluable in shaping these guidelines. Thank you, Netresearch, for your exceptional work!
+Original repository: https://github.com/netresearch/typo3-ddev-skill
 
 **Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
 Adapted by webconsulting.at for this skill collection
