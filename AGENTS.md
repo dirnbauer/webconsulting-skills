@@ -2,6 +2,10 @@
 
 Auto-generated index of all available skills in this marketplace.
 
+> **📢 Early Adopter Notice:** We encourage you to use these skills! Expect occasional updates as 
+> Anthropic, Cursor, and webconsulting evolve their platforms. Always review AI-generated code.
+> See [README](README.md) for details.
+
 > **TYPO3 Compatibility:** All skills support TYPO3 v13.x and v14.x (v14 preferred)
 > Code examples are designed to work on both versions simultaneously.
 
@@ -27,6 +31,7 @@ Adapted by webconsulting.at for this skill collection
 | Skill | Description | Version | Triggers |
 |-------|-------------|---------|----------|
 | **TYPO3 Development** | | | |
+| `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
 | `typo3-testing` | Unit, functional, E2E, architecture, mutation testing | 1.0.0 | testing, phpunit, playwright, phpat |
@@ -53,6 +58,7 @@ Adapted by webconsulting.at for this skill collection
 ## Skill Categories
 
 ### TYPO3 Development
+- **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing
 - **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
@@ -86,6 +92,114 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 
 > "Using the typo3-datahandler skill, help me create a content element programmatically."
 
+### Quick Examples by Category
+
+**🏗️ Project Setup (typo3-ddev)**
+- "Set up TYPO3 v14 with DDEV, Redis, and Xdebug"
+- "Configure multi-site with shared codebase"
+- "Import production database and sanitize sensitive data"
+- "Docker production setup with nginx and PHP-FPM"
+
+**📦 Content Blocks (typo3-content-blocks)**
+- "Create a hero banner Content Element with CTA button"
+- "Create a team members Record Type with Extbase naming"
+- "Build an accordion with Collection items"
+- "FAQ with categories using Record Type relations"
+- "Image slider with IRRE and max 10 slides"
+- "Migrate my classic TCA/SQL extension to Content Blocks"
+- "Convert this TCA config to Content Blocks YAML"
+- "Keep existing column names during migration"
+- "Revert Content Block to classic TCA/SQL format"
+- "Generate TCA PHP from Content Blocks config.yaml"
+- "Remove Content Blocks dependency safely"
+
+**🔧 Extension Development (typo3-datahandler, typo3-update)**
+- "CRUD operations with DataHandler and transactions"
+- "Extbase controller with list/show actions for v13+v14"
+- "PSR-14 event listener with AsEventListener attribute"
+- "Custom repository with QueryBuilder methods"
+- "Scheduler task with progress reporting"
+- "Backend module with list view and bulk actions"
+- "REST API with authentication and rate limiting"
+- "CLI command with progress bar and dry-run mode"
+
+**🗂️ TCA & FlexForm (typo3-datahandler)**
+- "TCA select field with icons and default value"
+- "TCA inline (IRRE) with sorting and appearance"
+- "FlexForm with tabs and database record selection"
+- "Custom route enhancers for SEO-friendly URLs"
+
+**📁 Files & Media (typo3-datahandler)**
+- "Process uploaded images: resize, convert to WebP"
+- "Extract and store EXIF metadata from images"
+- "Custom image processor with watermark"
+
+**🌐 Localization (typo3-update)**
+- "Multi-language setup with fallback types"
+- "XLIFF translations with pluralization"
+- "Sync translations from Phrase/Lokalise"
+
+**📧 Forms & Email (typo3-datahandler)**
+- "EXT:form custom finisher for CRM integration"
+- "Custom validator for email domain whitelist"
+- "Styled HTML email template with Fluid"
+
+**⚡ Performance (typo3-ddev, typo3-security)**
+- "Redis caching with cache groups and tags"
+- "Cache invalidation strategy with tags"
+- "Database query optimization and indexing"
+
+**🔐 Auth & Permissions (typo3-security)**
+- "Frontend user registration with email verification"
+- "Backend user groups with granular permissions"
+- "SAML SSO integration with Azure AD"
+
+**🔄 Upgrades (typo3-rector, typo3-extension-upgrade)**
+- "Upgrade extension from v12 to v13/v14 with Rector"
+- "Fix all deprecations for TYPO3 v14"
+- "Fractor for TypoScript and Fluid migrations"
+- "Site migration from v10 to v14 with URL preservation"
+
+**🧪 Testing (typo3-testing)**
+- "Unit tests with mocked repositories"
+- "Functional tests with database fixtures"
+- "E2E tests with Playwright for contact form"
+- "GitHub Actions CI for PHP 8.2/8.3 + TYPO3 v13/v14"
+
+**🔒 Security (typo3-security, security-audit)**
+- "Security audit for XSS, CSRF, SQL injection"
+- "Production hardening checklist"
+- "OWASP Top 10 compliance review"
+- "PSR-15 middleware for security headers"
+
+**📈 SEO (typo3-seo)**
+- "XML sitemap with custom entries"
+- "OpenGraph/Twitter cards with fallbacks"
+- "Hreflang for multi-language sites"
+- "Structured data for articles (JSON-LD)"
+
+**📚 Documentation (typo3-docs)**
+- "RST documentation following docs.typo3.org"
+- "API documentation with code examples"
+- "Configuration reference with confval directive"
+
+**🏢 Quality (enterprise-readiness, php-modernization)**
+- "PHPStan level 9 configuration"
+- "Enterprise readiness assessment"
+- "Quality gates for CI/CD"
+- "Custom logging with Sentry integration"
+
+**🚀 Deployment (typo3-ddev)**
+- "Deployer config with staging and production"
+- "GitHub Actions automated deployment"
+- "Docker production with health checks"
+
+**🛠️ Common Fixes (typo3-datahandler)**
+- "Fix broken relations and orphaned records"
+- "Bulk content update with DataHandler"
+- "Debug extension conflicts in TCA/hooks"
+- "Database optimization and missing indexes"
+
 ## Session Profiles
 
 For optimal performance, limit active skills per session:
@@ -95,8 +209,8 @@ Active: `webconsulting-branding`, `ui-design-patterns`
 Use case: UI development, styling, component creation, visual design
 
 ### Backend Session
-Active: `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
-Use case: Extension development, database operations, v13/v14 compatible code
+Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
+Use case: Extension development, Content Blocks, database operations, v13/v14 compatible code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `enterprise-readiness`, `typo3-ddev`  
@@ -118,6 +232,7 @@ Use case: Contributing patches to TYPO3 Core via Gerrit
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
 |-------|-----------|-----------|---------|---------|---------|
+| typo3-content-blocks | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
