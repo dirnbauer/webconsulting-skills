@@ -1,13 +1,14 @@
 ---
 name: typo3-content-blocks
-description: Expert guidance on creating Content Elements, Record Types, and Page Types using TYPO3 Content Blocks extension - the single source of truth for content modeling. Includes bidirectional migration between classic TCA/SQL and Content Blocks.
-version: 1.2.0
+description: Expert guidance on creating Content Elements, Record Types, Page Types, and File Types using TYPO3 Content Blocks extension - the single source of truth for content modeling. Includes bidirectional migration between classic TCA/SQL and Content Blocks.
+version: 1.3.0
 typo3_compatibility: "13.0 - 14.x"
 triggers:
   - content-blocks
   - content-element
   - record-type
   - page-type
+  - file-type
   - make:content-block
   - friendsoftypo3/content-blocks
   - irre
@@ -72,12 +73,12 @@ RewriteRule (?:typo3conf/ext|typo3/sysext|typo3/ext)/[^/]+/(?:Configuration|Cont
 
 Content Blocks supports four content types:
 
-| Type | Folder | Use Case |
-|------|--------|----------|
-| `ContentElements` | `ContentBlocks/ContentElements/` | Frontend content (tt_content) |
-| `RecordTypes` | `ContentBlocks/RecordTypes/` | Custom records (new tables) |
-| `PageTypes` | `ContentBlocks/PageTypes/` | Custom page types |
-| `FileTypes` | `ContentBlocks/FileTypes/` | Custom file metadata |
+| Type | Folder | Table | Use Case |
+|------|--------|-------|----------|
+| `ContentElements` | `ContentBlocks/ContentElements/` | `tt_content` | Frontend content (hero, accordion, CTA) |
+| `RecordTypes` | `ContentBlocks/RecordTypes/` | Custom/existing | Structured records (news, products, team) |
+| `PageTypes` | `ContentBlocks/PageTypes/` | `pages` | Custom page types (blog, landing page) |
+| `FileTypes` | `ContentBlocks/FileTypes/` | `sys_file_metadata` | Extended file metadata (photographer, copyright) |
 
 ## 4. Folder Structure
 
@@ -95,10 +96,26 @@ EXT:my_sitepackage/
     │       │   ├── frontend.html
     │       │   └── partials/
     │       └── config.yaml
-    └── RecordTypes/
-        └── my-record/
-            ├── assets/
-            │   └── icon.svg
+    ├── RecordTypes/
+    │   └── my-record/
+    │       ├── assets/
+    │       │   └── icon.svg
+    │       ├── language/
+    │       │   └── labels.xlf
+    │       └── config.yaml
+    ├── PageTypes/
+    │   └── blog-article/
+    │       ├── assets/
+    │       │   ├── icon.svg
+    │       │   ├── icon-hide-in-menu.svg
+    │       │   └── icon-root.svg
+    │       ├── language/
+    │       │   └── labels.xlf
+    │       ├── templates/
+    │       │   └── backend-preview.html
+    │       └── config.yaml
+    └── FileTypes/
+        └── image-extended/
             ├── language/
             │   └── labels.xlf
             └── config.yaml
@@ -389,7 +406,254 @@ fields:
     minitems: 1
 ```
 
-## 7. Field Types Reference
+## 7. Creating Page Types (Custom doktypes)
+
+Page Types extend the `pages` table with custom page types – ideal for blog articles, landing pages, news pages, or other page variants with special properties.
+
+### When to Use Page Types
+
+| Use Case | Example |
+|----------|---------|
+| Structured page properties | Blog with author, teaser image, publish date |
+| Plugin integration | News lists, event calendars reading page properties |
+| Different page behavior | Landing pages without navigation |
+| SEO-specific fields | Custom meta fields per page type |
+
+### Minimal Page Type
+
+```yaml
+# EXT:my_sitepackage/ContentBlocks/PageTypes/blog-article/config.yaml
+name: myvendor/blog-article
+typeName: 1705234567
+fields:
+  - identifier: author_name
+    type: Text
+```
+
+### Full Page Type Example
+
+```yaml
+# EXT:my_sitepackage/ContentBlocks/PageTypes/blog-article/config.yaml
+name: myvendor/blog-article
+typeName: 1705234567   # Unix timestamp (unique identifier)
+group: default         # Options: default, link, special
+fields:
+  - identifier: author_name
+    type: Text
+    label: Author
+    required: true
+  - identifier: teaser_text
+    type: Textarea
+    label: Teaser
+  - identifier: hero_image
+    type: File
+    allowed: common-image-types
+    maxitems: 1
+  - identifier: publish_date
+    type: DateTime
+    label: Publish Date
+  - identifier: reading_time
+    type: Number
+    label: Reading Time (minutes)
+```
+
+### Page Type Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `typeName` | integer | ✓ | Unique doktype number (use Unix timestamp) |
+| `group` | string | | Group in selector: `default`, `link`, `special` |
+
+**Reserved typeName values:** 199, 254 (cannot be used)
+
+### Icons for Page States
+
+Page Types support state-specific icons. Add these to your assets folder:
+
+```
+ContentBlocks/PageTypes/blog-article/
+├── assets/
+│   ├── icon.svg              # Default icon
+│   ├── icon-hide-in-menu.svg # Hidden in menu state
+│   └── icon-root.svg         # Site root state
+└── config.yaml
+```
+
+### Backend Preview
+
+Create a `backend-preview.html` to preview custom page properties:
+
+```html
+<!-- templates/backend-preview.html -->
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="card card-size-medium">
+    <div class="card-body">
+        <be:link.editRecord uid="{data.uid}" table="{data.mainType}" fields="author_name">
+            <strong>Author:</strong> {data.author_name}
+        </be:link.editRecord>
+        <f:if condition="{data.publish_date}">
+            <br/><small>Published: <f:format.date format="d.m.Y">{data.publish_date}</f:format.date></small>
+        </f:if>
+    </div>
+</div>
+</html>
+```
+
+### Frontend Integration
+
+Page Types have **no automatic frontend rendering**. Add the ContentBlocksDataProcessor to your TypoScript:
+
+```typoscript
+# Configuration/TypoScript/setup.typoscript
+page = PAGE
+page {
+    10 = FLUIDTEMPLATE
+    10 {
+        templateName = Default
+        templateRootPaths.10 = EXT:my_sitepackage/Resources/Private/Templates/
+        
+        dataProcessing {
+            # Process Content Blocks page data
+            1 = content-blocks
+        }
+    }
+}
+```
+
+Then access fields in your Fluid template:
+
+```html
+<!-- Resources/Private/Templates/Default.html -->
+<f:if condition="{data.author_name}">
+    <p class="author">By {data.author_name}</p>
+</f:if>
+
+<f:if condition="{data.hero_image}">
+    <f:for each="{data.hero_image}" as="image">
+        <f:image image="{image}" class="hero-image"/>
+    </f:for>
+</f:if>
+```
+
+### Remove from Page Tree Drag Area
+
+To hide your page type from the "Create new page" drag area:
+
+```typoscript
+# Configuration/user.tsconfig
+options {
+    pageTree {
+        doktypesToShowInNewPageDragArea := removeFromList(1705234567)
+    }
+}
+```
+
+## 8. Creating File Types (Extended Metadata)
+
+> New in version 1.2
+
+File Types extend the `sys_file_metadata` table with custom fields – perfect for photographer credits, copyright notices, or additional file options.
+
+### Available File Type Names
+
+| typeName | File Types |
+|----------|------------|
+| `image` | JPEG, PNG, GIF, WebP, SVG |
+| `video` | MP4, WebM, OGG |
+| `audio` | MP3, WAV, OGG |
+| `text` | TXT, PDF, Markdown |
+| `application` | ZIP, Office formats |
+
+### Minimal File Type
+
+```yaml
+# EXT:my_sitepackage/ContentBlocks/FileTypes/image-extended/config.yaml
+name: myvendor/image-extended
+typeName: image
+fields:
+  - identifier: photographer
+    type: Text
+    label: Photographer
+```
+
+### Full File Type Example
+
+```yaml
+# EXT:my_sitepackage/ContentBlocks/FileTypes/image-extended/config.yaml
+name: myvendor/image-extended
+typeName: image
+prefixFields: false  # Keep original column names
+fields:
+  - identifier: image_overlay_palette
+    type: Palette
+    label: 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette'
+    fields:
+      # Reuse existing TYPO3 core fields
+      - identifier: alternative
+        useExistingField: true
+      - identifier: description
+        useExistingField: true
+      - type: Linebreak
+      - identifier: link
+        useExistingField: true
+      - identifier: title
+        useExistingField: true
+      - type: Linebreak
+      # Custom fields
+      - identifier: photographer
+        type: Text
+        label: Photographer
+      - identifier: copyright
+        type: Text
+        label: Copyright Notice
+      - identifier: source_url
+        type: Link
+        label: Source URL
+      - type: Linebreak
+      - identifier: crop
+        useExistingField: true
+```
+
+### File Type Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `typeName` | string | ✓ | One of: `text`, `image`, `audio`, `video`, `application` |
+| `prefixFields` | boolean | | Disable prefixing (recommended: `false`) |
+
+### Use Cases for File Types
+
+| Use Case | Fields to Add |
+|----------|---------------|
+| Photography agency | `photographer`, `copyright`, `license_type`, `expiry_date` |
+| Video platform | `director`, `duration`, `transcript`, `subtitles` |
+| Document management | `document_version`, `author`, `confidentiality` |
+| E-commerce | `product_sku`, `variant_color`, `variant_size` |
+
+### Accessing File Type Fields
+
+In Fluid templates, access custom metadata through FAL references:
+
+```html
+<f:for each="{data.images}" as="image">
+    <figure>
+        <f:image image="{image}" alt="{image.alternative}"/>
+        <f:if condition="{image.properties.photographer}">
+            <figcaption>
+                Photo: {image.properties.photographer}
+                <f:if condition="{image.properties.copyright}">
+                    | © {image.properties.copyright}
+                </f:if>
+            </figcaption>
+        </f:if>
+    </figure>
+</f:for>
+```
+
+## 9. Field Types Reference
 
 ### Simple Fields
 
@@ -503,7 +767,7 @@ fields:
         label: Initially Open
 ```
 
-## 8. Field Prefixing
+## 10. Field Prefixing
 
 Content Blocks automatically prefixes field identifiers to avoid collisions.
 
@@ -540,7 +804,7 @@ fields:
     prefixField: false  # This field won't be prefixed
 ```
 
-## 9. Templating Features
+## 11. Templating Features
 
 ### Accessing Data in Fluid
 
@@ -605,7 +869,7 @@ fields:
 <f:translate key="{cb:languagePath(name: 'vendor/other-block')}:shared_label"/>
 ```
 
-## 10. Extending Existing Tables
+## 12. Extending Existing Tables
 
 Add custom types to existing tables (like `tx_news`):
 
@@ -621,7 +885,7 @@ fields:
     type: Text
 ```
 
-## 11. Workflow with DDEV
+## 13. Workflow with DDEV
 
 ### Standard Development Workflow
 
@@ -664,7 +928,7 @@ ddev typo3 make:model --extension=my_sitepackage
 ddev typo3 make:repository --extension=my_sitepackage
 ```
 
-## 12. Defaults Configuration
+## 14. Defaults Configuration
 
 Create a `content-blocks.yaml` in project root for default settings:
 
@@ -690,7 +954,7 @@ config:
     vendorPrefix: tx_mysitepackage
 ```
 
-## 13. Best Practices
+## 15. Best Practices
 
 ### DO ✅
 
@@ -751,7 +1015,7 @@ config:
 
 5. **Don't forget shareAcross options** when using foreign_table in multiple places
 
-## 14. Troubleshooting
+## 16. Troubleshooting
 
 ### Content Block Not Appearing
 
@@ -783,7 +1047,7 @@ ddev typo3 database:updateschema
 - Check for typos in config.yaml
 - Ensure labels.xlf has matching keys
 
-## 15. Version Constraints
+## 17. Version Constraints
 
 ```php
 // ext_emconf.php
@@ -800,7 +1064,7 @@ $EM_CONF[$_EXTKEY] = [
 ];
 ```
 
-## 16. Migrating Classic Extensions to Content Blocks
+## 18. Migrating Classic Extensions to Content Blocks
 
 This section guides you through converting traditional TYPO3 extensions (with separate TCA, SQL, TypoScript) to the modern Content Blocks approach.
 
@@ -1330,7 +1594,7 @@ fields:
 
 ---
 
-## 17. Reverting Content Blocks to Classic Extension Format
+## 19. Reverting Content Blocks to Classic Extension Format
 
 This section guides you through converting Content Blocks back to traditional TYPO3 extension format with separate TCA, SQL, and TypoScript files.
 
@@ -2247,7 +2511,7 @@ ddev typo3 cache:flush
 
 ---
 
-## 18. Package Management for v14 Compatibility
+## 20. Package Management for v14 Compatibility
 
 If extensions don't support TYPO3 v14 yet, fork and update:
 
@@ -2269,7 +2533,10 @@ Required private forks for webconsulting stack:
 - [Content Blocks Documentation](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/)
 - [YAML Reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/Index.html)
 - [Field Types](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/FieldTypes/Index.html)
+- [Content Elements API](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/ContentElements/Index.html)
 - [Record Types API](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/RecordTypes/Index.html)
+- [Page Types API](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/PageTypes/Index.html)
+- [File Types YAML Reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/FileTypes/Index.html)
 - [Packagist: friendsoftypo3/content-blocks](https://packagist.org/packages/friendsoftypo3/content-blocks)
 
 ---
