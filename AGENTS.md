@@ -45,6 +45,7 @@ Adapted by webconsulting.at for this skill collection
 | **Security & Operations** | | | |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
+| `ai-search-optimization` | AEO/GEO for ChatGPT, Perplexity, Google AI Overviews visibility | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
 | **PHP & Tools** | | | |
@@ -74,6 +75,7 @@ Adapted by webconsulting.at for this skill collection
 ### Security & Operations
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
+- **ai-search-optimization**: AEO/GEO for AI search visibility (ChatGPT, Perplexity, Google AI Overviews)
 - **security-audit**: Deep security audits aligned with OWASP Top 10
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
 
@@ -178,6 +180,14 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Hreflang for multi-language sites"
 - "Structured data for articles (JSON-LD)"
 
+**🤖 AI Search (ai-search-optimization)**
+- "Optimize content for ChatGPT and Perplexity citations"
+- "Schema markup for Google AI Overviews"
+- "Configure robots.txt for AI crawlers (GPTBot, PerplexityBot)"
+- "E-E-A-T signals for AI search visibility"
+- "Monitor brand mentions in AI search platforms"
+- "Structure content for AI answer extraction"
+
 **📚 Documentation (typo3-docs)**
 - "RST documentation following docs.typo3.org"
 - "API documentation with code examples"
@@ -228,6 +238,10 @@ Use case: Extension documentation, quality assessment, standards compliance
 Active: `typo3-core-contributions`, `typo3-testing`, `typo3-conformance`  
 Use case: Contributing patches to TYPO3 Core via Gerrit
 
+### Marketing & SEO Session
+Active: `typo3-seo`, `ai-search-optimization`, `webconsulting-branding`  
+Use case: SEO optimization, AI search visibility, content marketing, structured data
+
 ## Version Compatibility Matrix
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
@@ -244,6 +258,7 @@ Use case: Contributing patches to TYPO3 Core via Gerrit
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
+| ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
 | php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
