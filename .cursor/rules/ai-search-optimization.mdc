@@ -891,13 +891,166 @@ final readonly class AddArticleSchema
 
 ---
 
+## 14. Markdown & MDX Implementation
+
+### Frontmatter for AI Search
+
+```yaml
+---
+title: "How to Optimize for AI Search"
+description: "Direct answer to primary query in 150 chars"
+date: 2025-01-15
+lastmod: 2025-01-15
+author:
+  name: "Jane Doe"
+  title: "SEO Specialist"
+  linkedin: "https://linkedin.com/in/janedoe"
+schema:
+  type: "Article"
+---
+```
+
+### JSON-LD in MDX (Next.js)
+
+```tsx
+// components/JsonLd.tsx
+export function JsonLd({ data }: { data: Record<string, unknown> }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+      }}
+    />
+  );
+}
+```
+
+```mdx
+import { JsonLd } from '@/components/JsonLd';
+
+<JsonLd data={{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Title",
+  "datePublished": "2025-01-15"
+}} />
+```
+
+### Raw MDX View (URL Parameter)
+
+```typescript
+// next.config.js
+module.exports = {
+  async rewrites() {
+    return [{ source: '/docs/:path*.md', destination: '/api/raw-mdx?path=:path*' }];
+  },
+};
+```
+
+```typescript
+// app/api/raw-mdx/route.ts
+import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
+
+export async function GET(request: NextRequest) {
+  const filePath = request.nextUrl.searchParams.get('path');
+  const safePath = filePath?.replace(/\.\./g, '') || '';
+  const mdxPath = path.join(process.cwd(), 'content', `${safePath}.mdx`);
+  
+  try {
+    const content = fs.readFileSync(mdxPath, 'utf8');
+    return new NextResponse(content, {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  } catch {
+    return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+}
+```
+
+### MD/MDX Checklist
+
+- [ ] Frontmatter: title, description, date, lastmod, author
+- [ ] Single H1, logical heading hierarchy
+- [ ] JSON-LD schema (Article, FAQPage, HowTo)
+- [ ] FAQ with `<details>/<summary>` elements
+- [ ] Visible last modified date
+- [ ] Author bio with credentials
+- [ ] llms.txt at site root
+
+---
+
+## 15. llms.txt - LLM Site Index
+
+Provide a structured Markdown file to help LLMs understand your site.
+
+### Basic Format
+
+```markdown
+# Your Site Name
+
+> Brief one-sentence description.
+
+## Documentation
+
+- [Getting Started](/docs/start): Quick introduction
+- [API Reference](/docs/api): Complete API docs
+
+## Optional
+
+- [About](/about): Company info
+```
+
+### TYPO3 Implementation
+
+```bash
+ddev composer require web-vision/ai-llms-txt
+```
+
+```yaml
+# config/sites/main/config.yaml
+imports:
+  - resource: 'EXT:ai_llms_txt/Configuration/Routes/RouterEnhancer.yaml'
+```
+
+### Next.js Dynamic Generation
+
+```typescript
+// app/llms.txt/route.ts
+export async function GET() {
+  const content = `# Site Name
+> Description.
+
+## Pages
+- [Home](/): Main page
+- [Docs](/docs): Documentation
+`;
+  return new Response(content, {
+    headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+  });
+}
+```
+
+### Checklist
+
+- [ ] llms.txt at site root
+- [ ] H1 with site name, blockquote summary
+- [ ] Organized sections with link descriptions
+- [ ] llms-full.txt for complete docs (optional)
+
+---
+
 ## Resources & References
 
 ### Official Documentation
 - [Google AI Overviews Guidelines](https://developers.google.com/search/docs/appearance/ai-overviews)
 - [Schema.org Full Hierarchy](https://schema.org/docs/full.html)
 - [OpenAI GPTBot Documentation](https://platform.openai.com/docs/gptbot)
+- [llms.txt Specification](https://llmstxt.org/)
 - [TYPO3 EXT:schema Documentation](https://docs.typo3.org/p/brotkrueml/schema/main/en-us/)
+- [TYPO3 EXT:ai_llms_txt Documentation](https://docs.typo3.org/p/web-vision/ai-llms-txt/main/en-us/)
 
 ### Industry Resources
 - [Semrush AI Search Study](https://www.semrush.com/blog/content-optimization-ai-search-study/)

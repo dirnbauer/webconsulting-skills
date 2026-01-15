@@ -45,7 +45,7 @@ Adapted by webconsulting.at for this skill collection
 | **Security & Operations** | | | |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
-| `ai-search-optimization` | AEO/GEO for ChatGPT, Perplexity, Google AI Overviews visibility | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity |
+| `ai-search-optimization` | AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity, llms.txt |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
 | **PHP & Tools** | | | |
@@ -75,7 +75,7 @@ Adapted by webconsulting.at for this skill collection
 ### Security & Operations
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
-- **ai-search-optimization**: AEO/GEO for AI search visibility (ChatGPT, Perplexity, Google AI Overviews)
+- **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
 - **security-audit**: Deep security audits aligned with OWASP Top 10
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
 
@@ -182,11 +182,13 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 
 **🤖 AI Search (ai-search-optimization)**
 - "Optimize content for ChatGPT and Perplexity citations"
-- "Schema markup for Google AI Overviews"
-- "Configure robots.txt for AI crawlers (GPTBot, PerplexityBot)"
+- "Schema markup for Google AI Overviews (FAQPage, Article, HowTo)"
+- "Configure robots.txt for AI crawlers (GPTBot, PerplexityBot, ClaudeBot)"
 - "E-E-A-T signals for AI search visibility"
-- "Monitor brand mentions in AI search platforms"
-- "Structure content for AI answer extraction"
+- "Implement llms.txt for LLM site discovery"
+- "TYPO3 EXT:schema for structured data"
+- "MDX JSON-LD components for Next.js/Astro"
+- "Raw MDX view with URL parameter (?raw=true)"
 
 **📚 Documentation (typo3-docs)**
 - "RST documentation following docs.typo3.org"
