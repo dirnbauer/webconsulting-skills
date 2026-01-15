@@ -149,6 +149,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
+| `ai-search-optimization` | aeo, geo, ai search, chatgpt, llms.txt | "Optimize for ChatGPT and Perplexity citations" |
 | `security-audit` | security audit, owasp, vulnerabilities | "Audit my controller for security issues" |
 | `enterprise-readiness` | enterprise, openssf, slsa | "Assess my project for enterprise readiness" |
 | `php-modernization` | php, phpstan, dto, enum | "Modernize my PHP code to 8.3 patterns" |
@@ -421,6 +422,35 @@ Set up proper meta tag configuration with fallbacks: use page-specific tags if s
 **Hreflang for Multi-Language:**
 ```
 Configure hreflang tags for my multi-language site with German, English, and French. Handle default language and x-default correctly.
+```
+
+---
+
+#### 🤖 AI Search Optimization (AEO/GEO)
+
+**Schema Markup for AI Search:**
+```
+Add FAQPage, Article, and Organization schema to my TYPO3 site using EXT:schema. Make content more likely to be cited by ChatGPT and Perplexity.
+```
+
+**Robots.txt for AI Crawlers:**
+```
+Configure robots.txt to allow AI bots (GPTBot, PerplexityBot, ClaudeBot) while blocking AI training crawlers. Use TYPO3 site config static routes.
+```
+
+**llms.txt Implementation:**
+```
+Implement llms.txt for my TYPO3 site to help LLMs discover and understand my content structure. Use the web-vision/ai-llms-txt extension.
+```
+
+**MDX with JSON-LD Schema:**
+```
+Create a Next.js MDX component that automatically generates Article schema from frontmatter. Include author, dates, and social links.
+```
+
+**AI Search Visibility Audit:**
+```
+Audit my website for AI search visibility: check schema markup, E-E-A-T signals, content structure, and robots.txt configuration.
 ```
 
 ---
@@ -770,6 +800,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | **Security & Operations** | | |
 | `typo3-security` | Security hardening checklist | Netresearch |
 | `typo3-seo` | SEO configuration with EXT:seo | Netresearch |
+| `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security | Netresearch |
 | **PHP & Tools** | | |

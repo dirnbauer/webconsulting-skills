@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **ai-search-optimization**: New skill for AI search visibility (AEO/GEO)
+  - Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies
+  - Schema.org markup (FAQPage, Article, HowTo, Organization) with sourced statistics
+  - E-E-A-T signals for AI trust and domain authority
+  - robots.txt configuration for AI crawlers (GPTBot, PerplexityBot, ClaudeBot)
+  - Content freshness strategies by platform (Perplexity, ChatGPT, Google AI)
+  - AI search visibility monitoring tools reference
+  - TYPO3 implementation with EXT:schema and EXT:ai_llms_txt (v13/v14)
+  - Markdown/MDX implementation (Next.js, Astro) with JSON-LD components
+  - llms.txt specification and implementation guide
+  - Raw MDX view with URL parameters (.md suffix, ?raw=true)
+
 ## [3.0.0] - 2026-01-04
 
 ### Added
