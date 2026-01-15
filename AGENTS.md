@@ -184,11 +184,16 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Optimize content for ChatGPT and Perplexity citations"
 - "Schema markup for Google AI Overviews (FAQPage, Article, HowTo)"
 - "Configure robots.txt for AI crawlers (GPTBot, PerplexityBot, ClaudeBot)"
-- "E-E-A-T signals for AI search visibility"
+- "E-E-A-T signals and author bios for AI trust"
 - "Implement llms.txt for LLM site discovery"
 - "TYPO3 EXT:schema for structured data"
+- "TYPO3 EXT:ai_llms_txt for llms.txt generation"
 - "MDX JSON-LD components for Next.js/Astro"
-- "Raw MDX view with URL parameter (?raw=true)"
+- "Raw MDX view with .md suffix or ?raw=true"
+- "FAQ Content Block with FAQPage schema"
+- "Content freshness with visible timestamps"
+- "Monitor brand mentions in AI search platforms"
+- "Audit website for AI search visibility"
 
 **📚 Documentation (typo3-docs)**
 - "RST documentation following docs.typo3.org"

@@ -428,29 +428,79 @@ Configure hreflang tags for my multi-language site with German, English, and Fre
 
 #### 🤖 AI Search Optimization (AEO/GEO)
 
-**Schema Markup for AI Search:**
+**Schema Markup for AI Search (TYPO3):**
 ```
 Add FAQPage, Article, and Organization schema to my TYPO3 site using EXT:schema. Make content more likely to be cited by ChatGPT and Perplexity.
 ```
 
 **Robots.txt for AI Crawlers:**
 ```
-Configure robots.txt to allow AI bots (GPTBot, PerplexityBot, ClaudeBot) while blocking AI training crawlers. Use TYPO3 site config static routes.
+Configure robots.txt to allow AI search bots (GPTBot, PerplexityBot, ClaudeBot) while blocking AI training crawlers (Google-Extended, CCBot). Use TYPO3 site config static routes.
 ```
 
-**llms.txt Implementation:**
+**llms.txt for TYPO3:**
 ```
-Implement llms.txt for my TYPO3 site to help LLMs discover and understand my content structure. Use the web-vision/ai-llms-txt extension.
+Implement llms.txt for my TYPO3 site using web-vision/ai-llms-txt extension. Configure which pages to include and how to structure the index.
 ```
 
-**MDX with JSON-LD Schema:**
+**llms.txt for Next.js/Astro:**
 ```
-Create a Next.js MDX component that automatically generates Article schema from frontmatter. Include author, dates, and social links.
+Create a dynamic llms.txt endpoint for my Next.js documentation site. Generate the index from content collections and include llms-full.txt with complete docs.
+```
+
+**FAQ Content Element with Schema:**
+```
+Create a TYPO3 Content Block for FAQ accordion that automatically generates FAQPage schema. Each item has question, answer, and initially-open checkbox.
+```
+
+**Article Schema with Author (TYPO3):**
+```
+Add Article schema with author information to my TYPO3 pages using a PSR-14 event listener. Include author name, credentials, LinkedIn, and dates.
+```
+
+**MDX JSON-LD Component:**
+```
+Create a reusable Next.js MDX component that generates Article schema from frontmatter (title, description, date, author). Include proper TypeScript types.
+```
+
+**FAQ Schema Component (MDX):**
+```
+Create a React FAQ component for MDX that renders an accessible accordion AND generates FAQPage schema. Use details/summary for no-JS support.
+```
+
+**E-E-A-T Author Bios:**
+```
+Add author bio fields to my TYPO3 pages (name, credentials, LinkedIn, bio) via TCA extension. Generate Person schema automatically for each page.
+```
+
+**Content Freshness Signals:**
+```
+Configure visible last-modified dates on my TYPO3 pages using SYS_LASTCHANGED. Add HTTP headers and structured data for content freshness.
 ```
 
 **AI Search Visibility Audit:**
 ```
-Audit my website for AI search visibility: check schema markup, E-E-A-T signals, content structure, and robots.txt configuration.
+Audit my website for AI search visibility: check schema markup quality, E-E-A-T signals, content structure, robots.txt configuration, and llms.txt presence.
+```
+
+**Monitor AI Citations:**
+```
+What tools can I use to monitor how often my brand is mentioned in ChatGPT, Perplexity, and Google AI Overviews? Set up tracking.
+```
+
+**Raw MDX View Endpoint:**
+```
+Add a .md URL suffix to my Next.js docs that shows raw MDX source instead of rendered content. Similar to how Vercel docs works.
+```
+
+**Optimize for Perplexity:**
+```
+Perplexity prefers fresh content. How do I optimize my content update frequency and visible timestamps to maximize Perplexity citations?
+```
+
+**Google AI Overviews Optimization:**
+```
+What specific schema types and content structures increase the chance of appearing in Google AI Overviews? Implement for my TYPO3 site.
 ```
 
 ---
