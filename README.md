@@ -861,6 +861,29 @@ grep -r "DataHandler" ~/.claude/skills/
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
 
+### Skill Supplements
+
+Most TYPO3 skills include additional supplement files:
+
+| Supplement | Purpose |
+|------------|---------|
+| `SKILL-PHP84.md` | PHP 8.4 specific patterns: property hooks, asymmetric visibility, new array functions |
+| `SKILL-CONTENT-BLOCKS.md` | Content Blocks integration: using Content Blocks with the skill's domain |
+
+**Skills with supplements:**
+- `php-modernization/SKILL-PHP84.md` - Comprehensive PHP 8.4 features reference
+- `typo3-datahandler/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - DataHandler with PHP 8.4 and Content Blocks
+- `typo3-ddev/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - DDEV PHP 8.4 config and CB development
+- `typo3-testing/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Testing with PHP 8.4 and Content Blocks
+- `typo3-rector/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Rector rules for PHP 8.4 and CB migration
+- `typo3-update/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Upgrade strategies with PHP 8.4 and CB
+- `typo3-extension-upgrade/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Extension upgrades
+- `typo3-conformance/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Standards with PHP 8.4 and CB
+- `typo3-security/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Security patterns
+- `typo3-seo/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - SEO with structured data
+- `typo3-docs/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Documenting PHP 8.4 and CB
+- `typo3-core-contributions/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Core contributions
+
 ### Cursor Integration
 
 - **Master Architect Rule**: Defines Claude as Senior TYPO3 Solutions Architect
@@ -925,7 +948,7 @@ git pull origin main
 
 ## Technology Stack
 
-- **PHP 8.2+** with strict types
+- **PHP 8.2+** with strict types (PHP 8.4 supplements available)
 - **TYPO3 v13/v14** (preferring v14)
 - **DDEV** for local development
 - **Hetzner Cloud** for hosting

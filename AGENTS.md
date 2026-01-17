@@ -9,6 +9,10 @@ Auto-generated index of all available skills in this marketplace.
 > **TYPO3 Compatibility:** All skills support TYPO3 v13.x and v14.x (v14 preferred)
 > Code examples are designed to work on both versions simultaneously.
 
+> **PHP 8.4 & Content Blocks:** Most TYPO3 skills include supplement files:
+> - `SKILL-PHP84.md` - PHP 8.4 specific patterns and migration
+> - `SKILL-CONTENT-BLOCKS.md` - Content Blocks integration and migration
+
 ---
 
 ## Acknowledgements
@@ -50,6 +54,7 @@ Adapted by webconsulting.at for this skill collection
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
+| `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
 | **Frontend Development** | | | |
@@ -81,8 +86,39 @@ Adapted by webconsulting.at for this skill collection
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
+  - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
+
+## Supplement Skills (PHP 8.4 & Content Blocks)
+
+Each TYPO3-related skill now includes optional supplement files:
+
+### PHP 8.4 Supplements (`SKILL-PHP84.md`)
+
+Cover PHP 8.4 specific patterns for each skill domain:
+- Property hooks for validation
+- Asymmetric visibility for encapsulation
+- New array functions (`array_find`, `array_any`, `array_all`)
+- `#[\Deprecated]` attribute usage
+- Migration patterns from PHP 8.2/8.3
+
+**Skills with PHP 8.4 supplements:**
+`php-modernization`, `typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-rector`, 
+`typo3-update`, `typo3-extension-upgrade`, `typo3-conformance`, `typo3-security`, 
+`typo3-seo`, `typo3-docs`, `typo3-core-contributions`
+
+### Content Blocks Supplements (`SKILL-CONTENT-BLOCKS.md`)
+
+Cover Content Blocks integration for each skill domain:
+- Using Content Blocks with the skill's topic
+- Migration from classic TCA/SQL
+- Best practices and patterns
+
+**Skills with Content Blocks supplements:**
+`typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-rector`, `typo3-update`, 
+`typo3-extension-upgrade`, `typo3-conformance`, `typo3-security`, `typo3-seo`, 
+`typo3-docs`, `typo3-core-contributions`
 
 ### Frontend Development
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
@@ -236,6 +272,14 @@ Use case: Server configuration, deployment, hardening, security audits
 ### Upgrade Session
 Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `php-modernization`  
 Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility
+
+### PHP 8.4 Migration Session
+Active: `php-modernization/SKILL-PHP84`, `typo3-rector/SKILL-PHP84`, `typo3-update/SKILL-PHP84`  
+Use case: Migrating to PHP 8.4, using new language features, fixing deprecations
+
+### Content Blocks Migration Session
+Active: `typo3-content-blocks`, `typo3-datahandler/SKILL-CONTENT-BLOCKS`, `typo3-extension-upgrade/SKILL-CONTENT-BLOCKS`  
+Use case: Converting classic TCA/SQL extensions to Content Blocks
 
 ### Documentation Session
 Active: `typo3-docs`, `typo3-conformance`  
