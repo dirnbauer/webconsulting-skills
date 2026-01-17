@@ -1,5 +1,5 @@
 {
-    "name": "webconsulting/claude-typo3-skills",
+    "name": "webconsulting/webconsulting-skills",
     "description": "AI Agent Skills for TYPO3 development with Claude/Cursor",
     "type": "composer-plugin",
     "license": "MIT",

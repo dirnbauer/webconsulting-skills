@@ -70,8 +70,8 @@ Both **Cursor** and **Claude Code** now share the same skills location: `~/.clau
 
 ```bash
 # Clone the repository
-git clone git@github.com:dirnbauer/claude-cursor-typo3-skills.git
-cd claude-cursor-typo3-skills
+git clone git@github.com:dirnbauer/webconsulting-skills.git
+cd webconsulting-skills
 
 # Install skills
 chmod +x install.sh
@@ -102,7 +102,7 @@ Install this skills package directly from GitHub without Packagist.
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/dirnbauer/claude-cursor-typo3-skills"
+            "url": "https://github.com/dirnbauer/webconsulting-skills"
         }
     ]
 }
@@ -111,7 +111,7 @@ Install this skills package directly from GitHub without Packagist.
 **2. Require the package:**
 
 ```bash
-composer require --dev webconsulting/claude-typo3-skills:dev-main
+composer require --dev webconsulting/webconsulting-skills:dev-main
 ```
 
 The Composer plugin will automatically run `install.sh` after installation to deploy skills to `~/.claude/skills/`.

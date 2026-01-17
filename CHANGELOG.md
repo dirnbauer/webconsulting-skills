@@ -74,8 +74,8 @@ We recommend using their original repositories for the latest updates.
 - Cursor IDE integration with master architect rule
 - Installation script (`install.sh`)
 
-[Unreleased]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v3.0.0...HEAD
-[3.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v2.0.0...v3.0.0
-[2.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/compare/v1.0.0...v2.0.0
-[1.0.0]: https://github.com/dirnbauer/claude-cursor-typo3-skills/releases/tag/v1.0.0
+[Unreleased]: https://github.com/dirnbauer/webconsulting-skills/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/dirnbauer/webconsulting-skills/compare/v2.0.0...v3.0.0
+[2.0.0]: https://github.com/dirnbauer/webconsulting-skills/compare/v1.0.0...v2.0.0
+[1.0.0]: https://github.com/dirnbauer/webconsulting-skills/releases/tag/v1.0.0
 

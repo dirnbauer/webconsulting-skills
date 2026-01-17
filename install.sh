@@ -40,7 +40,7 @@ else
     echo "→ Detected: Running on local machine"
 fi
 
-# Detect project root (go up from vendor/webconsulting/claude-typo3-skills)
+# Detect project root (go up from vendor/webconsulting/webconsulting-skills)
 if [ -f "$SCRIPT_DIR/../../../composer.json" ]; then
     PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
     echo "→ Project root: $PROJECT_ROOT"

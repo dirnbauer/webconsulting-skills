@@ -59,7 +59,7 @@ final class SkillInstallerPlugin implements PluginInterface, EventSubscriberInte
     private function runInstaller(): void
     {
         $vendorDir = $this->composer->getConfig()->get('vendor-dir');
-        $packageDir = $vendorDir . '/webconsulting/claude-typo3-skills';
+        $packageDir = $vendorDir . '/webconsulting/webconsulting-skills';
         $installScript = $packageDir . '/install.sh';
 
         if (!file_exists($installScript)) {
