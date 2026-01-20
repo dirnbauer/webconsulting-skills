@@ -60,6 +60,11 @@ Adapted by webconsulting.at for this skill collection
 | **Frontend Development** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
+| **Legal & Compliance** | | | |
+| `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
+| `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
+| `legal-impressum/EU` | EU eCommerce Directive compliance | 1.0.0 | impressum, eu, ecommerce directive |
+| `legal-impressum/WORLD` | International requirements (UK, CH, US) | 1.0.0 | impressum, international, uk, switzerland |
 
 ## Skill Categories
 
@@ -123,6 +128,12 @@ Cover Content Blocks integration for each skill domain:
 ### Frontend Development
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
 - **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
+
+### Legal & Compliance
+- **legal-impressum**: Austrian Impressum for all company types (Gesellschaftsformen)
+  - `SKILL-GERMANY.md`: German DDG/MStV requirements
+  - `SKILL-EU.md`: EU eCommerce Directive compliance
+  - `SKILL-WORLD.md`: International (UK, Switzerland, USA)
 
 ## Usage
 

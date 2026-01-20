@@ -860,6 +860,11 @@ grep -r "DataHandler" ~/.claude/skills/
 | **WebConsulting Specific** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
+| **Legal & Compliance** | | |
+| `legal-impressum` | Austrian Impressum (all Gesellschaftsformen) | webconsulting |
+| `legal-impressum/GERMANY` | German Impressum (DDG, MStV) | webconsulting |
+| `legal-impressum/EU` | EU eCommerce Directive compliance | webconsulting |
+| `legal-impressum/WORLD` | International (UK, CH, US) | webconsulting |
 
 ### Skill Supplements
 
