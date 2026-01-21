@@ -1,4 +1,4 @@
-# webconsulting Claude Marketplace
+# webconsulting skills - Claude Marketplace
 
 A curated collection of **Agent Skills** for AI-augmented software development. These skills transform Claude into a specialized assistant for web development, video creation, security auditing, and enterprise software engineering.
 
