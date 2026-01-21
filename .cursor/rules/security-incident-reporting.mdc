@@ -1,0 +1,50 @@
+---
+description: Security Incident Report templates following NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, blameless root cause analysis. Use when documenting security incidents, creating post-mortems, or communicating with security teams.
+globs:
+  - "**/incident-report*"
+  - "**/post-mortem*"
+  - "**/security-report*"
+  - "**/sir-*"
+---
+
+# Security Incident Reporting
+
+Use this skill when:
+- Documenting a security incident (DDoS, breach, hack)
+- Creating post-mortem reports
+- Analyzing attack patterns and correlating CVEs
+- Communicating with stakeholders about incidents
+- Reporting vulnerabilities to the TYPO3 Security Team
+
+## Key Resources
+
+- [SKILL.md](mdc:skills/security-incident-reporting/SKILL.md) - General incident reporting framework
+- [SKILL-TYPO3.md](mdc:skills/security-incident-reporting/SKILL-TYPO3.md) - TYPO3-specific forensics and Security Team communication
+
+## Quick Reference
+
+### Report Structure (NIST/SANS)
+
+1. **Module A**: Metadata & Executive Summary
+2. **Module B**: Timeline (chronological events)
+3. **Module C**: Technical Analysis & IoCs
+
+### Severity Ratings
+
+| System | Use Case |
+|--------|----------|
+| NCISS (1-6) | General cyber incidents |
+| DRS (1-7) | DDoS attacks |
+| CVSS v3.1 | Vulnerability scoring |
+
+### TYPO3 Security Team
+
+- **Email**: security@typo3.org
+- **PGP Key ID**: C05FBE60
+- **Policy**: Responsible disclosure, embargo until advisory
+
+### Blameless Post-Mortem Principles
+
+- Focus on systems, not individuals
+- "Why did the process allow X?" not "Who did X?"
+- Goal: improvement, not blame

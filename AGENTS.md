@@ -1,13 +1,12 @@
 # Available Agent Skills
 
-Auto-generated index of all available skills in this marketplace.
+A curated collection of Agent Skills for AI-augmented software development. Skills cover web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
 > **📢 Early Adopter Notice:** We encourage you to use these skills! Expect occasional updates as 
 > Anthropic, Cursor, and webconsulting evolve their platforms. Always review AI-generated code.
 > See [README](README.md) for details.
 
-> **TYPO3 Compatibility:** All skills support TYPO3 v13.x and v14.x (v14 preferred)
-> Code examples are designed to work on both versions simultaneously.
+> **TYPO3 Skills:** All TYPO3 skills support v13.x and v14.x (v14 preferred). Code examples work on both versions simultaneously.
 
 > **PHP 8.4 & Content Blocks:** Most TYPO3 skills include supplement files:
 > - `SKILL-PHP84.md` - PHP 8.4 specific patterns and migration
@@ -34,7 +33,28 @@ Adapted by webconsulting.at for this skill collection
 
 | Skill | Description | Version | Triggers |
 |-------|-------------|---------|----------|
-| **TYPO3 Development** | | | |
+| **Video & Animation** | | | |
+| `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
+| **Security & Enterprise** | | | |
+| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
+| `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | 1.0.0 | incident report, post-mortem, ddos, forensics |
+| `security-incident-reporting/TYPO3` | TYPO3 forensics, Security Team communication, PGP templates | 1.0.0 | typo3 incident, typo3 hack, security team |
+| `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
+| `ai-search-optimization` | AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity, llms.txt |
+| **PHP & Tools** | | | |
+| `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
+| `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
+| `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
+| `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
+| **Frontend & Design** | | | |
+| `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
+| `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
+| **Legal & Compliance** | | | |
+| `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
+| `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
+| `legal-impressum/EU` | EU eCommerce Directive compliance | 1.0.0 | impressum, eu, ecommerce directive |
+| `legal-impressum/WORLD` | International requirements (UK, CH, US) | 1.0.0 | impressum, international, uk, switzerland |
+| **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
@@ -42,54 +62,23 @@ Adapted by webconsulting.at for this skill collection
 | `typo3-conformance` | Extension standards compliance checker | 1.0.0 | conformance, standards, quality |
 | `typo3-docs` | Documentation using docs.typo3.org standards | 1.0.0 | documentation, rst, docs |
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | 1.0.0 | core, contributions, gerrit, forge |
-| **Upgrade & Migration** | | | |
 | `typo3-rector` | TYPO3 upgrade patterns using Rector for dual-version support | 2.0.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v13/v14 dual-version development guide | 2.0.0 | update, upgrade, v13, v14 |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
-| **Security & Operations** | | | |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
-| `ai-search-optimization` | AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity, llms.txt |
-| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
-| `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
-| **PHP & Tools** | | | |
-| `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
-| `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
-| `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
-| `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
-| **Frontend Development** | | | |
-| `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
-| `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
-| **Video & Animation** | | | |
-| `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
-| **Legal & Compliance** | | | |
-| `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
-| `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
-| `legal-impressum/EU` | EU eCommerce Directive compliance | 1.0.0 | impressum, eu, ecommerce directive |
-| `legal-impressum/WORLD` | International requirements (UK, CH, US) | 1.0.0 | impressum, international, uk, switzerland |
 
 ## Skill Categories
 
-### TYPO3 Development
-- **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
-- **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
-- **typo3-ddev**: Local development environment setup with multi-version testing
-- **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
-- **typo3-conformance**: Extension quality assessment and standards compliance
-- **typo3-docs**: Official documentation standards with RST and TYPO3 directives
-- **typo3-core-contributions**: Contributing to TYPO3 Core via Gerrit and Forge
+### Video & Animation
+- **remotion-best-practices**: Video creation in React with Remotion, animations, transitions, audio
 
-### Upgrade & Migration
-- **typo3-rector**: Automated code refactoring with Rector for dual-version support
-- **typo3-update**: Version migration and compatibility strategies for v13/v14
-- **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
-
-### Security & Operations
-- **typo3-security**: Production hardening checklist for v13/v14
-- **typo3-seo**: Search engine optimization with EXT:seo
-- **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
+### Security & Enterprise
 - **security-audit**: Deep security audits aligned with OWASP Top 10
+- **security-incident-reporting**: Post-incident documentation following NIST/SANS, DDoS post-mortem, CVE correlation
+  - `SKILL-TYPO3.md`: TYPO3 forensics, Security Team communication, PGP-encrypted vulnerability reports
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
+- **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
@@ -97,40 +86,7 @@ Adapted by webconsulting.at for this skill collection
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
 
-### Video & Animation
-- **remotion-best-practices**: Video creation in React with Remotion, animations, transitions, audio
-
-## Supplement Skills (PHP 8.4 & Content Blocks)
-
-Each TYPO3-related skill now includes optional supplement files:
-
-### PHP 8.4 Supplements (`SKILL-PHP84.md`)
-
-Cover PHP 8.4 specific patterns for each skill domain:
-- Property hooks for validation
-- Asymmetric visibility for encapsulation
-- New array functions (`array_find`, `array_any`, `array_all`)
-- `#[\Deprecated]` attribute usage
-- Migration patterns from PHP 8.2/8.3
-
-**Skills with PHP 8.4 supplements:**
-`php-modernization`, `typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-rector`, 
-`typo3-update`, `typo3-extension-upgrade`, `typo3-conformance`, `typo3-security`, 
-`typo3-seo`, `typo3-docs`, `typo3-core-contributions`
-
-### Content Blocks Supplements (`SKILL-CONTENT-BLOCKS.md`)
-
-Cover Content Blocks integration for each skill domain:
-- Using Content Blocks with the skill's topic
-- Migration from classic TCA/SQL
-- Best practices and patterns
-
-**Skills with Content Blocks supplements:**
-`typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-rector`, `typo3-update`, 
-`typo3-extension-upgrade`, `typo3-conformance`, `typo3-security`, `typo3-seo`, 
-`typo3-docs`, `typo3-core-contributions`
-
-### Frontend Development
+### Frontend & Design
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
 - **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
 
@@ -139,6 +95,32 @@ Cover Content Blocks integration for each skill domain:
   - `SKILL-GERMANY.md`: German DDG/MStV requirements
   - `SKILL-EU.md`: EU eCommerce Directive compliance
   - `SKILL-WORLD.md`: International (UK, Switzerland, USA)
+
+### TYPO3 CMS
+- **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
+- **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
+- **typo3-ddev**: Local development environment setup with multi-version testing
+- **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
+- **typo3-conformance**: Extension quality assessment and standards compliance
+- **typo3-docs**: Official documentation standards with RST and TYPO3 directives
+- **typo3-core-contributions**: Contributing to TYPO3 Core via Gerrit and Forge
+- **typo3-rector**: Automated code refactoring with Rector for dual-version support
+- **typo3-update**: Version migration and compatibility strategies for v13/v14
+- **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
+- **typo3-security**: Production hardening checklist for v13/v14
+- **typo3-seo**: Search engine optimization with EXT:seo
+
+## TYPO3 Skill Supplements
+
+TYPO3 skills include optional supplement files for PHP 8.4 and Content Blocks:
+
+### PHP 8.4 Supplements (`SKILL-PHP84.md`)
+
+Cover PHP 8.4 specific patterns: property hooks, asymmetric visibility, new array functions, `#[\Deprecated]` attribute.
+
+### Content Blocks Supplements (`SKILL-CONTENT-BLOCKS.md`)
+
+Cover Content Blocks integration: using Content Blocks with the skill's domain, migration from classic TCA/SQL.
 
 ## Usage
 
@@ -220,11 +202,36 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "E2E tests with Playwright for contact form"
 - "GitHub Actions CI for PHP 8.2/8.3 + TYPO3 v13/v14"
 
-**🔒 Security (typo3-security, security-audit)**
+**🔒 Security Hardening (typo3-security, security-audit)**
 - "Security audit for XSS, CSRF, SQL injection"
 - "Production hardening checklist"
 - "OWASP Top 10 compliance review"
 - "PSR-15 middleware for security headers"
+- "CVSS scoring for discovered vulnerabilities"
+
+**🚨 Incident Response (security-incident-reporting)**
+- "Create NIST/SANS-compliant incident report for executive summary"
+- "Document DDoS attack with timeline, peak bandwidth, and attack vectors"
+- "Build post-mortem report with blameless root cause analysis (5-Whys)"
+- "Generate IoC list with MITRE ATT&CK TTPs for threat intelligence"
+- "Correlate UDP amplification attack with CVE-2023-29552 (SLP)"
+- "Calculate incident severity using NCISS and DRS scoring"
+- "Create chronological timeline with detection, containment, recovery phases"
+- "Assess financial impact: lost revenue, scrubbing costs, response hours"
+- "Multi-vector DDoS analysis: volumetric + application layer"
+- "Executive summary for C-level stakeholders (max 200 words)"
+
+**🔬 TYPO3 Forensics (security-incident-reporting/TYPO3)**
+- "Verify TYPO3 Core integrity after suspected compromise"
+- "Analyze sys_log for suspicious backend logins and failed attempts"
+- "Search fileadmin for PHP webshells and malicious uploads"
+- "Check tt_content bodytext for injected scripts or spam"
+- "Audit be_users for unauthorized admin accounts"
+- "Create PGP-encrypted vulnerability report for security@typo3.org"
+- "Document TYPO3 system inventory: version, PHP, extensions"
+- "Classify vulnerability: Deserialization, XSS, SQLi, IDOR"
+- "Generate forensic checklist: logs, filesystem, database analysis"
+- "Responsible disclosure: follow embargo rules until advisory release"
 
 **📈 SEO (typo3-seo)**
 - "XML sitemap with custom entries"
@@ -282,8 +289,8 @@ Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-ddev`, `typo3-update
 Use case: Extension development, Content Blocks, database operations, v13/v14 compatible code
 
 ### Ops Session
-Active: `typo3-security`, `security-audit`, `enterprise-readiness`, `typo3-ddev`  
-Use case: Server configuration, deployment, hardening, security audits
+Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
+Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
 Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `php-modernization`  
@@ -327,6 +334,7 @@ Use case: SEO optimization, AI search visibility, content marketing, structured 
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
+| security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
 | enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
 | php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | cli-tools | ✓ | ✓ | ✓ | ✓ | ✓ |

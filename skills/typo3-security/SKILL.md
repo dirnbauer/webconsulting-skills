@@ -505,6 +505,13 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 
 ---
 
+## Related Skills
+
+- [security-incident-reporting/TYPO3](../security-incident-reporting/SKILL-TYPO3.md) - TYPO3 forensics, vulnerability classification, Security Team communication with PGP templates
+- [security-audit](../security-audit/SKILL.md) - General security audit patterns, OWASP, CVSS scoring
+
+---
+
 ## Credits & Attribution
 
 This skill is based on the excellent TYPO3 best practices and methodology developed by
