@@ -60,6 +60,8 @@ Adapted by webconsulting.at for this skill collection
 | **Frontend Development** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
+| **Video & Animation** | | | |
+| `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
 | **Legal & Compliance** | | | |
 | `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
@@ -94,6 +96,9 @@ Adapted by webconsulting.at for this skill collection
   - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
+
+### Video & Animation
+- **remotion-best-practices**: Video creation in React with Remotion, animations, transitions, audio
 
 ## Supplement Skills (PHP 8.4 & Content Blocks)
 

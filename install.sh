@@ -55,7 +55,68 @@ else
 fi
 
 # =============================================================================
-# 2. Define Installation Paths
+# 2. Sync External Skills (from .sync-config.json)
+# =============================================================================
+
+if [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -v jq &> /dev/null && command -v git &> /dev/null; then
+    echo ""
+    echo "→ Syncing external skills from .sync-config.json..."
+    
+    # Read enabled skills
+    SKILLS=$(jq -r '.skills[] | select(.enabled == true) | @base64' "$SCRIPT_DIR/.sync-config.json" 2>/dev/null)
+    
+    for skill_b64 in $SKILLS; do
+        skill=$(echo "$skill_b64" | base64 --decode)
+        name=$(echo "$skill" | jq -r '.name')
+        source=$(echo "$skill" | jq -r '.source')
+        branch=$(echo "$skill" | jq -r '.branch')
+        path=$(echo "$skill" | jq -r '.path // "."')
+        
+        echo "  Syncing: $name..."
+        
+        TEMP_DIR=$(mktemp -d)
+        if git clone --depth 1 --branch "$branch" "$source" "$TEMP_DIR" 2>/dev/null; then
+            SOURCE_DIR="$TEMP_DIR/$path"
+            TARGET_DIR="$SCRIPT_DIR/skills/$name"
+            
+            if [ -f "$SOURCE_DIR/SKILL.md" ]; then
+                mkdir -p "$TARGET_DIR"
+                cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
+                
+                # Copy examples if exists
+                if [ -d "$SOURCE_DIR/examples" ]; then
+                    rm -rf "$TARGET_DIR/examples"
+                    cp -r "$SOURCE_DIR/examples" "$TARGET_DIR/"
+                fi
+                
+                # Copy rules if exists
+                if [ -d "$SOURCE_DIR/rules" ]; then
+                    rm -rf "$TARGET_DIR/rules"
+                    cp -r "$SOURCE_DIR/rules" "$TARGET_DIR/"
+                fi
+                
+                echo "  ✓ Synced: $name"
+            else
+                echo "  ⚠ No SKILL.md found in $source (path: $path)"
+            fi
+        else
+            echo "  ⚠ Failed to sync: $name (clone failed)"
+        fi
+        rm -rf "$TEMP_DIR"
+    done
+else
+    echo ""
+    if [ ! -f "$SCRIPT_DIR/.sync-config.json" ]; then
+        echo "→ No .sync-config.json found, skipping external sync"
+    elif ! command -v jq &> /dev/null; then
+        echo "→ jq not installed, skipping external sync (install with: brew install jq)"
+    elif ! command -v git &> /dev/null; then
+        echo "→ git not installed, skipping external sync"
+    fi
+fi
+
+# =============================================================================
+# 3. Define Installation Paths
 # =============================================================================
 
 # Primary: Unified skills directory (works for both Cursor and Claude Code)
@@ -68,7 +129,7 @@ PROJECT_SKILLS_DIR="$PROJECT_ROOT/.cursor/skills"
 PROJECT_RULES_DIR="$PROJECT_ROOT/.cursor/rules"
 
 # =============================================================================
-# 3. Install Agent Skills (Unified Location - Cursor & Claude Code)
+# 4. Install Agent Skills (Unified Location - Cursor & Claude Code)
 # =============================================================================
 
 if [ "$IS_CONTAINER" = "true" ]; then
@@ -98,7 +159,7 @@ else
 fi
 
 # =============================================================================
-# 4. Install Project-Level Skills (Optional - for version-controlled projects)
+# 5. Install Project-Level Skills (Optional - for version-controlled projects)
 # =============================================================================
 
 echo ""
@@ -122,7 +183,7 @@ for skill_path in "$SCRIPT_DIR/skills"/*; do
 done
 
 # =============================================================================
-# 5. Legacy: Install Cursor Rules (.mdc format - still works in 2.2+)
+# 6. Legacy: Install Cursor Rules (.mdc format - still works in 2.2+)
 # =============================================================================
 
 echo ""
@@ -146,7 +207,7 @@ for skill_path in "$SCRIPT_DIR/skills"/*; do
 done
 
 # =============================================================================
-# 6. Copy AGENTS.md to project root (if different from source)
+# 7. Copy AGENTS.md to project root (if different from source)
 # =============================================================================
 
 if [ -f "$SCRIPT_DIR/AGENTS.md" ] && [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ]; then
@@ -157,7 +218,7 @@ if [ -f "$SCRIPT_DIR/AGENTS.md" ] && [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ]; then
 fi
 
 # =============================================================================
-# 7. Summary
+# 8. Summary
 # =============================================================================
 
 echo ""

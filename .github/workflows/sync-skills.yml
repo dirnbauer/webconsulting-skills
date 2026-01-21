@@ -59,6 +59,7 @@ jobs:
             name=$(echo "$skill" | jq -r '.name')
             source=$(echo "$skill" | jq -r '.source')
             branch=$(echo "$skill" | jq -r '.branch')
+            path=$(echo "$skill" | jq -r '.path // "."')
             
             # Skip if filter specified and doesn't match
             if [ -n "$SKILL_FILTER" ] && [ "$name" != "$SKILL_FILTER" ]; then
@@ -70,6 +71,7 @@ jobs:
             echo "Syncing skill: $name"
             echo "Source: $source"
             echo "Branch: $branch"
+            echo "Path: $path"
             echo "====================================="
             
             # Create temp directory for clone
@@ -77,19 +79,30 @@ jobs:
             
             # Clone the repository
             if git clone --depth 1 --branch "$branch" "$source" "$TEMP_DIR" 2>/dev/null; then
+              # Determine source directory (support path parameter)
+              SOURCE_DIR="$TEMP_DIR/$path"
+              
               # Check if SKILL.md exists
-              if [ -f "$TEMP_DIR/SKILL.md" ]; then
+              if [ -f "$SOURCE_DIR/SKILL.md" ]; then
                 # Ensure target directory exists
                 mkdir -p "skills/$name"
                 
                 # Copy SKILL.md
-                cp "$TEMP_DIR/SKILL.md" "skills/$name/SKILL.md"
+                cp "$SOURCE_DIR/SKILL.md" "skills/$name/SKILL.md"
                 echo "✓ Updated skills/$name/SKILL.md"
                 
                 # Copy examples directory if exists
-                if [ -d "$TEMP_DIR/examples" ]; then
-                  cp -r "$TEMP_DIR/examples" "skills/$name/"
+                if [ -d "$SOURCE_DIR/examples" ]; then
+                  rm -rf "skills/$name/examples"
+                  cp -r "$SOURCE_DIR/examples" "skills/$name/"
                   echo "✓ Updated skills/$name/examples/"
+                fi
+                
+                # Copy rules directory if exists
+                if [ -d "$SOURCE_DIR/rules" ]; then
+                  rm -rf "skills/$name/rules"
+                  cp -r "$SOURCE_DIR/rules" "skills/$name/"
+                  echo "✓ Updated skills/$name/rules/"
                 fi
                 
                 # Check for changes
@@ -98,7 +111,7 @@ jobs:
                   echo "Changes detected in $name"
                 fi
               else
-                echo "⚠ No SKILL.md found in $source"
+                echo "⚠ No SKILL.md found in $source (path: $path)"
               fi
             else
               echo "⚠ Failed to clone $source"

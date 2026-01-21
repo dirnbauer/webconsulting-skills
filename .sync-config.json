@@ -19,6 +19,13 @@
       "source": "https://github.com/netresearch/typo3-update-skill.git",
       "branch": "main",
       "enabled": false
+    },
+    {
+      "name": "remotion-best-practices",
+      "source": "https://github.com/remotion-dev/skills.git",
+      "branch": "main",
+      "path": "skills/remotion",
+      "enabled": true
     }
   ],
   "syncSchedule": "weekly",

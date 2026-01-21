@@ -157,6 +157,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `context7` | documentation, api, libraries | "Look up current Symfony documentation" |
 | `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
+| `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -752,6 +753,85 @@ Implement proper error handling for my API: custom exceptions, error codes, mean
 
 ---
 
+#### 🎬 Video Creation with Remotion
+
+**Basic Video Composition:**
+```
+Create a Remotion composition with a 1920x1080 video at 30fps, 5 seconds duration. Add a centered title that fades in.
+```
+
+**Animated Text Intro:**
+```
+Build a YouTube-style intro: logo zooms in with spring animation, title types in letter-by-letter, then both fade out.
+```
+
+**Audio Visualization:**
+```
+Create an audio visualizer that reacts to music. Use waveform data to animate bars that pulse with the beat.
+```
+
+**TikTok-Style Captions:**
+```
+Add TikTok-style word-by-word captions to my video. Highlight the current word, use a bold font, and add a subtle shadow.
+```
+
+**Scene Transitions:**
+```
+Create a video with 3 scenes using slide and fade transitions. Each scene has different background colors and centered text.
+```
+
+**3D Product Showcase:**
+```
+Build a 3D product rotation video using React Three Fiber. The product rotates 360° with smooth easing over 4 seconds.
+```
+
+**Data Visualization Video:**
+```
+Create an animated bar chart that grows from zero. Each bar animates in sequence with a spring effect. Add value labels.
+```
+
+**Video with Dynamic Duration:**
+```
+Create a Remotion composition where the duration is calculated based on the audio file length using calculateMetadata.
+```
+
+**GIF Integration:**
+```
+Embed an animated GIF into my Remotion video, synchronized with the timeline. Loop it 3 times during a 6-second segment.
+```
+
+**Lottie Animation:**
+```
+Add a Lottie animation to my video intro. Synchronize the Lottie playback with Remotion's frame timing.
+```
+
+**Custom Fonts:**
+```
+Load a custom Google Font (Inter) and a local font file (.woff2) for my video. Apply different weights to title and subtitle.
+```
+
+**Video Trimming:**
+```
+Embed an external video file, trim the first 2 seconds, and play it at 1.5x speed. Add a fade-out at the end.
+```
+
+**Thumbnail Generation:**
+```
+Create a Still composition for video thumbnails. Include the video title, a background image, and a play button overlay.
+```
+
+**Sequenced Animations:**
+```
+Create a sequence of 5 elements that animate in one after another with 0.5s delays. Use useCurrentFrame and interpolate.
+```
+
+**Spring Physics:**
+```
+Animate a bouncing ball using spring physics. Configure tension, friction, and mass for a realistic bounce effect.
+```
+
+---
+
 #### 🎯 Common Tasks & Fixes
 
 **Fix Broken Relations:**
@@ -860,6 +940,8 @@ grep -r "DataHandler" ~/.claude/skills/
 | **WebConsulting Specific** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
+| **Video & Animation** | | |
+| `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | **Legal & Compliance** | | |
 | `legal-impressum` | Austrian Impressum (all Gesellschaftsformen) | webconsulting |
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) | webconsulting |
