@@ -75,7 +75,7 @@ Adapted by webconsulting.at for this skill collection
 
 ### Security & Enterprise
 - **security-audit**: Deep security audits aligned with OWASP Top 10
-- **security-incident-reporting**: Post-incident documentation following NIST/SANS, DDoS post-mortem, CVE correlation
+- **security-incident-reporting**: Post-incident documentation drawing from NIST/SANS, DDoS post-mortem, CVE correlation
   - `SKILL-TYPO3.md`: TYPO3 forensics, Security Team communication, PGP-encrypted vulnerability reports
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
 - **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
@@ -210,7 +210,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "CVSS scoring for discovered vulnerabilities"
 
 **🚨 Incident Response (security-incident-reporting)**
-- "Create NIST/SANS-compliant incident report for executive summary"
+- "Create NIST/SANS-style incident report for executive summary"
 - "Document DDoS attack with timeline, peak bandwidth, and attack vectors"
 - "Build post-mortem report with blameless root cause analysis (5-Whys)"
 - "Generate IoC list with MITRE ATT&CK TTPs for threat intelligence"

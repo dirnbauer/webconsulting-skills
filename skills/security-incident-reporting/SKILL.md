@@ -1,6 +1,6 @@
 ---
 name: security-incident-reporting
-description: Security Incident Report templates following NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, and blameless root cause analysis.
+description: Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, and blameless root cause analysis.
 version: 1.0.0
 triggers:
   - incident report
@@ -16,7 +16,7 @@ triggers:
 
 # Security Incident Reporting
 
-Comprehensive framework for documenting and analyzing security incidents, aligned with NIST SP 800-61 and SANS methodologies.
+Comprehensive framework for documenting and analyzing security incidents, drawing from NIST SP 800-61 and SANS methodologies.
 
 ## When to Use
 
@@ -372,7 +372,7 @@ SLP reflectors. Recommend:
 
 ## Credits & Attribution
 
-This skill is based on the "Handbuch für Advanced Security Incident Reporting" methodology,
-integrating NIST SP 800-61, SANS frameworks, and industry best practices.
+This skill draws from the "Handbuch für Advanced Security Incident Reporting" methodology,
+incorporating elements of NIST SP 800-61, SANS frameworks, and industry best practices.
 
 Developed by webconsulting.at for the Claude skill collection.

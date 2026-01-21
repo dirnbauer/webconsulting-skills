@@ -1,5 +1,5 @@
 ---
-description: Security Incident Report templates following NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, blameless root cause analysis. Use when documenting security incidents, creating post-mortems, or communicating with security teams.
+description: Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, blameless root cause analysis. Use when documenting security incidents, creating post-mortems, or communicating with security teams.
 globs:
   - "**/incident-report*"
   - "**/post-mortem*"
