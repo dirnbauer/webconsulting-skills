@@ -1,8 +1,20 @@
 # webconsulting Claude Marketplace
 
-AI-augmented development environment for enterprise TYPO3 projects. This repository provides **Agent Skills** that transform Claude into a specialized TYPO3 Solutions Architect.
+A curated collection of **Agent Skills** for AI-augmented software development. These skills transform Claude into a specialized assistant for web development, video creation, security auditing, and enterprise software engineering.
 
 > **Works with:** Claude Code, Cursor IDE (tested with Cursor 2.2+)
+
+## Skill Categories
+
+| Category | Skills | Description |
+|----------|--------|-------------|
+| **TYPO3 CMS** | 12 skills | Content Blocks, DataHandler, upgrades, testing, security |
+| **Video & Animation** | 1 skill | Remotion video creation in React |
+| **Security & Enterprise** | 3 skills | OWASP audits, OpenSSF Scorecard, supply chain security |
+| **PHP & Tools** | 3 skills | PHP 8.x modernization, CLI tools, documentation lookup |
+| **Frontend & Design** | 2 skills | UI patterns, design systems, accessibility |
+| **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
+| **AI & SEO** | 1 skill | AEO/GEO for AI search visibility |
 
 ---
 
@@ -124,8 +136,8 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 **How do they work?** 
 - **Auto-applied**: Cursor's Agent decides when a skill is relevant based on your query
-- **Manual invoke**: Type `/skill-name` in chat (e.g., `/typo3-content-blocks`)
-- **Trigger keywords**: Mentioning keywords like "content-blocks" or "datahandler" activates relevant skills
+- **Manual invoke**: Type `/skill-name` in chat (e.g., `/remotion-best-practices`, `/security-audit`)
+- **Trigger keywords**: Mentioning keywords like "video", "animation", "security audit", or "content-blocks" activates relevant skills
 
 **Where do skills live?**
 - Source files: `skills/*/SKILL.md` (this repo)
@@ -986,11 +998,12 @@ Most TYPO3 skills include additional supplement files:
 │  │   Agent Skills      │  │  AGENTS   │  │  MCP Servers  │  │
 │  │  ~/.claude/skills/  │  │    .md    │  │               │  │
 │  ├─────────────────────┤  ├───────────┤  ├───────────────┤  │
-│  │ TYPO3 Development   │  │ Project   │  │ DDEV (local)  │  │
-│  │ Upgrade & Migration │  │ Instruc-  │  │ Hetzner       │  │
+│  │ TYPO3 CMS           │  │ Project   │  │ DDEV (local)  │  │
+│  │ Video & Animation   │  │ Instruc-  │  │ Hetzner       │  │
 │  │ Security & Ops      │  │ tions     │  │ MySQL         │  │
 │  │ PHP & Tools         │  │           │  │ GitHub        │  │
-│  │ WebConsulting       │  │           │  │ Firecrawl     │  │
+│  │ Frontend & Design   │  │           │  │ Firecrawl     │  │
+│  │ Legal & Compliance  │  │           │  │ Context7      │  │
 │  └─────────────────────┘  └───────────┘  └───────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 
@@ -1035,19 +1048,14 @@ git pull origin main
 
 ## Technology Stack
 
+Skills in this collection cover:
+
 - **PHP 8.2+** with strict types (PHP 8.4 supplements available)
-- **TYPO3 v13/v14** (preferring v14)
+- **TYPO3 v13/v14** for CMS projects
+- **React/Remotion** for video creation
 - **DDEV** for local development
-- **Hetzner Cloud** for hosting
-- **Fluid/Twig** templating
+- **Next.js/Astro** for frontend (AI Search Optimization)
 - **TailwindCSS** for styling
-
-## Excluded Technologies
-
-This marketplace explicitly excludes:
-- Go
-- Jira
-- Non-PHP backends
 
 ## Netresearch Skill Repositories
 
