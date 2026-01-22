@@ -20,6 +20,13 @@
       "branch": "main",
       "path": "skills/remotion",
       "enabled": true
+    },
+    {
+      "name": "readiness-report",
+      "source": "https://github.com/OpenHands/skills.git",
+      "branch": "main",
+      "path": "skills/readiness-report",
+      "enabled": true
     }
   ],
   "syncSchedule": "weekly",

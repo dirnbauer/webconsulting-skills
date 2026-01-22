@@ -95,6 +95,18 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -v jq &> /dev/null && comma
                     cp -r "$SOURCE_DIR/rules" "$TARGET_DIR/"
                 fi
                 
+                # Copy references if exists
+                if [ -d "$SOURCE_DIR/references" ]; then
+                    rm -rf "$TARGET_DIR/references"
+                    cp -r "$SOURCE_DIR/references" "$TARGET_DIR/"
+                fi
+                
+                # Copy scripts if exists
+                if [ -d "$SOURCE_DIR/scripts" ]; then
+                    rm -rf "$TARGET_DIR/scripts"
+                    cp -r "$SOURCE_DIR/scripts" "$TARGET_DIR/"
+                fi
+                
                 echo "  ✓ Synced: $name"
             else
                 echo "  ⚠ No SKILL.md found in $source (path: $path)"

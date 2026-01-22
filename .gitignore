@@ -22,3 +22,6 @@ tmp
 
 # Local reports (confidential, not committed)
 local_reports/
+
+# Generated symlinks (created by install.sh)
+.cursor/skills/

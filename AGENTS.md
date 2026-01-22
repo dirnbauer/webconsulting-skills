@@ -40,6 +40,7 @@ Adapted by webconsulting.at for this skill collection
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | 1.0.0 | incident report, post-mortem, ddos, forensics |
 | `security-incident-reporting/TYPO3` | TYPO3 forensics, Security Team communication, PGP templates | 1.0.0 | typo3 incident, typo3 hack, security team |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
+| `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | 1.0.0 | /readiness-report, agent readiness, codebase maturity |
 | `ai-search-optimization` | AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity, llms.txt |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
@@ -78,6 +79,7 @@ Adapted by webconsulting.at for this skill collection
 - **security-incident-reporting**: Post-incident documentation drawing from NIST/SANS, DDoS post-mortem, CVE correlation
   - `SKILL-TYPO3.md`: TYPO3 forensics, Security Team communication, PGP-encrypted vulnerability reports
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
+- **readiness-report**: AI agent readiness assessment across 9 technical pillars and 5 maturity levels
 - **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
 
 ### PHP & Tools
@@ -209,6 +211,14 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "PSR-15 middleware for security headers"
 - "CVSS scoring for discovered vulnerabilities"
 
+**📊 Agent Readiness (readiness-report)**
+- "Run /readiness-report to evaluate this repository"
+- "Assess codebase maturity for AI-assisted development"
+- "Identify gaps preventing effective autonomous development"
+- "Check which maturity level (L1-L5) this repo achieves"
+- "Generate prioritized recommendations for agent readiness"
+- "Evaluate the 9 technical pillars: Style, Build, Testing, Docs, DevEnv, Debugging, Security, Tasks, Analytics"
+
 **🚨 Incident Response (security-incident-reporting)**
 - "Create NIST/SANS-style incident report for executive summary"
 - "Document DDoS attack with timeline, peak bandwidth, and attack vectors"
@@ -336,6 +346,7 @@ Use case: SEO optimization, AI search visibility, content marketing, structured 
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
 | enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
+| readiness-report | ✓ | ✓ | ✓ | ✓ | ✓ |
 | php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | cli-tools | ✓ | ✓ | ✓ | ✓ | ✓ |
 | context7 | ✓ | ✓ | ✓ | ✓ | ✓ |

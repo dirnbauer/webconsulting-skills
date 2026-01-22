@@ -344,6 +344,13 @@ return [
 
 ---
 
+## Related Skills
+
+- [security-incident-reporting](../security-incident-reporting/SKILL.md) - Post-incident documentation, NIST/SANS frameworks, DDoS post-mortem, CVE correlation
+- [typo3-security](../typo3-security/SKILL.md) - TYPO3-specific hardening and configuration
+
+---
+
 ## Credits & Attribution
 
 This skill is based on the excellent work by
