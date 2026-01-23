@@ -11,6 +11,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | **TYPO3 CMS** | 12 skills | Content Blocks, DataHandler, upgrades, testing, security |
 | **Video & Animation** | 1 skill | Remotion video creation in React |
 | **Security & Enterprise** | 3 skills | OWASP audits, OpenSSF Scorecard, supply chain security |
+| **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **PHP & Tools** | 3 skills | PHP 8.x modernization, CLI tools, documentation lookup |
 | **Frontend & Design** | 2 skills | UI patterns, design systems, accessibility |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
@@ -170,6 +171,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
+| `postgres-best-practices` | postgres, sql, database, query, index, rls, supabase | "Optimize this slow Postgres query" or "Set up RLS for multi-tenant" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -873,6 +875,50 @@ Analyze my database for performance issues: missing indexes, large tables, unuse
 
 ---
 
+#### 🐘 Postgres & Supabase
+
+**Optimize Slow Query:**
+```
+Optimize this slow Postgres query. Use EXPLAIN ANALYZE to identify bottlenecks and suggest proper indexes.
+```
+
+**Row Level Security Setup:**
+```
+Set up Row Level Security for my multi-tenant orders table. Users should only see their own orders. Use auth.uid() with proper caching.
+```
+
+**Connection Pooling:**
+```
+Configure PgBouncer connection pooling for my Supabase project. Recommend pool size based on 4GB RAM.
+```
+
+**Find Missing Indexes:**
+```
+Find all foreign key columns in my database that are missing indexes. Generate CREATE INDEX statements.
+```
+
+**Cursor Pagination:**
+```
+Convert my OFFSET-based pagination to cursor-based pagination for the products table. Handle multi-column sorting.
+```
+
+**Batch Operations:**
+```
+Optimize my bulk insert loop. Convert individual INSERTs to batched statements or COPY for better performance.
+```
+
+**RLS Performance:**
+```
+Review my RLS policies for performance issues. Wrap function calls in SELECT for caching and add proper indexes.
+```
+
+**JSONB Indexing:**
+```
+My JSONB queries on the products.attributes column are slow. Add the right index type (GIN vs expression index).
+```
+
+---
+
 #### 🚀 Deployment & DevOps
 
 **Deployer Configuration:**
@@ -949,6 +995,8 @@ grep -r "DataHandler" ~/.claude/skills/
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
 | `cli-tools` | CLI tool management and auto-installation | Netresearch |
 | `context7` | Library documentation lookup via REST API | Netresearch |
+| **Database** | | |
+| `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
 | **WebConsulting Specific** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
@@ -1057,10 +1105,11 @@ Skills in this collection cover:
 - **Next.js/Astro** for frontend (AI Search Optimization)
 - **TailwindCSS** for styling
 
-## Netresearch Skill Repositories
+## External Skill Repositories
 
-The following Netresearch repositories are the source for most skills:
+The following repositories are the source for skills in this collection:
 
+### Netresearch (TYPO3 & PHP)
 - https://github.com/netresearch/typo3-ddev-skill
 - https://github.com/netresearch/typo3-testing-skill
 - https://github.com/netresearch/typo3-conformance-skill
@@ -1072,6 +1121,9 @@ The following Netresearch repositories are the source for most skills:
 - https://github.com/netresearch/php-modernization-skill
 - https://github.com/netresearch/cli-tools-skill
 - https://github.com/netresearch/context7-skill
+
+### Supabase (Postgres)
+- https://github.com/supabase/agent-skills
 
 ## Contributing
 
@@ -1092,3 +1144,12 @@ have been invaluable in shaping these guidelines.
 
 **Copyright (c) Netresearch DTT GmbH** - Methodology and best practices
 Adapted by webconsulting.at for this skill collection
+
+---
+
+We also thank **[Supabase](https://supabase.com/)** for their excellent Postgres best practices
+and AI agent skills. The `postgres-best-practices` skill is adapted from their open-source
+repository: https://github.com/supabase/agent-skills
+
+**Copyright (c) Supabase** - Postgres performance optimization guidelines
+See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-best-practices-for-ai-agents)
