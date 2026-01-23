@@ -27,6 +27,13 @@
       "branch": "main",
       "path": "skills/readiness-report",
       "enabled": true
+    },
+    {
+      "name": "postgres-best-practices",
+      "source": "https://github.com/supabase/agent-skills.git",
+      "branch": "main",
+      "path": "skills/postgres-best-practices",
+      "enabled": false
     }
   ],
   "syncSchedule": "weekly",
