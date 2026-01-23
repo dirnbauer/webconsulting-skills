@@ -29,6 +29,15 @@ Adapted by webconsulting.at for this skill collection
 
 ---
 
+We also thank **[Supabase](https://supabase.com/)** for their excellent Postgres best practices
+and AI agent skills. The `postgres-best-practices` skill is adapted from their open-source
+repository: https://github.com/supabase/agent-skills
+
+**Copyright (c) Supabase** - Postgres performance optimization guidelines  
+See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-best-practices-for-ai-agents)
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -39,9 +48,13 @@ Adapted by webconsulting.at for this skill collection
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | 1.0.0 | incident report, post-mortem, ddos, forensics |
 | `security-incident-reporting/TYPO3` | TYPO3 forensics, Security Team communication, PGP templates | 1.0.0 | typo3 incident, typo3 hack, security team |
+| `deepfake-detection` | Multimodal media authentication, PRNU/IGH/DQ forensics, GAN detection | 1.0.0 | deepfake, media forensics, fake detection, synthetic media |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security, quality gates | 1.0.0 | enterprise, openssf, slsa, security |
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | 1.0.0 | /readiness-report, agent readiness, codebase maturity |
 | `ai-search-optimization` | AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt | 1.0.0 | aeo, geo, ai search, chatgpt, perplexity, llms.txt |
+| **Database** | | | |
+| `postgres-best-practices` | Postgres performance, RLS, indexes, connection pooling (Supabase) | 1.0.0 | postgres, sql, database, query, index, rls |
+| `postgres-best-practices/SUPABASE` | Supabase auth.uid(), RLS patterns, Edge Functions, MCP | 1.0.0 | supabase, auth.uid, edge-functions, supabase-mcp |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
@@ -78,9 +91,18 @@ Adapted by webconsulting.at for this skill collection
 - **security-audit**: Deep security audits aligned with OWASP Top 10
 - **security-incident-reporting**: Post-incident documentation drawing from NIST/SANS, DDoS post-mortem, CVE correlation
   - `SKILL-TYPO3.md`: TYPO3 forensics, Security Team communication, PGP-encrypted vulnerability reports
+- **deepfake-detection**: Multimodal media authentication, synthetic media forensics (PRNU, IGH, DQ, GAN fingerprints)
 - **enterprise-readiness**: OpenSSF Scorecard, SLSA, supply chain security
 - **readiness-report**: AI agent readiness assessment across 9 technical pillars and 5 maturity levels
 - **ai-search-optimization**: AEO/GEO for AI search (schema.org, robots.txt, llms.txt, TYPO3, MD/MDX)
+
+### Database
+- **postgres-best-practices**: Postgres performance optimization from Supabase
+  - Query performance, indexes, connection pooling
+  - Row Level Security (RLS) patterns
+  - Schema design, data types, partitioning
+  - Concurrency, locking, queue processing
+  - `SKILL-SUPABASE.md`: auth.uid(), Edge Functions, MCP server, Realtime
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
@@ -264,6 +286,22 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Monitor brand mentions in AI search platforms"
 - "Audit website for AI search visibility"
 
+**🔍 Deepfake Detection & Media Forensics (deepfake-detection)**
+- "What are deepfakes and how do they work technically?"
+- "Verify authenticity of this video before publication"
+- "Is this image AI-generated? Check for diffusion model or GAN artifacts"
+- "Analyze PRNU/PCE sensor fingerprints to match claimed camera source"
+- "Generate DQ probability map to detect image splicing and compositing"
+- "Detect face-swap deepfakes via temporal consistency and blink analysis"
+- "Check this audio for voice cloning artifacts and synthetic speech patterns"
+- "Verify C2PA/CAI content provenance and cryptographic chain of custody"
+- "Analyze shadow physics and reflection consistency for semantic forensics"
+- "Build automated media authentication pipeline with ffmpeg and exiftool"
+- "Create forensic report with authenticity grade (1-6) and confidence intervals"
+- "What tools do I need for deepfake detection? Install ffmpeg, exiftool, c2patool"
+- "Explain the Liar's Dividend and 4D disinformation tactics"
+- "How do I defend against CEO voice clone fraud attacks?"
+
 **📚 Documentation (typo3-docs)**
 - "RST documentation following docs.typo3.org"
 - "API documentation with code examples"
@@ -285,6 +323,23 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Bulk content update with DataHandler"
 - "Debug extension conflicts in TCA/hooks"
 - "Database optimization and missing indexes"
+
+**🐘 Postgres & Supabase (postgres-best-practices)**
+- "Optimize this slow Postgres query"
+- "Add proper indexes for WHERE and JOIN columns"
+- "Review my schema for performance issues"
+- "Set up Row Level Security for multi-tenant app"
+- "Configure connection pooling with PgBouncer"
+- "Find missing indexes on foreign keys"
+- "Use cursor-based pagination instead of OFFSET"
+- "Batch INSERT statements for bulk data"
+- "UPSERT pattern for insert-or-update"
+- "Use SKIP LOCKED for job queue processing"
+- "Partition large time-series table"
+- "Enable pg_stat_statements for query analysis"
+- "Choose right index type: B-tree vs GIN vs BRIN"
+- "Optimize RLS policies for performance"
+- "Fix N+1 queries with batch loading"
 
 ## Session Profiles
 
@@ -326,6 +381,14 @@ Use case: Contributing patches to TYPO3 Core via Gerrit
 Active: `typo3-seo`, `ai-search-optimization`, `webconsulting-branding`  
 Use case: SEO optimization, AI search visibility, content marketing, structured data
 
+### Media Forensics Session
+Active: `deepfake-detection`, `security-audit`, `security-incident-reporting`  
+Use case: Media authentication, deepfake detection, disinformation defense, content provenance verification
+
+### Database Session
+Active: `postgres-best-practices`, `typo3-datahandler`, `security-audit`  
+Use case: Database optimization, Postgres queries, RLS policies, connection pooling, schema design
+
 ## Version Compatibility Matrix
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
@@ -345,6 +408,7 @@ Use case: SEO optimization, AI search visibility, content marketing, structured 
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
+| deepfake-detection | ✓ | ✓ | ✓ | ✓ | ✓ |
 | enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
 | readiness-report | ✓ | ✓ | ✓ | ✓ | ✓ |
 | php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -352,6 +416,7 @@ Use case: SEO optimization, AI search visibility, content marketing, structured 
 | context7 | ✓ | ✓ | ✓ | ✓ | ✓ |
 | webconsulting-branding | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
+| postgres-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
