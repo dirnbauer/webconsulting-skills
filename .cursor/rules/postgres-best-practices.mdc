@@ -1,0 +1,133 @@
+---
+description: Postgres performance optimization and best practices from Supabase. Query performance, connection pooling, Row Level Security (RLS), schema design, indexes, and diagnostics.
+globs: 
+alwaysApply: false
+---
+
+# Postgres Best Practices
+
+> **Source:** Based on [Supabase's Postgres Best Practices](https://github.com/supabase/agent-skills) for AI agents.
+
+## Rule Categories by Priority
+
+| Priority | Category | Impact |
+|----------|----------|--------|
+| 1 | Query Performance | CRITICAL |
+| 2 | Connection Management | CRITICAL |
+| 3 | Security & RLS | CRITICAL |
+| 4 | Schema Design | HIGH |
+| 5 | Concurrency & Locking | MEDIUM-HIGH |
+| 6 | Data Access Patterns | MEDIUM |
+| 7 | Monitoring & Diagnostics | LOW-MEDIUM |
+| 8 | Advanced Features | LOW |
+
+## Critical Rules
+
+### Always Index WHERE and JOIN Columns
+
+```sql
+-- Create index on frequently filtered column
+create index orders_customer_id_idx on orders (customer_id);
+
+-- Index foreign key columns (Postgres does NOT do this automatically!)
+create index orders_customer_id_idx on orders (customer_id);
+```
+
+### Choose Right Index Type
+
+- **B-tree (default)**: `=`, `<`, `>`, `BETWEEN`, `IN`
+- **GIN**: Arrays, JSONB (`@>`, `?`), full-text search
+- **BRIN**: Large time-series tables (10-100x smaller)
+
+### Enable Row Level Security
+
+```sql
+alter table orders enable row level security;
+
+create policy orders_user_policy on orders
+  for all
+  using ((select auth.uid()) = user_id);  -- Note: wrap in (select) for caching
+
+alter table orders force row level security;
+```
+
+### Use Connection Pooling
+
+Use PgBouncer in transaction mode. Each connection uses 1-3MB RAM.
+
+### Use Appropriate Data Types
+
+- IDs: `bigint generated always as identity` (not `int`, not `serial`)
+- Strings: `text` (not `varchar(n)`)
+- Timestamps: `timestamptz` (not `timestamp`)
+- Money: `numeric(10,2)` (not `float`)
+
+## Performance Patterns
+
+### Composite Indexes (equality first, range last)
+
+```sql
+create index orders_status_created_idx on orders (status, created_at);
+```
+
+### Cursor-Based Pagination (not OFFSET)
+
+```sql
+select * from products where id > $last_id order by id limit 20;
+```
+
+### Batch INSERTs
+
+```sql
+insert into events (user_id, action) values
+  (1, 'click'), (1, 'view'), (2, 'click');
+```
+
+### SKIP LOCKED for Queues
+
+```sql
+select * from jobs where status = 'pending'
+order by created_at limit 1
+for update skip locked;
+```
+
+### UPSERT
+
+```sql
+insert into settings (user_id, key, value)
+values (123, 'theme', 'dark')
+on conflict (user_id, key)
+do update set value = excluded.value;
+```
+
+## Diagnostics
+
+```sql
+-- Enable query stats
+create extension if not exists pg_stat_statements;
+
+-- Find slow queries
+select query, mean_exec_time, calls
+from pg_stat_statements
+order by total_exec_time desc limit 10;
+
+-- Find missing FK indexes
+select conrelid::regclass, a.attname
+from pg_constraint c
+join pg_attribute a on a.attrelid = c.conrelid and a.attnum = any(c.conkey)
+where c.contype = 'f'
+  and not exists (
+    select 1 from pg_index i
+    where i.indrelid = c.conrelid and a.attnum = any(i.indkey)
+  );
+```
+
+## Anti-Patterns to Avoid
+
+- Using `OFFSET` for pagination (use cursor-based)
+- Individual INSERTs in a loop (batch them)
+- Missing indexes on foreign keys
+- Using `int` for IDs (use `bigint`)
+- RLS policies calling functions per-row (wrap in `select`)
+- Random UUIDs (v4) as primary keys (use UUIDv7 or identity)
+- Creating connections per request (use pooling)
