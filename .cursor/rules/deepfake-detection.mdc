@@ -1,0 +1,305 @@
+---
+name: deepfake-detection
+description: Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era.
+version: 1.0.0
+triggers:
+  - deepfake
+  - media forensics
+  - fake detection
+  - synthetic media
+  - prnu
+  - image authentication
+  - video verification
+  - disinformation
+  - manipulated media
+  - GAN detection
+---
+
+# Deepfake Detection & Media Authentication
+
+Comprehensive framework for detecting synthetic media, analyzing manipulation artifacts, and establishing media provenance.
+
+## When to Use
+
+- Verifying authenticity of images or videos before publication
+- Detecting AI-generated or manipulated media (deepfakes, face swaps, voice clones)
+- Forensic analysis of suspicious media for legal or journalistic purposes
+- Implementing automated media authentication pipelines
+- Establishing content provenance and chain of custody
+- Countering disinformation and Advanced Persistent Manipulators (APMs)
+
+## What Are Deepfakes?
+
+**Deepfakes** are synthetic media created using deep learning (GANs, Diffusion Models, Autoencoders) to generate or manipulate audiovisual content with high realism.
+
+| Type | Description |
+|------|-------------|
+| Face Swap | Replace one person's face with another |
+| Voice Clone | Generate speech in someone's voice |
+| Lip Sync | Make someone appear to say different words |
+| Fully Synthetic | Generate non-existent people, scenes |
+
+**Entertaining**: De-aging actors, satire, art, accessibility.
+**Dangerous**: Non-consensual imagery, financial fraud, election interference, evidence fabrication.
+
+**Future**: Transition from "seeing is believing" to "cryptographic proof is believing" via C2PA/CAI provenance.
+
+## The ABC Framework of Synthetic Media Threats
+
+| Category | Description |
+|----------|-------------|
+| **A - Actors** | Nation-states, APMs, commercial disinformation services |
+| **B - Behavior** | Astroturfing, coordinated inauthentic behavior |
+| **C - Content** | Deepfake videos, voice clones, GAN faces, manipulated images |
+
+## The 4D Disinformation Tactics
+
+| Tactic | Description | Counter |
+|--------|-------------|---------|
+| **Dismiss** | Claim real evidence is fake ("Liar's Dividend") | Provenance verification |
+| **Distort** | Reframe with synthetic fragments | Semantic consistency |
+| **Distract** | Flood with synthetic noise | Automated detection |
+| **Dismay** | Psychological operations | Confidence scoring |
+
+## Forensic Detection Criteria
+
+### Criterion A: Sensor Fingerprints (PRNU/PCE)
+
+Photo-Response Non-Uniformity (PRNU) acts as biometric fingerprint for cameras.
+
+```python
+def calculate_pce(image: np.ndarray, reference_prnu: np.ndarray) -> float:
+    """
+    PCE value > 60: high confidence match
+    PCE value 40-60: moderate confidence
+    PCE value < 40: low confidence or mismatch
+    """
+    noise_residual = extract_noise_residual(image)
+    correlation = correlate_2d(noise_residual, reference_prnu)
+    return peak**2 / energy
+```
+
+**PRNU Limitations (Wronski Effect)**: Modern computational photography breaks sensor-to-pixel mapping. Pre-2018 DSLRs: High reliability. 2023+ Smartphones: Low reliability.
+
+### Criterion B: Noise-Intensity (IGH Classification)
+
+```python
+def analyze_igh_profile(image: np.ndarray) -> dict:
+    """
+    Authentic optical blur: asymmetric gradient distribution
+    Synthetic blur: symmetric Gaussian distribution
+    """
+    gradients = compute_intensity_gradients(image)
+    symmetry_score = measure_gradient_symmetry(gradients)
+    return {"classification": "authentic" if symmetry_score < 0.7 else "synthetic"}
+```
+
+### Criterion C: Blur Analysis
+
+| Blur Type | Gradient Profile | Detection |
+|-----------|------------------|-----------|
+| Optical (lens) | Asymmetric | IGH analysis |
+| Digital (software) | Symmetric | IGH analysis |
+| Portrait mode (fake) | Uniform | Edge discontinuity |
+
+### Criterion D: Compression Artifacts (DQ Detection)
+
+```python
+def generate_dq_probability_map(image: np.ndarray) -> np.ndarray:
+    """
+    Spliced regions show different quantization histories.
+    Red regions = likely manipulation.
+    """
+    dct_blocks = compute_dct_blocks(image)
+    return detect_quantization_inconsistencies(dct_blocks)
+```
+
+## Video-Specific Detection
+
+```python
+def analyze_temporal_artifacts(video_path: str) -> dict:
+    return {
+        "face_boundary_flickering": detect_boundary_flickering(frames),
+        "lighting_consistency": analyze_lighting_consistency(frames),
+        "blink_analysis": detect_blink_patterns(frames),
+        "audio_visual_sync": check_lip_sync_accuracy(video_path)
+    }
+```
+
+### GAN Fingerprint Detection
+
+```python
+def detect_gan_fingerprints(image: np.ndarray) -> dict:
+    """
+    GANs produce checkerboard patterns in FFT.
+    Different families leave distinct signatures.
+    """
+    fft = compute_fft_spectrum(image)
+    return {
+        "checkerboard_score": detect_checkerboard_artifacts(fft),
+        "suspected_generator": match_known_gan_spectra(fft)
+    }
+```
+
+## Semantic Forensics (SemaFor)
+
+| Check | Description |
+|-------|-------------|
+| Shadow Physics | Verify shadows match single light source |
+| Reflection Consistency | Check reflections match scene geometry |
+| Perspective Geometry | Verify vanishing points consistent |
+| Audio-Visual Sync | Lip movements match phonemes |
+
+## Authenticity Scoring System
+
+| % | Grade | Interpretation |
+|---|-------|----------------|
+| 90-100 | 1 (Excellent) | Valid PRNU/PCE, no DQ artifacts |
+| 75-89 | 2 (Good) | Consistent IGH, minor compression deviations |
+| 50-74 | 3 (Satisfactory) | Hybrid content, requires human review |
+| 35-49 | 4 (Adequate) | Noise inconsistencies, local editing suspected |
+| 20-34 | 5 (Poor) | Splicing detected via DQ maps |
+| <20 | 6 (Fail) | GAN fingerprints or physical impossibilities |
+
+## LLM Integration
+
+| Role | Model | Version | Function |
+|------|-------|---------|----------|
+| Lead | Claude Opus | 4.5 | Multimodal analysis, report generation |
+| Validation | Gemini Pro | 3.0 | Cross-validation of results |
+| Reasoning | GLM Pro Thinking | 4.7 | Logical verification of forensic conclusions |
+
+## Required Tools & Auto-Installation
+
+| Tool | Purpose | Required |
+|------|---------|----------|
+| `ffmpeg` | Video processing, frame extraction | Yes |
+| `exiftool` | Deep metadata extraction | Yes |
+| `imagemagick` | Image processing, ELA | Recommended |
+| `jq` | JSON processing | Recommended |
+| `c2patool` | C2PA provenance verification | Optional |
+
+**Agent Auto-Installation**: When a tool is missing, the agent will detect and offer to install it. **User approval required.**
+
+```bash
+# macOS
+brew install ffmpeg exiftool imagemagick jq
+
+# Ubuntu/Debian  
+sudo apt install ffmpeg libimage-exiftool-perl imagemagick jq
+
+# Windows
+winget install ffmpeg exiftool imagemagick jqlang.jq
+```
+
+## Tool Usage Examples
+
+### ffmpeg for Feature Extraction
+
+```bash
+# Extract I-frames for PRNU analysis
+ffmpeg -i input.mp4 -vf "select='eq(pict_type,I)'" -vsync vfr frame_%04d.png
+
+# Extract metadata for container audit
+ffprobe -v quiet -print_format json -show_format -show_streams input.mp4
+
+# Isolate audio for voice clone detection
+ffmpeg -i input.mp4 -vn -acodec pcm_s16le -ar 44100 audio.wav
+```
+
+### ExifTool for Metadata Forensics
+
+```bash
+# Check for editing software traces
+exiftool -Software -CreatorTool -HistorySoftwareAgent input.jpg
+
+# Check creation/modification times
+exiftool -time:all -G1 input.jpg
+```
+
+### C2PA Provenance Verification
+
+```bash
+c2patool verify input.jpg
+c2patool manifest input.jpg -o manifest.json
+```
+
+## Content Provenance (C2PA/CAI)
+
+```python
+def verify_c2pa_provenance(media_path: str) -> dict:
+    """
+    Verify Content Authenticity Initiative manifests.
+    """
+    manifest = extract_c2pa_manifest(media_path)
+    if manifest and verify_all(manifest):
+        return {"has_provenance": True, "valid": True}
+    return {"has_provenance": False, "recommendation": "Proceed with forensic analysis"}
+```
+
+## Defense Pipeline
+
+```python
+class MediaAuthenticationPipeline:
+    async def authenticate(self, media_path: str) -> AuthenticationResult:
+        # Check provenance first (fast path)
+        provenance = await self.c2pa_validator.verify(media_path)
+        if provenance.valid:
+            return AuthenticationResult(authentic=True, method="cryptographic")
+        
+        # Run forensic analysis in parallel
+        results = await asyncio.gather(
+            self.prnu_analyzer.analyze(media_path),
+            self.igh_classifier.classify(media_path),
+            self.dq_detector.detect(media_path),
+            self.gan_detector.detect(media_path),
+            self.semantic_analyzer.analyze(media_path)
+        )
+        
+        return AuthenticationResult(composite=self.fuse_signals(results))
+```
+
+## Checklists
+
+### Pre-Analysis
+- [ ] Obtain original file (avoid screenshots, re-uploads)
+- [ ] Preserve file hash (SHA-256)
+- [ ] Document source and context
+- [ ] Check for C2PA/CAI provenance
+
+### Analysis
+- [ ] PRNU/PCE analysis
+- [ ] IGH profile classification
+- [ ] DQ probability map
+- [ ] GAN fingerprint analysis
+- [ ] Semantic consistency checks
+- [ ] Video: temporal consistency, audio-visual sync
+
+## Limitations
+
+| Challenge | Impact | Mitigation |
+|-----------|--------|------------|
+| Computational imaging | Destroys PRNU | Rely on semantic analysis |
+| Social media compression | Removes artifacts | Focus on coarse-grained signals |
+| Adversarial attacks | Evades models | Multi-model ensemble |
+| Rapid GAN evolution | Outdated fingerprints | Continuous updates |
+
+## Related Skills
+
+- [security-audit](../security-audit/SKILL.md) - Security assessment patterns
+- [security-incident-reporting](../security-incident-reporting/SKILL.md) - Incident documentation
+
+## Key References (2024-2025)
+
+- Ramanaharan et al. (2025): DeepFake detection generalizability review. *Forensic Sci Int: Digital Investigation*
+- Ahmed et al. (2024): Visual Deepfake Detection review. *IEEE Access*
+- Nature Sci Rep (2025): Diffusion model detection via uncertainty estimation
+- DARPA SemaFor (2024): Semantic forensics program transition
+- C2PA v2.3 (2025): Content Credentials specification
+- PMC (2024): Audio deepfake detection comprehensive review
+
+See full SKILL.md for 23 cited sources.
+
+---
+
+Developed by webconsulting.at for the Claude skill collection.
