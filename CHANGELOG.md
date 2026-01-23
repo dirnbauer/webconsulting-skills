@@ -8,6 +8,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **postgres-best-practices**: Postgres performance optimization skill from Supabase
+  - Query performance: indexes, composite indexes, covering indexes, partial indexes
+  - Connection management: pooling, limits, idle timeouts
+  - Security & RLS: Row Level Security patterns, auth.uid() optimization, least privilege
+  - Schema design: data types, FK indexes, partitioning, primary key strategies
+  - Concurrency & locking: short transactions, deadlock prevention, SKIP LOCKED
+  - Data access patterns: batch inserts, N+1 elimination, cursor pagination, UPSERT
+  - Monitoring: pg_stat_statements, EXPLAIN ANALYZE, autovacuum tuning
+  - Advanced features: JSONB indexes, full-text search with tsvector
+  - SKILL-SUPABASE.md supplement: auth.uid(), Edge Functions, MCP server, Realtime
+
+- **deepfake-detection**: Multimodal media authentication and synthetic media forensics
+  - PRNU/PCE sensor fingerprint analysis
+  - IGH classification for GAN detection
+  - DQ probability maps for splicing detection
+  - Semantic forensics (shadows, reflections, physics)
+  - C2PA/CAI content provenance verification
+  - Voice clone detection patterns
+  - LLM-augmented sensemaking for post-empirical media
+
 - **ai-search-optimization**: New skill for AI search visibility (AEO/GEO)
   - Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies
   - Schema.org markup (FAQPage, Article, HowTo, Organization) with sourced statistics
