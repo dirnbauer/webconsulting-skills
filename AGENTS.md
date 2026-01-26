@@ -38,6 +38,15 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
 
 ---
 
+We also thank **[Corey Haines](https://coreyhaines.com/)** for his excellent marketing skills
+collection. The `marketing-skills` skill is adapted from his open-source repository:
+https://github.com/coreyhaines31/marketingskills
+
+**Copyright (c) Corey Haines** - Marketing frameworks and best practices  
+See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -55,6 +64,13 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
 | **Database** | | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, connection pooling (Supabase) | 1.0.0 | postgres, sql, database, query, index, rls |
 | `postgres-best-practices/SUPABASE` | Supabase auth.uid(), RLS patterns, Edge Functions, MCP | 1.0.0 | supabase, auth.uid, edge-functions, supabase-mcp |
+| **Marketing** | | | |
+| `marketing-skills` | CRO, copywriting, SEO, pricing, psychology (Corey Haines) | 1.0.0 | marketing, cro, conversion, landing page, funnel |
+| `marketing-skills/CRO` | Page conversion rate optimization framework | 1.0.0 | cro, optimize page, page not converting |
+| `marketing-skills/COPYWRITING` | Headlines, CTAs, page structure, copy formulas | 1.0.0 | copywriting, headline, rewrite, cta |
+| `marketing-skills/SEO` | Technical SEO, on-page SEO, content quality audit | 1.0.0 | seo audit, not ranking, technical seo |
+| `marketing-skills/PSYCHOLOGY` | 70+ mental models for marketing and persuasion | 1.0.0 | psychology, mental model, persuasion, bias |
+| `marketing-skills/PRICING` | Pricing tiers, value metrics, freemium vs trial | 1.0.0 | pricing, tiers, freemium, monetization |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
@@ -103,6 +119,14 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
   - Schema design, data types, partitioning
   - Concurrency, locking, queue processing
   - `SKILL-SUPABASE.md`: auth.uid(), Edge Functions, MCP server, Realtime
+
+### Marketing
+- **marketing-skills**: Marketing skills from Corey Haines
+  - `SKILL-CRO.md`: Page conversion rate optimization
+  - `SKILL-COPYWRITING.md`: Headlines, CTAs, page structure
+  - `SKILL-SEO.md`: Technical and on-page SEO audit
+  - `SKILL-PSYCHOLOGY.md`: 70+ mental models for marketing
+  - `SKILL-PRICING.md`: Pricing strategy, tiers, value metrics
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
@@ -341,6 +365,26 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Optimize RLS policies for performance"
 - "Fix N+1 queries with batch loading"
 
+**📈 Marketing & Growth (marketing-skills)**
+- "Optimize this landing page for conversions"
+- "Review my pricing page CRO"
+- "Write homepage copy for my SaaS product"
+- "Create headlines for this feature page"
+- "Improve this CTA copy"
+- "Audit my site for SEO issues"
+- "Why isn't my page ranking?"
+- "Review my pricing tiers and packaging"
+- "Should I use freemium or free trial?"
+- "Apply psychology to increase conversions"
+- "What mental models apply to this marketing challenge?"
+- "Help me structure this landing page"
+- "Write copy for my demo request page"
+- "Optimize my signup flow"
+- "Create an A/B test plan for my pricing page"
+- "Add social proof and trust signals"
+- "Handle objections on my sales page"
+- "Write a value proposition for my product"
+
 ## Session Profiles
 
 For optimal performance, limit active skills per session:
@@ -389,6 +433,10 @@ Use case: Media authentication, deepfake detection, disinformation defense, cont
 Active: `postgres-best-practices`, `typo3-datahandler`, `security-audit`  
 Use case: Database optimization, Postgres queries, RLS policies, connection pooling, schema design
 
+### Marketing Session
+Active: `marketing-skills`, `ai-search-optimization`, `ui-design-patterns`  
+Use case: Landing page optimization, copywriting, pricing strategy, SEO audits, conversion optimization
+
 ## Version Compatibility Matrix
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
@@ -417,6 +465,7 @@ Use case: Database optimization, Postgres queries, RLS policies, connection pool
 | webconsulting-branding | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
 | postgres-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
+| marketing-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
