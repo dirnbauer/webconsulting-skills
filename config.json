@@ -1,0 +1,21 @@
+{
+  "id": "ws_579cd5af",
+  "name": "webconsulting-skills",
+  "slug": "webconsulting-skills",
+  "defaults": {
+    "model": "claude-sonnet-4-5-20250929",
+    "permissionMode": "safe",
+    "cyclablePermissionModes": [
+      "safe",
+      "ask",
+      "allow-all"
+    ],
+    "thinkingLevel": "think",
+    "enabledSourceSlugs": []
+  },
+  "localMcpServers": {
+    "enabled": true
+  },
+  "createdAt": 1769254170431,
+  "updatedAt": 1769254170432
+}
