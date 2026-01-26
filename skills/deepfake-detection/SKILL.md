@@ -1,7 +1,7 @@
 ---
 name: deepfake-detection
 description: Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era.
-version: 1.0.0
+version: 1.1.0
 triggers:
   - deepfake
   - media forensics
@@ -54,6 +54,17 @@ Comprehensive framework for detecting synthetic media, analyzing manipulation ar
 | **Full Body Puppetry** | Pose Estimation | Control a person's body movements |
 | **Fully Synthetic** | Diffusion, GANs | Generate non-existent people, scenes, events |
 
+### Emerging Capabilities (2025-2026)
+
+| Type | Advancement | Implication |
+|------|-------------|-------------|
+| **Face Swap** | One-shot swapping (single reference image), GHOST 2.0 [[24]](#references), DynamicFace [[25]](#references) | Minimal source material needed |
+| **Face Reenactment** | Audio-driven animation, Neural Head Reenactment | Fully synthetic video calls |
+| **Voice Clone** | Zero-shot cloning (no training on target), Emotional Voice Synthesis | Clone any voice instantly with emotion |
+| **Lip Sync** | High-fidelity with Diffusion Models, Multilingual sync | Automatic dubbing across languages |
+| **Full Body Puppetry** | 3D-aware motion transfer, Neural Body Avatars | Photorealistic real-time control |
+| **Fully Synthetic** | Video Diffusion Models, Controllable Generation | Precise control over age, expression, gaze |
+
 ### The Entertaining Side
 
 Deepfakes have legitimate and creative applications:
@@ -85,6 +96,16 @@ The same technology enables serious harms:
 
 > **Real Case (2024)**: WPP CEO Mark Read was targeted by a sophisticated deepfake voice clone attempting to authorize fraudulent transfers [[19]](#references). Deepfake fraud cases surged **1,740%** in North America between 2022-2023, with average losses exceeding $500,000 per incident [[18]](#references).
 
+### Current Scale (2025-2026)
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| Deepfakes shared annually | **8 million** (2025) vs 500,000 (2023) | Industry estimates |
+| Projected synthetic content | **90% of online content** by 2026 | Europol |
+| Non-consensual intimate imagery (NCII) | **98% of all deepfakes** | EU Commission |
+
+> **Key Insight**: The exponential growth rate means detection systems face an ever-increasing volume challenge, reinforcing the need for proactive authentication (C2PA) over reactive detection.
+
 ### The Future of Deepfakes
 
 | Timeline | Development | Implication |
@@ -105,6 +126,15 @@ Detection Accuracy:    █████████████░░░░░░
 ```
 
 **Key Insight**: We are transitioning from a world where "seeing is believing" to one where "cryptographic proof is believing." The future lies not in perfect detection, but in **provenance infrastructure** (C2PA v2.3) that proves authenticity at creation [[15, 16]](#references).
+
+### The Fundamental Asymmetry
+
+| Approach | Analogy | Certainty Level |
+|----------|---------|-----------------|
+| **Traditional Detection** (PRNU, IGH, DQ, GAN fingerprints) | Fingerabdrücke (fingerprints) | Probabilistic, disputable |
+| **Cryptographic Provenance** (C2PA/CAI) | DNA-Match | Mathematically certain (collision probability 2⁻²⁵⁶) |
+
+> Traditional methods deliver probabilities. Cryptographic signatures deliver mathematical certainty—not absolute, but with security that is physically impossible to overcome.
 
 ---
 
@@ -409,6 +439,21 @@ def generate_dq_probability_map(image: np.ndarray) -> np.ndarray:
 
 Video deepfake detection requires analysis of temporal consistency, which current research shows remains challenging for generalization across different manipulation methods [[1, 4]](#references).
 
+### Visual Detection Indicators (Human Review)
+
+Before algorithmic analysis, trained reviewers check for these telltale signs:
+
+| Indicator | What to Look For | Why It Happens |
+|-----------|------------------|----------------|
+| **Face Boundaries** | Flickering edges, face "floating" over body | Imperfect blending between swapped face and original |
+| **Blinking** | No blinking, asymmetric blinking, stiff eyes | Early models lacked blink training; still imperfect |
+| **Lip Sync** | Delays on plosives (p, b, m sounds) | Audio-visual alignment is computationally hard |
+| **Shadows & Light** | Multiple shadow directions, inconsistent lighting | Composited elements from different light sources |
+| **Eye Reflections** | Different scenes reflected in each eye | Synthesized eyes don't share real-world reflection |
+| **Hair Details** | Smooth contours, "melting" strands, clipping | Fine details are hardest for generators |
+
+> **Best Practice**: Slow down video to 25% speed and examine frame-by-frame. Artifacts become more visible when temporal smoothing is removed.
+
 ### Temporal Consistency Analysis
 
 ```python
@@ -551,6 +596,22 @@ def calculate_authenticity_score(media_path: str) -> dict:
 ---
 
 ## 9. Content Provenance (C2PA / CAI)
+
+### Industry Adoption (2025-2026)
+
+C2PA is rapidly becoming the industry standard. Current adoption landscape:
+
+| Category | Adopters | Status |
+|----------|----------|--------|
+| **AI Generators** | DALL-E 3, Adobe Firefly, Google Gemini | Auto-sign all outputs |
+| **Software** | Adobe Photoshop, Lightroom | Cryptographic edit history |
+| **Professional Cameras** | Leica M11-P, Sony (select models) | Sign at capture |
+| **Camera Manufacturers** | Nikon, Canon | Following (announced) |
+| **Smartphones** | Google Pixel 10 (2025/26) | Native C2PA support |
+| **Mobile OEMs** | Samsung Galaxy | Following (announced) |
+| **Enterprise** | Microsoft 365 | Mandatory AI watermarks (2026) |
+
+> **Prognosis (3-5 years)**: For media organizations and government agencies: Without cryptographic provenance, no file will be considered trustworthy.
 
 ### Content Authenticity Initiative (CAI) Integration
 
@@ -706,6 +767,32 @@ score is [SCORE]% (Grade: [GRADE]). [RECOMMENDATION].
 3. **Temporal Delay**: Wait for verification before amplifying uncertain content
 4. **Provenance Requirement**: Mandate C2PA for critical communications
 
+### Response When Targeted (Personal Deepfakes)
+
+If you or your client are depicted in a deepfake:
+
+| Step | Action | Details |
+|------|--------|---------|
+| 1 | **Preserve Evidence** | Screenshot with timestamp, save URL, download file |
+| 2 | **Platform Takedown** | Report to platform using manipulation/deepfake reporting tools |
+| 3 | **Legal Assessment** | Consult attorney for jurisdiction-specific remedies |
+| 4 | **Support Resources** | Contact victim support organizations |
+
+#### Legal Framework (Austria)
+
+| Statute | Protection | Application |
+|---------|------------|-------------|
+| **§ 78 UrhG** | Recht am eigenen Bild (Right to own image) | Unauthorized use of likeness |
+| **§ 107c StGB** | Cybermobbing | Persistent harassment via digital means |
+| **§ 120a StGB** | Unbefugte Bildaufnahmen | Intimate imagery without consent |
+
+**Austrian Resources**:
+- [Saferinternet.at Helpline](https://www.saferinternet.at/helpline) - Expert counseling
+- Rat auf Draht: **147** (24/7 hotline for young people)
+- Internet Ombudsstelle: [ombudsstelle.at](https://www.ombudsstelle.at)
+
+> **Note**: Similar protections exist across EU member states under the Digital Services Act (DSA) and GDPR. Consult local counsel for jurisdiction-specific advice.
+
 ### Detection Pipeline Example
 
 ```python
@@ -824,6 +911,9 @@ class MediaAuthenticationPipeline:
 | Social media compression | Removes fine artifacts | Focus on coarse-grained signals |
 | Adversarial attacks on detectors | Evades specific models | Multi-model ensemble |
 | Rapid GAN evolution | Outdated fingerprints | Continuous model updates |
+| **Metadata stripping** | Screenshots, re-uploads remove C2PA | Invisible watermarks coupled with C2PA |
+
+> **C2PA Challenge**: Screenshots and social media uploads can strip metadata ("stripping attack"). The industry is developing invisible watermarks that survive re-encoding and link back to C2PA manifests.
 
 ### Ethical Considerations
 
@@ -923,6 +1013,22 @@ class MediaAuthenticationPipeline:
 23. **Kirchner, M. & Fridrich, J. (2019)**. "PRNU-Based Camera Identification." *Digital Image Forensics*, Springer.
     - Sensor fingerprint methodology
 
+### Face Swap & Synthesis (2025)
+
+24. **GHOST 2.0 (2025)**. "Generative High-fidelity One Shot Transfer of Heads." *arXiv*.
+    - One-shot face swapping with single reference image
+
+25. **DynamicFace (2025)**. "High-Quality and Consistent Video Face Swapping using Diffusion." *ICCV 2025*.
+    - Temporal consistency in video face swapping via diffusion models
+
+26. **HFMF (2025)**. "Hierarchical Fusion for Multi-Modal Forgery Detection." *WACV 2025*.
+    - Multi-modal detection architecture
+
+### Policy & Impact (2025)
+
+27. **European Parliament (2025)**. "Children and deepfakes." *EPRS Briefing*.
+    - Policy analysis on deepfake impact on minors
+
 ---
 
 ## Credits & Attribution
@@ -931,6 +1037,6 @@ This skill synthesizes methodologies from the multimedia forensics research comm
 drawing from peer-reviewed publications (2024-2025), DARPA MediFor/SemaFor program
 outcomes, and industry standards (C2PA v2.3, CAI).
 
-All citations verified as of January 2026.
+All citations verified as of January 2026. Updated with content from webconsulting.at blog article.
 
 Developed by webconsulting.at for the Claude skill collection.

@@ -1,7 +1,7 @@
 ---
 name: deepfake-detection
 description: Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era.
-version: 1.0.0
+version: 1.1.0
 triggers:
   - deepfake
   - media forensics
@@ -40,9 +40,16 @@ Comprehensive framework for detecting synthetic media, analyzing manipulation ar
 | Fully Synthetic | Generate non-existent people, scenes |
 
 **Entertaining**: De-aging actors, satire, art, accessibility.
-**Dangerous**: Non-consensual imagery, financial fraud, election interference, evidence fabrication.
+**Dangerous**: Non-consensual imagery (98% of deepfakes), financial fraud, election interference, evidence fabrication.
+
+**Scale (2025)**: 8 million deepfakes shared annually (vs 500k in 2023). Europol projects 90% of online content synthetic by 2026.
 
 **Future**: Transition from "seeing is believing" to "cryptographic proof is believing" via C2PA/CAI provenance.
+
+| Detection Approach | Analogy | Certainty |
+|--------------------|---------|-----------|
+| Traditional (PRNU, IGH, DQ) | Fingerprints | Probabilistic, disputable |
+| Cryptographic (C2PA) | DNA-Match | Mathematical (2⁻²⁵⁶ collision) |
 
 ## The ABC Framework of Synthetic Media Threats
 
@@ -113,6 +120,19 @@ def generate_dq_probability_map(image: np.ndarray) -> np.ndarray:
     dct_blocks = compute_dct_blocks(image)
     return detect_quantization_inconsistencies(dct_blocks)
 ```
+
+## Visual Detection Indicators (Human Review)
+
+| Indicator | What to Look For |
+|-----------|------------------|
+| **Face Boundaries** | Flickering edges, face "floating" |
+| **Blinking** | No blinking, asymmetric blinks |
+| **Lip Sync** | Delays on plosives (p, b, m) |
+| **Shadows** | Multiple shadow directions |
+| **Eye Reflections** | Different scenes in each eye |
+| **Hair** | Smooth contours, "melting" strands |
+
+> Slow video to 25% speed for frame-by-frame inspection.
 
 ## Video-Specific Detection
 
@@ -226,6 +246,18 @@ c2patool manifest input.jpg -o manifest.json
 
 ## Content Provenance (C2PA/CAI)
 
+### Industry Adoption (2025-2026)
+
+| Category | Adopters | Status |
+|----------|----------|--------|
+| **AI Generators** | DALL-E 3, Adobe Firefly, Google Gemini | Auto-sign |
+| **Software** | Adobe Photoshop, Lightroom | Cryptographic history |
+| **Cameras** | Leica M11-P, Sony | Sign at capture |
+| **Smartphones** | Google Pixel 10 (2025/26) | Native support |
+| **Enterprise** | Microsoft 365 | Mandatory AI watermarks (2026) |
+
+**Challenge**: Metadata stripping via screenshots/re-uploads. Solution: Invisible watermarks linked to C2PA.
+
 ```python
 def verify_c2pa_provenance(media_path: str) -> dict:
     """
@@ -275,6 +307,17 @@ class MediaAuthenticationPipeline:
 - [ ] Semantic consistency checks
 - [ ] Video: temporal consistency, audio-visual sync
 
+## Response When Targeted
+
+| Step | Action |
+|------|--------|
+| 1 | **Preserve Evidence**: Screenshot with timestamp, URL, download file |
+| 2 | **Platform Takedown**: Report via manipulation/deepfake reporting |
+| 3 | **Legal Assessment**: Consult attorney |
+| 4 | **Support**: Victim support organizations |
+
+**Austria**: § 78 UrhG (Recht am eigenen Bild), § 107c StGB (Cybermobbing). Saferinternet.at Helpline, Rat auf Draht (147).
+
 ## Limitations
 
 | Challenge | Impact | Mitigation |
@@ -283,6 +326,7 @@ class MediaAuthenticationPipeline:
 | Social media compression | Removes artifacts | Focus on coarse-grained signals |
 | Adversarial attacks | Evades models | Multi-model ensemble |
 | Rapid GAN evolution | Outdated fingerprints | Continuous updates |
+| Metadata stripping | Removes C2PA | Invisible watermarks |
 
 ## Related Skills
 
@@ -297,8 +341,12 @@ class MediaAuthenticationPipeline:
 - DARPA SemaFor (2024): Semantic forensics program transition
 - C2PA v2.3 (2025): Content Credentials specification
 - PMC (2024): Audio deepfake detection comprehensive review
+- GHOST 2.0 (2025): One-shot face swapping. *arXiv*
+- DynamicFace (2025): Video face swapping with Diffusion. *ICCV 2025*
+- HFMF (2025): Hierarchical Fusion for Multi-Modal Forgery Detection. *WACV 2025*
+- European Parliament (2025): Children and deepfakes. *EPRS Briefing*
 
-See full SKILL.md for 23 cited sources.
+See full SKILL.md for 27 cited sources.
 
 ---
 
