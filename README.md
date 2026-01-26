@@ -12,6 +12,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | **Video & Animation** | 1 skill | Remotion video creation in React |
 | **Security & Enterprise** | 3 skills | OWASP audits, OpenSSF Scorecard, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
+| **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
 | **PHP & Tools** | 3 skills | PHP 8.x modernization, CLI tools, documentation lookup |
 | **Frontend & Design** | 2 skills | UI patterns, design systems, accessibility |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
@@ -81,6 +82,8 @@ Both **Cursor** and **Claude Code** now share the same skills location: `~/.clau
 
 ## Quick Start
 
+### Option 1: Standalone Installation (Recommended)
+
 ```bash
 # Clone the repository
 git clone git@github.com:dirnbauer/webconsulting-skills.git
@@ -90,8 +93,23 @@ cd webconsulting-skills
 chmod +x install.sh
 ./install.sh
 
-# Restart Cursor IDE
+# Restart Cursor IDE or Claude Code
 ```
+
+### Option 2: Clone as Project Subdirectory
+
+```bash
+# From your project root
+git clone git@github.com:dirnbauer/webconsulting-skills.git webconsulting-skills
+
+# Install skills (auto-detects parent project)
+cd webconsulting-skills
+./install.sh
+
+# Skills are installed to ~/.claude/skills/ AND your project's .cursor/
+```
+
+> The installer auto-detects if it's running from a vendor directory, project subdirectory, or standalone clone, and adjusts paths accordingly.
 
 ### Alternative: Composer Agent Skill Plugin
 
@@ -172,6 +190,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
 | `postgres-best-practices` | postgres, sql, database, query, index, rls, supabase | "Optimize this slow Postgres query" or "Set up RLS for multi-tenant" |
+| `marketing-skills` | marketing, cro, conversion, landing page, pricing | "Optimize this landing page" or "Write homepage copy" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -919,6 +938,70 @@ My JSONB queries on the products.attributes column are slow. Add the right index
 
 ---
 
+#### 📈 Marketing & Growth
+
+**Landing Page CRO:**
+```
+Optimize this landing page for conversions. Analyze the value proposition, headline, CTAs, and social proof placement.
+```
+
+**Homepage Copywriting:**
+```
+Write homepage copy for my SaaS product that helps teams manage projects. Focus on clarity over cleverness.
+```
+
+**Headline Formulas:**
+```
+Generate 5 headline variations for my product using proven formulas. Product: email marketing tool for e-commerce.
+```
+
+**CTA Optimization:**
+```
+Improve these CTA buttons. Current: "Submit", "Learn More", "Sign Up". Make them value-focused.
+```
+
+**Pricing Strategy:**
+```
+Review my pricing page. I have 3 tiers at $29, $79, $199. Should the middle tier be recommended? How do I handle enterprise?
+```
+
+**Freemium vs Trial:**
+```
+Should I use freemium or free trial for my collaboration tool? What are the pros and cons of each?
+```
+
+**SEO Audit:**
+```
+Audit my site for SEO issues. Check technical SEO, on-page optimization, and content quality.
+```
+
+**Pricing Psychology:**
+```
+What psychological principles can I apply to my pricing page to increase conversions?
+```
+
+**Page Structure:**
+```
+Help me structure my landing page. What sections should I include and in what order?
+```
+
+**Objection Handling:**
+```
+What objections might visitors have on my pricing page and how should I address them?
+```
+
+**A/B Test Ideas:**
+```
+Suggest A/B test ideas for my homepage hero section. What should I test first?
+```
+
+**Social Proof Strategy:**
+```
+How should I incorporate social proof on my landing page? Where should logos, testimonials, and stats go?
+```
+
+---
+
 #### 🚀 Deployment & DevOps
 
 **Deployer Configuration:**
@@ -997,6 +1080,8 @@ grep -r "DataHandler" ~/.claude/skills/
 | `context7` | Library documentation lookup via REST API | Netresearch |
 | **Database** | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
+| **Marketing** | | |
+| `marketing-skills` | CRO, copywriting, SEO, pricing, psychology | Corey Haines |
 | **WebConsulting Specific** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
@@ -1087,12 +1172,22 @@ Edit `.cursor/mcp.json` to add your MCP server configurations:
 ### Updating Skills
 
 ```bash
+# If you have uncommitted local changes to skills, stash them first
+git stash
+
 # Pull latest changes
 git pull origin main
 
-# Re-run installation
+# Restore any local changes (optional)
+git stash pop
+
+# Re-run installation to update symlinks
 ./install.sh
+
+# Restart Cursor IDE to load updated skills
 ```
+
+> **Note:** The installer removes and recreates symlinks on each run, so running `./install.sh` after pulling always ensures your skills are up to date.
 
 ## Technology Stack
 
@@ -1125,6 +1220,9 @@ The following repositories are the source for skills in this collection:
 ### Supabase (Postgres)
 - https://github.com/supabase/agent-skills
 
+### Corey Haines (Marketing)
+- https://github.com/coreyhaines31/marketingskills
+
 ## Contributing
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
@@ -1153,3 +1251,12 @@ repository: https://github.com/supabase/agent-skills
 
 **Copyright (c) Supabase** - Postgres performance optimization guidelines
 See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-best-practices-for-ai-agents)
+
+---
+
+We also thank **[Corey Haines](https://coreyhaines.com/)** for his excellent marketing skills
+collection. The `marketing-skills` skill is adapted from his open-source repository:
+https://github.com/coreyhaines31/marketingskills
+
+**Copyright (c) Corey Haines** - Marketing frameworks and best practices
+See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
