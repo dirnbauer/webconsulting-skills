@@ -1,0 +1,79 @@
+---
+description: Marketing skills for AI agents. CRO, copywriting, SEO, pricing, and psychology. From Corey Haines' Marketing Skills collection.
+globs: 
+alwaysApply: false
+---
+
+# Marketing Skills
+
+> **Source:** Based on [Corey Haines' Marketing Skills](https://github.com/coreyhaines31/marketingskills)
+
+## CRO Priority
+
+1. Value proposition clarity (5-second test)
+2. Headline effectiveness
+3. CTA placement and copy
+4. Visual hierarchy
+5. Trust signals
+6. Objection handling
+7. Friction removal
+
+## Headline Formulas
+
+- `{Outcome} without {pain point}`
+- `The {opposite} way to {outcome}`
+- `Never {bad thing} again`
+- `{Feature} for {audience} to {use case}`
+- `Turn {input} into {outcome}`
+
+## CTA Copy
+
+```
+Weak: Submit, Sign Up, Learn More
+Strong: Start Free Trial, Get [Thing], See [Product] in Action
+```
+
+## Copywriting Principles
+
+- Clarity over cleverness
+- Benefits over features
+- Specificity over vagueness ("4 hours to 15 minutes" not "save time")
+- Customer language over jargon
+
+## Pricing
+
+### Value Metrics
+- Per user: Collaboration tools
+- Per usage: Variable consumption (API calls)
+- Per record: CRM, email tools
+- Flat fee: Simple products
+
+### Good-Better-Best
+- Good: Entry, remove barriers
+- Better: Recommended, where most land
+- Best: Premium, capture high value
+
+## Psychology Quick Reference
+
+| Challenge | Models |
+|-----------|--------|
+| Low conversions | Hick's Law, Activation Energy |
+| Price objections | Anchoring, Framing, Loss Aversion |
+| Building trust | Authority, Social Proof, Reciprocity |
+| Decision paralysis | Paradox of Choice, Defaults |
+
+## SEO Priority
+
+1. Crawlability & Indexation
+2. Technical (Core Web Vitals)
+3. On-Page (titles, metas, headings)
+4. Content Quality (E-E-A-T)
+5. Authority & Links
+
+## Supplements
+
+- `SKILL-CRO.md` - Full page optimization
+- `SKILL-COPYWRITING.md` - Headlines and copy
+- `SKILL-SEO.md` - SEO audit checklist
+- `SKILL-PSYCHOLOGY.md` - 70+ mental models
+- `SKILL-PRICING.md` - Pricing strategy
