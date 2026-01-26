@@ -40,18 +40,26 @@ else
     echo "→ Detected: Running on local machine"
 fi
 
-# Detect project root (go up from vendor/webconsulting/webconsulting-skills)
+# Detect project root
+# Priority: 
+#   1. Composer vendor install (vendor/webconsulting/webconsulting-skills)
+#   2. Subdirectory of project (project/webconsulting-skills)
+#   3. Current working directory
+#   4. Script directory (fallback)
 if [ -f "$SCRIPT_DIR/../../../composer.json" ]; then
+    # Composer vendor install
     PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-    echo "→ Project root: $PROJECT_ROOT"
+    echo "→ Project root (vendor): $PROJECT_ROOT"
+elif [ -f "$SCRIPT_DIR/../composer.json" ] || [ -d "$SCRIPT_DIR/../src" ]; then
+    # Subdirectory of main project (e.g., project/webconsulting-skills/)
+    PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+    echo "→ Project root (parent): $PROJECT_ROOT"
+elif [ -f "$PWD/composer.json" ]; then
+    PROJECT_ROOT="$PWD"
+    echo "→ Project root (from cwd): $PROJECT_ROOT"
 else
-    if [ -f "$PWD/composer.json" ]; then
-        PROJECT_ROOT="$PWD"
-        echo "→ Project root (from cwd): $PROJECT_ROOT"
-    else
-        echo "⚠ Warning: Could not detect project root. Using script directory."
-        PROJECT_ROOT="$SCRIPT_DIR"
-    fi
+    echo "⚠ Warning: Could not detect project root. Using script directory."
+    PROJECT_ROOT="$SCRIPT_DIR"
 fi
 
 # =============================================================================
