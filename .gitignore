@@ -25,3 +25,6 @@ local_reports/
 
 # Generated symlinks (created by install.sh)
 .cursor/skills/
+
+# Claude Code session history
+sessions/
