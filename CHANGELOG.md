@@ -6,7 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- **install.sh**: Improved project root detection with 4-tier priority:
+  1. Composer vendor install (`vendor/webconsulting/webconsulting-skills`)
+  2. Subdirectory of project (`project/webconsulting-skills/`)
+  3. Current working directory (if has `composer.json`)
+  4. Script directory (fallback)
+
+- **README.md**: Updated installation instructions
+  - Split Quick Start into "Standalone" and "Clone as Subdirectory" options
+  - Added pre-pull steps (git stash) to Updating Skills section
+  - Added note about symlink recreation behavior
+
 ### Added
+
+- **marketing-skills**: Marketing skills collection from Corey Haines
+  - CRO: Page conversion rate optimization framework
+  - Copywriting: Headlines, CTAs, page structure, copy formulas
+  - SEO: Technical and on-page SEO audit checklist
+  - Psychology: 70+ mental models for marketing and persuasion
+  - Pricing: Pricing strategy, tiers, value metrics, freemium vs trial
 
 - **postgres-best-practices**: Postgres performance optimization skill from Supabase
   - Query performance: indexes, composite indexes, covering indexes, partial indexes
