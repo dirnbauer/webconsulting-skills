@@ -125,16 +125,7 @@ Detection Accuracy:    █████████████░░░░░░
                        ↑ Gap widening over time
 ```
 
-**Key Insight**: We are transitioning from a world where "seeing is believing" to one where "cryptographic proof is believing." The future lies not in perfect detection, but in **provenance infrastructure** (C2PA v2.3) that proves authenticity at creation [[15, 16]](#references).
-
-### The Fundamental Asymmetry
-
-| Approach | Analogy | Certainty Level |
-|----------|---------|-----------------|
-| **Traditional Detection** (PRNU, IGH, DQ, GAN fingerprints) | Fingerabdrücke (fingerprints) | Probabilistic, disputable |
-| **Cryptographic Provenance** (C2PA/CAI) | DNA-Match | Mathematically certain (collision probability 2⁻²⁵⁶) |
-
-> Traditional methods deliver probabilities. Cryptographic signatures deliver mathematical certainty—not absolute, but with security that is physically impossible to overcome.
+**Key Insight**: We are transitioning from a world where "seeing is believing" to one where "cryptographic proof is believing." The future lies not in perfect detection, but in **provenance infrastructure** (C2PA v2.3) that proves authenticity at creation [[15, 16]](#references). Traditional detection methods (PRNU, IGH, DQ) are like fingerprints—helpful, but disputable. Cryptographic provenance (C2PA) is like a DNA match—mathematically certain.
 
 ---
 

@@ -44,12 +44,7 @@ Comprehensive framework for detecting synthetic media, analyzing manipulation ar
 
 **Scale (2025)**: 8 million deepfakes shared annually (vs 500k in 2023). Europol projects 90% of online content synthetic by 2026.
 
-**Future**: Transition from "seeing is believing" to "cryptographic proof is believing" via C2PA/CAI provenance.
-
-| Detection Approach | Analogy | Certainty |
-|--------------------|---------|-----------|
-| Traditional (PRNU, IGH, DQ) | Fingerprints | Probabilistic, disputable |
-| Cryptographic (C2PA) | DNA-Match | Mathematical (2⁻²⁵⁶ collision) |
+**Future**: Transition from "seeing is believing" to "cryptographic proof is believing" via C2PA/CAI provenance. Traditional detection methods are like fingerprints—helpful, but disputable. C2PA is like a DNA match—mathematically certain.
 
 ## The ABC Framework of Synthetic Media Threats
 
