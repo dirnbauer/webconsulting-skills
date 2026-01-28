@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, height=630">
+  <title>OG Image Example - webconsulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* webconsulting Design Tokens v2 */
+      --webcon-primary: #1b7a95;
+      --webcon-primary-light: #66c4e1;
+      --webcon-primary-50: #e8f4f8;
+      --webcon-primary-100: #c5e4ed;
+      --webcon-primary-200: #9dd2e2;
+      --webcon-primary-700: #1b7a95;
+      --webcon-primary-800: #155d73;
+      --webcon-primary-900: #0f4555;
+      --webcon-warning: #d97706;
+      --webcon-success: #16a34a;
+      --neutral-dark: #404040;
+      --neutral-950: #0a0a0a;
+      --text-light: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.7);
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      font-family: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+      background: var(--neutral-950);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .og-container {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 80px;
+    }
+
+    /* Gradient background using primary colors */
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--webcon-primary-900) 0%, var(--neutral-950) 50%, var(--webcon-primary-800) 100%);
+    }
+
+    /* Overlay pattern */
+    .bg-pattern {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 100% 0%, rgba(102, 196, 225, 0.2) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 80% at 0% 100%, rgba(27, 122, 149, 0.25) 0%, transparent 50%);
+    }
+
+    /* Grid overlay */
+    .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    /* Floating orbs - primary colors */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+    }
+
+    .orb-primary {
+      width: 350px;
+      height: 350px;
+      background: var(--webcon-primary);
+      top: -100px;
+      right: 100px;
+      opacity: 0.25;
+    }
+
+    .orb-light {
+      width: 300px;
+      height: 300px;
+      background: var(--webcon-primary-light);
+      bottom: -80px;
+      left: 50px;
+      opacity: 0.2;
+    }
+
+    .orb-warning {
+      width: 150px;
+      height: 150px;
+      background: var(--webcon-warning);
+      top: 60%;
+      right: 350px;
+      opacity: 0.15;
+    }
+
+    /* Geometric decoration */
+    .geo-ring {
+      position: absolute;
+      right: 80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 380px;
+      height: 380px;
+    }
+
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ring-1 { inset: 0; }
+    .ring-2 { inset: 40px; border-color: rgba(27, 122, 149, 0.3); }
+    .ring-3 { inset: 80px; border-color: rgba(102, 196, 225, 0.25); }
+    .ring-4 { inset: 120px; border-color: rgba(217, 119, 6, 0.2); }
+
+    .ring-center {
+      position: absolute;
+      inset: 140px;
+      background: linear-gradient(135deg, var(--webcon-primary), var(--webcon-primary-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 80px rgba(27, 122, 149, 0.4),
+        0 0 40px rgba(102, 196, 225, 0.3),
+        inset 0 -10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .ring-center::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent 60%);
+    }
+
+    /* Orbiting dots */
+    .orbit-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px currentColor;
+    }
+
+    .orbit-dot-1 {
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--webcon-primary-light);
+      color: var(--webcon-primary-light);
+    }
+
+    .orbit-dot-2 {
+      bottom: 40px;
+      right: 20px;
+      background: var(--webcon-warning);
+      color: var(--webcon-warning);
+      width: 8px;
+      height: 8px;
+    }
+
+    .orbit-dot-3 {
+      top: 80px;
+      left: 10px;
+      background: var(--webcon-primary);
+      color: var(--webcon-primary);
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Main content */
+    .content {
+      position: relative;
+      z-index: 10;
+      max-width: 620px;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .logo-mark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo-mark svg {
+      width: 360px;
+      height: 48px;
+    }
+
+    /* Headline */
+    .headline {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      font-stretch: 125%;
+    }
+
+    .headline em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--webcon-primary-light), var(--webcon-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Tagline */
+    .tagline {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 520px;
+    }
+
+    /* Domain badge */
+    .domain {
+      margin-top: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+    }
+
+    .domain-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--webcon-primary-light);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--webcon-primary-light);
+    }
+
+    /* Corner accent - warning highlight */
+    .corner-accent {
+      position: absolute;
+      bottom: 40px;
+      right: 60px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .corner-line {
+      width: 40px;
+      height: 2px;
+      background: var(--webcon-warning);
+    }
+
+    .corner-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--webcon-warning);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Code snippet decoration */
+    .code-decoration {
+      position: absolute;
+      top: 40px;
+      right: 60px;
+      font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.25);
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .code-decoration .highlight {
+      color: var(--webcon-primary-light);
+    }
+
+    .code-decoration .warning {
+      color: var(--webcon-warning);
+    }
+
+    /* Noise overlay */
+    .noise {
+      position: absolute;
+      inset: 0;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="og-container">
+    <!-- Background layers -->
+    <div class="bg-gradient"></div>
+    <div class="bg-pattern"></div>
+    <div class="grid-lines"></div>
+    <div class="noise"></div>
+    
+    <!-- Floating orbs -->
+    <div class="orb orb-primary"></div>
+    <div class="orb orb-light"></div>
+    <div class="orb orb-warning"></div>
+    
+    <!-- Geometric ring -->
+    <div class="geo-ring">
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+      <div class="ring ring-4"></div>
+      <div class="ring-center"></div>
+      <div class="orbit-dot orbit-dot-1"></div>
+      <div class="orbit-dot orbit-dot-2"></div>
+      <div class="orbit-dot orbit-dot-3"></div>
+    </div>
+    
+    <!-- Code decoration -->
+    <div class="code-decoration">
+      <span class="highlight">declare</span>(strict_types=<span class="warning">1</span>);<br>
+      <span class="highlight">namespace</span> Webconsulting\Skills;
+    </div>
+    
+    <!-- Main content -->
+    <div class="content">
+      <div class="logo">
+        <div class="logo-mark">
+          <!-- Full webconsulting logo from https://www.webconsulting.at/logo-light.svg -->
+          <svg viewBox="0 0 237.06 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Wordmark "webconsulting" in white for dark background -->
+            <g>
+              <polygon fill="#ffffff" points="67.51 16.92 65.33 9.27 62.13 9.27 59.95 16.97 57.85 9.27 53.86 9.27 58.07 22.73 61.45 22.73 63.75 14.63 66.09 22.73 69.42 22.73 73.66 9.27 69.64 9.27 67.51 16.92"/>
+              <path fill="#ffffff" d="M86.02,11.01c-.53-.63-1.19-1.12-1.98-1.47-.79-.35-1.71-.53-2.74-.53-1.16,0-2.17.2-3,.61-.84.41-1.51.96-2.02,1.64-.51.68-.89,1.44-1.13,2.28-.25.84-.37,1.68-.37,2.54s.12,1.75.37,2.58.64,1.57,1.17,2.22,1.24,1.17,2.1,1.56c.86.38,1.9.57,3.1.57.78,0,1.48-.06,2.09-.19.61-.13,1.2-.34,1.77-.63.57-.29,1.2-.67,1.87-1.15l-1.72-2.62c-.51.44-1.1.77-1.77,1.01-.67.24-1.35.35-2.02.35-.84,0-1.56-.2-2.16-.61-.6-.41-.96-1.03-1.06-1.87h9.01c.04-.27.06-.52.07-.74,0-.22.01-.41.01-.57,0-.98-.13-1.9-.4-2.76-.26-.86-.66-1.6-1.19-2.22ZM78.46,14.52c.05-.38.19-.76.4-1.12.21-.36.52-.67.93-.91.41-.25.93-.37,1.57-.37.4,0,.76.06,1.09.18s.61.29.85.5c.24.22.42.48.56.78.13.28.2.6.2.94h-5.59Z"/>
+              <path fill="#ffffff" d="M100.45,9.82c-.85-.55-1.79-.82-2.83-.82-.67,0-1.32.14-1.94.42-.62.28-1.15.73-1.58,1.34-.07.1-.13.21-.19.31V3.7h-3.71v19.03h3.71v-1.77c.08.14.17.27.26.39.48.63,1.03,1.06,1.64,1.3.61.24,1.22.35,1.82.35,1.18,0,2.19-.3,3.03-.91.84-.61,1.48-1.44,1.92-2.5.45-1.06.67-2.26.67-3.6,0-1.49-.25-2.76-.76-3.79-.51-1.04-1.19-1.83-2.03-2.38ZM99.13,17.92c-.24.54-.58.95-1.02,1.23-.45.28-.97.42-1.57.42s-1.12-.15-1.57-.44c-.45-.29-.79-.7-1.02-1.24-.24-.54-.35-1.17-.35-1.9s.12-1.36.35-1.88c.24-.53.58-.94,1.02-1.24.45-.3.97-.45,1.57-.45s1.12.15,1.57.44c.45.29.79.7,1.02,1.23.24.53.35,1.17.35,1.91s-.12,1.39-.35,1.92Z"/>
+              <path fill="#ffffff" d="M110.12,12.8c.43-.36.99-.55,1.68-.55.73,0,1.3.19,1.71.57.41.38.71.88.91,1.5l3.28-1.31c-.51-1.37-1.27-2.37-2.29-3.03-1.02-.66-2.22-.98-3.6-.98-1.13,0-2.11.2-2.93.59-.83.39-1.52.91-2.07,1.57-.56.66-.97,1.4-1.24,2.24-.27.84-.41,1.7-.41,2.59s.14,1.76.41,2.59c.27.84.69,1.59,1.24,2.25.55.66,1.25,1.19,2.07,1.58.83.39,1.81.59,2.93.59,1.38,0,2.58-.33,3.6-1,1.02-.66,1.78-1.67,2.29-3.02l-3.28-1.31c-.2.62-.51,1.12-.91,1.5s-.98.57-1.71.57-1.25-.18-1.68-.55c-.43-.36-.74-.84-.94-1.42s-.3-1.18-.3-1.8.1-1.22.3-1.79.51-1.04.94-1.41Z"/>
+              <path fill="#ffffff" d="M129.41,9.9c-1.03-.6-2.2-.9-3.51-.9s-2.51.3-3.54.89c-1.03.59-1.84,1.42-2.43,2.47-.59,1.06-.89,2.27-.89,3.63s.3,2.55.89,3.62c.59,1.06,1.41,1.9,2.44,2.5,1.04.6,2.21.9,3.52.9s2.48-.3,3.51-.91c1.03-.61,1.84-1.44,2.43-2.5.59-1.06.89-2.26.89-3.6s-.3-2.57-.89-3.62c-.59-1.05-1.4-1.87-2.43-2.47ZM128.6,18.01c-.24.56-.58.99-1.04,1.28-.46.29-1.01.44-1.67.44s-1.21-.15-1.68-.44c-.46-.29-.82-.72-1.06-1.28-.25-.56-.37-1.24-.37-2.02s.12-1.47.37-2.02.6-.96,1.06-1.26c.46-.29,1.02-.44,1.68-.44s1.21.15,1.67.44c.45.29.8.71,1.04,1.26.24.55.35,1.22.35,2.02s-.12,1.46-.35,2.02Z"/>
+              <path fill="#ffffff" d="M142.52,9c-.6,0-1.2.1-1.8.31-.6.21-1.13.56-1.6,1.06-.19.2-.35.44-.51.71v-1.81h-3.74v13.46h3.74v-6.36c0-.96.1-1.75.3-2.35.2-.6.51-1.05.91-1.34.41-.29.91-.44,1.52-.44.8,0,1.39.24,1.76.72.37.48.56,1.24.56,2.28v7.48h3.77v-8.87c0-1.51-.43-2.7-1.3-3.56-.86-.86-2.07-1.3-3.62-1.3Z"/>
+              <path fill="#ffffff" d="M159.05,15.19c-.52-.32-1.07-.57-1.65-.75-.58-.18-1.14-.34-1.67-.46-.56-.15-1.01-.27-1.34-.38-.33-.11-.56-.23-.71-.37-.15-.14-.22-.3-.22-.51,0-.27.15-.5.45-.67s.69-.26,1.16-.26c.56,0,1.1.13,1.61.4.51.26.93.63,1.26,1.11l2.32-1.83c-.53-.8-1.24-1.41-2.13-1.83-.89-.42-1.88-.63-2.98-.63-1.55,0-2.8.37-3.75,1.12-.96.75-1.43,1.73-1.43,2.95,0,.73.15,1.33.44,1.82.29.48.67.88,1.15,1.19.47.31.98.56,1.53.75s1.07.35,1.58.48c.45.13.86.26,1.23.38.36.13.66.28.87.45.22.17.33.41.33.7,0,.31-.17.58-.51.82-.34.24-.81.35-1.41.35-.82,0-1.5-.21-2.03-.63-.54-.42-.96-.86-1.27-1.31l-2.57,2.24c.33.36.75.76,1.26,1.19.51.43,1.15.79,1.91,1.08.76.29,1.66.44,2.68.44,1.13,0,2.12-.19,2.96-.57.85-.38,1.5-.92,1.97-1.62.46-.7.7-1.51.7-2.42,0-.78-.16-1.43-.48-1.95-.32-.52-.74-.94-1.26-1.26Z"/>
+              <path fill="#ffffff" d="M171.95,14.16c0,1.07-.05,2.03-.16,2.88-.11.85-.35,1.51-.72,1.99-.37.48-.97.72-1.79.72-.67,0-1.18-.14-1.52-.41-.34-.27-.56-.63-.68-1.08-.12-.45-.18-.93-.18-1.46v-7.53h-3.74v8.35c0,1.07.17,2.02.52,2.83.35.81.89,1.44,1.62,1.88.74.45,1.68.67,2.83.67.91,0,1.74-.21,2.5-.63.52-.29.96-.74,1.32-1.33v1.69h3.77v-13.46h-3.77v4.89Z"/>
+              <path fill="#ffffff" d="M183.41,19.57c-.25,0-.46-.07-.63-.2-.16-.14-.25-.37-.25-.7V3.7h-3.74v15.7c0,1.26.32,2.17.96,2.74.64.57,1.43.86,2.37.86.31,0,.66-.03,1.04-.1.38-.06.77-.17,1.17-.31v-3.19c-.16.04-.32.07-.46.11-.15.04-.3.05-.46.05Z"/>
+              <path fill="#ffffff" d="M191.36,4.28l-3.79,2.02v2.98h-2.35v2.92h2.35v6.42c0,1.09.2,1.96.6,2.59.4.64.93,1.1,1.58,1.38.66.28,1.36.42,2.1.42.42,0,.82-.03,1.22-.1.39-.06.78-.17,1.16-.31v-2.87c-.26.07-.5.13-.72.16-.23.04-.43.05-.61.05-.6,0-1.01-.2-1.22-.6-.21-.4-.31-1-.31-1.8v-5.35h2.87v-2.92h-2.87v-5Z"/>
+              <rect fill="#ffffff" x="197.49" y="9.27" width="3.74" height="13.46"/>
+              <rect fill="#ffffff" x="197.44" y="3.7" width="3.9" height="3.6"/>
+              <path fill="#ffffff" d="M212.04,9c-.6,0-1.2.1-1.8.31-.6.21-1.13.56-1.6,1.06-.19.2-.35.44-.51.71v-1.81h-3.74v13.46h3.74v-6.36c0-.96.1-1.75.3-2.35.2-.6.51-1.05.91-1.34.41-.29.91-.44,1.52-.44.8,0,1.39.24,1.76.72.37.48.56,1.24.56,2.28v7.48h3.77v-8.87c0-1.51-.43-2.7-1.3-3.56s-2.07-1.3-3.62-1.3Z"/>
+              <path fill="#ffffff" d="M229.75,21.52c-.58-.26-1.27-.47-2.07-.61-.8-.15-1.68-.27-2.65-.38-.58-.07-1.09-.15-1.52-.23-.43-.08-.76-.2-.98-.37-.23-.16-.34-.38-.34-.66,0-.23.07-.44.21-.64.79.33,1.67.5,2.66.5,1.11,0,2.08-.2,2.92-.61.84-.41,1.49-.98,1.95-1.72.46-.74.7-1.6.7-2.58,0-.87-.18-1.64-.53-2.32l2.03-1.64-1.94-2.32-2.25,1.81c-.07-.04-.13-.08-.21-.12-.86-.42-1.79-.63-2.81-.63s-1.93.21-2.8.63c-.86.42-1.56,1.01-2.07,1.77-.52.76-.78,1.67-.78,2.7,0,.96.24,1.82.72,2.58.17.27.37.5.59.73-.25.21-.48.42-.67.66-.5.61-.75,1.29-.75,2.03,0,.82.27,1.47.81,1.97.23.21.48.39.76.55l-1.84,1.09c-.04.15-.06.3-.08.45-.02.15-.03.3-.03.42,0,1.24.58,2.22,1.75,2.93,1.16.72,2.77,1.08,4.8,1.08s3.54-.36,4.63-1.08c1.08-.72,1.62-1.75,1.62-3.1,0-.75-.16-1.35-.48-1.82-.32-.46-.77-.83-1.35-1.09ZM223.55,12.65c.35-.37.82-.56,1.42-.56s1.07.19,1.41.56c.34.37.51.85.51,1.43s-.15,1.05-.45,1.46c-.3.41-.79.61-1.46.61s-1.16-.2-1.47-.61c-.31-.41-.46-.9-.46-1.46s.17-1.06.52-1.43ZM227.21,25.75c-.42.21-1.05.31-1.88.31-1.04,0-1.85-.12-2.44-.37-.59-.25-.89-.58-.89-1v-.11s0-.07.03-.11l.86-1.06c.51.12,1.03.21,1.54.27.66.07,1.21.15,1.65.22.45.07.8.15,1.05.23.25.08.44.18.55.3.11.12.16.28.16.48,0,.35-.21.62-.63.83Z"/>
+            </g>
+            <!-- Icon -->
+            <g>
+              <path fill="#66c4e1" d="M49.82,3.89c.6-.26,1.08-.06,1.07.47l-.2,6.88c-.02.52-.52,1.16-1.12,1.43l-18.32,8.02c-.61.27-1.08.06-1.07-.47l.21-6.88c.02-.52.52-1.16,1.12-1.43L49.82,3.89Z"/>
+              <path fill="#1b7a95" d="M22.39,20.12c.28.6.08,1.08-.44,1.08l-6.89-.04c-.52,0-1.17-.49-1.45-1.09L5.15,1.95c-.28-.6-.08-1.08.44-1.08l6.89.04c.52,0,1.17.49,1.45,1.09l8.46,18.12Z"/>
+              <path fill="#66c4e1" d="M49.5,14.66c.6-.26,1.08-.06,1.07.47l-.2,6.88c-.02.52-.52,1.16-1.12,1.43l-18.32,8.02c-.61.27-1.08.06-1.07-.47l.21-6.88c.02-.52.52-1.16,1.12-1.43l18.32-8.02Z"/>
+              <path fill="#1b7a95" d="M28.7,19.9l.04-6.89c0-.71.32-1.44.84-2.02L25.38,2c-.28-.6-.93-1.08-1.45-1.09l-6.89-.04c-.52,0-.72.48-.44,1.08l8.46,18.12c.28.6.93,1.09,1.45,1.09h2.56c-.24-.35-.38-.79-.37-1.25Z"/>
+              <path fill="#1b7a95" d="M37.74,6.83l1.11-.52-2.02-4.32c-.28-.6-.93-1.09-1.45-1.09l-6.89-.04c-.52,0-.72.48-.44,1.08l3.61,7.73,6.08-2.84Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+      
+      <h1 class="headline">Agent Skills for <em>TYPO3</em></h1>
+      
+      <p class="tagline">AI-augmented development with expert knowledge for web development, security, and enterprise software.</p>
+      
+      <div class="domain">
+        <span class="domain-dot"></span>
+        webconsulting.at
+      </div>
+    </div>
+    
+    <!-- Corner accent -->
+    <div class="corner-accent">
+      <div class="corner-line"></div>
+      <span class="corner-text">Skills</span>
+    </div>
+  </div>
+</body>
+</html>
