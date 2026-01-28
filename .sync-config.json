@@ -34,6 +34,13 @@
       "branch": "main",
       "path": "skills/postgres-best-practices",
       "enabled": false
+    },
+    {
+      "name": "og-image",
+      "source": "https://github.com/stevysmith/og-image-skill.git",
+      "branch": "main",
+      "path": "plugins/og-image/skills/og-image",
+      "enabled": false
     }
   ],
   "syncSchedule": "weekly",
