@@ -1,7 +1,7 @@
 ---
 name: deepfake-detection
 description: Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era.
-version: 1.1.0
+version: 1.2.0
 triggers:
   - deepfake
   - media forensics
@@ -18,6 +18,8 @@ triggers:
 # Deepfake Detection & Media Authentication
 
 Comprehensive framework for detecting synthetic media, analyzing manipulation artifacts, and establishing media provenance in the post-empirical era.
+
+> **Key Insight**: Traditional detection methods (PRNU, IGH, DQ) are like **fingerprints**—helpful, but disputable. Cryptographic provenance (C2PA) is like a **DNA match**—mathematically certain (collision probability 2⁻²⁵⁶).
 
 ## When to Use
 
@@ -327,6 +329,21 @@ c2patool manifest input.jpg -o manifest.json
 c2patool trust input.jpg
 ```
 
+#### C2PA Test Files for Validation
+
+Official test files from the C2PA organization (CC BY-SA 4.0):
+
+| File | Description | Expected Result |
+|------|-------------|-----------------|
+| `adobe-20220124-C.jpg` | Valid Adobe certificate, verified signature | ✅ Chain verified |
+| `truepic-20230212-camera.jpg` | Hardware-signed at capture | ✅ Chain verified |
+| Files without credentials | No C2PA manifest | ⚠️ No provenance |
+| Tampered files | Modified after signing | ❌ Invalid signature |
+
+Source: [c2pa-org/public-testfiles](https://github.com/c2pa-org/public-testfiles)
+
+> **Understanding C2PA Validation**: The chain is verified step-by-step: (1) Certificate verified → (2) Signature valid → (3) Claims unchanged → (4) Image hash matches. One failure breaks the entire chain.
+
 ---
 
 ## 5. Forensic Detection Criteria
@@ -545,6 +562,19 @@ def analyze_shadow_consistency(image: np.ndarray) -> dict:
 
 ## 8. Authenticity Scoring System
 
+### Analysis Layer Weighting
+
+Based on scientific reliability of each method (from webconsulting.at forensics research):
+
+| Analysis Layer | Weight | Rationale |
+|----------------|--------|-----------|
+| **Signal Analysis** | 45% | Objective forensic signals: noise patterns, compression artifacts, frequency analysis. Hybrid approaches achieve F1 scores of 0.96 on benchmarks |
+| **Metadata Analysis** | 35% | EXIF provenance chain. 62% of images have camera-specific signatures, 99% are manufacturer-identifiable |
+| **Semantic Analysis** | 20% | AI-based artifact detection. Only 58% accuracy on standard benchmarks—OpenAI discontinued their detector in 2023 due to low accuracy |
+| **C2PA (Bonus)** | +25-40 points | Cryptographic proof. Only unforgeable method. Combined with AI detection reduces false positives by 41% |
+
+> **Important**: Without C2PA verification, maximum achievable grade is 2 ("No manipulation indicators"). Grade 1 ("Provenance cryptographically verified") requires a validated signature chain.
+
 ### Probability to Grade Mapping
 
 | Authenticity % | Grade | Interpretation |
@@ -587,6 +617,35 @@ def calculate_authenticity_score(media_path: str) -> dict:
 ---
 
 ## 9. Content Provenance (C2PA / CAI)
+
+### C2PA Steering Committee (2026)
+
+The Coalition for Content Provenance and Authenticity is governed by major technology and media companies:
+
+| Member | Role |
+|--------|------|
+| **Adobe** | Founding member, CAI lead |
+| **BBC** | Media organization representative |
+| **Google** | Platform integration |
+| **Meta** | Social platform adoption |
+| **Microsoft** | Enterprise integration (365) |
+| **OpenAI** | AI generator signing (DALL-E, ChatGPT) |
+| **Publicis Groupe** | Advertising industry adoption |
+| **Sony** | Hardware integration (cameras) |
+| **Truepic** | Mobile authentication pioneer |
+
+### Content Credentials: The CR Icon
+
+**C2PA** is the technical standard. **Content Credentials** is the user-facing implementation with the visible "CR" icon.
+
+| What the CR Icon Shows | Description |
+|------------------------|-------------|
+| **Creator** | Who created the media (camera, person, AI) |
+| **Software** | What software was used for editing |
+| **AI Disclosure** | Whether AI was used for generation |
+| **Edit History** | What editing steps occurred |
+
+> **Key Feature**: All assertions are cryptographically signed. Changing even **one pixel** invalidates the signature—manipulation is immediately detectable.
 
 ### Industry Adoption (2025-2026)
 
@@ -779,6 +838,7 @@ If you or your client are depicted in a deepfake:
 
 **Austrian Resources**:
 - [Saferinternet.at Helpline](https://www.saferinternet.at/helpline) - Expert counseling
+- [Saferinternet.at Unterrichtsmaterialien](https://www.saferinternet.at/zielgruppen/lehrende) - Teaching materials ("Wahr oder falsch im Internet")
 - Rat auf Draht: **147** (24/7 hotline for young people)
 - Internet Ombudsstelle: [ombudsstelle.at](https://www.ombudsstelle.at)
 
@@ -843,6 +903,8 @@ class MediaAuthenticationPipeline:
 | [Sensity](https://sensity.ai/) | Commercial | Enterprise deepfake detection API |
 | [Microsoft Video Authenticator](https://www.microsoft.com/en-us/ai/ai-lab-video-authenticator) | Tool | Frame-by-frame manipulation scoring |
 | [C2PA Tool](https://c2pa.org/c2patool/) | CLI | Content provenance verification |
+| [Content Credentials Verify](https://contentcredentials.org/verify) | Web | Online C2PA verification (CAI) |
+| [webconsulting Forensik-Tool](https://www.webconsulting.at/blog/deepfakes-erkennen-verstehen) | Web | Multi-layer analysis (EXIF, C2PA, Signal, AI) |
 
 ### Reference Datasets
 
@@ -1004,6 +1066,23 @@ class MediaAuthenticationPipeline:
 23. **Kirchner, M. & Fridrich, J. (2019)**. "PRNU-Based Camera Identification." *Digital Image Forensics*, Springer.
     - Sensor fingerprint methodology
 
+### Deepfake Synthesis Methods
+
+28. **Thies, J. et al. (2016)**. "Face2Face: Real-time Face Capture and Reenactment of RGB Videos." *CVPR 2016*.
+    - Foundational face reenactment technique
+
+29. **Prajwal, K.R. et al. (2020)**. "Wav2Lip: Accurately Lip-syncing Videos In The Wild." *ACM Multimedia 2020*.
+    - Audio-driven lip synchronization
+
+30. **Siarohin, A. et al. (2019)**. "First Order Motion Model for Image Animation." *NeurIPS 2019*.
+    - Keypoint-based body puppetry
+
+31. **Karras, T. et al. (2020)**. "Analyzing and Improving the Image Quality of StyleGAN." *CVPR 2020*.
+    - StyleGAN2 architecture and fully synthetic generation
+
+32. **Perov, I. et al. (2020)**. "DeepFaceLab: Integrated, flexible and extensible face-swapping framework."
+    - Widely-used face swap toolkit
+
 ### Face Swap & Synthesis (2025)
 
 24. **GHOST 2.0 (2025)**. "Generative High-fidelity One Shot Transfer of Heads." *arXiv*.
@@ -1028,6 +1107,8 @@ This skill synthesizes methodologies from the multimedia forensics research comm
 drawing from peer-reviewed publications (2024-2025), DARPA MediFor/SemaFor program
 outcomes, and industry standards (C2PA v2.3, CAI).
 
-All citations verified as of January 2026. Updated with content from webconsulting.at blog article.
+**Synchronized with**: [webconsulting.at/blog/deepfakes-erkennen-verstehen](https://www.webconsulting.at/blog/deepfakes-erkennen-verstehen)
+
+All citations verified as of January 2026.
 
 Developed by webconsulting.at for the Claude skill collection.
