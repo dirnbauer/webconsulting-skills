@@ -47,6 +47,14 @@ See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https:/
 
 ---
 
+We also thank **[Stevy Smith](https://github.com/stevysmith)** for the excellent OG Image skill.
+The `og-image` skill is adapted from their open-source repository:
+https://github.com/stevysmith/og-image-skill
+
+**Copyright (c) Stevy Smith** - OG Image generation and social meta tag configuration
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -79,6 +87,7 @@ See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https:/
 | **Frontend & Design** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
+| `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
 | **Legal & Compliance** | | | |
 | `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
@@ -137,6 +146,11 @@ See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https:/
 ### Frontend & Design
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
 - **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
+- **og-image**: Social media preview images (Open Graph) and meta tag configuration
+  - Creates `/og-image` route matching project design system
+  - Screenshots at 1200x630 dimensions
+  - Configures og:image, twitter:card, theme-color meta tags
+  - Supports Next.js, Vite, Astro, Remix, plain HTML
 
 ### Legal & Compliance
 - **legal-impressum**: Austrian Impressum for all company types (Gesellschaftsformen)
@@ -365,6 +379,18 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Optimize RLS policies for performance"
 - "Fix N+1 queries with batch loading"
 
+**🖼️ OG Images & Social Sharing (og-image)**
+- "Generate an OG image for my Next.js app"
+- "Create social preview image matching my design system"
+- "Set up Twitter card meta tags"
+- "Configure Open Graph meta tags for LinkedIn sharing"
+- "Screenshot my /og-image page at 1200x630"
+- "Add og:image, og:title, og:description meta tags"
+- "Create OG image with cosmic/ethereal/brutalist/editorial style"
+- "Audit my site's social sharing meta tags"
+- "Set up metadataBase for absolute OG image URLs"
+- "Cache bust my OG image on Facebook/Twitter/LinkedIn"
+
 **📈 Marketing & Growth (marketing-skills)**
 - "Optimize this landing page for conversions"
 - "Review my pricing page CRO"
@@ -390,8 +416,8 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 For optimal performance, limit active skills per session:
 
 ### Frontend Session
-Active: `webconsulting-branding`, `ui-design-patterns`  
-Use case: UI development, styling, component creation, visual design
+Active: `webconsulting-branding`, `ui-design-patterns`, `og-image`  
+Use case: UI development, styling, component creation, visual design, social sharing
 
 ### Backend Session
 Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
@@ -466,6 +492,7 @@ Use case: Landing page optimization, copywriting, pricing strategy, SEO audits, 
 | ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
 | postgres-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
 | marketing-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
+| og-image | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
