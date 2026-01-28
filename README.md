@@ -14,7 +14,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
 | **PHP & Tools** | 3 skills | PHP 8.x modernization, CLI tools, documentation lookup |
-| **Frontend & Design** | 2 skills | UI patterns, design systems, accessibility |
+| **Frontend & Design** | 3 skills | UI patterns, design systems, accessibility, OG images |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
 | **AI & SEO** | 1 skill | AEO/GEO for AI search visibility |
 
@@ -191,6 +191,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
 | `postgres-best-practices` | postgres, sql, database, query, index, rls, supabase | "Optimize this slow Postgres query" or "Set up RLS for multi-tenant" |
 | `marketing-skills` | marketing, cro, conversion, landing page, pricing | "Optimize this landing page" or "Write homepage copy" |
+| `og-image` | og-image, open graph, social preview, twitter card, meta tags | "Generate an OG image" or "Set up Twitter card meta tags" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -865,6 +866,35 @@ Animate a bouncing ball using spring physics. Configure tension, friction, and m
 
 ---
 
+#### 🖼️ OG Images & Social Sharing
+
+**Generate OG Image:**
+```
+Create an OG image page for my Next.js app that matches my existing design system. Use my brand colors and fonts.
+```
+
+**Social Meta Tags:**
+```
+Configure all necessary Open Graph and Twitter card meta tags for my website. Include og:image at 1200x630.
+```
+
+**Screenshot OG Page:**
+```
+Navigate to my /og-image page, resize to 1200x630, and take a screenshot for use as og:image.
+```
+
+**Cache Busting:**
+```
+I've updated my OG image. How do I refresh the cache on Facebook, Twitter, and LinkedIn?
+```
+
+**Design Templates:**
+```
+Show me the different OG image design templates available: cosmic, editorial, brutalist, ethereal.
+```
+
+---
+
 #### 🎯 Common Tasks & Fixes
 
 **Fix Broken Relations:**
@@ -1085,6 +1115,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | **WebConsulting Specific** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
+| `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
 | **Video & Animation** | | |
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | **Legal & Compliance** | | |
@@ -1223,6 +1254,9 @@ The following repositories are the source for skills in this collection:
 ### Corey Haines (Marketing)
 - https://github.com/coreyhaines31/marketingskills
 
+### Stevy Smith (OG Images)
+- https://github.com/stevysmith/og-image-skill
+
 ## Contributing
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
@@ -1260,3 +1294,11 @@ https://github.com/coreyhaines31/marketingskills
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
+
+---
+
+We also thank **[Stevy Smith](https://github.com/stevysmith)** for the excellent OG Image skill.
+The `og-image` skill is adapted from their open-source repository:
+https://github.com/stevysmith/og-image-skill
+
+**Copyright (c) Stevy Smith** - OG Image generation and social meta tag configuration
