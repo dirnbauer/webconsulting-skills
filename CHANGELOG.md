@@ -6,6 +6,96 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **frontend-design**: Distinctive UI aesthetics from Anthropic
+  - Anti-AI-slop patterns for memorable interfaces
+  - Creative typography pairings (avoid Inter/Roboto/Arial)
+  - Color palettes with dominant + accent approach
+  - Motion design for high-impact moments
+  - Component examples: dark tech hero, glass morphism cards, pricing cards
+  - Quick reference CSS variables system
+
+- **web-design-guidelines**: Interface review for accessibility from Vercel
+  - WCAG 2.1 AA compliance checking
+  - Semantic HTML validation patterns
+  - ARIA patterns for common UI components
+  - Keyboard navigation requirements
+  - Focus states and color contrast guidelines
+  - Quick checklist for pre-launch review
+
+- **document-processing**: PDF, DOCX, PPTX, XLSX processing from Anthropic
+  - PDF: pdfplumber text extraction, pypdf merge/split/rotate, reportlab creation, OCR with pytesseract
+  - DOCX: pandoc conversion, docx-js creation, OOXML tracked changes workflow
+  - PPTX: markitdown extraction, PptxGenJS creation, template workflows
+  - XLSX: pandas analysis, openpyxl formulas, financial model standards
+
+- **update.sh**: New update script for easy skill management
+  - `--pull` flag to pull git changes before updating
+  - `--sync-only` flag to only sync external skills
+  - `--force` flag to stash local changes
+  - `--dry-run` flag to preview changes
+  - Automatic lastSync timestamp in .sync-config.json
+
+### Changed
+
+- **composer.json**: Added composer scripts for skill management
+  - `composer skills:install` - Install skills to ~/.claude/skills
+  - `composer skills:update` - Sync external skills and reinstall
+  - `composer skills:sync` - Only sync external skills
+  - `composer skills:list` - List all available skills
+
+- **.sync-config.json**: Added external sources for new skills
+  - web-design-guidelines from Vercel
+  - Reference entries for Anthropic skills (disabled, using local versions)
+  - Reference entries for marketing-skills (disabled, using local version with supplements)
+
+- **AGENTS.md**: Updated with new skills
+  - Added frontend-design, web-design-guidelines, document-processing to overview
+  - Added example prompts for new skills
+  - Added new session profiles (Creative Design, Accessibility Audit, Document Processing)
+  - Updated compatibility matrix
+
+- **README.md**: Updated documentation
+  - Added new update script documentation
+  - Added composer scripts documentation
+  - Added sync-config.json documentation
+  - Updated skill counts and categories
+  - Added Anthropic to external skill sources
+
+- **react-best-practices**: React and Next.js performance optimization from Vercel Engineering
+  - 57 rules across 8 priority categories
+  - Eliminating waterfalls (async/await patterns, Promise.all, Suspense)
+  - Bundle size optimization (barrel imports, dynamic imports, defer third-party)
+  - Server-side performance (React.cache, parallel fetching, after() API)
+  - Client-side data fetching (SWR, event listeners, passive listeners)
+  - Re-render optimization (memo, functional setState, useTransition, refs)
+  - Rendering performance (content-visibility, hydration, Activity component)
+  - JavaScript performance (batching, caching, Set/Map lookups)
+  - Advanced patterns (event handler refs, init once, useLatest)
+
+- **readiness-report**: AI agent readiness assessment from OpenHands
+  - 9 technical pillars: Style, Build, Testing, Docs, DevEnv, Debugging, Security, Tasks, Analytics
+  - 5 maturity levels (L1 Sandbox to L5 Collaborative)
+  - Automated repository analysis scripts
+  - Prioritized recommendations for improving agent readiness
+
+- **security-incident-reporting**: Security incident documentation templates
+  - NIST/SANS incident report structure
+  - DDoS post-mortem templates with timeline documentation
+  - CVE correlation and MITRE ATT&CK TTP mapping
+  - Blameless root cause analysis (5-Whys)
+  - SKILL-TYPO3.md: TYPO3 forensics, Security Team communication, PGP templates
+
+- **firecrawl**: LLM-optimized web scraping and research from Mendable AI
+  - Replaces built-in WebFetch/WebSearch with superior accuracy
+  - Clean markdown output optimized for LLM context windows
+  - JavaScript rendering and common block bypass
+  - Web, image, and news search with time/location filters
+  - Site mapping and URL discovery
+  - Parallel scraping with automatic rate limiting
+  - Search AND scrape in single operation
+
 ### Changed
 
 - **install.sh**: Improved project root detection with 4-tier priority:
