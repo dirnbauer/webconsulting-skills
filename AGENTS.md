@@ -55,6 +55,32 @@ https://github.com/stevysmith/og-image-skill
 
 ---
 
+We also thank **[Vercel Engineering](https://vercel.com)** for their excellent React and Next.js 
+performance optimization guidelines. The `react-best-practices` and `web-design-guidelines` skills 
+are adapted from their open-source repository:
+https://github.com/vercel-labs/agent-skills
+
+**Copyright (c) Vercel, Inc.** - React and Next.js performance optimization (MIT License)
+
+---
+
+We also thank **[Firecrawl](https://firecrawl.dev/)** by Mendable AI for their excellent web
+scraping and research tools. The `firecrawl` skill provides LLM-optimized content extraction.
+
+**Copyright (c) Mendable AI** - Web scraping and content extraction  
+See: [Firecrawl](https://firecrawl.dev/) | [GitHub](https://github.com/mendableai/firecrawl)
+
+---
+
+We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing 
+and frontend design skills. The `document-processing` and `frontend-design` skills are adapted 
+from their open-source repository:
+https://github.com/anthropics/skills
+
+**Copyright (c) Anthropic** - Document processing and frontend design (MIT License)
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -84,10 +110,16 @@ https://github.com/stevysmith/og-image-skill
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
+| `firecrawl` | LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
 | **Frontend & Design** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
+| `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces | 1.0.0 | frontend, design, creative, beautiful, distinctive, aesthetics |
+| `web-design-guidelines` | Interface review, accessibility audit, WCAG, ARIA, semantic HTML | 1.0.0 | web design, accessibility, a11y, wcag, aria, semantic html |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
+| `react-best-practices` | React/Next.js performance optimization from Vercel (57 rules) | 1.0.0 | react, next.js, performance, optimization, bundle, waterfalls |
+| **Documents & Office** | | | |
+| `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, and analysis | 1.0.0 | pdf, docx, word, pptx, powerpoint, xlsx, excel, document |
 | **Legal & Compliance** | | | |
 | `legal-impressum` | Austrian Impressum for all Gesellschaftsformen (ECG, MedienG) | 1.0.0 | impressum, legal notice, austria, offenlegung |
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) for all Rechtsformen | 1.0.0 | impressum, germany, DDG |
@@ -142,15 +174,43 @@ https://github.com/stevysmith/og-image-skill
   - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
+- **firecrawl**: LLM-optimized web scraping, search, and research
+  - Clean markdown output optimized for LLM context windows
+  - JavaScript rendering, parallel scraping, time/location filters
 
 ### Frontend & Design
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
 - **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
+- **frontend-design**: Distinctive UI aesthetics that avoid generic "AI slop"
+  - Bold aesthetic directions: brutalist, maximalist, luxury, editorial
+  - Creative typography pairings (avoid Inter/Roboto/Arial)
+  - Color palettes with dominant + accent approach
+  - Motion design for high-impact moments
+  - Anti-patterns checklist
+- **web-design-guidelines**: Interface review for accessibility and usability
+  - WCAG 2.1 AA compliance checking
+  - Semantic HTML validation
+  - ARIA patterns and keyboard navigation
+  - Responsive design and touch targets
+  - Focus states and color contrast
 - **og-image**: Social media preview images (Open Graph) and meta tag configuration
   - Creates `/og-image` route matching project design system
   - Screenshots at 1200x630 dimensions
   - Configures og:image, twitter:card, theme-color meta tags
   - Supports Next.js, Vite, Astro, Remix, plain HTML
+- **react-best-practices**: React and Next.js performance optimization from Vercel
+  - 57 rules across 8 categories, prioritized by impact
+  - Eliminating waterfalls (async/await, Promise.all, Suspense)
+  - Bundle size optimization (barrel imports, dynamic imports)
+  - Server-side performance (React.cache, parallel fetching)
+  - Re-render optimization (memo, useTransition, refs)
+
+### Documents & Office
+- **document-processing**: PDF, DOCX, PPTX, XLSX creation, editing, and analysis
+  - PDF: text extraction, merge/split, OCR, watermarks, forms
+  - DOCX: pandoc conversion, docx-js creation, tracked changes
+  - PPTX: markitdown extraction, PptxGenJS creation, thumbnails
+  - XLSX: pandas analysis, openpyxl formulas, financial models
 
 ### Legal & Compliance
 - **legal-impressum**: Austrian Impressum for all company types (Gesellschaftsformen)
@@ -411,13 +471,136 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Handle objections on my sales page"
 - "Write a value proposition for my product"
 
+**⚛️ React & Next.js Performance (react-best-practices)**
+- "Review this React component for performance issues"
+- "Optimize this Next.js page"
+- "Eliminate request waterfalls in my data fetching"
+- "Use Promise.all for parallel fetches"
+- "Add Suspense boundaries for streaming"
+- "Reduce bundle size with dynamic imports"
+- "Avoid barrel file imports"
+- "Use React.cache() for request deduplication"
+- "Optimize re-renders with memo and useTransition"
+- "Defer third-party scripts after hydration"
+- "Use SWR for client-side data fetching"
+- "Parallelize server component fetches"
+
+**🔥 Web Research & Scraping (firecrawl)**
+- "Search the web for Next.js 15 new features and summarize"
+- "Scrape the Stripe API documentation for webhooks"
+- "Research competitor pricing pages and compare features"
+- "Fetch the latest React documentation on Server Components"
+- "Map all URLs on docs.example.com and find API pages"
+- "Get the Tailwind CSS v4 migration guide"
+- "Search for tech news from today about AI agents"
+- "Scrape this JavaScript-heavy SPA page (wait for render)"
+- "Find GitHub repositories for headless CMS"
+- "Search for reviews of these 5 products in parallel"
+- "Extract all code examples from this documentation page"
+- "Find the latest security vulnerabilities disclosed this week"
+
+**🎨 Frontend Design & Creative UI (frontend-design)**
+- "Create a distinctive landing page that doesn't look AI-generated"
+- "Design a dark tech hero section with gradient mesh backgrounds"
+- "Build a pricing card with glass morphism effects"
+- "Create an editorial-style testimonial section"
+- "Design a brutalist navigation menu"
+- "Build a retro-futuristic dashboard interface"
+- "Create animated cards with staggered reveal on scroll"
+- "Design a luxury product page with serif typography"
+- "Build a SaaS hero with neon accents and glow effects"
+- "Create a minimalist portfolio with bold typography"
+- "Design feature cards with creative hover states"
+- "Build a dark mode interface with proper contrast"
+- "Suggest distinctive font pairings, avoid Inter/Roboto"
+- "Create a color palette with dominant, secondary, and accent colors"
+- "Add micro-interactions to my buttons (hover, click, loading)"
+- "Build a page transition with slide-up fade-in animations"
+- "Create a gradient mesh background with subtle animation"
+- "Add noise texture overlay for visual depth"
+- "Design a navigation that morphs between mobile and desktop"
+- "Audit my design for 'AI slop' patterns and fix them"
+- "Create CSS variables for a complete design system"
+- "Build a hero with parallax scrolling and floating elements"
+- "Design an asymmetric layout with intentional visual tension"
+- "Create a diagonal split layout for my hero section"
+
+**✅ Accessibility & Interface Review (web-design-guidelines)**
+- "Review this component for accessibility issues"
+- "Audit my form for WCAG 2.1 AA compliance"
+- "Check color contrast ratios in my design"
+- "Add proper ARIA labels to my navigation"
+- "Fix keyboard navigation in my modal"
+- "Add focus indicators to all interactive elements"
+- "Review semantic HTML structure"
+- "Check touch target sizes for mobile"
+- "Add skip links for keyboard users"
+- "Audit my site for screen reader compatibility"
+- "Fix heading hierarchy issues"
+- "Add alt text to all images"
+- "Create an accessible modal with focus trapping and escape key"
+- "Build accessible tabs with ARIA roles and arrow key navigation"
+- "Add ARIA live regions for dynamic notifications"
+- "Check my color palette for colorblind accessibility"
+- "Create accessible date picker with keyboard support"
+- "Implement prefers-reduced-motion for my animations"
+- "Convert this div-soup navigation to semantic HTML"
+- "Add scope attributes and captions to my data tables"
+- "Create keyboard-navigable image gallery"
+- "What will a screen reader announce for this component?"
+- "Run a full WCAG 2.1 AA audit with issue list and fixes"
+- "Add focus-visible styles that look good without outlines"
+
+**📄 Document Processing (document-processing)**
+- "Extract text from this PDF while preserving structure"
+- "Merge these 5 PDFs into one with bookmarks"
+- "Split this 100-page PDF into chapters"
+- "OCR this scanned PDF with poor quality"
+- "Add 'CONFIDENTIAL' watermark to all pages"
+- "Create a PDF invoice with header, line items, and footer"
+- "Rotate all landscape pages to portrait"
+- "Password-protect this PDF with encryption"
+- "Extract pages 10-25 as a new PDF"
+- "Convert this Word document to clean markdown"
+- "Create a DOCX with table of contents and page numbers"
+- "Find and replace text across this Word document"
+- "Extract all tracked changes with authors and dates"
+- "Accept all tracked changes and save clean version"
+- "Extract all text from this PowerPoint by slide"
+- "Create a pitch deck: Problem, Solution, Market, Traction, Team, Ask"
+- "Replace all images in this PowerPoint with new versions"
+- "Export slide 5 as high-resolution PNG"
+- "Analyze this Excel: row count, columns, data types, issues"
+- "Calculate summary statistics for the Revenue column"
+- "Find duplicate rows based on Email column"
+- "Create an Excel budget with SUM formulas for totals"
+- "Add formulas: column D = C * B, row 20 sums each column"
+- "Format Excel: bold headers, currency format, alternating rows"
+- "Create financial model: blue inputs, black formulas, green outputs"
+- "Add conditional formatting: red if negative, green if above target"
+- "Create dropdown list from values in another sheet"
+- "Convert PDF tables to Excel file"
+- "Batch process all PDFs: extract text to markdown files"
+
 ## Session Profiles
 
 For optimal performance, limit active skills per session:
 
 ### Frontend Session
-Active: `webconsulting-branding`, `ui-design-patterns`, `og-image`  
-Use case: UI development, styling, component creation, visual design, social sharing
+Active: `webconsulting-branding`, `ui-design-patterns`, `frontend-design`, `og-image`, `react-best-practices`  
+Use case: UI development, styling, component creation, visual design, social sharing, React/Next.js optimization
+
+### Creative Design Session
+Active: `frontend-design`, `ui-design-patterns`, `webconsulting-branding`, `og-image`  
+Use case: Distinctive UI design, creative interfaces, anti-AI-slop aesthetics, memorable user experiences
+
+### Accessibility Audit Session
+Active: `web-design-guidelines`, `ui-design-patterns`, `react-best-practices`  
+Use case: WCAG compliance, accessibility audits, semantic HTML, ARIA patterns, keyboard navigation
+
+### Document Processing Session
+Active: `document-processing`, `enterprise-readiness`  
+Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
 Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
@@ -463,6 +646,14 @@ Use case: Database optimization, Postgres queries, RLS policies, connection pool
 Active: `marketing-skills`, `ai-search-optimization`, `ui-design-patterns`  
 Use case: Landing page optimization, copywriting, pricing strategy, SEO audits, conversion optimization
 
+### React & Next.js Session
+Active: `react-best-practices`, `ui-design-patterns`, `og-image`  
+Use case: React/Next.js performance optimization, bundle size reduction, data fetching patterns, server components
+
+### Research & Documentation Session
+Active: `firecrawl`, `context7`, `ai-search-optimization`  
+Use case: Web research, API documentation lookup, competitor analysis, content extraction, documentation crawling
+
 ## Version Compatibility Matrix
 
 | Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
@@ -493,6 +684,11 @@ Use case: Landing page optimization, copywriting, pricing strategy, SEO audits, 
 | postgres-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
 | marketing-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
 | og-image | ✓ | ✓ | ✓ | ✓ | ✓ |
+| react-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
+| frontend-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
+| document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
+| firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
