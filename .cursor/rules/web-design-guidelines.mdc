@@ -1,0 +1,85 @@
+---
+description: Review web interfaces for compliance with modern design guidelines. Check accessibility, usability, semantic HTML, ARIA, keyboard navigation. Use when reviewing frontend code or auditing interfaces.
+globs:
+alwaysApply: false
+---
+
+# Web Design Guidelines
+
+Review web interfaces for accessibility, usability, and WCAG compliance.
+
+## Priority Rules
+
+| Category | Impact |
+|----------|--------|
+| Accessibility | CRITICAL |
+| Semantic HTML | HIGH |
+| Keyboard Navigation | HIGH |
+| ARIA Patterns | MEDIUM-HIGH |
+| Responsive Design | MEDIUM |
+
+## Accessibility (CRITICAL)
+
+### Color Contrast
+- Normal text: 4.5:1 minimum
+- Large text (≥18px bold): 3:1 minimum
+- UI components: 3:1 minimum
+
+### Focus States
+```css
+/* ❌ BAD */
+button:focus { outline: none; }
+
+/* ✅ GOOD */
+button:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+```
+
+### Alt Text
+```html
+<!-- ✅ Descriptive -->
+<img src="hero.jpg" alt="Team collaborating" />
+
+<!-- ✅ Decorative -->
+<img src="decoration.svg" alt="" role="presentation" />
+```
+
+### Icon-Only Buttons
+```html
+<button aria-label="Close dialog">
+  <svg aria-hidden="true"><!-- icon --></svg>
+</button>
+```
+
+## Semantic HTML
+
+```html
+<!-- ✅ GOOD -->
+<header><nav>...</nav></header>
+<main>...</main>
+<footer>...</footer>
+
+<!-- ❌ BAD: Div soup -->
+<div class="header"><div class="nav">...</div></div>
+```
+
+## Keyboard Navigation
+
+- Tab order matches visual order
+- Skip links present
+- Modals trap focus
+- Escape closes dialogs
+
+## Quick Checklist
+
+- [ ] Images have alt text
+- [ ] Form inputs have labels
+- [ ] Focus indicators visible
+- [ ] Heading hierarchy sequential
+- [ ] Color contrast meets 4.5:1
+- [ ] Touch targets ≥44x44px
+- [ ] `prefers-reduced-motion` respected
+
+**Full skill:** `skills/web-design-guidelines/SKILL.md`
