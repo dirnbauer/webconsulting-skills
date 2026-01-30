@@ -3,6 +3,15 @@
     "description": "AI Agent Skills for TYPO3 development with Claude/Cursor",
     "type": "composer-plugin",
     "license": "MIT",
+    "keywords": [
+        "ai",
+        "agent",
+        "skills",
+        "claude",
+        "cursor",
+        "typo3",
+        "llm"
+    ],
     "authors": [
         {
             "name": "Netresearch DTT GmbH",
@@ -19,12 +28,32 @@
         "php": ">=8.2",
         "composer-plugin-api": "^2.0"
     },
+    "require-dev": {
+        "composer/composer": "^2.0"
+    },
     "autoload": {
         "psr-4": {
             "WebConsulting\\AgentSkills\\": "src/"
         }
     },
+    "scripts": {
+        "skills:install": "bash install.sh",
+        "skills:update": "bash update.sh",
+        "skills:sync": "bash update.sh --sync-only",
+        "skills:list": "ls -la skills/ | grep ^d | awk '{print $NF}' | tail -n +2"
+    },
+    "scripts-descriptions": {
+        "skills:install": "Install skills to ~/.claude/skills and .cursor/rules",
+        "skills:update": "Sync external skills and reinstall",
+        "skills:sync": "Only sync external skills without reinstalling",
+        "skills:list": "List all available skills"
+    },
     "extra": {
         "class": "WebConsulting\\AgentSkills\\SkillInstallerPlugin"
+    },
+    "config": {
+        "allow-plugins": {
+            "webconsulting/webconsulting-skills": true
+        }
     }
 }
