@@ -10,13 +10,14 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 |----------|--------|-------------|
 | **TYPO3 CMS** | 12 skills | Content Blocks, DataHandler, upgrades, testing, security |
 | **Video & Animation** | 1 skill | Remotion video creation in React |
-| **Security & Enterprise** | 3 skills | OWASP audits, OpenSSF Scorecard, supply chain security |
+| **Security & Enterprise** | 4 skills | OWASP audits, deepfake detection, OpenSSF Scorecard, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
-| **PHP & Tools** | 3 skills | PHP 8.x modernization, CLI tools, documentation lookup |
-| **Frontend & Design** | 3 skills | UI patterns, design systems, accessibility, OG images |
+| **PHP & Tools** | 4 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping |
+| **Frontend & Design** | 6 skills | UI patterns, design systems, accessibility, OG images, React/Next.js performance, creative frontend design |
+| **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
-| **AI & SEO** | 1 skill | AEO/GEO for AI search visibility |
+| **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
 
 ---
 
@@ -189,9 +190,16 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
+| `react-best-practices` | react, next.js, performance, optimization, bundle size, waterfalls | "Optimize this React component" or "Eliminate request waterfalls" |
+| `deepfake-detection` | deepfake, media forensics, fake detection, synthetic media, prnu | "Verify authenticity of this video" or "Detect AI-generated images" |
+| `readiness-report` | /readiness-report, agent readiness, codebase maturity | "Run /readiness-report to evaluate this repository" |
 | `postgres-best-practices` | postgres, sql, database, query, index, rls, supabase | "Optimize this slow Postgres query" or "Set up RLS for multi-tenant" |
 | `marketing-skills` | marketing, cro, conversion, landing page, pricing | "Optimize this landing page" or "Write homepage copy" |
 | `og-image` | og-image, open graph, social preview, twitter card, meta tags | "Generate an OG image" or "Set up Twitter card meta tags" |
+| `frontend-design` | frontend, design, creative, beautiful, distinctive, aesthetics | "Create a distinctive landing page" or "Design a dark tech hero section" |
+| `web-design-guidelines` | web design, accessibility, a11y, wcag, aria, semantic html | "Review this component for accessibility issues" or "Audit my form for WCAG" |
+| `document-processing` | pdf, docx, word, pptx, powerpoint, xlsx, excel | "Extract text from this PDF" or "Create an Excel model with formulas" |
+| `firecrawl` | scrape, crawl, search web, research, fetch url, documentation | "Research competitor pricing pages" or "Scrape API docs" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -588,6 +596,484 @@ Review my contact form for accessibility issues. Ensure proper labels, error mes
 **Design System Integration:**
 ```
 Apply the webconsulting design system to my TYPO3 templates: colors, typography, spacing, and component styles.
+```
+
+---
+
+#### ✨ Creative Frontend Design (frontend-design)
+
+The `frontend-design` skill helps you create **distinctive, memorable interfaces** that avoid generic "AI slop" aesthetics. It covers typography, color, motion, spatial composition, and component design.
+
+**Distinctive Landing Pages:**
+
+```
+Create a landing page that looks nothing like a typical SaaS template. Use bold typography, asymmetric layout, and a unique color palette.
+```
+
+```
+Design a dark-mode landing page with a gradient mesh background, floating elements, and glass morphism cards.
+```
+
+```
+Build a brutalist-style landing page with raw aesthetics, monospace fonts, and intentional visual tension.
+```
+
+**Typography That Stands Out:**
+
+```
+Suggest distinctive font pairings for my tech startup. Avoid Inter, Roboto, and other overused fonts.
+```
+
+```
+Create a typography system with a display font for headlines and a body font that pairs well. Show me the CSS variables.
+```
+
+```
+Design a heading hierarchy with variable font weights, tight letter-spacing, and optical sizing.
+```
+
+**Color Palettes:**
+
+```
+Create a cohesive color palette for a fintech app. Use a dominant color for 60%, secondary for 30%, and accent for 10%.
+```
+
+```
+Design a dark theme color system with proper contrast ratios, surface elevation colors, and accent states.
+```
+
+```
+Generate a color palette inspired by [brand/concept]. Include semantic colors for success, warning, error states.
+```
+
+**Hero Sections:**
+
+```
+Create a hero section with a diagonal split layout, bold headline on the left, and product screenshot on the right.
+```
+
+```
+Design a full-screen hero with animated gradient background, centered headline with letter-by-letter animation.
+```
+
+```
+Build a hero with parallax scrolling, floating UI elements, and a CTA that pulses subtly.
+```
+
+**Component Design:**
+
+```
+Create a pricing card with glass morphism effect, gradient border, and hover animation that lifts the card.
+```
+
+```
+Design a testimonial carousel with asymmetric cards, large quotation marks, and smooth slide transitions.
+```
+
+```
+Build a feature grid with icons that animate on hover, subtle shadows, and a staggered reveal animation.
+```
+
+**Motion & Animation:**
+
+```
+Add micro-interactions to my buttons: subtle scale on hover, satisfying click feedback, loading state animation.
+```
+
+```
+Create a page transition effect with content that slides up and fades in as you scroll.
+```
+
+```
+Design a navigation menu that morphs smoothly between mobile hamburger and desktop horizontal layout.
+```
+
+**Background Effects:**
+
+```
+Create a gradient mesh background using CSS that subtly animates and shifts colors.
+```
+
+```
+Add a noise texture overlay to my dark sections for visual depth without looking dated.
+```
+
+```
+Build an animated blob background that responds to mouse movement.
+```
+
+**Anti-AI-Slop Audit:**
+
+```
+Review my landing page for generic AI patterns. Check for: overused fonts, stock gradients, predictable layouts, bland copy.
+```
+
+```
+Make this hero section more distinctive. It currently looks like every other SaaS landing page.
+```
+
+```
+Audit my design for "AI slop" indicators and suggest specific improvements for each issue.
+```
+
+---
+
+#### ♿ Web Accessibility Audit (web-design-guidelines)
+
+The `web-design-guidelines` skill provides **WCAG 2.1 AA compliance checking**, semantic HTML validation, and accessibility best practices.
+
+**Color & Contrast:**
+
+```
+Check all text colors in my CSS for WCAG 2.1 AA contrast compliance (4.5:1 for normal text, 3:1 for large text).
+```
+
+```
+My brand color is #3B82F6. What's the minimum darkness needed for text on white background to pass WCAG AA?
+```
+
+```
+Review my color palette for colorblind accessibility. Suggest alternatives for red/green combinations.
+```
+
+**Focus States:**
+
+```
+Audit my interactive elements for visible focus indicators. Show me how to add proper focus-visible styles.
+```
+
+```
+My designer wants to remove focus outlines. Create accessible alternatives that still look good.
+```
+
+```
+Add a skip link to my page header that becomes visible on focus.
+```
+
+**Form Accessibility:**
+
+```
+Review my form for accessibility issues: labels, error messages, required field indicators, and field grouping.
+```
+
+```
+Make this form accessible: add proper labels, aria-describedby for help text, and live error announcements.
+```
+
+```
+Create an accessible date picker pattern with keyboard navigation and screen reader support.
+```
+
+**Semantic HTML:**
+
+```
+Audit my page structure for semantic HTML issues. Check heading hierarchy, landmarks, and proper element usage.
+```
+
+```
+Convert this div-soup navigation to proper semantic HTML with nav, ul, li, and a elements.
+```
+
+```
+Review my table markup. Add proper headers, scope attributes, and caption for accessibility.
+```
+
+**ARIA Patterns:**
+
+```
+Implement an accessible modal dialog with proper focus trapping, escape key handling, and aria attributes.
+```
+
+```
+Create accessible tabs with proper ARIA roles, keyboard navigation (arrow keys), and focus management.
+```
+
+```
+Build an accessible accordion using details/summary with enhanced keyboard support and animations.
+```
+
+```
+Add ARIA live regions to my notification system so screen readers announce new messages.
+```
+
+**Keyboard Navigation:**
+
+```
+Audit my page for keyboard accessibility. Check tab order, focus traps, and interactive element reachability.
+```
+
+```
+My dropdown menu isn't keyboard accessible. Fix the tab order and add arrow key navigation.
+```
+
+```
+Create a keyboard-navigable image gallery with arrow keys, escape to close, and focus restoration.
+```
+
+**Screen Reader Testing:**
+
+```
+What will a screen reader announce for this component? Check all interactive elements and dynamic content.
+```
+
+```
+Add proper alt text to my images. Some are decorative, some are informational, some are functional.
+```
+
+```
+Review my icon buttons. They need accessible names since they have no visible text.
+```
+
+**Responsive & Touch:**
+
+```
+Audit my touch targets for mobile accessibility. Minimum 44x44px with adequate spacing.
+```
+
+```
+Check my responsive design for accessibility issues at different breakpoints and zoom levels.
+```
+
+```
+Add prefers-reduced-motion support to my animations for users with vestibular disorders.
+```
+
+**Quick Accessibility Checklist:**
+
+```
+Run a full accessibility audit on my homepage. Check: color contrast, focus states, semantic HTML, ARIA, keyboard nav, and alt text.
+```
+
+```
+Prepare my site for WCAG 2.1 AA compliance. Create a checklist of issues and fixes.
+```
+
+```
+Review this component against WCAG success criteria and list all failures with fixes.
+```
+
+---
+
+#### 📄 Document Processing (document-processing)
+
+The `document-processing` skill handles **PDF, DOCX, PPTX, and XLSX** files — extraction, creation, editing, and analysis.
+
+**PDF Text Extraction:**
+
+```
+Extract all text from this PDF while preserving structure (headings, paragraphs, lists).
+```
+
+```
+Extract the table on page 3 of this PDF into a structured format I can use in code.
+```
+
+```
+Extract text from this scanned PDF using OCR. The quality is poor, so maximize accuracy.
+```
+
+**PDF Creation:**
+
+```
+Create a PDF invoice with company header, line items table, and footer with payment terms.
+```
+
+```
+Generate a PDF report from this data with charts, tables, and formatted sections.
+```
+
+```
+Create a certificate PDF with a decorative border, centered text, and signature line.
+```
+
+**PDF Manipulation:**
+
+```
+Merge these 5 PDF files into one, maintaining bookmarks and page numbers.
+```
+
+```
+Split this 100-page PDF into separate files, one per chapter (chapters start at pages 1, 23, 45, 67, 89).
+```
+
+```
+Extract pages 10-25 from this PDF as a new file.
+```
+
+```
+Rotate all landscape pages in this PDF to portrait orientation.
+```
+
+```
+Add a watermark "CONFIDENTIAL" to every page of this PDF.
+```
+
+```
+Password-protect this PDF with encryption.
+```
+
+**Word Document Processing:**
+
+```
+Extract all text from this DOCX file as plain markdown, preserving headings and lists.
+```
+
+```
+Convert this Word document to clean markdown for use in my documentation site.
+```
+
+```
+Create a Word document from this markdown content with proper heading styles.
+```
+
+```
+Create a DOCX file with my report content, including a table of contents and page numbers.
+```
+
+**Word Document Editing:**
+
+```
+Find and replace all instances of "Company A" with "Company B" in this Word document.
+```
+
+```
+Extract all tracked changes from this Word document and list them with authors and dates.
+```
+
+```
+Accept all tracked changes in this document and save a clean version.
+```
+
+```
+Add a comment to this Word document at the paragraph starting with "In conclusion..."
+```
+
+**PowerPoint Processing:**
+
+```
+Extract all text from this PowerPoint presentation, organized by slide.
+```
+
+```
+Create a summary of this PPTX: slide titles, key bullet points, and speaker notes.
+```
+
+```
+Convert this PowerPoint to a markdown outline for use in documentation.
+```
+
+**PowerPoint Creation:**
+
+```
+Create a PowerPoint presentation from this markdown outline. Use a clean, professional style.
+```
+
+```
+Generate slides for my quarterly report: title slide, 4 content slides with charts, and summary slide.
+```
+
+```
+Create a pitch deck with these sections: Problem, Solution, Market, Traction, Team, Ask.
+```
+
+**PowerPoint Editing:**
+
+```
+Replace all images in this PowerPoint with updated versions from this folder.
+```
+
+```
+Update the footer on all slides to show "Q4 2026" instead of "Q3 2026".
+```
+
+```
+Extract slide 5 as a high-resolution PNG image for use in marketing.
+```
+
+**Excel Data Analysis:**
+
+```
+Analyze this Excel file and summarize: row count, column names, data types, and any obvious issues.
+```
+
+```
+Calculate summary statistics for the 'Revenue' column: sum, average, min, max, and standard deviation.
+```
+
+```
+Find all duplicate rows in this Excel file based on the 'Email' column.
+```
+
+```
+Create a pivot table summary: sales by region and product category.
+```
+
+**Excel Creation:**
+
+```
+Create an Excel file from this JSON data with proper column headers and formatting.
+```
+
+```
+Generate an Excel report with these sheets: Summary, Details, Charts. Add formulas, not hardcoded values.
+```
+
+```
+Create a budget spreadsheet with categories, monthly columns, and SUM formulas for totals.
+```
+
+**Excel Formulas & Formatting:**
+
+```
+Add formulas to this Excel file: column D should be C * B, and row 20 should sum each column.
+```
+
+```
+Format this Excel file: header row bold with background color, currency format for money columns, alternating row colors.
+```
+
+```
+Create a financial model with proper Excel standards: blue for inputs, black for formulas, green for outputs.
+```
+
+```
+Add conditional formatting: highlight cells red if value is negative, green if above target.
+```
+
+**Excel Advanced:**
+
+```
+Create a dropdown list in column A that only allows values from the 'Categories' sheet.
+```
+
+```
+Add data validation to the 'Date' column to only accept dates in 2026.
+```
+
+```
+Create a chart from this data and embed it in the 'Dashboard' sheet.
+```
+
+```
+Protect this worksheet but allow users to edit cells in the 'Input' range.
+```
+
+**Cross-Format Workflows:**
+
+```
+Convert this PDF report to an editable Word document, preserving formatting as much as possible.
+```
+
+```
+Extract the tables from this PDF and save them as an Excel file.
+```
+
+```
+Create a PowerPoint from the key findings in this Excel analysis.
+```
+
+```
+Batch process all PDFs in this folder: extract text and save as individual markdown files.
 ```
 
 ---
@@ -1032,6 +1518,350 @@ How should I incorporate social proof on my landing page? Where should logos, te
 
 ---
 
+#### ⚛️ React & Next.js Performance (Vercel Best Practices)
+
+The `react-best-practices` skill contains **57 rules across 8 priority categories** from Vercel Engineering. It automatically detects performance anti-patterns and suggests fixes prioritized by impact.
+
+**Why it's cool:** Instead of guessing what to optimize, you get Vercel's battle-tested rules applied automatically. The skill catches issues like request waterfalls, bundle bloat, and re-render storms that kill Core Web Vitals.
+
+**Critical: Eliminate Waterfalls (Priority 1)**
+
+```
+I have this data fetching code that feels slow:
+
+const user = await fetchUser(id);
+const posts = await fetchPosts(userId);
+const comments = await fetchComments(postId);
+
+Why is it slow and how do I fix it?
+```
+
+```
+Add Suspense boundaries to my Next.js page so the header shows immediately while data loads.
+```
+
+```
+My API route awaits a database call early but only uses it in one branch. How do I defer the await?
+```
+
+**Critical: Bundle Size (Priority 2)**
+
+```
+My Next.js bundle is 2MB. Analyze my imports and find barrel file imports that pull in entire libraries.
+```
+
+```
+I'm importing a heavy charting library. Show me how to use next/dynamic with a loading skeleton.
+```
+
+```
+Move my analytics initialization to after hydration so it doesn't block the main bundle.
+```
+
+```
+I have a feature flag that controls a heavy component. Only load the component when the flag is true.
+```
+
+**High: Server-Side Performance (Priority 3)**
+
+```
+I'm calling getUser() in multiple server components. Show me how to use React.cache() to deduplicate.
+```
+
+```
+Restructure this server component to start fetches in the parent and await in children (parallel fetching).
+```
+
+```
+I need to log analytics after responding. Use next/after() to make it non-blocking.
+```
+
+```
+My server component passes a huge object to a client component. How do I minimize serialization?
+```
+
+**Medium-High: Client-Side Data Fetching (Priority 4)**
+
+```
+Convert my useEffect + useState data fetching to SWR for automatic deduplication and caching.
+```
+
+```
+I'm adding scroll event listeners in multiple components. Show me how to deduplicate them.
+```
+
+```
+Make my scroll listeners passive to improve scrolling performance.
+```
+
+**Medium: Re-render Optimization (Priority 5)**
+
+```
+This component re-renders every time state changes, but it only uses state in a callback. Fix it.
+```
+
+```
+Extract my expensive list rendering into a memoized component.
+```
+
+```
+My callback changes on every render because it references count. Use functional setState.
+```
+
+```
+I'm computing derived state in useEffect. Show me how to derive it during render instead.
+```
+
+```
+My search input lags because filtering is slow. Use startTransition for the non-urgent filter update.
+```
+
+```
+I'm storing mouse position in state but I only use it in event handlers. Use a ref instead.
+```
+
+**Medium: Rendering Performance (Priority 6)**
+
+```
+I have a long list with 1000 items. Add content-visibility: auto for performance.
+```
+
+```
+This static JSX is defined inside the component. Hoist it outside to avoid recreating.
+```
+
+```
+I'm animating an SVG directly. Wrap it in a div and animate the wrapper instead.
+```
+
+```
+I get hydration mismatch warnings for user-specific data. How do I handle client-only values?
+```
+
+**Low-Medium: JavaScript Performance (Priority 7)**
+
+```
+I'm setting multiple CSS properties in a loop. Batch them using cssText or a class.
+```
+
+```
+I'm doing array.includes() in a loop. Build a Set for O(1) lookups.
+```
+
+```
+I'm accessing object.nested.value repeatedly in a loop. Cache it in a variable.
+```
+
+```
+I have filter().map().filter(). Combine into a single loop.
+```
+
+```
+This function sorts an array just to find the max. Use a loop instead.
+```
+
+**Advanced Patterns (Priority 8)**
+
+```
+My event handler function changes every render. Store it in a ref for stable reference.
+```
+
+```
+I need to initialize an SDK once per app load, not per render. Show me the init-once pattern.
+```
+
+---
+
+#### 🔥 Firecrawl (Web Research & Scraping)
+
+The `firecrawl` skill provides **LLM-optimized web scraping** that returns clean markdown instead of messy HTML. It replaces built-in web tools with superior accuracy, JavaScript rendering, and parallel operations.
+
+**Why it's cool:** Built-in web tools often fail on JavaScript-heavy sites, return cluttered HTML, or get blocked. Firecrawl handles all of this and returns markdown that fits perfectly in LLM context windows. Plus, it parallelizes operations automatically.
+
+**Web Search & Research**
+
+```
+Search the web for "Next.js 15 new features" and summarize the top 5 results.
+```
+
+```
+Find the latest AI news from the past week. Use time-filtered search.
+```
+
+```
+Research competitor pricing pages for "headless CMS" products. Search, scrape the results, and compare.
+```
+
+```
+Search for "TYPO3 v14 release notes" and scrape the official documentation.
+```
+
+```
+Find GitHub repositories for "React component library" and analyze their README files.
+```
+
+**Documentation & API Reference**
+
+```
+Scrape the Stripe API documentation for webhooks and summarize the key endpoints.
+```
+
+```
+Fetch the latest React documentation on Server Components and explain how they work.
+```
+
+```
+Get the Tailwind CSS v4 migration guide and list the breaking changes.
+```
+
+```
+Scrape the Supabase docs for Row Level Security and create a cheatsheet.
+```
+
+**Site Mapping & Crawling**
+
+```
+Map all URLs on docs.example.com and find pages related to "authentication".
+```
+
+```
+Discover all blog posts on this site and list them by date.
+```
+
+```
+Find all API endpoints documented on this site.
+```
+
+**Content Extraction**
+
+```
+Scrape this article and extract just the main content, removing navigation and ads.
+```
+
+```
+Get all links from this page and categorize them by domain.
+```
+
+```
+Fetch this JavaScript-heavy SPA page (wait 3 seconds for it to render).
+```
+
+```
+Extract all code examples from this documentation page.
+```
+
+**Parallel Research (Why Firecrawl is Fast)**
+
+```
+I have 10 competitor websites. Scrape all their pricing pages in parallel and compare features.
+```
+
+```
+Search for reviews of these 5 products, scrape the top results for each, and summarize.
+```
+
+```
+Fetch documentation from 3 different libraries in parallel and compare their approaches.
+```
+
+**Combining with Analysis**
+
+```
+Search for "serverless database options 2024", scrape the top 10 results, and create a comparison table.
+```
+
+```
+Research how companies implement authentication. Search for case studies, scrape them, and identify patterns.
+```
+
+```
+Find the top 5 articles about React performance, scrape them, and compile the best tips.
+```
+
+**News & Trends**
+
+```
+Search for tech news from today about "AI agents" and summarize the headlines.
+```
+
+```
+Find recent articles about TYPO3 and list what's new in the community.
+```
+
+```
+Search for the latest security vulnerabilities disclosed this week.
+```
+
+**Local Search**
+
+```
+Search for "software development agencies" in Vienna, Austria and list the top results.
+```
+
+```
+Find tech meetups in Berlin, Germany.
+```
+
+**Image & Media Search**
+
+```
+Search for "dashboard UI design" images and list the top results with URLs.
+```
+
+```
+Find infographics about "microservices architecture".
+```
+
+---
+
+#### 🔬 Media Forensics & Deepfake Detection
+
+**Verify Media Authenticity:**
+```
+Verify authenticity of this video before publication. Check for temporal inconsistencies, face swap artifacts, and synthetic speech patterns.
+```
+
+**Detect AI-Generated Images:**
+```
+Is this image AI-generated? Check for diffusion model artifacts, GAN fingerprints, and semantic inconsistencies.
+```
+
+**PRNU Analysis:**
+```
+Analyze PRNU/PCE sensor fingerprints to match this image to its claimed camera source.
+```
+
+**Content Provenance:**
+```
+Verify C2PA/CAI content provenance and check the cryptographic chain of custody for this media file.
+```
+
+**Forensic Report:**
+```
+Create a forensic report with authenticity grade (1-6) and confidence intervals for this video.
+```
+
+---
+
+#### 📊 Agent Readiness Assessment
+
+**Run Readiness Report:**
+```
+Run /readiness-report to evaluate this repository for AI-assisted development readiness.
+```
+
+**Identify Gaps:**
+```
+What gaps are preventing effective autonomous development in this codebase?
+```
+
+**Maturity Level:**
+```
+Check which maturity level (L1-L5) this repo achieves across the 9 technical pillars.
+```
+
+---
+
 #### 🚀 Deployment & DevOps
 
 **Deployer Configuration:**
@@ -1103,19 +1933,28 @@ grep -r "DataHandler" ~/.claude/skills/
 | `typo3-seo` | SEO configuration with EXT:seo | Netresearch |
 | `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
+| `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |
+| `deepfake-detection` | Multimodal media authentication, synthetic media forensics | webconsulting |
+| `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security | Netresearch |
 | **PHP & Tools** | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
 | `cli-tools` | CLI tool management and auto-installation | Netresearch |
 | `context7` | Library documentation lookup via REST API | Netresearch |
+| `firecrawl` | LLM-optimized web scraping, search, and research | Firecrawl |
 | **Database** | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
 | **Marketing** | | |
 | `marketing-skills` | CRO, copywriting, SEO, pricing, psychology | Corey Haines |
-| **WebConsulting Specific** | | |
+| **Frontend & Design** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
+| `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns | Anthropic |
+| `web-design-guidelines` | Interface review, WCAG, ARIA, accessibility | Vercel |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
+| `react-best-practices` | React/Next.js performance optimization (57 rules) | Vercel |
+| **Documents & Office** | | |
+| `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, analysis | Anthropic |
 | **Video & Animation** | | |
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | **Legal & Compliance** | | |
@@ -1202,23 +2041,65 @@ Edit `.cursor/mcp.json` to add your MCP server configurations:
 
 ### Updating Skills
 
+**Quick Update (recommended):**
+
 ```bash
-# If you have uncommitted local changes to skills, stash them first
-git stash
+# Update everything in one command
+./update.sh --pull
 
-# Pull latest changes
+# Or step by step:
 git pull origin main
-
-# Restore any local changes (optional)
-git stash pop
-
-# Re-run installation to update symlinks
-./install.sh
-
-# Restart Cursor IDE to load updated skills
+./update.sh
 ```
 
-> **Note:** The installer removes and recreates symlinks on each run, so running `./install.sh` after pulling always ensures your skills are up to date.
+**Using Composer:**
+
+```bash
+# Update skills via composer
+composer skills:update
+
+# Sync external skills only (no reinstall)
+composer skills:sync
+
+# List all available skills
+composer skills:list
+
+# Full reinstall
+composer skills:install
+```
+
+**Update Script Options:**
+
+```bash
+./update.sh              # Sync external skills and reinstall
+./update.sh --pull       # Pull git changes first, then update
+./update.sh --sync-only  # Only sync external skills, don't reinstall
+./update.sh --force      # Stash local changes if needed
+./update.sh --dry-run    # Show what would be done without making changes
+./update.sh --help       # Show all options
+```
+
+**Syncing External Skills:**
+
+The `.sync-config.json` file defines external skill sources that are automatically synchronized:
+
+```json
+{
+  "skills": [
+    {
+      "name": "react-best-practices",
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "branch": "main",
+      "path": "skills/react-best-practices",
+      "enabled": true
+    }
+  ]
+}
+```
+
+To enable/disable external skill syncing, edit `.sync-config.json` and set `enabled: true/false`.
+
+> **Note:** The installer removes and recreates symlinks on each run, so running `./install.sh` or `./update.sh` after pulling always ensures your skills are up to date.
 
 ## Technology Stack
 
@@ -1256,6 +2137,19 @@ The following repositories are the source for skills in this collection:
 
 ### Stevy Smith (OG Images)
 - https://github.com/stevysmith/og-image-skill
+
+### Vercel (React & Next.js)
+- https://github.com/vercel-labs/agent-skills
+
+### OpenHands (AI Readiness)
+- https://github.com/OpenHands/skills
+
+### Firecrawl (Web Scraping)
+- https://github.com/mendableai/firecrawl
+- CLI: https://github.com/mendableai/firecrawl-cli
+
+### Anthropic (Document Processing & Frontend Design)
+- https://github.com/anthropics/skills
 
 ## Contributing
 
@@ -1302,3 +2196,20 @@ The `og-image` skill is adapted from their open-source repository:
 https://github.com/stevysmith/og-image-skill
 
 **Copyright (c) Stevy Smith** - OG Image generation and social meta tag configuration
+
+---
+
+We also thank **[Vercel Engineering](https://vercel.com)** for their excellent React and Next.js
+performance optimization guidelines. The `react-best-practices` skill is adapted from their
+open-source repository: https://github.com/vercel-labs/agent-skills
+
+**Copyright (c) Vercel, Inc.** - React and Next.js performance optimization (MIT License)
+Adapted by webconsulting.at for this skill collection
+
+---
+
+We also thank **[Firecrawl](https://firecrawl.dev/)** by Mendable AI for their excellent web scraping
+and research tools. The `firecrawl` skill provides LLM-optimized content extraction.
+
+**Copyright (c) Mendable AI** - Web scraping and content extraction
+See: [Firecrawl](https://firecrawl.dev/) | [GitHub](https://github.com/mendableai/firecrawl)
