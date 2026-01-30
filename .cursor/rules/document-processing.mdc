@@ -1,0 +1,69 @@
+---
+description: Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets.
+globs:
+alwaysApply: false
+---
+
+# Document Processing
+
+Create, edit, and analyze PDFs, Word documents, PowerPoint presentations, and Excel spreadsheets.
+
+## Quick Reference
+
+| Task | Best Tool |
+|------|-----------|
+| Extract PDF text | `pdfplumber`, `pdftotext` |
+| Merge/split PDF | `pypdf`, `qpdf` |
+| Create PDF | `reportlab` |
+| OCR scanned PDF | `pytesseract` + `pdf2image` |
+| Extract DOCX text | `pandoc`, `markitdown` |
+| Create DOCX | `docx-js` (JavaScript) |
+| Extract PPTX text | `markitdown` |
+| Create PPTX | `PptxGenJS` (JavaScript) |
+| Analyze Excel | `pandas` |
+| Excel with formulas | `openpyxl` |
+
+## PDF Examples
+
+```python
+# Extract text
+import pdfplumber
+with pdfplumber.open("doc.pdf") as pdf:
+    text = pdf.pages[0].extract_text()
+
+# Merge PDFs
+from pypdf import PdfWriter, PdfReader
+writer = PdfWriter()
+for f in ["doc1.pdf", "doc2.pdf"]:
+    reader = PdfReader(f)
+    for page in reader.pages:
+        writer.add_page(page)
+with open("merged.pdf", "wb") as out:
+    writer.write(out)
+```
+
+## Excel: Use Formulas, Not Hardcoded Values
+
+```python
+# ❌ WRONG
+total = df['Sales'].sum()
+sheet['B10'] = total
+
+# ✅ CORRECT
+sheet['B10'] = '=SUM(B2:B9)'
+```
+
+## Command Line Tools
+
+```bash
+# PDF text extraction
+pdftotext input.pdf output.txt
+
+# Merge PDFs
+qpdf --empty --pages file1.pdf file2.pdf -- merged.pdf
+
+# DOCX to markdown
+pandoc document.docx -o output.md
+```
+
+**Full skill:** `skills/document-processing/SKILL.md`
