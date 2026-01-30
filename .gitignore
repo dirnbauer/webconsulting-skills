@@ -28,3 +28,13 @@ local_reports/
 
 # Claude Code session history
 sessions/
+
+# AI agent local config directories (not project skills)
+.agent/
+.claude/
+.codex/
+.gemini/
+.junie/
+.kilocode/
+.kiro/
+.opencode/
