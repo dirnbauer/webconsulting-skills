@@ -41,6 +41,68 @@
       "branch": "main",
       "path": "plugins/og-image/skills/og-image",
       "enabled": false
+    },
+    {
+      "name": "react-best-practices",
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "branch": "main",
+      "path": "skills/react-best-practices",
+      "enabled": true
+    },
+    {
+      "name": "web-design-guidelines",
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "branch": "main",
+      "path": "skills/web-design-guidelines",
+      "enabled": true
+    },
+    {
+      "name": "frontend-design",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/frontend-design",
+      "enabled": false,
+      "note": "Local version preferred - more comprehensive"
+    },
+    {
+      "name": "document-processing-pdf",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/pdf",
+      "enabled": false,
+      "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "document-processing-docx",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/docx",
+      "enabled": false,
+      "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "document-processing-pptx",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/pptx",
+      "enabled": false,
+      "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "document-processing-xlsx",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/xlsx",
+      "enabled": false,
+      "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "marketing-skills",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills",
+      "enabled": false,
+      "note": "Local version with supplements preferred"
     }
   ],
   "syncSchedule": "weekly",
