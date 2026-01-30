@@ -1,0 +1,76 @@
+---
+description: Create distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Use when building UI components, pages, or when user wants visually striking, creative, memorable interfaces.
+globs:
+alwaysApply: false
+---
+
+# Frontend Design
+
+Create distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics.
+
+## When to Apply
+
+- Building new UI components, pages, or applications
+- User asks for "beautiful", "stunning", "creative", or "distinctive" interfaces
+- Creating landing pages, dashboards, or marketing sites
+- User complains about generic or boring design
+
+## Design Thinking
+
+Before coding, commit to a **BOLD** aesthetic direction:
+
+| Direction | Characteristics |
+|-----------|-----------------|
+| Brutally Minimal | Lots of whitespace, stark contrasts |
+| Maximalist Chaos | Dense information, overlapping elements |
+| Retro-Futuristic | Neon accents, geometric shapes |
+| Luxury/Refined | Subtle gradients, serif fonts |
+| Editorial/Magazine | Strong typography, grid-based |
+| Brutalist/Raw | Exposed structure, monospace fonts |
+
+## Typography: Fonts to AVOID
+
+```css
+/* ❌ NEVER - Generic AI slop */
+font-family: Inter, Roboto, Arial, system-ui, sans-serif;
+```
+
+## Distinctive Font Pairings
+
+| Display Font | Body Font | Use Case |
+|--------------|-----------|----------|
+| Clash Display | Satoshi | Agency portfolios |
+| Playfair Display | Source Sans Pro | Magazines |
+| Space Grotesk | DM Sans | SaaS dashboards |
+| Cormorant Garamond | Lato | High-end e-commerce |
+
+## Color: Commit to Dominant + Accent
+
+```css
+/* ✅ GOOD: Dominant with sharp accent */
+:root {
+  --bg-primary: #0a0a0b;      /* 70% */
+  --bg-secondary: #1a1a1d;    /* 20% */
+  --accent: #ff3366;          /* 10% */
+}
+```
+
+## Motion: High-Impact Moments
+
+```css
+/* Orchestrated page load with staggered reveals */
+.hero-title { animation-delay: 0.1s; }
+.hero-subtitle { animation-delay: 0.2s; }
+.hero-cta { animation-delay: 0.3s; }
+```
+
+## Anti-Patterns
+
+| Avoid | Why |
+|-------|-----|
+| Purple gradient on white | Overused, generic |
+| Inter/Roboto fonts | Seen everywhere |
+| 12-column grid everywhere | Predictable |
+| Card soup layout | No visual hierarchy |
+
+**Full skill:** `skills/frontend-design/SKILL.md`
