@@ -1,21 +1,10 @@
 ---
 name: vercel-react-best-practices
 description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.
-version: 1.0.0
 license: MIT
-triggers:
-  - react
-  - next.js
-  - nextjs
-  - performance
-  - optimization
-  - bundle size
-  - waterfalls
-  - data fetching
-  - suspense
-  - server components
 metadata:
   author: vercel
+  version: "1.0.0"
 ---
 
 # Vercel React Best Practices
@@ -127,187 +116,21 @@ Reference these guidelines when:
 - `advanced-init-once` - Initialize app once per app load
 - `advanced-use-latest` - useLatest for stable callback refs
 
----
+## How to Use
 
-## Detailed Rules
+Read individual rule files for detailed explanations and code examples:
 
-### Eliminating Waterfalls (CRITICAL)
-
-#### async-defer-await
-Move `await` into branches where the value is actually needed.
-
-```tsx
-// ❌ BAD: Awaiting early blocks everything
-async function getData() {
-  const data = await fetchData();
-  if (condition) {
-    return data;
-  }
-  return null;
-}
-
-// ✅ GOOD: Defer await until needed
-async function getData() {
-  const dataPromise = fetchData();
-  if (condition) {
-    return await dataPromise;
-  }
-  return null;
-}
+```
+rules/async-parallel.md
+rules/bundle-barrel-imports.md
 ```
 
-#### async-parallel
-Use `Promise.all()` for independent operations.
+Each rule file contains:
+- Brief explanation of why it matters
+- Incorrect code example with explanation
+- Correct code example with explanation
+- Additional context and references
 
-```tsx
-// ❌ BAD: Sequential fetches
-const user = await fetchUser(id);
-const posts = await fetchPosts(id);
-const comments = await fetchComments(id);
+## Full Compiled Document
 
-// ✅ GOOD: Parallel fetches
-const [user, posts, comments] = await Promise.all([
-  fetchUser(id),
-  fetchPosts(id),
-  fetchComments(id),
-]);
-```
-
-#### async-suspense-boundaries
-Use Suspense boundaries to stream content progressively.
-
-```tsx
-// ✅ GOOD: Suspense enables streaming
-export default function Page() {
-  return (
-    <div>
-      <Header />
-      <Suspense fallback={<Loading />}>
-        <SlowComponent />
-      </Suspense>
-    </div>
-  );
-}
-```
-
-### Bundle Size Optimization (CRITICAL)
-
-#### bundle-barrel-imports
-Import directly from source files, not barrel files (index.ts).
-
-```tsx
-// ❌ BAD: Barrel import pulls in entire library
-import { Button } from '@/components';
-
-// ✅ GOOD: Direct import
-import { Button } from '@/components/Button';
-```
-
-#### bundle-dynamic-imports
-Use `next/dynamic` for heavy components.
-
-```tsx
-// ❌ BAD: Always loads heavy component
-import HeavyChart from './HeavyChart';
-
-// ✅ GOOD: Dynamic import
-import dynamic from 'next/dynamic';
-const HeavyChart = dynamic(() => import('./HeavyChart'), {
-  loading: () => <ChartSkeleton />,
-});
-```
-
-#### bundle-defer-third-party
-Load analytics and logging after hydration.
-
-```tsx
-// ✅ GOOD: Defer analytics loading
-useEffect(() => {
-  import('./analytics').then((module) => module.init());
-}, []);
-```
-
-### Server-Side Performance (HIGH)
-
-#### server-cache-react
-Use `React.cache()` for per-request deduplication.
-
-```tsx
-// ✅ GOOD: Cached per-request
-import { cache } from 'react';
-
-const getUser = cache(async (id: string) => {
-  return await db.user.findUnique({ where: { id } });
-});
-```
-
-#### server-parallel-fetching
-Restructure components to parallelize server fetches.
-
-```tsx
-// ❌ BAD: Parent awaits before child renders
-async function Page() {
-  const user = await getUser();
-  return <Profile user={user} />;
-}
-
-// ✅ GOOD: Start fetch in parent, await in child
-async function Page() {
-  const userPromise = getUser();
-  return <Profile userPromise={userPromise} />;
-}
-
-async function Profile({ userPromise }) {
-  const user = await userPromise;
-  return <div>{user.name}</div>;
-}
-```
-
-### Re-render Optimization (MEDIUM)
-
-#### rerender-memo
-Extract expensive calculations into memoized components.
-
-```tsx
-// ✅ GOOD: Expensive component memoized
-const ExpensiveList = memo(function ExpensiveList({ items }) {
-  return items.map((item) => <ExpensiveItem key={item.id} item={item} />);
-});
-```
-
-#### rerender-functional-setstate
-Use functional setState for stable callbacks.
-
-```tsx
-// ❌ BAD: Callback changes on every render
-const increment = () => setCount(count + 1);
-
-// ✅ GOOD: Stable callback
-const increment = useCallback(() => setCount((c) => c + 1), []);
-```
-
-#### rerender-transitions
-Use `startTransition` for non-urgent updates.
-
-```tsx
-// ✅ GOOD: Non-urgent update doesn't block input
-const [isPending, startTransition] = useTransition();
-
-function handleChange(value) {
-  setInputValue(value); // Urgent
-  startTransition(() => {
-    setSearchResults(filterData(value)); // Non-urgent
-  });
-}
-```
-
----
-
-## Credits & Attribution
-
-This skill is adapted from **[Vercel Engineering](https://vercel.com)**.
-
-Original repository: https://github.com/vercel-labs/agent-skills
-
-**Copyright (c) Vercel, Inc.** - MIT License  
-Adapted by webconsulting.at for this skill collection
+For the complete guide with all rules expanded: `AGENTS.md`
