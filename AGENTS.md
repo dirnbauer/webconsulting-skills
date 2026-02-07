@@ -81,6 +81,25 @@ https://github.com/anthropics/skills
 
 ---
 
+We also thank **[ehmo](https://github.com/ehmo)** for the excellent platform design skills collection.
+The platform design skills (Android, iOS, iPadOS, macOS, tvOS, visionOS, watchOS, Web) are adapted 
+from their open-source repository:
+https://github.com/ehmo/platform-design-skills
+
+**Copyright (c) platform-design-skills** - Apple HIG and Material Design guidelines (MIT License)
+
+---
+
+We also thank **[AITYTech](https://github.com/aitytech)** for their excellent AgentKits Marketing 
+skills collection. The `cro-funnel`, `programmatic-seo`, `launch-strategy`, and `ab-testing` skills 
+are adapted from their open-source repository:
+https://github.com/aitytech/agentkits-marketing
+
+**Copyright (c) AITYTech** - Enterprise-grade AI marketing automation (MIT License)  
+See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -105,6 +124,11 @@ https://github.com/anthropics/skills
 | `marketing-skills/SEO` | Technical SEO, on-page SEO, content quality audit | 1.0.0 | seo audit, not ranking, technical seo |
 | `marketing-skills/PSYCHOLOGY` | 70+ mental models for marketing and persuasion | 1.0.0 | psychology, mental model, persuasion, bias |
 | `marketing-skills/PRICING` | Pricing tiers, value metrics, freemium vs trial | 1.0.0 | pricing, tiers, freemium, monetization |
+| **CRO & Growth (AgentKits)** | | | |
+| `cro-funnel` | Full-funnel CRO: form, signup, onboarding, popup, paywall | 1.0.0 | cro funnel, form cro, signup flow, onboarding, paywall |
+| `programmatic-seo` | SEO pages at scale with templates and data | 1.0.0 | programmatic seo, template pages, directory, location pages |
+| `launch-strategy` | Product launches, Product Hunt, go-to-market | 1.0.0 | product launch, product hunt, gtm, beta launch |
+| `ab-testing` | A/B test design, sample size, statistical significance | 1.0.0 | ab test, split test, experiment, hypothesis |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
@@ -118,6 +142,15 @@ https://github.com/anthropics/skills
 | `web-design-guidelines` | Interface review, accessibility audit, WCAG, ARIA, semantic HTML | 1.0.0 | web design, accessibility, a11y, wcag, aria, semantic html |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
 | `react-best-practices` | React/Next.js performance optimization from Vercel (57 rules) | 1.0.0 | react, next.js, performance, optimization, bundle, waterfalls |
+| **Platform Design** | | | |
+| `android-design` | Material Design 3, Jetpack Compose, dynamic color, navigation | 1.0.0 | android, material design, jetpack compose, material you |
+| `ios-design` | Apple HIG for iPhone, SwiftUI, Dynamic Type, Dark Mode | 1.0.0 | ios, iphone, swiftui, uikit, dynamic type |
+| `ipados-design` | Apple HIG for iPad, multitasking, keyboard, pointer support | 1.0.0 | ipad, ipados, split view, stage manager, sidebar |
+| `macos-design` | Apple HIG for Mac, menu bar, toolbars, keyboard shortcuts | 1.0.0 | macos, mac app, appkit, menu bar, toolbar |
+| `tvos-design` | Apple HIG for Apple TV, focus navigation, 10-foot UI | 1.0.0 | tvos, apple tv, siri remote, focus navigation |
+| `visionos-design` | Apple HIG for Vision Pro, spatial UI, eye/hand input | 1.0.0 | visionos, vision pro, spatial computing, realitykit |
+| `watchos-design` | Apple HIG for Apple Watch, complications, glanceable UI | 1.0.0 | watchos, apple watch, complications, digital crown |
+| `web-platform-design` | WCAG 2.2, responsive design, forms, typography, i18n | 1.0.0 | wcag, web platform, responsive, accessibility, i18n |
 | **Documents & Office** | | | |
 | `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, and analysis | 1.0.0 | pdf, docx, word, pptx, powerpoint, xlsx, excel, document |
 | **Legal & Compliance** | | | |
@@ -138,6 +171,9 @@ https://github.com/anthropics/skills
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
+| `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
+| `typo3-powermail/CONDITIONS` | Conditional field/page visibility with powermail_cond 13+ | 1.0.0 | powermail_cond, conditional fields, show hide fields |
+| `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
 
 ## Skill Categories
 
@@ -168,6 +204,28 @@ https://github.com/anthropics/skills
   - `SKILL-SEO.md`: Technical and on-page SEO audit
   - `SKILL-PSYCHOLOGY.md`: 70+ mental models for marketing
   - `SKILL-PRICING.md`: Pricing strategy, tiers, value metrics
+
+### CRO & Growth (AgentKits Marketing)
+- **cro-funnel**: Full-funnel Conversion Rate Optimization from AgentKits
+  - Form CRO: Lead capture, contact forms, demo requests
+  - Signup Flow CRO: Registration, account creation, trial activation
+  - Onboarding CRO: Post-signup activation, time-to-value, aha moment
+  - Popup CRO: Modals, exit intent, slide-ins, email capture
+  - Paywall CRO: In-app paywalls, upgrade screens, freemium conversion
+- **programmatic-seo**: Build SEO pages at scale with templates and data
+  - 12 playbooks: Templates, Curation, Comparisons, Locations, Personas, Integrations, Glossary
+  - URL structure best practices (subfolders > subdomains)
+  - Unique value per page, avoid thin content penalties
+- **launch-strategy**: Product launches and go-to-market strategies
+  - ORB Framework: Owned, Rented, Borrowed channels
+  - Five-phase launch: Internal → Alpha → Beta → Early Access → Full
+  - Product Hunt launch strategy and checklist
+  - Post-launch product marketing
+- **ab-testing**: A/B test design and experimentation
+  - Hypothesis framework and documentation
+  - Sample size calculation and duration planning
+  - Metrics selection: primary, secondary, guardrail
+  - Statistical analysis and result interpretation
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
@@ -205,6 +263,48 @@ https://github.com/anthropics/skills
   - Server-side performance (React.cache, parallel fetching)
   - Re-render optimization (memo, useTransition, refs)
 
+### Platform Design
+- **android-design**: Material Design 3 and Android platform guidelines
+  - Dynamic color (Material You) with static fallback
+  - Navigation Bar, Navigation Rail, Navigation Drawer
+  - Window size classes, edge-to-edge display
+  - Accessibility: 48dp touch targets, TalkBack support
+- **ios-design**: Apple Human Interface Guidelines for iPhone
+  - 44pt touch targets, safe areas, thumb zone placement
+  - Tab bar navigation, NavigationStack, large titles
+  - Dynamic Type, semantic system colors, Dark Mode
+  - VoiceOver, Bold Text, Reduce Motion support
+- **ipados-design**: Apple Human Interface Guidelines for iPad
+  - Adaptive layouts, Split View, Slide Over, Stage Manager
+  - Sidebar navigation, keyboard shortcuts (Cmd+key)
+  - Pointer/trackpad support, hover effects, right-click menus
+  - Drag and drop between apps, Apple Pencil support
+- **macos-design**: Apple Human Interface Guidelines for Mac
+  - Complete menu bar with keyboard shortcuts
+  - Resizable windows, fullscreen, multiple windows
+  - Toolbars, sidebars, source list style
+  - Full keyboard navigation, vibrancy, Dark Mode
+- **tvos-design**: Apple Human Interface Guidelines for Apple TV
+  - Focus-based navigation with parallax effects
+  - 10-foot UI: 29pt minimum text, high contrast
+  - Siri Remote: swipe, click, Menu, Play/Pause
+  - Top Shelf content, media playback controls
+- **visionos-design**: Apple Human Interface Guidelines for Vision Pro
+  - Spatial layout: content at 1-2m, never behind user
+  - Look-and-pinch interaction, 60pt minimum targets
+  - Windows with glass material, volumes, immersive spaces
+  - Progressive immersion, world-anchored UI
+- **watchos-design**: Apple Human Interface Guidelines for Apple Watch
+  - Glanceable design: 2-second comprehension
+  - Digital Crown scrolling with haptic detents
+  - Complications: multiple families, fresh data
+  - Always On display, workout features
+- **web-platform-design**: Comprehensive web platform design guidelines
+  - WCAG 2.2 accessibility, semantic HTML, ARIA patterns
+  - Responsive design, container queries, touch targets
+  - Forms, typography, performance optimization
+  - Dark mode, animations, internationalization (RTL)
+
 ### Documents & Office
 - **document-processing**: PDF, DOCX, PPTX, XLSX creation, editing, and analysis
   - PDF: text extraction, merge/split, OCR, watermarks, forms
@@ -231,6 +331,10 @@ https://github.com/anthropics/skills
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
+- **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
+  - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
+  - `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, conditions (property hooks, asymmetric visibility)
+  - `SKILL-EXAMPLES.md`: Multi-step shop form with Austrian legal types, conditions, translations, DDEV SQL + DataHandler CLI
 
 ## TYPO3 Skill Supplements
 
@@ -369,6 +473,71 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Hreflang for multi-language sites"
 - "Structured data for articles (JSON-LD)"
 
+**📬 Powermail Forms (typo3-powermail)**
+- "Create a simple contact form with name, email, subject, message"
+- "Build a multi-step order form with product selection and GDPR checkboxes"
+- "Create a registration form with company details and VAT number"
+- "Build a job application form with file upload and cover letter"
+- "Create an event registration form with date picker and attendee count"
+- "Build a feedback/survey form with radio buttons and rating scale"
+- "Create a newsletter signup form with double opt-in"
+- "Build a support ticket form that routes to departments via select"
+- "Create a booking request form with date range and room type"
+- "Build a callback request form with preferred time slot selection"
+- "Create a custom finisher that sends form data to a CRM API"
+- "Custom finisher that creates fe_users from registration form"
+- "Write a finisher that posts form data to Slack/Teams webhook"
+- "SaveToAnyTable: write form answers to a custom database table"
+- "Create a SendParametersFinisher to forward data to external service"
+- "Custom validator for Austrian VAT number (ATU format)"
+- "Custom validator for IBAN fields"
+- "Custom validator for Austrian ZIP codes (4 digits)"
+- "Validate that at least one checkbox in a group is selected"
+- "PSR-14 event: route receiver email based on department select field"
+- "PSR-14 event: modify sender name from multiple form fields"
+- "PSR-14 event: prevent DB save for specific forms"
+- "PSR-14 event: add custom data to mail object for use in finishers"
+- "PSR-14 event: modify email body before sending"
+- "Configure spam shield with honeypot, rate limiting, and blacklists"
+- "Custom spam shield method with external API (Akismet, reCAPTCHA)"
+- "Configure double opt-in for newsletter signups with custom email template"
+- "AJAX form submission without page reload"
+- "Override receiver and sender email templates with custom Fluid partials"
+- "Prefill form fields from logged-in frontend user data"
+- "Prefill form fields from GET/POST parameters"
+- "Add form to page via TypoScript without backend plugin"
+- "Configure route enhancer for SEO-friendly opt-in URLs"
+- "Export submitted mails to CSV/Excel via backend module"
+- "Create a multi-language form (English + German) with translated labels"
+- "Translate select/radio options for multi-language forms"
+- "Create form structure via DataHandler CLI command"
+- "Insert form with all fields via DDEV SQL for local testing"
+- "Show the database structure of all powermail tables"
+
+**📬 Powermail Conditions (typo3-powermail/CONDITIONS)**
+- "Show/hide fields based on select dropdown value"
+- "Hide an entire page/fieldset unless a checkbox is checked"
+- "Show extra fields when user selects 'Other' in a dropdown"
+- "Field-to-field comparison: warn when email fields don't match"
+- "Build conditional form for Austrian legal types (Gesellschaftsformen)"
+- "Show Firmenbuchnummer only for GmbH, AG, OG, KG, e.U."
+- "Show Stammkapital and Geschäftsführer only for GmbH"
+- "Show ZVR-Zahl and Obmann only for Verein"
+- "Create condition container with multiple rules and AND/OR conjunction"
+- "Reduce flickering with server-side prerendered conditions ViewHelper"
+- "Configure route enhancer for condition AJAX endpoint (TypeNum 3132)"
+- "Exclude file upload fields from condition AJAX payload"
+- "Create conditions via DDEV SQL for local testing"
+- "Create conditions via DataHandler CLI command"
+- "Show the database structure of all powermail_cond tables"
+- "Numeric comparison: show discount field when quantity > 10"
+- "Multi-step shop form with conditional fields per legal type (full example)"
+- "Create powermail form as workspace draft (not live)"
+- "Set up DataHandler CLI with --workspace option for draft forms"
+- "Publish workspace form via CLI: workspace:publish"
+- "Ensure conditions are in the same workspace as the form"
+- "Check which workspace a powermail form lives in (t3ver_wsid)"
+
 **🤖 AI Search (ai-search-optimization)**
 - "Optimize content for ChatGPT and Perplexity citations"
 - "Schema markup for Google AI Overviews (FAQPage, Article, HowTo)"
@@ -471,6 +640,63 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Handle objections on my sales page"
 - "Write a value proposition for my product"
 
+**🎯 CRO Funnel Optimization (cro-funnel)**
+- "Optimize my lead capture form (reduce fields)"
+- "Review my contact form for CRO issues"
+- "Audit my demo request form for friction"
+- "Improve my signup flow conversion rate"
+- "Add social auth to reduce signup friction"
+- "Design multi-step registration flow"
+- "Create onboarding checklist for new users"
+- "Define and optimize for the aha moment"
+- "Design empty states that drive first action"
+- "Create re-engagement flow for stalled users"
+- "Design email capture popup with exit intent"
+- "Create scroll-triggered newsletter popup"
+- "Build announcement banner for new feature"
+- "Design paywall screen for freemium upgrade"
+- "Create trial expiration modal"
+- "Optimize feature gate for paid conversion"
+- "Full-funnel CRO audit from page to payment"
+
+**📊 Programmatic SEO (programmatic-seo)**
+- "Build [service] in [city] pages at scale"
+- "Create comparison pages ([X] vs [Y])"
+- "Design directory pages for my category"
+- "Build integration pages for partner tools"
+- "Create persona pages ([product] for [audience])"
+- "Design template gallery for SEO"
+- "Build glossary pages for industry terms"
+- "Plan programmatic SEO strategy for my SaaS"
+- "Avoid thin content penalties at scale"
+- "Design URL structure for programmatic pages"
+- "Create hub and spoke internal linking"
+- "Choose between the 12 pSEO playbooks"
+
+**🚀 Product Launch (launch-strategy)**
+- "Plan my Product Hunt launch strategy"
+- "Create pre-launch waitlist campaign"
+- "Design 5-phase launch from alpha to GA"
+- "Build ORB channel strategy (owned/rented/borrowed)"
+- "Create Product Hunt listing and assets"
+- "Plan post-launch momentum strategy"
+- "Design feature announcement campaign"
+- "Create beta program with early access"
+- "Build launch checklist for new product"
+- "Plan ongoing launch for feature releases"
+
+**🧪 A/B Testing (ab-testing)**
+- "Design A/B test for my homepage hero"
+- "Create hypothesis for pricing page test"
+- "Calculate sample size for my experiment"
+- "How long should I run this A/B test?"
+- "Choose primary and guardrail metrics"
+- "Analyze A/B test results"
+- "Document test learnings and next steps"
+- "Plan multivariate test for checkout flow"
+- "Avoid common A/B testing mistakes"
+- "Set up experiment tracking"
+
 **⚛️ React & Next.js Performance (react-best-practices)**
 - "Review this React component for performance issues"
 - "Optimize this Next.js page"
@@ -551,6 +777,31 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Run a full WCAG 2.1 AA audit with issue list and fixes"
 - "Add focus-visible styles that look good without outlines"
 
+**📱 Platform Design (android-design, ios-design, ipados-design, macos-design, tvos-design, visionos-design, watchos-design, web-platform-design)**
+- "Review my Android app for Material Design 3 compliance"
+- "Implement dynamic color theming in Jetpack Compose"
+- "Create a Navigation Bar with 4 destinations"
+- "Review my iOS app for Human Interface Guidelines"
+- "Implement Dark Mode with semantic system colors"
+- "Add Dynamic Type support to my SwiftUI app"
+- "Create a tab bar with 5 sections using SF Symbols"
+- "Adapt my iPhone app layout for iPad Split View"
+- "Add keyboard shortcuts to my iPad app"
+- "Implement sidebar navigation for iPad"
+- "Support trackpad hover effects and right-click menus"
+- "Create a Mac app with proper menu bar and shortcuts"
+- "Implement toolbar and sidebar for my macOS app"
+- "Review my tvOS app for focus navigation issues"
+- "Design a 10-foot UI with proper text sizes for Apple TV"
+- "Create Top Shelf content with deep links"
+- "Design a visionOS window with glass material"
+- "Implement look-and-pinch interaction for Vision Pro"
+- "Create glanceable watchOS interface for Apple Watch"
+- "Add complications to my watchOS app"
+- "Audit my web app for WCAG 2.2 compliance"
+- "Make my forms accessible with proper labels and error states"
+- "Add RTL support with CSS logical properties"
+
 **📄 Document Processing (document-processing)**
 - "Extract text from this PDF while preserving structure"
 - "Merge these 5 PDFs into one with bookmarks"
@@ -603,8 +854,8 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
-Use case: Extension development, Content Blocks, database operations, v13/v14 compatible code
+Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
+Use case: Extension development, Content Blocks, database operations, forms, v13/v14 compatible code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -615,7 +866,7 @@ Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `php-moderniz
 Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility
 
 ### PHP 8.4 Migration Session
-Active: `php-modernization/SKILL-PHP84`, `typo3-rector/SKILL-PHP84`, `typo3-update/SKILL-PHP84`  
+Active: `php-modernization/SKILL-PHP84`, `typo3-rector/SKILL-PHP84`, `typo3-update/SKILL-PHP84`, `typo3-powermail/SKILL-PHP84`  
 Use case: Migrating to PHP 8.4, using new language features, fixing deprecations
 
 ### Content Blocks Migration Session
@@ -646,6 +897,14 @@ Use case: Database optimization, Postgres queries, RLS policies, connection pool
 Active: `marketing-skills`, `ai-search-optimization`, `ui-design-patterns`  
 Use case: Landing page optimization, copywriting, pricing strategy, SEO audits, conversion optimization
 
+### CRO & Growth Session
+Active: `cro-funnel`, `ab-testing`, `marketing-skills`, `programmatic-seo`  
+Use case: Full-funnel conversion optimization, A/B testing, signup flows, onboarding, paywall optimization
+
+### Product Launch Session
+Active: `launch-strategy`, `marketing-skills`, `og-image`, `programmatic-seo`  
+Use case: Product launches, Product Hunt campaigns, go-to-market strategy, feature announcements
+
 ### React & Next.js Session
 Active: `react-best-practices`, `ui-design-patterns`, `og-image`  
 Use case: React/Next.js performance optimization, bundle size reduction, data fetching patterns, server components
@@ -653,6 +912,18 @@ Use case: React/Next.js performance optimization, bundle size reduction, data fe
 ### Research & Documentation Session
 Active: `firecrawl`, `context7`, `ai-search-optimization`  
 Use case: Web research, API documentation lookup, competitor analysis, content extraction, documentation crawling
+
+### Android Development Session
+Active: `android-design`, `ui-design-patterns`, `react-best-practices`  
+Use case: Material Design 3, Jetpack Compose, dynamic color, Android navigation, accessibility
+
+### Apple Platform Session
+Active: `ios-design`, `ipados-design`, `macos-design`, `watchos-design`, `tvos-design`, `visionos-design`  
+Use case: SwiftUI/UIKit development, Human Interface Guidelines, Apple platform-specific patterns
+
+### Cross-Platform Design Session
+Active: `android-design`, `ios-design`, `web-platform-design`, `ui-design-patterns`  
+Use case: Designing for multiple platforms, ensuring platform-appropriate patterns, accessibility across platforms
 
 ## Version Compatibility Matrix
 
@@ -670,6 +941,7 @@ Use case: Web research, API documentation lookup, competitor analysis, content e
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -689,6 +961,18 @@ Use case: Web research, API documentation lookup, competitor analysis, content e
 | web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
 | document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
 | firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
+| android-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| ios-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| ipados-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| macos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| tvos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| visionos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| watchos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| web-platform-design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| cro-funnel | ✓ | ✓ | ✓ | ✓ | ✓ |
+| programmatic-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
+| launch-strategy | ✓ | ✓ | ✓ | ✓ | ✓ |
+| ab-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
