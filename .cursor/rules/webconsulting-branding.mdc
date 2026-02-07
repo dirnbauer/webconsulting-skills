@@ -1,7 +1,7 @@
 ---
 name: webconsulting-branding
 description: Enforces webconsulting.at design system, color palettes, typography, and MDX component structures for frontend development.
-version: 1.0.0
+version: 2.0.0
 typo3_compatibility: "13.0 - 14.x"
 triggers:
   - frontend
@@ -24,29 +24,44 @@ triggers:
 
 ## 2. Visual Design Tokens (Strict Adherence)
 
-### Color Palette
+### Brand Color Palette
 
-| Token | Hex Value | Tailwind Class | Usage |
-|-------|-----------|----------------|-------|
-| Primary Teal | `#14b8a6` | `text-teal-500` | Links, primary buttons, active states |
-| Primary Cyan | `#06b6d4` | `text-cyan-600` | Hover states, secondary highlights |
-| Accent Amber | `#f59e0b` | `text-amber-500` | Warnings, highlights, specialized icons |
-| Neutral Dark | `#334155` | `text-slate-700` | Body text, standard paragraphs |
-| Deep Black | `#0a0a0a` | `bg-neutral-950` | Footers, dark mode backgrounds |
-| Hero Gradient Start | `#667eea` | `from-[#667eea]` | Hero section gradient start |
-| Hero Gradient End | `#764ba2` | `to-[#764ba2]` | Hero section gradient end |
+| Token | Light Mode | Dark Mode | Tailwind Class | Usage |
+|-------|------------|-----------|----------------|-------|
+| Primary | `#1b7a95` | `#66c4e1` | `text-webcon-primary` | Links, primary buttons, active states |
+| Primary Light | `#66c4e1` | `#9dd8eb` | `text-webcon-primary-light` | Hover states, accents |
+| Primary 50 | `#e8f4f8` | `#0f3d4a` | `bg-webcon-primary-50` | Light backgrounds |
+| Primary 100 | `#c5e4ed` | `#155d73` | `bg-webcon-primary-100` | Subtle backgrounds |
+| Primary 200 | `#9dd2e2` | `#1b7a95` | `bg-webcon-primary-200` | Borders, highlights |
+| Primary 700 | `#1b7a95` | `#66c4e1` | `text-webcon-primary-700` | Primary text |
+| Primary 800 | `#155d73` | `#9dd8eb` | `text-webcon-primary-800` | Strong emphasis |
+| Primary 900 | `#0f4555` | `#c5e8f2` | `text-webcon-primary-900` | Maximum contrast |
 
-### Hero Gradient Usage
+### Semantic State Colors
 
-```css
-.hero-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-```
+| State | Color | Light BG | Border | Tailwind Prefix |
+|-------|-------|----------|--------|-----------------|
+| Success | `#16a34a` / `#4ade80` | `#dcfce7` / `#14532d` | `#86efac` / `#22c55e` | `webcon-success` |
+| Error | `#dc2626` / `#f87171` | `#fee2e2` / `#450a0a` | `#fca5a5` / `#ef4444` | `webcon-error` |
+| Warning | `#d97706` / `#fbbf24` | `#fef3c7` / `#451a03` | `#fcd34d` / `#f59e0b` | `webcon-warning` |
+| Info | `#1b7a95` / `#66c4e1` | `#e8f4f8` / `#0f3d4a` | `#66c4e1` / `#1b7a95` | `webcon-info` |
 
-```html
-<div class="bg-gradient-to-r from-[#667eea] to-[#764ba2]">
-  <!-- Hero content -->
+### Using Brand Colors
+
+```jsx
+// Primary button
+<button className="bg-webcon-primary text-white hover:bg-webcon-primary-800">
+  Action
+</button>
+
+// Info callout
+<div className="bg-webcon-info-light border border-webcon-info-border text-webcon-info">
+  Information message
+</div>
+
+// Success state
+<div className="bg-webcon-success-light border border-webcon-success-border">
+  <CheckIcon className="text-webcon-success" />
 </div>
 ```
 
@@ -54,15 +69,28 @@ triggers:
 
 | Element | Font Family | Weight | Usage |
 |---------|-------------|--------|-------|
-| Headings | Raleway | 600, 700 | H1-H3, titles |
-| Body | Open Sans | 400, 500 | Paragraphs, UI elements |
-| Code | JetBrains Mono | 400 | Code blocks, inline code |
-| Fallback | Calibri | - | System fallback only |
+| All Text | Hanken Grotesk | 400-700 | Body, headings, UI |
+| Display | Hanken Grotesk (wide) | 600, 700 | Hero titles, emphasis |
+| Code | System monospace | 400 | Code blocks, inline code |
 
-### Font Import
+**Font Configuration** (Next.js):
+
+```typescript
+import { Hanken_Grotesk } from 'next/font/google'
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-hanken-grotesk',
+  display: 'swap',
+})
+```
+
+**CSS Variables**:
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Open+Sans:wght@400;500&family=JetBrains+Mono&display=swap');
+--font-sans: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
+--font-display: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
+--font-display--font-variation-settings: 'wdth' 125;
 ```
 
 ## 3. MDX Component Architecture
@@ -157,15 +185,15 @@ final class PageController extends ActionController
 
 ## 4. Mermaid Diagrams (Theming)
 
-All diagrams must explicitly override the theme to match the Teal/Amber palette:
+All diagrams must explicitly override the theme to match the webconsulting palette:
 
 ```markdown
 %%{init: {'theme': 'base', 'themeVariables': { 
-  'primaryColor': '#14b8a6', 
+  'primaryColor': '#1b7a95', 
   'primaryTextColor': '#ffffff',
-  'primaryBorderColor': '#0d9488',
-  'lineColor': '#334155',
-  'secondaryColor': '#f59e0b',
+  'primaryBorderColor': '#155d73',
+  'lineColor': '#404040',
+  'secondaryColor': '#d97706',
   'tertiaryColor': '#fef3c7',
   'edgeLabelBackground': '#ffffff'
 }}}%%
@@ -177,6 +205,12 @@ graph TD
     E --> D
 ```
 
+**CSS enhancements** (automatically applied via base.css):
+- Nodes have 10px border-radius for modern look
+- 2px stroke width for better definition
+- White text with shadow on mindmap nodes
+- Cluster/subgraph backgrounds use light gray (`#f0f0f0`)
+
 ## 5. Accessibility Guidelines (WCAG 2.1 AA)
 
 ### Contrast Requirements
@@ -187,7 +221,8 @@ graph TD
 ### Interactive Elements
 
 - All interactive elements must have visible **focus states**
-- Use ring: `focus:ring-2 focus:ring-teal-500 focus:ring-offset-2`
+- Use ring: `focus:ring-2 focus:ring-webcon-primary focus:ring-offset-2`
+- Outline for scrollable regions: `outline: 2px solid #1B7A95`
 
 ### Images and Media
 
@@ -199,7 +234,7 @@ graph TD
 
 - All interactive elements must be keyboard accessible
 - Logical tab order (no positive tabindex)
-- Skip links for main content
+- Skip links for main content (styled with dark background, white text)
 
 ## 6. Responsive Breakpoints
 
@@ -228,7 +263,7 @@ Use consistent spacing based on 4px grid:
 ### Primary Button
 
 ```html
-<button class="bg-teal-500 hover:bg-teal-600 text-white font-medium px-6 py-3 rounded-lg transition-colors focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+<button class="bg-webcon-primary hover:bg-webcon-primary-800 text-white font-medium px-6 py-3 rounded-lg transition-colors focus:ring-2 focus:ring-webcon-primary focus:ring-offset-2">
   Primary Action
 </button>
 ```
@@ -236,7 +271,7 @@ Use consistent spacing based on 4px grid:
 ### Secondary Button
 
 ```html
-<button class="border-2 border-teal-500 text-teal-500 hover:bg-teal-50 font-medium px-6 py-3 rounded-lg transition-colors">
+<button class="border-2 border-webcon-primary text-webcon-primary hover:bg-webcon-primary-50 font-medium px-6 py-3 rounded-lg transition-colors">
   Secondary Action
 </button>
 ```
@@ -244,8 +279,35 @@ Use consistent spacing based on 4px grid:
 ### Ghost Button
 
 ```html
-<button class="text-slate-600 hover:text-teal-500 hover:bg-slate-100 px-4 py-2 rounded transition-colors">
+<button class="text-muted-foreground hover:text-webcon-primary hover:bg-muted px-4 py-2 rounded transition-colors">
   Ghost Action
 </button>
 ```
+
+## 9. Dark Mode Support
+
+The design system supports automatic dark mode via the `.dark` class. All `webcon-*` colors automatically invert:
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--webcon-primary` | `#1b7a95` | `#66c4e1` |
+| `--webcon-success` | `#16a34a` | `#4ade80` |
+| `--webcon-error` | `#dc2626` | `#f87171` |
+| `--webcon-warning` | `#d97706` | `#fbbf24` |
+
+**Usage**: Apply `dark` class to a parent element (usually `<html>`) to enable dark mode.
+
+## 10. shadcn/ui Integration
+
+The design system is compatible with shadcn/ui components. Semantic tokens map to shadcn conventions:
+
+| shadcn Token | webconsulting Equivalent |
+|--------------|--------------------------|
+| `--background` | Light: white, Dark: neutral-950 |
+| `--foreground` | Light: neutral-950, Dark: white |
+| `--primary` | `--webcon-primary` |
+| `--destructive` | `--webcon-error` |
+| `--muted` | Neutral grays |
+| `--accent` | Light backgrounds |
+| `--ring` | Focus ring color |
 
