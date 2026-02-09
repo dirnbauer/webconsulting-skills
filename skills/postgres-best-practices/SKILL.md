@@ -1,18 +1,11 @@
 ---
 name: postgres-best-practices
-description: Postgres performance optimization and best practices from Supabase. Query performance, connection pooling, Row Level Security, schema design, and diagnostics.
-version: 1.0.0
-triggers:
-  - postgres
-  - postgresql
-  - sql
-  - database
-  - query
-  - index
-  - rls
-  - row-level-security
-  - supabase
-  - connection-pooling
+description: >-
+  Postgres performance optimization and best practices from Supabase. Query performance,
+  connection pooling, Row Level Security, schema design, and diagnostics. Use when working
+  with postgres, postgresql, sql, database, query, index, rls, row-level-security.
+metadata:
+  version: "1.0.0"
 ---
 
 # Postgres Best Practices

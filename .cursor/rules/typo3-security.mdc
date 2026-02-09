@@ -1,14 +1,12 @@
 ---
 name: typo3-security
-description: Security hardening checklist and best practices for TYPO3 v13/v14 installations, covering configuration, file permissions, and common vulnerabilities.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - security
-  - hardening
-  - permissions
-  - authentication
-  - vulnerabilities
+description: >-
+  Security hardening checklist and best practices for TYPO3 v13/v14 installations,
+  covering configuration, file permissions, and common vulnerabilities. Use when working
+  with security, hardening, permissions, authentication, vulnerabilities.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # TYPO3 Security Hardening

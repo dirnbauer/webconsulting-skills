@@ -1,22 +1,12 @@
 ---
 name: cro-funnel
-description: Full-funnel Conversion Rate Optimization (CRO) for SaaS and web apps. Covers page CRO, form optimization, signup flow, onboarding activation, popup/modal design, and paywall/upgrade screens. Use when optimizing any part of the conversion funnel.
-version: 1.0.0
+description: >-
+  Full-funnel Conversion Rate Optimization (CRO) for SaaS and web apps. Covers page CRO,
+  form optimization, signup flow, onboarding activation, popup/modal design, and
+  paywall/upgrade screens. Use when optimizing any part of the conversion funnel.
 license: MIT
-triggers:
-  - cro funnel
-  - form optimization
-  - signup flow
-  - onboarding activation
-  - popup optimization
-  - modal design
-  - paywall
-  - upgrade screen
-  - freemium conversion
-  - user activation
-  - registration flow
-  - lead capture
-  - exit intent
+metadata:
+  version: "1.0.0"
 ---
 
 # CRO Funnel Optimization

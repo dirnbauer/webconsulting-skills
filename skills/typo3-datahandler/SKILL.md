@@ -1,15 +1,12 @@
 ---
 name: typo3-datahandler
-description: Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring transactional safety, PSR-14 event handling, and reference index integrity.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - database
-  - datahandler
-  - tcemain
-  - records
-  - content
-  - pages
+description: >-
+  Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring
+  transactional safety, PSR-14 event handling, and reference index integrity. Use when
+  working with database, datahandler, tcemain, records, content, pages.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # TYPO3 DataHandler Operations

@@ -1,15 +1,10 @@
 ---
 name: php-modernization
-description: PHP 8.x modernization patterns. Use when upgrading to PHP 8.2/8.3/8.4, implementing type safety, or achieving PHPStan level 10.
-version: 1.0.0
-triggers:
-  - php
-  - modernization
-  - phpstan
-  - rector
-  - type safety
-  - dto
-  - enum
+description: >-
+  PHP 8.x modernization patterns. Use when upgrading to PHP 8.2/8.3/8.4, implementing type
+  safety, or achieving PHPStan level 10.
+metadata:
+  version: "1.0.0"
 ---
 
 # PHP Modernization Skill

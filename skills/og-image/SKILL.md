@@ -1,15 +1,12 @@
 ---
 name: og-image
-description: Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.
-version: 1.0.0
-triggers:
-  - og-image
-  - open graph
-  - social preview
-  - twitter card
-  - meta tags
-  - social sharing
-  - og:image
+description: >-
+  Generate social media preview images (Open Graph) and configure meta tags. Creates a
+  screenshot-optimized page using the project's existing design system, captures it at
+  1200x630, and sets up all social sharing meta tags. Use when working with og-image, open
+  graph, social preview, twitter card, meta tags, social sharing, og:image.
+metadata:
+  version: "1.0.0"
 ---
 
 # OG Image Skill

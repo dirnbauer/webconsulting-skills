@@ -1,14 +1,11 @@
 ---
 name: typo3-core-contributions
-description: TYPO3 Core contribution workflow. Use when working with Forge issues, submitting patches to Gerrit, or contributing docs.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - core
-  - contributions
-  - gerrit
-  - forge
-  - patch
+description: >-
+  TYPO3 Core contribution workflow. Use when working with Forge issues, submitting patches
+  to Gerrit, or contributing docs.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
 ---
 
 # TYPO3 Core Contributions Skill

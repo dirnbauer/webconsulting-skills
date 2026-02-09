@@ -1,17 +1,12 @@
 ---
 name: security-incident-reporting
-description: Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, and blameless root cause analysis.
-version: 1.0.0
-triggers:
-  - incident report
-  - post-mortem
-  - sir
-  - ddos analysis
-  - security reporting
-  - root cause analysis
-  - cve correlation
-  - nist 800-61
-  - sans incident response
+description: >-
+  Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE
+  correlation, timeline documentation, and blameless root cause analysis. Use when working
+  with incident report, post-mortem, sir, ddos analysis, security reporting, root cause
+  analysis, cve correlation, nist 800-61.
+metadata:
+  version: "1.0.0"
 ---
 
 # Security Incident Reporting

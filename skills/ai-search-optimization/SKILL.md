@@ -1,17 +1,12 @@
 ---
 name: ai-search-optimization
-description: Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI search platforms.
-version: 1.0.0
-triggers:
-  - aeo
-  - geo
-  - ai search
-  - chatgpt search
-  - perplexity
-  - ai overviews
-  - generative search
-  - llm visibility
-  - answer engine
+description: >-
+  Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for
+  AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI
+  search platforms. Use when working with aeo, geo, ai search, chatgpt search, perplexity,
+  ai overviews, generative search, llm visibility.
+metadata:
+  version: "1.0.0"
 ---
 
 # AI Search Optimization (AEO & GEO)

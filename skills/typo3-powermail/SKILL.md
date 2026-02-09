@@ -1,23 +1,17 @@
 ---
 name: typo3-powermail
-description: Expert guidance on TYPO3 Powermail 13+ form extension. Creating forms, custom finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email templates, backend modules, and extension development. Use when working with powermail forms, mail handling, form validation, or extending powermail functionality.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-related_skills:
-  - typo3-datahandler
-  - typo3-content-blocks
-  - typo3-testing
-triggers:
-  - powermail
-  - mailform
-  - form extension
-  - in2code/powermail
-  - tx_powermail
-  - powermail finisher
-  - powermail validator
-  - powermail viewhelper
-  - spam shield
-  - double opt-in
+description: >-
+  Expert guidance on TYPO3 Powermail 13+ form extension. Creating forms, custom finishers,
+  validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
+  templates, backend modules, and extension development. Use when working with powermail
+  forms, mail handling, form validation, or extending powermail functionality.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
+  related_skills:
+    - typo3-datahandler
+    - typo3-content-blocks
+    - typo3-testing
 ---
 
 # TYPO3 Powermail Development

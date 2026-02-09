@@ -1,14 +1,10 @@
 ---
 name: cli-tools
-description: CLI tool management and auto-installation. Use when commands fail with 'command not found', installing tools, or checking project environments.
-version: 1.0.0
-triggers:
-  - cli
-  - tools
-  - installation
-  - command not found
-  - brew
-  - apt
+description: >-
+  CLI tool management and auto-installation. Use when commands fail with 'command not
+  found', installing tools, or checking project environments.
+metadata:
+  version: "1.0.0"
 ---
 
 # CLI Tools Skill

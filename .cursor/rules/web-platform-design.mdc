@@ -1,21 +1,13 @@
 ---
 name: web-platform-design
-description: Comprehensive web platform design and accessibility guidelines. Use when building web interfaces, implementing WCAG compliance, responsive layouts, forms, typography, performance, animations, or internationalization. Covers HTML, CSS, and JavaScript best practices.
-version: 1.0.0
+description: >-
+  Comprehensive web platform design and accessibility guidelines. Use when building web
+  interfaces, implementing WCAG compliance, responsive layouts, forms, typography,
+  performance, animations, or internationalization. Covers HTML, CSS, and JavaScript best
+  practices.
 license: MIT
-triggers:
-  - web platform
-  - html accessibility
-  - css responsive
-  - wcag 2.2
-  - aria patterns
-  - form accessibility
-  - web typography
-  - web performance
-  - css animation
-  - i18n web
-  - rtl layout
-  - semantic html
+metadata:
+  version: "1.0.0"
 ---
 
 # Web Platform Design Guidelines

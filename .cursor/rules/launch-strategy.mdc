@@ -1,18 +1,13 @@
 ---
 name: launch-strategy
-description: Plan product launches, feature announcements, and go-to-market strategies. Covers phased launches, Product Hunt strategy, channel selection (owned/rented/borrowed), and ongoing launch momentum.
-version: 1.0.0
+description: >-
+  Plan product launches, feature announcements, and go-to-market strategies. Covers phased
+  launches, Product Hunt strategy, channel selection (owned/rented/borrowed), and ongoing
+  launch momentum. Use when working with product launch, feature launch, go-to-market, gtm
+  strategy, product hunt, beta launch, early access, waitlist.
 license: MIT
-triggers:
-  - product launch
-  - feature launch
-  - go-to-market
-  - gtm strategy
-  - product hunt
-  - beta launch
-  - early access
-  - waitlist
-  - announcement
+metadata:
+  version: "1.0.0"
 ---
 
 # Launch Strategy

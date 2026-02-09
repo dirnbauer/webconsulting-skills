@@ -1,15 +1,11 @@
 ---
 name: enterprise-readiness
-description: Assess and enhance software projects for enterprise-grade security, quality, and automation. Aligned with OpenSSF Scorecard, SLSA, and S2C2F.
-version: 1.0.0
-triggers:
-  - enterprise
-  - openssf
-  - slsa
-  - security
-  - scorecard
-  - supply chain
-  - badge
+description: >-
+  Assess and enhance software projects for enterprise-grade security, quality, and
+  automation. Aligned with OpenSSF Scorecard, SLSA, and S2C2F. Use when working with
+  enterprise, openssf, slsa, security, scorecard, supply chain, badge.
+metadata:
+  version: "1.0.0"
 ---
 
 # Enterprise Readiness Assessment

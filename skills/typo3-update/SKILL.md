@@ -1,16 +1,13 @@
 ---
 name: typo3-update
-description: Comprehensive guide for writing TYPO3 code compatible with both v13 and v14, with preference for v14. Covers version constraints, compatible patterns, and migration strategies.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - update
-  - upgrade
-  - v13
-  - v14
-  - migration
-  - lts
-  - compatibility
+description: >-
+  Comprehensive guide for writing TYPO3 code compatible with both v13 and v14, with
+  preference for v14. Covers version constraints, compatible patterns, and migration
+  strategies. Use when working with update, upgrade, v13, v14, migration, lts,
+  compatibility.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # TYPO3 Dual-Version Development: v13 & v14

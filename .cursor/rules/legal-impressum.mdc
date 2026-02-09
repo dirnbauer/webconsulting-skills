@@ -1,17 +1,11 @@
 ---
 name: legal-impressum
-description: Austrian Impressum (legal notice) requirements for all company types. Covers ECG, UGB, GewO, MedienG, and Offenlegungspflicht for public media.
-version: 1.0.0
-triggers:
-  - impressum
-  - legal notice
-  - imprint
-  - austria
-  - österreich
-  - ECG
-  - mediengesetz
-  - offenlegung
-  - gesellschaftsform
+description: >-
+  Austrian Impressum (legal notice) requirements for all company types. Covers ECG, UGB,
+  GewO, MedienG, and Offenlegungspflicht for public media. Use when working with
+  impressum, legal notice, imprint, austria, österreich, ECG, mediengesetz, offenlegung.
+metadata:
+  version: "1.0.0"
 ---
 
 # Austrian Impressum Requirements

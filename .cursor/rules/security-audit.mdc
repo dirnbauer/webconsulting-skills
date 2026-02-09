@@ -1,16 +1,10 @@
 ---
 name: security-audit
-description: Security audit patterns for PHP/OWASP. Use when conducting security assessments, identifying vulnerabilities (XXE, SQL injection, XSS), or CVSS scoring.
-version: 1.0.0
-triggers:
-  - security
-  - audit
-  - owasp
-  - vulnerabilities
-  - xxe
-  - sql injection
-  - xss
-  - cvss
+description: >-
+  Security audit patterns for PHP/OWASP. Use when conducting security assessments,
+  identifying vulnerabilities (XXE, SQL injection, XSS), or CVSS scoring.
+metadata:
+  version: "1.0.0"
 ---
 
 # Security Audit Skill

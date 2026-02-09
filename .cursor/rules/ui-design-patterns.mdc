@@ -1,21 +1,12 @@
 ---
 name: ui-design-patterns
-description: Practical UI design patterns and principles for creating polished, professional interfaces. Based on proven techniques from Refactoring UI and Practical UI.
-version: 1.1.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - ui
-  - design
-  - layout
-  - spacing
-  - typography
-  - color
-  - hierarchy
-  - styling
-  - visual
-  - accessibility
-  - usability
-  - contrast
+description: >-
+  Practical UI design patterns and principles for creating polished, professional
+  interfaces. Based on proven techniques from Refactoring UI and Practical UI. Use when
+  working with ui, design, layout, spacing, typography, color, hierarchy, styling.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.1.0"
 ---
 
 # UI Design Patterns

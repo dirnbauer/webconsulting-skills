@@ -1,18 +1,11 @@
 ---
 name: marketing-skills
-description: Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth engineering. From Corey Haines' Marketing Skills collection.
-version: 1.0.0
-triggers:
-  - marketing
-  - cro
-  - conversion
-  - copywriting
-  - seo
-  - landing page
-  - pricing
-  - growth
-  - funnel
-  - ab test
+description: >-
+  Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth
+  engineering. From Corey Haines' Marketing Skills collection. Use when working with
+  marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.
+metadata:
+  version: "1.0.0"
 ---
 
 # Marketing Skills for AI Agents

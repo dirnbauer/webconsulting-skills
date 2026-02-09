@@ -1,20 +1,12 @@
 ---
 name: document-processing
-description: Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text extraction, form filling, document creation, and data analysis.
-version: 1.0.0
+description: >-
+  Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working
+  with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text
+  extraction, form filling, document creation, and data analysis.
 license: MIT
-triggers:
-  - pdf
-  - docx
-  - word
-  - pptx
-  - powerpoint
-  - xlsx
-  - excel
-  - spreadsheet
-  - document
-  - office
-  - presentation
+metadata:
+  version: "1.0.0"
 ---
 
 # Document Processing

@@ -1,15 +1,12 @@
 ---
 name: webconsulting-branding
-description: Enforces webconsulting.at design system, color palettes, typography, and MDX component structures for frontend development.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - frontend
-  - design
-  - branding
-  - ui
-  - components
-  - styling
+description: >-
+  Enforces webconsulting.at design system, color palettes, typography, and MDX component
+  structures for frontend development. Use when working with frontend, design, branding,
+  ui, components, styling.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # webconsulting Design System

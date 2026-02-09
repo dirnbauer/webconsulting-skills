@@ -1,18 +1,13 @@
 ---
 name: programmatic-seo
-description: Build SEO-optimized pages at scale using templates and data. Use for directory pages, location pages, comparison pages, integration pages, or any pattern-based content strategy. Triggers on "programmatic SEO", "template pages", "pages at scale", or "[keyword] + [city] pages".
-version: 1.0.0
+description: >-
+  Build SEO-optimized pages at scale using templates and data. Use for directory pages,
+  location pages, comparison pages, integration pages, or any pattern-based content
+  strategy. Triggers on "programmatic SEO", "template pages", "pages at scale", or
+  "[keyword] + [city] pages".
 license: MIT
-triggers:
-  - programmatic seo
-  - pseo
-  - template pages
-  - pages at scale
-  - directory pages
-  - location pages
-  - comparison pages
-  - integration pages
-  - scaled content
+metadata:
+  version: "1.0.0"
 ---
 
 # Programmatic SEO

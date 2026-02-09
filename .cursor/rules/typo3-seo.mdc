@@ -1,15 +1,12 @@
 ---
 name: typo3-seo
-description: SEO configuration and best practices for TYPO3 v13/v14, including EXT:seo setup, sitemaps, meta tags, and structured data.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - seo
-  - sitemap
-  - meta
-  - robots
-  - structured data
-  - opengraph
+description: >-
+  SEO configuration and best practices for TYPO3 v13/v14, including EXT:seo setup,
+  sitemaps, meta tags, and structured data. Use when working with seo, sitemap, meta,
+  robots, structured data, opengraph.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # TYPO3 SEO Configuration

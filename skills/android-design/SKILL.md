@@ -1,17 +1,13 @@
 ---
-name: android-design-guidelines
-description: Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.
-version: 1.0.0
+name: android-design
+description: >-
+  Material Design 3 and Android platform guidelines. Use when building Android apps with
+  Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility.
+  Triggers on tasks involving Android UI, Compose components, dynamic color, or Material
+  Design compliance.
 license: MIT
-triggers:
-  - android
-  - material design
-  - jetpack compose
-  - android ui
-  - material you
-  - dynamic color
-  - android accessibility
-  - android navigation
+metadata:
+  version: "1.0.0"
 ---
 
 # Android Platform Design Guidelines — Material Design 3

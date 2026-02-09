@@ -1,14 +1,12 @@
 ---
 name: typo3-extension-upgrade
-description: Systematic TYPO3 extension upgrades to newer LTS versions. Covers Extension Scanner, Rector, Fractor, PHPStan, and testing.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - extension
-  - upgrade
-  - fractor
-  - rector
-  - migration
+description: >-
+  Systematic TYPO3 extension upgrades to newer LTS versions. Covers Extension Scanner,
+  Rector, Fractor, PHPStan, and testing. Use when working with extension, upgrade,
+  fractor, rector, migration.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
 ---
 
 # TYPO3 Extension Upgrade Skill

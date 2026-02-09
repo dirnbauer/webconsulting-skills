@@ -1,17 +1,13 @@
 ---
-name: ipados-design-guidelines
-description: Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.
-version: 1.0.0
+name: ipados-design
+description: >-
+  Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces,
+  implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts.
+  Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or
+  trackpad support.
 license: MIT
-triggers:
-  - ipad
-  - ipados
-  - split view
-  - stage manager
-  - sidebar navigation
-  - trackpad support
-  - keyboard shortcuts
-  - ipad multitasking
+metadata:
+  version: "1.0.0"
 ---
 
 # iPadOS Design Guidelines

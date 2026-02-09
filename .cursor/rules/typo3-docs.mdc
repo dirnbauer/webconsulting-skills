@@ -1,14 +1,12 @@
 ---
 name: typo3-docs
-description: Create and maintain TYPO3 extension documentation following official docs.typo3.org standards. RST syntax, TYPO3 directives, rendering, and deployment.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - documentation
-  - rst
-  - docs
-  - readme
-  - typo3 documentation
+description: >-
+  Create and maintain TYPO3 extension documentation following official docs.typo3.org
+  standards. RST syntax, TYPO3 directives, rendering, and deployment. Use when working
+  with documentation, rst, docs, readme, typo3 documentation.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
 ---
 
 # TYPO3 Documentation Skill

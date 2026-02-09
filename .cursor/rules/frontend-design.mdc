@@ -1,22 +1,13 @@
 ---
 name: frontend-design
-description: Guide for creating distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices. Use when building UI components, pages, applications, or when the user wants visually striking, memorable interfaces.
-version: 1.0.0
+description: >-
+  Guide for creating distinctive, production-grade frontend interfaces that avoid generic
+  "AI slop" aesthetics. Implement real working code with exceptional attention to
+  aesthetic details and creative choices. Use when building UI components, pages,
+  applications, or when the user wants visually striking, memorable interfaces.
 license: MIT
-triggers:
-  - frontend
-  - design
-  - ui
-  - interface
-  - beautiful
-  - creative
-  - distinctive
-  - aesthetics
-  - visual
-  - memorable
-  - striking
-  - polished
-  - production
+metadata:
+  version: "1.0.0"
 ---
 
 # Frontend Design

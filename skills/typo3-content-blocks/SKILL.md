@@ -1,20 +1,15 @@
 ---
 name: typo3-content-blocks
-description: Expert guidance on creating Content Elements, Record Types, Page Types, and File Types using TYPO3 Content Blocks extension - the single source of truth for content modeling.
-version: 1.4.0
-typo3_compatibility: "13.0 - 14.x"
-related_skills:
-  - typo3-content-blocks-migration
-triggers:
-  - content-blocks
-  - content-element
-  - record-type
-  - page-type
-  - file-type
-  - make:content-block
-  - friendsoftypo3/content-blocks
-  - irre
-  - collection
+description: >-
+  Expert guidance on creating Content Elements, Record Types, Page Types, and File Types
+  using TYPO3 Content Blocks extension - the single source of truth for content modeling.
+  Use when working with content-blocks, content-element, record-type, page-type,
+  file-type, make:content-block, friendsoftypo3/content-blocks, irre.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.4.0"
+  related_skills:
+    - typo3-content-blocks-migration
 ---
 
 # TYPO3 Content Blocks Development

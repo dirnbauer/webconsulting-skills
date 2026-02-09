@@ -1,18 +1,12 @@
 ---
 name: deepfake-detection
-description: Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era.
-version: 1.2.0
-triggers:
-  - deepfake
-  - media forensics
-  - fake detection
-  - synthetic media
-  - prnu
-  - image authentication
-  - video verification
-  - disinformation
-  - manipulated media
-  - GAN detection
+description: >-
+  Multimodal media authentication and deepfake forensics. PRNU analysis, IGH
+  classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the
+  post-empirical era. Use when working with deepfake, media forensics, fake detection,
+  synthetic media, prnu, image authentication, video verification, disinformation.
+metadata:
+  version: "1.2.0"
 ---
 
 # Deepfake Detection & Media Authentication

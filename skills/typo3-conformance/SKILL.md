@@ -1,18 +1,16 @@
 ---
 name: typo3-conformance
-description: Evaluate TYPO3 extensions for conformance to v13/v14 standards. Use when assessing quality, generating reports, or planning modernization.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-file_triggers:
-  - ext_emconf.php
-  - ext_localconf.php
-  - Configuration/TCA/**/*
-  - "*.typoscript"
-triggers:
-  - conformance
-  - standards
-  - quality
-  - assessment
+description: >-
+  Evaluate TYPO3 extensions for conformance to v13/v14 standards. Use when assessing
+  quality, generating reports, or planning modernization.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
+  file_triggers:
+    - ext_emconf.php
+    - ext_localconf.php
+    - Configuration/TCA/**/*
+    - *.typoscript
 ---
 
 # TYPO3 Extension Conformance Checker

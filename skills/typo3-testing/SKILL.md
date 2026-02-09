@@ -1,17 +1,11 @@
 ---
 name: typo3-testing
-description: TYPO3 extension testing (unit, functional, E2E, architecture, mutation). Use when setting up test infrastructure, writing tests, or configuring CI/CD.
-version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - testing
-  - phpunit
-  - playwright
-  - phpat
-  - unit test
-  - functional test
-  - e2e
-  - coverage
+description: >-
+  TYPO3 extension testing (unit, functional, E2E, architecture, mutation). Use when
+  setting up test infrastructure, writing tests, or configuring CI/CD.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "1.0.0"
 ---
 
 # TYPO3 Testing Skill

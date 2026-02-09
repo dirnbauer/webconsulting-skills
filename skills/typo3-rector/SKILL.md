@@ -1,14 +1,12 @@
 ---
 name: typo3-rector
-description: TYPO3 upgrade patterns using Rector, including automated refactoring rules and dual-version compatibility strategies for v13/v14.
-version: 2.0.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - rector
-  - upgrade
-  - migration
-  - refactoring
-  - deprecation
+description: >-
+  TYPO3 upgrade patterns using Rector, including automated refactoring rules and
+  dual-version compatibility strategies for v13/v14. Use when working with rector,
+  upgrade, migration, refactoring, deprecation.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.0.0"
 ---
 
 # TYPO3 Rector Upgrade Patterns

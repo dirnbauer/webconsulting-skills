@@ -1,17 +1,13 @@
 ---
 name: ab-testing
-description: Design and implement statistically valid A/B tests and experiments. Covers hypothesis creation, sample size calculation, test design, metrics selection, and results analysis.
-version: 1.0.0
+description: >-
+  Design and implement statistically valid A/B tests and experiments. Covers hypothesis
+  creation, sample size calculation, test design, metrics selection, and results analysis.
+  Use when working with ab test, a/b test, split test, experiment, test this change,
+  multivariate test, hypothesis, statistical significance.
 license: MIT
-triggers:
-  - ab test
-  - a/b test
-  - split test
-  - experiment
-  - test this change
-  - multivariate test
-  - hypothesis
-  - statistical significance
+metadata:
+  version: "1.0.0"
 ---
 
 # A/B Test Setup

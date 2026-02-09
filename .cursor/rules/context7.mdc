@@ -1,13 +1,10 @@
 ---
 name: context7
-description: Fetch up-to-date library documentation via Context7 REST API. Use when needing current API docs, framework patterns, or code examples for any library.
-version: 1.0.0
-triggers:
-  - documentation
-  - api
-  - libraries
-  - docs
-  - context7
+description: >-
+  Fetch up-to-date library documentation via Context7 REST API. Use when needing current
+  API docs, framework patterns, or code examples for any library.
+metadata:
+  version: "1.0.0"
 ---
 
 # Context7 Documentation Lookup Skill

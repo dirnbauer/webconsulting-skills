@@ -1,15 +1,12 @@
 ---
 name: typo3-ddev
-description: Best practices for TYPO3 local development with DDEV, including configuration, database management, multi-version testing, and common workflows for v13/v14.
-version: 2.1.0
-typo3_compatibility: "13.0 - 14.x"
-triggers:
-  - ddev
-  - local
-  - development
-  - docker
-  - environment
-  - multi-version
+description: >-
+  Best practices for TYPO3 local development with DDEV, including configuration, database
+  management, multi-version testing, and common workflows for v13/v14. Use when working
+  with ddev, local, development, docker, environment, multi-version.
+compatibility: TYPO3 13.0 - 14.x
+metadata:
+  version: "2.1.0"
 ---
 
 # TYPO3 DDEV Local Development
