@@ -174,6 +174,8 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
 | `typo3-powermail/CONDITIONS` | Conditional field/page visibility with powermail_cond 13+ | 1.0.0 | powermail_cond, conditional fields, show hide fields |
 | `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
+| `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
+| `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 
 ## Skill Categories
 
@@ -335,6 +337,8 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
   - `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, conditions (property hooks, asymmetric visibility)
   - `SKILL-EXAMPLES.md`: Multi-step shop form with Austrian legal types, conditions, translations, DDEV SQL + DataHandler CLI
+- **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
+  - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
 
 ## TYPO3 Skill Supplements
 
@@ -537,6 +541,28 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Publish workspace form via CLI: workspace:publish"
 - "Ensure conditions are in the same workspace as the form"
 - "Check which workspace a powermail form lives in (t3ver_wsid)"
+
+**📋 Records List Types (typo3-records-list-types)**
+- "Set Grid View as default for the Records module"
+- "Configure per-table fields for News cards (title, teaser, image)"
+- "Switch between Grid, Compact, and Teaser views in the backend"
+- "Create a custom Timeline view type with TSconfig and Fluid template"
+- "Add an Address Book view using CompactView with fixed columns"
+- "Restrict view modes to specific pages via TSconfig conditions"
+- "Register a custom view type via PSR-14 RegisterViewModesEvent"
+- "Configure pagination: items per page, per-type override"
+- "Create a Photo Gallery view (GridView, 48 items, no description)"
+- "Add a Product Catalog view with custom template and large thumbnails"
+- "Reuse built-in TeaserView for event calendar page"
+- "Set up drag-and-drop reordering in Grid View"
+- "Add custom CSS for dark mode support using TYPO3 CSS variables"
+- "Add custom JavaScript module to a view type"
+- "Configure grid column count for media folder pages"
+- "Force Grid View for a specific backend user group"
+- "Show workspace state indicators (new, modified, moved, deleted)"
+- "Disable extension for specific page trees"
+- "Create a custom view with no pagination (itemsPerPage = 0)"
+- "Install the companion records-list-examples extension"
 
 **🤖 AI Search (ai-search-optimization)**
 - "Optimize content for ChatGPT and Perplexity citations"
@@ -854,8 +880,8 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
-Use case: Extension development, Content Blocks, database operations, forms, v13/v14 compatible code
+Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
+Use case: Extension development, Content Blocks, database operations, forms, backend views, v13/v14 compatible code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -942,6 +968,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-records-list-types | | ✓ | | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
