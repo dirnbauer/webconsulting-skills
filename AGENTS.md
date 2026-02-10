@@ -117,6 +117,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
+| `firecrawl` | Firecrawl CLI for LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
 | `skill-creator` | Guide for creating and packaging effective Agent Skills (Anthropic) | 1.0.0 | create skill, new skill, skill creator, package skill, SKILL.md |
 | **Frontend & Design** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
@@ -218,6 +219,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
+- **firecrawl**: Firecrawl CLI for LLM-optimized web scraping, search, and research
 - **skill-creator**: Guide for creating effective Agent Skills (from Anthropic)
   - `scripts/init_skill.py`: Initialize new skill from template
   - `scripts/package_skill.py`: Package and validate skill for distribution
@@ -917,8 +919,8 @@ Active: `react-best-practices`, `ui-design-patterns`, `og-image`
 Use case: React/Next.js performance optimization, bundle size reduction, data fetching patterns, server components
 
 ### Research & Documentation Session
-Active: `context7`, `ai-search-optimization`  
-Use case: API documentation lookup, competitor analysis, documentation crawling
+Active: `firecrawl`, `context7`, `ai-search-optimization`  
+Use case: Web research, API documentation lookup, competitor analysis, content extraction, documentation crawling
 
 ### Android Development Session
 Active: `android-design`, `ui-design-patterns`, `react-best-practices`  
@@ -969,6 +971,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | frontend-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
 | document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
+| firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
 | skill-creator | ✓ | ✓ | ✓ | ✓ | ✓ |
 | android-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ios-design | ✓ | ✓ | ✓ | ✓ | ✓ |

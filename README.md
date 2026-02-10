@@ -185,6 +185,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `frontend-design` | frontend, design, creative, beautiful, distinctive, aesthetics | "Create a distinctive landing page" or "Design a dark tech hero section" |
 | `web-design-guidelines` | web design, accessibility, a11y, wcag, aria, semantic html | "Review this component for accessibility issues" or "Audit my form for WCAG" |
 | `document-processing` | pdf, docx, word, pptx, powerpoint, xlsx, excel | "Extract text from this PDF" or "Create an Excel model with formulas" |
+| `firecrawl` | scrape, crawl, search web, research, fetch url | "Search the web for..." or "Scrape this page" |
 | `skill-creator` | create skill, new skill, skill creator, package skill, SKILL.md | "Create a new skill for database migrations" or "Package my skill" |
 | `android-design` | android, material design, jetpack compose, material you | "Review my Android app for Material Design" |
 | `ios-design` | ios, iphone, swiftui, dynamic type, dark mode | "Review my iOS app for HIG compliance" |
@@ -1797,6 +1798,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | webconsulting |
 | `cli-tools` | CLI tool management and auto-installation | webconsulting |
 | `context7` | Library documentation lookup via REST API | webconsulting |
+| `firecrawl` | Firecrawl CLI for web scraping, search, and research | Firecrawl |
 | `skill-creator` | Guide for creating and packaging Agent Skills | Anthropic |
 | **Database** | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
