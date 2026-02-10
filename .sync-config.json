@@ -3,80 +3,41 @@
   "description": "External skill sources for automatic synchronization",
   "skills": [
     {
-      "name": "typo3-docs",
-      "source": "https://github.com/netresearch/typo3-docs-skill.git",
+      "name": "ab-testing",
+      "source": "https://github.com/aitytech/agentkits-marketing.git",
       "branch": "main",
-      "enabled": false
+      "enabled": true,
+      "path": ".claude/skills/ab-test-setup",
+      "note": "Upstream skill name differs: ab-test-setup"
     },
     {
-      "name": "typo3-update",
-      "source": "https://github.com/netresearch/typo3-update-skill.git",
+      "name": "android-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
       "branch": "main",
-      "enabled": false
+      "enabled": true,
+      "path": "skills/android"
     },
     {
-      "name": "remotion-best-practices",
-      "source": "https://github.com/remotion-dev/skills.git",
+      "name": "cro-funnel",
+      "source": "https://github.com/aitytech/agentkits-marketing.git",
       "branch": "main",
-      "path": "skills/remotion",
-      "enabled": true
-    },
-    {
-      "name": "readiness-report",
-      "source": "https://github.com/OpenHands/skills.git",
-      "branch": "main",
-      "path": "skills/readiness-report",
-      "enabled": true
-    },
-    {
-      "name": "postgres-best-practices",
-      "source": "https://github.com/supabase/agent-skills.git",
-      "branch": "main",
-      "path": "skills/postgres-best-practices",
-      "enabled": false
-    },
-    {
-      "name": "og-image",
-      "source": "https://github.com/stevysmith/og-image-skill.git",
-      "branch": "main",
-      "path": "plugins/og-image/skills/og-image",
-      "enabled": false
-    },
-    {
-      "name": "react-best-practices",
-      "source": "https://github.com/vercel-labs/agent-skills.git",
-      "branch": "main",
-      "path": "skills/react-best-practices",
-      "enabled": true
-    },
-    {
-      "name": "web-design-guidelines",
-      "source": "https://github.com/vercel-labs/agent-skills.git",
-      "branch": "main",
-      "path": "skills/web-design-guidelines",
-      "enabled": true
-    },
-    {
-      "name": "frontend-design",
-      "source": "https://github.com/anthropics/skills.git",
-      "branch": "main",
-      "path": "skills/frontend-design",
       "enabled": false,
-      "note": "Local version preferred - more comprehensive"
-    },
-    {
-      "name": "document-processing-pdf",
-      "source": "https://github.com/anthropics/skills.git",
-      "branch": "main",
-      "path": "skills/pdf",
-      "enabled": false,
-      "note": "Bundled into local document-processing skill"
+      "path": ".claude/skills/form-cro",
+      "note": "Local cro-funnel is a composite skill; keep local version preferred"
     },
     {
       "name": "document-processing-docx",
       "source": "https://github.com/anthropics/skills.git",
       "branch": "main",
       "path": "skills/docx",
+      "enabled": false,
+      "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "document-processing-pdf",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/pdf",
       "enabled": false,
       "note": "Bundled into local document-processing skill"
     },
@@ -97,23 +58,152 @@
       "note": "Bundled into local document-processing skill"
     },
     {
+      "name": "firecrawl",
+      "source": "https://github.com/firecrawl/cli.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/firecrawl-cli"
+    },
+    {
+      "name": "frontend-design",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/frontend-design",
+      "enabled": true
+    },
+    {
+      "name": "ios-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/ios"
+    },
+    {
+      "name": "ipados-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/ipados"
+    },
+    {
+      "name": "launch-strategy",
+      "source": "https://github.com/aitytech/agentkits-marketing.git",
+      "branch": "main",
+      "enabled": true,
+      "path": ".claude/skills/launch-strategy"
+    },
+    {
+      "name": "macos-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/macos"
+    },
+    {
       "name": "marketing-skills",
       "source": "https://github.com/coreyhaines31/marketingskills.git",
       "branch": "main",
       "path": "skills",
       "enabled": false,
-      "note": "Local version with supplements preferred"
+      "note": "Local version with supplements preferred (upstream split into many skills)"
+    },
+    {
+      "name": "og-image",
+      "source": "https://github.com/stevysmith/og-image-skill.git",
+      "branch": "main",
+      "path": "plugins/og-image/skills/og-image",
+      "enabled": true
+    },
+    {
+      "name": "postgres-best-practices",
+      "source": "https://github.com/supabase/agent-skills.git",
+      "branch": "main",
+      "path": "skills/supabase-postgres-best-practices",
+      "enabled": true
+    },
+    {
+      "name": "programmatic-seo",
+      "source": "https://github.com/aitytech/agentkits-marketing.git",
+      "branch": "main",
+      "enabled": true,
+      "path": ".claude/skills/programmatic-seo"
+    },
+    {
+      "name": "react-best-practices",
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "branch": "main",
+      "path": "skills/react-best-practices",
+      "enabled": true
+    },
+    {
+      "name": "readiness-report",
+      "source": "https://github.com/OpenHands/skills.git",
+      "branch": "main",
+      "path": "skills/readiness-report",
+      "enabled": true
+    },
+    {
+      "name": "remotion-best-practices",
+      "source": "https://github.com/remotion-dev/skills.git",
+      "branch": "main",
+      "path": "skills/remotion",
+      "enabled": true
     },
     {
       "name": "skill-creator",
       "source": "https://github.com/anthropics/skills.git",
       "branch": "main",
       "path": "skills/skill-creator",
-      "enabled": false,
-      "note": "Local copy installed - enable to sync upstream updates"
+      "enabled": true
+    },
+    {
+      "name": "tvos-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/tvos"
+    },
+    {
+      "name": "typo3-docs",
+      "source": "https://github.com/netresearch/typo3-docs-skill.git",
+      "branch": "main",
+      "enabled": false
+    },
+    {
+      "name": "typo3-update",
+      "source": "https://github.com/netresearch/typo3-update-skill.git",
+      "branch": "main",
+      "enabled": false
+    },
+    {
+      "name": "visionos-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/visionos"
+    },
+    {
+      "name": "watchos-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/watchos"
+    },
+    {
+      "name": "web-design-guidelines",
+      "source": "https://github.com/vercel-labs/agent-skills.git",
+      "branch": "main",
+      "path": "skills/web-design-guidelines",
+      "enabled": true
+    },
+    {
+      "name": "web-platform-design",
+      "source": "https://github.com/ehmo/platform-design-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/web"
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": null
+  "lastSync": "2026-02-10T17:07:06Z"
 }
-
