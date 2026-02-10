@@ -1,30 +1,9 @@
 ---
 name: og-image
-description: >-
-  Generate social media preview images (Open Graph) and configure meta tags. Creates a
-  screenshot-optimized page using the project's existing design system, captures it at
-  1200x630, and sets up all social sharing meta tags. Use when working with og-image, open
-  graph, social preview, twitter card, meta tags, social sharing, og:image.
-metadata:
-  version: "1.0.0"
+description: Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.
 ---
 
-# OG Image Skill
-
-Generate social media preview images (Open Graph) and configure all meta tags for optimal sharing on Twitter/X, LinkedIn, Facebook, Slack, Discord, and more.
-
 This skill creates professional Open Graph images for social media sharing. It analyzes the existing codebase to match the project's design system, generates a dedicated OG image page, screenshots it, and configures all necessary meta tags.
-
-## What It Does
-
-Creates a dedicated `/og-image` route in your project that renders a 1200x630 preview image matching your existing design system. Then screenshots it and configures all necessary meta tags.
-
-**The skill automatically:**
-- Explores your codebase to understand your design system (colors, fonts, components)
-- Creates an OG image page using your existing aesthetic
-- Screenshots at the correct 1200x630 dimensions
-- Saves to your public folder
-- Audits and adds missing meta tags (og:image, twitter:card, theme-color, etc.)
 
 ## Workflow
 
@@ -66,7 +45,6 @@ Create a dedicated route at `/og-image` (or equivalent for the framework):
 - Fixed dimensions: exactly 1200px wide × 630px tall
 - Self-contained styling (no external dependencies that might not render)
 - Hide any dev tool indicators with CSS:
-
 ```css
 [data-nextjs-dialog-overlay],
 [data-nextjs-dialog],
@@ -93,7 +71,7 @@ nextjs-portal,
 
 ### Phase 3: Screenshot Capture
 
-Use Playwright or Browser MCP to capture the OG image:
+Use Playwright to capture the OG image:
 
 1. Navigate to the OG image page (typically `http://localhost:3000/og-image` or similar)
 2. Resize viewport to exactly 1200×630
@@ -101,7 +79,7 @@ Use Playwright or Browser MCP to capture the OG image:
 4. Take a PNG screenshot
 5. Save to the project's public folder as `og-image.png`
 
-**Browser MCP Commands:**
+**Playwright Commands:**
 ```
 browser_navigate: http://localhost:{port}/og-image
 browser_resize: width=1200, height=630
@@ -124,7 +102,7 @@ openGraph: {
   locale: "en_US",
   type: "website",
   images: [{
-    url: "/og-image.png", // or absolute URL
+    url: "/og-image.png",  // or absolute URL
     width: 1200,
     height: 630,
     alt: "Descriptive alt text for accessibility",
@@ -137,7 +115,7 @@ twitter: {
   card: "summary_large_image",
   title: "Product Name - Short Description",
   description: "Compelling description for Twitter",
-  creator: "@handle", // if provided
+  creator: "@handle",  // if provided
   images: [{
     url: "/og-image.png",
     width: 1200,
@@ -148,7 +126,7 @@ twitter: {
 
 // Additional
 other: {
-  "theme-color": "#000000", // match brand color
+  "theme-color": "#000000",  // match brand color
   "msapplication-TileColor": "#000000",
 },
 
@@ -179,27 +157,6 @@ metadataBase: new URL("https://yourdomain.com"),
    - List of meta tags added/updated
    - Links to social preview debuggers
 
-## Supported Frameworks
-
-- Next.js (App Router & Pages Router)
-- Vite + React
-- Astro
-- Remix
-- Plain HTML/CSS
-
-## What Gets Generated
-
-1. **`/og-image` route** - A standalone page optimized for screenshots
-2. **`/public/og-image.png`** - The 1200x630 screenshot
-3. **Meta tag updates** - All necessary OG, Twitter, and misc meta tags
-
-## Meta Tags Configured
-
-- `og:image`, `og:image:width`, `og:image:height`, `og:image:alt`, `og:image:type`
-- `twitter:card`, `twitter:image`, `twitter:title`, `twitter:description`
-- `theme-color`, `msapplication-TileColor`
-- Apple web app meta tags
-
 ## Prompting for Missing Information
 
 Only ask the user if these cannot be determined from the codebase:
@@ -229,23 +186,6 @@ Only ask the user if these cannot be determined from the codebase:
 - Create `/src/pages/og-image.astro`
 - Update layout with meta tags
 
-## Design Templates
-
-See the `examples/` directory for complete HTML templates:
-
-- **Cosmic** - Dark gradients, aurora colors, geometric orbs
-- **Editorial** - Light, refined, magazine-inspired with abstract shapes
-- **Brutalist** - Bold typography, harsh colors, raw geometric blocks
-- **Ethereal** - Mesh gradients, glassmorphism, floating particles
-- **Webconsulting** - Teal/cyan/amber palette, hero gradient, Raleway typography (webconsulting.at design system)
-
-## Cache Busting
-
-After generating, use these tools to refresh social platform caches:
-- Facebook/LinkedIn: https://developers.facebook.com/tools/debug/
-- Twitter/X: https://cards-dev.twitter.com/validator
-- LinkedIn: https://www.linkedin.com/post-inspector/
-
 ## Quality Checklist
 
 Before completing, verify:
@@ -258,14 +198,3 @@ Before completing, verify:
 - [ ] Meta tags include alt text for accessibility
 - [ ] theme-color is set to match brand
 - [ ] User informed of cache-busting URLs
-
----
-
-## Credits & Attribution
-
-This skill is based on the excellent work by
-**[Stevy Smith](https://github.com/stevysmith)**.
-
-Original repository: https://github.com/stevysmith/og-image-skill
-
-Adapted by webconsulting.at for this skill collection

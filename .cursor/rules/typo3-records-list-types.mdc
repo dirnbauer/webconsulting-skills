@@ -1,7 +1,7 @@
 ---
 name: typo3-records-list-types
 description: Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.
-version: 1.0.0
+version: 1.1.0
 typo3_compatibility: "14.0 - 14.x"
 triggers:
   - records list types
@@ -19,6 +19,7 @@ triggers:
 
 > **Compatibility:** TYPO3 v14.0+ / PHP 8.3+
 > Extension key: `records_list_types` / Composer: `webconsulting/records-list-types`
+> GitHub: https://github.com/dirnbauer/typo3-records-list-types
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
 
@@ -35,6 +36,25 @@ Transforms the TYPO3 backend **Records** module with multiple view modes:
 | **Custom** | Your own views via TSconfig + Fluid | Timeline, kanban, catalog, gallery |
 
 All views include: pagination, sorting, search, record actions, workspace indicators, dark mode, WCAG 2.1 accessibility.
+
+### Features
+
+- **Grid View** -- Card-based layout with thumbnails, drag-and-drop reordering, and field display
+- **Compact View** -- Dense single-line rows with fixed columns and horizontal scrolling
+- **Teaser View** -- News-style cards with title, date, and description excerpt
+- **Custom Views** -- Register your own view types via PSR-14 events or TSconfig
+- **Drag & Drop** -- Mouse and keyboard reordering with full WCAG 2.1 accessibility
+- **Language Flags** -- Language flag icons displayed per record in grid cards
+- **Workspace Support** -- Color-coded indicators for new, modified, moved, and deleted records
+- **Dark Mode** -- Full compatibility with TYPO3's dark mode (light/dark themes)
+- **Per-Table Config** -- Configure title, description, image, and display fields via TSconfig
+- **User Preferences** -- View mode is persisted per backend user via AJAX
+- **Sorting Controls** -- Manual drag ordering and field-based sorting with direction toggle
+- **Pagination** -- Matches TYPO3 Core: multi-table mode shows limited records with "Expand table" button, single-table mode shows full pagination (record range, page input, first/prev/next/last)
+- **Image Preview Hint** -- Subtle notice below thumbnails reminding editors that the image may not appear on the frontend for certain record types
+- **Zero-PHP Extensibility** -- Add new view types with just TSconfig + Fluid template + CSS, no PHP classes needed
+- **Search** -- Client-side search filtering across all view modes
+- **Accessibility** -- WCAG 2.1 compliant keyboard navigation, ARIA labels, and screen reader support
 
 ## 2. Installation
 
@@ -118,7 +138,38 @@ mod.web_list.gridView.table.fe_users {
 }
 ```
 
-## 5. Pagination
+## 5. View Modes Detail
+
+### Grid View
+
+- **Card structure**: Header (icon, title, drag handle, actions), optional thumbnail image (16:9), field values body, footer (UID, PID, language flag)
+- **Thumbnails**: Automatically resolved from FAL image fields (configurable per table)
+- **Field display**: Type-aware formatting -- booleans as badges, dates in monospace, relations with count indicators, links as clickable, text truncated with ellipsis
+- **Two-column field layout**: Small fields display side-by-side; text/richtext fields span full width
+- **Drag-and-drop**: Both mouse and keyboard (Space to grab, arrows to move, Space to drop, Escape to cancel)
+- **Record actions**: Inline visibility toggle, edit, delete, plus dropdown for info, history, copy, cut
+- **State indicators**: Hidden records get amber headers; workspace records show blue/purple/cyan/red headers
+- **Language flags**: Each card shows the record's language flag icon in the bottom-right corner
+- **Responsive grid**: Auto-fills columns from 320px minimum, scales from 1 column on mobile to multiple on wide screens
+
+### Compact View
+
+- **Fixed columns**: Icon, UID, and title pinned on the left; status toggle, edit, delete pinned on the right
+- **Scrollable middle**: Additional fields scroll horizontally between fixed columns
+- **Scroll shadows**: Visual indicators when content extends beyond the visible area
+- **Sortable headers**: Click column headers to sort ascending/descending via TYPO3's native dropdown API
+- **Zebra striping**: Alternating row colors for readability
+- **Hidden record styling**: Muted background and dimmed title for hidden records
+
+### Teaser View
+
+- **Clean design**: Title, date with calendar icon, description excerpt (2-line clamp)
+- **Status badges**: UID pill and hidden/visible indicator
+- **Compact actions**: Visibility toggle, edit, delete buttons
+- **Hidden state**: Accent bar on hidden records
+- **CSS `light-dark()`**: Native theme switching support
+
+## 6. Pagination
 
 Matches TYPO3 Core List View behavior:
 
@@ -138,7 +189,7 @@ mod.web_list.viewMode.types.teaser.itemsPerPage = 100
 mod.web_list.viewMode.types.grid.itemsPerPage = 0
 ```
 
-## 6. Sorting
+## 7. Sorting
 
 Tables with TCA `sortby` support two modes:
 
@@ -147,7 +198,7 @@ Tables with TCA `sortby` support two modes:
 
 A segmented toggle switches between modes. Drag-and-drop supports both mouse and keyboard (Space to grab, arrows to move, Space to drop, Escape to cancel).
 
-## 7. Custom View Types (Quick Start)
+## 8. Custom View Types (Quick Start)
 
 Add a view in **3 steps** -- zero PHP required.
 
@@ -215,7 +266,7 @@ Restrict views to specific pages:
 [end]
 ```
 
-## 8. Column Display
+## 9. Column Display
 
 Two modes control which fields appear:
 
@@ -223,6 +274,13 @@ Two modes control which fields appear:
 |------|---------|----------|
 | **Editor-controlled** | `columnsFromTCA = 1` | Respects editor's "Show columns" selection |
 | **Fixed layout** | `columnsFromTCA = 0` | Uses `displayColumns` list exactly |
+
+### `columnsFromTCA = 1` Resolution Order
+
+1. **Editor's "Show columns" selection** (stored per-user per-table)
+2. **TSconfig `showFields`** (`mod.web_list.table.<table>.showFields`)
+3. **TCA `searchFields`** (the table's most relevant fields)
+4. **Label field only** (final fallback)
 
 ### Special Column Names
 
@@ -232,7 +290,7 @@ Two modes control which fields appear:
 | `datetime` | First date field (`datetime`, `date`, `starttime`, `crdate`) |
 | `teaser` | First description field (`teaser`, `abstract`, `description`, `bodytext`) |
 
-## 9. TSconfig Reference
+## 10. TSconfig Reference
 
 ### View Type Options
 
@@ -245,13 +303,14 @@ Two modes control which fields appear:
 | `partial` | string | `Card` | Default partial |
 | `templateRootPath` | string | | Custom template path |
 | `partialRootPath` | string | | Custom partial path |
+| `layoutRootPath` | string | | Custom layout path |
 | `css` | string | | CSS file (`EXT:` syntax) |
 | `js` | string | | JS module (`@vendor/module.js`) |
 | `columnsFromTCA` | bool | `1` | Use editor column selection |
 | `displayColumns` | string | | Comma-separated field list |
 | `itemsPerPage` | int | `100` | Records per page (`0` = no pagination) |
 
-## 10. Workspace Support
+## 11. Workspace Support
 
 Records display color-coded indicators in workspaces:
 
@@ -266,7 +325,7 @@ Workspace overlays applied via `BackendUtility::workspaceOL()`.
 
 > **Note:** Workspace support is experimental. Visual indicators work, but drag-and-drop within workspaces has limited testing.
 
-## 11. PSR-14 Events
+## 12. PSR-14 Events
 
 | Event | Purpose |
 |-------|---------|
@@ -305,7 +364,74 @@ $event->modifyViewMode(string $id, array $config): void
 $event->getViewModes(): array
 ```
 
-## 12. Architecture
+## 13. Extending
+
+### Override Templates via TypoScript
+
+```typoscript
+module.tx_recordsgridview {
+    view {
+        templateRootPaths.100 = EXT:your_extension/Resources/Private/Templates/RecordsListTypes/
+        partialRootPaths.100 = EXT:your_extension/Resources/Private/Partials/RecordsListTypes/
+        layoutRootPaths.100 = EXT:your_extension/Resources/Private/Layouts/RecordsListTypes/
+    }
+}
+```
+
+### Custom Record Actions
+
+Listen to `ModifyRecordListRecordActionsEvent` (TYPO3 Core event):
+
+```php
+#[AsEventListener]
+final class CustomRecordActionListener
+{
+    public function __invoke(ModifyRecordListRecordActionsEvent $event): void
+    {
+        if ($event->getTable() === 'tx_yourext_domain_model_item') {
+            $event->setAction(
+                action: '<a href="..." title="My Action"><span class="icon">...</span></a>',
+                actionName: 'myCustomAction',
+                group: 'primary',
+                after: 'edit'
+            );
+        }
+    }
+}
+```
+
+### Custom Thumbnail Logic
+
+```php
+class CustomThumbnailService extends ThumbnailService
+{
+    public function getThumbnailForRecord(string $table, array $record, string $imageField): ?FileInterface
+    {
+        if ($table === 'tx_yourext_domain_model_item') {
+            return $this->getFromExternalSource($record);
+        }
+        return parent::getThumbnailForRecord($table, $record, $imageField);
+    }
+}
+```
+
+Register override in `Services.yaml`:
+
+```yaml
+services:
+  Webconsulting\RecordsListTypes\Service\ThumbnailService:
+    class: YourVendor\YourExtension\Service\CustomThumbnailService
+```
+
+### JavaScript Hooks
+
+```javascript
+document.addEventListener('recordsGridview:viewModeChanged', (event) => {
+    console.log('View mode changed to:', event.detail.mode);
+});
+```
+
+## 14. Architecture
 
 ### Services
 
@@ -316,6 +442,13 @@ $event->getViewModes(): array
 | `ThumbnailService` | Resolves FAL references, generates thumbnail URLs |
 | `ViewModeResolver` | Determines active view from request/preference/TSconfig |
 | `ViewTypeRegistry` | Registry for built-in + custom view types |
+| `MiddlewareDiagnosticService` | Detects middleware interference with view rendering |
+
+### ViewHelpers
+
+| ViewHelper | Purpose |
+|------------|---------|
+| `RecordActionsViewHelper` | Renders cached record actions (`<gridview:recordActions>`) |
 
 ### CSS Architecture
 
@@ -336,7 +469,14 @@ Custom view types automatically receive `base.css`.
 | `GridViewActions.js` | Drag-drop, record actions, sorting, search, pagination, ARIA |
 | `view-switcher.js` | View mode switching with AJAX persistence |
 
-## 13. Common Recipes
+### AJAX Routes
+
+| Route | Purpose |
+|-------|---------|
+| `records_list_types_set_view_mode` | Persist user's view mode preference |
+| `records_list_types_get_view_mode` | Retrieve current view mode preference |
+
+## 15. Common Recipes
 
 ### Grid as Default for Media Folders
 
@@ -386,16 +526,78 @@ mod.web_list.gridView.table.sys_file_metadata {
 
 Install [typo3-records-list-examples](https://github.com/dirnbauer/typo3-records-list-examples) for 6 ready-to-use view types: Timeline, Catalog, Address Book, Event List, Gallery, Dashboard.
 
-## 14. Accessibility
+## 16. File Structure
+
+```
+records_list_types/
+├── Classes/
+│   ├── Constants.php
+│   ├── Controller/
+│   │   ├── Ajax/ViewModeController.php        # AJAX preference persistence
+│   │   └── RecordListController.php           # Main controller (XClass)
+│   ├── Event/
+│   │   └── RegisterViewModesEvent.php         # PSR-14: custom view registration
+│   ├── EventListener/
+│   │   ├── GridViewButtonBarListener.php      # Injects toggle buttons
+│   │   ├── GridViewQueryListener.php          # Query modification bridge
+│   │   └── GridViewRecordActionsListener.php  # Record action collection
+│   ├── Pagination/
+│   │   └── DatabasePaginator.php              # Paginator for pre-fetched records
+│   ├── Service/
+│   │   ├── GridConfigurationService.php       # TSconfig parsing
+│   │   ├── MiddlewareDiagnosticService.php    # Middleware diagnostics
+│   │   ├── RecordGridDataProvider.php         # Record fetching & enrichment
+│   │   ├── ThumbnailService.php               # FAL image processing
+│   │   ├── ViewModeResolver.php               # View mode determination
+│   │   └── ViewTypeRegistry.php               # View type management
+│   └── ViewHelpers/
+│       └── RecordActionsViewHelper.php        # Record actions rendering
+├── Configuration/
+│   ├── Backend/AjaxRoutes.php
+│   ├── Icons.php
+│   ├── JavaScriptModules.php
+│   ├── page.tsconfig
+│   └── Services.yaml
+├── Documentation/
+├── Resources/
+│   ├── Private/
+│   │   ├── Language/ (en, de)
+│   │   ├── Layouts/
+│   │   ├── Partials/ (Card, CompactRow, Pagination, RecordActions, SortingDropdown, TeaserCard, ViewSwitcher)
+│   │   └── Templates/ (CompactView, GenericView, GridView, TeaserView)
+│   └── Public/
+│       ├── Css/ (base, grid-view, compact-view, teaser-view, view-mode-toggle)
+│       ├── Icons/
+│       └── JavaScript/ (GridViewActions, view-switcher)
+├── Tests/ (Unit, Functional, Architecture)
+├── composer.json
+├── ext_emconf.php
+└── ext_localconf.php
+```
+
+## 17. Accessibility
 
 - **Keyboard drag-and-drop**: Space/Enter to grab, arrows to move, Space/Enter to drop, Escape to cancel
 - **ARIA live regions**: Announce drag state and position ("Position 3 of 12")
 - **Semantic markup**: `role="listbox"` on grids, `role="option"` on cards
 - **Focus management**: Visible focus indicators, proper tab order
 
-## 15. Dark Mode
+## 18. Dark Mode
 
 All views support TYPO3 dark mode via CSS custom properties:
 - `[data-color-scheme="dark"]` attribute support
 - `prefers-color-scheme: dark` system preference
 - Design tokens for all colors, shadows, and borders
+
+## 19. Security
+
+- **SQL Injection Prevention**: All queries use TYPO3's QueryBuilder with parameterized named parameters
+- **CSRF Protection**: AJAX endpoints use TYPO3's built-in token handling
+- **Access Control**: Full integration with TYPO3's backend user permissions and workspace restrictions
+- **Input Validation**: View mode, table names, UIDs, and sort parameters validated and sanitized
+- **XSS Prevention**: Fluid templates with proper escaping; no raw HTML output of user data
+
+## 20. Known Limitations
+
+- **Workspace support is experimental.** Visual indicators work, but drag-and-drop within workspaces has limited testing.
+- **Drag-and-drop accessibility**: Keyboard-based drag-and-drop is implemented with ARIA, but screen reader testing (NVDA, JAWS, VoiceOver) has been limited. Standard List View is a more tested fallback.
