@@ -66,6 +66,7 @@ Offline (workspace) versions live in the **same database table** as live records
 | `0` | Default: workspace modification of existing record |
 | `1` | New placeholder (live pendant, insertion point for sorting) |
 | `2` | Delete placeholder (record marked for deletion upon publish) |
+| `3` | Move placeholder (live placeholder, hidden online, linked via `t3ver_move_id`) |
 | `4` | Move pointer (workspace pendant of record to be moved) |
 
 ### The Overlay Mechanism
@@ -79,10 +80,10 @@ TYPO3 **always fetches live records first**, then overlays workspace versions on
 
 The `uid` of the live record is **always preserved** during overlay -- this keeps all references and links intact.
 
-### Publishing vs Swapping
+### Publishing Workflow
 
-- **Publish**: Draft content replaces live content. The old live version is archived.
-- **Swap**: Draft content and live content exchange places. The old live content moves into the workspace. Useful for **temporary campaigns** (e.g., Christmas special: swap in, then swap back after the holiday).
+- **Publish**: Draft content replaces live content through the workspace publish process.
+- TYPO3 v13/v14 use publish workflows; do not rely on legacy workspace-level swap mode.
 
 ## 2. CRITICAL: File/FAL Limitation
 
@@ -92,7 +93,7 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 
 - Files in `fileadmin/` live exclusively in the **LIVE workspace**
 - If you **overwrite** a file, the change affects **ALL workspaces immediately**
-- `sys_file` and `sys_file_reference` records **do** support versioning, but the **physical file** does not
+- `sys_file_reference` records are workspace-versioned; physical files and `sys_file` records are not versioned like content overlays
 - Replacing an image in a workspace content element may fail in preview (Forge #88021)
 
 ### The Predictable Filename Security Problem
@@ -206,7 +207,6 @@ Use this checklist to verify your workspace setup is complete:
 - [ ] Notification settings configured per stage
 - [ ] Mountpoints set if workspace should be restricted to specific page trees
 - [ ] Publish date set if auto-publish is desired
-- [ ] "Swap modes" configured (Other tab)
 - [ ] "Publish access" configured (restrict publishing to owners if needed)
 
 #### Tables (TCA)
@@ -303,8 +303,6 @@ final class SetupWorkspaceCommand extends Command
             'adminusers' => 'be_groups_' . $groupUid,
             'members' => 'be_groups_' . $groupUid,
             // Stages: default stages (Editing, Ready to publish) are always available
-            // Swap mode: 0 = publish (default), 1 = swap
-            'swap_modes' => 0,
             // Publish access: 0 = no restriction, 1 = only publish-stage content, 2 = only owners can publish
             'publish_access' => 0,
             // Allow editing of non-versionable records (live edit)
@@ -367,7 +365,7 @@ bin/typo3 workspace:setup
 ```sql
 -- ============================================================
 -- LOCAL DDEV ONLY - Workspace base configuration
--- Run: ddev mysql < setup-workspace.sql
+-- Save this block as setup-workspace.sql, then run: ddev mysql < setup-workspace.sql
 -- ============================================================
 
 -- 1. Create backend user group for workspace editors
@@ -387,14 +385,13 @@ VALUES (
 SET @group_uid = LAST_INSERT_ID();
 
 -- 2. Create custom workspace
-INSERT INTO sys_workspace (pid, title, description, adminusers, members, swap_modes, publish_access, tstamp, crdate)
+INSERT INTO sys_workspace (pid, title, description, adminusers, members, publish_access, tstamp, crdate)
 VALUES (
     0,
     'Staging Workspace',
     'Content staging workspace for preview and review before publishing',
     CONCAT('be_groups_', @group_uid),
     CONCAT('be_groups_', @group_uid),
-    0,  -- 0 = publish mode (not swap)
     0,  -- 0 = no publish restriction
     UNIX_TIMESTAMP(),
     UNIX_TIMESTAMP()
@@ -965,7 +962,7 @@ SELECT
     GROUP_CONCAT(bg.title SEPARATOR ', ') AS groups,
     GROUP_CONCAT(bg.workspace_perms SEPARATOR ', ') AS group_ws_perms
 FROM be_users bu
-LEFT JOIN be_users_groups_mm mm ON bu.uid = mm.uid_local
+LEFT JOIN be_users_be_groups_mm mm ON bu.uid = mm.uid_local
 LEFT JOIN be_groups bg ON mm.uid_foreign = bg.uid
 WHERE bu.deleted = 0
   AND bu.disable = 0
@@ -1240,9 +1237,10 @@ final class WorkspaceAwareTest extends FunctionalTestCase
     }
 
     /**
-     * Test: Publishing workspace makes content live.
+     * Test: Workspace swap command makes staged content live for a record pair.
+     * Note: this demonstrates DataHandler swap semantics for record-level version commands.
      */
-    public function testPublishWorkspaceMakesContentLive(): void
+    public function testSwapWorkspaceRecordPairMakesContentLive(): void
     {
         $this->setWorkspaceId(1);
 
@@ -1380,7 +1378,7 @@ bin/phpunit -c Build/phpunit-functional.xml \
 
 **Key points:**
 - `pages` and `tt_content` have `versioningWS = true` by default
-- FAL relations (images, media) are versioned via `sys_file_reference` overlays (physical files are not versioned); MM relations (categories) via their MM tables; simple fields (links, text) are versioned directly in the record overlay
+- FAL relations (images, media) are versioned via `sys_file_reference` overlays (physical files are not versioned); MM relations (categories) are handled through parent record overlays/DataHandler relation handling; simple fields (links, text) are versioned directly in the record overlay
 - Page tree shows modified pages with a highlighting indicator
 - The Workspaces module gives a full overview of all changes
 
@@ -1402,15 +1400,15 @@ options.workspaces.previewPageId.tx_news_domain_model_news = 42
 - Related news: MM relations are handled by DataHandler
 - News images: FAL references are versioned, but **physical files are not** (see Section 2)
 
-### Campaign/Seasonal Content with Swap Mode
+### Campaign/Seasonal Content with Scheduled Publish
 
 For temporary content (Christmas, Black Friday, product launches):
 
-1. Create workspace with **swap mode** enabled (workspace record > Other tab > Swap modes)
-2. Prepare all campaign content in the workspace
-3. At campaign start: **swap** workspace to live
-4. Old live content moves into the workspace
-5. At campaign end: **swap back** to restore original content
+1. Prepare all campaign content in the workspace
+2. Send changes to review and approval stage
+3. Publish (or schedule auto-publish) at campaign start
+4. Create a follow-up workspace change set to restore baseline content after campaign end
+5. Publish the rollback change set when the campaign is over
 
 ### Preview Links for External Reviewers
 
