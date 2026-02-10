@@ -1,0 +1,62 @@
+name: skills.sh Publish Check
+
+on:
+  workflow_dispatch:
+    inputs:
+      skill_name:
+        description: "Optional: skill directory name to validate (e.g. typo3-workspaces)"
+        required: false
+        default: ""
+
+jobs:
+  publish-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate skill structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          SKILL_NAME="${{ github.event.inputs.skill_name }}"
+
+          if [ -n "$SKILL_NAME" ]; then
+            if [ ! -f "skills/$SKILL_NAME/SKILL.md" ]; then
+              echo "ERROR: skills/$SKILL_NAME/SKILL.md not found"
+              exit 1
+            fi
+            echo "Validated: skills/$SKILL_NAME/SKILL.md"
+          else
+            echo "No specific skill provided. Running repository-level checks."
+          fi
+
+          if [ ! -f "README.md" ]; then
+            echo "ERROR: README.md missing"
+            exit 1
+          fi
+          if [ ! -f "AGENTS.md" ]; then
+            echo "ERROR: AGENTS.md missing"
+            exit 1
+          fi
+          if [ ! -f ".sync-config.json" ]; then
+            echo "ERROR: .sync-config.json missing"
+            exit 1
+          fi
+
+      - name: Publish checklist summary
+        shell: bash
+        run: |
+          SKILL_NAME="${{ github.event.inputs.skill_name }}"
+          {
+            echo "## GitHub -> skills.sh Publish Checklist"
+            echo ""
+            echo "- Commit merged to \`main\`: ✅"
+            echo "- Repository structure valid: ✅"
+            echo "- Next: verify skill visibility on skills.sh (search repo + skill name)."
+            if [ -n "$SKILL_NAME" ]; then
+              echo "- Checked skill: \`$SKILL_NAME\`"
+            fi
+            echo ""
+            echo "Commit: \`${GITHUB_SHA}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -40,7 +40,7 @@ Add a new entry to the `skills` array:
 gh workflow run sync-skills.yml
 
 # Or sync locally
-./scripts/sync-skills.sh
+./update.sh --sync-only
 ```
 
 ## Automatic Synchronization
@@ -98,4 +98,25 @@ skills/
 2. **Review Changes**: Always review sync PRs before merging
 3. **Local Overrides**: Prefix local skills with `webconsulting-` to avoid conflicts
 4. **Documentation**: Keep skill descriptions concise for context efficiency
+
+## Deterministic Publish Flow (GitHub -> skills.sh)
+
+Use this checklist whenever you add or update a local skill and want predictable publication behavior:
+
+1. **Commit and push** your skill change to `main`.
+2. **Run local sync** (if needed):
+   ```bash
+   ./update.sh --sync-only
+   ```
+3. **Run install** to refresh generated mirrors:
+   ```bash
+   ./install.sh
+   ```
+4. **Commit generated changes** (`.cursor/rules/*.mdc`, index docs) and push.
+5. **Run GitHub workflow** `skills-sh-publish-check.yml` (manual dispatch) to validate repository state.
+6. **Verify on skills.sh** by searching the repository + skill name.
+
+Notes:
+- This repository is the source of truth.
+- `sync-skills.yml` syncs upstream imported skills only; it does not publish to skills.sh directly.
 

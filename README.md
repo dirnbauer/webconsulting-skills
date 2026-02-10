@@ -1951,6 +1951,26 @@ composer skills:install
 ./update.sh --help       # Show all options
 ```
 
+### GitHub Push -> skills.sh Publish (Checklist)
+
+Use this simple flow to keep publication deterministic:
+
+```bash
+# 1) Push skill changes
+git push origin main
+
+# 2) Refresh imported skills if needed
+./update.sh --sync-only
+
+# 3) Regenerate local mirrors
+./install.sh
+
+# 4) Commit generated files and push
+git add -A && git commit -m "chore: refresh generated skill mirrors" && git push
+```
+
+Then run the GitHub workflow `skills-sh-publish-check.yml` (manual dispatch) and verify your skill on skills.sh by searching for repository + skill name.
+
 **Syncing External Skills:**
 
 The `.sync-config.json` file defines external skill sources that are automatically synchronized:
