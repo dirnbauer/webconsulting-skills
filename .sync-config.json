@@ -103,6 +103,14 @@
       "path": "skills",
       "enabled": false,
       "note": "Local version with supplements preferred"
+    },
+    {
+      "name": "skill-creator",
+      "source": "https://github.com/anthropics/skills.git",
+      "branch": "main",
+      "path": "skills/skill-creator",
+      "enabled": false,
+      "note": "Local copy installed - enable to sync upstream updates"
     }
   ],
   "syncSchedule": "weekly",

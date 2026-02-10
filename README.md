@@ -13,7 +13,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | **Security & Enterprise** | 4 skills | OWASP audits, deepfake detection, OpenSSF Scorecard, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
-| **PHP & Tools** | 4 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping |
+| **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
 | **Frontend & Design** | 6 skills | UI patterns, design systems, accessibility, OG images, React/Next.js performance, creative frontend design |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
@@ -200,6 +200,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `web-design-guidelines` | web design, accessibility, a11y, wcag, aria, semantic html | "Review this component for accessibility issues" or "Audit my form for WCAG" |
 | `document-processing` | pdf, docx, word, pptx, powerpoint, xlsx, excel | "Extract text from this PDF" or "Create an Excel model with formulas" |
 | `firecrawl` | scrape, crawl, search web, research, fetch url, documentation | "Research competitor pricing pages" or "Scrape API docs" |
+| `skill-creator` | create skill, new skill, skill creator, package skill, SKILL.md | "Create a new skill for database migrations" or "Package my skill" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -1942,6 +1943,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | `cli-tools` | CLI tool management and auto-installation | Netresearch |
 | `context7` | Library documentation lookup via REST API | Netresearch |
 | `firecrawl` | LLM-optimized web scraping, search, and research | Firecrawl |
+| `skill-creator` | Guide for creating and packaging Agent Skills | Anthropic |
 | **Database** | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
 | **Marketing** | | |
@@ -2148,7 +2150,7 @@ The following repositories are the source for skills in this collection:
 - https://github.com/mendableai/firecrawl
 - CLI: https://github.com/mendableai/firecrawl-cli
 
-### Anthropic (Document Processing & Frontend Design)
+### Anthropic (Document Processing, Frontend Design & Skill Creator)
 - https://github.com/anthropics/skills
 
 ## Contributing

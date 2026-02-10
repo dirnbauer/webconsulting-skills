@@ -72,12 +72,12 @@ See: [Firecrawl](https://firecrawl.dev/) | [GitHub](https://github.com/mendablea
 
 ---
 
-We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing 
-and frontend design skills. The `document-processing` and `frontend-design` skills are adapted 
-from their open-source repository:
+We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing, 
+frontend design, and skill creator skills. The `document-processing`, `frontend-design`, and 
+`skill-creator` skills are adapted from their open-source repository:
 https://github.com/anthropics/skills
 
-**Copyright (c) Anthropic** - Document processing and frontend design (MIT License)
+**Copyright (c) Anthropic** - Document processing, frontend design, and skill creation (Apache-2.0 / MIT License)
 
 ---
 
@@ -135,6 +135,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
 | `firecrawl` | LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
+| `skill-creator` | Guide for creating and packaging effective Agent Skills (Anthropic) | 1.0.0 | create skill, new skill, skill creator, package skill, SKILL.md |
 | **Frontend & Design** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
@@ -237,6 +238,11 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 - **firecrawl**: LLM-optimized web scraping, search, and research
   - Clean markdown output optimized for LLM context windows
   - JavaScript rendering, parallel scraping, time/location filters
+- **skill-creator**: Guide for creating effective Agent Skills (from Anthropic)
+  - `scripts/init_skill.py`: Initialize new skill from template
+  - `scripts/package_skill.py`: Package and validate skill for distribution
+  - `references/workflows.md`: Sequential and conditional workflow patterns
+  - `references/output-patterns.md`: Template and example output patterns
 
 ### Frontend & Design
 - **webconsulting-branding**: Design tokens, colors, typography, MDX components
@@ -737,6 +743,14 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Use SWR for client-side data fetching"
 - "Parallelize server component fetches"
 
+**🛠️ Skill Creation (skill-creator)**
+- "Create a new skill for database migrations"
+- "Initialize a skill template for my custom workflow"
+- "Package my skill for distribution"
+- "Validate my SKILL.md frontmatter"
+- "Help me structure a skill with references and scripts"
+- "What's the best pattern for organizing a multi-domain skill?"
+
 **🔥 Web Research & Scraping (firecrawl)**
 - "Search the web for Next.js 15 new features and summarize"
 - "Scrape the Stripe API documentation for webhooks"
@@ -988,6 +1002,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
 | document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
 | firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
+| skill-creator | ✓ | ✓ | ✓ | ✓ | ✓ |
 | android-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ios-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ipados-design | ✓ | ✓ | ✓ | ✓ | ✓ |
