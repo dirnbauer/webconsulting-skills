@@ -14,11 +14,6 @@
     ],
     "authors": [
         {
-            "name": "Netresearch DTT GmbH",
-            "email": "plugins@netresearch.de",
-            "role": "Original skill methodology"
-        },
-        {
             "name": "webconsulting.at",
             "homepage": "https://webconsulting.at",
             "role": "Adaptation and additional skills"

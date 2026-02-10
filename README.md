@@ -34,12 +34,6 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 
 ---
 
-> **Attribution:** The majority of skills in this repository are derived from the excellent work by
-> **[Netresearch DTT GmbH](https://github.com/netresearch)**. We recommend using their original
-> repositories for the latest updates. A few additional skills are specific to webconsulting.at.
-
----
-
 ## 🚀 Unified Agent Skills (Cursor + Claude Code)
 
 Both **Cursor** and **Claude Code** now share the same skills location: `~/.claude/skills/`
@@ -112,17 +106,6 @@ cd webconsulting-skills
 
 > The installer auto-detects if it's running from a vendor directory, project subdirectory, or standalone clone, and adjusts paths accordingly.
 
-### Alternative: Composer Agent Skill Plugin
-
-For automatic skill loading in PHP projects, use Netresearch's Composer plugin:
-
-```bash
-composer require --dev netresearch/composer-agent-skill-plugin
-```
-
-This plugin automatically discovers and loads agent skills from your Composer dependencies.
-See: https://github.com/netresearch/composer-agent-skill-plugin
-
 ### Alternative: Composer from GitHub (VCS)
 
 Install this skills package directly from GitHub without Packagist.
@@ -181,6 +164,9 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
+| `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
+| `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
+| `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
 | `ai-search-optimization` | aeo, geo, ai search, chatgpt, llms.txt | "Optimize for ChatGPT and Perplexity citations" |
 | `security-audit` | security audit, owasp, vulnerabilities | "Audit my controller for security issues" |
 | `enterprise-readiness` | enterprise, openssf, slsa | "Assess my project for enterprise readiness" |
@@ -199,8 +185,19 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `frontend-design` | frontend, design, creative, beautiful, distinctive, aesthetics | "Create a distinctive landing page" or "Design a dark tech hero section" |
 | `web-design-guidelines` | web design, accessibility, a11y, wcag, aria, semantic html | "Review this component for accessibility issues" or "Audit my form for WCAG" |
 | `document-processing` | pdf, docx, word, pptx, powerpoint, xlsx, excel | "Extract text from this PDF" or "Create an Excel model with formulas" |
-| `firecrawl` | scrape, crawl, search web, research, fetch url, documentation | "Research competitor pricing pages" or "Scrape API docs" |
 | `skill-creator` | create skill, new skill, skill creator, package skill, SKILL.md | "Create a new skill for database migrations" or "Package my skill" |
+| `android-design` | android, material design, jetpack compose, material you | "Review my Android app for Material Design" |
+| `ios-design` | ios, iphone, swiftui, dynamic type, dark mode | "Review my iOS app for HIG compliance" |
+| `ipados-design` | ipad, ipados, split view, stage manager, sidebar | "Add keyboard shortcuts to my iPad app" |
+| `macos-design` | macos, mac app, appkit, menu bar, toolbar | "Create a Mac app with proper menu bar" |
+| `tvos-design` | tvos, apple tv, siri remote, focus navigation | "Design 10-foot UI for Apple TV" |
+| `visionos-design` | visionos, vision pro, spatial computing | "Design spatial UI for Vision Pro" |
+| `watchos-design` | watchos, apple watch, complications, digital crown | "Create glanceable watchOS interface" |
+| `web-platform-design` | wcag, web platform, responsive, accessibility, i18n | "Audit my web app for WCAG 2.2" |
+| `ab-testing` | ab test, split test, experiment, hypothesis | "Design A/B test for my homepage" |
+| `cro-funnel` | cro funnel, form cro, signup flow, onboarding, paywall | "Optimize my signup flow" |
+| `programmatic-seo` | programmatic seo, template pages, directory, location pages | "Build [service] in [city] pages at scale" |
+| `launch-strategy` | product launch, product hunt, gtm, beta launch | "Plan my Product Hunt launch" |
 
 ### Example Prompts (Copy & Paste)
 
@@ -1673,148 +1670,6 @@ I need to initialize an SDK once per app load, not per render. Show me the init-
 
 ---
 
-#### 🔥 Firecrawl (Web Research & Scraping)
-
-The `firecrawl` skill provides **LLM-optimized web scraping** that returns clean markdown instead of messy HTML. It replaces built-in web tools with superior accuracy, JavaScript rendering, and parallel operations.
-
-**Why it's cool:** Built-in web tools often fail on JavaScript-heavy sites, return cluttered HTML, or get blocked. Firecrawl handles all of this and returns markdown that fits perfectly in LLM context windows. Plus, it parallelizes operations automatically.
-
-**Web Search & Research**
-
-```
-Search the web for "Next.js 15 new features" and summarize the top 5 results.
-```
-
-```
-Find the latest AI news from the past week. Use time-filtered search.
-```
-
-```
-Research competitor pricing pages for "headless CMS" products. Search, scrape the results, and compare.
-```
-
-```
-Search for "TYPO3 v14 release notes" and scrape the official documentation.
-```
-
-```
-Find GitHub repositories for "React component library" and analyze their README files.
-```
-
-**Documentation & API Reference**
-
-```
-Scrape the Stripe API documentation for webhooks and summarize the key endpoints.
-```
-
-```
-Fetch the latest React documentation on Server Components and explain how they work.
-```
-
-```
-Get the Tailwind CSS v4 migration guide and list the breaking changes.
-```
-
-```
-Scrape the Supabase docs for Row Level Security and create a cheatsheet.
-```
-
-**Site Mapping & Crawling**
-
-```
-Map all URLs on docs.example.com and find pages related to "authentication".
-```
-
-```
-Discover all blog posts on this site and list them by date.
-```
-
-```
-Find all API endpoints documented on this site.
-```
-
-**Content Extraction**
-
-```
-Scrape this article and extract just the main content, removing navigation and ads.
-```
-
-```
-Get all links from this page and categorize them by domain.
-```
-
-```
-Fetch this JavaScript-heavy SPA page (wait 3 seconds for it to render).
-```
-
-```
-Extract all code examples from this documentation page.
-```
-
-**Parallel Research (Why Firecrawl is Fast)**
-
-```
-I have 10 competitor websites. Scrape all their pricing pages in parallel and compare features.
-```
-
-```
-Search for reviews of these 5 products, scrape the top results for each, and summarize.
-```
-
-```
-Fetch documentation from 3 different libraries in parallel and compare their approaches.
-```
-
-**Combining with Analysis**
-
-```
-Search for "serverless database options 2024", scrape the top 10 results, and create a comparison table.
-```
-
-```
-Research how companies implement authentication. Search for case studies, scrape them, and identify patterns.
-```
-
-```
-Find the top 5 articles about React performance, scrape them, and compile the best tips.
-```
-
-**News & Trends**
-
-```
-Search for tech news from today about "AI agents" and summarize the headlines.
-```
-
-```
-Find recent articles about TYPO3 and list what's new in the community.
-```
-
-```
-Search for the latest security vulnerabilities disclosed this week.
-```
-
-**Local Search**
-
-```
-Search for "software development agencies" in Vienna, Austria and list the top results.
-```
-
-```
-Find tech meetups in Berlin, Germany.
-```
-
-**Image & Media Search**
-
-```
-Search for "dashboard UI design" images and list the top results with URLs.
-```
-
-```
-Find infographics about "microservices architecture".
-```
-
----
-
 #### 🔬 Media Forensics & Deepfake Detection
 
 **Verify Media Authenticity:**
@@ -1908,9 +1763,6 @@ grep -r "DataHandler" ~/.claude/skills/
 5. **Check the skill source** - Read `~/.claude/skills/*/SKILL.md` for full documentation
 6. **View in settings** - Go to `Cursor Settings → Rules` to see all discovered skills
 
-> **Note:** We bundled [Netresearch's excellent skills](https://github.com/netresearch) for quick installation.
-> For deep methodology and the latest updates, check their original repositories.
-
 ## What's Included
 
 ### Agent Skills
@@ -1919,30 +1771,32 @@ grep -r "DataHandler" ~/.claude/skills/
 |-------|---------|--------|
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
-| `typo3-datahandler` | Transactional database operations via DataHandler | Netresearch |
-| `typo3-ddev` | Local DDEV development environment | Netresearch |
-| `typo3-testing` | Unit, functional, E2E, architecture testing | Netresearch |
-| `typo3-conformance` | Extension standards compliance checker | Netresearch |
-| `typo3-docs` | Documentation using docs.typo3.org standards | Netresearch |
-| `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | Netresearch |
+| `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
+| `typo3-ddev` | Local DDEV development environment | webconsulting |
+| `typo3-testing` | Unit, functional, E2E, architecture testing | webconsulting |
+| `typo3-conformance` | Extension standards compliance checker | webconsulting |
+| `typo3-docs` | Documentation using docs.typo3.org standards | webconsulting |
+| `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | webconsulting |
 | **Upgrade & Migration** | | |
-| `typo3-rector` | TYPO3 upgrade patterns with Rector | Netresearch |
-| `typo3-update` | TYPO3 v13/v14 migration guide (prefers v14) | Netresearch |
-| `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | Netresearch |
+| `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
+| `typo3-update` | TYPO3 v13/v14 migration guide (prefers v14) | webconsulting |
+| `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | webconsulting |
 | **Security & Operations** | | |
-| `typo3-security` | Security hardening checklist | Netresearch |
-| `typo3-seo` | SEO configuration with EXT:seo | Netresearch |
+| `typo3-security` | Security hardening checklist | webconsulting |
+| `typo3-seo` | SEO configuration with EXT:seo | webconsulting |
+| `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
+| `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
+| `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
 | `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
-| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
+| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | webconsulting |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |
 | `deepfake-detection` | Multimodal media authentication, synthetic media forensics | webconsulting |
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
-| `enterprise-readiness` | OpenSSF, SLSA, supply chain security | Netresearch |
+| `enterprise-readiness` | OpenSSF, SLSA, supply chain security | webconsulting |
 | **PHP & Tools** | | |
-| `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
-| `cli-tools` | CLI tool management and auto-installation | Netresearch |
-| `context7` | Library documentation lookup via REST API | Netresearch |
-| `firecrawl` | LLM-optimized web scraping, search, and research | Firecrawl |
+| `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | webconsulting |
+| `cli-tools` | CLI tool management and auto-installation | webconsulting |
+| `context7` | Library documentation lookup via REST API | webconsulting |
 | `skill-creator` | Guide for creating and packaging Agent Skills | Anthropic |
 | **Database** | | |
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
@@ -1964,6 +1818,20 @@ grep -r "DataHandler" ~/.claude/skills/
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) | webconsulting |
 | `legal-impressum/EU` | EU eCommerce Directive compliance | webconsulting |
 | `legal-impressum/WORLD` | International (UK, CH, US) | webconsulting |
+| **Platform Design** | | |
+| `android-design` | Material Design 3, Jetpack Compose, dynamic color | ehmo |
+| `ios-design` | Apple HIG for iPhone, SwiftUI, Dynamic Type | ehmo |
+| `ipados-design` | Apple HIG for iPad, multitasking, pointer support | ehmo |
+| `macos-design` | Apple HIG for Mac, menu bar, toolbars, shortcuts | ehmo |
+| `tvos-design` | Apple HIG for Apple TV, focus navigation, 10-foot UI | ehmo |
+| `visionos-design` | Apple HIG for Vision Pro, spatial UI, eye/hand input | ehmo |
+| `watchos-design` | Apple HIG for Apple Watch, complications, glanceable UI | ehmo |
+| `web-platform-design` | WCAG 2.2, responsive design, forms, typography, i18n | ehmo |
+| **CRO & Growth** | | |
+| `cro-funnel` | Full-funnel CRO: form, signup, onboarding, popup, paywall | AITYTech |
+| `programmatic-seo` | SEO pages at scale with templates and data | AITYTech |
+| `launch-strategy` | Product launches, Product Hunt, go-to-market | AITYTech |
+| `ab-testing` | A/B test design, sample size, statistical significance | AITYTech |
 
 ### Skill Supplements
 
@@ -2007,8 +1875,8 @@ Most TYPO3 skills include additional supplement files:
 │  │ Video & Animation   │  │ Instruc-  │  │ Hetzner       │  │
 │  │ Security & Ops      │  │ tions     │  │ MySQL         │  │
 │  │ PHP & Tools         │  │           │  │ GitHub        │  │
-│  │ Frontend & Design   │  │           │  │ Firecrawl     │  │
-│  │ Legal & Compliance  │  │           │  │ Context7      │  │
+│  │ Frontend & Design   │  │           │  │ Context7      │  │
+│  │ Legal & Compliance  │  │           │  │               │  │
 │  └─────────────────────┘  └───────────┘  └───────────────┘  │
 └─────────────────────────────────────────────────────────────┘
 
@@ -2118,19 +1986,6 @@ Skills in this collection cover:
 
 The following repositories are the source for skills in this collection:
 
-### Netresearch (TYPO3 & PHP)
-- https://github.com/netresearch/typo3-ddev-skill
-- https://github.com/netresearch/typo3-testing-skill
-- https://github.com/netresearch/typo3-conformance-skill
-- https://github.com/netresearch/typo3-docs-skill
-- https://github.com/netresearch/typo3-core-contributions-skill
-- https://github.com/netresearch/typo3-extension-upgrade-skill
-- https://github.com/netresearch/security-audit-skill
-- https://github.com/netresearch/enterprise-readiness-skill
-- https://github.com/netresearch/php-modernization-skill
-- https://github.com/netresearch/cli-tools-skill
-- https://github.com/netresearch/context7-skill
-
 ### Supabase (Postgres)
 - https://github.com/supabase/agent-skills
 
@@ -2145,10 +2000,6 @@ The following repositories are the source for skills in this collection:
 
 ### OpenHands (AI Readiness)
 - https://github.com/OpenHands/skills
-
-### Firecrawl (Web Scraping)
-- https://github.com/mendableai/firecrawl
-- CLI: https://github.com/mendableai/firecrawl-cli
 
 ### Anthropic (Document Processing, Frontend Design & Skill Creator)
 - https://github.com/anthropics/skills
@@ -2166,12 +2017,7 @@ MIT License - webconsulting.at
 
 ## Acknowledgements
 
-We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their
-outstanding contributions to the TYPO3 community. Their excellent methodology and best practices
-have been invaluable in shaping these guidelines.
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
 
 ---
 
@@ -2208,10 +2054,3 @@ open-source repository: https://github.com/vercel-labs/agent-skills
 **Copyright (c) Vercel, Inc.** - React and Next.js performance optimization (MIT License)
 Adapted by webconsulting.at for this skill collection
 
----
-
-We also thank **[Firecrawl](https://firecrawl.dev/)** by Mendable AI for their excellent web scraping
-and research tools. The `firecrawl` skill provides LLM-optimized content extraction.
-
-**Copyright (c) Mendable AI** - Web scraping and content extraction
-See: [Firecrawl](https://firecrawl.dev/) | [GitHub](https://github.com/mendableai/firecrawl)

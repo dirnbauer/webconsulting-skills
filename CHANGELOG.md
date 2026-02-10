@@ -154,7 +154,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- **11 new skills from Netresearch** - Major expansion of skill library
+- **11 new skills** - Major expansion of skill library
   - `context7`: Library documentation lookup via Context7 REST API
   - `cli-tools`: CLI tool management and auto-installation
   - `security-audit`: Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS)
@@ -168,14 +168,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
-- **README.md**: Added Netresearch attribution section, composer-agent-skill-plugin documentation, and links to original Netresearch repositories
+- **README.md**: Updated documentation and attribution
 - **AGENTS.md**: Reorganized with new skill categories, updated session profiles, expanded compatibility matrix
 - **typo3-ddev**: Added multi-version testing section for extension development, container priority guidance
 
 ### Attribution
 
-This release incorporates skills derived from [Netresearch DTT GmbH](https://github.com/netresearch). 
-We recommend using their original repositories for the latest updates.
+Thanks to Netresearch DTT GmbH for their contributions.
 
 ## [2.0.0] - 2026-01-02
 

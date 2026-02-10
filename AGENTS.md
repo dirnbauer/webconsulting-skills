@@ -16,16 +16,7 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 
 ## Acknowledgements
 
-We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their
-outstanding contributions to the TYPO3 community. Their excellent methodology and best practices
-have been invaluable in shaping these guidelines.
-
-The majority of skills in this repository are derived from Netresearch's open-source skill
-repositories. We recommend checking their original repositories for the latest updates:
-https://github.com/netresearch
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
 
 ---
 
@@ -61,14 +52,6 @@ are adapted from their open-source repository:
 https://github.com/vercel-labs/agent-skills
 
 **Copyright (c) Vercel, Inc.** - React and Next.js performance optimization (MIT License)
-
----
-
-We also thank **[Firecrawl](https://firecrawl.dev/)** by Mendable AI for their excellent web
-scraping and research tools. The `firecrawl` skill provides LLM-optimized content extraction.
-
-**Copyright (c) Mendable AI** - Web scraping and content extraction  
-See: [Firecrawl](https://firecrawl.dev/) | [GitHub](https://github.com/mendableai/firecrawl)
 
 ---
 
@@ -134,7 +117,6 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
-| `firecrawl` | LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
 | `skill-creator` | Guide for creating and packaging effective Agent Skills (Anthropic) | 1.0.0 | create skill, new skill, skill creator, package skill, SKILL.md |
 | **Frontend & Design** | | | |
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
@@ -177,6 +159,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
+| `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 1.0.0 | workspace, versioning, staging, publishing, review, draft content |
 
 ## Skill Categories
 
@@ -235,9 +218,6 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
-- **firecrawl**: LLM-optimized web scraping, search, and research
-  - Clean markdown output optimized for LLM context windows
-  - JavaScript rendering, parallel scraping, time/location filters
 - **skill-creator**: Guide for creating effective Agent Skills (from Anthropic)
   - `scripts/init_skill.py`: Initialize new skill from template
   - `scripts/package_skill.py`: Package and validate skill for distribution
@@ -345,6 +325,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - `SKILL-EXAMPLES.md`: Multi-step shop form with Austrian legal types, conditions, translations, DDEV SQL + DataHandler CLI
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
+- **typo3-workspaces**: Workspaces versioning, staging, publishing workflows, and debugging
 
 ## TYPO3 Skill Supplements
 
@@ -751,20 +732,6 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Help me structure a skill with references and scripts"
 - "What's the best pattern for organizing a multi-domain skill?"
 
-**🔥 Web Research & Scraping (firecrawl)**
-- "Search the web for Next.js 15 new features and summarize"
-- "Scrape the Stripe API documentation for webhooks"
-- "Research competitor pricing pages and compare features"
-- "Fetch the latest React documentation on Server Components"
-- "Map all URLs on docs.example.com and find API pages"
-- "Get the Tailwind CSS v4 migration guide"
-- "Search for tech news from today about AI agents"
-- "Scrape this JavaScript-heavy SPA page (wait for render)"
-- "Find GitHub repositories for headless CMS"
-- "Search for reviews of these 5 products in parallel"
-- "Extract all code examples from this documentation page"
-- "Find the latest security vulnerabilities disclosed this week"
-
 **🎨 Frontend Design & Creative UI (frontend-design)**
 - "Create a distinctive landing page that doesn't look AI-generated"
 - "Design a dark tech hero section with gradient mesh backgrounds"
@@ -950,8 +917,8 @@ Active: `react-best-practices`, `ui-design-patterns`, `og-image`
 Use case: React/Next.js performance optimization, bundle size reduction, data fetching patterns, server components
 
 ### Research & Documentation Session
-Active: `firecrawl`, `context7`, `ai-search-optimization`  
-Use case: Web research, API documentation lookup, competitor analysis, content extraction, documentation crawling
+Active: `context7`, `ai-search-optimization`  
+Use case: API documentation lookup, competitor analysis, documentation crawling
 
 ### Android Development Session
 Active: `android-design`, `ui-design-patterns`, `react-best-practices`  
@@ -983,6 +950,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | | ✓ | | ✓ | ✓ |
+| typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
@@ -1001,7 +969,6 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | frontend-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
 | document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
-| firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
 | skill-creator | ✓ | ✓ | ✓ | ✓ | ✓ |
 | android-design | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ios-design | ✓ | ✓ | ✓ | ✓ | ✓ |

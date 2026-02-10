@@ -504,12 +504,4 @@ public function __construct(
 
 ## Credits & Attribution
 
-This skill is based on the excellent TYPO3 best practices and methodology developed by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**. We are deeply grateful for their
-outstanding contributions to the TYPO3 community and their commitment to sharing knowledge.
-
-Netresearch has been a leading force in TYPO3 development, and their expertise has been
-invaluable in shaping these guidelines. Thank you, Netresearch, for your exceptional work!
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

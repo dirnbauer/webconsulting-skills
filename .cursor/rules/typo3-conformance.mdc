@@ -17,6 +17,8 @@ metadata:
 
 Evaluate TYPO3 extensions for standards compliance, architecture patterns, and best practices.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## Skill Delegation
 
 | Skill | Use For |
@@ -395,10 +397,4 @@ parameters:
 
 ## Credits & Attribution
 
-This skill is based on the excellent work by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
-
-Original repository: https://github.com/netresearch/typo3-conformance-skill
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

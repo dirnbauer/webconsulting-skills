@@ -14,6 +14,8 @@ metadata:
 > **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
 > All code examples in this skill are designed to work on both TYPO3 v13 and v14.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## 1. The Prime Directive
 
 **NEVER** use raw SQL (`INSERT`, `UPDATE`, `DELETE`) for `pages`, `tt_content`, or any TCA-configured table.
@@ -566,12 +568,4 @@ $EM_CONF[$_EXTKEY] = [
 
 ## Credits & Attribution
 
-This skill is based on the excellent TYPO3 best practices and methodology developed by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**. We are deeply grateful for their
-outstanding contributions to the TYPO3 community and their commitment to sharing knowledge.
-
-Netresearch has been a leading force in TYPO3 development, and their expertise has been
-invaluable in shaping these guidelines. Thank you, Netresearch, for your exceptional work!
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

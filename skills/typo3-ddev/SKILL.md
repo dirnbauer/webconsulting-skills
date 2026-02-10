@@ -567,10 +567,4 @@ ddev exec -d /var/www/html/v13 vendor/bin/typo3 cache:flush
 
 ## Credits & Attribution
 
-This skill is based on the excellent TYPO3 best practices and methodology developed by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
-
-Original repository: https://github.com/netresearch/typo3-ddev-skill
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

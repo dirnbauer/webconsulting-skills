@@ -19,6 +19,8 @@ metadata:
 > **Compatibility:** TYPO3 v13.x and v14.x with Powermail 13.x
 > All code examples target PHP 8.2+ and TYPO3 v13/v14.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 > **Supplements:**
 > - [SKILL-CONDITIONS.md](SKILL-CONDITIONS.md) - Conditional field/page visibility (powermail_cond)
 > - [SKILL-PHP84.md](SKILL-PHP84.md) - PHP 8.4 patterns (property hooks, asymmetric visibility, new array functions)

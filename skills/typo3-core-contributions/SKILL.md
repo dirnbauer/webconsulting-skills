@@ -290,10 +290,4 @@ Build/Scripts/runTests.sh -s cgl
 
 ## Credits & Attribution
 
-This skill is based on the excellent work by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
-
-Original repository: https://github.com/netresearch/typo3-core-contributions-skill
-
-**Copyright (c) Netresearch DTT GmbH** - Methodology and best practices  
-Adapted by webconsulting.at for this skill collection
+Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
