@@ -84,6 +84,7 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 
 - **Publish**: Draft content replaces live content through the workspace publish process.
 - TYPO3 v13/v14 use publish workflows; do not rely on legacy workspace-level swap mode.
+- **IMPORTANT**: The `swap` action is no longer allowed in TYPO3 v14. Use `action => 'publish'` instead of `action => 'swap'`.
 
 ## 2. CRITICAL: File/FAL Limitation
 
@@ -1237,10 +1238,12 @@ final class WorkspaceAwareTest extends FunctionalTestCase
     }
 
     /**
-     * Test: Workspace swap command makes staged content live for a record pair.
-     * Note: this demonstrates DataHandler swap semantics for record-level version commands.
+     * Test: Workspace publish command makes staged content live for a record pair.
+     *
+     * DEPRECATED: The 'swap' action is no longer allowed in TYPO3 v14.
+     * Use 'action' => 'publish' instead. The 'swapWith' key is replaced by 'uid' (workspace version uid).
      */
-    public function testSwapWorkspaceRecordPairMakesContentLive(): void
+    public function testPublishWorkspaceRecordPairMakesContentLive(): void
     {
         $this->setWorkspaceId(1);
 
@@ -1249,8 +1252,8 @@ final class WorkspaceAwareTest extends FunctionalTestCase
             'tt_content' => [
                 10 => [
                     'version' => [
-                        'action' => 'swap',
-                        'swapWith' => $this->getWorkspaceVersionUid('tt_content', 10, 1),
+                        'action' => 'publish',
+                        'uid' => $this->getWorkspaceVersionUid('tt_content', 10, 1),
                     ],
                 ],
             ],
