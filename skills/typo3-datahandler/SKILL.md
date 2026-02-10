@@ -14,6 +14,8 @@ metadata:
 > **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
 > All code examples in this skill are designed to work on both TYPO3 v13 and v14.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## 1. The Prime Directive
 
 **NEVER** use raw SQL (`INSERT`, `UPDATE`, `DELETE`) for `pages`, `tt_content`, or any TCA-configured table.

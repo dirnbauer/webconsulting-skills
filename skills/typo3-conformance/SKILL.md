@@ -17,6 +17,8 @@ metadata:
 
 Evaluate TYPO3 extensions for standards compliance, architecture patterns, and best practices.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## Skill Delegation
 
 | Skill | Use For |

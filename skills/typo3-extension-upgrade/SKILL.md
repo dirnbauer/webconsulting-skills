@@ -13,6 +13,8 @@ metadata:
 
 Systematic framework for upgrading TYPO3 extensions to newer LTS versions.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 > **Scope**: Extension code upgrades only. NOT for TYPO3 project/core upgrades.
 
 ## Upgrade Toolkit

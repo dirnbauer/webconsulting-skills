@@ -12,6 +12,8 @@ metadata:
 
 Comprehensive testing infrastructure for TYPO3 extensions: unit, functional, E2E, architecture, and mutation testing.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## Test Type Selection
 
 | Type | Use When | Speed | Framework |

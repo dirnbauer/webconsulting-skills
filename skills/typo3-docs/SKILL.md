@@ -13,6 +13,8 @@ metadata:
 
 Create and maintain TYPO3 extension documentation following official docs.typo3.org standards.
 
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+
 ## When to Use
 
 - Creating documentation from scratch (no `Documentation/` exists)
