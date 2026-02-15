@@ -15,6 +15,7 @@ End-to-end workflow for building product documentation: help pages, AI-generated
 |------------|---------|---------|
 | Node.js 20+ | Pre-installed | Runtime |
 | Remotion | `npm install remotion @remotion/cli @remotion/player` | Video composition |
+| qrcode.react | `npm install qrcode.react` | QR codes in end card |
 | tsx | `npm install -D tsx` | Run TypeScript scripts |
 
 ### Optional (for production quality)
@@ -203,7 +204,7 @@ a **4s end card** with social links that fades to black.
 | 4 | Wizard | 11s | Step indicator with progressive activation |
 | 5 | Security | 11s | Feature grid with staggered fade-in |
 | 6 | Outro | 11s | Logo + CTA + credits + website (highlight blog) |
-| 7 | End Card | 4s | Social links (GitHub, YouTube, X) + fade to black |
+| 7 | End Card | 7s | QR codes + social links (GitHub, YouTube, X) + fade to black |
 
 ### Lead-in and end card
 
@@ -211,16 +212,29 @@ The lead-in uses an **exponential volume curve** (`Math.pow(t, 2.5)`) because
 human hearing follows a logarithmic scale (Weber-Fechner law). A linear ramp
 sounds "sudden" in the middle; the power curve feels perceptually smooth.
 
-The end card shows social media links with staggered slide-up animations,
-then fades to solid black over the last 1.5 seconds. Both are defined as
+The end card shows QR codes with social media links (staggered slide-up),
+then fades to solid black over the last 1.5 seconds. QR codes are rendered
+inline using `qrcode.react` (`npm install qrcode.react`). Both are defined as
 exported constants in `ProductTour.tsx`:
 
 ```tsx
 export const LEAD_IN_FRAMES = Math.round(30 * 1.5); // 45 frames
-export const END_CARD_FRAMES = Math.round(30 * 4);   // 120 frames
+export const END_CARD_FRAMES = Math.round(30 * 7);   // 210 frames
 ```
 
 These are added to `TOTAL_FRAMES` in `Root.tsx` for the composition duration.
+
+#### QR code pattern
+
+```tsx
+import { QRCodeSVG } from "qrcode.react";
+
+<QRCodeSVG value="https://github.com/user" size={160}
+  bgColor="#ffffff" fgColor="#0f172a" level="M" />
+```
+
+Each social card shows: platform icon + handle, QR code (white bg, dark fg,
+rounded container), and the URL text below.
 
 ### Animation toolkit
 
