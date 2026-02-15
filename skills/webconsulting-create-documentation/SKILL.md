@@ -204,7 +204,7 @@ a **4s end card** with social links that fades to black.
 | 4 | Wizard | 11s | Step indicator with progressive activation |
 | 5 | Security | 11s | Feature grid with staggered fade-in |
 | 6 | Outro | 11s | Logo + CTA + credits + website (highlight blog) |
-| 7 | End Card | 7s | QR codes + social links (GitHub, YouTube, X) + fade to black |
+| 7 | End Card | 7s | 4 QR codes (website, GitHub, YouTube, X) + scale-up finale |
 
 ### Lead-in and end card
 
@@ -212,10 +212,12 @@ The lead-in uses an **exponential volume curve** (`Math.pow(t, 2.5)`) because
 human hearing follows a logarithmic scale (Weber-Fechner law). A linear ramp
 sounds "sudden" in the middle; the power curve feels perceptually smooth.
 
-The end card shows QR codes with social media links (staggered slide-up),
-then fades to solid black over the last 1.5 seconds. QR codes are rendered
-inline using `qrcode.react` (`npm install qrcode.react`). Both are defined as
-exported constants in `ProductTour.tsx`:
+The end card shows 4 QR codes with social/website links (staggered slide-up).
+**No fade-to-black** — the QR codes stay fully visible so viewers can scan them.
+In the **final 2 seconds**, the entire card scales up smoothly (1.0 → 1.08)
+with the T3 Monitoring logo, drawing attention to the links.
+
+QR codes are rendered inline using `qrcode.react` (`npm install qrcode.react`).
 
 ```tsx
 export const LEAD_IN_FRAMES = Math.round(30 * 1.5); // 45 frames
@@ -224,17 +226,29 @@ export const END_CARD_FRAMES = Math.round(30 * 7);   // 210 frames
 
 These are added to `TOTAL_FRAMES` in `Root.tsx` for the composition duration.
 
+#### End card links
+
+| # | Platform | Handle | Highlight |
+|---|----------|--------|-----------|
+| 1 | Website | webconsulting.at | Orange border, `/blog` callout with description |
+| 2 | GitHub | @dirnbauer | — |
+| 3 | YouTube | @webconsulting-curt | — |
+| 4 | X | @KDirnbauer | — |
+
+The website card is **emphasized**: orange handle text, orange QR border,
+and a `/blog` callout below ("TYPO3 tutorials, tips & deep dives").
+
 #### QR code pattern
 
 ```tsx
 import { QRCodeSVG } from "qrcode.react";
 
-<QRCodeSVG value="https://github.com/user" size={160}
+<QRCodeSVG value="https://webconsulting.at" size={140}
   bgColor="#ffffff" fgColor="#0f172a" level="M" />
 ```
 
 Each social card shows: platform icon + handle, QR code (white bg, dark fg,
-rounded container), and the URL text below.
+rounded container), URL text, and optional highlight callout.
 
 ### Animation toolkit
 
