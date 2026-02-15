@@ -164,6 +164,104 @@ Upload the new file with a different name. Do NOT overwrite the existing file. T
 - **CONSIDER** EXT:secure_downloads for any confidential documents
 - **AUDIT** `fileadmin/` for files with predictable naming patterns
 
+## 2a. File Collections and Workspaces
+
+> **File collections (`sys_file_collection`) are workspace-versioned at the record level, but folder-based collections resolve files from the live filesystem at runtime -- there is no database relation to overlay.**
+
+### How File Collections Work
+
+`sys_file_collection` stores three collection types, distinguished by the `type` field:
+
+| `type` value | Resolution mechanism | Database relations involved |
+|---|---|---|
+| `static` (0) | `sys_file_reference` rows (`tablenames='sys_file_collection'`, `fieldname='files'`) | One `sys_file_reference` row per file |
+| `folder` (1) | `folder_identifier` string (e.g. `1:/user_upload/gallery/`) | **None** -- no join table, no reference rows |
+| `category` (2) | `category` uid resolved via `sys_category_record_mm` | MM table (handled via parent record overlay) |
+
+The TCA for `sys_file_collection` has `versioningWS => true`. This means the **collection record itself** gets workspace versions with `t3ver_*` fields. However, the record-level versioning only versions the fields stored in `sys_file_collection` -- it does **not** version the files that the collection resolves.
+
+### Workspace Safety per Collection Type
+
+| Collection Type | Record versioned? | File binding versioned? | Physical files versioned? | Workspace-safe? |
+|---|---|---|---|---|
+| **Static** | Yes | Yes (`sys_file_reference` has `versioningWS = true`) | No | Partially safe |
+| **Folder-based** | Yes (record only) | **No** -- no DB binding exists | No | **Not safe** |
+| **Category-based** | Yes | Partially (category MM handled via parent overlay) | No | Partially safe |
+
+### Why Folder-Based Collections Break Workspace Isolation
+
+For folder-based collections, the "relation" between the collection and its files is **not a database relation**. The collection record stores only a `folder_identifier` string. When `FolderBasedFileCollection::loadContents()` is called, TYPO3 calls `$storage->getFilesInFolder()` to list files directly from the live storage driver. There is no overlay-capable database row between the collection and its files.
+
+**Consequences:**
+
+- Adding a file to the folder makes it visible in **all workspaces** immediately
+- Removing a file from the folder removes it from **all workspaces** immediately
+- Changing the `folder_identifier` field in a workspace version points to a different folder, but the folder contents themselves are always live
+- The "File links" content element (`CType=uploads`) using a folder-based collection will show different files than intended during workspace preview if the folder contents changed after the workspace version was created
+
+### Static Collections Are Safer
+
+Static collections (`type=static`) bind files via `sys_file_reference` rows. Both `sys_file_collection` and `sys_file_reference` have `versioningWS = true`. When you add or remove a file from a static collection inside a workspace, TYPO3 creates workspace versions of the `sys_file_reference` rows. The binding between collection and file is versioned.
+
+The remaining limitation: physical files (`sys_file`) are still not versioned (see Section 2). If you overwrite a file, it changes everywhere.
+
+### Workarounds for Folder-Based Collections
+
+**1. Prefer static collections when workspace isolation matters:**
+
+Use `type=static` instead of `type=folder`. The file-to-collection binding is a `sys_file_reference` row, which is workspace-versioned.
+
+**2. Use separate folders per workspace version:**
+
+For folder-based collections, create a new folder for the workspace change (e.g. `gallery-v2/`) and change the `folder_identifier` in the workspace version of the collection record. The live version still points to the original folder.
+
+**3. Do NOT modify shared folder contents while workspace drafts reference them:**
+
+If a folder-based collection is used in workspace content, avoid adding or removing files from that folder until the workspace is published.
+
+**4. Clean up old folders after publishing:**
+
+Use `AfterRecordPublishedEvent` to remove obsolete folders after the workspace version is published:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace MyVendor\MyExtension\EventListener;
+
+use TYPO3\CMS\Core\Attribute\AsEventListener;
+use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Workspaces\Event\AfterRecordPublishedEvent;
+
+#[AsEventListener]
+final class CleanupOldCollectionFolderListener
+{
+    public function __construct(
+        private readonly StorageRepository $storageRepository,
+    ) {}
+
+    public function __invoke(AfterRecordPublishedEvent $event): void
+    {
+        if ($event->getTable() !== 'sys_file_collection') {
+            return;
+        }
+
+        // After publishing a folder-based collection, remove the old folder
+        // if it is no longer referenced by any collection.
+        // Implementation depends on your naming convention (e.g. gallery-v1/, gallery-v2/).
+    }
+}
+```
+
+### Rules for Workspace-Safe File Collections
+
+- **PREFER** static collections (`type=static`) over folder-based when workspaces are used
+- **NEVER** add or remove files from a folder that is referenced by a folder-based collection in an unpublished workspace
+- **USE** separate folders per workspace version if folder-based collections are required
+- **DOCUMENT** for editors that folder-based collections show live folder contents regardless of workspace state
+- **TEST** file collection behavior in workspace preview before relying on it for editorial workflows
+
 ## 3. Installation & Setup Checklist
 
 ### Installation
