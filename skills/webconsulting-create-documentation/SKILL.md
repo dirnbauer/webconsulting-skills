@@ -214,8 +214,8 @@ sounds "sudden" in the middle; the power curve feels perceptually smooth.
 
 The end card shows 4 QR codes with social/website links (staggered slide-up).
 **No fade-to-black** — the QR codes stay fully visible so viewers can scan them.
-In the **final 2 seconds**, the entire card scales up smoothly (1.0 → 1.08)
-with the T3 Monitoring logo, drawing attention to the links.
+In the **final 2 seconds**, the entire card scales up dramatically (1.0 → 1.5)
+with the T3 Monitoring logo, creating a confident, cinematic close.
 
 QR codes are rendered inline using `qrcode.react` (`npm install qrcode.react`).
 
@@ -236,7 +236,8 @@ These are added to `TOTAL_FRAMES` in `Root.tsx` for the composition duration.
 | 4 | X | @KDirnbauer | — |
 
 The website card is **emphasized**: orange handle text, orange QR border,
-and a `/blog` callout below ("TYPO3 tutorials, tips & deep dives").
+and a `/blog` pill badge below — glass-style container with orange border,
+glow shadow, and "Tutorials & deep dives" label.
 
 #### QR code pattern
 
