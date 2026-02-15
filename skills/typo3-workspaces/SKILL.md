@@ -2,8 +2,9 @@
 name: typo3-workspaces
 description: >-
   Expert guidance on TYPO3 Workspaces: versioning, staging, publishing workflows,
-  file limitations, query migration, debugging, and testing. Use when working with
-  workspace, versioning, staging, publishing, review, draft content, workflow.
+  file limitations, file collection workspace safety, query migration, debugging,
+  and testing. Use when working with workspace, versioning, staging, publishing,
+  review, draft content, workflow, file collection.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
   version: "1.0.0"
@@ -93,6 +94,7 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 ## 2. CRITICAL: File/FAL Limitation
 
 > **Files (FAL) are NOT versioned.** This is the single most important limitation of TYPO3 Workspaces.
+> See also Section 2a below for the additional **file collection** limitation (folder-based collections).
 
 ### What This Means
 
