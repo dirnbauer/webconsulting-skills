@@ -188,18 +188,39 @@ function SceneComponent() {
 }
 ```
 
-### Recommended scenes (6 total, ~70 seconds)
+### Recommended scenes (7 total, ~75 seconds)
 
 Durations are **dynamic** — driven by narration audio length (see Phase 5).
+The video includes a **1.5s lead-in** (dark + exponential volume ramp) and
+a **4s end card** with social links that fades to black.
 
 | # | Scene | ~Duration | Content |
 |---|-------|-----------|---------|
+| — | Lead-in | 1.5s | Dark screen, music fades in (exponential t^2.5) |
 | 1 | Intro | 13s | Logo + tagline + brand identity |
 | 2 | Dashboard | 12s | Stat cards with spring animations |
 | 3 | Clients | 12s | Client list with slide-in rows |
 | 4 | Wizard | 11s | Step indicator with progressive activation |
 | 5 | Security | 11s | Feature grid with staggered fade-in |
 | 6 | Outro | 11s | Logo + CTA + credits |
+| 7 | End Card | 4s | Social links (GitHub, YouTube, X) + fade to black |
+
+### Lead-in and end card
+
+The lead-in uses an **exponential volume curve** (`Math.pow(t, 2.5)`) because
+human hearing follows a logarithmic scale (Weber-Fechner law). A linear ramp
+sounds "sudden" in the middle; the power curve feels perceptually smooth.
+
+The end card shows social media links with staggered slide-up animations,
+then fades to solid black over the last 1.5 seconds. Both are defined as
+exported constants in `ProductTour.tsx`:
+
+```tsx
+export const LEAD_IN_FRAMES = Math.round(30 * 1.5); // 45 frames
+export const END_CARD_FRAMES = Math.round(30 * 4);   // 120 frames
+```
+
+These are added to `TOTAL_FRAMES` in `Root.tsx` for the composition duration.
 
 ### Animation toolkit
 
