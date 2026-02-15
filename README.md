@@ -8,13 +8,15 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 12 skills | Content Blocks, DataHandler, upgrades, testing, security |
+| **TYPO3 CMS** | 15 skills | Content Blocks, DataHandler, Powermail, Workspaces, Records List Types, upgrades, testing, security |
 | **Video & Animation** | 1 skill | Remotion video creation in React |
-| **Security & Enterprise** | 4 skills | OWASP audits, deepfake detection, OpenSSF Scorecard, supply chain security |
+| **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
+| **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
 | **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
-| **Frontend & Design** | 6 skills | UI patterns, design systems, accessibility, OG images, React/Next.js performance, creative frontend design |
+| **Frontend & Design** | 6 skills | UI patterns, design systems, accessibility, OG images, React/Next.js, creative frontend |
+| **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
