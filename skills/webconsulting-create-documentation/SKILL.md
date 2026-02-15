@@ -216,6 +216,8 @@ The end card shows 4 QR codes with social/website links (staggered slide-up).
 **No fade-to-black** — the QR codes stay fully visible so viewers can scan them.
 In the **final 2 seconds**, the entire card scales up dramatically (1.0 → 1.5)
 with the T3 Monitoring logo, creating a confident, cinematic close.
+The "Find us on" heading scales up in sync but also **moves upward** (-120px)
+so it doesn't get covered by the expanding QR code row.
 
 QR codes are rendered inline using `qrcode.react` (`npm install qrcode.react`).
 
