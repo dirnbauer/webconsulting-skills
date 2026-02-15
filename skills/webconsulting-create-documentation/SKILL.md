@@ -396,13 +396,24 @@ The script:
 ### Music prompt (adapt for your product)
 
 ```
-Minimal ambient electronic underscore for a technology product video.
-Soft piano notes over warm analog synth pads. Gentle, cinematic, and
-aspirational — like an Apple keynote background track. No drums, no
-vocals, no sudden changes. Slow tempo around 70 BPM. Calm, meditative,
-and premium-feeling. Think Brian Eno meets Hans Zimmer at low volume.
+Uplifting neoclassical underscore for a modern technology product video.
+Bright piano arpeggios in a major key over gentle pizzicato strings and
+a soft cello melody. Light, optimistic, and forward-moving — like a TED
+talk opening or an Apple product reveal. Subtle modern electronic texture
+underneath the classical instruments. No heavy drums, no vocals, no sudden
+drops. Tempo around 100 BPM. Engaging but never distracting — true
+background music that lifts the mood without competing with narration.
+Think Max Richter meets Ólafur Arnalds with a hint of Nils Frahm.
 Duration should be around 90 seconds.
 ```
+
+**Key prompt principles:**
+- Specify **major key** to avoid melancholic/minor tonality
+- Name **classic instruments** (piano, strings, cello) for warmth and sophistication
+- Add **modern electronic texture** to keep it contemporary
+- Reference **real composers** (Max Richter, Ólafur Arnalds, Nils Frahm) for style anchoring
+- Emphasize **"background music"** and **"never distracting"** — Suno tends to overpower otherwise
+- Set **tempo** (100 BPM) — too slow feels sad, too fast feels hectic
 
 ### Volume ducking
 
