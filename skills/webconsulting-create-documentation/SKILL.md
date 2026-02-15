@@ -230,17 +230,31 @@ GOOD: "Your dashboard. Beautifully considered. Every metric, thoughtfully
        placed, to give you immediate clarity."
 ```
 
-### Export the narration script
+### Export the narration script (single source of truth)
 
-Define all narration text in `ProductTour.tsx` as an exported constant:
+Define all narration text in `ProductTour.tsx` as an **exported** constant.
+This is the single source of truth for both subtitles and audio generation:
 
 ```tsx
+// remotion/ProductTour.tsx
 export const NARRATION_SCRIPT: Record<string, string> = {
-  intro: "We believe in something profoundly simple...",
-  dashboard: "Your dashboard. Beautifully considered...",
+  intro: "Imagine seeing every TYPO3 installation you manage...",
+  dashboard: "Your dashboard gives you the full picture...",
   // ... one entry per scene
 };
 ```
+
+**Critical**: The generate script **imports** this constant — never duplicate the text:
+
+```tsx
+// scripts/generate-narration.ts
+import { NARRATION_SCRIPT } from "../remotion/ProductTour.js";
+const NARRATION = NARRATION_SCRIPT; // Same text for audio + subtitles
+```
+
+This guarantees spoken audio always matches the on-screen subtitles.
+If you edit `NARRATION_SCRIPT`, just re-run `npm run narration:generate` and
+`npm run remotion:render` — both audio and subtitles update automatically.
 
 ### NarrationSubtitle component
 
@@ -399,30 +413,15 @@ to ensure the video only references files that actually exist. Always run
 
 This is the exact text sent to ElevenLabs. Copy and adapt for your product:
 
-```
-Scene 1 — Intro:
-"Imagine seeing every TYPO3 installation you manage — health, security,
-updates — in one place, instantly. That's T3 Monitoring."
+The narration text lives in `remotion/ProductTour.tsx` as `NARRATION_SCRIPT`.
+The generate script imports it — **never edit narration text in two places**.
 
-Scene 2 — Dashboard:
-"Your dashboard gives you the full picture. Client health, extension status,
-security alerts — everything you need, the moment you need it."
+To see the current script, read `NARRATION_SCRIPT` in `ProductTour.tsx`.
+To change it, edit only that file, then re-run:
 
-Scene 3 — Clients:
-"Every website. Every client. One unified view — so you always know exactly
-where things stand, without digging through servers."
-
-Scene 4 — Wizard:
-"Onboarding a new client takes four steps. Enter the details, connect,
-and you're monitoring. It really is that quick."
-
-Scene 5 — Security:
-"When a vulnerability appears, you'll see it immediately. No surprises.
-No delays. Just the clarity to act fast."
-
-Scene 6 — Outro:
-"T3 Monitoring. Built for agencies who care about their clients.
-Open source. Reliable. Ready when you are."
+```bash
+npm run narration:generate   # Regenerates audio from the updated text
+npm run remotion:render      # Subtitles already read from the same source
 ```
 
 ## Phase 5b: Background Music (Suno AI)
