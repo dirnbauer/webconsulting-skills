@@ -171,6 +171,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
 | `ai-search-optimization` | aeo, geo, ai search, chatgpt, llms.txt | "Optimize for ChatGPT and Perplexity citations" |
 | `security-audit` | security audit, owasp, vulnerabilities | "Audit my controller for security issues" |
+| `security-incident-reporting` | incident report, post-mortem, ddos, forensics | "Create NIST/SANS-style incident report" or "Document DDoS attack timeline" |
 | `enterprise-readiness` | enterprise, openssf, slsa | "Assess my project for enterprise readiness" |
 | `php-modernization` | php, phpstan, dto, enum | "Modernize my PHP code to 8.3 patterns" |
 | `cli-tools` | cli, tools, command not found | "Install missing CLI tools" |
@@ -201,6 +202,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `cro-funnel` | cro funnel, form cro, signup flow, onboarding, paywall | "Optimize my signup flow" |
 | `programmatic-seo` | programmatic seo, template pages, directory, location pages | "Build [service] in [city] pages at scale" |
 | `launch-strategy` | product launch, product hunt, gtm, beta launch | "Plan my Product Hunt launch" |
+| `legal-impressum` | impressum, legal notice, austria, offenlegung, germany, DDG | "Create Austrian Impressum for a GmbH" or "German DDG-compliant legal notice" |
 
 ### Example Prompts (Copy & Paste)
 
