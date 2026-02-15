@@ -348,28 +348,28 @@ This is the exact text sent to ElevenLabs. Copy and adapt for your product:
 
 ```
 Scene 1 — Intro:
-"We believe in something profoundly simple. The ability to see everything
-— at a glance. This is T3 Monitoring."
+"Imagine seeing every TYPO3 installation you manage — health, security,
+updates — in one place, instantly. That's T3 Monitoring."
 
 Scene 2 — Dashboard:
-"Your dashboard. Beautifully considered. Every metric, thoughtfully
-placed, to give you immediate clarity across all your installations."
+"Your dashboard gives you the full picture. Client health, extension status,
+security alerts — everything you need, the moment you need it."
 
 Scene 3 — Clients:
-"Every TYPO3 website. Every client. Connected, monitored, and deeply
-understood — all from a single, unified view."
+"Every website. Every client. One unified view — so you always know exactly
+where things stand, without digging through servers."
 
 Scene 4 — Wizard:
-"Adding a new client should feel effortless. Four deliberate steps.
-No complexity. No confusion. Just, done."
+"Onboarding a new client takes four steps. Enter the details, connect,
+and you're monitoring. It really is that quick."
 
 Scene 5 — Security:
-"Security isn't a feature. It's a foundation. The moment something
-needs your attention, you'll know."
+"When a vulnerability appears, you'll see it immediately. No surprises.
+No delays. Just the clarity to act fast."
 
 Scene 6 — Outro:
-"T3 Monitoring. Your TYPO3 installations — always under your care.
-Open source. Beautifully engineered. Unmistakably purposeful."
+"T3 Monitoring. Built for agencies who care about their clients.
+Open source. Reliable. Ready when you are."
 ```
 
 ## Phase 5b: Background Music (Suno AI)

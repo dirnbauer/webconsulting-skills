@@ -8,29 +8,29 @@ Scene durations are **driven by audio length** (not hardcoded). The generate scr
 probes each file and writes `remotion/narration-durations.ts` with frame counts.
 Timings below are approximate for reference.
 
-### Scene 1: Intro (~8.5s audio → 10.6s scene)
+### Scene 1: Intro (~7.9s audio → 9.9s scene)
 
-> We believe in something profoundly simple. The ability to see everything — at a glance. This is T3 Monitoring.
+> Imagine seeing every TYPO3 installation you manage — health, security, updates — in one place, instantly. That's T3 Monitoring.
 
-### Scene 2: Dashboard (~10.2s audio → 12.2s scene)
+### Scene 2: Dashboard (~10.0s audio → 12.0s scene)
 
-> Your dashboard. Beautifully considered. Every metric, thoughtfully placed, to give you immediate clarity across all your installations.
+> Your dashboard gives you the full picture. Client health, extension status, security alerts — everything you need, the moment you need it.
 
-### Scene 3: Clients (~9.8s audio → 11.8s scene)
+### Scene 3: Clients (~9.4s audio → 11.4s scene)
 
-> Every TYPO3 website. Every client. Connected, monitored, and deeply understood — all from a single, unified view.
+> Every website. Every client. One unified view — so you always know exactly where things stand, without digging through servers.
 
-### Scene 4: Wizard (~9.3s audio → 11.3s scene)
+### Scene 4: Wizard (~9.4s audio → 11.4s scene)
 
-> Adding a new client should feel effortless. Four deliberate steps. No complexity. No confusion. Just, done.
+> Onboarding a new client takes four steps. Enter the details, connect, and you're monitoring. It really is that quick.
 
-### Scene 5: Security (~7.5s audio → 9.5s scene)
+### Scene 5: Security (~7.1s audio → 9.1s scene)
 
-> Security isn't a feature. It's a foundation. The moment something needs your attention, you'll know.
+> When a vulnerability appears, you'll see it immediately. No surprises. No delays. Just the clarity to act fast.
 
-### Scene 6: Outro (~10.7s audio → 12.7s scene)
+### Scene 6: Outro (~10.3s audio → 12.3s scene)
 
-> T3 Monitoring. Your TYPO3 installations — always under your care. Open source. Beautifully engineered. Unmistakably purposeful.
+> T3 Monitoring. Built for agencies who care about their clients. Open source. Reliable. Ready when you are.
 
 ## The Prompt
 
@@ -63,9 +63,10 @@ Rules:
 
 ### Sentence structure
 
-- Start with the **subject**, then add a period. Short fragments work.
-- "Your dashboard." not "The dashboard allows you to..."
-- "Four deliberate steps." not "There are four steps in the wizard."
+- Lead with what the user **gets**, not what the product does.
+- "Imagine seeing every installation" not "This product shows you installations"
+- "It really is that quick." not "The process is very fast."
+- Short fragments still work, but mix in conversational confidence.
 
 ### Word choice
 
