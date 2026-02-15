@@ -202,7 +202,7 @@ a **4s end card** with social links that fades to black.
 | 3 | Clients | 12s | Client list with slide-in rows |
 | 4 | Wizard | 11s | Step indicator with progressive activation |
 | 5 | Security | 11s | Feature grid with staggered fade-in |
-| 6 | Outro | 11s | Logo + CTA + credits |
+| 6 | Outro | 11s | Logo + CTA + credits + website (highlight blog) |
 | 7 | End Card | 4s | Social links (GitHub, YouTube, X) + fade to black |
 
 ### Lead-in and end card
