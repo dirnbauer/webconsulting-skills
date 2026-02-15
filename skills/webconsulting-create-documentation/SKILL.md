@@ -1,11 +1,11 @@
 ---
 name: webconsulting-create-documentation
-description: Create product documentation with help pages, AI-generated screenshots, and Remotion product videos with TTS narration. Use when asked to create documentation, a help page, product tour video, generate screenshots, or add user guides to a Next.js application.
+description: Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.
 ---
 
 # webconsulting — Create Documentation
 
-End-to-end workflow for building product documentation: help pages, placeholder screenshots, and narrated product tour videos using Remotion + ElevenLabs TTS.
+End-to-end workflow for building product documentation: help pages, AI-generated illustrations, narrated product tour videos (Remotion + ElevenLabs TTS + Suno AI music), and GitHub README visual documentation.
 
 ## Prerequisites
 
@@ -24,6 +24,7 @@ End-to-end workflow for building product documentation: help pages, placeholder 
 | ElevenLabs API key | [elevenlabs.io](https://elevenlabs.io) | Premium TTS narration (Jony Ive voice) |
 | ffmpeg | `brew install ffmpeg` | Convert audio to MP3 (smaller files) |
 | macOS `say` + `afconvert` | Built-in on macOS | Fallback TTS (Daniel voice, outputs WAV) |
+| Suno API key | [api.box](https://www.api.box) | AI-generated background music |
 
 ### ElevenLabs Setup
 
@@ -56,7 +57,9 @@ so you can regenerate ~16 times per month on the free tier.
 2. Generate illustrations → AI image generation tool (GenerateImage)
 3. Build Remotion video   → Animated scenes with narration subtitles
 4. Generate TTS audio     → ElevenLabs API or macOS `say` fallback
-5. Render final video     → npm run remotion:render
+5. Generate music         → Suno AI background music (optional)
+6. Render final video     → npm run remotion:render
+7. GitHub README          → Embed screenshots + video in README.md
 ```
 
 ## Phase 1: Help Page
@@ -185,16 +188,18 @@ function SceneComponent() {
 }
 ```
 
-### Recommended scenes (6 total, ~45 seconds)
+### Recommended scenes (6 total, ~70 seconds)
 
-| # | Scene | Duration | Content |
-|---|-------|----------|---------|
-| 1 | Intro | 7s | Logo + tagline + brand identity |
-| 2 | Dashboard | 7s | Stat cards with spring animations |
-| 3 | Clients | 7s | Client list with slide-in rows |
-| 4 | Wizard | 7s | Step indicator with progressive activation |
-| 5 | Security | 7s | Feature grid with staggered fade-in |
-| 6 | Outro | 10s | Logo + CTA + credits |
+Durations are **dynamic** — driven by narration audio length (see Phase 5).
+
+| # | Scene | ~Duration | Content |
+|---|-------|-----------|---------|
+| 1 | Intro | 13s | Logo + tagline + brand identity |
+| 2 | Dashboard | 12s | Stat cards with spring animations |
+| 3 | Clients | 12s | Client list with slide-in rows |
+| 4 | Wizard | 11s | Step indicator with progressive activation |
+| 5 | Security | 11s | Feature grid with staggered fade-in |
+| 6 | Outro | 11s | Logo + CTA + credits |
 
 ### Animation toolkit
 
