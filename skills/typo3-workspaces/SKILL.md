@@ -18,7 +18,7 @@ metadata:
 
 ## Sources
 
-This skill is based on 14 authoritative sources:
+This skill is based on 18 authoritative sources:
 
 1. [TYPO3 Workspaces Extension Docs](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Index.html)
 2. [Versioning (Workspaces Extension)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Versioning/Index.html)
@@ -34,6 +34,10 @@ This skill is based on 14 authoritative sources:
 12. [TYPO3-CORE-SA-2025-022: Information Disclosure in Workspaces Module](https://typo3.org/security/advisory/typo3-core-sa-2025-022)
 13. [Forge Bug #88021: FAL preview fails when file changed in workspace](https://forge.typo3.org/issues/88021)
 14. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
+15. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
+16. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
+17. [Forge Bug #60343: sys_file_metadata does not recognize workspace](https://forge.typo3.org/issues/60343)
+18. [Forge Feature #97923: Combined folder_identifier field for sys_file_collection](https://forge.typo3.org/issues/97923)
 
 ## 1. Core Concepts
 
