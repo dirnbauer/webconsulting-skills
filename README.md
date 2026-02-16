@@ -2075,6 +2075,12 @@ The `.sync-config.json` file defines external skill sources that are automatical
 
 To enable/disable external skill syncing, edit `.sync-config.json` and set `enabled: true/false`.
 
+**GitHub Actions Auto-Sync:**
+
+The `sync-skills.yml` workflow runs weekly (Mondays 06:00 UTC) and can be triggered manually. It syncs enabled skills from upstream repos and opens a PR on the `chore/sync-skills` branch.
+
+**Required repo setting:** Go to **Settings > Actions > General > Workflow permissions** and enable **"Allow GitHub Actions to create and approve pull requests"** for the workflow to create PRs automatically.
+
 > **Note:** The installer removes and recreates symlinks on each run, so running `./install.sh` or `./update.sh` after pulling always ensures your skills are up to date.
 
 ## Technology Stack
@@ -2207,4 +2213,3 @@ The `refactor-clean` skill is adapted from their open-source repository:
 https://github.com/sickn33/antigravity-awesome-skills
 
 **Copyright (c) sickn33** - Clean code principles and SOLID design patterns
-

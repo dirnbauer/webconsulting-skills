@@ -27,11 +27,6 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
       - name: Read Sync Configuration
         id: config
         run: |
@@ -105,6 +100,20 @@ jobs:
                   echo "✓ Updated skills/$name/rules/"
                 fi
                 
+                # Copy references directory if exists
+                if [ -d "$SOURCE_DIR/references" ]; then
+                  rm -rf "skills/$name/references"
+                  cp -r "$SOURCE_DIR/references" "skills/$name/"
+                  echo "✓ Updated skills/$name/references/"
+                fi
+                
+                # Copy scripts directory if exists
+                if [ -d "$SOURCE_DIR/scripts" ]; then
+                  rm -rf "skills/$name/scripts"
+                  cp -r "$SOURCE_DIR/scripts" "skills/$name/"
+                  echo "✓ Updated skills/$name/scripts/"
+                fi
+                
                 # Check for changes
                 if ! git diff --quiet "skills/$name/"; then
                   CHANGES_MADE=true
@@ -131,60 +140,72 @@ jobs:
           jq --arg ts "$TIMESTAMP" '.lastSync = $ts' .sync-config.json > .sync-config.tmp
           mv .sync-config.tmp .sync-config.json
       
-      - name: Regenerate AGENTS.md
+      - name: Check AGENTS.md for missing skills
         if: steps.sync.outputs.changes_made == 'true'
         run: |
-          echo "# Available Agent Skills" > AGENTS.md
-          echo "" >> AGENTS.md
-          echo "Auto-generated index of all available skills in this marketplace." >> AGENTS.md
-          echo "" >> AGENTS.md
-          echo "| Skill | Description | Version |" >> AGENTS.md
-          echo "|-------|-------------|---------|" >> AGENTS.md
-          
+          # AGENTS.md is hand-crafted; don't overwrite it.
+          # Instead, list any synced skills not yet mentioned.
+          echo "Checking AGENTS.md for newly synced skills..."
+          MISSING=""
           for skill_dir in skills/*/; do
             if [ -f "${skill_dir}SKILL.md" ]; then
               skill_name=$(basename "$skill_dir")
-              
-              # Extract metadata from YAML frontmatter
-              description=$(sed -n '/^---$/,/^---$/p' "${skill_dir}SKILL.md" | grep -E "^description:" | sed 's/description: //' | head -1)
-              version=$(sed -n '/^---$/,/^---$/p' "${skill_dir}SKILL.md" | grep -E "^version:" | sed 's/version: //' | head -1)
-              
-              # Default values if not found
-              description=${description:-"No description"}
-              version=${version:-"1.0.0"}
-              
-              echo "| \`$skill_name\` | $description | $version |" >> AGENTS.md
+              if ! grep -q "\`$skill_name\`" AGENTS.md 2>/dev/null; then
+                MISSING="$MISSING  - $skill_name\n"
+              fi
             fi
           done
-          
-          echo "" >> AGENTS.md
-          echo "---" >> AGENTS.md
-          echo "*Last updated: $(date -u +"%Y-%m-%d %H:%M:%S UTC")*" >> AGENTS.md
+          if [ -n "$MISSING" ]; then
+            echo "⚠ The following skills are not yet listed in AGENTS.md:"
+            echo -e "$MISSING"
+            echo "Please add them manually after merging this PR."
+          else
+            echo "✓ All skills are listed in AGENTS.md"
+          fi
       
+      - name: Commit and Push to Sync Branch
+        if: steps.sync.outputs.changes_made == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          BRANCH="chore/sync-skills"
+          git checkout -B "$BRANCH"
+          git add skills/ .sync-config.json
+          git commit -m "chore: sync external skills"
+          git push -f origin "$BRANCH"
+
       - name: Create Pull Request
         if: steps.sync.outputs.changes_made == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'chore: sync external skills'
-          title: 'chore: Sync External Skills'
-          body: |
-            ## Skill Synchronization
-            
-            This PR updates skills from external repositories as defined in `.sync-config.json`.
-            
-            ### Changes
-            - Synced skill definitions from upstream sources
-            - Updated AGENTS.md index
-            - Updated sync timestamp
-            
-            ### Review Checklist
-            - [ ] Reviewed skill content changes
-            - [ ] Verified no breaking changes
-            - [ ] Tested installation with `./install.sh`
-          branch: chore/sync-skills
-          delete-branch: true
-          labels: |
-            automated
-            skills
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check if PR already exists for this branch
+          EXISTING_PR=$(gh pr list --head "chore/sync-skills" --state open --json number -q '.[0].number' || true)
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already exists, updated branch."
+          else
+            cat > /tmp/pr-body.md <<'PREOF'
+          ## Skill Synchronization
+
+          This PR updates skills from external repositories as defined in `.sync-config.json`.
+
+          ### Changes
+          - Synced skill definitions from upstream sources
+          - Updated sync timestamp
+
+          ### Review Checklist
+          - [ ] Reviewed skill content changes
+          - [ ] Verified no breaking changes
+          - [ ] Updated AGENTS.md and README.md if new skills were added
+          - [ ] Tested installation with `./install.sh`
+          PREOF
+            gh pr create \
+              --title "chore: Sync External Skills" \
+              --body-file /tmp/pr-body.md \
+              --base main \
+              --head "chore/sync-skills" \
+              --label "automated,skills"
+          fi
 
