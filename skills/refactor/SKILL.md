@@ -1,16 +1,7 @@
 ---
 name: refactor
-description: >-
-  Improve code structure and readability without changing external behavior. Covers
-  common code smells (long methods, duplication, nested conditionals, magic numbers),
-  safe refactoring process, design patterns (Strategy, Chain of Responsibility),
-  type safety improvements, and extract method techniques.
-metadata:
-  version: "1.0.0"
-  source: "https://github.com/github/awesome-copilot"
-  related_skills:
-    - refactor-clean
-    - php-modernization
+description: 'Surgical code refactoring to improve maintainability without changing behavior. Covers extracting functions, renaming variables, breaking down god functions, improving type safety, eliminating code smells, and applying design patterns. Less drastic than repo-rebuilder; use for gradual improvements.'
+license: MIT
 ---
 
 # Refactor
@@ -43,7 +34,7 @@ Use this skill when:
 
 ### When NOT to Refactor
 
-```text
+```
 - Code that works and won't change again (if it ain't broke...)
 - Critical production code without tests (add tests first)
 - When you're under a tight deadline
@@ -166,9 +157,85 @@ Use this skill when:
 + function createUser(data: UserData) {
 +   /* ... */
 + }
+
+# EVEN BETTER: Use builder pattern for complex construction
++ const user = UserBuilder
++   .email('test@example.com')
++   .password('secure123')
++   .name('Test User')
++   .address(address)
++   .build();
 ```
 
-### 5. Magic Numbers/Strings
+### 5. Feature Envy
+
+```diff
+# BAD: Method that uses another object's data more than its own
+- class Order {
+-   calculateDiscount(user) {
+-     if (user.membershipLevel === 'gold') {
++       return this.total * 0.2;
++     }
++     if (user.accountAge > 365) {
++       return this.total * 0.1;
++     }
++     return 0;
++   }
++ }
+
+# GOOD: Move logic to the object that owns the data
++ class User {
++   getDiscountRate(orderTotal) {
++     if (this.membershipLevel === 'gold') return 0.2;
++     if (this.accountAge > 365) return 0.1;
++     return 0;
++   }
++ }
++
++ class Order {
++   calculateDiscount(user) {
++     return this.total * user.getDiscountRate(this.total);
++   }
++ }
+```
+
+### 6. Primitive Obsession
+
+```diff
+# BAD: Using primitives for domain concepts
+- function sendEmail(to, subject, body) { /* ... */ }
+- sendEmail('user@example.com', 'Hello', '...');
+
+- function createPhone(country, number) {
+-   return `${country}-${number}`;
+- }
+
+# GOOD: Use domain types
++ class Email {
++   private constructor(public readonly value: string) {
++     if (!Email.isValid(value)) throw new Error('Invalid email');
++   }
++   static create(value: string) { return new Email(value); }
++   static isValid(email: string) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
++ }
++
++ class PhoneNumber {
++   constructor(
++     public readonly country: string,
++     public readonly number: string
++   ) {
++     if (!PhoneNumber.isValid(country, number)) throw new Error('Invalid phone');
++   }
++   toString() { return `${this.country}-${this.number}`; }
++   static isValid(country: string, number: string) { /* ... */ }
++ }
++
++ // Usage
++ const email = Email.create('user@example.com');
++ const phone = new PhoneNumber('1', '555-1234');
+```
+
+### 7. Magic Numbers/Strings
 
 ```diff
 # BAD: Unexplained values
@@ -196,7 +263,7 @@ Use this skill when:
 + setTimeout(callback, ONE_DAY_MS);
 ```
 
-### 6. Nested Conditionals
+### 8. Nested Conditionals
 
 ```diff
 # BAD: Arrow code
@@ -206,11 +273,19 @@ Use this skill when:
 -       if (order.user.isActive) {
 -         if (order.total > 0) {
 -           return processOrder(order);
--         }
--       }
--     }
--   }
-- }
++         } else {
++           return { error: 'Invalid total' };
++         }
++       } else {
++         return { error: 'User inactive' };
++       }
++     } else {
++       return { error: 'No user' };
++     }
++   } else {
++     return { error: 'No order' };
++   }
++ }
 
 # GOOD: Guard clauses / early returns
 + function process(order) {
@@ -220,9 +295,19 @@ Use this skill when:
 +   if (order.total <= 0) return { error: 'Invalid total' };
 +   return processOrder(order);
 + }
+
+# EVEN BETTER: Using Result type
++ function process(order): Result<ProcessedOrder, Error> {
++   return Result.combine([
++     validateOrderExists(order),
++     validateUserExists(order),
++     validateUserActive(order.user),
++     validateOrderTotal(order)
++   ]).flatMap(() => processOrder(order));
++ }
 ```
 
-### 7. Dead Code
+### 9. Dead Code
 
 ```diff
 # BAD: Unused code lingers
@@ -235,6 +320,144 @@ Use this skill when:
 # GOOD: Remove it
 + // Delete unused functions, imports, and commented code
 + // If you need it again, git history has it
+```
+
+### 10. Inappropriate Intimacy
+
+```diff
+# BAD: One class reaches deep into another
+- class OrderProcessor {
+-   process(order) {
+-     order.user.profile.address.street;  // Too intimate
+-     order.repository.connection.config;  // Breaking encapsulation
++   }
++ }
+
+# GOOD: Ask, don't tell
++ class OrderProcessor {
++   process(order) {
++     order.getShippingAddress();  // Order knows how to get it
++     order.save();  // Order knows how to save itself
++   }
++ }
+```
+
+---
+
+## Extract Method Refactoring
+
+### Before and After
+
+```diff
+# Before: One long function
+- function printReport(users) {
+-   console.log('USER REPORT');
+-   console.log('============');
+-   console.log('');
+-   console.log(`Total users: ${users.length}`);
+-   console.log('');
+-   console.log('ACTIVE USERS');
+-   console.log('------------');
+-   const active = users.filter(u => u.isActive);
+-   active.forEach(u => {
+-     console.log(`- ${u.name} (${u.email})`);
+-   });
+-   console.log('');
+-   console.log(`Active: ${active.length}`);
+-   console.log('');
+-   console.log('INACTIVE USERS');
+-   console.log('--------------');
+-   const inactive = users.filter(u => !u.isActive);
+-   inactive.forEach(u => {
+-     console.log(`- ${u.name} (${u.email})`);
+-   });
+-   console.log('');
+-   console.log(`Inactive: ${inactive.length}`);
+- }
+
+# After: Extracted methods
++ function printReport(users) {
++   printHeader('USER REPORT');
++   console.log(`Total users: ${users.length}\n`);
++   printUserSection('ACTIVE USERS', users.filter(u => u.isActive));
++   printUserSection('INACTIVE USERS', users.filter(u => !u.isActive));
++ }
++
++ function printHeader(title) {
++   const line = '='.repeat(title.length);
++   console.log(title);
++   console.log(line);
++   console.log('');
++ }
++
++ function printUserSection(title, users) {
++   console.log(title);
++   console.log('-'.repeat(title.length));
++   users.forEach(u => console.log(`- ${u.name} (${u.email})`));
++   console.log('');
++   console.log(`${title.split(' ')[0]}: ${users.length}`);
++   console.log('');
++ }
+```
+
+---
+
+## Introducing Type Safety
+
+### From Untyped to Typed
+
+```diff
+# Before: No types
+- function calculateDiscount(user, total, membership, date) {
+-   if (membership === 'gold' && date.getDay() === 5) {
+-     return total * 0.25;
+-   }
+-   if (membership === 'gold') return total * 0.2;
+-   return total * 0.1;
+- }
+
+# After: Full type safety
++ type Membership = 'bronze' | 'silver' | 'gold';
++
++ interface User {
++   id: string;
++   name: string;
++   membership: Membership;
++ }
++
++ interface DiscountResult {
++   original: number;
++   discount: number;
++   final: number;
++   rate: number;
++ }
++
++ function calculateDiscount(
++   user: User,
++   total: number,
++   date: Date = new Date()
++ ): DiscountResult {
++   if (total < 0) throw new Error('Total cannot be negative');
++
++   let rate = 0.1; // Default bronze
++
++   if (user.membership === 'gold' && date.getDay() === 5) {
++     rate = 0.25; // Friday bonus for gold
++   } else if (user.membership === 'gold') {
++     rate = 0.2;
++   } else if (user.membership === 'silver') {
++     rate = 0.15;
++   }
++
++   const discount = total * rate;
++
++   return {
++     original: total,
++     discount,
++     final: total - discount,
++     rate
++   };
++ }
 ```
 
 ---
@@ -250,10 +473,10 @@ Use this skill when:
 -     return order.total > 50 ? 0 : 5.99;
 -   } else if (method === 'express') {
 -     return order.total > 100 ? 9.99 : 14.99;
--   } else if (method === 'overnight') {
--     return 29.99;
--   }
-- }
++   } else if (method === 'overnight') {
++     return 29.99;
++   }
++ }
 
 # After: Strategy pattern
 + interface ShippingStrategy {
@@ -272,16 +495,72 @@ Use this skill when:
 +   }
 + }
 +
++ class OvernightShipping implements ShippingStrategy {
++   calculate(order: Order) {
++     return 29.99;
++   }
++ }
++
 + function calculateShipping(order: Order, strategy: ShippingStrategy) {
 +   return strategy.calculate(order);
 + }
 ```
 
+### Chain of Responsibility
+
+```diff
+# Before: Nested validation
+- function validate(user) {
+-   const errors = [];
+-   if (!user.email) errors.push('Email required');
++   else if (!isValidEmail(user.email)) errors.push('Invalid email');
++   if (!user.name) errors.push('Name required');
++   if (user.age < 18) errors.push('Must be 18+');
++   if (user.country === 'blocked') errors.push('Country not supported');
++   return errors;
++ }
+
+# After: Chain of responsibility
++ abstract class Validator {
++   abstract validate(user: User): string | null;
++   setNext(validator: Validator): Validator {
++     this.next = validator;
++     return validator;
++   }
++   validate(user: User): string | null {
++     const error = this.doValidate(user);
++     if (error) return error;
++     return this.next?.validate(user) ?? null;
++   }
++ }
++
++ class EmailRequiredValidator extends Validator {
++   doValidate(user: User) {
++     return !user.email ? 'Email required' : null;
++   }
++ }
++
++ class EmailFormatValidator extends Validator {
++   doValidate(user: User) {
++     return user.email && !isValidEmail(user.email) ? 'Invalid email' : null;
++   }
++ }
++
++ // Build the chain
++ const validator = new EmailRequiredValidator()
++   .setNext(new EmailFormatValidator())
++   .setNext(new NameRequiredValidator())
++   .setNext(new AgeValidator())
++   .setNext(new CountryValidator());
+```
+
 ---
 
-## Safe Refactoring Process
+## Refactoring Steps
 
-```text
+### Safe Refactoring Process
+
+```
 1. PREPARE
    - Ensure tests exist (write them if missing)
    - Commit current state
@@ -345,19 +624,22 @@ Use this skill when:
 
 ## Common Refactoring Operations
 
-| Operation | Description |
-|-----------|-------------|
-| Extract Method | Turn code fragment into method |
-| Extract Class | Move behavior to new class |
-| Extract Interface | Create interface from implementation |
-| Inline Method | Move method body back to caller |
-| Pull Up Method | Move method to superclass |
-| Push Down Method | Move method to subclass |
-| Rename Method/Variable | Improve clarity |
-| Introduce Parameter Object | Group related parameters |
-| Replace Conditional with Polymorphism | Use polymorphism instead of switch/if |
-| Replace Magic Number with Constant | Named constants |
-| Decompose Conditional | Break complex conditions |
-| Replace Nested Conditional with Guard Clauses | Early returns |
-| Introduce Null Object | Eliminate null checks |
-| Replace Inheritance with Delegation | Composition over inheritance |
+| Operation                                     | Description                           |
+| --------------------------------------------- | ------------------------------------- |
+| Extract Method                                | Turn code fragment into method        |
+| Extract Class                                 | Move behavior to new class            |
+| Extract Interface                             | Create interface from implementation  |
+| Inline Method                                 | Move method body back to caller       |
+| Inline Class                                  | Move class behavior to caller         |
+| Pull Up Method                                | Move method to superclass             |
+| Push Down Method                              | Move method to subclass               |
+| Rename Method/Variable                        | Improve clarity                       |
+| Introduce Parameter Object                    | Group related parameters              |
+| Replace Conditional with Polymorphism         | Use polymorphism instead of switch/if |
+| Replace Magic Number with Constant            | Named constants                       |
+| Decompose Conditional                         | Break complex conditions              |
+| Consolidate Conditional                       | Combine duplicate conditions          |
+| Replace Nested Conditional with Guard Clauses | Early returns                         |
+| Introduce Null Object                         | Eliminate null checks                 |
+| Replace Type Code with Class/Enum             | Strong typing                         |
+| Replace Inheritance with Delegation           | Composition over inheritance          |

@@ -1,15 +1,6 @@
 ---
-name: refactor-clean
-description: >-
-  Code refactoring expert specializing in clean code principles, SOLID design patterns,
-  and modern software engineering best practices. Analyzes and refactors code to improve
-  quality, maintainability, and performance with incremental steps and stable behavior.
-metadata:
-  version: "1.0.0"
-  source: "https://github.com/sickn33/antigravity-awesome-skills"
-  related_skills:
-    - refactor
-    - php-modernization
+name: code-refactoring-refactor-clean
+description: "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance."
 ---
 
 # Refactor and Clean Code
@@ -30,11 +21,9 @@ You are a code refactoring expert specializing in clean code principles, SOLID d
 - The request is for documentation only
 
 ## Context
-
 The user needs help refactoring code to make it cleaner, more maintainable, and aligned with best practices. Focus on practical improvements that enhance code quality without over-engineering.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions
@@ -43,6 +32,7 @@ $ARGUMENTS
 - Propose a refactor plan with incremental steps.
 - Apply changes in small slices and keep behavior stable.
 - Update tests and verify regressions.
+- If detailed patterns are required, open `resources/implementation-playbook.md`.
 
 ## Safety
 
@@ -55,3 +45,7 @@ $ARGUMENTS
 - Refactor plan with ordered steps
 - Proposed changes and expected impact
 - Test/verification notes
+
+## Resources
+
+- `resources/implementation-playbook.md` for detailed patterns and examples.

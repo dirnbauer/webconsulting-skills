@@ -1,14 +1,6 @@
 ---
 name: find-skills
-description: >-
-  Discover and install skills from the open agent skills ecosystem using the Skills CLI
-  (npx skills). Search for skills by keyword, install from GitHub, and manage updates.
-  Use when users ask about finding, installing, or managing agent skills.
-metadata:
-  version: "1.0.0"
-  source: "https://github.com/vercel-labs/skills"
-  related_skills:
-    - skill-creator
+description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
 ---
 
 # Find Skills
@@ -37,7 +29,7 @@ The Skills CLI (`npx skills`) is the package manager for the open agent skills e
 - `npx skills check` - Check for skill updates
 - `npx skills update` - Update all installed skills
 
-**Browse skills at:** [https://skills.sh/](https://skills.sh/)
+**Browse skills at:** https://skills.sh/
 
 ## How to Help Users Find Skills
 
@@ -65,7 +57,7 @@ For example:
 
 The command will return results like:
 
-```text
+```
 Install with npx skills add <owner/repo@skill>
 
 vercel-labs/agent-skills@vercel-react-best-practices
@@ -82,7 +74,7 @@ When you find relevant skills, present them to the user with:
 
 Example response:
 
-```text
+```
 I found a skill that might help! The "vercel-react-best-practices" skill provides
 React and Next.js performance optimization guidelines from Vercel Engineering.
 
@@ -106,15 +98,15 @@ The `-g` flag installs globally (user-level) and `-y` skips confirmation prompts
 
 When searching, consider these common categories:
 
-| Category | Example Queries |
-|----------|-----------------|
+| Category        | Example Queries                          |
+| --------------- | ---------------------------------------- |
 | Web Development | react, nextjs, typescript, css, tailwind |
-| Testing | testing, jest, playwright, e2e |
-| DevOps | deploy, docker, kubernetes, ci-cd |
-| Documentation | docs, readme, changelog, api-docs |
-| Code Quality | review, lint, refactor, best-practices |
-| Design | ui, ux, design-system, accessibility |
-| Productivity | workflow, automation, git |
+| Testing         | testing, jest, playwright, e2e           |
+| DevOps          | deploy, docker, kubernetes, ci-cd        |
+| Documentation   | docs, readme, changelog, api-docs        |
+| Code Quality    | review, lint, refactor, best-practices   |
+| Design          | ui, ux, design-system, accessibility     |
+| Productivity    | workflow, automation, git                |
 
 ## Tips for Effective Searches
 
@@ -132,7 +124,7 @@ If no relevant skills exist:
 
 Example:
 
-```text
+```
 I searched for skills related to "xyz" but didn't find any matches.
 I can still help you with this task directly! Would you like me to proceed?
 
