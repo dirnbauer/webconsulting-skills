@@ -83,10 +83,55 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 
 ---
 
+We also thank **[Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio)** for the excellent
+shadcn/ui component patterns skill. The `shadcn-ui` skill is adapted from their open-source repository:
+https://github.com/giuseppe-trisciuoglio/developer-kit
+
+**Copyright (c) Giuseppe Trisciuoglio** - shadcn/ui component patterns with Radix UI and Tailwind CSS
+
+---
+
+We also thank **[Softaworks](https://github.com/softaworks)** for the excellent agent-md-refactor skill.
+The `agent-md-refactor` skill is adapted from their open-source repository:
+https://github.com/softaworks/agent-toolkit
+
+**Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure
+
+---
+
+We also thank **[GitHub](https://github.com/github)** for the excellent refactoring skill from their
+awesome-copilot collection. The `refactor` skill is adapted from their open-source repository:
+https://github.com/github/awesome-copilot
+
+**Copyright (c) GitHub** - Code refactoring patterns and best practices
+
+---
+
+We also thank **[sickn33](https://github.com/sickn33)** for the excellent clean code refactoring skill.
+The `refactor-clean` skill is adapted from their open-source repository:
+https://github.com/sickn33/antigravity-awesome-skills
+
+**Copyright (c) sickn33** - Clean code principles and SOLID design patterns
+
+---
+
+We also thank **[Vercel](https://vercel.com)** for the find-skills discovery skill.
+The `find-skills` skill is adapted from their open-source repository:
+https://github.com/vercel-labs/skills
+
+**Copyright (c) Vercel, Inc.** - Skill discovery and installation (MIT License)
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
 |-------|-------------|---------|----------|
+| **Code Quality & Refactoring** | | | |
+| `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | 1.0.0 | refactor agents.md, split instructions, organize claude.md |
+| `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
+| `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
+| `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
 | **Video & Animation** | | | |
 | `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
 | **Security & Enterprise** | | | |
@@ -112,6 +157,11 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `programmatic-seo` | SEO pages at scale with templates and data | 1.0.0 | programmatic seo, template pages, directory, location pages |
 | `launch-strategy` | Product launches, Product Hunt, go-to-market | 1.0.0 | product launch, product hunt, gtm, beta launch |
 | `ab-testing` | A/B test design, sample size, statistical significance | 1.0.0 | ab test, split test, experiment, hypothesis |
+| **Code Quality & Refactoring** | | | |
+| `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | 1.0.0 | refactor agents.md, split instructions, organize claude.md |
+| `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
+| `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
+| `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
@@ -126,6 +176,7 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
 | `web-design-guidelines` | Interface review, accessibility audit, WCAG, ARIA, semantic HTML | 1.0.0 | web design, accessibility, a11y, wcag, aria, semantic html |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
 | `react-best-practices` | React/Next.js performance optimization from Vercel (57 rules) | 1.0.0 | react, next.js, performance, optimization, bundle, waterfalls |
+| `shadcn-ui` | shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms | 1.0.0 | shadcn, radix, tailwind, components, form, dialog, button, card |
 | **Platform Design** | | | |
 | `android-design` | Material Design 3, Jetpack Compose, dynamic color, navigation | 1.0.0 | android, material design, jetpack compose, material you |
 | `ios-design` | Apple HIG for iPhone, SwiftUI, Dynamic Type, Dark Mode | 1.0.0 | ios, iphone, swiftui, uikit, dynamic type |
@@ -214,6 +265,25 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - Metrics selection: primary, secondary, guardrail
   - Statistical analysis and result interpretation
 
+### Code Quality & Refactoring
+- **agent-md-refactor**: Refactor bloated agent instruction files (AGENTS.md, CLAUDE.md, COPILOT.md)
+  - Progressive disclosure: keep essentials at root, organize rest into linked files
+  - 5-phase process: Find contradictions → Extract essentials → Categorize → Structure → Prune
+  - Templates for root file and linked category files
+- **refactor**: Code refactoring patterns and best practices from GitHub
+  - 10 common code smells with before/after fixes
+  - Safe refactoring process (prepare → identify → refactor → verify → clean up)
+  - Design patterns: Strategy, Chain of Responsibility
+  - Type safety improvements, extract method techniques
+- **refactor-clean**: Clean code expert with SOLID design patterns
+  - Incremental refactoring steps with stable behavior
+  - Code smell assessment, dependency analysis, risky hotspot identification
+  - Refactor plan with ordered steps and expected impact
+- **find-skills**: Discover and install skills from the open agent skills ecosystem
+  - Skills CLI (`npx skills`) for searching, installing, updating skills
+  - Browse at skills.sh, install from GitHub repositories
+  - Common skill categories and search tips
+
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
   - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
@@ -252,6 +322,12 @@ See: [AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)
   - Bundle size optimization (barrel imports, dynamic imports)
   - Server-side performance (React.cache, parallel fetching)
   - Re-render optimization (memo, useTransition, refs)
+- **shadcn-ui**: shadcn/ui component patterns with Radix UI and Tailwind CSS
+  - Core components: Button, Input, Form, Card, Dialog, Select, Sheet, Table, Toast, Charts
+  - Forms with React Hook Form + Zod validation
+  - Theming with CSS variables, dark mode support
+  - Next.js App Router integration, Server Components patterns
+  - Customization with class-variance-authority (cva)
 
 ### Platform Design
 - **android-design**: Material Design 3 and Android platform guidelines
@@ -712,6 +788,20 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Avoid common A/B testing mistakes"
 - "Set up experiment tracking"
 
+**🧩 shadcn/ui Components (shadcn-ui)**
+- "Set up shadcn/ui in my Next.js project"
+- "Create a login form with email and password validation using shadcn/ui"
+- "Build a settings dialog with shadcn/ui Dialog component"
+- "Add a data table with sorting and pagination using shadcn/ui Table"
+- "Create a sidebar navigation with Sheet component"
+- "Build a dashboard card layout with shadcn/ui Card"
+- "Add toast notifications to my Next.js app"
+- "Create a multi-field form with Zod validation and shadcn/ui Form"
+- "Customize shadcn/ui Button with a new gradient variant"
+- "Set up dark mode theming with shadcn/ui CSS variables"
+- "Build a chart dashboard with shadcn/ui Charts and Recharts"
+- "Create a command palette / search dialog with shadcn/ui"
+
 **⚛️ React & Next.js Performance (react-best-practices)**
 - "Review this React component for performance issues"
 - "Optimize this Next.js page"
@@ -725,6 +815,34 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Defer third-party scripts after hydration"
 - "Use SWR for client-side data fetching"
 - "Parallelize server component fetches"
+
+**🔧 Code Refactoring (refactor, refactor-clean)**
+- "Refactor this function - it's too long and hard to follow"
+- "Clean up this code and remove duplication"
+- "This class has too many responsibilities, split it up"
+- "Replace these nested if-statements with guard clauses"
+- "Extract a reusable method from this repeated logic"
+- "Apply SOLID principles to this module"
+- "Remove dead code and magic numbers from this file"
+- "Improve type safety in these functions"
+- "Find code smells in this service class"
+- "Create a refactoring plan for this legacy module"
+
+**📝 Agent Instructions Refactoring (agent-md-refactor)**
+- "Refactor my AGENTS.md - it's 500 lines and hard to maintain"
+- "Split my CLAUDE.md into focused topic files"
+- "Organize my agent instructions with progressive disclosure"
+- "Find contradictions in my agent config files"
+- "My COPILOT.md is bloated, clean it up"
+- "Create a minimal root file with links to detailed guidelines"
+
+**🔍 Skill Discovery (find-skills)**
+- "Find a skill for React performance optimization"
+- "Is there a skill for writing changelogs?"
+- "Search for testing skills on skills.sh"
+- "Install the react-best-practices skill from Vercel"
+- "What skills are available for deployment automation?"
+- "Help me find a skill for code review"
 
 **🛠️ Skill Creation (skill-creator)**
 - "Create a new skill for database migrations"
@@ -847,7 +965,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 For optimal performance, limit active skills per session:
 
 ### Frontend Session
-Active: `webconsulting-branding`, `ui-design-patterns`, `frontend-design`, `og-image`, `react-best-practices`  
+Active: `webconsulting-branding`, `ui-design-patterns`, `frontend-design`, `og-image`, `react-best-practices`, `shadcn-ui`  
 Use case: UI development, styling, component creation, visual design, social sharing, React/Next.js optimization
 
 ### Creative Design Session
@@ -915,8 +1033,8 @@ Active: `launch-strategy`, `marketing-skills`, `og-image`, `programmatic-seo`
 Use case: Product launches, Product Hunt campaigns, go-to-market strategy, feature announcements
 
 ### React & Next.js Session
-Active: `react-best-practices`, `ui-design-patterns`, `og-image`  
-Use case: React/Next.js performance optimization, bundle size reduction, data fetching patterns, server components
+Active: `react-best-practices`, `shadcn-ui`, `ui-design-patterns`, `og-image`  
+Use case: React/Next.js performance optimization, shadcn/ui components, bundle size reduction, data fetching patterns
 
 ### Research & Documentation Session
 Active: `firecrawl`, `context7`, `ai-search-optimization`  
@@ -929,6 +1047,14 @@ Use case: Material Design 3, Jetpack Compose, dynamic color, Android navigation,
 ### Apple Platform Session
 Active: `ios-design`, `ipados-design`, `macos-design`, `watchos-design`, `tvos-design`, `visionos-design`  
 Use case: SwiftUI/UIKit development, Human Interface Guidelines, Apple platform-specific patterns
+
+### Code Refactoring Session
+Active: `refactor`, `refactor-clean`, `agent-md-refactor`, `php-modernization`  
+Use case: Code quality improvement, removing code smells, SOLID refactoring, agent instruction restructuring
+
+### Skill Management Session
+Active: `find-skills`, `skill-creator`  
+Use case: Discovering new skills, installing skills from skills.sh, creating custom skills
 
 ### Cross-Platform Design Session
 Active: `android-design`, `ios-design`, `web-platform-design`, `ui-design-patterns`  
@@ -985,6 +1111,11 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | programmatic-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | launch-strategy | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ab-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
+| agent-md-refactor | ✓ | ✓ | ✓ | ✓ | ✓ |
+| refactor | ✓ | ✓ | ✓ | ✓ | ✓ |
+| refactor-clean | ✓ | ✓ | ✓ | ✓ | ✓ |
+| find-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
+| shadcn-ui | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 

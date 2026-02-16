@@ -14,8 +14,9 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
 | **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
+| **Code Quality & Refactoring** | 4 skills | Agent instruction refactoring, code smells, SOLID patterns, skill discovery |
 | **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
-| **Frontend & Design** | 6 skills | UI patterns, design systems, accessibility, OG images, React/Next.js, creative frontend |
+| **Frontend & Design** | 7 skills | UI patterns, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
 | **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
@@ -154,6 +155,11 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 | Skill | Trigger Keywords | Example Prompt |
 |-------|------------------|----------------|
+| `agent-md-refactor` | refactor agents.md, split instructions, organize claude.md | "Refactor my AGENTS.md - it's too long" or "Split my CLAUDE.md into focused files" |
+| `refactor` | refactor, clean up, code smell, improve code, extract method | "Refactor this function" or "Clean up this code and remove duplication" |
+| `refactor-clean` | refactor, clean code, solid, maintainability | "Apply SOLID principles to this module" or "Find code smells and fix them" |
+| `find-skills` | find skill, install skill, npx skills, skills.sh | "Find a skill for React performance" or "Search skills.sh for testing tools" |
+| `shadcn-ui` | shadcn, radix, tailwind, components, form, dialog, button | "Set up shadcn/ui in my Next.js project" or "Build a form with Zod validation" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
@@ -205,6 +211,74 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `legal-impressum` | impressum, legal notice, austria, offenlegung, germany, DDG | "Create Austrian Impressum for a GmbH" or "German DDG-compliant legal notice" |
 
 ### Example Prompts (Copy & Paste)
+
+#### 🔧 Code Refactoring
+
+**Refactor Code (refactor, refactor-clean):**
+```
+This function is 200 lines long with deeply nested conditionals. Refactor it into smaller, focused functions with guard clauses.
+```
+
+```
+Find all code smells in my UserService class: duplication, god object, long parameter lists, magic numbers.
+```
+
+```
+Apply the Strategy pattern to replace this long switch statement for shipping calculation.
+```
+
+```
+Create a refactoring plan for this legacy module. Identify risky hotspots, propose incremental steps, and keep behavior stable.
+```
+
+```
+Remove dead code, extract duplicated logic into shared utilities, and add proper TypeScript types.
+```
+
+**Refactor Agent Instructions (agent-md-refactor):**
+```
+My AGENTS.md is 500 lines and hard to maintain. Refactor it using progressive disclosure: keep essentials at root, split the rest into linked topic files.
+```
+
+```
+Find contradictions in my CLAUDE.md file and flag vague instructions for deletion.
+```
+
+```
+Reorganize my agent config into: code-style.md, testing.md, architecture.md, and git-workflow.md
+```
+
+**Find and Install Skills (find-skills):**
+```
+Find a skill for React performance optimization on skills.sh
+```
+
+```
+Search for available skills related to deployment automation
+```
+
+```
+Install the refactor skill from github/awesome-copilot using npx skills
+```
+
+**shadcn/ui Components:**
+```
+Set up shadcn/ui in my Next.js project and create a login form with email/password validation using React Hook Form and Zod
+```
+
+```
+Build a dashboard with shadcn/ui: Card grid for stats, data Table with pagination, and toast notifications for actions
+```
+
+```
+Create a settings dialog using shadcn/ui Dialog with a form inside. Include text inputs, a select dropdown for role, and a checkbox for notifications.
+```
+
+```
+Customize the shadcn/ui Button component with a new "gradient" variant and an "xl" size option
+```
+
+---
 
 #### 🏗️ Project Setup & Environment
 
@@ -1798,6 +1872,11 @@ grep -r "DataHandler" ~/.claude/skills/
 | `deepfake-detection` | Multimodal media authentication, synthetic media forensics | webconsulting |
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security | webconsulting |
+| **Code Quality & Refactoring** | | |
+| `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | Softaworks |
+| `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
+| `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | sickn33 |
+| `find-skills` | Discover and install skills from skills.sh ecosystem | Vercel |
 | **PHP & Tools** | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | webconsulting |
 | `cli-tools` | CLI tool management and auto-installation | webconsulting |
@@ -1815,6 +1894,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | `web-design-guidelines` | Interface review, WCAG, ARIA, accessibility | Vercel |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
 | `react-best-practices` | React/Next.js performance optimization (57 rules) | Vercel |
+| `shadcn-ui` | shadcn/ui component patterns (Radix UI, Tailwind CSS, Zod) | Giuseppe Trisciuoglio |
 | **Documents & Office** | | |
 | `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, analysis | Anthropic |
 | **Video & Animation** | | |
@@ -2012,6 +2092,21 @@ Skills in this collection cover:
 
 The following repositories are the source for skills in this collection:
 
+### Softaworks (Agent MD Refactor)
+- https://github.com/softaworks/agent-toolkit
+
+### GitHub (Code Refactoring)
+- https://github.com/github/awesome-copilot
+
+### sickn33 (Clean Code Refactoring)
+- https://github.com/sickn33/antigravity-awesome-skills
+
+### Giuseppe Trisciuoglio (shadcn/ui)
+- https://github.com/giuseppe-trisciuoglio/developer-kit
+
+### Vercel (Find Skills, React, Web Design)
+- https://github.com/vercel-labs/skills
+
 ### Supabase (Postgres)
 - https://github.com/supabase/agent-skills
 
@@ -2074,9 +2169,42 @@ https://github.com/stevysmith/og-image-skill
 ---
 
 We also thank **[Vercel Engineering](https://vercel.com)** for their excellent React and Next.js
-performance optimization guidelines. The `react-best-practices` skill is adapted from their
-open-source repository: https://github.com/vercel-labs/agent-skills
+performance optimization guidelines, web design guidelines, and find-skills discovery tool.
+The `react-best-practices`, `web-design-guidelines`, and `find-skills` skills are adapted from their
+open-source repositories: https://github.com/vercel-labs/agent-skills and https://github.com/vercel-labs/skills
 
-**Copyright (c) Vercel, Inc.** - React and Next.js performance optimization (MIT License)
+**Copyright (c) Vercel, Inc.** - React/Next.js optimization, web design guidelines, skill discovery (MIT License)
 Adapted by webconsulting.at for this skill collection
+
+---
+
+We also thank **[Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio)** for the excellent
+shadcn/ui component patterns skill. The `shadcn-ui` skill is adapted from their open-source repository:
+https://github.com/giuseppe-trisciuoglio/developer-kit
+
+**Copyright (c) Giuseppe Trisciuoglio** - shadcn/ui component patterns with Radix UI and Tailwind CSS
+
+---
+
+We also thank **[Softaworks](https://github.com/softaworks)** for the excellent agent-md-refactor skill.
+The `agent-md-refactor` skill is adapted from their open-source repository:
+https://github.com/softaworks/agent-toolkit
+
+**Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure
+
+---
+
+We also thank **[GitHub](https://github.com/github)** for the excellent refactoring skill from their
+awesome-copilot collection. The `refactor` skill is adapted from their open-source repository:
+https://github.com/github/awesome-copilot
+
+**Copyright (c) GitHub** - Code refactoring patterns and best practices
+
+---
+
+We also thank **[sickn33](https://github.com/sickn33)** for the excellent clean code refactoring skill.
+The `refactor-clean` skill is adapted from their open-source repository:
+https://github.com/sickn33/antigravity-awesome-skills
+
+**Copyright (c) sickn33** - Clean code principles and SOLID design patterns
 
