@@ -9,7 +9,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 | Category | Skills | Description |
 |----------|--------|-------------|
 | **TYPO3 CMS** | 15 skills | Content Blocks, DataHandler, Powermail, Workspaces, Records List Types, upgrades, testing, security |
-| **Video & Animation** | 1 skill | Remotion video creation in React |
+| **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
@@ -185,6 +185,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
+| `webconsulting-create-documentation` | documentation, help page, product video, screenshots, tts, gsap | "Create product documentation with video tour" or "Build a help page" |
 | `react-best-practices` | react, next.js, performance, optimization, bundle size, waterfalls | "Optimize this React component" or "Eliminate request waterfalls" |
 | `deepfake-detection` | deepfake, media forensics, fake detection, synthetic media, prnu | "Verify authenticity of this video" or "Detect AI-generated images" |
 | `readiness-report` | /readiness-report, agent readiness, codebase maturity | "Run /readiness-report to evaluate this repository" |
@@ -1429,6 +1430,64 @@ Animate a bouncing ball using spring physics. Configure tension, friction, and m
 
 ---
 
+#### 📖 Product Documentation & Video Tours (webconsulting-create-documentation)
+
+The `webconsulting-create-documentation` skill creates **complete product documentation**: help pages, AI-generated screenshots, narrated product tour videos (Remotion + ElevenLabs TTS + Suno AI music), and animated diagrams with GSAP.
+
+**Help Pages:**
+
+```
+Create a help page for my Next.js app with collapsible FAQ sections, step-by-step instructions, and AI-generated placeholder illustrations.
+```
+
+```
+Build a user guide with navigation sidebar, search, and dark/light mode support.
+```
+
+**Product Tour Videos:**
+
+```
+Create a 60-second product tour video with Remotion. Include title card, 3 feature scenes with narration, and an end card with QR codes.
+```
+
+```
+Generate ElevenLabs TTS narration in a Jony Ive-inspired calm, deliberate style for my product walkthrough script.
+```
+
+```
+Add Suno AI background music to my Remotion video with automatic volume ducking during narration.
+```
+
+**Remotion + GSAP Animations:**
+
+```
+Create an animated architecture diagram where SVG nodes pop in with elastic easing and connection lines draw themselves between components.
+```
+
+```
+Build a 3D exploded screenshot view: separate my UI into layers (background, modal, buttons), tilt into isometric perspective, and pull layers apart on the Z-axis.
+```
+
+```
+Animate a data dashboard with number odometers counting up, staggered table row reveals, and spring-loaded bar charts.
+```
+
+```
+Create a code diff walkthrough animation: removed lines shrink and glow red, new lines expand and glow green, unchanged lines glide to new positions.
+```
+
+```
+Animate a glass morph spotlight effect that zooms into a UI area using clip-path while blurring the rest of the screenshot.
+```
+
+**GitHub README Documentation:**
+
+```
+Create GitHub README documentation with dark/light theme screenshots using <picture> tags and an embedded product video.
+```
+
+---
+
 #### 🖼️ OG Images & Social Sharing
 
 **Generate OG Image:**
@@ -1899,6 +1958,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, analysis | Anthropic |
 | **Video & Animation** | | |
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
+| `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | webconsulting |
 | **Legal & Compliance** | | |
 | `legal-impressum` | Austrian Impressum (all Gesellschaftsformen) | webconsulting |
 | `legal-impressum/GERMANY` | German Impressum (DDG, MStV) | webconsulting |

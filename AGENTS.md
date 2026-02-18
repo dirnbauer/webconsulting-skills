@@ -134,6 +134,7 @@ https://github.com/vercel-labs/skills
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
 | **Video & Animation** | | | |
 | `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
+| `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | 1.1.0 | documentation, help page, product video, screenshots, tts, gsap |
 | **Security & Enterprise** | | | |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | 1.0.0 | incident report, post-mortem, ddos, forensics |
@@ -217,6 +218,7 @@ https://github.com/vercel-labs/skills
 
 ### Video & Animation
 - **remotion-best-practices**: Video creation in React with Remotion, animations, transitions, audio
+- **webconsulting-create-documentation**: Product documentation with help pages, AI screenshots, narrated video tours (Remotion + GSAP + ElevenLabs TTS + Suno AI music), GitHub README visual docs
 
 ### Security & Enterprise
 - **security-audit**: Deep security audits aligned with OWASP Top 10
@@ -699,6 +701,18 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Optimize RLS policies for performance"
 - "Fix N+1 queries with batch loading"
 
+**📖 Product Documentation & Video Tours (webconsulting-create-documentation)**
+- "Create product documentation with help pages and video tour"
+- "Build a help page with collapsible FAQ sections and step-by-step instructions"
+- "Create a 60-second product tour video with Remotion, TTS narration, and background music"
+- "Generate ElevenLabs TTS narration in a calm Jony Ive style"
+- "Animate an SVG architecture diagram with GSAP: nodes pop in, lines draw themselves"
+- "Build a 3D exploded screenshot view separating UI into layers"
+- "Create number odometer animations for dashboard infographics"
+- "Code diff walkthrough: removed lines glow red, new lines glow green"
+- "Add Suno AI background music with volume ducking during narration"
+- "GitHub README with dark/light theme screenshots and embedded video"
+
 **🖼️ OG Images & Social Sharing (og-image)**
 - "Generate an OG image for my Next.js app"
 - "Create social preview image matching my design system"
@@ -1001,8 +1015,8 @@ Active: `typo3-content-blocks`, `typo3-datahandler/SKILL-CONTENT-BLOCKS`, `typo3
 Use case: Converting classic TCA/SQL extensions to Content Blocks
 
 ### Documentation Session
-Active: `typo3-docs`, `typo3-conformance`  
-Use case: Extension documentation, quality assessment, standards compliance
+Active: `typo3-docs`, `typo3-conformance`, `webconsulting-create-documentation`  
+Use case: Extension documentation, quality assessment, product documentation, video tours
 
 ### Core Contribution Session
 Active: `typo3-core-contributions`, `typo3-testing`, `typo3-conformance`  
@@ -1116,6 +1130,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | refactor-clean | ✓ | ✓ | ✓ | ✓ | ✓ |
 | find-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
 | shadcn-ui | ✓ | ✓ | ✓ | ✓ | ✓ |
+| webconsulting-create-documentation | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
