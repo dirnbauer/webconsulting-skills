@@ -1157,6 +1157,104 @@ Batch process all PDFs in this folder: extract text and save as individual markd
 
 ---
 
+#### 🔍 Solr Search (typo3-solr)
+
+The `typo3-solr` skill provides expert guidance on **Apache Solr search integration for TYPO3**: installation, Index Queue, faceting, suggest/autocomplete, PSR-14 events, custom indexers, vector/semantic search, and deep debugging. Includes supplements for file indexing (`SKILL-SOLRFAL.md`) and custom vanilla JS frontends (`SKILL-FRONTEND.md`).
+
+**Installation & Setup:**
+
+```
+Set up EXT:solr with DDEV using the ddev-typo3-solr addon. Configure the Solr connection for my TYPO3 13.4 site with two languages (German and English).
+```
+
+```
+Configure a production Docker setup for Solr with persistent data, custom configsets, and health checks.
+```
+
+```
+Set up hosted-solr.com for my multi-language TYPO3 site. Configure per-environment connections using helhum/dotenv-connector.
+```
+
+**Indexing:**
+
+```
+Index EXT:news records into Solr with categories, tags, and author information. Configure the Index Queue via TypoScript.
+```
+
+```
+Create a custom PSR-14 event listener that enriches Solr documents with data from related records during indexing.
+```
+
+```
+My items are in the Index Queue but not appearing in search results. Debug the full pipeline from queue to search.
+```
+
+```
+Index custom Extbase records from tx_myext_domain_model_product with price, categories, and images.
+```
+
+**Faceted Search:**
+
+```
+Configure faceted search with category filters, date range facets, and price range facets. Include proper TypoScript and Fluid templates.
+```
+
+```
+Add a hierarchical category facet that shows parent > child categories with item counts.
+```
+
+**Suggest & Autocomplete:**
+
+```
+Add suggest/autocomplete to my search form. Show search suggestions as the user types with proper debouncing.
+```
+
+```
+Replace the default jQuery-based suggest with vanilla JavaScript. Use the EXT:solr suggest API endpoint.
+```
+
+**Vector Search (LLM/Semantic):**
+
+```
+Set up Solr vector search with OpenAI embeddings for semantic search on my TYPO3 content. Use Solr's native dense vector support.
+```
+
+```
+Configure Solr's text-to-vector transformer with a local model for embedding generation without external API calls.
+```
+
+**File Indexing (solrfal):**
+
+```
+Index PDF files from fileadmin into Solr using EXT:solrfal and Apache Tika. Configure the Tika server in Docker.
+```
+
+```
+Set up file indexing for Word documents, Excel files, and PDFs with proper content extraction and metadata.
+```
+
+**Custom Frontend (Vanilla JS):**
+
+```
+Build a custom search interface with vanilla JavaScript: instant search results, facet filtering, and pagination without jQuery.
+```
+
+**Debugging & Troubleshooting:**
+
+```
+My search returns "Search is currently not available." Debug the connection, core status, and configuration.
+```
+
+```
+Full debugging: walk through the complete pipeline from Solr connection to search results. Check Index Queue, schema, and query configuration.
+```
+
+```
+Items show as "indexed" in the backend but search returns zero results. How do I debug the search query?
+```
+
+---
+
 #### 🗂️ TCA & FlexForm
 
 **TCA Select with Items:**
@@ -1989,6 +2087,8 @@ Most TYPO3 skills include additional supplement files:
 |------------|---------|
 | `SKILL-PHP84.md` | PHP 8.4 specific patterns: property hooks, asymmetric visibility, new array functions |
 | `SKILL-CONTENT-BLOCKS.md` | Content Blocks integration: using Content Blocks with the skill's domain |
+| `SKILL-SOLRFAL.md` | File indexing with solrfal and Apache Tika (typo3-solr only) |
+| `SKILL-FRONTEND.md` | Custom vanilla JS for search, suggest, facets without jQuery (typo3-solr only) |
 
 **Skills with supplements:**
 - `php-modernization/SKILL-PHP84.md` - Comprehensive PHP 8.4 features reference
@@ -2003,6 +2103,8 @@ Most TYPO3 skills include additional supplement files:
 - `typo3-seo/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - SEO with structured data
 - `typo3-docs/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Documenting PHP 8.4 and CB
 - `typo3-core-contributions/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Core contributions
+- `typo3-solr/SKILL-SOLRFAL.md` - File indexing with solrfal and Apache Tika (PDF, DOCX, XLSX)
+- `typo3-solr/SKILL-FRONTEND.md` - Custom vanilla JS for search, suggest, facets (no jQuery)
 
 ### Cursor Integration
 

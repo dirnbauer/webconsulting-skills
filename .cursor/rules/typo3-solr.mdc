@@ -538,6 +538,9 @@ plugin.tx_solr.search {
                 field = year_intS
                 type = queryGroup
                 queryGroup {
+                    2026 {
+                        query = [2026-01-01T00:00:00Z TO 2026-12-31T23:59:59Z]
+                    }
                     2025 {
                         query = [2025-01-01T00:00:00Z TO 2025-12-31T23:59:59Z]
                     }
@@ -989,7 +992,500 @@ EXT:solr 13.1 has initial vector search support. For custom integration, use a P
 
 ## 12. Debugging & Troubleshooting
 
-This section is the core reference for diagnosing and fixing EXT:solr issues.
+This section is the core reference for diagnosing and fixing EXT:solr issues. If you are new to EXT:solr, start with the step-by-step guide below before jumping to the reference sections.
+
+### Step-by-Step Troubleshooting Guide (Beginner)
+
+If search is not working and you have **no idea where to start**, follow these steps in order. Each step explains **what** you are checking, **where** to find it, and **what the result means**.
+
+---
+
+#### Step 1: Understand the Architecture
+
+Before debugging, know how EXT:solr works. There are **four parts** that must all work:
+
+```
+┌─────────────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────────────┐
+│  1. Connection   │───▶│  2. Indexing  │───▶│  3. Solr Core │───▶│  4. Frontend  │
+│  TYPO3 ↔ Solr    │    │  Queue+Worker │    │  Documents   │    │  Search+Fluid │
+└─────────────────┘    └──────────────┘    └──────────────┘    └──────────────┘
+```
+
+- **Connection**: TYPO3 must know where Solr is running (host, port, core name)
+- **Indexing**: TYPO3 must send your content (pages, news, etc.) to Solr via the Index Queue and a Scheduler task
+- **Solr Core**: The Solr server stores documents and makes them searchable
+- **Frontend**: The search plugin sends queries to Solr and renders results via Fluid templates
+
+A problem at **any** of these four parts breaks search. The steps below check each part from left to right.
+
+---
+
+#### Step 2: Is Solr Reachable? (Connection Check)
+
+**Where:** TYPO3 Backend → Admin Tools → Reports → Status Report
+
+**What you see:** A list of status checks. Look for entries about "Solr":
+- **All green** ✅ = Solr is reachable, connection works → go to Step 3
+- **Red/yellow** ⚠️ = Solr is not reachable → fix connection first
+
+**If red -- things to check:**
+
+Open your site configuration file `config/sites/<your-site>/config.yaml` and verify these settings:
+
+```yaml
+solr_enabled_read: true
+solr_host_read: solr              # hostname where Solr runs
+solr_port_read: '8983'            # port (8983 for standalone, 8984 for DDEV)
+solr_scheme_read: http            # http or https (DDEV uses https)
+solr_path_read: /                 # usually just /
+solr_core_read: core_en           # must match the actual core name in Solr
+```
+
+**For DDEV users:**
+
+```yaml
+solr_host_read: <your-project>.ddev.site
+solr_port_read: '8984'
+solr_scheme_read: https
+```
+
+**Quick test from the terminal:**
+
+```bash
+# DDEV: test if Solr responds
+ddev exec curl -s http://solr:8983/solr/core_en/admin/ping
+
+# Expected: {"status":"OK"}
+# If "Connection refused": Solr container is not running → ddev restart
+```
+
+**After fixing:** Always click "Initialize connection" in the EXT:solr backend module (Web → Search → Overview tab).
+
+---
+
+#### Step 3: Is Content in the Index Queue? (Indexing Check)
+
+**Where:** TYPO3 Backend → Web → Search → "Index Queue" tab
+
+**What you see:** A table showing record types (pages, news, etc.) with counts.
+
+| What you see | What it means | What to do |
+|-------------|---------------|------------|
+| **Table is empty** | No content has been queued for Solr | You need to initialize the queue (see below) |
+| **Items with count > 0, errors = 0** | Content is queued and indexed | Go to Step 4 |
+| **Items with errors > 0** | Indexing failed for some records | Read the error messages (see below) |
+
+**If the queue is empty:**
+
+1. Check that EXT:solr TypoScript templates are included on the root page:
+   - Backend → Web → Template module → root page → "Includes" tab
+   - You must see "Search - Base Configuration" in the list
+   - If it's missing, add it: click "Include static (from extensions)" and select "Search - Base Configuration (solr)"
+
+2. Initialize the queue:
+   - Go to Web → Search → "Index Queue" tab
+   - Select the checkboxes for the record types you want to index (e.g., "pages")
+   - Click "Queue selected content"
+   - The table should now show a count
+
+**If items have errors:**
+
+The `errors` column tells you what went wrong. Common errors:
+
+| Error message | What it means | Fix |
+|---------------|---------------|-----|
+| "Could not resolve host" | Solr server unreachable | Go back to Step 2 |
+| "Document is missing mandatory uniqueKey field: id" | The document has no ID | Check your TypoScript field mapping |
+| "OutOfMemoryError" | PHP or Solr ran out of memory | Increase `memory_limit` for the scheduler |
+| "HTTP 404" | The Solr core doesn't exist | Check core name, run `ddev solrctl apply` |
+
+---
+
+#### Step 4: Have Documents Arrived in Solr? (Solr Check)
+
+Even if the queue shows no errors, documents might not have been sent to Solr yet. The queue only fills the to-do list -- a **Scheduler task** actually sends them.
+
+**Check if the Scheduler task exists:**
+- Backend → System → Scheduler
+- Look for a task called "Index Queue Worker" (class: `ApacheSolrForTypo3\Solr\Task\IndexQueueWorkerTask`)
+- If it doesn't exist: create it (Add task → select "Index Queue Worker" → save)
+- If it exists: check "Last execution" -- has it run recently?
+
+**Run it manually now:**
+- Click the "play" button next to the Index Queue Worker task
+
+**Verify documents are in Solr:**
+
+Open the Solr Admin UI:
+- DDEV: run `ddev launch :8984` (opens in browser)
+- Production: navigate to `http://your-solr-host:8983/solr/`
+
+In Solr Admin UI:
+1. Select your core from the dropdown (e.g., `core_en`)
+2. Click "Query" in the left menu
+3. Leave `q` as `*:*` (means "all documents")
+4. Click "Execute Query"
+5. Check `numFound` in the response:
+
+| numFound | What it means | What to do |
+|----------|---------------|------------|
+| **0** | No documents at all | Scheduler task didn't run, or indexing failed silently → enable logging (see 12.0 Layer 2 below) |
+| **> 0** | Documents exist in Solr | Go to Step 5 |
+
+**Useful queries to run in Solr Admin:**
+
+```
+# How many documents per type?
+q=*:*&rows=0&facet=true&facet.field=type
+
+# Show 5 page documents with their key fields
+q=*:*&fq=type:pages&rows=5&fl=uid,title,url,siteHash
+
+# Search for a specific term
+q=your search term&fl=uid,title,score
+```
+
+---
+
+#### Step 5: Does the Frontend Show Results? (Frontend Check)
+
+**Where:** Open the page with the search plugin in the frontend, type a search term you know exists in Solr.
+
+| What you see | What it means | What to do |
+|-------------|---------------|------------|
+| **"Search is currently not available"** | Plugin can't connect to Solr | Go back to Step 2 -- connection issue from the frontend |
+| **Search works, but 0 results** | Query runs but finds nothing | Check site hash, access field (see below) |
+| **Results appear but wrong** | Documents found but wrong content/order | Check field mapping, boosting (see below) |
+| **Results appear correctly** ✅ | Everything works! | Done |
+
+**If 0 results even though Solr has documents:**
+
+The most common cause is a **site hash mismatch**. EXT:solr adds a `siteHash` to every document to prevent cross-site contamination. If the hash during indexing differs from the hash during searching, no results appear.
+
+Check in Solr Admin:
+```
+# What siteHash values exist in the index?
+q=*:*&rows=0&facet=true&facet.field=siteHash
+```
+
+Compare with what EXT:solr expects: open Extension Settings (Admin Tools → Settings → Extension Configuration → solr) and check `siteHashStrategy`. Since EXT:solr 13.0, the default is **site-identifier** (not domain).
+
+If the hashes don't match: **re-index** (Backend → Web → Search → Index Queue → clear and re-queue all).
+
+**Other causes of 0 results:**
+
+- `plugin.tx_solr.search.targetPage` points to wrong page → set it to the page UID containing the search plugin
+- `plugin.tx_solr.enabled` is `0` somewhere in TypoScript → check for override
+- Access restrictions: the `access` field on documents doesn't match the frontend user → test in Solr Admin with `q=*:*&fl=uid,title,access`
+
+---
+
+#### Step 6: Something Else is Wrong -- Enable Logging
+
+If the steps above didn't solve it, **enable logging** to see exactly what EXT:solr does:
+
+**1. Add TypoScript logging** (on the root page, dev/staging only):
+
+```typoscript
+plugin.tx_solr.logging {
+    debugOutput = 1
+    exceptions = 1
+    indexing = 1
+    query.rawGet = 1
+    query.queryString = 1
+    query.searchWords = 1
+}
+```
+
+**2. Write logs to a file** (in `config/system/additional.php`):
+
+```php
+$GLOBALS['TYPO3_CONF_VARS']['LOG']['ApacheSolrForTypo3']['Solr']['writerConfiguration'] = [
+    \Psr\Log\LogLevel::DEBUG => [
+        \TYPO3\CMS\Core\Log\Writer\FileWriter::class => [
+            'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/solr.log',
+        ],
+    ],
+];
+```
+
+**3. Watch the log file:**
+
+```bash
+# DDEV
+ddev exec tail -f var/log/solr.log
+
+# Then trigger the action: run the scheduler, or do a search in the frontend
+```
+
+**What to look for in the log:**
+
+- `[ERROR]` lines → these tell you exactly what failed
+- `Solr raw GET: http://...` → the exact URL sent to Solr (paste it in a browser to test)
+- `Response: 0 results` → Solr answered but found nothing (site hash? access? wrong field?)
+
+**4. Also check:** Admin Tools → Log module (filter by component "ApacheSolrForTypo3")
+
+---
+
+#### Step 7: Still Stuck? Escalation Path
+
+If all six steps above didn't solve it:
+
+1. **Ask in Slack:** [TYPO3 Slack #ext-solr](https://typo3.slack.com/messages/ext-solr/) -- the maintainers (dkd) are active here
+2. **Search GitHub Issues:** [TYPO3-Solr/ext-solr/issues](https://github.com/TYPO3-Solr/ext-solr/issues) -- your problem might already be reported
+3. **dkd support:** [Professional support](https://www.dkd.de/en/products/solr-enterprise-search/) -- paid support from the extension maintainers
+4. **Collect info for a bug report:** Solr version, EXT:solr version, PHP version, TYPO3 version, error messages from the log, Solr Admin query results
+
+---
+
+### 12.0 How to Get Debug Data
+
+Before you can fix anything, you need to **see** what EXT:solr is doing. There are six layers of debug data, from quick checks to deep inspection:
+
+```mermaid
+graph TD
+    subgraph quick ["1. Quick Checks (no config needed)"]
+        Reports["TYPO3 Reports Module"]
+        Backend["EXT:solr Backend Module"]
+        SolrUI["Solr Admin UI"]
+    end
+    subgraph config ["2. Enable Debug Output"]
+        TSLog["TypoScript logging.*"]
+        FileLog["FileWriter → var/log/solr.log"]
+        DebugTools["EXT:solrdebugtools"]
+    end
+    subgraph deep ["3. Deep Inspection"]
+        SolrDebug["Solr debugQuery=true"]
+        DB["SQL on tx_solr_* tables"]
+        CLI["CLI curl to Solr API"]
+    end
+    Reports --> TSLog
+    Backend --> TSLog
+    SolrUI --> SolrDebug
+    TSLog --> FileLog
+    FileLog --> DB
+    DebugTools --> SolrDebug
+```
+
+#### Layer 1: Quick checks (zero configuration)
+
+**TYPO3 Reports module** (Admin Tools -> Reports -> Status Report):
+- Shows connection status, configset match, core availability per language
+- If anything is red/yellow here, fix it before debugging further
+
+**EXT:solr backend module** (Web -> Search):
+- **Overview tab**: connection status per site and language
+- **Index Queue tab**: record counts by type, error counts, last indexed timestamp
+- **Index Fields tab**: all fields in the Solr schema with types and stored/indexed flags
+- **Stop Words / Synonyms tabs**: current configuration on the Solr core
+
+**Solr Admin UI** (DDEV: `ddev launch :8984`, Production: `http://host:8983/solr/`):
+- **Dashboard**: JVM memory, Solr version, uptime
+- **Core Selector** (dropdown): pick the core you want to inspect
+- **Query tab**: run queries directly against the core
+- **Schema Browser**: inspect field types, stored/indexed flags, sample values
+- **Analysis tab**: paste text to see how Solr tokenizes and stems it
+
+#### Layer 2: Enable TypoScript debug logging
+
+Add to your **root page TypoScript setup** (dev/staging only):
+
+```typoscript
+plugin.tx_solr.logging {
+    debugOutput = 1
+    exceptions = 1
+
+    indexing = 1
+    indexing.indexQueueInitialization = 1
+    indexing.pageIndexed = 1
+    indexing.queue.news = 1
+
+    query.rawGet = 1
+    query.rawPost = 1
+    query.queryString = 1
+    query.searchWords = 1
+}
+```
+
+| Setting | What it logs |
+|---------|-------------|
+| `debugOutput` | Writes debug info to the TYPO3 devlog |
+| `exceptions` | Full exception stack traces from Solr communication |
+| `indexing` | Every document sent to Solr during indexing |
+| `indexing.indexQueueInitialization` | Which tables were initialized into the queue |
+| `indexing.pageIndexed` | Each page after it was indexed (URL, fields, response) |
+| `indexing.queue.<name>` | Per-config logging (e.g., `queue.news`, `queue.events`) |
+| `query.rawGet` | The exact HTTP GET URL sent to Solr |
+| `query.rawPost` | POST body sent to Solr (for complex queries) |
+| `query.queryString` | The parsed Solr query string |
+| `query.searchWords` | The user's search input after processing |
+
+**Where does the output go?** By default, to the TYPO3 logging system. To get a file you can `tail -f`:
+
+```php
+// config/system/additional.php
+$GLOBALS['TYPO3_CONF_VARS']['LOG']['ApacheSolrForTypo3']['Solr']['writerConfiguration'] = [
+    \Psr\Log\LogLevel::DEBUG => [
+        \TYPO3\CMS\Core\Log\Writer\FileWriter::class => [
+            'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/solr.log',
+        ],
+    ],
+];
+```
+
+Then watch live:
+
+```bash
+# DDEV
+ddev exec tail -f var/log/solr.log
+
+# Standalone
+tail -f /var/www/html/var/log/solr.log
+```
+
+**Also check the TYPO3 system log:** Admin Tools -> Log module, filter by component `ApacheSolrForTypo3`.
+
+#### Layer 3: Solr debugQuery (score explanation)
+
+In Solr Admin UI -> Query tab, add `debugQuery=true` to see **why** a document ranks where it does:
+
+```
+q=typo3 solr&debugQuery=true&fl=uid,title,score
+```
+
+The response includes a `debug` section:
+
+```json
+{
+  "debug": {
+    "rawquerystring": "typo3 solr",
+    "querystring": "typo3 solr",
+    "parsedquery": "(title:typo3 | content:typo3) (title:solr | content:solr)",
+    "QParser": "ExtendedDismaxQParser",
+    "explain": {
+      "4f547484...": "\n7.256 = sum of:\n  3.628 = weight(title:typo3) ...\n  3.628 = weight(title:solr) ..."
+    },
+    "timing": {
+      "time": 2.0,
+      "prepare": { "time": 1.0 },
+      "process": { "time": 1.0 }
+    }
+  }
+}
+```
+
+Key fields in the debug response:
+
+| Field | What it tells you |
+|-------|-------------------|
+| `parsedquery` | How Solr interpreted your search terms (which fields, operators) |
+| `explain` | Per-document score breakdown: which fields matched, TF-IDF/BM25 weights |
+| `timing` | Query execution time per phase (prepare, process) |
+| `rawquerystring` | The original query before parsing |
+
+**Reading the explain output:** Each line shows a score component. Higher = more relevant. Look for:
+- Which **fields** contribute most (title vs content)
+- **Boost** values being applied
+- Whether **coord** (coordination) penalizes partial matches
+
+#### Layer 4: EXT:solrdebugtools (funding extension)
+
+[EXT:solrdebugtools](https://www.typo3-solr.com/) adds visual debugging to the frontend:
+
+- **Debug\Query ViewHelper**: shows the Solr query, parsed query, and timing in the frontend
+- **Explain display**: per-result score breakdown as pie chart
+- **Query parameters**: see all parameters sent to Solr
+
+Add to your Fluid template during development:
+
+```html
+<solrdebug:query resultSet="{resultSet}" />
+```
+
+This renders a debug panel directly in the search results page showing the full Solr request and response.
+
+#### Layer 5: CLI curl to Solr API
+
+Bypass TYPO3 entirely and talk to Solr directly:
+
+```bash
+# Ping (is Solr alive?)
+ddev exec curl -s http://solr:8983/solr/core_en/admin/ping | python3 -m json.tool
+
+# Total document count
+ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0' | python3 -m json.tool
+
+# Search with debug
+ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=test&debugQuery=true&fl=uid,title,score&wt=json' | python3 -m json.tool
+
+# Check a specific document by uid
+ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=uid:42&fl=*' | python3 -m json.tool
+
+# List all field names in the index
+ddev exec curl -s 'http://solr:8983/solr/core_en/admin/luke?numTerms=0&wt=json' | python3 -m json.tool | grep '"name"'
+
+# Document count by type
+ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=type' | python3 -m json.tool
+
+# Check what siteHash values exist
+ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=siteHash' | python3 -m json.tool
+
+# Analyze how a term is tokenized (for field type "text")
+ddev exec curl -s 'http://solr:8983/solr/core_en/analysis/field?analysis.fieldname=content&analysis.fieldvalue=TYPO3+Content+Management&wt=json' | python3 -m json.tool
+```
+
+**From host** (replace `ddev exec curl -s http://solr:8983` with `curl -sk https://<project>.ddev.site:8984`).
+
+#### Layer 6: Database-level inspection
+
+Query the TYPO3 database to see what EXT:solr thinks the state is:
+
+```sql
+-- How many items per type/config, and how many have errors?
+SELECT item_type, indexing_configuration,
+       COUNT(*) as total,
+       SUM(CASE WHEN indexed > 0 THEN 1 ELSE 0 END) as indexed,
+       SUM(CASE WHEN errors != '' THEN 1 ELSE 0 END) as errors,
+       SUM(CASE WHEN changed > indexed THEN 1 ELSE 0 END) as stale
+FROM tx_solr_indexqueue_item
+GROUP BY item_type, indexing_configuration;
+
+-- Show the actual error messages
+SELECT uid, item_type, item_uid, LEFT(errors, 200) as error_preview
+FROM tx_solr_indexqueue_item
+WHERE errors != ''
+ORDER BY uid DESC LIMIT 20;
+
+-- When was the last successful indexing run?
+SELECT MAX(FROM_UNIXTIME(indexed)) as last_indexed
+FROM tx_solr_indexqueue_item
+WHERE indexed > 0;
+
+-- What is the site hash stored for a specific page?
+SELECT uid, title, slug
+FROM pages
+WHERE uid = 1;
+-- Then check: the site hash comes from the site identifier in config.yaml
+```
+
+#### Putting it all together: Debug workflow
+
+```mermaid
+graph TD
+    Problem["Something's wrong"]
+    Problem --> Reports["1. Check Reports module"]
+    Reports -->|Red| Connection["Fix connection (12.2)"]
+    Reports -->|Green| Queue["2. Check Index Queue in backend module"]
+    Queue -->|Empty| Init["Initialize queue, check TypoScript"]
+    Queue -->|Errors| SQL["3. Read error messages from DB"]
+    Queue -->|OK| SolrAdmin["4. Query Solr Admin directly"]
+    SolrAdmin -->|No docs| Scheduler["Run scheduler, check indexing log"]
+    SolrAdmin -->|Docs exist| Frontend["5. Check frontend TypoScript"]
+    Frontend -->|No results| TS["Enable query logging, check siteHash"]
+    Frontend -->|Wrong results| Debug["6. debugQuery=true, check scoring"]
+    Scheduler --> Log["Enable indexing logging, tail solr.log"]
+```
 
 ### 12.1 Where to Start: Diagnostic Flowchart
 
@@ -1113,87 +1609,121 @@ graph LR
 
 ### 12.5 Logging Deep Dive
 
-Enable logging to analyze indexing and search operations:
+> For the full logging setup (TypoScript config, FileWriter, `tail -f`), see **12.0 Layer 2** above.
+
+**Selective logging per Index Queue config:**
+
+You can enable logging for just one config to reduce noise:
 
 ```typoscript
 plugin.tx_solr.logging {
-    debugOutput = 1
-    exceptions = 1
-    indexing = 1
-    indexing.indexQueueInitialization = 1
-    indexing.pageIndexed = 1
-    indexing.queue.news = 1
-    query.rawGet = 1
-    query.rawPost = 1
-    query.queryString = 1
-    query.searchWords = 1
+    indexing = 0
+    indexing.queue.events = 1
 }
 ```
 
-Configure a dedicated log file in `config/system/additional.php`:
+This logs only the "events" queue processing, not "news" or "pages".
 
-```php
-$GLOBALS['TYPO3_CONF_VARS']['LOG']['ApacheSolrForTypo3']['Solr']['writerConfiguration'] = [
-    \Psr\Log\LogLevel::DEBUG => [
-        \TYPO3\CMS\Core\Log\Writer\FileWriter::class => [
-            'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath() . '/log/solr.log',
-        ],
-    ],
-];
+**What the indexing log contains per document:**
+
+```
+[DEBUG] Indexing document: tx_news_domain_model_news:42
+  Fields: title=My Event, content=...(truncated), url=/events/my-event
+  Solr response: {"responseHeader":{"status":0,"QTime":3}}
 ```
 
-**Where to find output:** `var/log/solr.log`, Admin Tools -> Log module.
+If indexing fails, you'll see the Solr error response:
 
-> **Warning:** Disable logging on production. Log data grows quickly and impacts performance.
+```
+[ERROR] Indexing failed for tx_news_domain_model_news:42
+  Error: Document is missing mandatory uniqueKey field: id
+```
+
+**What the query log contains:**
+
+```
+[DEBUG] Solr query: q=test+search&fq=siteHash:abc123&fl=*,score
+[DEBUG] Solr raw GET: http://solr:8983/solr/core_en/select?q=test+search&...
+[DEBUG] Search words: ["test", "search"]
+[DEBUG] Response: 15 results in 3ms
+```
+
+> **Warning:** Disable logging on production. Log data grows quickly and impacts performance. Remove the `plugin.tx_solr.logging` config and the `writerConfiguration` from `additional.php`.
 
 ### 12.6 Solr Admin UI as Debugging Tool
 
 <!-- SCREENSHOT: solr-admin-query.png - Solr Admin query panel -->
 
-Key diagnostic queries:
+> See **12.0 Layer 5** for CLI `curl` equivalents of all these queries.
+
+Key diagnostic queries (run in Solr Admin -> Query tab):
 
 | Query | Purpose |
 |-------|---------|
 | `q=*:*&rows=0` | Total document count |
 | `q=*:*&fq=type:pages&rows=5&fl=uid,title,url,siteHash` | Check indexed pages |
 | `q=*:*&fq=type:tx_news_domain_model_news&fl=uid,title,content` | Check custom records |
-| `q=YOUR_TERM&debugQuery=true` | Score explanation |
+| `q=YOUR_TERM&debugQuery=true` | Score explanation (see 12.0 Layer 3 for reading the output) |
 | `q=*:*&facet=true&facet.field=type&rows=0` | Document type distribution |
 | `q=*:*&fq=siteHash:YOUR_HASH&rows=0` | Documents per site hash |
 
-**Core Admin:** Reload a core after schema changes (Analysis tab -> Reload Core).
+**Additional useful queries:**
 
-**Analysis screen:** Test how text is tokenized and stemmed. Paste text into the field analysis tool to see how Solr processes it.
+```
+# Find a specific record by UID and type
+q=*:*&fq=uid:42&fq=type:tx_news_domain_model_news&fl=*
+
+# Check which fields exist on a document (all fields)
+q=*:*&rows=1&fl=*
+
+# Compare what two configs indexed
+q=*:*&fq=indexing_configuration:news&rows=0
+q=*:*&fq=indexing_configuration:events&rows=0
+
+# Find documents with empty content
+q=*:*&fq=-content:[* TO *]&fl=uid,title,type
+
+# Check the access field (frontend user restrictions)
+q=*:*&fl=uid,title,access&rows=10
+```
+
+**Core Admin:** Reload a core after schema changes (Core Admin -> Reload button, or via API: `curl http://solr:8983/solr/admin/cores?action=RELOAD&core=core_en`).
+
+**Analysis screen:** Test how text is tokenized and stemmed. In Solr Admin -> Analysis, select the field type (e.g., `text`), paste text in the "Field Value (Index)" box, and click "Analyse Values". This shows every processing step: char filters, tokenizer, token filters (lowercase, stop words, stemming).
 
 <!-- SCREENSHOT: solr-analysis-screen.png - Solr Analysis screen -->
 
-### 12.7 Database-Level Debugging (DDEV Only)
+### 12.7 Database-Level Debugging
+
+> See **12.0 Layer 6** for the complete SQL query cookbook.
+
+Quick reference:
 
 ```sql
--- Queue fill state per type
+-- Overview: what's in the queue?
 SELECT item_type, indexing_configuration,
        COUNT(*) as total,
        SUM(CASE WHEN errors != '' THEN 1 ELSE 0 END) as errors
 FROM tx_solr_indexqueue_item
 GROUP BY item_type, indexing_configuration;
 
--- Failed items with error messages
+-- What went wrong?
 SELECT uid, item_type, item_uid, errors, changed, indexed
 FROM tx_solr_indexqueue_item
 WHERE errors != ''
 LIMIT 20;
 
--- Event queue (delayed monitoring)
+-- Event queue (delayed monitoring mode)
 SELECT * FROM tx_solr_eventqueue_item
 ORDER BY tstamp DESC LIMIT 20;
 
--- Stale items (changed but not re-indexed)
+-- Items that need re-indexing
 SELECT uid, item_type, item_uid, changed, indexed
 FROM tx_solr_indexqueue_item
 WHERE changed > indexed
 LIMIT 20;
 
--- Clear all errors (to retry indexing)
+-- Reset errors to retry indexing
 UPDATE tx_solr_indexqueue_item SET errors = '' WHERE errors != '';
 ```
 
@@ -1341,6 +1871,142 @@ Key columns in `tx_solr_indexqueue_item`:
 | `changed` | int | Timestamp when record was last changed |
 | `indexed` | int | Timestamp when record was last indexed |
 | `errors` | text | Error message from last indexing attempt |
+
+## FAQ / Common Recipes
+
+### One Table, Two Index Configs (e.g. News + Events from EXT:news)
+
+A common pattern: EXT:news is installed once but serves two purposes -- classic news articles and an event calendar (or product announcements, press releases, etc.). You want them as **separate facet values** in search.
+
+**Step 1: Two Index Queue configurations for the same table**
+
+Use `additionalWhereClause` to split records by category, type field, or sysfolder PID:
+
+```typoscript
+plugin.tx_solr.index.queue {
+
+    # Config 1: Classic news articles
+    news = 1
+    news {
+        type = tx_news_domain_model_news
+        additionalWhereClause = categories.uid IN (1,2,3)
+
+        fields {
+            title = title
+            content = SOLR_CONTENT
+            content.cObject = COA
+            content.cObject {
+                10 = TEXT
+                10.field = bodytext
+            }
+            category_stringM = SOLR_RELATION
+            category_stringM {
+                localField = categories
+                multiValue = 1
+            }
+            url = TEXT
+            url {
+                typolink.parameter = {$plugin.tx_news.settings.detailPid}
+                typolink.additionalParams = &tx_news_pi1[controller]=News&tx_news_pi1[action]=detail&tx_news_pi1[news]={field:uid}
+                typolink.additionalParams.insertData = 1
+                typolink.returnLast = url
+            }
+            # Custom field to distinguish in facets
+            newstype_stringS = TEXT
+            newstype_stringS.value = News
+        }
+    }
+
+    # Config 2: Events (same table, different records)
+    events = 1
+    events {
+        type = tx_news_domain_model_news
+        additionalWhereClause = categories.uid IN (4,5,6)
+
+        fields {
+            title = title
+            content = SOLR_CONTENT
+            content.cObject = COA
+            content.cObject {
+                10 = TEXT
+                10.field = bodytext
+            }
+            category_stringM = SOLR_RELATION
+            category_stringM {
+                localField = categories
+                multiValue = 1
+            }
+            # Event-specific fields
+            eventdate_dateS = datetime
+            eventlocation_stringS = TEXT
+            eventlocation_stringS {
+                field = teaser
+            }
+            url = TEXT
+            url {
+                typolink.parameter = {$plugin.tx_news.settings.detailPid}
+                typolink.additionalParams = &tx_news_pi1[controller]=News&tx_news_pi1[action]=detail&tx_news_pi1[news]={field:uid}
+                typolink.additionalParams.insertData = 1
+                typolink.returnLast = url
+            }
+            newstype_stringS = TEXT
+            newstype_stringS.value = Event
+        }
+    }
+}
+```
+
+**Alternative split strategies** (use only one):
+
+| Strategy | `additionalWhereClause` | When to use |
+|----------|------------------------|-------------|
+| By category | `categories.uid IN (4,5,6)` | Different category trees for news vs events |
+| By sysfolder | `pid IN (50,51)` | News and events stored in separate sysfolders |
+| By type field | `tx_news_domain_model_news.type = 1` | EXT:news type field distinguishes record types |
+| By tag | `tags.uid = 10` | Tagged with a specific tag |
+
+**Step 2: Facet on the custom field**
+
+```typoscript
+plugin.tx_solr.search.faceting {
+    facets {
+        newstype {
+            label = Content Type
+            field = newstype_stringS
+        }
+    }
+}
+```
+
+This shows "News (42)" and "Event (15)" as facet options.
+
+**Step 3: Initialize both queue configs**
+
+In the EXT:solr backend module -> Index Queue tab, both "news" and "events" appear as separate indexing configurations. Select both and click "Queue selected content".
+
+**How it works internally:** Each config creates its own `tx_solr_indexqueue_item` entries with `indexing_configuration = 'news'` or `indexing_configuration = 'events'`. The Scheduler worker processes both. In Solr, the documents have `type = tx_news_domain_model_news` (the table name) but differ in the `newstype_stringS` field.
+
+> **Tip:** If you want the Solr `type` field itself to differ (e.g., `type = news` vs `type = events`), you can override it in the fields config: `type = TEXT` / `type.value = events`. Be aware this affects other type-based filtering.
+
+### Different Detail Page URLs per Config
+
+When news and events have separate detail pages:
+
+```typoscript
+plugin.tx_solr.index.queue.news.fields.url {
+    typolink.parameter = 42
+    # ...
+}
+
+plugin.tx_solr.index.queue.events.fields.url {
+    typolink.parameter = 55
+    # ...
+}
+```
+
+### Three or More Configs from One Table
+
+The pattern scales -- you can create as many Index Queue configs as needed for the same table. Each gets its own name, `additionalWhereClause`, field mappings, and detail page URL.
 
 ## Related Skills
 

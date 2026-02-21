@@ -215,7 +215,7 @@ https://github.com/vercel-labs/skills
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 1.0.0 | workspace, versioning, staging, publishing, review, draft content |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
 | `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
-| `typo3-solr/FRONTEND` | Custom JS for search, suggest, facets without jQuery | 1.0.0 | solr javascript, vanilla js search, solr ajax, htmx solr |
+| `typo3-solr/FRONTEND` | Custom JS for search, suggest, facets without jQuery | 1.0.0 | solr javascript, vanilla js search, solr ajax |
 
 ## Skill Categories
 

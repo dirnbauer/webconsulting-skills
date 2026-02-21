@@ -2,8 +2,8 @@
 name: typo3-solr/FRONTEND
 description: >-
   Custom JavaScript integration for EXT:solr search, suggest/autocomplete, and
-  facet filtering without jQuery. Vanilla JS examples, AJAX endpoints, and
-  integration with htmx/Alpine.js.
+  facet filtering without jQuery. Vanilla JS examples and AJAX endpoints for
+  TYPO3 Fluid templates.
 ---
 
 # EXT:solr Frontend: Custom JavaScript Integration
@@ -413,62 +413,3 @@ To use EXT:solr without jQuery:
 4. Replace `solr-ajaxified` CSS class with `data-solr-*` attributes in your Fluid templates
 5. Use the vanilla JS classes from this guide
 
-## 6. Integration with Modern Frameworks
-
-### htmx
-
-htmx provides the simplest jQuery-free AJAX integration:
-
-```html
-<div class="tx_solr" hx-target="this" hx-swap="innerHTML">
-  <!-- Facet links -->
-  <a href="/search?facet=type:pages"
-     hx-get="/search?facet=type:pages&type=7383"
-     hx-push-url="/search?facet=type:pages">
-    Pages (42)
-  </a>
-
-  <!-- Search form -->
-  <form hx-get="/search" hx-vals='{"type": "7383"}' hx-push-url="true">
-    <input type="search" name="tx_solr[q]" />
-    <button type="submit">Search</button>
-  </form>
-</div>
-```
-
-### Alpine.js
-
-```html
-<div x-data="solrSearch()" class="tx_solr">
-  <form @submit.prevent="search">
-    <input type="search" x-model="query" placeholder="Search..." />
-    <button type="submit">Search</button>
-  </form>
-
-  <div x-show="loading">Loading...</div>
-  <div x-html="resultsHtml"></div>
-</div>
-
-<script>
-function solrSearch() {
-  return {
-    query: '',
-    loading: false,
-    resultsHtml: '',
-    async search() {
-      this.loading = true;
-      try {
-        const url = `/search?tx_solr[q]=${encodeURIComponent(this.query)}&type=7383`;
-        const res = await fetch(url);
-        this.resultsHtml = await res.text();
-        history.pushState(null, '', `/search?tx_solr[q]=${encodeURIComponent(this.query)}`);
-      } catch (e) {
-        this.resultsHtml = '<p>Search error</p>';
-      } finally {
-        this.loading = false;
-      }
-    }
-  };
-}
-</script>
-```
