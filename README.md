@@ -8,7 +8,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 15 skills | Content Blocks, DataHandler, Powermail, Workspaces, Records List Types, upgrades, testing, security |
+| **TYPO3 CMS** | 16 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
@@ -175,6 +175,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
+| `typo3-solr` | solr, search, indexing, facets, suggest, autocomplete, vector search | "Set up EXT:solr with DDEV" or "Debug Solr indexing issues" |
 | `ai-search-optimization` | aeo, geo, ai search, chatgpt, llms.txt | "Optimize for ChatGPT and Perplexity citations" |
 | `security-audit` | security audit, owasp, vulnerabilities | "Audit my controller for security issues" |
 | `security-incident-reporting` | incident report, post-mortem, ddos, forensics | "Create NIST/SANS-style incident report" or "Document DDoS attack timeline" |
@@ -1925,6 +1926,7 @@ grep -r "DataHandler" ~/.claude/skills/
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
+| `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
 | `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | webconsulting |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |

@@ -213,6 +213,9 @@ https://github.com/vercel-labs/skills
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 1.0.0 | workspace, versioning, staging, publishing, review, draft content |
+| `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
+| `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
+| `typo3-solr/FRONTEND` | Custom JS for search, suggest, facets without jQuery | 1.0.0 | solr javascript, vanilla js search, solr ajax, htmx solr |
 
 ## Skill Categories
 
@@ -406,6 +409,9 @@ https://github.com/vercel-labs/skills
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
 - **typo3-workspaces**: Workspaces versioning, staging, publishing workflows, and debugging
+- **typo3-solr**: Apache Solr search integration (Index Queue, facets, suggest, vector search, debugging)
+  - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
+  - `SKILL-FRONTEND.md`: Custom vanilla JS for search, suggest, facets (no jQuery)
 
 ## TYPO3 Skill Supplements
 
@@ -543,6 +549,23 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "OpenGraph/Twitter cards with fallbacks"
 - "Hreflang for multi-language sites"
 - "Structured data for articles (JSON-LD)"
+
+**🔍 Solr Search (typo3-solr)**
+- "Set up EXT:solr with DDEV and ddev-typo3-solr addon"
+- "Index EXT:news records into Solr with categories and tags"
+- "Configure faceted search with category and date filters"
+- "Add suggest/autocomplete to the search form"
+- "Debug: items in Index Queue but not appearing in search results"
+- "Set up Solr vector search with OpenAI embeddings (LLM module)"
+- "Custom PSR-14 event listener to enrich Solr documents"
+- "Docker production setup with persistent Solr data"
+- "Configure hosted-solr.com for a multi-language TYPO3 site"
+- "Index PDF files into Solr with EXT:solrfal and Tika"
+- "Replace jQuery-based suggest with vanilla JavaScript"
+- "Troubleshoot: Search is currently not available"
+- "Use helhum/dotenv-connector for per-environment Solr config"
+- "Test with EXT:solr v14 dev branch (task/14LTS_compatibility)"
+- "Full debugging: flowchart from connection to search results"
 
 **📬 Powermail Forms (typo3-powermail)**
 - "Create a simple contact form with name, email, subject, message"
@@ -995,8 +1018,8 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
-Use case: Extension development, Content Blocks, database operations, forms, backend views, v13/v14 compatible code
+Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
+Use case: Extension development, Content Blocks, database operations, forms, search, backend views, v13/v14 compatible code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -1031,8 +1054,8 @@ Active: `deepfake-detection`, `security-audit`, `security-incident-reporting`
 Use case: Media authentication, deepfake detection, disinformation defense, content provenance verification
 
 ### Database Session
-Active: `postgres-best-practices`, `typo3-datahandler`, `security-audit`  
-Use case: Database optimization, Postgres queries, RLS policies, connection pooling, schema design
+Active: `postgres-best-practices`, `typo3-datahandler`, `typo3-solr`, `security-audit`  
+Use case: Database optimization, Postgres queries, RLS policies, connection pooling, schema design, Solr search
 
 ### Marketing Session
 Active: `marketing-skills`, `ai-search-optimization`, `ui-design-patterns`  
@@ -1093,6 +1116,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | | ✓ | | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-solr | ✓ | | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
