@@ -1,14 +1,14 @@
-# webconsulting skills - Claude Marketplace
+# webconsulting Agent Skills
 
-A curated collection of **Agent Skills** for AI-augmented software development. These skills transform Claude into a specialized assistant for web development, video creation, security auditing, and enterprise software engineering.
+A curated collection of **59 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
-> **Works with:** Claude Code, Cursor IDE (tested with Cursor 2.2+)
+> **Works with:** Cursor IDE, Claude Code, Claude CLI
 
 ## Skill Categories
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 16 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, upgrades, testing, security |
+| **TYPO3 CMS** | 19 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, accessibility, batch, simplify, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
@@ -26,7 +26,7 @@ A curated collection of **Agent Skills** for AI-augmented software development. 
 
 > ## 📢 Early Adopter Notice
 >
-> **We encourage you to use these skills!** They're designed to boost your TYPO3 productivity significantly.
+> **We encourage you to use these skills!** They're designed to boost your development productivity significantly.
 > However, please keep these points in mind:
 >
 > - **Evolving Technology** — Anthropic, Cursor, and webconsulting are actively improving their platforms. Expect updates and occasional breaking changes.
@@ -160,6 +160,8 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `refactor-clean` | refactor, clean code, solid, maintainability | "Apply SOLID principles to this module" or "Find code smells and fix them" |
 | `find-skills` | find skill, install skill, npx skills, skills.sh | "Find a skill for React performance" or "Search skills.sh for testing tools" |
 | `shadcn-ui` | shadcn, radix, tailwind, components, form, dialog, button | "Set up shadcn/ui in my Next.js project" or "Build a form with Zod validation" |
+| `typo3-accessibility` | accessibility, a11y, wcag, aria, screen reader, keyboard navigation | "Run WCAG 2.2 AA audit on my TYPO3 site" or "Add skip-to-content link" |
+| `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
@@ -172,6 +174,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
+| `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
@@ -2021,6 +2024,9 @@ grep -r "DataHandler" ~/.claude/skills/
 | **Security & Operations** | | |
 | `typo3-security` | Security hardening checklist | webconsulting |
 | `typo3-seo` | SEO configuration with EXT:seo | webconsulting |
+| `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | webconsulting |
+| `typo3-simplify` | Simplify TYPO3 code for clarity and maintainability | webconsulting |
+| `typo3-batch` | Batch operations for large-scale TYPO3 migrations | webconsulting |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |

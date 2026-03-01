@@ -1,6 +1,6 @@
 {
     "name": "webconsulting/webconsulting-skills",
-    "description": "AI Agent Skills for TYPO3 development with Claude/Cursor",
+    "description": "Curated Agent Skills for AI-augmented software development (Cursor, Claude Code)",
     "type": "composer-plugin",
     "license": "MIT",
     "keywords": [

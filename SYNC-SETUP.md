@@ -1,10 +1,10 @@
 # Skill Synchronization Setup
 
-This document explains how to add and manage external skill sources in the webconsulting Claude Marketplace.
+This document explains how to add and manage external skill sources in the webconsulting Agent Skills collection.
 
 ## Overview
 
-The marketplace supports two types of skills:
+The collection supports two types of skills:
 
 1. **Local Skills**: Created and maintained within this repository
 2. **Upstream Skills**: Synced from external Git repositories
