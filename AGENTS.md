@@ -208,6 +208,8 @@ https://github.com/vercel-labs/skills
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | 1.0.0 | accessibility, a11y, wcag, aria, screen reader, keyboard |
+| `typo3-simplify` | Simplify TYPO3 code: API reuse, quality, efficiency (Boris Cherny) | 1.0.0 | simplify, clean up, refine, code quality, reduce complexity |
+| `typo3-batch` | Batch TYPO3 migrations: hooks→events, TCA, DI, namespaces (Boris Cherny) | 1.0.0 | batch, migrate, bulk, mass refactor, codemod, upgrade all |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
 | `typo3-powermail/CONDITIONS` | Conditional field/page visibility with powermail_cond 13+ | 1.0.0 | powermail_cond, conditional fields, show hide fields |
 | `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
@@ -404,6 +406,8 @@ https://github.com/vercel-labs/skills
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
 - **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
+- **typo3-simplify**: Simplify TYPO3 code for clarity and maintainability (adapted from Boris Cherny/Anthropic)
+- **typo3-batch**: Batch operations for large-scale TYPO3 migrations and refactoring (adapted from Boris Cherny/Anthropic)
 - **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
   - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
   - `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, conditions (property hooks, asymmetric visibility)
@@ -579,6 +583,62 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Add language attribute to multilingual content sections"
 - "Audit my TYPO3 backend for missing image alt texts"
 - "Create accessible data tables with scope and caption"
+
+**🧹 Simplify (typo3-simplify)**
+- "Simplify my recently changed TYPO3 code"
+- "Replace GeneralUtility::makeInstance with constructor injection"
+- "Find deprecated hooks and replace with PSR-14 events"
+- "Clean up my TCA: use v14 field types and required/nullable"
+- "Remove unnecessary code from ext_localconf.php"
+- "Replace $GLOBALS['TSFE'] with request attributes"
+- "Simplify my Extbase controller for v14 patterns"
+- "Review my Fluid templates for hardcoded strings"
+- "Clean up Services.yaml: remove redundant definitions"
+- "Reduce complexity in my repository queries"
+- "Replace GeneralUtility::_GP() with PSR-7 request"
+- "Find custom code that TYPO3 core already provides"
+- "Replace $GLOBALS['BE_USER'] with Context injection"
+- "Add constructor promotion and readonly to my service classes"
+- "Replace manual JSON response with PSR-7 JsonResponse"
+- "Simplify my middleware: remove unnecessary global state"
+- "Replace ObjectManager::get() with proper DI"
+- "Add declare(strict_types=1) and return types to my classes"
+- "Replace addPageTSConfig in ext_localconf with Configuration/page.tsconfig"
+- "Simplify TCA palettes: merge single-field palettes"
+- "Replace manual file path resolution with PathUtility"
+- "Remove unused use-imports and suppress annotations from PHP files"
+- "Replace custom caching with TYPO3 CacheManager"
+- "Simplify nested if-statements with guard clauses and early returns"
+- "Replace array typehints with typed arrays or DTO classes"
+- "Move icon registrations from ext_localconf to Configuration/Icons.php"
+
+**⚡ Batch (typo3-batch)**
+- "Batch migrate all hooks to PSR-14 events in my extension"
+- "Batch modernize all TCA files to v14 format"
+- "Batch convert all GeneralUtility::makeInstance to DI"
+- "Batch extract all hardcoded strings to XLIFF"
+- "Batch add missing return types to all PHP classes"
+- "Batch refactor Fluid templates: replace <a> with <f:link.page>"
+- "Batch move ext_localconf content to Configuration/ files"
+- "Batch rename extension namespace from Vendor\\Old to Vendor\\New"
+- "Batch migrate classic content elements to Content Blocks"
+- "Batch add declare(strict_types=1) to all PHP files"
+- "Batch convert TCA items arrays to label/value format"
+- "Batch set up unit tests for all service classes"
+- "Batch migrate to PHP 8.4: property hooks, array_find, #[Deprecated]"
+- "Batch add accessibility attributes to all Fluid templates"
+- "Batch replace all <img> tags with <f:image> in Fluid templates"
+- "Batch add constructor promotion to all Extbase classes"
+- "Batch move backend module registration to Configuration/Backend/Modules.php"
+- "Batch replace Signal/Slot with PSR-14 events across extension"
+- "Batch add readonly to all injected service properties"
+- "Batch replace 'eval' => 'required' with 'required' => true in all TCA"
+- "Batch create German XLIFF translations for all locallang files"
+- "Batch replace renderType inputDateTime with type datetime in TCA"
+- "Batch add final keyword to all non-inherited classes"
+- "Batch replace switchableControllerActions with separate plugins"
+- "Batch add functional tests for all repository classes"
+- "Batch replace manual link generation with UriBuilder across extension"
 
 **🔍 Solr Search (typo3-solr)**
 - "Set up EXT:solr with DDEV and ddev-typo3-solr addon"
@@ -1150,8 +1210,12 @@ Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `ente
 Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `php-modernization`  
-Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility
+Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `php-modernization`
+Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility, batch migrations
+
+### Code Quality Session
+Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-modernization`
+Use case: TYPO3 code simplification, batch modernization, API reuse, deprecated pattern removal
 
 ### PHP 8.4 Migration Session
 Active: `php-modernization/SKILL-PHP84`, `typo3-rector/SKILL-PHP84`, `typo3-update/SKILL-PHP84`, `typo3-powermail/SKILL-PHP84`  
@@ -1238,6 +1302,8 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-simplify | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-batch | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | | ✓ | | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
