@@ -556,7 +556,7 @@ return [
 ];
 ```
 
-The `t3ver_*` database columns are **auto-created** when `versioningWS = true` -- you do NOT need to add them to `ext_tables.sql`.
+The `t3ver_*` database columns are **auto-created** when `versioningWS = true` -- you do NOT need to add them to `ext_tables.sql`. Similarly, `enablecolumns` fields (`hidden`, `starttime`, `endtime`) and language fields (`sys_language_uid`, `l10n_parent`, `l10n_diffsource`) get **auto-created TCA column definitions** from `ctrl` since v13.3 -- you do NOT need to define them in `'columns'`.
 
 After enabling, run:
 

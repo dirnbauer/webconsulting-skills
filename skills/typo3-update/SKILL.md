@@ -423,6 +423,30 @@ return [
 ];
 ```
 
+### Auto-Created Columns from ctrl (v13.3+)
+
+Since TYPO3 v13.3, column definitions for fields referenced in `ctrl` are **auto-created** by the Core. You no longer need explicit `'columns'` entries for:
+
+- `enablecolumns` fields: `hidden`/`disabled`, `starttime`, `endtime`, `fe_group`
+- Language fields: `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
+- `editlock`, `description` (if set as `descriptionColumn`)
+
+**Still required:**
+- The `ctrl` properties themselves (`tstamp`, `crdate`, `delete`, `enablecolumns`, etc.)
+- References in `showitem` / palettes (auto-created columns must still be added to types manually)
+- Your own custom column definitions
+
+**Override auto-created columns** in `Configuration/TCA/Overrides/` if needed:
+
+```php
+<?php
+// Configuration/TCA/Overrides/pages.php
+// New pages are disabled by default
+$GLOBALS['TCA']['pages']['columns']['disabled']['config']['default'] = 1;
+```
+
+> **Important:** Auto-creation only works for `ctrl` properties in base `Configuration/TCA/` files, NOT in `Configuration/TCA/Overrides/`.
+
 ### TCA Overrides
 
 ```php

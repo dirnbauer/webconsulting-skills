@@ -140,6 +140,7 @@ final class MyService
 - [ ] Use `'nullable' => true` instead of `'eval' => 'null'`
 - [ ] Remove `'default' => ''` on string fields (already default)
 - [ ] Consolidate palette definitions (remove single-field palettes)
+- [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` (v13.3+): `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
 - [ ] Remove unused `showitem` fields from types
 
 ### Services.yaml

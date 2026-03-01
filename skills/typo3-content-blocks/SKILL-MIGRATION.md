@@ -226,10 +226,7 @@ return [
         'iconfile' => 'EXT:my_ext/Resources/Public/Icons/product.svg',
     ],
     'columns' => [
-        'hidden' => [
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => ['type' => 'check'],
-        ],
+        // Note: hidden, starttime, endtime columns are auto-created from ctrl (v13.3+)
         'name' => [
             'label' => 'Name',
             'config' => [

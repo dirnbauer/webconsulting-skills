@@ -90,7 +90,8 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 7. Replace 'renderType' => 'colorPicker' → 'type' => 'color'
 8. Replace 'type' => 'input', 'eval' => 'email' → 'type' => 'email'
 9. Convert items arrays: [0] => label, [1] => value → ['label' => ..., 'value' => ...]
-10. Run php -l to verify syntax
+10. Remove boilerplate columns auto-created from ctrl (v13.3+): hidden, starttime, endtime, fe_group, language fields
+11. Run php -l to verify syntax
 ```
 
 ### 3. GeneralUtility::makeInstance → DI
