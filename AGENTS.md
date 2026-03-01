@@ -207,6 +207,7 @@ https://github.com/vercel-labs/skills
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
+| `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | 1.0.0 | accessibility, a11y, wcag, aria, screen reader, keyboard |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
 | `typo3-powermail/CONDITIONS` | Conditional field/page visibility with powermail_cond 13+ | 1.0.0 | powermail_cond, conditional fields, show hide fields |
 | `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
@@ -402,6 +403,7 @@ https://github.com/vercel-labs/skills
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
+- **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
 - **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
   - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
   - `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, conditions (property hooks, asymmetric visibility)
@@ -550,6 +552,34 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Hreflang for multi-language sites"
 - "Structured data for articles (JSON-LD)"
 
+**♿ Accessibility (typo3-accessibility)**
+- "Run WCAG 2.2 AA accessibility audit on my TYPO3 site"
+- "Add skip-to-content link and landmark elements to my Fluid layout"
+- "Create accessible accordion with keyboard navigation"
+- "Create accessible tabs component for TYPO3"
+- "Add aria-current to active navigation items in Fluid"
+- "Make alt text required in TCA for all images"
+- "Add focus-visible styles to my site package"
+- "Create PSR-15 middleware for html lang attribute"
+- "Audit my Fluid templates for accessibility anti-patterns"
+- "Set up pa11y for automated WCAG testing in CI"
+- "Make EXT:form fields accessible with autocomplete and inputmode"
+- "Create screen-reader-only ViewHelper for hidden labels"
+- "Add aria-live announcer for dynamic content updates"
+- "Create accessible modal/dialog with focus trapping"
+- "Check my content elements for proper heading hierarchy"
+- "Configure reduced motion support in CSS and JavaScript"
+- "Check color contrast ratios in my TYPO3 site CSS"
+- "Add proper touch targets (44x44px) to all interactive elements"
+- "Create accessible breadcrumb navigation with aria-label"
+- "Ensure my EXT:news templates meet WCAG standards"
+- "Add fieldset and legend to grouped form inputs"
+- "Make my Content Block templates accessible"
+- "Create accessible image gallery with keyboard navigation"
+- "Add language attribute to multilingual content sections"
+- "Audit my TYPO3 backend for missing image alt texts"
+- "Create accessible data tables with scope and caption"
+
 **🔍 Solr Search (typo3-solr)**
 - "Set up EXT:solr with DDEV and ddev-typo3-solr addon"
 - "Index EXT:news records into Solr with categories and tags"
@@ -684,6 +714,96 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "What tools do I need for deepfake detection? Install ffmpeg, exiftool, c2patool"
 - "Explain the Liar's Dividend and 4D disinformation tactics"
 - "How do I defend against CEO voice clone fraud attacks?"
+
+**🔀 Workspaces (typo3-workspaces)**
+- "Create a workspace for content staging and review"
+- "Publish workspace changes to live via CLI"
+- "Debug workspace overlay queries that return wrong records"
+- "Configure workspace-aware Extbase repository queries"
+- "Create content as draft in workspace, preview before publishing"
+- "Set up workspace notification emails for reviewers"
+- "Swap workspace versions for pages and content elements"
+- "Check t3ver_wsid and t3ver_state for versioned records"
+- "Handle file references in workspace (limitations and workarounds)"
+- "Discard workspace changes and revert to live version"
+
+**🔍 Conformance (typo3-conformance)**
+- "Run conformance check on my TYPO3 extension"
+- "Evaluate extension quality for v13/v14 standards"
+- "Generate conformance report with recommendations"
+- "Check extension for deprecated API usage"
+- "Assess code quality metrics for TYPO3 extension"
+
+**🤝 Core Contributions (typo3-core-contributions)**
+- "Submit a patch to TYPO3 Core via Gerrit"
+- "Set up Gerrit for TYPO3 Core development"
+- "Create a Forge issue for a bug report"
+- "Cherry-pick a Core fix to another branch"
+- "Write a commit message following TYPO3 conventions"
+- "Review an existing Gerrit patch"
+
+**🎬 Video Creation (remotion-best-practices)**
+- "Create a product demo video with React and Remotion"
+- "Build animated text reveal with spring physics"
+- "Add background music with volume ducking during narration"
+- "Create a code walkthrough video with syntax highlighting"
+- "Build an SVG animation composition with staggered entrance"
+- "Render Remotion video to MP4 with custom FPS and resolution"
+- "Create a data-driven chart animation from JSON"
+- "Add captions and subtitles to a Remotion video"
+
+**🖌️ UI Design Patterns (ui-design-patterns)**
+- "Improve visual hierarchy on this page"
+- "Add proper spacing and rhythm to my layout"
+- "Choose a color palette with primary, secondary, and accent"
+- "Create a consistent typography scale"
+- "Design card components with proper visual weight"
+- "Improve contrast and readability of my text"
+- "Add visual depth with shadows and elevation"
+- "Create a responsive grid system with proper gaps"
+
+**🎨 Branding (webconsulting-branding)**
+- "Apply webconsulting.at design system to my components"
+- "Use the correct brand colors and typography"
+- "Create MDX components following webconsulting style"
+- "Set up CSS variables for the webconsulting design tokens"
+
+**⚖️ Legal Impressum (legal-impressum)**
+- "Create an Impressum for an Austrian GmbH"
+- "Generate Impressum for Austrian Einzelunternehmen (e.U.)"
+- "Create Offenlegung for an Austrian media website (MedienG)"
+- "Generate Impressum for a German UG (haftungsbeschränkt)"
+- "Create EU-compliant eCommerce legal notice"
+- "Impressum for Austrian Verein (ZVR-Zahl, Obmann)"
+- "Create Impressum for Austrian OG or KG"
+- "What legal information is required for a Swiss website?"
+
+**🔧 CLI Tools (cli-tools)**
+- "Install missing CLI tools for this project"
+- "Audit project environment for required tools"
+- "Auto-install ripgrep, fd, bat, eza on macOS"
+- "Set up PHP development tools (phpstan, rector, php-cs-fixer)"
+- "Detect project type and install required CLI tools"
+
+**📚 Context7 Documentation (context7)**
+- "Look up the latest API docs for this library"
+- "Find code examples for a specific framework method"
+- "Get current documentation for a npm/composer package"
+- "Check if this API method is still supported in the latest version"
+
+**🔥 Firecrawl (firecrawl)**
+- "Scrape this URL and return clean markdown"
+- "Search the web for information about a topic"
+- "Crawl an entire documentation site"
+- "Extract content from a page with JavaScript rendering"
+- "Get a sitemap of all URLs on a domain"
+
+**🐘 PHP 8.4 (php-modernization)**
+- "Migrate class to PHP 8.4 property hooks"
+- "Use asymmetric visibility for DTOs"
+- "Replace array functions with new PHP 8.4 equivalents"
+- "Add #[\\Deprecated] attribute to legacy methods"
+- "Convert constructor to promoted properties with hooks"
 
 **📚 Documentation (typo3-docs)**
 - "RST documentation following docs.typo3.org"
@@ -1010,8 +1130,12 @@ Active: `frontend-design`, `ui-design-patterns`, `webconsulting-branding`, `og-i
 Use case: Distinctive UI design, creative interfaces, anti-AI-slop aesthetics, memorable user experiences
 
 ### Accessibility Audit Session
-Active: `web-design-guidelines`, `ui-design-patterns`, `react-best-practices`  
+Active: `web-design-guidelines`, `ui-design-patterns`, `react-best-practices`, `typo3-accessibility`
 Use case: WCAG compliance, accessibility audits, semantic HTML, ARIA patterns, keyboard navigation
+
+### TYPO3 Accessibility Session
+Active: `typo3-accessibility`, `typo3-content-blocks`, `typo3-seo`, `web-design-guidelines`
+Use case: TYPO3 WCAG 2.2 AA compliance, accessible Fluid templates, keyboard navigation, form a11y
 
 ### Document Processing Session
 Active: `document-processing`, `enterprise-readiness`  
@@ -1113,6 +1237,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | | ✓ | | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
