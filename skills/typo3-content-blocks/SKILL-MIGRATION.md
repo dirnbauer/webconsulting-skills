@@ -225,8 +225,12 @@ return [
         ],
         'iconfile' => 'EXT:my_ext/Resources/Public/Icons/product.svg',
     ],
+    // hidden, starttime, endtime columns are auto-created from ctrl (v13.3+)
+    'palettes' => [
+        'visibility' => ['showitem' => 'hidden'],
+        'access' => ['showitem' => 'starttime, endtime'],
+    ],
     'columns' => [
-        // Note: hidden, starttime, endtime columns are auto-created from ctrl (v13.3+)
         'name' => [
             'label' => 'Name',
             'config' => [
@@ -253,7 +257,14 @@ return [
         // ... more columns
     ],
     'types' => [
-        '1' => ['showitem' => 'hidden, name, price, description'],
+        '1' => [
+            'showitem' => '
+                name, price, description,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                    --palette--;;visibility,
+                    --palette--;;access,
+            ',
+        ],
     ],
 ];
 ```
