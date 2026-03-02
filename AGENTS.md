@@ -205,6 +205,7 @@ https://github.com/vercel-labs/skills
 | `typo3-rector` | TYPO3 upgrade patterns using Rector for dual-version support | 2.0.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v13/v14 dual-version development guide | 2.0.0 | update, upgrade, v13, v14 |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
+| `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | 1.0.0 | fractor, flexform, typoscript migration, fluid migration |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | 1.0.0 | accessibility, a11y, wcag, aria, screen reader, keyboard |
@@ -403,6 +404,7 @@ https://github.com/vercel-labs/skills
 - **typo3-rector**: Automated code refactoring with Rector for dual-version support
 - **typo3-update**: Version migration and compatibility strategies for v13/v14
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
+- **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, Htaccess)
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
 - **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
@@ -498,6 +500,18 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Frontend user registration with email verification"
 - "Backend user groups with granular permissions"
 - "SAML SSO integration with Azure AD"
+
+**🔄 Fractor Non-PHP Migrations (typo3-fractor)**
+- "Set up Fractor for TYPO3 v13/v14 non-PHP migrations"
+- "Migrate FlexForm eval=required to required=1"
+- "Migrate TypoScript INCLUDE_TYPOSCRIPT to @import syntax"
+- "Migrate FlexForm indexed items to label/value format"
+- "Configure TypoScript code style formatting in Fractor"
+- "Run Fractor dry-run to preview non-PHP migrations"
+- "Migrate fe_login logout handling in Fluid templates"
+- "Remove deprecated TypoScript config options for v14"
+- "Write a custom Fractor rule for FlexForm migration"
+- "Configure Fractor file extension filtering"
 
 **🔄 Upgrades (typo3-rector, typo3-extension-upgrade)**
 - "Upgrade extension from v12 to v13/v14 with Rector"
@@ -1210,8 +1224,8 @@ Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `ente
 Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `php-modernization`
-Use case: TYPO3 version migrations, PHP upgrades, dual-version compatibility, batch migrations
+Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `php-modernization`
+Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, dual-version compatibility, batch migrations
 
 ### Code Quality Session
 Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-modernization`
@@ -1299,6 +1313,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-rector | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-update | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-fractor | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |

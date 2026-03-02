@@ -23,7 +23,7 @@ Systematic framework for upgrading TYPO3 extensions to newer LTS versions.
 |------|---------|-------|
 | Extension Scanner | Diagnose deprecated APIs | TYPO3 Backend |
 | Rector | Automated PHP migrations | `.php` |
-| Fractor | Non-PHP migrations | FlexForms, TypoScript, YAML, Fluid |
+| Fractor | Non-PHP migrations (see `typo3-fractor` skill) | FlexForms, TypoScript, YAML, Fluid |
 | PHPStan | Static analysis | `.php` |
 
 ## Planning Phase (Required)
@@ -134,7 +134,7 @@ git diff
 
 ### 4. Run Fractor
 
-Fractor handles non-PHP file migrations (FlexForms, TypoScript, YAML).
+Fractor handles non-PHP file migrations (FlexForms, TypoScript, Fluid, YAML, Htaccess). See the `typo3-fractor` skill for detailed configuration, all available rules, code style options, and custom rule creation.
 
 #### Configuration
 
@@ -143,13 +143,13 @@ Fractor handles non-PHP file migrations (FlexForms, TypoScript, YAML).
 // fractor.php
 declare(strict_types=1);
 
-use a]9r\Fractor\Configuration\FractorConfiguration;
+use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\Typo3Fractor\Set\Typo3LevelSetList;
 
 return FractorConfiguration::configure()
     ->withPaths([
-        __DIR__ . '/Configuration',
-        __DIR__ . '/Resources',
+        __DIR__ . '/Configuration/',
+        __DIR__ . '/Resources/',
     ])
     ->withSets([
         Typo3LevelSetList::UP_TO_TYPO3_13,
@@ -411,7 +411,7 @@ Before considering upgrade complete:
 - **TYPO3 v13 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13.html
 - **TYPO3 v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
-- **Fractor**: https://github.com/andreaswolf/fractor
+- **Fractor**: https://github.com/andreaswolf/fractor (package: `a9f/typo3-fractor`)
 
 ---
 
