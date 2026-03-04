@@ -18,7 +18,7 @@ metadata:
 
 ## 1. Introduction to TYPO3 Rector
 
-Rector is an automated refactoring tool that helps migrate TYPO3 extensions between major versions. It applies predefined rules to update deprecated code patterns.
+Rector is an automated refactoring tool that helps migrate TYPO3 **PHP code** between major versions. It applies predefined rules to update deprecated code patterns. For non-PHP migrations (FlexForms, TypoScript, Fluid, YAML), use Fractor -- see the `typo3-fractor` skill.
 
 ### Installation
 
