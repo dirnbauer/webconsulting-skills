@@ -286,6 +286,27 @@ Build/Scripts/runTests.sh -s cgl
 - **Contribution Guide**: https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/
 - **Git Setup**: https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/Setup/Git/
 
+## v14-Only Contribution Notes
+
+> The following notes are relevant when contributing to **TYPO3 v14 (main branch)**.
+
+### v14 Branch and Feature Freeze **[v14 only]**
+
+- v14 development targets the `main` branch.
+- Feature freeze for v14 is **March 31, 2026**. After this date, only bug fixes are accepted.
+- v14.3 LTS release planned for **April 21, 2026**.
+- Patches for v14-specific features should target `main`.
+- Bug fixes should be applied to the oldest affected branch and cherry-picked forward.
+
+### Key v14 API Changes for Patches **[v14 only]**
+
+When writing Core patches for v14, be aware of:
+- `$GLOBALS['TSFE']` fully removed — use request attributes.
+- `$GLOBALS['TCA']` is read-only at runtime — no runtime TCA modifications.
+- Fluid 5.0 with strict typing.
+- Backend modals use native `<dialog>` instead of Bootstrap Modal.
+- Symfony Translation Component replaces custom localization parsers.
+
 ---
 
 ## Credits & Attribution
