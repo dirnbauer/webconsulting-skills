@@ -564,6 +564,34 @@ jobs:
 | E2E tests | Optional, bonus points |
 | Mutation | 70%+ MSI for bonus points |
 
+## v14-Only Testing Changes
+
+> The following testing-related changes apply when testing against **TYPO3 v14**.
+
+### Testing Framework Version **[v14 only]**
+
+TYPO3 v14 requires `typo3/testing-framework:^9.0`. The v13 version (`^8.2`) is not compatible:
+
+```json
+{
+    "require-dev": {
+        "typo3/testing-framework": "^8.2 || ^9.0"
+    }
+}
+```
+
+### Fluid 5.0 in Functional Tests **[v14 only]**
+
+Functional tests rendering Fluid templates must account for Fluid 5.0 strict typing. ViewHelper arguments must match expected types exactly or tests will fail with type errors.
+
+### TCA Read-Only in Tests **[v14 only]**
+
+`$GLOBALS['TCA']` is read-only after boot in v14. Test fixtures that modify TCA at runtime must use `TcaSchemaFactory` or configure TCA in `Configuration/TCA/` fixtures instead.
+
+### Deprecated Method Removal **[v14 only]**
+
+Test code using deprecated TYPO3 APIs (e.g., `$GLOBALS['TSFE']`, Extbase annotations, `MailMessage->send()`) will fail in v14. Run tests against both v13 and v14 in CI to catch these early.
+
 ---
 
 ## Credits & Attribution
