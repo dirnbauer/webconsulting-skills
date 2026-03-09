@@ -1624,6 +1624,38 @@ final class CustomWorkspaceSortListener
 
 All events are in the `\TYPO3\CMS\Workspaces\Event\` namespace.
 
+## v14-Only Changes
+
+> The following workspace changes apply **exclusively to TYPO3 v14**.
+
+### "Freeze Editing" Removed **[v14 only]**
+
+Workspace "Freeze Editing" feature has been removed (#107323). Workspaces can no longer be frozen to prevent editing. Remove any code that references `freezeEditingWorkspace` or relies on frozen workspace state.
+
+### Workspace-Aware Inline Child Tables Enforced **[v14 only]**
+
+All inline (IRRE) child tables used in workspace-enabled parent tables **must** have `'versioningWS' => true` in their TCA ctrl (#106821). In v13 this was a deprecation warning; in v14 it is enforced. Missing `versioningWS` on child tables will cause errors.
+
+### Workspace Selector Moved to Sidebar **[v14.2+ only]**
+
+The workspace selector has been moved from the top bar to the **backend sidebar**. Workspaces now support **color** and **description** fields for visual distinction in the sidebar selector. Update any documentation or screenshots referencing the top bar workspace switcher.
+
+### Editor Information in Publish Module **[v14 only]**
+
+The workspace "Publish" module now shows **editor information** (#106074) — which backend user last modified each record. This helps reviewers identify who made changes.
+
+### `swap` Action Fully Removed **[v14 only]**
+
+The DataHandler workspace `swap` action that was deprecated in v13 is now fully removed. Use `action => 'publish'` exclusively:
+
+```php
+// ❌ Removed in v14
+$cmd['pages'][123]['version'] = ['action' => 'swap', 'swapWith' => 456];
+
+// ✅ v14 pattern
+$cmd['pages'][123]['version'] = ['action' => 'publish'];
+```
+
 ---
 
 ## Related Skills
