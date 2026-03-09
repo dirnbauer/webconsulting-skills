@@ -312,6 +312,25 @@ Stop the batch and report if:
 - Two units unexpectedly need the same file
 - User requests stop
 
+## v14-Only Batch Migration Targets
+
+> The following batch migration patterns are **v14-specific**.
+
+### Common v14 Batch Operations **[v14 only]**
+
+| Batch Operation | What to Migrate |
+|----------------|-----------------|
+| Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
+| Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
+| `MailMessage->send()` → `Mailer` | All email-sending code |
+| `ctrl.searchFields` → `searchable` | All TCA files with searchFields in ctrl |
+| TCA `interface` removal | All TCA files with `interface` key |
+| Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |
+| Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
+| FlexForm pointer fields | All FlexForm XML with pointer configurations |
+| Asset `external` property | All TypoScript with `external = 1` |
+| `configurePlugin()` subtypes | All plugin registrations using switchableControllerActions |
+
 ---
 
 ## Credits & Attribution
