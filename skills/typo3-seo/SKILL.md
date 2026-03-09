@@ -498,6 +498,41 @@ page.headerData.1000.value (
 [END]
 ```
 
+## v14-Only Changes
+
+> The following SEO changes apply **exclusively to TYPO3 v14**.
+
+### Sitemap GET Parameters Namespaced **[v14 only]**
+
+Sitemap GET parameters have been moved into a namespace (#104422). Route enhancers and custom sitemap providers must be updated. The `sitemap` and `sitemapType` parameters are now namespaced under `tx_seo_sitemap`.
+
+### Fluid Page Meta & Title ViewHelpers **[v14 only]**
+
+New ViewHelpers for setting page meta tags and titles directly from Fluid templates:
+
+```html
+<!-- Set page title from Fluid -->
+<f:page.title>{article.title} - My Site</f:page.title>
+
+<!-- Set meta tags from Fluid -->
+<f:page.meta name="description" content="{article.teaser}" />
+<f:page.meta property="og:title" content="{article.title}" />
+```
+
+These complement (and can replace) PHP-based `PageTitleProvider` and `MetaTagManager` approaches.
+
+### RecordTitleTagProvider **[v14 only]**
+
+New `RecordTitleTagProvider` (#106232) automatically generates page titles from displayed records. Useful for Extbase detail views without needing a custom title provider.
+
+### Regex-Based Slug Replacements **[v14 only]**
+
+Slugs now support **regex-based replacements** (#106072) for advanced URL transformation rules beyond simple character substitution.
+
+### headerData / footerData ViewHelpers **[v14 only]**
+
+New `<f:asset.headerData>` and `<f:asset.footerData>` ViewHelpers allow injecting raw HTML (e.g., JSON-LD structured data) directly from Fluid templates without TypoScript.
+
 ---
 
 ## Credits & Attribution
