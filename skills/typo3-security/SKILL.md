@@ -503,6 +503,46 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 - **v13 Security Features**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13/Index.html
 - **v14 Security Features**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
 
+## v14-Only Security Changes
+
+> The following security changes apply **exclusively to TYPO3 v14**.
+
+### Stronger HMAC Algorithm **[v14 only]**
+
+TYPO3 v14 uses a **stronger cryptographic algorithm for HMAC** (#106307). Existing HMAC tokens (e.g., in URLs, form tokens) generated with the old algorithm will be invalid after upgrade. Plan for token regeneration.
+
+### Built-in CipherService **[v14 only]**
+
+New `CipherService` (#108002) provides **symmetric encryption/decryption** out of the box. Use it instead of custom encryption implementations:
+
+```php
+use TYPO3\CMS\Core\Crypto\CipherService;
+
+$cipherService = GeneralUtility::makeInstance(CipherService::class);
+$encrypted = $cipherService->encrypt('sensitive data');
+$decrypted = $cipherService->decrypt($encrypted);
+```
+
+### MFA Failed Verification Notifications **[v14 only]**
+
+Backend users are now **notified on failed MFA verification attempts** (#105783). This provides early warning of potential brute-force attacks against MFA-protected accounts.
+
+### Install Tool Password via CLI **[v14 only]**
+
+New CLI command `install:password:set` (#104058) allows setting the Install Tool password without web access. Useful for automated deployments:
+
+```bash
+vendor/bin/typo3 install:password:set
+```
+
+### Redis-Based Install Tool Sessions **[v14 only]**
+
+Install Tool sessions can now be stored in **Redis** (#101059) instead of the filesystem. This enables Install Tool access in multi-server / shared-nothing deployments without shared filesystems.
+
+### Modal Migration **[v14 only]**
+
+Backend modals migrated from **Bootstrap Modal to native `<dialog>`** element (#107443). Custom backend JavaScript using Bootstrap Modal API must be updated.
+
 ---
 
 ## Related Skills
