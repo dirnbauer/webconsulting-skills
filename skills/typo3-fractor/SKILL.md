@@ -476,6 +476,34 @@ vendor/bin/fractor process --dry-run
 - **TYPO3 Rector** (PHP companion): https://github.com/sabbelasichon/typo3-rector
 - **Related Skills**: `typo3-extension-upgrade` (full upgrade workflow), `typo3-rector` (PHP migrations)
 
+## v14-Only Fractor Targets
+
+> The following non-PHP migration targets are **v14-specific** and handled by Fractor `Typo3SetList::TYPO3_14` rules.
+
+### TCA Migrations **[v14 only]**
+
+- **`ctrl.searchFields` removed** — migrate to per-column `'searchable' => true` configuration.
+- **`ctrl.is_static` removed** — remove from TCA ctrl arrays.
+- **TCA `interface` settings removed** (#106412) — remove `interface` key from TCA.
+- **TCA tab labels consolidated** (#107789) — use `core.form.tabs` short-form references.
+- **FlexForm pointer fields removed** (#107047) — use direct TCA column references.
+
+### TypoScript Migrations **[v14 only]**
+
+- **`config.concatenateCss` / `config.concatenateJs` removed** — remove these settings; delegate to web server or build tools.
+- **`config.compressCss` / `config.compressJs` removed** — same as above.
+- **`external` property removed** for asset inclusion — remove `external = 1` from TypoScript.
+- **TypoScript condition `getTSFE()` removed** — use request-based conditions.
+
+### Htaccess Migrations **[v14 only]**
+
+- **Updated default `.htaccess` template** (#105244) — Fractor can apply the updated template.
+
+### FlexForm Migrations **[v14 only]**
+
+- **FlexForm `pointer` field functionality removed** (#107047) — migrate to direct TCA references.
+- **`FlexFormService` merged into `FlexFormTools`** (#107945) — update PHP references.
+
 ---
 
 ## Credits & Attribution
