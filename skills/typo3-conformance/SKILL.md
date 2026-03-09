@@ -393,6 +393,24 @@ parameters:
 | 60-69 | C | Basic - Needs Work |
 | <60 | F | Not Conformant |
 
+## v14-Only Conformance Changes
+
+> The following conformance criteria apply when evaluating extensions for **TYPO3 v14**.
+
+### v14 Conformance Requirements **[v14 only]**
+
+- **No `$GLOBALS['TSFE']` usage** — fully removed in v14. Use request attributes.
+- **No Extbase annotations** — only PHP 8 attributes (`#[Validate]`, `#[IgnoreValidation]`).
+- **Static TCA only** — runtime TCA modifications are forbidden.
+- **`composer.json` required** — even in classic (non-Composer) mode.
+- **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
+- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → `administration`.
+- **No deprecated localization hooks** — use Symfony Translation Component.
+
+### Updated Backend Module Standards **[v14 only]**
+
+Backend modules must use the new parent module identifiers and native `<dialog>` patterns instead of Bootstrap Modals.
+
 ---
 
 ## Credits & Attribution
