@@ -1122,3 +1122,31 @@ if ($translatedFormUid) {
 > For a comprehensive multi-step mini-shop example with Austrian legal types (Gesellschaftsformen),
 > conditional fields per legal type, GDPR compliance, and two implementation approaches
 > (DDEV SQL + DataHandler CLI command), see [SKILL-EXAMPLES.md](SKILL-EXAMPLES.md).
+
+## v14-Only Changes
+
+> The following Powermail-related changes apply when running on **TYPO3 v14 only**.
+
+### EXT:form Hooks Removed **[v14 only]**
+
+If your Powermail extensions also interact with EXT:form, note that **all EXT:form hooks are removed** in v14:
+- `beforeRendering`, `afterSubmit`, `initializeFormElement`
+- `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`
+- `afterBuildingFinished`, `beforeRemoveFromParentRenderable`
+
+These are replaced by corresponding PSR-14 events (e.g., `BeforeFormIsSavedEvent`, `BeforeRenderableIsRenderedEvent`).
+
+### AbstractFinisher Changes **[v14 only]**
+
+`AbstractFinisher->getTypoScriptFrontendController()` is removed (#107507). Finishers needing request context must use the PSR-7 request from the form runtime instead of `$GLOBALS['TSFE']`.
+
+### EXT:form Storage Adapters **[v14.1+ only]**
+
+TYPO3 v14.1 introduces **Storage Adapters** for EXT:form, allowing pluggable storage backends for form definitions. This may affect how Powermail and EXT:form coexist in projects using both.
+
+### Fluid 5.0 Template Compatibility **[v14 only]**
+
+Powermail Fluid templates must comply with Fluid 5.0 strict typing:
+- ViewHelper arguments are strictly typed (integers vs strings matter).
+- No underscore-prefixed variables in Fluid templates.
+- Verify custom Fluid partials and templates for type mismatches.
