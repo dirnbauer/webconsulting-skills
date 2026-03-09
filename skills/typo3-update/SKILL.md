@@ -739,6 +739,119 @@ ddev typo3 database:updateschema
 - **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 
+## 13. v14-Only Changes (Manual — Not Handled by Rector)
+
+> The following changes apply **exclusively to TYPO3 v14** and require **manual migration**.
+> They are NOT covered by `ssch/typo3-rector` (v3.12+, 47 TYPO314 rules).
+> For automated migrations, run `Typo3LevelSetList::UP_TO_TYPO3_14` first, then address these manually.
+
+### Fluid 5.0 Template Changes **[v14 only]**
+
+Rector handles PHP-side ViewHelper declarations (`UseStrictTypesInFluidViewHelpersRector`), but Fluid **template** changes require manual review:
+
+- ViewHelper arguments in `.html` templates must match strict types (e.g., `tabindex` must be int, not string).
+- Fluid variable names with **underscore prefix** (`_myVar`) are disallowed — rename in all templates.
+- CDATA sections in Fluid templates are **no longer removed** automatically.
+- Use `{variable as type}` casting for ambiguous ViewHelper arguments.
+
+### TypoScriptFrontendController Removed **[v14 only]**
+
+Not covered by Rector — context-dependent migration requiring manual analysis:
+
+- `$GLOBALS['TSFE']` and `TypoScriptFrontendController` are fully removed.
+- Each usage needs different request attribute replacements:
+  ```php
+  // ❌ Removed in v14
+  $tsfe = $GLOBALS['TSFE'];
+  
+  // ✅ v14 pattern (also works in v13)
+  $pageInformation = $request->getAttribute('frontend.page.information');
+  $language = $request->getAttribute('language');
+  $typoscript = $request->getAttribute('frontend.typoscript');
+  ```
+
+### Backend Module Renaming **[v14 only]**
+
+Not a PHP migration — requires manual update to `Configuration/Backend/Modules.php`:
+
+| Old Parent | New Parent |
+|------------|------------|
+| `web` | `content` |
+| `file` | `media` |
+| `tools` | `administration` |
+
+### Runtime TCA Modifications Forbidden **[v14 only]**
+
+`$GLOBALS['TCA']` is **read-only after boot**. Any code modifying TCA at runtime (e.g., in `ext_localconf.php`, middleware, event listeners) must be moved to static `Configuration/TCA/` files. This requires architectural changes, not simple find-and-replace.
+
+### Plugin Subtypes Removed **[v14 only]**
+
+Requires manual restructuring — not a code-level replacement:
+- `list_type` subtypes and `switchableControllerActions` are fully removed.
+- Each plugin variant needs its own plugin registration via `configurePlugin()`.
+- Existing TypoScript/FlexForm configurations must be split per plugin.
+
+### EXT:form Hooks → PSR-14 Events **[v14 only]**
+
+Hook-to-event migration requires manual rewrite of hook implementations:
+- All EXT:form hooks removed: `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`.
+- Replace with corresponding PSR-14 events (e.g., `BeforeFormIsSavedEvent`, `BeforeRenderableIsRenderedEvent`).
+
+### Frontend Asset Pipeline **[v14 only]**
+
+Rector removes PHP configuration (`RemoveConcatenateAndCompressHandlerRector`), but the **infrastructure replacement** is manual:
+- CSS/JS concatenation and compression removed from TYPO3 Core entirely.
+- Must configure web server compression (nginx gzip, Apache mod_deflate) or use build tools (Vite, webpack).
+- TypoScript `config.concatenateCss`, `config.compressCss`, `config.concatenateJs`, `config.compressJs` must be removed (handled by Fractor, not Rector).
+
+### New TCA Features **[v14 only]**
+
+New features to adopt (not migrations):
+- **New TCA type `country`** (#99911) for country selection fields.
+- **New `itemsProcessors`** option (#107889) for dynamic item generation.
+- **Type-specific `ctrl` properties** in TCA `types` section (#108027).
+- **Type-specific TCA defaults** (#107281).
+
+### New Fluid ViewHelpers **[v14 only]**
+
+- `<f:page.meta>` — set page meta tags from Fluid templates.
+- `<f:page.title>` — set page title from Fluid templates.
+- `<f:asset.headerData>` / `<f:asset.footerData>` — inject raw HTML into head/footer.
+
+### Localization System **[v14 only]**
+
+Rector handles parser class replacement (`ReplaceLocalizationParsersWithLoaders`) and label syntax (`MigrateLabelReferenceToDomainSyntaxRector`), but these features are new:
+- **XLIFF 2.x** translation files supported alongside XLIFF 1.2.
+- **Translation domain mapping** (#93334) for flexible XLIFF file resolution.
+
+### New DataHandler Features **[v14 only]**
+
+- **`discard` command** (#107519) — discard workspace changes programmatically.
+- **ISO8601 date handling improved** — qualified and unqualified ISO8601 dates supported.
+
+### v14.1 Features **[v14.1+ only]**
+
+- **Default theme "Camino"** — ready-to-use frontend theme, no third-party deps.
+- **Content Element restrictions per column** — `content_defender` functionality merged into Core.
+- **Fluid Components integration** — improved Fluid namespace configuration.
+- **EXT:form Storage Adapters** — pluggable form storage backends.
+- **PHP 8.5 compatibility** enhancements.
+
+### v14.2 Features **[v14.2+ only]**
+
+- **Backend search by frontend URL** — find pages by their frontend URL in page tree and live search.
+- **Workspace selector moved to sidebar** with color and description.
+- **Extbase identity map language-aware** — identity map now considers language when resolving objects.
+- **XLIFF `xml:space` attribute** — whitespace handling respects the attribute.
+- **QR Code for frontend preview** — downloadable QR codes (PNG/SVG) for frontend URLs.
+
+### New v14 Deprecations (removed in v15) — Not Yet Handled by Rector
+
+- `ExtensionManagementUtility::addPiFlexFormValue()` — use direct FlexForm TCA.
+- `ExtensionManagementUtility::addFieldsToUserSettings` — use TCA for user settings.
+- `PageRenderer->addInlineLanguageDomain()`.
+- `FormEngine "additionalHiddenFields"` key.
+
 ---
 
 ## Credits & Attribution
