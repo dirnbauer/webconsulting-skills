@@ -969,6 +969,31 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 | Auto-playing video with sound | Add `muted` or remove `autoplay` |
 | Skipped heading levels | Fix hierarchy |
 
+## v14-Only Accessibility Changes
+
+> The following accessibility-related changes apply **exclusively to TYPO3 v14**.
+
+### Accessible Combobox Pattern **[v14 only]**
+
+TYPO3 v14 introduces a new **accessible combobox pattern** (#106637) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
+
+### Native `<dialog>` Element **[v14 only]**
+
+Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#107443). The native dialog provides better accessibility out of the box:
+- Built-in focus trapping
+- Proper `aria-modal` semantics
+- `Escape` key handling
+- Inert background
+- No JavaScript framework dependency
+
+Update any custom backend JavaScript that uses `Modal.show()` or `Modal.confirm()` from the Bootstrap-based API.
+
+### Fluid 5.0 Accessibility Impact **[v14 only]**
+
+Fluid 5.0 strict typing means ViewHelper arguments must be correctly typed. This affects accessibility-related ViewHelpers:
+- `tabindex` attributes must be integers, not strings
+- Boolean ARIA attributes (`aria-hidden`, `aria-expanded`) must be proper booleans
+
 ---
 
 ## Related Skills
