@@ -31,10 +31,38 @@ sessions/
 
 # AI agent local config directories (not project skills)
 .agent/
+.agents/
+.augment/
 .claude/
+.codebuddy/
 .codex/
+.commandcode/
+.continue/
+.cortex/
+.crush/
+.factory/
 .gemini/
+.goose/
+.iflow/
 .junie/
 .kilocode/
 .kiro/
+.kode/
+.mcpjam/
+.mux/
+.neovate/
 .opencode/
+.openhands/
+.pi/
+.pochi/
+.qoder/
+.qwen/
+.roo/
+.trae/
+.vibe/
+.windsurf/
+.zencoder/
+.adal/
+
+# npx skills CLI artifacts
+skills-lock.json
