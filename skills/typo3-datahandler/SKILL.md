@@ -564,6 +564,40 @@ $EM_CONF[$_EXTKEY] = [
 ];
 ```
 
+## v14-Only Changes
+
+> The following DataHandler changes apply **exclusively to TYPO3 v14**.
+
+### Removed Properties **[v14 only]**
+
+- **`DataHandler->userid`** and **`DataHandler->admin`** properties removed (#107848). The DataHandler now uses the backend user from `$GLOBALS['BE_USER']` directly. Do not set these properties.
+- **`DataHandler->storeLogMessages`** removed (#106118). Logging behavior is no longer configurable via this property.
+- **`DataHandler->copyWhichTables`**, **`DataHandler->neverHideAtCopy`**, **`DataHandler->copyTree`** removed (#107856). These internal properties are no longer accessible.
+
+### New `discard` Command **[v14 only]**
+
+DataHandler now supports a `discard` command to programmatically discard workspace changes:
+
+```php
+$cmd = [
+    'tt_content' => [
+        123 => ['discard' => true],
+    ],
+];
+```
+
+### ISO8601 Date Handling **[v14 only]**
+
+DataHandler now accepts both qualified (`2026-03-09T12:00:00+01:00`) and unqualified (`2026-03-09T12:00:00`) ISO8601 date strings for datetime fields (#105549).
+
+### Record API in List/Page Modules **[v14 only]**
+
+The List Module and Page Module now use the **Record API** (#107356, #92434) instead of raw array data for rendering. Custom preview renderers and record transformations must adapt to `Record` objects.
+
+### Reference Index Check Moved **[v14 only]**
+
+The Reference Index check has been moved to the **Install Tool** (#107629). The previous backend module approach is no longer available.
+
 ---
 
 ## Credits & Attribution
