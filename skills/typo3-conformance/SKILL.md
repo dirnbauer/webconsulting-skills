@@ -27,6 +27,18 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 | **typo3-docs** | RST validation, documentation rendering |
 | **php-modernization** | PHP 8.x patterns, PHPStan, type safety |
 
+## Enforcement Behavior (Required)
+
+When this skill states a quality gate (for example `PHPStan level 9+`, blocking CI,
+or no deprecations), treat it as an implementation requirement, not a suggestion.
+
+1. **Check actual config files first** (`phpstan.neon`, `composer.json`, CI workflow).
+2. **If a gate is unmet, fix it in code/config** in the same run whenever feasible.
+3. **Run verification commands** and report the real result (pass/fail), not assumptions.
+4. **Do not claim conformance** if required gates are not active.
+5. **If immediate full remediation is too large**, apply a clearly documented
+   transitional state (for example a baseline) and explicitly call out residual debt.
+
 ## Evaluation Workflow
 
 1. **Initial Assessment** - Extension key, TYPO3 version, type
@@ -382,6 +394,13 @@ parameters:
     excludePaths:
         - Tests/Fixtures/*
 ```
+
+### CI Enforcement Rule
+
+- PHPStan in CI must be **blocking**. Do not set `continue-on-error: true` for the
+  PHPStan step in `.github/workflows/ci.yml`.
+- If PHPStan is temporarily non-blocking for migration reasons, mark the extension as
+  **not fully conformant** and include a concrete remediation plan and owner.
 
 ## Scoring Interpretation
 
