@@ -206,6 +206,7 @@ https://github.com/vercel-labs/skills
 | `typo3-update` | TYPO3 v13/v14 dual-version development guide | 2.0.0 | update, upgrade, v13, v14 |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | 1.0.0 | fractor, flexform, typoscript migration, fluid migration |
+| `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | 1.0.0 | icons, backend module icons, icon migration, SVG icons, icon registry |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | 1.0.0 | accessibility, a11y, wcag, aria, screen reader, keyboard |
@@ -405,6 +406,7 @@ https://github.com/vercel-labs/skills
 - **typo3-update**: Version migration and compatibility strategies for v13/v14
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
 - **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, Htaccess)
+- **typo3-icon14**: Migrate extension icons from solid-background to v14 line-art style (currentColor, CSS custom properties)
 - **typo3-security**: Production hardening checklist for v13/v14
 - **typo3-seo**: Search engine optimization with EXT:seo
 - **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
@@ -518,6 +520,14 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Fix all deprecations for TYPO3 v14"
 - "Fractor for TypoScript and Fluid migrations"
 - "Site migration from v10 to v14 with URL preservation"
+
+**🎨 Icon Modernization (typo3-icon14)**
+- "Migrate extension icons to TYPO3 v14 line-art style"
+- "Convert solid-background SVG icons to currentColor"
+- "Scan extension for legacy icon SVGs and create v14 replacements"
+- "Update Configuration/Icons.php registration for v14"
+- "Create backend module icon with CSS custom properties"
+- "Audit extension icons against TYPO3 v14 design language"
 
 **🧪 Testing (typo3-testing)**
 - "Unit tests with mocked repositories"
@@ -1224,8 +1234,8 @@ Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `ente
 Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `php-modernization`
-Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, dual-version compatibility, batch migrations
+Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `php-modernization`
+Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, icon modernization, dual-version compatibility, batch migrations
 
 ### Code Quality Session
 Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-modernization`
@@ -1314,6 +1324,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-update | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-fractor | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-icon14 | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |
