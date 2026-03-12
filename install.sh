@@ -176,6 +176,14 @@ else
             echo "  ✓ Installed Skill: $skill_name"
         fi
     done
+    
+    # Clean up broken symlinks from renamed/removed skills
+    for link in "$USER_SKILLS_DIR"/*; do
+        if [ -L "$link" ] && [ ! -e "$link" ]; then
+            rm "$link"
+            echo "  ✗ Removed stale: $(basename "$link")"
+        fi
+    done
 fi
 
 # =============================================================================
@@ -199,6 +207,14 @@ for skill_path in "$SCRIPT_DIR/skills"/*; do
         # Symlink to source
         ln -s "$skill_path" "$target"
         echo "  ✓ Linked Skill: $skill_name"
+    fi
+done
+
+# Clean up broken symlinks from renamed/removed skills
+for link in "$PROJECT_SKILLS_DIR"/*; do
+    if [ -L "$link" ] && [ ! -e "$link" ]; then
+        rm "$link"
+        echo "  ✗ Removed stale: $(basename "$link")"
     fi
 done
 
