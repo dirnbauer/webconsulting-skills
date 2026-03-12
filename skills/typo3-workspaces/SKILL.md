@@ -7,7 +7,7 @@ description: >-
   review, draft content, workflow, file collection.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
-  version: "1.0.0"
+  version: "2.0.0"
 ---
 
 # TYPO3 Workspaces

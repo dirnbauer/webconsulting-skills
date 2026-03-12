@@ -217,7 +217,7 @@ https://github.com/vercel-labs/skills
 | `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
-| `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 1.0.0 | workspace, versioning, staging, publishing, review, draft content |
+| `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 2.0.0 | workspace, versioning, staging, publishing, review, draft content |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
 | `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
 | `typo3-solr/FRONTEND` | Custom JS for search, suggest, facets without jQuery | 1.0.0 | solr javascript, vanilla js search, solr ajax |
