@@ -563,6 +563,38 @@ ddev exec -d /var/www/html/v14 vendor/bin/phpunit
 ddev exec -d /var/www/html/v13 vendor/bin/typo3 cache:flush
 ```
 
+## v14-Only DDEV Changes
+
+> The following DDEV-related changes are relevant when setting up **TYPO3 v14 environments**.
+
+### PHP 8.5 Compatibility **[v14.1+ only]**
+
+TYPO3 v14.1 adds **PHP 8.5 compatibility**. When PHP 8.5 is released, update your DDEV config:
+```yaml
+# .ddev/config.yaml
+php_version: "8.5"
+```
+
+### Camino Default Theme **[v14.1+ only]**
+
+TYPO3 v14.1 ships with the **Camino** default frontend theme. For quick-start setups:
+```bash
+ddev composer require typo3/cms-camino
+ddev typo3 extension:activate camino
+```
+
+### composer.json Required in Classic Mode **[v14 only]**
+
+In v14, extensions **must** have a `composer.json` file even in classic (non-Composer) mode. Ensure all local extensions include a valid `composer.json`.
+
+### Frontend Asset Pipeline **[v14 only]**
+
+Frontend CSS/JS concatenation and compression are removed from TYPO3 Core. Configure your DDEV web server or add a build step:
+```yaml
+# .ddev/nginx-site.conf or custom config
+# Enable gzip compression at the web server level
+```
+
 ---
 
 ## Credits & Attribution

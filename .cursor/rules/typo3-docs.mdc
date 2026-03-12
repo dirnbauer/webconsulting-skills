@@ -450,6 +450,30 @@ This extension provides functionality for managing items.
 - **Render Guides**: https://github.com/TYPO3-Documentation/render-guides
 - **Intercept**: https://intercept.typo3.com/
 
+## v14-Only Documentation Changes
+
+> The following documentation-related changes apply **exclusively to TYPO3 v14**.
+
+### XLIFF 2.x Support **[v14 only]**
+
+TYPO3 v14 supports **XLIFF 2.x** translation files (#107710) alongside the existing XLIFF 1.2 format. Document which XLIFF version your extension uses.
+
+### Translation Domain Mapping **[v14 only]**
+
+New **translation domain mapping** feature (#93334) allows flexible XLIFF file resolution. Extensions can map translation domains to specific XLIFF files without following the convention-based path.
+
+### TranslateViewHelper Domain Syntax **[v14 only]**
+
+The `TranslateViewHelper` (`<f:translate>`) supports a new **domain syntax** (#107759) for referencing translations across extension boundaries using `LLL:EXT:` shorthand.
+
+### Symfony Translation Component **[v14 only]**
+
+TYPO3's localization system now uses the **Symfony Translation Component** (#107436) internally. This affects how translation files are parsed and cached. Custom localization parser implementations are deprecated.
+
+### `xml:space` Attribute in XLIFF **[v14.2+ only]**
+
+XLIFF files now respect the `xml:space` attribute for whitespace handling. Document any whitespace-sensitive translations appropriately.
+
 ---
 
 ## Credits & Attribution

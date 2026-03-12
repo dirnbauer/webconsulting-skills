@@ -413,6 +413,35 @@ Before considering upgrade complete:
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 - **Fractor**: https://github.com/andreaswolf/fractor (package: `a9f/typo3-fractor`)
 
+## v14-Only Upgrade Targets
+
+> The following upgrade targets are **v14-specific** breaking changes to address during extension upgrades.
+
+### Critical v14 Breaking Changes
+
+| Change | Migration |
+|--------|-----------|
+| `$GLOBALS['TSFE']` / `TypoScriptFrontendController` removed | Use request attributes (`frontend.page.information`, `language`) |
+| Extbase annotations removed | Use `#[Validate]`, `#[IgnoreValidation]` PHP attributes |
+| `MailMessage->send()` removed | Use `Mailer::send()` |
+| `FlexFormService` removed | Use `FlexFormTools` |
+| DataHandler `userid`/`admin`/`storeLogMessages` removed | Use `$GLOBALS['BE_USER']` directly |
+| Frontend asset concat/compress removed | Delegate to web server or build tools |
+| Plugin subtypes removed | Register separate plugins via `configurePlugin()` |
+| TCA `ctrl.searchFields` removed | Use per-column `'searchable' => true` |
+| Backend module parent IDs changed | `web` → `content`, `file` → `media`, `tools` → `administration` |
+| Fluid 5.0 strict types | Fix ViewHelper argument types, remove underscore-prefixed variables |
+
+### v14.2 Deprecations (prepare for v15)
+
+| Deprecated | Impact |
+|------------|--------|
+| `PageDoktypeRegistry` methods | Migrate to TCA `allowedRecordTypes` |
+| `ExtensionManagementUtility::addFieldsToUserSettings` | Use TCA |
+| Localization parsers (`XliffParser`) | Symfony Translation Component |
+| `ButtonBar`/`Menu` `make*` methods | Use `ComponentFactory` |
+| Scheduler task registration via `SC_OPTIONS` | Use TCA-based registration |
+
 ---
 
 ## Credits & Attribution

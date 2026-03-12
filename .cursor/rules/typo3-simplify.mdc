@@ -207,6 +207,23 @@ When simplifying for v12/v13 compatibility:
 - Keep numeric TCA `items` arrays alongside `label`/`value` format
 - Use `#[Autoconfigure]` only on v14+ (not available in v12)
 
+## v14-Only Simplification Targets
+
+> The following simplification opportunities are **v14-specific**.
+
+### v14 Simplification Patterns **[v14 only]**
+
+| Pattern | Simplification |
+|---------|---------------|
+| `$GLOBALS['TSFE']` access | Replace with `$request->getAttribute('frontend.page.information')` |
+| Extbase annotations (`@validate`) | Replace with `#[Validate]` PHP attribute |
+| `MailMessage->send()` | Replace with `Mailer::send()` |
+| `FlexFormService` usage | Replace with `FlexFormTools` |
+| Bootstrap Modal JS | Replace with native `<dialog>` pattern |
+| TCA `ctrl.searchFields` | Replace with per-column `'searchable' => true` |
+| Custom localization parsers | Remove, use Symfony Translation Component |
+| `GeneralUtility::createVersionNumberedFilename()` | Remove, use System Resource API |
+
 ---
 
 ## Credits & Attribution

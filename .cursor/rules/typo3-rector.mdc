@@ -500,6 +500,37 @@ public function __construct(
 - **v13 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13/Index.html
 - **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
 
+## v14-Only Rector Targets
+
+> The following patterns are **v14-only** migration targets for Rector. Use `Typo3LevelSetList::UP_TO_TYPO3_14` when it becomes available, or apply these manually.
+
+### New Rector Migration Targets **[v14 only]**
+
+| Removed/Changed | Migration |
+|-----------------|-----------|
+| `TypoScriptFrontendController` | Use request attributes (`frontend.page.information`, `language`) |
+| Extbase annotations (`@validate`, `@ignorevalidation`) | Use PHP attributes (`#[Validate]`, `#[IgnoreValidation]`) |
+| `FlexFormService` class | Merged into `FlexFormTools` (#107945) |
+| `BackendUtility` localization methods | Use new APIs (#106393) |
+| `MailMessage->send()` | Use `Mailer::send()` |
+| `GeneralUtility::createVersionNumberedFilename()` | Use System Resource API |
+| `PathUtility::getPublicResourceWebPath()` | Use System Resource API |
+| `PathUtility::getRelativePath()` / `getRelativePathTo()` | Use new path resolution |
+| `AbstractTypolinkBuilder->build()` | Use `TypolinkBuilderInterface` |
+| `DataHandler->userid` / `->admin` / `->storeLogMessages` | Removed, no replacement |
+
+### v14.2 Deprecation Targets (prepare for v15 removal)
+
+| Deprecated | Migration |
+|------------|-----------|
+| `PageDoktypeRegistry` config methods | Migrate to TCA `allowedRecordTypes` |
+| `PageRenderer->addInlineLanguageDomain()` | Use alternative API |
+| `ExtensionManagementUtility::addFieldsToUserSettings` | Use TCA for user settings |
+| `ButtonBar`/`Menu`/`MenuRegistry` `make*` methods | Use `ComponentFactory` |
+| Scheduler task registration via `SC_OPTIONS` | Use TCA-based registration |
+| `FormEngine "additionalHiddenFields"` key | Removed in v15 |
+| `Localization parsers` (XliffParser, etc.) | Symfony Translation Component |
+
 ---
 
 ## Credits & Attribution

@@ -2095,6 +2095,32 @@ The pattern scales -- you can create as many Index Queue configs as needed for t
 - [Sease: SeededKnnVectorQuery (Solr 10)](https://sease.io/2026/02/lexically-accelerated-vector-search-seededknnvectorquery-support-in-apache-solr-10.html)
 - [LangChain4j Embedding Models](https://docs.langchain4j.dev/category/embedding-models)
 
+## v14-Only Solr Changes
+
+> The following Solr-related changes are relevant when running EXT:solr on **TYPO3 v14**.
+
+### EXT:solr v14 Compatibility **[v14 only]**
+
+EXT:solr v14 compatibility is being developed on the `task/14LTS_compatibility` branch. Check [Packagist](https://packagist.org/packages/apache-solr-for-typo3/solr) for the latest v14-compatible release.
+
+### Fluid 5.0 in Search Templates **[v14 only]**
+
+Search result templates and facet partials must comply with Fluid 5.0 strict typing:
+- ViewHelper arguments are strictly typed.
+- No underscore-prefixed template variables.
+- Review custom result and facet templates for type mismatches.
+
+### TypoScriptFrontendController Removal **[v14 only]**
+
+Custom indexer or search plugins referencing `$GLOBALS['TSFE']` must migrate to request attributes. This affects:
+- Custom `IndexQueueInitializer` implementations
+- PSR-14 event listeners for `AfterSearchHasBeenExecutedEvent`
+- Custom `ResultParser` classes
+
+### TCA `searchFields` Migration **[v14 only]**
+
+If your custom record TCA uses `ctrl.searchFields` for Solr indexing configuration, note that `searchFields` is removed from `ctrl` in v14. Use per-column `'searchable' => true` instead. This does not directly affect Solr Index Queue configuration (which uses its own field mapping), but may affect backend search behavior.
+
 ## Credits & Attribution
 
 - **dkd Internet Service GmbH** for developing and maintaining EXT:solr, EXT:tika, and the TYPO3-Solr ecosystem

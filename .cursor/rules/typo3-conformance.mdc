@@ -27,6 +27,18 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 | **typo3-docs** | RST validation, documentation rendering |
 | **php-modernization** | PHP 8.x patterns, PHPStan, type safety |
 
+## Enforcement Behavior (Required)
+
+When this skill states a quality gate (for example `PHPStan level 9+`, blocking CI,
+or no deprecations), treat it as an implementation requirement, not a suggestion.
+
+1. **Check actual config files first** (`phpstan.neon`, `composer.json`, CI workflow).
+2. **If a gate is unmet, fix it in code/config** in the same run whenever feasible.
+3. **Run verification commands** and report the real result (pass/fail), not assumptions.
+4. **Do not claim conformance** if required gates are not active.
+5. **If immediate full remediation is too large**, apply a clearly documented
+   transitional state (for example a baseline) and explicitly call out residual debt.
+
 ## Evaluation Workflow
 
 1. **Initial Assessment** - Extension key, TYPO3 version, type
@@ -383,6 +395,13 @@ parameters:
         - Tests/Fixtures/*
 ```
 
+### CI Enforcement Rule
+
+- PHPStan in CI must be **blocking**. Do not set `continue-on-error: true` for the
+  PHPStan step in `.github/workflows/ci.yml`.
+- If PHPStan is temporarily non-blocking for migration reasons, mark the extension as
+  **not fully conformant** and include a concrete remediation plan and owner.
+
 ## Scoring Interpretation
 
 | Score | Grade | Status |
@@ -392,6 +411,24 @@ parameters:
 | 70-79 | B | Development Ready |
 | 60-69 | C | Basic - Needs Work |
 | <60 | F | Not Conformant |
+
+## v14-Only Conformance Changes
+
+> The following conformance criteria apply when evaluating extensions for **TYPO3 v14**.
+
+### v14 Conformance Requirements **[v14 only]**
+
+- **No `$GLOBALS['TSFE']` usage** — fully removed in v14. Use request attributes.
+- **No Extbase annotations** — only PHP 8 attributes (`#[Validate]`, `#[IgnoreValidation]`).
+- **Static TCA only** — runtime TCA modifications are forbidden.
+- **`composer.json` required** — even in classic (non-Composer) mode.
+- **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
+- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → `administration`.
+- **No deprecated localization hooks** — use Symfony Translation Component.
+
+### Updated Backend Module Standards **[v14 only]**
+
+Backend modules must use the new parent module identifiers and native `<dialog>` patterns instead of Bootstrap Modals.
 
 ---
 
