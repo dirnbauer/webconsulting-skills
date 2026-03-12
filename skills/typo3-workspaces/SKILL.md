@@ -57,22 +57,24 @@ Offline (workspace) versions live in the **same database table** as live records
 
 | Field | Purpose |
 |-------|---------|
-| `t3ver_oid` | Points to the live record's `uid` (0 for live records) |
+| `t3ver_oid` | Points to the live record's `uid` (0 for live records and workspace-new records) |
 | `t3ver_wsid` | Workspace ID this version belongs to (0 for live) |
 | `t3ver_state` | Special state flags (see below) |
 | `t3ver_stage` | Workflow stage (0=editing, -10=ready to publish) |
-| `pid` | Set to `-1` for all offline versions |
+| `pid` | Real page ID (same as the live record's pid) |
 
-**t3ver_state values:**
+> **Note:** Before TYPO3 v11, offline versions had `pid = -1`. Since v11 (Breaking #92497), workspace records store their **real pid**. If you encounter `pid = -1` in legacy code or documentation, it is outdated.
+
+**t3ver_state values (v13/v14):**
 
 | Value | Meaning |
 |-------|---------|
-| `-1` | New placeholder version (workspace pendant for new record) |
-| `0` | Default: workspace modification of existing record |
-| `1` | New placeholder (live pendant, insertion point for sorting) |
+| `0` | Default: workspace modification of existing live record |
+| `1` | New record created exclusively in workspace (no live counterpart) |
 | `2` | Delete placeholder (record marked for deletion upon publish) |
-| `3` | Move placeholder (live placeholder, hidden online, linked via `t3ver_move_id`) |
-| `4` | Move pointer (workspace pendant of record to be moved) |
+| `4` | Move pointer (record to be moved upon publish, stores new pid/sorting) |
+
+> **Removed in v11:** `t3ver_state = -1` (old "new version" pendant), `t3ver_state = 3` (old "move placeholder"), and the `t3ver_move_id` field. If you see these values in legacy code, they are no longer used in v13/v14.
 
 ### The Overlay Mechanism
 
@@ -850,6 +852,18 @@ $queryBuilder->getRestrictions()
 
 Extbase repositories handle workspace overlays **automatically** via the persistence layer. No changes needed for standard `findBy*` methods.
 
+> **CRITICAL: Extbase DataMapper does NOT populate `t3ver_*` system fields.**
+> If you add `$t3verWsid`, `$t3verState`, or `$t3verOid` properties to an Extbase domain model, they will **always remain at their default value** (typically `0`). The `t3ver_*` columns are `ctrl` fields in TCA, not `columns` — Extbase's `DataMapFactory` does not create column maps for them.
+>
+> To inspect workspace state of Extbase model objects, query the database directly via `ConnectionPool`:
+>
+> ```php
+> $row = GeneralUtility::makeInstance(ConnectionPool::class)
+>     ->getConnectionForTable('pages')
+>     ->select(['t3ver_wsid', 't3ver_state', 't3ver_oid'], 'pages', ['uid' => $post->getUid()])
+>     ->fetchAssociative();
+> ```
+
 **However**, if you use custom QueryBuilder inside a repository:
 
 ```php
@@ -979,17 +993,18 @@ TYPO3 handles this automatically when using `PageRepository->versionOL()` and `P
 When working in a workspace:
 
 1. The **default language record** is versioned first (if modified)
-2. Translations created in a workspace get their own placeholder + version records
+2. Translations created in a workspace are single records with `t3ver_state = 1` (workspace-new)
 3. The `l10n_parent` field points to the **live** default language record UID
-4. Each translation version has its own `t3ver_oid` pointing to the live translation
+4. Modified translations have `t3ver_oid` pointing to the live translation UID
 
 Database example for a tt_content record translated to French in workspace 1:
 
 | uid | pid | t3ver_wsid | t3ver_oid | t3ver_state | l10n_parent | sys_language_uid | header |
 |-----|-----|------------|-----------|-------------|-------------|------------------|--------|
 | 11 | 20 | 0 | 0 | 0 | 0 | 0 | Article #1 |
-| 31 | 20 | 1 | 0 | 1 | 11 | 1 | Placeholder (fr) |
-| 32 | -1 | 1 | 31 | -1 | 11 | 1 | Article #1 (fr) |
+| 31 | 20 | 1 | 0 | 1 | 11 | 1 | Article #1 (fr) |
+
+> **Note:** In TYPO3 v13/v14, workspace-new records are a **single row** with `t3ver_state = 1` and real `pid`. The old two-row pattern (placeholder + version with `pid = -1` and `t3ver_state = -1`) was removed in v11.
 
 ### Language Restrictions per Workspace
 
@@ -1421,7 +1436,7 @@ Create `Tests/Functional/Fixtures/WorkspaceTestData.csv`:
 "tt_content"
 ,"uid","pid","header","CType","bodytext","deleted","t3ver_oid","t3ver_wsid","t3ver_state"
 ,10,1,"Original Header","text","<p>Original</p>",0,0,0,0
-,11,-1,"Modified In Workspace","text","<p>Modified</p>",0,10,1,0
+,11,1,"Modified In Workspace","text","<p>Modified</p>",0,10,1,0
 ```
 
 ### Run Tests
