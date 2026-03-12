@@ -1,0 +1,562 @@
+---
+name: typo3-icon14
+description: >-
+  Migrate TYPO3 extension backend module icons from old solid-background style
+  to TYPO3 v14 line-art style using currentColor, CSS custom properties, and the
+  Icon API. Scans extensions for legacy icon SVGs, creates v14-conformant replacements,
+  and updates Configuration/Icons.php registration. Use when working with icons, backend
+  module icons, icon migration, icon update, module icon, TYPO3 v14 icons, icon redesign,
+  SVG icons, icon registry, icon modernization.
+compatibility: TYPO3 13.4 - 14.x
+metadata:
+  version: "1.0.0"
+---
+
+# TYPO3 v14 Icon Modernizer
+
+> Migrate extension icons from the legacy solid-background style to the TYPO3 v14 line-art
+> design language. Covers backend module icons, plugin icons, record icons, and the
+> Extension icon.
+
+## Quick Reference: Old vs New Style
+
+| Aspect | Old Style (pre-v14) | New v14 Style |
+|--------|---------------------|---------------|
+| **Background** | Solid color rectangle (`<rect fill="#5BA34F"/>` or `<path fill="#5BA34F" d="M0,0h64v64H0V0z"/>`) | No background — transparent |
+| **Primary shapes** | White `#FFFFFF` on colored bg | `currentColor` (adapts to theme) |
+| **Accent color** | Hardcoded brand color (e.g. `#5BA34F`) | `var(--icon-color-accent, #ff8700)` |
+| **Secondary elements** | `opacity="0.25"` / `0.75` with hardcoded fill | `opacity=".4"` with `currentColor` |
+| **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | `0 0 64 64` always |
+| **SVG wrapper** | `version="1.1"`, `xmlns:xlink`, `enable-background`, generator comments | Minimal: `xmlns` + `viewBox` only |
+| **Detail colors** | `#333333` for text lines, brand color for accents | `currentColor` + accent variable |
+
+## Process
+
+1. **Scan** — Find all icon files and registrations in the extension
+2. **Classify** — Identify which icons use old style vs already v14-conformant
+3. **Redesign** — Create new SVG icons following the v14 design language
+4. **Register** — Ensure `Configuration/Icons.php` uses `SvgIconProvider`
+5. **Verify** — Confirm module, plugin, and TCA references are correct
+6. **Ask before saving** — Always present the plan and new SVGs to the user before writing files
+
+## Step 1: Scan Extension for Icons
+
+### File locations to check
+
+| Location | Purpose |
+|----------|---------|
+| `Resources/Public/Icons/module-*.svg` | Backend module icons |
+| `Resources/Public/Icons/plugin-*.svg` | Frontend plugin icons |
+| `Resources/Public/Icons/record-*.svg` | Record type icons (TCA) |
+| `Resources/Public/Icons/Extension.svg` | Extension icon (Extension Manager) |
+| `Resources/Public/Icons/actions-*.svg` | Custom action icons |
+| `Resources/Public/Icons/*.png` | Legacy bitmap icons (should migrate to SVG) |
+
+### Configuration files to check
+
+| File | What to look for |
+|------|------------------|
+| `Configuration/Icons.php` | Icon registration array — must exist for v14 |
+| `Configuration/Backend/Modules.php` | `iconIdentifier` for each module |
+| `Configuration/TCA/*.php` | `typeicon_classes`, `iconIdentifier` in ctrl/types |
+| `Configuration/TCA/Overrides/*.php` | Plugin icons (`pluginIcon`), page type icons |
+| `ext_localconf.php` | **REMOVED in v14** — no `IconRegistry::registerIcon()` calls |
+| `ext_tables.php` | Should not contain icon registration |
+
+### Default output paths (use these if user does not specify)
+
+When generating or updating icons, save files to these standard TYPO3 extension paths.
+All paths are relative to the extension root (e.g. `packages/my_extension/` or
+`vendor/vendor/my-extension/`).
+
+```
+EXT:my_extension/
+├── Configuration/
+│   ├── Icons.php                          ← Icon registration (create if missing)
+│   ├── Backend/
+│   │   └── Modules.php                    ← Module iconIdentifier references
+│   ├── TCA/
+│   │   ├── tx_myext_domain_model_*.php    ← Record typeicon_classes
+│   │   └── Overrides/
+│   │       ├── tt_content.php             ← Plugin pluginIcon
+│   │       ├── pages.php                  ← Page type icons
+│   │       └── sys_category.php           ← Category type icons
+│   └── Sets/                              ← (no icon files here)
+├── Resources/
+│   └── Public/
+│       └── Icons/
+│           ├── Extension.svg              ← Extension Manager icon (16×16)
+│           ├── module-{extkey}.svg        ← Parent module icon (64×64)
+│           ├── module-{extkey}-*.svg      ← Submodule icons (64×64)
+│           ├── plugin-{extkey}-*.svg      ← Plugin icons (16×16)
+│           ├── record-{extkey}-*.svg      ← Record type icons (16×16)
+│           ├── record-folder-contains-{extkey}.svg  ← Folder icon (16×16)
+│           └── actions-*.svg              ← Custom action icons (16×16)
+└── ext_localconf.php                      ← Do NOT register icons here (v14)
+```
+
+#### Concrete example: `t3g/blog` extension
+
+Generated/updated files for the blog extension (`EXT:blog`):
+
+```
+vendor/t3g/blog/
+├── Configuration/
+│   ├── Icons.php                                  ← Updated (added declare strict_types)
+│   └── Backend/
+│       └── Modules.php                            ← Unchanged (already v14 format)
+└── Resources/
+    └── Public/
+        └── Icons/
+            ├── Extension.svg                      ← Updated (16×16, currentColor)
+            │
+            │  Module icons (64×64 viewBox)
+            ├── module-blog.svg                    ← Book with accent spine
+            ├── module-blog-posts.svg              ← Document with folded corner
+            ├── module-blog-comments.svg           ← Overlapping speech bubbles
+            ├── module-blog-setup.svg              ← Dual gears (large + small accent)
+            │
+            │  Plugin icons (16×16 viewBox, each unique)
+            ├── plugin-blog-archive.svg            ← Archive box with accent top
+            ├── plugin-blog-authorposts.svg         ← Person silhouette + document
+            ├── plugin-blog-authors.svg            ← Two people (accent for secondary)
+            ├── plugin-blog-category.svg           ← Tag shape with accent dot
+            ├── plugin-blog-commentform.svg         ← Speech bubble outline + accent lines
+            ├── plugin-blog-comments.svg           ← Two bubbles (accent + currentColor)
+            ├── plugin-blog-demandedposts.svg       ← Document with accent text lines
+            ├── plugin-blog-footer.svg             ← Page with accent footer area
+            ├── plugin-blog-header.svg             ← Page with accent header area
+            ├── plugin-blog-posts.svg              ← Document with accent title bar
+            ├── plugin-blog-relatedposts.svg        ← Two linked documents (accent behind)
+            ├── plugin-blog-sidebar.svg            ← Page with accent sidebar
+            ├── plugin-blog-tag.svg                ← Tag outline with accent dot
+            │
+            │  Record icons (16×16 viewBox)
+            ├── record-blog-author.svg             ← Person with accent body
+            ├── record-blog-category.svg           ← Tag with accent dot + rotated rect
+            ├── record-blog-comment.svg            ← Speech bubble with accent title
+            ├── record-blog-page.svg               ← Page with accent header
+            ├── record-blog-page-root.svg          ← Globe with accent ring
+            ├── record-blog-post.svg               ← Document with fold + accent lines
+            ├── record-blog-tag.svg                ← Tag outline with accent circle
+            ├── record-folder-contains-blog.svg    ← Folder with accent tab
+            │
+            │  Action icons (16×16, kept as-is)
+            ├── actions-approve.svg                ← Uses class="icon-color" (already v14)
+            └── actions-decline.svg                ← Uses class="icon-color" (already v14)
+```
+
+#### ViewBox sizes by icon type
+
+| Icon Type | ViewBox | Typical Size Rendered |
+|-----------|---------|----------------------|
+| `module-*` | `0 0 64 64` | 48–64px (sidebar menu) |
+| `plugin-*` | `0 0 16 16` | 16–32px (content wizard, list view) |
+| `record-*` | `0 0 16 16` | 16px (page tree, list view, TCA) |
+| `actions-*` | `0 0 16 16` | 16px (buttons, toolbars) |
+| `Extension.svg` | `0 0 16 16` | 16–32px (Extension Manager) |
+
+### Detection: Is an icon old-style?
+
+An SVG is **old-style** if it matches ANY of these patterns:
+
+```
+Solid background rectangle:
+  <rect ... fill="#RRGGBB" ... />  covering full viewBox
+  <path fill="#RRGGBB" d="M0,0h64v64H0V0z"/>
+
+Hardcoded white for primary shapes:
+  fill="#FFFFFF" or fill="#fff" or fill="white"
+
+Hardcoded dark for details:
+  fill="#333333" or fill="#333" or fill="black"
+
+Legacy SVG attributes:
+  version="1.1"
+  xmlns:xlink="..."
+  enable-background="..."
+  xml:space="preserve"
+
+Generator comments:
+  <!-- Generator: Adobe Illustrator ... -->
+  <!-- Generator: Sketch ... -->
+```
+
+## Step 2: V14 Icon Design Language
+
+### SVG Template
+
+Every v14-style module icon follows this structure:
+
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Secondary/decorative elements at reduced opacity -->
+  <g opacity=".4">
+    <path fill="currentColor" d="..."/>
+  </g>
+  <!-- Primary shape outlines -->
+  <path fill="currentColor" d="..."/>
+  <!-- Accent color elements (1-2 key elements only) -->
+  <path fill="var(--icon-color-accent, #ff8700)" d="..."/>
+</svg>
+```
+
+### Design Rules
+
+1. **No background** — The SVG has a transparent background. No rectangles or paths covering the full viewBox.
+
+2. **`currentColor` for primary shapes** — All main outlines, strokes, and primary filled shapes use `currentColor`. This adapts automatically to the backend theme and color scheme (white text on dark sidebar, dark text on light content areas).
+
+3. **`var(--icon-color-accent, #ff8700)` for accent** — One or two key elements use the TYPO3 accent color CSS variable. The fallback `#ff8700` ensures visibility when the variable is not set. TYPO3 overrides this variable per theme and context (see Dark/Light Mode section below).
+
+4. **`opacity=".4"` for depth** — Secondary or decorative elements (shadows, background layers, filled areas behind outlines) use 40% opacity with `currentColor`. This works in both light and dark modes because the base color adapts via `currentColor`.
+
+5. **64×64 viewBox** — All module icons use `viewBox="0 0 64 64"`. No exceptions.
+
+6. **Clean SVG markup** — No `version`, no `xmlns:xlink`, no `enable-background`, no `xml:space`, no generator comments, no `id` attributes unless needed for sprites.
+
+7. **Semantic shape preservation** — The icon's meaning (gear = settings, speech bubble = comments, document = posts) must be preserved. Only the rendering style changes.
+
+8. **Line-art aesthetic** — Prefer outlined shapes with consistent stroke weight (simulated via path outlines) over solid fills. The new style feels lighter and more modern.
+
+### Dark/Light Mode Support
+
+TYPO3 v14 supports both dark and light color schemes. Icons MUST render correctly in both
+modes. The backend uses `data-color-scheme` and `data-bs-theme` attributes (not
+`prefers-color-scheme` media queries) to control the mode.
+
+#### How `currentColor` Adapts
+
+`currentColor` inherits the CSS `color` property of the parent element:
+
+| Context | Dark Mode | Light Mode |
+|---------|-----------|------------|
+| **Sidebar** (`.scaffold-sidebar`) | White/light text → icon is light | Dark text → icon is dark |
+| **Content area** | Light text on dark bg → icon is light | Dark text on light bg → icon is dark |
+| **Toolbar** | Adapts to toolbar text color | Adapts to toolbar text color |
+| **List module** | Row text color | Row text color |
+
+No extra CSS is needed — `currentColor` handles everything automatically.
+
+#### How `--icon-color-accent` Cascades
+
+The accent color follows a multi-level cascade with `light-dark()` CSS functions:
+
+```
+SVG: fill="var(--icon-color-accent, #ff8700)"
+  ↓
+CSS: --icon-color-accent: var(--typo3-icons-accent)
+  ↓
+Theme-specific values:
+  Default:  light-dark(var(--token-color-primary-60), var(--token-color-primary-40))
+  Classic:  #ff8700 (orange, same in both modes)
+  Fresh sidebar: light-dark(#bf9aff, #b68cff) (purple!)
+```
+
+The `light-dark()` CSS function resolves based on the element's `color-scheme`:
+- First value = light mode
+- Second value = dark mode
+
+**Result:** Icons automatically get the correct accent color for the active theme AND
+color scheme without any SVG changes.
+
+#### Theme-Specific Accent Colors
+
+| Theme | Context | Light Mode | Dark Mode |
+|-------|---------|------------|-----------|
+| **Default** | Everywhere | `--token-color-primary-60` | `--token-color-primary-40` |
+| **Classic** | Everywhere | `#ff8700` (orange) | `#ff8700` (orange) |
+| **Fresh** | Sidebar | `#bf9aff` (purple) | `#b68cff` (purple) |
+| **Fresh** | Content | Primary token colors | Primary token colors |
+
+#### Icon Variant Colors
+
+TYPO3 provides additional icon color overrides via `--icon-color-primary`:
+
+| Variant | CSS Variable |
+|---------|-------------|
+| Default | `currentColor` |
+| Danger | `var(--typo3-text-color-danger)` |
+| Success | `var(--typo3-text-color-success)` |
+| Warning | `var(--typo3-text-color-warning)` |
+| Info | `var(--typo3-text-color-info)` |
+| Notice | `var(--typo3-text-color-notice)` |
+
+These are applied by TYPO3 when rendering icons with a state or overlay — extension icons
+do not need to handle these. Just use `currentColor` and let TYPO3 manage overrides.
+
+#### Dark/Light Mode Design Checklist
+
+- [ ] **NEVER hardcode colors** — No `#fff`, `#000`, `#333`, or any hex color in SVG
+- [ ] **Use only `currentColor`** for primary/secondary shapes
+- [ ] **Use only `var(--icon-color-accent, #ff8700)`** for accent elements
+- [ ] **Test opacity at `.4`** in both modes — ensure secondary elements are visible but
+      not dominant on both light and dark backgrounds
+- [ ] **Accent must contrast** against both light and dark backgrounds — TYPO3's cascade
+      handles this, but verify the fallback `#ff8700` has sufficient contrast ratio
+- [ ] **No `fill="white"`** — this breaks in light mode (invisible on white background)
+- [ ] **No `fill="black"`** — this breaks in dark mode (invisible on dark background)
+- [ ] **Clear browser localStorage** after changes — icons are cached client-side
+
+#### Why NOT to Use `prefers-color-scheme`
+
+The TYPO3 backend does NOT use `prefers-color-scheme` for its color mode. It uses
+`data-color-scheme` and `data-bs-theme` attributes set on the HTML element. Using
+`prefers-color-scheme` in icon SVGs would cause them to be out of sync with the backend
+theme when a user manually overrides the system preference.
+
+### Color mapping from old to new
+
+| Old Color | New Equivalent | Usage |
+|-----------|----------------|-------|
+| `#FFFFFF` (white on colored bg) | `currentColor` | Primary icon shapes |
+| `#5BA34F` / `#3F7437` or any brand color background | REMOVE (no background) | — |
+| `#5BA34F` accent elements (non-bg) | `var(--icon-color-accent, #ff8700)` | Accent highlights |
+| `#333333` / `#333` detail lines | `currentColor` | Detail elements |
+| `opacity="0.25"` | `opacity=".4"` | Secondary elements |
+| `opacity="0.75"` | `opacity=".4"` or full opacity | Depends on visual weight |
+| `fill="white"` | `currentColor` | NEVER hardcode white |
+| `fill="black"` / `fill="#000"` | `currentColor` | NEVER hardcode black |
+
+### Reference: TYPO3 v14 Core Module Icons
+
+Study these core icons for the correct visual language:
+
+**module-web** (Page/content module):
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <g opacity=".4"><path fill="currentColor" d="M48 28.6H37.79c-1 0-2.04-1.09-2.04-2.1V16L48 28.6Z"/></g>
+  <path fill="currentColor" d="M35.81 20 44 28.42V48H24V20h11.81m1.69-4H21.75c-.97 0-1.75.81-1.75 1.8v32.4c0 .99.78 1.8 1.75 1.8h24.5c.97 0 1.75-.81 1.75-1.8V26.8L37.5 16Z"/>
+  <path fill="var(--icon-color-accent, #ff8700)" d="M20 17.8c0-.99.78-1.8 1.75-1.8H37.5l2.5 2.57V14c0-1.1-.9-2-2-2H14c-1.1 0-2 .9-2 2v32c0 1.1.9 2 2 2h6V17.8Z"/>
+</svg>
+```
+
+**module-system** (System settings — gear):
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path fill="currentColor" d="M32.93 52c-.83 0-1.53-.6-1.63-1.4l-.48-3.72..."/>
+  <path fill="var(--icon-color-accent, #ff8700)" d="M20.48 34.95c.08.6.6 1.05 1.22 1.05h1.98v-.54..."/>
+</svg>
+```
+
+**module-site** (Globe):
+```xml
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path fill="var(--icon-color-accent, #ff8700)" d="M32 16c8.82 0 16 7.18..."/>
+  <path fill="currentColor" d="M21.05 43.64c.11-.83..."/>
+</svg>
+```
+
+**Key patterns in core icons:**
+- Document icons: outlined rectangle with folded corner, accent for secondary document layer
+- Settings/gear icons: gear outline in `currentColor`, smaller gear or inner element in accent
+- Globe/site icons: circle outline in accent, landmass/detail in `currentColor`
+- List/content icons: lines/rows in `currentColor`, header or sidebar accent in accent color
+
+## Step 3: Icon Registration (v14)
+
+### Configuration/Icons.php
+
+Icons MUST be registered via `Configuration/Icons.php`. This file is auto-loaded by TYPO3.
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+
+return [
+    'module-myext' => [
+        'provider' => SvgIconProvider::class,
+        'source' => 'EXT:my_extension/Resources/Public/Icons/module-myext.svg',
+    ],
+    'module-myext-list' => [
+        'provider' => SvgIconProvider::class,
+        'source' => 'EXT:my_extension/Resources/Public/Icons/module-myext-list.svg',
+    ],
+];
+```
+
+Compact form using `array_map` (when all icons use `SvgIconProvider`):
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider;
+
+return array_map(
+    static fn (string $source) => [
+        'provider' => SvgIconProvider::class,
+        'source' => $source,
+    ],
+    [
+        'module-myext' => 'EXT:my_extension/Resources/Public/Icons/module-myext.svg',
+        'module-myext-list' => 'EXT:my_extension/Resources/Public/Icons/module-myext-list.svg',
+    ]
+);
+```
+
+### Configuration/Backend/Modules.php
+
+Module definitions reference icons by their registered identifier:
+
+```php
+return [
+    'myext_main' => [
+        'position' => ['after' => 'web'],
+        'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
+        'iconIdentifier' => 'module-myext',
+    ],
+    'myext_list' => [
+        'parent' => 'myext_main',
+        'access' => 'user',
+        'iconIdentifier' => 'module-myext-list',
+        // ...
+    ],
+];
+```
+
+### REMOVED in v14
+
+The following patterns are **no longer supported** in TYPO3 v14:
+
+```php
+// WRONG — removed in v14
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Imaging\IconRegistry::class
+);
+$iconRegistry->registerIcon(
+    'module-myext',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:my_extension/Resources/Public/Icons/module-myext.svg']
+);
+```
+
+## Step 4: Using Icons
+
+### In Fluid Templates
+
+```html
+<core:icon identifier="module-myext" size="small" />
+
+<!-- Inline SVG (allows CSS color inheritance): -->
+<core:icon identifier="module-myext" size="small" alternativeMarkupIdentifier="inline" />
+```
+
+### In PHP
+
+```php
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
+
+public function __construct(
+    private readonly IconFactory $iconFactory,
+) {}
+
+public function getIcon(): string
+{
+    return $this->iconFactory
+        ->getIcon('module-myext', IconSize::SMALL)
+        ->render();
+}
+```
+
+### In JavaScript (ES6)
+
+```javascript
+import Icons from '@typo3/backend/icons.js';
+
+Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
+    document.querySelector('.target').innerHTML = icon;
+});
+```
+
+### Icon Sizes (v14)
+
+| Enum Value | Size | Use Case |
+|------------|------|----------|
+| `IconSize::MEGA` | 64px | Module menu main icons |
+| `IconSize::LARGE` | 48px | Module menu sub-icons |
+| `IconSize::MEDIUM` | 32px | Default, toolbar |
+| `IconSize::SMALL` | 16px | Inline, lists, TCA |
+| `IconSize::DEFAULT` | 1em | Scales with font size |
+
+## Step 5: Migration Checklist
+
+For each extension icon that needs updating:
+
+- [ ] Read the current SVG content
+- [ ] Identify the semantic meaning (what does the icon represent?)
+- [ ] Remove solid background rectangle/path
+- [ ] Replace `#FFFFFF` fills with `currentColor`
+- [ ] Replace brand-color accent fills with `var(--icon-color-accent, #ff8700)`
+- [ ] Replace `#333333` detail fills with `currentColor`
+- [ ] Normalize opacity values to `.4` for secondary elements
+- [ ] Set viewBox to `0 0 64 64`
+- [ ] Remove all legacy attributes (`version`, `xmlns:xlink`, `enable-background`, `xml:space`, `id`)
+- [ ] Remove generator comments
+- [ ] Redesign shapes from filled-on-background to outlined/line-art
+- [ ] Verify `Configuration/Icons.php` exists and uses `SvgIconProvider`
+- [ ] Verify `Configuration/Backend/Modules.php` references correct `iconIdentifier`
+- [ ] Verify TCA `typeicon_classes` and `pluginIcon` references
+- [ ] Clear TYPO3 caches and browser local storage after deployment
+
+## Step 6: Transforming Icon Shapes
+
+### From Filled to Outlined
+
+Old style icons are typically solid white shapes on a colored background. The v14 style
+uses outlined shapes with an inner/outer path to create the outline effect.
+
+**Old (solid shape on background):**
+```xml
+<path fill="#5BA34F" d="M0,0h64v64H0V0z"/>
+<polygon fill="#FFFFFF" points="18,16 18,44 27,44 32,50 37,44 46,44 46,16"/>
+```
+
+**New (outlined shape, no background):**
+```xml
+<path fill="currentColor" d="M18 16v28h9l5 6 5-6h9V16H18zm26 26H38l-6 7.2L26 42H20V18h24v24z"/>
+```
+
+The outer path defines the full shape, the inner path (after `z` or as a cutout) creates
+the outlined/hollow appearance.
+
+### Accent Placement Strategy
+
+Choose ONE of these accent strategies per icon:
+
+1. **Background layer** — A secondary shape behind the main icon in accent color (like module-web's second document)
+2. **Inner detail** — A small detail inside the main shape (like module-system's smaller gear)
+3. **Border/outline** — The outer ring or border (like module-site's circle)
+
+Do NOT use accent for the entire primary shape — that looks like the old solid style.
+
+## @typo3/icons NPM Package
+
+The official icon set is published as `@typo3/icons` on npm. Extensions should NOT copy core
+icons but may reference them by identifier. Custom extension icons follow the same design
+language but are unique to the extension.
+
+Browse available icons: https://typo3.github.io/TYPO3.Icons/
+Module icons: https://typo3.github.io/TYPO3.Icons/icons/module.html
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---------|-----|
+| Using `fill="#ff8700"` directly | Use `var(--icon-color-accent, #ff8700)` for theme support |
+| Using `fill="white"` or `fill="#fff"` | Replace with `currentColor` — hardcoded white is invisible in light mode |
+| Using `fill="black"` or `fill="#333"` | Replace with `currentColor` — hardcoded dark is invisible in dark mode |
+| Using `<rect fill="..."/>` as background | Remove entirely — icons must be transparent |
+| Using `prefers-color-scheme` in SVG | Don't — TYPO3 uses `data-color-scheme`, not media queries |
+| Keeping `xmlns:xlink` | Remove — not needed for modern SVG |
+| Registering in `ext_localconf.php` | Move to `Configuration/Icons.php` |
+| Using `IconRegistry::registerIcon()` | Use the declarative array in `Icons.php` |
+| Forgetting to clear browser cache | Icons are cached in browser localStorage |
+| Using 32×32 viewBox for parent module | Always use 64×64 for consistency |
+| Assuming accent is always orange | Fresh theme uses purple (`#bf9aff`/`#b68cff`) in sidebar |
+| Using inline `style` for colors | Use `fill` attribute with CSS variables — inline styles override the cascade |
