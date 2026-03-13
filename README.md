@@ -1,14 +1,14 @@
 # webconsulting Agent Skills
 
-A curated collection of **59 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
+A curated collection of **61 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
-> **Works with:** Cursor IDE, Claude Code, Claude CLI
+> **Works with:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, Windsurf, GitHub Copilot, Kiro, Cline, Continue.dev, Aider, and more
 
 ## Skill Categories
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 19 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, accessibility, batch, simplify, upgrades, testing, security |
+| **TYPO3 CMS** | 21 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
@@ -37,30 +37,42 @@ A curated collection of **59 Agent Skills** for AI-augmented software developmen
 
 ---
 
-## 🚀 Unified Agent Skills (Cursor + Claude Code)
+## 🚀 Universal Agent Skills (10+ AI Clients)
 
-Both **Cursor** and **Claude Code** now share the same skills location: `~/.claude/skills/`
+Skills are installed as **symlinks** from the central `skills/` directory to each client's discovery path. One source of truth, many consumers.
 
-### What's New
+### Supported Clients
 
-| Feature | Description |
-|---------|-------------|
-| **Unified Location** | Skills install to `~/.claude/skills/` (works for Cursor & Claude Code) |
-| **Auto-Discovery** | Both IDEs automatically find and load skills |
-| **Invoke with `/`** | Type `/` in Agent chat to see all available skills |
-| **Cross-Platform** | Same skills work in Cursor, Claude Code, and Claude CLI |
+| Tier | Client | Installation | Discovery |
+|------|--------|-------------|-----------|
+| **1** | **Cursor** | Symlinks to `~/.cursor/skills/` + `.cursor/skills/` + `.mdc` rules | Auto-discovery, `/skill-name` invocation |
+| **1** | **Claude Code** | Symlinks to `~/.claude/skills/` | Auto-loaded from user skills |
+| **1** | **Gemini CLI** | Symlinks to `~/.gemini/skills/` + `gemini-extension.json` | Native extension manifest |
+| **1** | **OpenAI Codex** | Symlinks to `.codex/skills/` | Project-level discovery |
+| **1** | **Windsurf** | Symlinks to `~/.windsurf/skills/` | User-level discovery |
+| **1** | **Kiro** | Symlinks to `~/.kiro/skills/` | User-level discovery |
+| **2** | **GitHub Copilot** | Reads `AGENTS.md` natively | No extra install needed |
+| **2** | **Cline** | Reads `.clinerules/` | Symlinks to project rules |
+| **2** | **Aider** | Reads `AGENTS.md` natively | No extra install needed |
+| **2** | **Continue.dev** | Reads `.continue/rules/` | Config-based |
 
 ### Directory Structure After Install
 
 ```
-~/.claude/skills/          ← Primary (shared by Cursor & Claude Code)
-  ├── typo3-content-blocks/
-  ├── typo3-datahandler/
-  └── ...
+~/.cursor/skills/          ← Cursor (user-level)
+~/.claude/skills/          ← Claude Code (user-level)
+~/.gemini/skills/          ← Gemini CLI (user-level)
+~/.windsurf/skills/        ← Windsurf (user-level)
+~/.kiro/skills/            ← Kiro (user-level)
 
 .cursor/
-  ├── skills/              ← Project-level (version-controlled)
+  ├── skills/              ← Cursor (project-level)
   └── rules/               ← Legacy .mdc files (backwards compat)
+.codex/skills/             ← OpenAI Codex (project-level)
+.clinerules/               ← Cline (project-level)
+
+gemini-extension.json      ← Gemini CLI extension manifest
+AGENTS.md                  ← Read natively by Copilot, Aider, Gemini
 ```
 
 ### Using Skills
@@ -73,6 +85,14 @@ Both **Cursor** and **Claude Code** now share the same skills location: `~/.clau
 **In Claude Code:**
 1. Skills are automatically loaded from `~/.claude/skills/`
 2. Reference skills in your prompts or let Claude auto-detect
+
+**In Gemini CLI:**
+1. Skills are discovered via `gemini-extension.json` manifest
+2. Trigger-based activation matches your prompt to relevant skills
+
+**In other clients:**
+1. Skills are discovered from their respective directories
+2. `AGENTS.md` provides cross-client instructions (Copilot, Aider, Gemini)
 
 > **Note:** Legacy `.mdc` rules are still generated in `.cursor/rules/` for backwards compatibility.
 
@@ -104,7 +124,7 @@ git clone git@github.com:dirnbauer/webconsulting-skills.git webconsulting-skills
 cd webconsulting-skills
 ./install.sh
 
-# Skills are installed to ~/.claude/skills/ AND your project's .cursor/
+# Skills are installed to all detected AI client directories
 ```
 
 > The installer auto-detects if it's running from a vendor directory, project subdirectory, or standalone clone, and adjusts paths accordingly.
@@ -132,13 +152,13 @@ Install this skills package directly from GitHub without Packagist.
 composer require --dev webconsulting/webconsulting-skills:dev-main
 ```
 
-The Composer plugin will automatically run `install.sh` after installation to deploy skills to `~/.claude/skills/`.
+The Composer plugin will automatically run `install.sh` after installation to deploy skills to all detected AI client directories.
 
 ## How to Use Agent Skills
 
 ### Skills for Dummies
 
-**What are Agent Skills?** They're Markdown files (`SKILL.md`) containing expert knowledge that Claude reads to become a specialist. After running `./install.sh`, skills are installed to `~/.claude/skills/` and automatically discovered by both Cursor and Claude Code.
+**What are Agent Skills?** They're Markdown files (`SKILL.md`) containing expert knowledge that your AI coding assistant reads to become a specialist. After running `./install.sh`, skills are symlinked to all detected AI client directories and automatically discovered.
 
 **How do they work?** 
 - **Auto-applied**: Cursor's Agent decides when a skill is relevant based on your query
@@ -147,9 +167,10 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 **Where do skills live?**
 - Source files: `skills/*/SKILL.md` (this repo)
-- User-level: `~/.claude/skills/` (primary, shared by Cursor & Claude Code)
-- Project-level: `.cursor/skills/` (version-controlled)
+- User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.windsurf/skills/`, `~/.kiro/skills/`
+- Project-level: `.cursor/skills/`, `.codex/skills/`, `.clinerules/`
 - Legacy rules: `.cursor/rules/*.mdc` (backwards compatibility)
+- Cross-client: `AGENTS.md` (read natively by Copilot, Aider, Gemini CLI)
 
 ### Skill Reference
 
@@ -172,6 +193,8 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-rector` | rector, refactoring, deprecation | "Use Rector to fix deprecations" |
 | `typo3-update` | update, upgrade, v13, v14, migration | "Make my code compatible with v13 and v14" |
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
+| `typo3-fractor` | fractor, flexform, typoscript migration, fluid migration | "Use Fractor to migrate FlexForms and TypoScript" |
+| `typo3-icon14` | icons, backend module icons, icon migration, SVG icons, icon registry | "Migrate extension icons to TYPO3 v14 line-art style" |
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
 | `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
@@ -1978,17 +2001,19 @@ Create a production-ready Docker setup for TYPO3: nginx, PHP-FPM, Redis, with pr
 ### Discovery Commands
 
 ```bash
-# List all installed skills (user-level)
+# List all installed skills (any client)
+ls ~/.cursor/skills/
 ls ~/.claude/skills/
+ls ~/.gemini/skills/
 
 # List project-level skills
 ls .cursor/skills/
 
 # View a specific skill's content
-cat ~/.claude/skills/typo3-ddev/SKILL.md
+cat skills/typo3-ddev/SKILL.md
 
 # Search for a keyword across all skills
-grep -r "DataHandler" ~/.claude/skills/
+grep -r "DataHandler" skills/
 
 # Re-install after pulling updates
 ./install.sh
@@ -2021,6 +2046,8 @@ grep -r "DataHandler" ~/.claude/skills/
 | `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
 | `typo3-update` | TYPO3 v13/v14 migration guide (prefers v14) | webconsulting |
 | `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | webconsulting |
+| `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | webconsulting |
+| `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | webconsulting |
 | **Security & Operations** | | |
 | `typo3-security` | Security hardening checklist | webconsulting |
 | `typo3-seo` | SEO configuration with EXT:seo | webconsulting |
@@ -2112,33 +2139,35 @@ Most TYPO3 skills include additional supplement files:
 - `typo3-solr/SKILL-SOLRFAL.md` - File indexing with solrfal and Apache Tika (PDF, DOCX, XLSX)
 - `typo3-solr/SKILL-FRONTEND.md` - Custom vanilla JS for search, suggest, facets (no jQuery)
 
-### Cursor Integration
+### IDE Integration
 
-- **Master Architect Rule**: Defines Claude as Senior TYPO3 Solutions Architect
+- **Cross-client skills**: Same `SKILL.md` files work across all supported AI coding assistants
+- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 61 skills
 - **MCP Configuration**: Placeholder for DDEV, Hetzner, and MySQL servers
 
 ## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│              Cursor IDE / Claude Code                        │
-├─────────────────────────────────────────────────────────────┤
-│  ┌─────────────────────┐  ┌───────────┐  ┌───────────────┐  │
-│  │   Agent Skills      │  │  AGENTS   │  │  MCP Servers  │  │
-│  │  ~/.claude/skills/  │  │    .md    │  │               │  │
-│  ├─────────────────────┤  ├───────────┤  ├───────────────┤  │
-│  │ TYPO3 CMS           │  │ Project   │  │ DDEV (local)  │  │
-│  │ Video & Animation   │  │ Instruc-  │  │ Hetzner       │  │
-│  │ Security & Ops      │  │ tions     │  │ MySQL         │  │
-│  │ PHP & Tools         │  │           │  │ GitHub        │  │
-│  │ Frontend & Design   │  │           │  │ Context7      │  │
-│  │ Legal & Compliance  │  │           │  │               │  │
-│  └─────────────────────┘  └───────────┘  └───────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+                        ┌──────────────────┐
+                        │  skills/ (source) │
+                        │   61 SKILL.md     │
+                        └────────┬─────────┘
+                                 │ symlinks
+           ┌─────────────────────┼─────────────────────┐
+           │                     │                     │
+    ┌──────▼──────┐     ┌───────▼───────┐    ┌───────▼───────┐
+    │  User-Level  │     │ Project-Level  │    │  Native Read   │
+    ├──────────────┤     ├────────────────┤    ├────────────────┤
+    │ ~/.cursor/   │     │ .cursor/skills │    │ AGENTS.md      │
+    │ ~/.claude/   │     │ .cursor/rules  │    │ (Copilot,      │
+    │ ~/.gemini/   │     │ .codex/skills  │    │  Aider,        │
+    │ ~/.windsurf/ │     │ .clinerules/   │    │  Gemini CLI)   │
+    │ ~/.kiro/     │     │                │    │                │
+    └──────────────┘     └────────────────┘    └────────────────┘
 
-Skills are auto-discovered from:
-  ~/.claude/skills/    (user-level, unified for Cursor & Claude Code)
-  .cursor/skills/      (project-level)
+    Cursor, Claude       Cursor, Codex,         No install needed
+    Code, Gemini CLI,    Cline                  — reads AGENTS.md
+    Windsurf, Kiro                              or gemini-extension.json
 ```
 
 ## Configuration
@@ -2301,6 +2330,12 @@ The following repositories are the source for skills in this collection:
 ### Anthropic (Document Processing, Frontend Design & Skill Creator)
 - https://github.com/anthropics/skills
 
+### ehmo (Platform Design Skills)
+- https://github.com/ehmo/platform-design-skills
+
+### AITYTech (AgentKits Marketing)
+- https://github.com/aitytech/agentkits-marketing
+
 ## Contributing
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
@@ -2383,3 +2418,39 @@ The `refactor-clean` skill is adapted from their open-source repository:
 https://github.com/sickn33/antigravity-awesome-skills
 
 **Copyright (c) sickn33** - Clean code principles and SOLID design patterns
+
+---
+
+We also thank **[ehmo](https://github.com/ehmo)** for the excellent platform design skills collection.
+The platform design skills (Android, iOS, iPadOS, macOS, tvOS, visionOS, watchOS, Web) are adapted
+from their open-source repository:
+https://github.com/ehmo/platform-design-skills
+
+**Copyright (c) platform-design-skills** - Apple HIG and Material Design guidelines (MIT License)
+
+---
+
+We also thank **[AITYTech](https://github.com/aitytech)** for their excellent AgentKits Marketing
+skills collection. The `cro-funnel`, `programmatic-seo`, `launch-strategy`, and `ab-testing` skills
+are adapted from their open-source repository:
+https://github.com/aitytech/agentkits-marketing
+
+**Copyright (c) AITYTech** - Enterprise-grade AI marketing automation (MIT License)
+
+---
+
+We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing,
+frontend design, and skill creator skills. The `document-processing`, `frontend-design`, and
+`skill-creator` skills are adapted from their open-source repository:
+https://github.com/anthropics/skills
+
+**Copyright (c) Anthropic** - Document processing, frontend design, and skill creation (Apache-2.0 / MIT License)
+
+---
+
+We also thank **[Volker Kemeter](https://github.com/vkemeter)** for his contribution of the
+Gemini CLI extension manifest (`gemini-extension.json`), which enables native skill discovery
+and trigger-based activation across all webconsulting skills within Gemini CLI and Google
+Antigravity. His work on a generic, standards-compliant integration approach directly informed
+the multi-client installation strategy.
+See: [vkemeter/webconsulting-skills@ed03ef0](https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0)
