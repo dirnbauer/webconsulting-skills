@@ -172,7 +172,7 @@ install_skills_to() {
             fi
 
             ln -s "$skill_path" "$target"
-            ((count++))
+            count=$((count + 1))
         fi
     done
 
@@ -278,7 +278,7 @@ if [ "$USER_ONLY" = false ]; then
             fi
 
             cp "$skill_path/SKILL.md" "$target_rule"
-            ((mdc_count++))
+            mdc_count=$((mdc_count + 1))
         fi
     done
     echo "  ✓ Cursor rules: $mdc_count .mdc files created"

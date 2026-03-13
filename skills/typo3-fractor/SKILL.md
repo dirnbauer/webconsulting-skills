@@ -7,7 +7,7 @@ description: >-
   non-php upgrade, yaml migration.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # TYPO3 Fractor Skill
@@ -30,8 +30,18 @@ Use both together for complete TYPO3 upgrades. See the `typo3-extension-upgrade`
 ## 1. Installation
 
 ```bash
-composer require a9f/typo3-fractor --dev
+composer require --dev a9f/typo3-fractor
+# or with DDEV:
+ddev composer require --dev a9f/typo3-fractor
 ```
+
+> **Important:** Like Rector, Fractor loads the project autoloader and requires a PHP version
+> that can parse the installed TYPO3 packages. For TYPO3 v14 targets, run Fractor with
+> PHP 8.2+. Use DDEV or a container if your local PHP is older.
+
+> **Always run Fractor, never skip it.** Non-PHP files (FlexForms, TypoScript, Fluid) contain
+> version-specific patterns that are easy to miss in manual review. Fractor rules are
+> maintained by the TYPO3 community and cover edge cases.
 
 This meta-package installs all TYPO3-specific file processors:
 - `a9f/fractor` (core engine)
