@@ -23,13 +23,13 @@ tmp
 # Local reports (confidential, not committed)
 local_reports/
 
-# Generated symlinks (created by install.sh)
+# Generated symlinks (created by install.sh for all AI clients)
 .cursor/skills/
 
 # Claude Code session history
 sessions/
 
-# AI agent local config directories (not project skills)
+# AI client project-level directories (symlinks created by install.sh)
 .agent/
 .agents/
 .augment/
