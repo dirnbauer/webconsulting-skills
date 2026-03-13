@@ -56,6 +56,7 @@ done
 
 echo "╔══════════════════════════════════════════════════════════════╗"
 echo "║     webconsulting Agent Skills Updater                       ║"
+echo "║     Universal — Cursor · Claude · Gemini · Codex · more     ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
 
@@ -229,6 +230,6 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
 fi
 echo ""
 echo "Next steps:"
-echo "  1. Restart Cursor IDE or Claude Code to load updated skills"
+echo "  1. Restart your IDE / CLI to discover updated skills"
 echo "  2. Run './update.sh --help' for more options"
 echo "═══════════════════════════════════════════════════════════════"
