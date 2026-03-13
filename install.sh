@@ -154,6 +154,233 @@ else
 fi
 
 # =============================================================================
+# 3. Generate Cross-Client Instruction Files
+# =============================================================================
+
+echo ""
+echo "→ Generating cross-client instruction files..."
+
+# Count skills
+SKILL_COUNT=0
+for skill_path in "$SCRIPT_DIR/skills"/*; do
+    if [ -d "$skill_path" ] && [ -f "$skill_path/SKILL.md" ]; then
+        SKILL_COUNT=$((SKILL_COUNT + 1))
+    fi
+done
+
+# ── Generate CLAUDE.md ────────────────────────────────────────────────────────
+cat > "$SCRIPT_DIR/CLAUDE.md" <<CLAUDE_EOF
+# webconsulting Agent Skills
+
+This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
+
+## Instructions
+
+Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+
+## Skills Location
+
+All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
+
+To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
+
+## Key Conventions
+
+- TYPO3 skills support v13.x and v14.x (v14 preferred)
+- Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
+- Always review AI-generated code before committing
+- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+CLAUDE_EOF
+echo "  ✓ CLAUDE.md ($SKILL_COUNT skills)"
+
+# ── Generate GEMINI.md ────────────────────────────────────────────────────────
+cat > "$SCRIPT_DIR/GEMINI.md" <<GEMINI_EOF
+# webconsulting Agent Skills
+
+This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
+
+## Instructions
+
+Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+
+## Gemini CLI Integration
+
+Skills are registered in \`gemini-extension.json\` with trigger-based activation. The extension manifest maps each skill to its trigger keywords and \`skills/\` directory path.
+
+## Skills Location
+
+All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
+
+To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
+
+## Key Conventions
+
+- TYPO3 skills support v13.x and v14.x (v14 preferred)
+- Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
+- Always review AI-generated code before committing
+- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+GEMINI_EOF
+echo "  ✓ GEMINI.md ($SKILL_COUNT skills)"
+
+# ── Generate .windsurfrules ───────────────────────────────────────────────────
+cat > "$SCRIPT_DIR/.windsurfrules" <<WINDSURF_EOF
+# webconsulting Agent Skills
+
+This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
+
+## Instructions
+
+Follow the instructions in AGENTS.md — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+
+## Skills Location
+
+All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
+
+To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
+
+## Key Conventions
+
+- TYPO3 skills support v13.x and v14.x (v14 preferred)
+- Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
+- Always review AI-generated code before committing
+- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+WINDSURF_EOF
+echo "  ✓ .windsurfrules ($SKILL_COUNT skills)"
+
+# ── Generate .github/copilot-instructions.md ──────────────────────────────────
+mkdir -p "$SCRIPT_DIR/.github"
+cat > "$SCRIPT_DIR/.github/copilot-instructions.md" <<COPILOT_EOF
+# webconsulting Agent Skills
+
+This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
+
+## Instructions
+
+Follow the instructions in [AGENTS.md](../AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+
+## Skills Location
+
+All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
+
+To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
+
+## Key Conventions
+
+- TYPO3 skills support v13.x and v14.x (v14 preferred)
+- Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
+- Always review AI-generated code before committing
+- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+COPILOT_EOF
+echo "  ✓ .github/copilot-instructions.md ($SKILL_COUNT skills)"
+
+# ── Generate gemini-extension.json ────────────────────────────────────────────
+# Parses the AGENTS.md Skills Overview table for descriptions and triggers.
+# Only includes top-level skills (skips sub-skills with / in the name).
+
+AGENTS_FILE="$SCRIPT_DIR/AGENTS.md"
+GEMINI_JSON="$SCRIPT_DIR/gemini-extension.json"
+
+if [ -f "$AGENTS_FILE" ]; then
+    # Start JSON
+    cat > "$GEMINI_JSON" <<'GEMINI_HDR'
+{
+  "name": "webconsulting-skills",
+  "version": "2.0.0",
+GEMINI_HDR
+
+    printf '  "description": "Curated Agent Skills for AI-augmented software development — universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",\n' >> "$GEMINI_JSON"
+    printf '  "contextFileName": "AGENTS.md",\n' >> "$GEMINI_JSON"
+    printf '  "excludeTools": [],\n' >> "$GEMINI_JSON"
+    printf '  "skills": {\n' >> "$GEMINI_JSON"
+
+    # Parse table rows: | `skill-name` | Description | Version | trigger1, trigger2 |
+    # Skip sub-skills (contain /), category headers (start with **), and table header
+    # Write entries to a temp file, then join with commas
+    ENTRIES_FILE=$(mktemp)
+
+    grep -E '^\| `[a-z]' "$AGENTS_FILE" | while IFS='|' read -r _ raw_name raw_desc _ raw_triggers _; do
+        skill_name=$(echo "$raw_name" | sed 's/`//g' | xargs)
+        description=$(echo "$raw_desc" | xargs)
+        triggers_raw=$(echo "$raw_triggers" | xargs)
+
+        # Skip sub-skills (name contains /) and duplicates
+        case "$skill_name" in */*) continue ;; esac
+        if [ ! -d "$SCRIPT_DIR/skills/$skill_name" ]; then
+            continue
+        fi
+        # Skip if already written (handles duplicate table rows)
+        if grep -q "\"$skill_name\":" "$ENTRIES_FILE" 2>/dev/null; then
+            continue
+        fi
+
+        # Escape double quotes in description
+        description=$(echo "$description" | sed 's/"/\\"/g')
+
+        # Build triggers JSON array
+        triggers_json="["
+        first_trigger=true
+        IFS=',' read -ra TRIGGER_ARRAY <<< "$triggers_raw"
+        for trigger in "${TRIGGER_ARRAY[@]}"; do
+            trigger=$(echo "$trigger" | xargs)
+            if [ -n "$trigger" ]; then
+                if [ "$first_trigger" = true ]; then
+                    first_trigger=false
+                else
+                    triggers_json+=", "
+                fi
+                triggers_json+="\"$trigger\""
+            fi
+        done
+        triggers_json+="]"
+
+        # Write skill entry to temp file (one JSON object per line marker)
+        {
+            printf '    "%s": {\n' "$skill_name"
+            printf '      "name": "%s",\n' "$skill_name"
+            printf '      "description": "%s",\n' "$description"
+            printf '      "triggers": %s,\n' "$triggers_json"
+            printf '      "path": "${extensionPath}/skills/%s"\n' "$skill_name"
+            printf '    }'
+        } >> "$ENTRIES_FILE"
+        printf '\n---ENTRY_SEP---\n' >> "$ENTRIES_FILE"
+    done
+
+    # Join entries with commas and write to JSON
+    if [ -s "$ENTRIES_FILE" ]; then
+        # Remove trailing separator, replace separators with commas
+        sed -i.bak '/^---ENTRY_SEP---$/d' "$ENTRIES_FILE" 2>/dev/null || sed -i '' '/^---ENTRY_SEP---$/d' "$ENTRIES_FILE"
+        rm -f "$ENTRIES_FILE.bak"
+
+        # Re-read entries and add commas between skill blocks
+        awk '
+            /^    "[a-z].*": \{$/ {
+                if (seen) printf ",\n"
+                seen=1
+            }
+            { print }
+        ' "$ENTRIES_FILE" >> "$GEMINI_JSON"
+    fi
+    rm -f "$ENTRIES_FILE"
+
+    printf '\n  }\n}\n' >> "$GEMINI_JSON"
+
+    # Count entries in generated JSON
+    gemini_skill_count=$(grep -c '"path":' "$GEMINI_JSON" 2>/dev/null || echo "0")
+    echo "  ✓ gemini-extension.json ($gemini_skill_count skills)"
+
+    # Validate JSON if jq is available
+    if command -v jq &> /dev/null; then
+        if jq empty "$GEMINI_JSON" 2>/dev/null; then
+            echo "  ✓ JSON validation passed"
+        else
+            echo "  ⚠ JSON validation failed — check gemini-extension.json manually"
+        fi
+    fi
+else
+    echo "  ⚠ AGENTS.md not found — skipping gemini-extension.json generation"
+fi
+
+# =============================================================================
 # Helper: Install skills via symlinks to a target directory
 # =============================================================================
 

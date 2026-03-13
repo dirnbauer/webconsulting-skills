@@ -1,375 +1,436 @@
 {
   "name": "webconsulting-skills",
   "version": "2.0.0",
-  "description": "Curated Agent Skills for AI-augmented software development \u2014 universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",
+  "description": "Curated Agent Skills for AI-augmented software development — universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",
   "contextFileName": "AGENTS.md",
   "excludeTools": [],
   "skills": {
-    "ab-testing": {
-      "name": "ab-testing",
-      "description": "A/B test design, sample size, statistical significance",
-      "triggers": ["ab test", "split test", "experiment", "hypothesis"],
-      "path": "${extensionPath}/skills/ab-testing"
-    },
     "agent-md-refactor": {
       "name": "agent-md-refactor",
       "description": "Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure",
       "triggers": ["refactor agents.md", "split instructions", "organize claude.md"],
       "path": "${extensionPath}/skills/agent-md-refactor"
-    },
-    "ai-search-optimization": {
-      "name": "ai-search-optimization",
-      "description": "AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt",
-      "triggers": ["aeo", "geo", "ai search", "chatgpt", "perplexity", "llms.txt"],
-      "path": "${extensionPath}/skills/ai-search-optimization"
-    },
-    "android-design": {
-      "name": "android-design",
-      "description": "Material Design 3, Jetpack Compose, dynamic color, navigation",
-      "triggers": ["android", "material design", "jetpack compose", "material you"],
-      "path": "${extensionPath}/skills/android-design"
-    },
-    "cli-tools": {
-      "name": "cli-tools",
-      "description": "CLI tool management and auto-installation",
-      "triggers": ["cli", "tools", "installation"],
-      "path": "${extensionPath}/skills/cli-tools"
-    },
-    "context7": {
-      "name": "context7",
-      "description": "Library documentation lookup via REST API",
-      "triggers": ["documentation", "api", "libraries"],
-      "path": "${extensionPath}/skills/context7"
-    },
-    "cro-funnel": {
-      "name": "cro-funnel",
-      "description": "Full-funnel CRO: form, signup, onboarding, popup, paywall",
-      "triggers": ["cro funnel", "form cro", "signup flow", "onboarding", "paywall"],
-      "path": "${extensionPath}/skills/cro-funnel"
-    },
-    "deepfake-detection": {
-      "name": "deepfake-detection",
-      "description": "Multimodal media authentication, PRNU/IGH/DQ forensics, GAN detection",
-      "triggers": ["deepfake", "media forensics", "fake detection", "synthetic media"],
-      "path": "${extensionPath}/skills/deepfake-detection"
-    },
-    "document-processing": {
-      "name": "document-processing",
-      "description": "PDF, DOCX, PPTX, XLSX creation, editing, and analysis",
-      "triggers": ["pdf", "docx", "word", "pptx", "powerpoint", "xlsx", "excel", "document"],
-      "path": "${extensionPath}/skills/document-processing"
-    },
-    "enterprise-readiness": {
-      "name": "enterprise-readiness",
-      "description": "OpenSSF, SLSA, supply chain security, quality gates",
-      "triggers": ["enterprise", "openssf", "slsa", "security"],
-      "path": "${extensionPath}/skills/enterprise-readiness"
-    },
-    "find-skills": {
-      "name": "find-skills",
-      "description": "Discover and install skills from skills.sh ecosystem (Vercel)",
-      "triggers": ["find skill", "install skill", "npx skills", "skills.sh", "skill search"],
-      "path": "${extensionPath}/skills/find-skills"
-    },
-    "firecrawl": {
-      "name": "firecrawl",
-      "description": "Firecrawl CLI for LLM-optimized web scraping, search, and research",
-      "triggers": ["scrape", "crawl", "search web", "research", "fetch url"],
-      "path": "${extensionPath}/skills/firecrawl"
-    },
-    "frontend-design": {
-      "name": "frontend-design",
-      "description": "Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces",
-      "triggers": ["frontend", "design", "creative", "beautiful", "distinctive", "aesthetics"],
-      "path": "${extensionPath}/skills/frontend-design"
-    },
-    "ios-design": {
-      "name": "ios-design",
-      "description": "Apple HIG for iPhone, SwiftUI, Dynamic Type, Dark Mode",
-      "triggers": ["ios", "iphone", "swiftui", "uikit", "dynamic type"],
-      "path": "${extensionPath}/skills/ios-design"
-    },
-    "ipados-design": {
-      "name": "ipados-design",
-      "description": "Apple HIG for iPad, multitasking, keyboard, pointer support",
-      "triggers": ["ipad", "ipados", "split view", "stage manager", "sidebar"],
-      "path": "${extensionPath}/skills/ipados-design"
-    },
-    "launch-strategy": {
-      "name": "launch-strategy",
-      "description": "Product launches, Product Hunt, go-to-market",
-      "triggers": ["product launch", "product hunt", "gtm", "beta launch"],
-      "path": "${extensionPath}/skills/launch-strategy"
-    },
-    "legal-impressum": {
-      "name": "legal-impressum",
-      "description": "Austrian Impressum for all Gesellschaftsformen (ECG, MedienG)",
-      "triggers": ["impressum", "legal notice", "austria", "offenlegung"],
-      "path": "${extensionPath}/skills/legal-impressum"
-    },
-    "macos-design": {
-      "name": "macos-design",
-      "description": "Apple HIG for Mac, menu bar, toolbars, keyboard shortcuts",
-      "triggers": ["macos", "mac app", "appkit", "menu bar", "toolbar"],
-      "path": "${extensionPath}/skills/macos-design"
-    },
-    "marketing-skills": {
-      "name": "marketing-skills",
-      "description": "CRO, copywriting, SEO, pricing, psychology (Corey Haines)",
-      "triggers": ["marketing", "cro", "conversion", "landing page", "funnel"],
-      "path": "${extensionPath}/skills/marketing-skills"
-    },
-    "og-image": {
-      "name": "og-image",
-      "description": "Social preview images (Open Graph), meta tags, Twitter cards",
-      "triggers": ["og-image", "open graph", "social preview", "twitter card", "meta tags"],
-      "path": "${extensionPath}/skills/og-image"
-    },
-    "php-modernization": {
-      "name": "php-modernization",
-      "description": "PHP 8.x patterns, PHPStan level 10, DTOs, enums",
-      "triggers": ["php", "modernization", "phpstan", "rector"],
-      "path": "${extensionPath}/skills/php-modernization"
-    },
-    "postgres-best-practices": {
-      "name": "postgres-best-practices",
-      "description": "Postgres performance, RLS, indexes, connection pooling (Supabase)",
-      "triggers": ["postgres", "sql", "database", "query", "index", "rls"],
-      "path": "${extensionPath}/skills/postgres-best-practices"
-    },
-    "programmatic-seo": {
-      "name": "programmatic-seo",
-      "description": "SEO pages at scale with templates and data",
-      "triggers": ["programmatic seo", "template pages", "directory", "location pages"],
-      "path": "${extensionPath}/skills/programmatic-seo"
-    },
-    "react-best-practices": {
-      "name": "react-best-practices",
-      "description": "React/Next.js performance optimization from Vercel (57 rules)",
-      "triggers": ["react", "next.js", "performance", "optimization", "bundle", "waterfalls"],
-      "path": "${extensionPath}/skills/react-best-practices"
-    },
-    "readiness-report": {
-      "name": "readiness-report",
-      "description": "AI agent readiness assessment (9 pillars, 5 maturity levels)",
-      "triggers": ["/readiness-report", "agent readiness", "codebase maturity"],
-      "path": "${extensionPath}/skills/readiness-report"
-    },
+    }
+,
     "refactor": {
       "name": "refactor",
       "description": "Code refactoring patterns, code smells, design patterns (GitHub)",
       "triggers": ["refactor", "clean up", "code smell", "improve code", "extract method"],
       "path": "${extensionPath}/skills/refactor"
-    },
+    }
+,
     "refactor-clean": {
       "name": "refactor-clean",
       "description": "Clean code principles, SOLID patterns, incremental refactoring",
       "triggers": ["refactor", "clean code", "solid", "maintainability", "testability"],
       "path": "${extensionPath}/skills/refactor-clean"
-    },
+    }
+,
+    "find-skills": {
+      "name": "find-skills",
+      "description": "Discover and install skills from skills.sh ecosystem (Vercel)",
+      "triggers": ["find skill", "install skill", "npx skills", "skills.sh", "skill search"],
+      "path": "${extensionPath}/skills/find-skills"
+    }
+,
     "remotion-best-practices": {
       "name": "remotion-best-practices",
       "description": "Video creation in React with Remotion",
       "triggers": ["remotion", "video", "react", "animation", "composition"],
       "path": "${extensionPath}/skills/remotion-best-practices"
-    },
-    "security-audit": {
-      "name": "security-audit",
-      "description": "Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS)",
-      "triggers": ["security", "audit", "owasp", "vulnerabilities"],
-      "path": "${extensionPath}/skills/security-audit"
-    },
-    "security-incident-reporting": {
-      "name": "security-incident-reporting",
-      "description": "NIST/SANS incident reports, DDoS post-mortem, CVE correlation",
-      "triggers": ["incident report", "post-mortem", "ddos", "forensics"],
-      "path": "${extensionPath}/skills/security-incident-reporting"
-    },
-    "shadcn-ui": {
-      "name": "shadcn-ui",
-      "description": "shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms",
-      "triggers": ["shadcn", "radix", "tailwind", "components", "form", "dialog", "button", "card"],
-      "path": "${extensionPath}/skills/shadcn-ui"
-    },
-    "skill-creator": {
-      "name": "skill-creator",
-      "description": "Guide for creating and packaging effective Agent Skills (Anthropic)",
-      "triggers": ["create skill", "new skill", "skill creator", "package skill", "SKILL.md"],
-      "path": "${extensionPath}/skills/skill-creator"
-    },
-    "tvos-design": {
-      "name": "tvos-design",
-      "description": "Apple HIG for Apple TV, focus navigation, 10-foot UI",
-      "triggers": ["tvos", "apple tv", "siri remote", "focus navigation"],
-      "path": "${extensionPath}/skills/tvos-design"
-    },
-    "typo3-accessibility": {
-      "name": "typo3-accessibility",
-      "description": "WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist",
-      "triggers": ["accessibility", "a11y", "wcag", "aria", "screen reader", "keyboard"],
-      "path": "${extensionPath}/skills/typo3-accessibility"
-    },
-    "typo3-batch": {
-      "name": "typo3-batch",
-      "description": "Batch TYPO3 migrations: hooks\u2192events, TCA, DI, namespaces (Boris Cherny)",
-      "triggers": ["batch", "migrate", "bulk", "mass refactor", "codemod", "upgrade all"],
-      "path": "${extensionPath}/skills/typo3-batch"
-    },
-    "typo3-conformance": {
-      "name": "typo3-conformance",
-      "description": "Extension standards compliance checker",
-      "triggers": ["conformance", "standards", "quality"],
-      "path": "${extensionPath}/skills/typo3-conformance"
-    },
-    "typo3-content-blocks": {
-      "name": "typo3-content-blocks",
-      "description": "Content Elements & Record Types with single source of truth config",
-      "triggers": ["content-blocks", "content-element", "record-type", "irre"],
-      "path": "${extensionPath}/skills/typo3-content-blocks"
-    },
-    "typo3-core-contributions": {
-      "name": "typo3-core-contributions",
-      "description": "TYPO3 Core contribution workflow (Gerrit, Forge)",
-      "triggers": ["core", "contributions", "gerrit", "forge"],
-      "path": "${extensionPath}/skills/typo3-core-contributions"
-    },
-    "typo3-datahandler": {
-      "name": "typo3-datahandler",
-      "description": "Expert guidance on DataHandler for transactional database operations",
-      "triggers": ["database", "datahandler", "tcemain", "records"],
-      "path": "${extensionPath}/skills/typo3-datahandler"
-    },
-    "typo3-ddev": {
-      "name": "typo3-ddev",
-      "description": "TYPO3 local development with DDEV, multi-version testing",
-      "triggers": ["ddev", "local", "development", "docker"],
-      "path": "${extensionPath}/skills/typo3-ddev"
-    },
-    "typo3-docs": {
-      "name": "typo3-docs",
-      "description": "Documentation using docs.typo3.org standards",
-      "triggers": ["documentation", "rst", "docs"],
-      "path": "${extensionPath}/skills/typo3-docs"
-    },
-    "typo3-extension-upgrade": {
-      "name": "typo3-extension-upgrade",
-      "description": "Systematic extension upgrades with Rector, Fractor, PHPStan",
-      "triggers": ["extension", "upgrade", "fractor"],
-      "path": "${extensionPath}/skills/typo3-extension-upgrade"
-    },
-    "typo3-fractor": {
-      "name": "typo3-fractor",
-      "description": "Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML)",
-      "triggers": ["fractor", "flexform", "typoscript migration", "fluid migration"],
-      "path": "${extensionPath}/skills/typo3-fractor"
-    },
-    "typo3-icon14": {
-      "name": "typo3-icon14",
-      "description": "Migrate extension icons to TYPO3 v14 line-art style",
-      "triggers": ["icons", "backend module icons", "icon migration", "SVG icons", "icon registry"],
-      "path": "${extensionPath}/skills/typo3-icon14"
-    },
-    "typo3-powermail": {
-      "name": "typo3-powermail",
-      "description": "Powermail 13+ forms, finishers, validators, events, spam shield",
-      "triggers": ["powermail", "mailform", "form extension", "tx_powermail"],
-      "path": "${extensionPath}/skills/typo3-powermail"
-    },
-    "typo3-records-list-types": {
-      "name": "typo3-records-list-types",
-      "description": "Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module",
-      "triggers": ["records list types", "grid view backend", "compact view", "teaser view", "custom view type", "backend record cards"],
-      "path": "${extensionPath}/skills/typo3-records-list-types"
-    },
-    "typo3-rector": {
-      "name": "typo3-rector",
-      "description": "TYPO3 upgrade patterns using Rector for dual-version support",
-      "triggers": ["rector", "upgrade", "migration", "refactoring"],
-      "path": "${extensionPath}/skills/typo3-rector"
-    },
-    "typo3-security": {
-      "name": "typo3-security",
-      "description": "Security hardening checklist and best practices",
-      "triggers": ["security", "hardening", "permissions"],
-      "path": "${extensionPath}/skills/typo3-security"
-    },
-    "typo3-seo": {
-      "name": "typo3-seo",
-      "description": "SEO configuration with EXT:seo, sitemaps, meta tags",
-      "triggers": ["seo", "sitemap", "meta", "robots"],
-      "path": "${extensionPath}/skills/typo3-seo"
-    },
-    "typo3-simplify": {
-      "name": "typo3-simplify",
-      "description": "Simplify TYPO3 code: API reuse, quality, efficiency (Boris Cherny)",
-      "triggers": ["simplify", "clean up", "refine", "code quality", "reduce complexity"],
-      "path": "${extensionPath}/skills/typo3-simplify"
-    },
-    "typo3-solr": {
-      "name": "typo3-solr",
-      "description": "Apache Solr search: indexing, facets, suggest, vector search, debugging",
-      "triggers": ["solr", "search", "indexing", "facets", "suggest", "autocomplete", "vector search"],
-      "path": "${extensionPath}/skills/typo3-solr"
-    },
-    "typo3-testing": {
-      "name": "typo3-testing",
-      "description": "Unit, functional, E2E, architecture, mutation testing",
-      "triggers": ["testing", "phpunit", "playwright", "phpat"],
-      "path": "${extensionPath}/skills/typo3-testing"
-    },
-    "typo3-update": {
-      "name": "typo3-update",
-      "description": "TYPO3 v13/v14 dual-version development guide",
-      "triggers": ["update", "upgrade", "v13", "v14"],
-      "path": "${extensionPath}/skills/typo3-update"
-    },
-    "typo3-workspaces": {
-      "name": "typo3-workspaces",
-      "description": "Workspaces versioning, staging, publishing workflows, debugging",
-      "triggers": ["workspace", "versioning", "staging", "publishing", "review", "draft content"],
-      "path": "${extensionPath}/skills/typo3-workspaces"
-    },
-    "ui-design-patterns": {
-      "name": "ui-design-patterns",
-      "description": "Practical UI design patterns, accessibility, usability",
-      "triggers": ["ui", "design", "accessibility", "usability"],
-      "path": "${extensionPath}/skills/ui-design-patterns"
-    },
-    "visionos-design": {
-      "name": "visionos-design",
-      "description": "Apple HIG for Vision Pro, spatial UI, eye/hand input",
-      "triggers": ["visionos", "vision pro", "spatial computing", "realitykit"],
-      "path": "${extensionPath}/skills/visionos-design"
-    },
-    "watchos-design": {
-      "name": "watchos-design",
-      "description": "Apple HIG for Apple Watch, complications, glanceable UI",
-      "triggers": ["watchos", "apple watch", "complications", "digital crown"],
-      "path": "${extensionPath}/skills/watchos-design"
-    },
-    "web-design-guidelines": {
-      "name": "web-design-guidelines",
-      "description": "Interface review, accessibility audit, WCAG, ARIA, semantic HTML",
-      "triggers": ["web design", "accessibility", "a11y", "wcag", "aria", "semantic html"],
-      "path": "${extensionPath}/skills/web-design-guidelines"
-    },
-    "web-platform-design": {
-      "name": "web-platform-design",
-      "description": "WCAG 2.2, responsive design, forms, typography, i18n",
-      "triggers": ["wcag", "web platform", "responsive", "accessibility", "i18n"],
-      "path": "${extensionPath}/skills/web-platform-design"
-    },
-    "webconsulting-branding": {
-      "name": "webconsulting-branding",
-      "description": "webconsulting.at design system, colors, typography, MDX",
-      "triggers": ["frontend", "design", "branding", "ui"],
-      "path": "${extensionPath}/skills/webconsulting-branding"
-    },
+    }
+,
     "webconsulting-create-documentation": {
       "name": "webconsulting-create-documentation",
       "description": "Product docs, help pages, video tours (Remotion + GSAP + TTS)",
       "triggers": ["documentation", "help page", "product video", "screenshots", "tts", "gsap"],
       "path": "${extensionPath}/skills/webconsulting-create-documentation"
     }
+,
+    "security-audit": {
+      "name": "security-audit",
+      "description": "Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS)",
+      "triggers": ["security", "audit", "owasp", "vulnerabilities"],
+      "path": "${extensionPath}/skills/security-audit"
+    }
+,
+    "security-incident-reporting": {
+      "name": "security-incident-reporting",
+      "description": "NIST/SANS incident reports, DDoS post-mortem, CVE correlation",
+      "triggers": ["incident report", "post-mortem", "ddos", "forensics"],
+      "path": "${extensionPath}/skills/security-incident-reporting"
+    }
+,
+    "deepfake-detection": {
+      "name": "deepfake-detection",
+      "description": "Multimodal media authentication, PRNU/IGH/DQ forensics, GAN detection",
+      "triggers": ["deepfake", "media forensics", "fake detection", "synthetic media"],
+      "path": "${extensionPath}/skills/deepfake-detection"
+    }
+,
+    "enterprise-readiness": {
+      "name": "enterprise-readiness",
+      "description": "OpenSSF, SLSA, supply chain security, quality gates",
+      "triggers": ["enterprise", "openssf", "slsa", "security"],
+      "path": "${extensionPath}/skills/enterprise-readiness"
+    }
+,
+    "readiness-report": {
+      "name": "readiness-report",
+      "description": "AI agent readiness assessment (9 pillars, 5 maturity levels)",
+      "triggers": ["/readiness-report", "agent readiness", "codebase maturity"],
+      "path": "${extensionPath}/skills/readiness-report"
+    }
+,
+    "ai-search-optimization": {
+      "name": "ai-search-optimization",
+      "description": "AEO/GEO for AI search visibility with TYPO3, MD/MDX, and llms.txt",
+      "triggers": ["aeo", "geo", "ai search", "chatgpt", "perplexity", "llms.txt"],
+      "path": "${extensionPath}/skills/ai-search-optimization"
+    }
+,
+    "postgres-best-practices": {
+      "name": "postgres-best-practices",
+      "description": "Postgres performance, RLS, indexes, connection pooling (Supabase)",
+      "triggers": ["postgres", "sql", "database", "query", "index", "rls"],
+      "path": "${extensionPath}/skills/postgres-best-practices"
+    }
+,
+    "marketing-skills": {
+      "name": "marketing-skills",
+      "description": "CRO, copywriting, SEO, pricing, psychology (Corey Haines)",
+      "triggers": ["marketing", "cro", "conversion", "landing page", "funnel"],
+      "path": "${extensionPath}/skills/marketing-skills"
+    }
+,
+    "cro-funnel": {
+      "name": "cro-funnel",
+      "description": "Full-funnel CRO: form, signup, onboarding, popup, paywall",
+      "triggers": ["cro funnel", "form cro", "signup flow", "onboarding", "paywall"],
+      "path": "${extensionPath}/skills/cro-funnel"
+    }
+,
+    "programmatic-seo": {
+      "name": "programmatic-seo",
+      "description": "SEO pages at scale with templates and data",
+      "triggers": ["programmatic seo", "template pages", "directory", "location pages"],
+      "path": "${extensionPath}/skills/programmatic-seo"
+    }
+,
+    "launch-strategy": {
+      "name": "launch-strategy",
+      "description": "Product launches, Product Hunt, go-to-market",
+      "triggers": ["product launch", "product hunt", "gtm", "beta launch"],
+      "path": "${extensionPath}/skills/launch-strategy"
+    }
+,
+    "ab-testing": {
+      "name": "ab-testing",
+      "description": "A/B test design, sample size, statistical significance",
+      "triggers": ["ab test", "split test", "experiment", "hypothesis"],
+      "path": "${extensionPath}/skills/ab-testing"
+    }
+,
+    "php-modernization": {
+      "name": "php-modernization",
+      "description": "PHP 8.x patterns, PHPStan level 10, DTOs, enums",
+      "triggers": ["php", "modernization", "phpstan", "rector"],
+      "path": "${extensionPath}/skills/php-modernization"
+    }
+,
+    "cli-tools": {
+      "name": "cli-tools",
+      "description": "CLI tool management and auto-installation",
+      "triggers": ["cli", "tools", "installation"],
+      "path": "${extensionPath}/skills/cli-tools"
+    }
+,
+    "context7": {
+      "name": "context7",
+      "description": "Library documentation lookup via REST API",
+      "triggers": ["documentation", "api", "libraries"],
+      "path": "${extensionPath}/skills/context7"
+    }
+,
+    "firecrawl": {
+      "name": "firecrawl",
+      "description": "Firecrawl CLI for LLM-optimized web scraping, search, and research",
+      "triggers": ["scrape", "crawl", "search web", "research", "fetch url"],
+      "path": "${extensionPath}/skills/firecrawl"
+    }
+,
+    "skill-creator": {
+      "name": "skill-creator",
+      "description": "Guide for creating and packaging effective Agent Skills (Anthropic)",
+      "triggers": ["create skill", "new skill", "skill creator", "package skill", "SKILL.md"],
+      "path": "${extensionPath}/skills/skill-creator"
+    }
+,
+    "webconsulting-branding": {
+      "name": "webconsulting-branding",
+      "description": "webconsulting.at design system, colors, typography, MDX",
+      "triggers": ["frontend", "design", "branding", "ui"],
+      "path": "${extensionPath}/skills/webconsulting-branding"
+    }
+,
+    "ui-design-patterns": {
+      "name": "ui-design-patterns",
+      "description": "Practical UI design patterns, accessibility, usability",
+      "triggers": ["ui", "design", "accessibility", "usability"],
+      "path": "${extensionPath}/skills/ui-design-patterns"
+    }
+,
+    "frontend-design": {
+      "name": "frontend-design",
+      "description": "Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces",
+      "triggers": ["frontend", "design", "creative", "beautiful", "distinctive", "aesthetics"],
+      "path": "${extensionPath}/skills/frontend-design"
+    }
+,
+    "web-design-guidelines": {
+      "name": "web-design-guidelines",
+      "description": "Interface review, accessibility audit, WCAG, ARIA, semantic HTML",
+      "triggers": ["web design", "accessibility", "a11y", "wcag", "aria", "semantic html"],
+      "path": "${extensionPath}/skills/web-design-guidelines"
+    }
+,
+    "og-image": {
+      "name": "og-image",
+      "description": "Social preview images (Open Graph), meta tags, Twitter cards",
+      "triggers": ["og-image", "open graph", "social preview", "twitter card", "meta tags"],
+      "path": "${extensionPath}/skills/og-image"
+    }
+,
+    "react-best-practices": {
+      "name": "react-best-practices",
+      "description": "React/Next.js performance optimization from Vercel (57 rules)",
+      "triggers": ["react", "next.js", "performance", "optimization", "bundle", "waterfalls"],
+      "path": "${extensionPath}/skills/react-best-practices"
+    }
+,
+    "shadcn-ui": {
+      "name": "shadcn-ui",
+      "description": "shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms",
+      "triggers": ["shadcn", "radix", "tailwind", "components", "form", "dialog", "button", "card"],
+      "path": "${extensionPath}/skills/shadcn-ui"
+    }
+,
+    "android-design": {
+      "name": "android-design",
+      "description": "Material Design 3, Jetpack Compose, dynamic color, navigation",
+      "triggers": ["android", "material design", "jetpack compose", "material you"],
+      "path": "${extensionPath}/skills/android-design"
+    }
+,
+    "ios-design": {
+      "name": "ios-design",
+      "description": "Apple HIG for iPhone, SwiftUI, Dynamic Type, Dark Mode",
+      "triggers": ["ios", "iphone", "swiftui", "uikit", "dynamic type"],
+      "path": "${extensionPath}/skills/ios-design"
+    }
+,
+    "ipados-design": {
+      "name": "ipados-design",
+      "description": "Apple HIG for iPad, multitasking, keyboard, pointer support",
+      "triggers": ["ipad", "ipados", "split view", "stage manager", "sidebar"],
+      "path": "${extensionPath}/skills/ipados-design"
+    }
+,
+    "macos-design": {
+      "name": "macos-design",
+      "description": "Apple HIG for Mac, menu bar, toolbars, keyboard shortcuts",
+      "triggers": ["macos", "mac app", "appkit", "menu bar", "toolbar"],
+      "path": "${extensionPath}/skills/macos-design"
+    }
+,
+    "tvos-design": {
+      "name": "tvos-design",
+      "description": "Apple HIG for Apple TV, focus navigation, 10-foot UI",
+      "triggers": ["tvos", "apple tv", "siri remote", "focus navigation"],
+      "path": "${extensionPath}/skills/tvos-design"
+    }
+,
+    "visionos-design": {
+      "name": "visionos-design",
+      "description": "Apple HIG for Vision Pro, spatial UI, eye/hand input",
+      "triggers": ["visionos", "vision pro", "spatial computing", "realitykit"],
+      "path": "${extensionPath}/skills/visionos-design"
+    }
+,
+    "watchos-design": {
+      "name": "watchos-design",
+      "description": "Apple HIG for Apple Watch, complications, glanceable UI",
+      "triggers": ["watchos", "apple watch", "complications", "digital crown"],
+      "path": "${extensionPath}/skills/watchos-design"
+    }
+,
+    "web-platform-design": {
+      "name": "web-platform-design",
+      "description": "WCAG 2.2, responsive design, forms, typography, i18n",
+      "triggers": ["wcag", "web platform", "responsive", "accessibility", "i18n"],
+      "path": "${extensionPath}/skills/web-platform-design"
+    }
+,
+    "document-processing": {
+      "name": "document-processing",
+      "description": "PDF, DOCX, PPTX, XLSX creation, editing, and analysis",
+      "triggers": ["pdf", "docx", "word", "pptx", "powerpoint", "xlsx", "excel", "document"],
+      "path": "${extensionPath}/skills/document-processing"
+    }
+,
+    "legal-impressum": {
+      "name": "legal-impressum",
+      "description": "Austrian Impressum for all Gesellschaftsformen (ECG, MedienG)",
+      "triggers": ["impressum", "legal notice", "austria", "offenlegung"],
+      "path": "${extensionPath}/skills/legal-impressum"
+    }
+,
+    "typo3-content-blocks": {
+      "name": "typo3-content-blocks",
+      "description": "Content Elements & Record Types with single source of truth config",
+      "triggers": ["content-blocks", "content-element", "record-type", "irre"],
+      "path": "${extensionPath}/skills/typo3-content-blocks"
+    }
+,
+    "typo3-datahandler": {
+      "name": "typo3-datahandler",
+      "description": "Expert guidance on DataHandler for transactional database operations",
+      "triggers": ["database", "datahandler", "tcemain", "records"],
+      "path": "${extensionPath}/skills/typo3-datahandler"
+    }
+,
+    "typo3-ddev": {
+      "name": "typo3-ddev",
+      "description": "TYPO3 local development with DDEV, multi-version testing",
+      "triggers": ["ddev", "local", "development", "docker"],
+      "path": "${extensionPath}/skills/typo3-ddev"
+    }
+,
+    "typo3-testing": {
+      "name": "typo3-testing",
+      "description": "Unit, functional, E2E, architecture, mutation testing",
+      "triggers": ["testing", "phpunit", "playwright", "phpat"],
+      "path": "${extensionPath}/skills/typo3-testing"
+    }
+,
+    "typo3-conformance": {
+      "name": "typo3-conformance",
+      "description": "Extension standards compliance checker",
+      "triggers": ["conformance", "standards", "quality"],
+      "path": "${extensionPath}/skills/typo3-conformance"
+    }
+,
+    "typo3-docs": {
+      "name": "typo3-docs",
+      "description": "Documentation using docs.typo3.org standards",
+      "triggers": ["documentation", "rst", "docs"],
+      "path": "${extensionPath}/skills/typo3-docs"
+    }
+,
+    "typo3-core-contributions": {
+      "name": "typo3-core-contributions",
+      "description": "TYPO3 Core contribution workflow (Gerrit, Forge)",
+      "triggers": ["core", "contributions", "gerrit", "forge"],
+      "path": "${extensionPath}/skills/typo3-core-contributions"
+    }
+,
+    "typo3-rector": {
+      "name": "typo3-rector",
+      "description": "TYPO3 upgrade patterns using Rector for dual-version support",
+      "triggers": ["rector", "upgrade", "migration", "refactoring"],
+      "path": "${extensionPath}/skills/typo3-rector"
+    }
+,
+    "typo3-update": {
+      "name": "typo3-update",
+      "description": "TYPO3 v13/v14 dual-version development guide",
+      "triggers": ["update", "upgrade", "v13", "v14"],
+      "path": "${extensionPath}/skills/typo3-update"
+    }
+,
+    "typo3-extension-upgrade": {
+      "name": "typo3-extension-upgrade",
+      "description": "Systematic extension upgrades with Rector, Fractor, PHPStan",
+      "triggers": ["extension", "upgrade", "fractor"],
+      "path": "${extensionPath}/skills/typo3-extension-upgrade"
+    }
+,
+    "typo3-fractor": {
+      "name": "typo3-fractor",
+      "description": "Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML)",
+      "triggers": ["fractor", "flexform", "typoscript migration", "fluid migration"],
+      "path": "${extensionPath}/skills/typo3-fractor"
+    }
+,
+    "typo3-icon14": {
+      "name": "typo3-icon14",
+      "description": "Migrate extension icons to TYPO3 v14 line-art style",
+      "triggers": ["icons", "backend module icons", "icon migration", "SVG icons", "icon registry"],
+      "path": "${extensionPath}/skills/typo3-icon14"
+    }
+,
+    "typo3-security": {
+      "name": "typo3-security",
+      "description": "Security hardening checklist and best practices",
+      "triggers": ["security", "hardening", "permissions"],
+      "path": "${extensionPath}/skills/typo3-security"
+    }
+,
+    "typo3-seo": {
+      "name": "typo3-seo",
+      "description": "SEO configuration with EXT:seo, sitemaps, meta tags",
+      "triggers": ["seo", "sitemap", "meta", "robots"],
+      "path": "${extensionPath}/skills/typo3-seo"
+    }
+,
+    "typo3-accessibility": {
+      "name": "typo3-accessibility",
+      "description": "WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist",
+      "triggers": ["accessibility", "a11y", "wcag", "aria", "screen reader", "keyboard"],
+      "path": "${extensionPath}/skills/typo3-accessibility"
+    }
+,
+    "typo3-simplify": {
+      "name": "typo3-simplify",
+      "description": "Simplify TYPO3 code: API reuse, quality, efficiency (Boris Cherny)",
+      "triggers": ["simplify", "clean up", "refine", "code quality", "reduce complexity"],
+      "path": "${extensionPath}/skills/typo3-simplify"
+    }
+,
+    "typo3-batch": {
+      "name": "typo3-batch",
+      "description": "Batch TYPO3 migrations: hooks→events, TCA, DI, namespaces (Boris Cherny)",
+      "triggers": ["batch", "migrate", "bulk", "mass refactor", "codemod", "upgrade all"],
+      "path": "${extensionPath}/skills/typo3-batch"
+    }
+,
+    "typo3-powermail": {
+      "name": "typo3-powermail",
+      "description": "Powermail 13+ forms, finishers, validators, events, spam shield",
+      "triggers": ["powermail", "mailform", "form extension", "tx_powermail"],
+      "path": "${extensionPath}/skills/typo3-powermail"
+    }
+,
+    "typo3-records-list-types": {
+      "name": "typo3-records-list-types",
+      "description": "Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module",
+      "triggers": ["records list types", "grid view backend", "compact view", "teaser view", "custom view type", "backend record cards"],
+      "path": "${extensionPath}/skills/typo3-records-list-types"
+    }
+,
+    "typo3-workspaces": {
+      "name": "typo3-workspaces",
+      "description": "Workspaces versioning, staging, publishing workflows, debugging",
+      "triggers": ["workspace", "versioning", "staging", "publishing", "review", "draft content"],
+      "path": "${extensionPath}/skills/typo3-workspaces"
+    }
+,
+    "typo3-solr": {
+      "name": "typo3-solr",
+      "description": "Apache Solr search: indexing, facets, suggest, vector search, debugging",
+      "triggers": ["solr", "search", "indexing", "facets", "suggest", "autocomplete", "vector search"],
+      "path": "${extensionPath}/skills/typo3-solr"
+    }
+
   }
 }
