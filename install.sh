@@ -38,9 +38,12 @@
 #     • .kiro/skills/         (Kiro)
 #
 # Cross-client files (read natively by multiple clients):
-#     • AGENTS.md     → Copilot, Codex, Windsurf, Cline, Kiro
-#     • CLAUDE.md     → Claude Code
-#     • GEMINI.md     → Gemini CLI, Antigravity
+#     • AGENTS.md                       → Copilot, Codex, Windsurf, Cline, Kiro, Aider
+#     • CLAUDE.md                       → Claude Code
+#     • GEMINI.md                       → Gemini CLI, Antigravity
+#     • .windsurfrules                  → Windsurf
+#     • .github/copilot-instructions.md → GitHub Copilot
+#     • gemini-extension.json           → Gemini CLI (skill triggers)
 #
 # ============================================================================
 
@@ -288,13 +291,61 @@ fi
 # 6. Cross-Client Instruction Files
 # =============================================================================
 
-if [ -f "$SCRIPT_DIR/AGENTS.md" ] && [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
+if [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
     echo ""
     echo "→ Installing cross-client instruction files..."
 
-    # AGENTS.md → Copilot, Codex, Windsurf, Cline, Kiro
-    cp "$SCRIPT_DIR/AGENTS.md" "$PROJECT_ROOT/AGENTS.md"
-    echo "  ✓ AGENTS.md (Copilot, Codex, Windsurf, Cline, Kiro)"
+    # AGENTS.md → always overwrite (canonical source of truth)
+    if [ -f "$SCRIPT_DIR/AGENTS.md" ]; then
+        cp "$SCRIPT_DIR/AGENTS.md" "$PROJECT_ROOT/AGENTS.md"
+        echo "  ✓ AGENTS.md (Copilot, Codex, Windsurf, Cline, Kiro, Aider)"
+    fi
+
+    # CLAUDE.md → Claude Code primary instructions
+    if [ -f "$SCRIPT_DIR/CLAUDE.md" ] && [ ! -f "$PROJECT_ROOT/CLAUDE.md" ]; then
+        cp "$SCRIPT_DIR/CLAUDE.md" "$PROJECT_ROOT/CLAUDE.md"
+        echo "  ✓ CLAUDE.md (Claude Code)"
+    elif [ -f "$PROJECT_ROOT/CLAUDE.md" ]; then
+        echo "  · CLAUDE.md already exists (skipped)"
+    fi
+
+    # GEMINI.md → Gemini CLI primary instructions
+    if [ -f "$SCRIPT_DIR/GEMINI.md" ] && [ ! -f "$PROJECT_ROOT/GEMINI.md" ]; then
+        cp "$SCRIPT_DIR/GEMINI.md" "$PROJECT_ROOT/GEMINI.md"
+        echo "  ✓ GEMINI.md (Gemini CLI, Antigravity)"
+    elif [ -f "$PROJECT_ROOT/GEMINI.md" ]; then
+        echo "  · GEMINI.md already exists (skipped)"
+    fi
+
+    # .windsurfrules → Windsurf project rules
+    if [ -f "$SCRIPT_DIR/.windsurfrules" ] && [ ! -f "$PROJECT_ROOT/.windsurfrules" ]; then
+        cp "$SCRIPT_DIR/.windsurfrules" "$PROJECT_ROOT/.windsurfrules"
+        echo "  ✓ .windsurfrules (Windsurf)"
+    elif [ -f "$PROJECT_ROOT/.windsurfrules" ]; then
+        echo "  · .windsurfrules already exists (skipped)"
+    fi
+
+    # .github/copilot-instructions.md → GitHub Copilot
+    if [ -f "$SCRIPT_DIR/.github/copilot-instructions.md" ] && [ ! -f "$PROJECT_ROOT/.github/copilot-instructions.md" ]; then
+        mkdir -p "$PROJECT_ROOT/.github"
+        cp "$SCRIPT_DIR/.github/copilot-instructions.md" "$PROJECT_ROOT/.github/copilot-instructions.md"
+        echo "  ✓ .github/copilot-instructions.md (GitHub Copilot)"
+    elif [ -f "$PROJECT_ROOT/.github/copilot-instructions.md" ]; then
+        echo "  · .github/copilot-instructions.md already exists (skipped)"
+    fi
+
+    # gemini-extension.json → Gemini CLI extension manifest
+    if [ -f "$SCRIPT_DIR/gemini-extension.json" ] && [ ! -f "$PROJECT_ROOT/gemini-extension.json" ]; then
+        cp "$SCRIPT_DIR/gemini-extension.json" "$PROJECT_ROOT/gemini-extension.json"
+        echo "  ✓ gemini-extension.json (Gemini CLI skill triggers)"
+    elif [ -f "$PROJECT_ROOT/gemini-extension.json" ]; then
+        echo "  · gemini-extension.json already exists (skipped)"
+    fi
+elif [ "$SCRIPT_DIR" = "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
+    echo ""
+    echo "→ Cross-client files already in place (standalone install)"
+    echo "  AGENTS.md, CLAUDE.md, GEMINI.md, .windsurfrules,"
+    echo "  .github/copilot-instructions.md, gemini-extension.json"
 fi
 
 # =============================================================================
@@ -324,10 +375,13 @@ if [ "$USER_ONLY" != "true" ]; then
     echo ""
 fi
 
-echo "Cross-client files (read natively — no installation needed):"
-echo "  AGENTS.md    → Copilot, Codex, Windsurf, Cline, Kiro"
-echo "  CLAUDE.md    → Claude Code (create manually if needed)"
-echo "  GEMINI.md    → Gemini CLI, Antigravity (create manually if needed)"
+echo "Cross-client instruction files:"
+echo "  AGENTS.md                        → Copilot, Codex, Windsurf, Cline, Kiro, Aider"
+echo "  CLAUDE.md                        → Claude Code"
+echo "  GEMINI.md                        → Gemini CLI, Antigravity"
+echo "  .windsurfrules                   → Windsurf"
+echo "  .github/copilot-instructions.md  → GitHub Copilot"
+echo "  gemini-extension.json            → Gemini CLI (skill triggers)"
 echo ""
 echo "Next steps:"
 echo "  1. Restart your IDE / CLI to discover skills"

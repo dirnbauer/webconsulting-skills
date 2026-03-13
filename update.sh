@@ -172,14 +172,14 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                 done
                 
                 echo "    ✓ Synced successfully"
-                ((SYNCED++))
+                SYNCED=$((SYNCED + 1))
             else
                 echo "    ⚠ No SKILL.md found at path: $path"
-                ((FAILED++))
+                FAILED=$((FAILED + 1))
             fi
         else
             echo "    ⚠ Failed to clone: $source"
-            ((FAILED++))
+            FAILED=$((FAILED + 1))
         fi
         rm -rf "$TEMP_DIR"
     done
