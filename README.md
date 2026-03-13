@@ -72,7 +72,11 @@ Skills are installed as **symlinks** from the central `skills/` directory to eac
 .clinerules/               ← Cline (project-level)
 
 gemini-extension.json      ← Gemini CLI extension manifest
-AGENTS.md                  ← Read natively by Copilot, Aider, Gemini
+AGENTS.md                  ← Read natively by Copilot, Aider, Gemini, Codex
+CLAUDE.md                  ← Claude Code primary instructions (→ AGENTS.md)
+GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
+.github/copilot-instructions.md  ← GitHub Copilot instructions (→ AGENTS.md)
+.windsurfrules             ← Windsurf project rules (→ AGENTS.md)
 ```
 
 ### Using Skills
@@ -2159,15 +2163,16 @@ Most TYPO3 skills include additional supplement files:
     │  User-Level  │     │ Project-Level  │    │  Native Read   │
     ├──────────────┤     ├────────────────┤    ├────────────────┤
     │ ~/.cursor/   │     │ .cursor/skills │    │ AGENTS.md      │
-    │ ~/.claude/   │     │ .cursor/rules  │    │ (Copilot,      │
-    │ ~/.gemini/   │     │ .codex/skills  │    │  Aider,        │
-    │ ~/.windsurf/ │     │ .clinerules/   │    │  Gemini CLI)   │
-    │ ~/.kiro/     │     │                │    │                │
+    │ ~/.claude/   │     │ .cursor/rules  │    │ CLAUDE.md      │
+    │ ~/.gemini/   │     │ .codex/skills  │    │ GEMINI.md      │
+    │ ~/.windsurf/ │     │ .clinerules/   │    │ .windsurfrules │
+    │ ~/.kiro/     │     │                │    │ .github/       │
+    │              │     │                │    │  copilot-...md │
     └──────────────┘     └────────────────┘    └────────────────┘
 
     Cursor, Claude       Cursor, Codex,         No install needed
-    Code, Gemini CLI,    Cline                  — reads AGENTS.md
-    Windsurf, Kiro                              or gemini-extension.json
+    Code, Gemini CLI,    Cline                  — each client reads
+    Windsurf, Kiro                              its native config file
 ```
 
 ## Configuration
