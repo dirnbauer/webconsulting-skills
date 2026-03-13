@@ -123,6 +123,15 @@ https://github.com/vercel-labs/skills
 
 ---
 
+We also thank **[Volker Kemeter](https://github.com/vkemeter)** for his contribution of the
+Gemini CLI extension manifest (`gemini-extension.json`), which enables native skill discovery
+and trigger-based activation across all webconsulting skills within Gemini CLI and Google
+Antigravity. His work on a generic, standards-compliant integration approach directly informed
+the multi-client installation strategy.
+See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
