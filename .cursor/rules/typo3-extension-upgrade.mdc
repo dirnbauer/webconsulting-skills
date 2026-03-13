@@ -6,7 +6,7 @@ description: >-
   fractor, rector, migration.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # TYPO3 Extension Upgrade Skill
@@ -59,7 +59,24 @@ git status
 git checkout -b feature/typo3-14-upgrade
 ```
 
-### 2. Update Version Constraints
+> **PHP version requirement:** Rector and Fractor load your project's autoloader, which means
+> TYPO3 v14 packages are parsed by PHP. You **must** run these tools with PHP 8.2+ (matching
+> TYPO3 v14's minimum). If your local PHP is older, use DDEV (`ddev exec vendor/bin/rector ...`)
+> or a Docker container. **Do not skip Rector/Fractor and do manual replacements instead** --
+> the tools catch patterns that are easy to miss manually (namespace renames, FlexForm
+> structure changes, TypoScript condition syntax).
+
+### 2. Install Upgrade Tools
+
+Add the upgrade tools as dev dependencies **before** updating version constraints:
+
+```bash
+composer require --dev ssch/typo3-rector a9f/typo3-fractor
+```
+
+This ensures the tools can analyze your code against the target version's rules.
+
+### 3. Update Version Constraints
 
 ```json
 // composer.json
@@ -83,7 +100,7 @@ $EM_CONF[$_EXTKEY] = [
 ];
 ```
 
-### 3. Run Rector
+### 4. Run Rector
 
 Rector handles PHP code migrations automatically.
 
@@ -132,7 +149,7 @@ vendor/bin/rector process
 git diff
 ```
 
-### 4. Run Fractor
+### 5. Run Fractor
 
 Fractor handles non-PHP file migrations (FlexForms, TypoScript, Fluid, YAML, Htaccess). See the `typo3-fractor` skill for detailed configuration, all available rules, code style options, and custom rule creation.
 
@@ -166,7 +183,7 @@ vendor/bin/fractor process --dry-run
 vendor/bin/fractor process
 ```
 
-### 5. Fix Code Style
+### 6. Fix Code Style
 
 ```bash
 # Run PHP-CS-Fixer
@@ -176,7 +193,7 @@ vendor/bin/php-cs-fixer fix
 vendor/bin/php-cs-fixer fix --dry-run
 ```
 
-### 6. Run PHPStan
+### 7. Run PHPStan
 
 ```bash
 # Analyze codebase
@@ -186,7 +203,7 @@ vendor/bin/phpstan analyse
 # Then re-run until clean
 ```
 
-### 7. Run Tests
+### 8. Run Tests
 
 ```bash
 # Unit tests
@@ -198,7 +215,7 @@ vendor/bin/phpunit -c Tests/FunctionalTests.xml
 # Fix failing tests
 ```
 
-### 8. Manual Testing
+### 9. Manual Testing
 
 ```bash
 # Test in target TYPO3 version

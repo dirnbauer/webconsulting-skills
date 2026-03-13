@@ -6,7 +6,7 @@ description: >-
   upgrade, migration, refactoring, deprecation.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 ---
 
 # TYPO3 Rector Upgrade Patterns
@@ -23,8 +23,19 @@ Rector is an automated refactoring tool that helps migrate TYPO3 **PHP code** be
 ### Installation
 
 ```bash
+composer require --dev ssch/typo3-rector
+# or with DDEV:
 ddev composer require --dev ssch/typo3-rector
 ```
+
+> **Important:** Rector loads your project's autoloader. For TYPO3 v14 projects, Rector
+> **must** run on PHP 8.2+ because TYPO3 v14 packages use `readonly` classes and other
+> PHP 8.2 syntax. If your local PHP is older, always use DDEV or a container:
+> `ddev exec vendor/bin/rector process --dry-run`
+
+> **Always run Rector, never skip it.** Manual replacements (e.g. `strpos` -> `str_starts_with`)
+> miss edge cases that Rector rules handle correctly. Rector also catches deprecated TYPO3
+> namespace changes and method signature updates that are hard to find manually.
 
 ### Basic Configuration for Dual-Version Support
 
