@@ -4,6 +4,18 @@ A curated collection of **61 Agent Skills** for AI-augmented software developmen
 
 > **Works with:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, Windsurf, GitHub Copilot, Kiro, Cline, Continue.dev, Aider, and more
 
+### A Note from the Maintainer
+
+This project exists for one reason: to give the developer community a practical, ready-to-use
+collection of agent skills that make day-to-day work better. No vendor lock-in, no gatekeeping
+— just solid patterns you can drop into your workflow.
+
+A significant portion of the TYPO3 and PHP skills in this collection builds on the outstanding
+work by **[Netresearch DTT GmbH](https://www.netresearch.de/)**. Their open-source skill
+repositories set the bar for quality and depth, and studying their approach taught me a great
+deal about how to structure effective agent skills. Thank you, Netresearch — your contributions
+to the TYPO3 ecosystem and the broader AI-assisted development community are genuinely appreciated.
+
 ## Skill Categories
 
 | Category | Skills | Description |

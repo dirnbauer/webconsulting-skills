@@ -6,6 +6,12 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 > Anthropic, Cursor, and webconsulting evolve their platforms. Always review AI-generated code.
 > See [README](README.md) for details.
 
+> **A note from the maintainer:** This collection is here for the community — practical agent skills
+> you can drop into your workflow, no strings attached. A big thank you to
+> **[Netresearch DTT GmbH](https://www.netresearch.de/)** whose open-source skill repositories
+> taught me a lot about structuring effective agent skills and whose work forms the foundation
+> for many of the TYPO3 and PHP skills in this collection.
+
 > **TYPO3 Skills:** All TYPO3 skills support v13.x and v14.x (v14 preferred). Code examples work on both versions simultaneously.
 
 > **PHP 8.4 & Content Blocks:** Most TYPO3 skills include supplement files:
