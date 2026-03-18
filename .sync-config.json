@@ -213,7 +213,8 @@
       "name": "typo3-update",
       "source": "https://github.com/netresearch/typo3-update-skill.git",
       "branch": "main",
-      "enabled": false
+      "enabled": false,
+      "note": "Repository may no longer exist upstream; kept for reference"
     },
     {
       "name": "visionos-design",

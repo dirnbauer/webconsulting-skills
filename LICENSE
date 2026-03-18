@@ -28,12 +28,10 @@ This repository contains skills adapted from upstream open-source projects.
 Each retains its original copyright and license terms as noted below
 and in each skill's SKILL.md file.
 
-Netresearch DTT GmbH (16 skills)
+Netresearch DTT GmbH (11 skills)
   Skills: php-modernization, enterprise-readiness, security-audit, cli-tools,
-          context7, typo3-datahandler, typo3-ddev, typo3-testing,
-          typo3-conformance, typo3-docs, typo3-core-contributions,
-          typo3-rector, typo3-update, typo3-extension-upgrade,
-          typo3-security, typo3-seo
+          context7, typo3-ddev, typo3-testing, typo3-conformance, typo3-docs,
+          typo3-core-contributions, typo3-extension-upgrade
   Copyright (c) 2025-2026 Netresearch DTT GmbH
   License: MIT (code) / CC-BY-SA-4.0 (content/documentation)
   Source: https://github.com/netresearch
