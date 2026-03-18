@@ -1094,3 +1094,5 @@ export const AnimatedNumber = ({ targetValue = 10000 }) => {
   );
 };
 ```
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

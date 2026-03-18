@@ -2216,3 +2216,5 @@ Semrush, Ahrefs, and the broader SEO community's work on generative engine optim
 - Ahrefs analysis of AI impact on SEO
 
 Created by webconsulting.at for the Claude Cursor Skills collection.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -560,3 +560,5 @@ Module icons: https://typo3.github.io/TYPO3.Icons/icons/module.html
 | Using 32×32 viewBox for parent module | Always use 64×64 for consistency |
 | Assuming accent is always orange | Fresh theme uses purple (`#bf9aff`/`#b68cff`) in sidebar |
 | Using inline `style` for colors | Use `fill` attribute with CSS variables — inline styles override the cascade |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -2128,3 +2128,5 @@ If your custom record TCA uses `ctrl.searchFields` for Solr indexing configurati
 - **b13** for maintaining the ddev-typo3-solr addon
 - **Helmut Hummel (helhum)** for dotenv-connector
 - **Mittwald** for managed Solr hosting documentation
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

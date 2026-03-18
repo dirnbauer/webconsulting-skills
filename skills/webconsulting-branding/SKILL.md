@@ -308,3 +308,5 @@ The design system is compatible with shadcn/ui components. Semantic tokens map t
 | `--accent` | Light backgrounds |
 | `--ring` | Focus ring color |
 
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -863,3 +863,5 @@ Every interactive element needs clear state feedback:
 ---
 
 *For deeper learning, study the source materials: [Refactoring UI](https://www.refactoringui.com/) and [Practical UI](https://www.practical-ui.com/)*
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

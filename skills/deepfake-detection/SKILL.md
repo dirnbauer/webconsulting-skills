@@ -1106,3 +1106,5 @@ outcomes, and industry standards (C2PA v2.3, CAI).
 All citations verified as of January 2026.
 
 Developed by webconsulting.at for the Claude skill collection.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

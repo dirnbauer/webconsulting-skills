@@ -948,3 +948,5 @@ Use this checklist to evaluate Android UI implementations:
 | `READ_EXTERNAL_STORAGE` for photos | Unnecessary since Android 13 | Use Photo Picker API |
 | Blocking UI on permission denial | Punishes the user | Graceful degradation |
 | Manual color palette selection | Inconsistent tonal relationships | Use Material Theme Builder |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

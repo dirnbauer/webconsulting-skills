@@ -371,3 +371,5 @@ This skill draws from the "Handbuch für Advanced Security Incident Reporting" m
 incorporating elements of NIST SP 800-61, SANS frameworks, and industry best practices.
 
 Developed by webconsulting.at for the Claude skill collection.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

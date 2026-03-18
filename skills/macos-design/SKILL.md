@@ -963,3 +963,5 @@ Before shipping a Mac app, verify:
 14. **Hardcoded colors** — Use semantic system colors, not hardcoded hex values. Your colors should adapt to Light/Dark mode and accessibility settings automatically.
 
 15. **No drag and drop** — Mac is a drag-and-drop platform. If users can see content, they expect to drag it somewhere.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
