@@ -654,3 +654,5 @@ If you need more context:
 - **schema-markup**: For adding structured data to templates
 - **copywriting**: For the non-templated copy portions
 - **analytics-tracking**: For measuring programmatic page performance
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

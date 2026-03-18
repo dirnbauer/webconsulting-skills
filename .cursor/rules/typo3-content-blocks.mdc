@@ -1134,3 +1134,5 @@ This skill incorporates information from the official Content Blocks documentati
 Original documentation: https://docs.typo3.org/p/friendsoftypo3/content-blocks/
 
 Adapted by webconsulting.at for this skill collection
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

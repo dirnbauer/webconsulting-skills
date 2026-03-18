@@ -244,3 +244,5 @@ Use this checklist when reviewing a watchOS design or implementation.
 - [ ] Does the Long Look include inline actions?
 - [ ] Are haptic types matched to notification urgency?
 - [ ] Is notification frequency appropriate (not excessive)?
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

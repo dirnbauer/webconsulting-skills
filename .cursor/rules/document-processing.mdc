@@ -648,3 +648,5 @@ Original repositories:
 
 **Copyright (c) Anthropic** - MIT License  
 Adapted by webconsulting.at for this skill collection
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

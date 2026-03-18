@@ -568,3 +568,5 @@ All basic requirements PLUS:
 This skill is part of the webconsulting.at skills collection.
 
 Sources: WKO, USP.gv.at, Austrian Federal Legal Information System (RIS)
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

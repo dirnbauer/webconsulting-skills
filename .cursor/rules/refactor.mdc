@@ -643,3 +643,5 @@ Use this skill when:
 | Introduce Null Object                         | Eliminate null checks                 |
 | Replace Type Code with Class/Enum             | Strong typing                         |
 | Replace Inheritance with Delegation           | Composition over inheritance          |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

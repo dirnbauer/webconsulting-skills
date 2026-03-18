@@ -269,3 +269,5 @@ Use this checklist when reviewing a tvOS app design or implementation.
 | Pinch-to-zoom | Multi-finger gestures impossible on Siri Remote | Provide explicit zoom controls |
 | Long forms | Keyboard input is painful on tvOS | Pre-fill, use profiles, or offload to iPhone |
 | Thin/light typography | Disappears on TV displays | Medium weight minimum |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
