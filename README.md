@@ -2302,6 +2302,13 @@ Skills in this collection cover:
 
 The following repositories are the source for skills in this collection:
 
+### Netresearch DTT GmbH (TYPO3, PHP, Security, Enterprise — 16 skills)
+- https://github.com/netresearch
+- Skills: `php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
+  `typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
+  `typo3-core-contributions`, `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`,
+  `typo3-security`, `typo3-seo`
+
 ### Softaworks (Agent MD Refactor)
 - https://github.com/softaworks/agent-toolkit
 
@@ -2350,11 +2357,39 @@ The following repositories are the source for skills in this collection:
 
 ## License
 
-MIT License - webconsulting.at
+MIT License — webconsulting.at
+
+This repository contains both original skills and skills adapted from upstream open-source
+projects. Each upstream source retains its original copyright and license terms:
+
+- **Netresearch DTT GmbH** — MIT (code) / CC-BY-SA-4.0 (content) for 16 adapted skills
+- **Supabase** — Postgres best practices guidelines
+- **Vercel, Inc.** — React/Next.js optimization, web design, skill discovery (MIT)
+- **Anthropic** — Document processing, frontend design, skill creator (Apache-2.0 / MIT)
+- **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
+- **AITYTech** — AgentKits Marketing automation (MIT)
+
+See individual SKILL.md files for per-skill attribution and license details.
 
 ## Acknowledgements
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their
+foundational contributions to this skill collection. The majority of TYPO3-related skills and
+several cross-domain skills are based on Netresearch's original open-source skill repositories.
+Their deep expertise in TYPO3 development, enterprise PHP engineering, and AI-augmented workflows
+has been instrumental in shaping the quality and depth of these guidelines.
+
+The following 16 skills are adapted from Netresearch's work:
+`php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
+`typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
+`typo3-core-contributions`, `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`,
+`typo3-security`, `typo3-seo`
+
+Original repositories: https://github.com/netresearch
+
+**Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization,
+and enterprise best practices (MIT / CC-BY-SA-4.0)
+See: [netresearch.de](https://www.netresearch.de/)
 
 ---
 

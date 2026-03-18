@@ -16,7 +16,23 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 
 ## Acknowledgements
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their
+foundational contributions to this skill collection. The majority of TYPO3-related skills and
+several cross-domain skills are based on Netresearch's original open-source skill repositories.
+Their deep expertise in TYPO3 development, enterprise PHP engineering, and AI-augmented workflows
+has been instrumental in shaping the quality and depth of these guidelines.
+
+The following 16 skills are adapted from Netresearch's work:
+`php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
+`typo3-datahandler`, `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
+`typo3-core-contributions`, `typo3-rector`, `typo3-update`, `typo3-extension-upgrade`,
+`typo3-security`, `typo3-seo`
+
+Original repositories: https://github.com/netresearch
+
+**Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization,
+and enterprise best practices (MIT / CC-BY-SA-4.0)
+See: [netresearch.de](https://www.netresearch.de/)
 
 ---
 
