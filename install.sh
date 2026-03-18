@@ -45,6 +45,8 @@
 #     • .github/copilot-instructions.md → GitHub Copilot
 #     • gemini-extension.json           → Gemini CLI (skill triggers)
 #
+# License: MIT (code) / CC-BY-SA-4.0 (content)
+# Third-party skills retain their original licenses — see LICENSE for details.
 # ============================================================================
 
 set -e
@@ -190,6 +192,11 @@ To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` a
 - Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+
+## License
+
+Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
+See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
 CLAUDE_EOF
 echo "  ✓ CLAUDE.md ($SKILL_COUNT skills)"
 
@@ -219,6 +226,11 @@ To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` a
 - Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+
+## License
+
+Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
+See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
 GEMINI_EOF
 echo "  ✓ GEMINI.md ($SKILL_COUNT skills)"
 
@@ -244,6 +256,11 @@ To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` a
 - Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+
+## License
+
+Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
+See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
 WINDSURF_EOF
 echo "  ✓ .windsurfrules ($SKILL_COUNT skills)"
 
@@ -270,6 +287,11 @@ To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` a
 - Most TYPO3 skills include \`SKILL-PHP84.md\` and \`SKILL-CONTENT-BLOCKS.md\` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+
+## License
+
+Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
+See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
 COPILOT_EOF
 echo "  ✓ .github/copilot-instructions.md ($SKILL_COUNT skills)"
 
@@ -289,6 +311,7 @@ if [ -f "$AGENTS_FILE" ]; then
 GEMINI_HDR
 
     printf '  "description": "Curated Agent Skills for AI-augmented software development — universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",\n' >> "$GEMINI_JSON"
+    printf '  "license": "MIT AND CC-BY-SA-4.0",\n' >> "$GEMINI_JSON"
     printf '  "contextFileName": "AGENTS.md",\n' >> "$GEMINI_JSON"
     printf '  "excludeTools": [],\n' >> "$GEMINI_JSON"
     printf '  "skills": {\n' >> "$GEMINI_JSON"

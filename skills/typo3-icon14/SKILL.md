@@ -10,6 +10,7 @@ description: >-
 compatibility: TYPO3 13.4 - 14.x
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 v14 Icon Modernizer

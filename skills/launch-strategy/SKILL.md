@@ -35,6 +35,7 @@ success_metrics:
   - media_coverage
   - social_engagement
 output_schema: launch-plan
+license: MIT
 ---
 
 # Launch Strategy

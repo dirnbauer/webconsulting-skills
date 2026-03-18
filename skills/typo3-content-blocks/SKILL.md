@@ -10,6 +10,7 @@ metadata:
   version: "1.4.0"
   related_skills:
     - typo3-content-blocks-migration
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Content Blocks Development

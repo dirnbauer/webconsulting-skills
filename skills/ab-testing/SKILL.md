@@ -30,6 +30,7 @@ success_metrics:
   - test_velocity
   - win_rate
 output_schema: ab-test-plan
+license: MIT
 ---
 
 # A/B Test Setup

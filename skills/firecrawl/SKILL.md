@@ -5,6 +5,7 @@ description: |
 allowed-tools:
   - Bash(firecrawl *)
   - Bash(npx firecrawl *)
+license: ISC (CLI); platform AGPL-3.0
 ---
 
 # Firecrawl CLI

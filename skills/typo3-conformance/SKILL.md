@@ -11,6 +11,7 @@ metadata:
     - ext_localconf.php
     - Configuration/TCA/**/*
     - *.typoscript
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Extension Conformance Checker

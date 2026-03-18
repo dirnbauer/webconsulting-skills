@@ -5,6 +5,7 @@ description: >-
   safety, or achieving PHPStan level 10.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # PHP Modernization Skill

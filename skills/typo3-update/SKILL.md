@@ -8,6 +8,7 @@ description: >-
 compatibility: TYPO3 13.0 - 14.x
 metadata:
   version: "2.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Dual-Version Development: v13 & v14

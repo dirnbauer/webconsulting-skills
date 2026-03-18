@@ -14,6 +14,7 @@ metadata:
     - typo3-datahandler
     - typo3-seo
     - ai-search-optimization
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Apache Solr for TYPO3

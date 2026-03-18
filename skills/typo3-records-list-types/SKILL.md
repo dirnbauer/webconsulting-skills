@@ -13,6 +13,7 @@ triggers:
   - drag and drop records
   - records module view
   - view mode tsconfig
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Records List Types

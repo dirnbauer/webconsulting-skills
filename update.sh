@@ -13,6 +13,9 @@
 #   --help         Show this help message
 #
 # This script updates Agent Skills from external sources and reinstalls them.
+#
+# License: MIT (code) / CC-BY-SA-4.0 (content)
+# Third-party skills retain their original licenses — see LICENSE for details.
 # ============================================================================
 
 set -e

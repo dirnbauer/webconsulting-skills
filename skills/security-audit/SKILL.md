@@ -5,6 +5,7 @@ description: >-
   identifying vulnerabilities (XXE, SQL injection, XSS), or CVSS scoring.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Security Audit Skill

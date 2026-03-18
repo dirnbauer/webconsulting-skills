@@ -1,6 +1,7 @@
 ---
 name: remotion-best-practices
 description: Best practices for Remotion - Video creation in React
+license: Custom (see remotion.dev/license)
 metadata:
   tags: remotion, video, react, animation, composition
 ---

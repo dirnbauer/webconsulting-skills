@@ -7,6 +7,7 @@ description: >-
 compatibility: TYPO3 13.0 - 14.x
 metadata:
   version: "1.1.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # UI Design Patterns

@@ -7,6 +7,7 @@ description: >-
   ai overviews, generative search, llm visibility.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # AI Search Optimization (AEO & GEO)

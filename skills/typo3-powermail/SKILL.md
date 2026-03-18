@@ -12,6 +12,7 @@ metadata:
     - typo3-datahandler
     - typo3-content-blocks
     - typo3-testing
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Powermail Development

@@ -22,3 +22,9 @@ To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and f
 - Most TYPO3 skills include `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
+
+
+## License
+
+Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
+See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.

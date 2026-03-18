@@ -31,6 +31,7 @@ success_metrics:
   - indexed_pages
   - organic_traffic
   - keyword_coverage
+license: MIT
 ---
 
 # Programmatic SEO
