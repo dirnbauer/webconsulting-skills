@@ -1,0 +1,100 @@
+MIT License
+
+Copyright (c) 2025-2026 webconsulting.at
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+THIRD-PARTY LICENSES
+
+This repository contains skills adapted from upstream open-source projects.
+Each retains its original copyright and license terms as noted below
+and in each skill's SKILL.md file.
+
+Netresearch DTT GmbH (16 skills)
+  Skills: php-modernization, enterprise-readiness, security-audit, cli-tools,
+          context7, typo3-datahandler, typo3-ddev, typo3-testing,
+          typo3-conformance, typo3-docs, typo3-core-contributions,
+          typo3-rector, typo3-update, typo3-extension-upgrade,
+          typo3-security, typo3-seo
+  Copyright (c) 2025-2026 Netresearch DTT GmbH
+  License: MIT (code) / CC-BY-SA-4.0 (content/documentation)
+  Source: https://github.com/netresearch
+
+Supabase (1 skill)
+  Skill: postgres-best-practices
+  Copyright (c) Supabase
+  Source: https://github.com/supabase/agent-skills
+
+Vercel, Inc. (3 skills)
+  Skills: react-best-practices, web-design-guidelines, find-skills
+  Copyright (c) Vercel, Inc.
+  License: MIT
+  Source: https://github.com/vercel-labs/agent-skills,
+          https://github.com/vercel-labs/skills
+
+Anthropic (3 skills)
+  Skills: document-processing, frontend-design, skill-creator
+  Copyright (c) Anthropic
+  License: Apache-2.0 / MIT
+  Source: https://github.com/anthropics/skills
+
+platform-design-skills / ehmo (8 skills)
+  Skills: android-design, ios-design, ipados-design, macos-design,
+          tvos-design, visionos-design, watchos-design, web-platform-design
+  Copyright (c) platform-design-skills
+  License: MIT
+  Source: https://github.com/ehmo/platform-design-skills
+
+AITYTech (4 skills)
+  Skills: cro-funnel, programmatic-seo, launch-strategy, ab-testing
+  Copyright (c) AITYTech
+  License: MIT
+  Source: https://github.com/aitytech/agentkits-marketing
+
+Corey Haines (1 skill)
+  Skill: marketing-skills
+  Copyright (c) Corey Haines
+  Source: https://github.com/coreyhaines31/marketingskills
+
+Stevy Smith (1 skill)
+  Skill: og-image
+  Copyright (c) Stevy Smith
+  Source: https://github.com/stevysmith/og-image-skill
+
+Giuseppe Trisciuoglio (1 skill)
+  Skill: shadcn-ui
+  Copyright (c) Giuseppe Trisciuoglio
+  Source: https://github.com/giuseppe-trisciuoglio/developer-kit
+
+Softaworks (1 skill)
+  Skill: agent-md-refactor
+  Copyright (c) Softaworks
+  Source: https://github.com/softaworks/agent-toolkit
+
+GitHub (1 skill)
+  Skill: refactor
+  Copyright (c) GitHub
+  Source: https://github.com/github/awesome-copilot
+
+sickn33 (1 skill)
+  Skill: refactor-clean
+  Copyright (c) sickn33
+  Source: https://github.com/sickn33/antigravity-awesome-skills
