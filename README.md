@@ -2380,7 +2380,9 @@ Each retains its original copyright and license terms:
 
 - **Netresearch DTT GmbH** — MIT (code) / CC-BY-SA-4.0 (content) for 11 adapted skills
 - **Vercel, Inc.** — React/Next.js optimization, web design, skill discovery (MIT)
-- **Anthropic** — Document processing, frontend design, skill creator (Apache-2.0 / MIT)
+- **Anthropic** — `frontend-design`, `skill-creator` (Apache-2.0); `document-processing` (source-available)
+- **Firecrawl / Mendable, Inc.** — `firecrawl` CLI (ISC); platform is AGPL-3.0
+- **Remotion** — `remotion-best-practices` (custom license, see remotion.dev/license)
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
 - **AITYTech** — AgentKits Marketing automation (MIT)
 
@@ -2495,10 +2497,30 @@ https://github.com/aitytech/agentkits-marketing
 
 We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing,
 frontend design, and skill creator skills. The `document-processing`, `frontend-design`, and
-`skill-creator` skills are adapted from their open-source repository:
+`skill-creator` skills are adapted from their repository:
 https://github.com/anthropics/skills
 
-**Copyright (c) Anthropic** - Document processing, frontend design, and skill creation (Apache-2.0 / MIT License)
+**Copyright (c) Anthropic** — `frontend-design` and `skill-creator` (Apache-2.0 License);
+`document-processing` (source-available, see Anthropic's README for terms)
+
+---
+
+We also thank **[Firecrawl / Mendable, Inc.](https://www.firecrawl.dev/)** for their excellent web
+scraping CLI. The `firecrawl` skill is adapted from their open-source repository:
+https://github.com/firecrawl/cli
+
+**Copyright (c) Firecrawl / Mendable, Inc.** — CLI (ISC License)
+Note: The Firecrawl platform is AGPL-3.0; this skill documents CLI usage patterns only.
+
+---
+
+We also thank **[Remotion](https://remotion.dev/)** for their excellent video creation framework.
+The `remotion-best-practices` skill is adapted from their skills repository:
+https://github.com/remotion-dev/skills
+
+Note: The Remotion library uses a custom license (free for individuals / small companies up to
+3 employees; company license required for larger organizations). This skill documents usage
+patterns only and does not include or redistribute Remotion source code.
 
 ---
 

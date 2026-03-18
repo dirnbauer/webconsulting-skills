@@ -198,5 +198,3 @@ Before completing, verify:
 - [ ] Meta tags include alt text for accessibility
 - [ ] theme-color is set to match brand
 - [ ] User informed of cache-busting URLs
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

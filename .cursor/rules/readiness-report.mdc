@@ -125,5 +125,3 @@ After reviewing the report, common fixes can be automated:
 - Set up pre-commit hooks
 
 Ask to "fix readiness gaps" to begin automated remediation of failing criteria.
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

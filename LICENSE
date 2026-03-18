@@ -34,10 +34,24 @@ Vercel, Inc. (3 skills)
           https://github.com/vercel-labs/skills
 
 Anthropic (3 skills)
-  Skills: document-processing, frontend-design, skill-creator
+  Skills: frontend-design, skill-creator (Apache-2.0)
+          document-processing (source-available, not open source)
   Copyright (c) Anthropic
-  License: Apache-2.0 / MIT
+  License: Apache-2.0 (frontend-design, skill-creator)
+           Source-available (document-processing — see Anthropic's README for terms)
   Source: https://github.com/anthropics/skills
+
+Firecrawl (1 skill)
+  Skill: firecrawl
+  Copyright (c) Firecrawl / Mendable, Inc.
+  License: ISC (CLI); note: the Firecrawl platform is AGPL-3.0
+  Source: https://github.com/firecrawl/cli
+
+Remotion (1 skill)
+  Skill: remotion-best-practices
+  License: Custom (free for individuals / <=3 employees; company license required)
+  Note: Skill documents usage patterns only; no Remotion source code included
+  Source: https://github.com/remotion-dev/skills
 
 platform-design-skills / ehmo (8 skills)
   Skills: android-design, ios-design, ipados-design, macos-design,
