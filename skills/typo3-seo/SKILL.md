@@ -537,10 +537,4 @@ New `<f:asset.headerData>` and `<f:asset.footerData>` ViewHelpers allow injectin
 
 ## Credits & Attribution
 
-This skill is based on the excellent work by
-**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
-
-Original repository: https://github.com/netresearch/typo3-seo-skill
-
-**Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
-Adapted by webconsulting.at for this skill collection
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
