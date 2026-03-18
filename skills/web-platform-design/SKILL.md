@@ -1444,3 +1444,5 @@ Use this checklist when building or reviewing web interfaces.
 | `margin-left` / `padding-right` | Use `margin-inline-start` / `padding-inline-end` |
 | `<img>` without dimensions | Add `width` and `height` attributes |
 | Hover-only disclosure | Add `:focus-within` and click handler |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

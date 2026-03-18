@@ -1075,3 +1075,5 @@ These are common mistakes that violate the iOS Human Interface Guidelines. Never
 14. **Stacked modals** — Presenting a sheet on top of a sheet on top of a sheet creates navigation confusion. Use navigation within a single modal instead.
 
 15. **Dark Mode as an afterthought** — Using hardcoded colors means the app is either broken in Dark Mode or light mode. Always use semantic colors.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

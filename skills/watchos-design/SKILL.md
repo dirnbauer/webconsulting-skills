@@ -364,3 +364,5 @@ Use this checklist when reviewing a watchOS design or implementation.
 - [ ] Animations respect Reduce Motion (`@Environment(\.accessibilityReduceMotion)`)
 - [ ] Bold Text preference is respected (SwiftUI handles automatically; custom text checks `@Environment(\.legibilityWeight)`)
 - [ ] Increase Contrast preference is respected (custom colors provide higher-contrast variants)
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

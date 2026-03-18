@@ -125,3 +125,5 @@ For browser, launch separate sessions for independent tasks and operate them in 
 firecrawl credit-usage
 firecrawl credit-usage --json --pretty -o .firecrawl/credits.json
 ```
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

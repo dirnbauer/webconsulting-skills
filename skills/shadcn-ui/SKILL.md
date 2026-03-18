@@ -1931,3 +1931,5 @@ export function AdvancedForm() {
 - Zod: https://zod.dev
 - Tailwind CSS: https://tailwindcss.com
 - Examples: https://ui.shadcn.com/examples
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
