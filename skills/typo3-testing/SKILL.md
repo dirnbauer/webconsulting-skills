@@ -596,4 +596,10 @@ Test code using deprecated TYPO3 APIs (e.g., `$GLOBALS['TSFE']`, Extbase annotat
 
 ## Credits & Attribution
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+This skill is based on the excellent work by
+**[Netresearch DTT GmbH](https://www.netresearch.de/)**.
+
+Original repository: https://github.com/netresearch/typo3-testing-skill
+
+**Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
+Adapted by webconsulting.at for this skill collection
