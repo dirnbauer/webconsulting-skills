@@ -2,7 +2,7 @@
     "name": "webconsulting/webconsulting-skills",
     "description": "Curated Agent Skills for AI-augmented software development (Cursor, Claude Code)",
     "type": "composer-plugin",
-    "license": "MIT",
+    "license": ["MIT", "CC-BY-SA-4.0"],
     "keywords": [
         "ai",
         "agent",

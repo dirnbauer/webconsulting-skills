@@ -2368,13 +2368,17 @@ The following repositories are the source for skills in this collection:
 
 ## License
 
-MIT License — webconsulting.at
+This project uses **split licensing**:
 
-This repository contains both original skills and skills adapted from upstream open-source
-projects. Each upstream source retains its original copyright and license terms:
+- **Code** (scripts, installers, configuration): [MIT License](LICENSE-MIT)
+- **Content** (skill definitions, documentation, SKILL.md files): [CC-BY-SA-4.0](LICENSE-CC-BY-SA-4.0)
+
+See [LICENSE](LICENSE) for details and third-party attribution.
+
+This repository also contains skills adapted from upstream open-source projects.
+Each retains its original copyright and license terms:
 
 - **Netresearch DTT GmbH** — MIT (code) / CC-BY-SA-4.0 (content) for 11 adapted skills
-- **Supabase** — Postgres best practices guidelines
 - **Vercel, Inc.** — React/Next.js optimization, web design, skill discovery (MIT)
 - **Anthropic** — Document processing, frontend design, skill creator (Apache-2.0 / MIT)
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
