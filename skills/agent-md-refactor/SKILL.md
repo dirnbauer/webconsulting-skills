@@ -285,5 +285,3 @@ After refactoring, verify:
 6. **Self-contained files** - Each linked file stands alone
 
 ---
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
