@@ -49,6 +49,7 @@ final class CreateContentCommand
 
     public string $cType {
         set (string $value) {
+            // Example allowlist only — extend with your Content Block CTypes (e.g. myvendor_hero) or validate via ContentBlockRegistry.
             $allowed = ['text', 'textmedia', 'html', 'header'];
             if (!in_array($value, $allowed, true)) {
                 throw new \InvalidArgumentException('Invalid CType: ' . $value);
@@ -60,11 +61,15 @@ final class CreateContentCommand
     public string $header = '';
     public string $bodytext = '';
 
-    // Virtual property for DataHandler data array
-    public array $dataMap {
-        get => [
+    /**
+     * Build a datamap for one new tt_content row. Use a stable placeholder id (e.g. NEW_1)
+     * per DataHandler::start() call — never regenerate the key on each property read.
+     */
+    public function toDataMap(string $newId = 'NEW_1'): array
+    {
+        return [
             'tt_content' => [
-                'NEW_' . uniqid() => [
+                $newId => [
                     'pid' => $this->pid,
                     'CType' => $this->cType,
                     'header' => $this->header,
@@ -91,24 +96,27 @@ use Vendor\MyExtension\DataHandler\CreateContentCommand;
 final class ContentService
 {
     public function __construct(
-        private readonly DataHandler $dataHandler,
+        private readonly DataHandlerFactory $dataHandlerFactory,
     ) {}
 
-    public function createContent(CreateContentCommand $command): int
+    public function createContent(CreateContentCommand $command, string $newId = 'NEW_1'): int
     {
-        $this->dataHandler->start($command->dataMap, []);
-        $this->dataHandler->process_datamap();
+        $dataHandler = $this->dataHandlerFactory->create();
+        $dataHandler->start($command->toDataMap($newId), []);
+        $dataHandler->process_datamap();
 
-        if ($this->dataHandler->errorLog !== []) {
+        if ($dataHandler->errorLog !== []) {
             throw new \RuntimeException(
-                'DataHandler errors: ' . implode(', ', $this->dataHandler->errorLog)
+                'DataHandler errors: ' . implode(', ', $dataHandler->errorLog)
             );
         }
 
-        return (int) current($this->dataHandler->substNEWwithIDs);
+        return (int) ($dataHandler->substNEWwithIDs[$newId] ?? 0);
     }
 }
 ```
+
+Use the `DataHandlerFactory` from **section 5** (`readonly` + `GeneralUtility::makeInstance`) so each operation gets a clean `DataHandler` instance.
 
 ---
 
@@ -161,22 +169,23 @@ use Vendor\MyExtension\DataHandler\DataHandlerResult;
 final class RecordService
 {
     public function __construct(
-        private readonly DataHandler $dataHandler,
+        private readonly DataHandlerFactory $dataHandlerFactory,
     ) {}
 
     public function processDataMap(array $data): DataHandlerResult
     {
         $result = new DataHandlerResult();
+        $dataHandler = $this->dataHandlerFactory->create();
 
-        $this->dataHandler->start($data, []);
-        $this->dataHandler->process_datamap();
+        $dataHandler->start($data, []);
+        $dataHandler->process_datamap();
 
-        foreach ($this->dataHandler->substNEWwithIDs as $newId => $uid) {
+        foreach ($dataHandler->substNEWwithIDs as $newId => $uid) {
             $table = $this->extractTableFromNewId($newId);
             $result->addCreatedRecord($table, (int) $uid);
         }
 
-        foreach ($this->dataHandler->errorLog as $error) {
+        foreach ($dataHandler->errorLog as $error) {
             $result->addError($error);
         }
 
@@ -276,10 +285,13 @@ final class DataMapValidator
         $result = new ValidationResult();
 
         foreach ($dataMap as $table => $records) {
-            // Check if any record is missing required fields
+            // Check if any NEW_* row is missing pid (array_any passes value, key per PHP 8.4)
             $missingPid = array_any(
                 $records,
-                fn(array $fields) => !isset($fields['pid']) && str_starts_with((string) key($records), 'NEW')
+                fn(array $fields, string|int $recordKey): bool =>
+                    !isset($fields['pid'])
+                    && is_string($recordKey)
+                    && str_starts_with($recordKey, 'NEW')
             );
 
             if ($missingPid) {
@@ -316,6 +328,7 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Service;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use Vendor\MyExtension\DataHandler\CreateContentCommand;
 
 final class LegacyContentService
 {
@@ -389,9 +402,8 @@ final readonly class DataHandlerFactory
 {
     public function create(): DataHandler
     {
-        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-        $dataHandler->bypassAccessCheckForRecords = false;
-        return $dataHandler;
+        // Fresh instance per operation — DataHandler keeps submission state on the object.
+        return GeneralUtility::makeInstance(DataHandler::class);
     }
 }
 ```
@@ -407,7 +419,7 @@ final readonly class DataHandlerFactory
 - [ ] Use asymmetric visibility for result objects
 - [ ] Replace manual array loops with `array_find()`, `array_any()`, `array_all()`
 - [ ] Add `#[\Deprecated]` to legacy helper methods
-- [ ] Use `readonly` services where DataHandler is injected
+- [ ] Prefer a small `DataHandlerFactory` (or `GeneralUtility::makeInstance` per call) instead of injecting a shared `DataHandler` singleton
 
 ---
 

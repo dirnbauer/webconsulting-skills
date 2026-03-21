@@ -12,7 +12,7 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Extension Upgrade Skill
 
-Systematic framework for upgrading TYPO3 extensions to newer LTS versions.
+Systematic framework for upgrading TYPO3 extensions **to TYPO3 v14** (and verifying them on v14).
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
@@ -130,9 +130,9 @@ return RectorConfig::configure()
         // PHP version upgrades
         LevelSetList::UP_TO_PHP_82,
         
-        // TYPO3 upgrades
-        Typo3LevelSetList::UP_TO_TYPO3_13,
-        Typo3SetList::TYPO3_13,
+        // TYPO3 upgrades (v14 target — adjust if you intentionally stop at v13)
+        Typo3LevelSetList::UP_TO_TYPO3_14,
+        Typo3SetList::TYPO3_14,
     ])
     ->withImportNames();
 ```
@@ -170,7 +170,7 @@ return FractorConfiguration::configure()
         __DIR__ . '/Resources/',
     ])
     ->withSets([
-        Typo3LevelSetList::UP_TO_TYPO3_13,
+        Typo3LevelSetList::UP_TO_TYPO3_14,
     ]);
 ```
 
@@ -325,7 +325,7 @@ ExtensionUtility::registerModule(...);
 // ✅ NEW (Configuration/Backend/Modules.php)
 return [
     'web_mymodule' => [
-        'parent' => 'web',
+        'parent' => 'content',
         'access' => 'user,group',
         'iconIdentifier' => 'myext-module',
         'labels' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang_mod.xlf',
@@ -440,13 +440,13 @@ Before considering upgrade complete:
 |--------|-----------|
 | `$GLOBALS['TSFE']` / `TypoScriptFrontendController` removed | Use request attributes (`frontend.page.information`, `language`) |
 | Extbase annotations removed | Use `#[Validate]`, `#[IgnoreValidation]` PHP attributes |
-| `MailMessage->send()` removed | Inject `Symfony\Component\Mailer\MailerInterface` and call `send()` with a `Email` / `FluidEmail` instance |
+| `MailMessage->send()` removed | Inject `TYPO3\CMS\Core\Mail\MailerInterface` (Core facade over Symfony Mailer) and send `FluidEmail` / `Email` instances so TYPO3 transport config applies |
 | `FlexFormService` removed | Use `FlexFormTools` |
 | DataHandler `userid`/`admin`/`storeLogMessages` removed | Use `$GLOBALS['BE_USER']` / context APIs as documented in the changelog entry |
 | Frontend asset concat/compress removed | Delegate to web server or build tools |
 | Plugin subtypes removed | Register separate plugins via `configurePlugin()` |
 | TCA `ctrl.searchFields` removed | Use per-column `'searchable' => true` |
-| Backend module menu identifiers | Parent ids were reorganized in v14 (for example `content`, `media`, `administration`). Compare with Core `Configuration/Backend/Modules.php` — do not assume a 1:1 string rename from older examples. |
+| Backend module menu identifiers | Parent ids were reorganized in v14 (for example `content`, `media`, **`admin`**). Compare with Core `Configuration/Backend/Modules.php` — do not assume a 1:1 string rename from older examples. |
 | Fluid 5.0 strict types | Fix ViewHelper argument types; remove underscore-prefixed variables |
 
 ### Changelog-first for upcoming minors

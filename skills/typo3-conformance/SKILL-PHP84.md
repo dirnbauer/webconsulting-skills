@@ -83,7 +83,7 @@ parameters:
 - [ ] `declare(strict_types=1)` in all files
 - [ ] No single underscore class names
 - [ ] `#[\Deprecated]` on legacy methods
-- [ ] PHPStan level 9+ passing
+- [ ] PHPStan level 10 passing (or transitional baseline per main conformance skill)
 - [ ] PHP-CS-Fixer with PER-CS
 
 ---

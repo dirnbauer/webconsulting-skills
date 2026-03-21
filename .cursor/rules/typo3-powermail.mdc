@@ -1,7 +1,7 @@
 ---
 name: typo3-powermail
 description: >-
-  Expert guidance on TYPO3 Powermail 13+ form extension. Creating forms, custom finishers,
+  Expert guidance on the Powermail **extension** 13.x with TYPO3 v14. Creating forms, custom finishers,
   validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
   templates, backend modules, and extension development. Use when working with powermail
   forms, mail handling, form validation, or extending powermail functionality.

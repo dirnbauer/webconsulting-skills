@@ -66,8 +66,9 @@ page {
 ```typoscript
 page.meta.description = TEXT
 page.meta.description {
-    # Fallback chain: page description > parent description > site description
-    data = page:description // levelfield:-1,description,slide // {$site.description}
+    # Page description, then slide rootline; add further fallbacks via stdWrap.if / constants (do not use {$...} inside `data` as a getText key)
+    data = page:description
+    ifEmpty.data = levelfield:-1,description,slide
     htmlSpecialChars = 1
 }
 ```
@@ -213,8 +214,10 @@ Disallow: /typo3/
 Disallow: /typo3conf/
 Disallow: /typo3temp/
 
-Sitemap: {getEnv:TYPO3_SITE_URL}sitemap.xml
+Sitemap: https://example.com/sitemap.xml
     )
+    # For a dynamic base URL, derive it from site `base` (YAML), a TypoScript constant, or
+    # a small data processor — `TEXT.value` does not interpolate `{getEnv:...}` getText.
 }
 ```
 
@@ -311,7 +314,8 @@ lib.breadcrumbSchema {
                     30.value = ,"name":"
                     40 = TEXT
                     40.field = nav_title // title
-                    40.htmlSpecialChars = 1
+                    # Inside JSON-LD, avoid htmlSpecialChars (produces &quot; in <script> — invalid JSON). Sanitize in PHP/Fluid or ensure plain-text titles.
+                    40.htmlSpecialChars = 0
                     50 = TEXT
                     50.value = ","item":"
                     60 = TEXT
@@ -400,10 +404,7 @@ $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_allowUpscaling'] = false;
 // WebP is automatically generated in TYPO3 v14 when supported
 ```
 
-```typoscript
-# Responsive images
-tt_content.image.settings.responsive_image_rendering = 1
-```
+> **Responsive images:** configure image processing via your site package, `fluid_styled_content`, and FAL — there is no stable Core TypoScript path `tt_content.image.settings.responsive_image_rendering`; avoid copy-pasting fabricated keys.
 
 ## 8. SEO Checklist
 
@@ -442,22 +443,11 @@ tt_content.image.settings.responsive_image_rendering = 1
 | Extension | Purpose | TYPO3 v14 Support |
 |-----------|---------|-----------------|
 | `typo3/cms-seo` | Core SEO functionality | ✓ |
-| `yoast-seo-for-typo3/yoast_seo` | Content analysis, readability | ✓ |
-| `brotkrueml/schema` | Advanced structured data | ✓ |
+| `yoast-seo-for-typo3/yoast_seo` | Content analysis (historical) | **Not for v14** — Packagist releases target up to **TYPO3 10.x** only; do **not** list as v14-compatible |
+| `brotkrueml/schema` | Advanced structured data | ✓ (verify `require.typo3/cms-core` on Packagist) |
 | `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as TYPO3 v14 default; prefer `typo3/cms-seo` |
 
-### Yoast SEO Integration
-
-```bash
-ddev composer require yoast-seo-for-typo3/yoast_seo
-ddev typo3 extension:setup -e yoast_seo
-```
-
-Features:
-- Real-time content analysis
-- Readability scoring
-- Focus keyword optimization
-- Social preview
+> **Yoast SEO for TYPO3:** If you need readability scoring on v14, use Core/`cms-seo` features, `brotkrueml/schema`, or another extension that **explicitly** declares `typo3/cms-core: ^14` on Packagist — do not rely on `yoast_seo` without confirming constraints.
 
 ### Schema Extension
 

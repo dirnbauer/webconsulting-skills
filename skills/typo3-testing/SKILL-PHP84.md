@@ -30,7 +30,7 @@ triggers:
 ```json
 {
     "require-dev": {
-        "phpunit/phpunit": "^11.0 || ^12.0",
+        "phpunit/phpunit": "^11.2.5 || ^12.1.2 || ^13.0.2",
         "typo3/testing-framework": "^9.0"
     }
 }
@@ -42,7 +42,7 @@ triggers:
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         bootstrap="vendor/autoload.php"
+         bootstrap="vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
          cacheDirectory=".phpunit.cache"
          requireCoverageMetadata="false"
          colors="true">

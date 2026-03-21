@@ -128,12 +128,16 @@ class User
     }
 }
 
-// After (manual refactoring)
+// After (manual refactoring) — use a backing property so the setter does not recurse into itself
 class User
 {
+    private string $emailBacking = '';
+
     public string $email {
-        get => $this->email;
-        set (string $value) => $this->email = strtolower(trim($value));
+        get => $this->emailBacking;
+        set (string $value) {
+            $this->emailBacking = strtolower(trim($value));
+        }
     }
 }
 ```

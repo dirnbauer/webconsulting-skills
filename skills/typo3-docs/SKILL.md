@@ -282,9 +282,9 @@ max_line_length = 80
 ### Local Rendering
 
 ```bash
-# Render documentation (working directory = project root inside the container)
+# Render documentation (extension root = /project; official HOWTO uses --config=Documentation)
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest
+  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation
 
 # Output is in Documentation-GENERATED-temp/
 ```
@@ -296,23 +296,23 @@ phpDocumentor Guides exposes a **`serve`** command (dev server with file watchin
 ```bash
 docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
   ghcr.io/typo3-documentation/render-guides:latest \
-  serve Documentation --output=Documentation-GENERATED-temp
+  --config=Documentation serve --output=Documentation-GENERATED-temp
 
 # Open http://localhost:1337 in the browser
 ```
 
-> Older instructions sometimes used `--watch` on the container; current images forward to the Guides CLI — use `serve` and confirm options with `docker run … ghcr.io/typo3-documentation/render-guides:latest -h` for your tag.
+> **`serve` availability** depends on the image tag — run `docker run --rm ghcr.io/typo3-documentation/render-guides:latest -h` and use the subcommands your build exposes. Older tags used different flags (`--watch`, etc.).
 
 ### Validation
 
 ```bash
 # Fail the build on warnings/errors in the render log
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest --no-progress --fail-on-log
+  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --fail-on-log
 
-# Validate all guides.xml files under Documentation/ against the XSD
+# Validate guides.xml (CLI varies by image — confirm with `-h`; often no extra path when using --config)
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest lint-guides-xml Documentation
+  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation lint-guides-xml
 ```
 
 ## Screenshots
@@ -386,7 +386,9 @@ After installation, activate the extension:
 
 ..  code-block:: bash
 
-    vendor/bin/typo3 extension:setup -e my_extension
+    vendor/bin/typo3 extension:setup my_extension
+
+> Extension CLI flags change between Core versions — run `vendor/bin/typo3 extension:setup --help` and use the documented option for a single extension (often a positional name or `-e`, depending on your TYPO3).
 ```
 
 ## Deployment to docs.typo3.org
@@ -410,6 +412,8 @@ Documentation is automatically rendered when:
 - Manual trigger via Intercept
 
 ## Complete Index.rst Example
+
+> **Includes.rst.txt:** Older Sphinx-based manuals often started with `.. include:: /Includes.rst.txt`. Current **render-guides** `init` output may not ship that file — omit the line or add the file only if your project still uses the shared-include pattern.
 
 ```rst
 ..  include:: /Includes.rst.txt

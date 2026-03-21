@@ -770,7 +770,7 @@ SET @container_uid = LAST_INSERT_ID();
 -- CONDITION 1: Hide Firmenbuchnummer when NOT needed
 -- -----------------------------------------------
 -- Strategy: actions='0' (hide) when rechtsform IS one of the types that don't need it.
--- conjunction='AND' with ops=4 (is exact match) per rule.
+-- conjunction='OR' — any matching rule hides the field (AND would require impossible simultaneous values).
 -- Effect: field is hidden when rechtsform = Einzelunternehmen OR Verein OR GesBR OR placeholder.
 -- It remains VISIBLE for: e.U., OG, KG, GmbH, AG.
 
@@ -779,7 +779,7 @@ SET @container_uid = LAST_INSERT_ID();
 INSERT INTO tx_powermailcond_domain_model_condition
   (pid, conditioncontainer, title, target_field, actions, conjunction, rules, tstamp, crdate)
 VALUES
-  (1, @container_uid, 'Show Firmenbuchnummer',  CAST(@f_fb_nr AS CHAR),  '0', 'AND', 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @container_uid, 'Show Firmenbuchnummer',  CAST(@f_fb_nr AS CHAR),  '0', 'OR', 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 SET @cond_fb_nr = LAST_INSERT_ID();
 
 -- Create rules: each rule checks if rechtsform (start_field) matches a value
@@ -801,7 +801,7 @@ UPDATE tx_powermailcond_domain_model_condition SET rules = 4 WHERE uid = @cond_f
 INSERT INTO tx_powermailcond_domain_model_condition
   (pid, conditioncontainer, title, target_field, actions, conjunction, rules, tstamp, crdate)
 VALUES
-  (1, @container_uid, 'Show Firmenbuchgericht', CAST(@f_fb_ger AS CHAR), '0', 'AND', 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @container_uid, 'Show Firmenbuchgericht', CAST(@f_fb_ger AS CHAR), '0', 'OR', 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 SET @cond_fb_ger = LAST_INSERT_ID();
 INSERT INTO tx_powermailcond_domain_model_rule (pid, conditions, title, start_field, ops, cond_string, tstamp, crdate) VALUES
   (1, @cond_fb_ger, 'is Einzelunternehmen', @f_rechtsform, 4, 'Einzelunternehmen', UNIX_TIMESTAMP(), UNIX_TIMESTAMP()),
@@ -1003,7 +1003,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Doctrine\DBAL\ParameterType;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsCommand(
@@ -1398,10 +1400,20 @@ final class CreateShopFormCommand extends Command
                 ];
 
                 foreach ($dataHandler2->copyMappingArray_merged['tx_powermail_domain_model_page'] ?? [] as $origUid => $transUid) {
-                    // Determine which page by looking up sorting
-                    foreach ($pageLabels as $sorting => $label) {
+                    $qb = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_powermail_domain_model_page');
+                    $sorting = (int) $qb->select('sorting')
+                        ->from('tx_powermail_domain_model_page')
+                        ->where(
+                            $qb->expr()->eq(
+                                'uid',
+                                $qb->createNamedParameter((int) $origUid, ParameterType::INTEGER),
+                            ),
+                        )
+                        ->executeQuery()
+                        ->fetchOne();
+                    if (isset($pageLabels[$sorting])) {
                         $germanData['tx_powermail_domain_model_page'][$transUid] = [
-                            'title' => $label,
+                            'title' => $pageLabels[$sorting],
                         ];
                     }
                 }

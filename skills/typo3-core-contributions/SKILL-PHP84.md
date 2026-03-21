@@ -43,14 +43,16 @@ TYPO3 v14 requires **PHP 8.2+** (see Core `composer.json` / system requirements)
 
 ### Using Property Hooks
 
+Use **fictional** class names in draft patches — do not paste invented APIs onto real Core classes (e.g. `SiteConfiguration`) in examples.
+
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace TYPO3\CMS\Core\Configuration;
+namespace Vendor\Example;
 
-final class SiteConfiguration
+final class SiteIdentifier
 {
     public string $identifier {
         set (string $value) {
@@ -66,30 +68,16 @@ final class SiteConfiguration
 }
 ```
 
-### Using #[\Deprecated]
+### Using `#[\Deprecated]` and PHP 8.4 `array_find()`
+
+TYPO3 **Core does not ship** `GeneralUtility::arrayFind()`. Prefer native **`array_find()`** (PHP 8.4+) in new code, and use `#[\Deprecated]` on **real** Core methods you are deprecating per the current deprecation policy.
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace TYPO3\CMS\Core\Utility;
-
-final class GeneralUtility
-{
-    #[\Deprecated(
-        message: 'Use native array_find() instead',
-        since: 'TYPO3 14.0'
-    )]
-    public static function arrayFind(array $array, callable $callback): mixed
-    {
-        trigger_error(
-            'GeneralUtility::arrayFind() is deprecated. Use array_find().',
-            E_USER_DEPRECATED
-        );
-        return array_find($array, $callback);
-    }
-}
+$firstEven = array_find([1, 2, 3], static fn (int $n): bool => $n % 2 === 0);
 ```
 
 ---

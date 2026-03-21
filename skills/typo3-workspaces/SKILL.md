@@ -727,9 +727,9 @@ final class ItemService
 
 return [
     'my_module' => [
-        // v14: primary web modules often use parent `content`; compare with Core `Configuration/Backend/Modules.php`
-        'parent' => 'web',
-        'position' => ['after' => 'web_info'],
+        // v14: primary web modules use parent `content`; compare with Core `Configuration/Backend/Modules.php`
+        'parent' => 'content',
+        'position' => ['after' => 'records'],
         'access' => 'user',
         // Control workspace availability:
         // '*'       = available in all workspaces (default)

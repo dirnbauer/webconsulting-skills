@@ -34,34 +34,38 @@ Before contributing, ensure you have:
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 
-# Add Gerrit remote
-git remote add gerrit ssh://your-username@review.typo3.org:29418/Packages/TYPO3.CMS.git
+# See "Clone TYPO3 Core" below for Gerrit remote setup
 ```
 
 ## Environment Setup
 
 ### Clone TYPO3 Core
 
-```bash
-# Clone via Gerrit
-git clone ssh://your-username@review.typo3.org:29418/Packages/TYPO3.CMS.git
-cd TYPO3.CMS
+**Recommended:** clone the public Git repository, then add Gerrit as a **push** remote (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the current URLs and the `git remote set-url origin --push …` variant).
 
-# Or clone from GitHub (read-only mirror)
+```bash
 git clone https://github.com/TYPO3/typo3.git
 cd typo3
 
-# Add Gerrit remote for pushing
-git remote add gerrit ssh://your-username@review.typo3.org:29418/Packages/TYPO3.CMS.git
+# Push remote to Gerrit (many developers name this `gerrit`)
+git remote add gerrit ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git
 ```
 
-### Install Commit Hook
+After `composer install`, set **`COMPOSER_ROOT_VERSION`** as described in the guide (required for a proper Core checkout).
+
+### Install Commit Hook (Change-Id)
+
+Prefer Core’s documented methods — for example:
 
 ```bash
-# Install commit-msg hook for Change-Id
-scp -p -P 29418 your-username@review.typo3.org:hooks/commit-msg .git/hooks/
+# After composer install in the Core clone:
+composer gerrit:setup
+# or copy the hook from the repository:
+cp Build/git-hooks/commit-msg .git/hooks/commit-msg
 chmod +x .git/hooks/commit-msg
 ```
+
+Avoid relying on `scp` from Gerrit unless you are following an explicit, up-to-date snippet from the guide.
 
 ## Contribution Workflow
 
@@ -108,8 +112,10 @@ Releases: main
 
 ### 5. Push to Gerrit
 
+Many developers use a dedicated remote (often named `gerrit`). The [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) also documents configuring **`origin`** with a separate **push** URL to Gerrit (`git remote set-url origin --push …`), in which case you push with `git push origin HEAD:refs/for/main` instead of a `gerrit` remote. **Use the remote name and ref your checkout actually uses.**
+
 ```bash
-# Push for review
+# Push for review (example: dedicated remote named "gerrit")
 git push gerrit HEAD:refs/for/main
 ```
 
@@ -150,14 +156,15 @@ Resolves: #105737
 Releases: main
 ```
 
-**Breaking Change:**
+**Breaking Change (illustrative — match the real changelog entry):**
 ```
-[!!!][TASK] Remove deprecated DataHandler hooks
+[!!!][TASK] Remove deprecated XYZ API
 
-The legacy hooks have been deprecated since v12 and
-are now removed. Use PSR-14 events instead.
+Describe the actual breaking change and the supported
+replacement (Core event, new service API, etc.).
 
-See migration guide in the documentation.
+DataHandler datamap/cmdmap reactions often remain on
+`SC_OPTIONS` hook classes unless a documented Core event exists.
 
 Resolves: #98765
 Releases: main
@@ -194,21 +201,22 @@ git rebase origin/main
 git push gerrit HEAD:refs/for/main --force
 ```
 
-### Cherry-pick to Other Branches
+### Backporting to a Stable Branch
 
-After approval on main:
+After the patch is merged on `main`, backports follow **Forge + Gerrit** rules for the target branch (e.g. `13.4`, next patch-level branch). Typical flow:
 
 ```bash
-# Switch to target branch
-git checkout main
-git pull origin main
+git fetch origin
+git checkout <target-branch>   # e.g. stable branch named in the issue
+git pull origin <target-branch>
 
-# Cherry-pick with original Change-Id
-git cherry-pick -x <commit-hash>
+git cherry-pick -x <merge-commit-on-main>
 
-# Push for review
-git push gerrit HEAD:refs/for/main
+# Push for review on THAT branch (not main)
+git push <push-remote> HEAD:refs/for/<target-branch>
 ```
+
+Use the remote name your checkout uses (`gerrit` or an `origin` push URL). See the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the exact branch naming policy.
 
 ## Code Review
 
@@ -236,11 +244,7 @@ All patches must pass:
 ### Push Rejected
 
 ```bash
-# Missing Change-Id
-# Ensure commit hook is installed
-scp -p -P 29418 your-username@review.typo3.org:hooks/commit-msg .git/hooks/
-
-# Amend to add Change-Id
+# Missing Change-Id — reinstall the hook (see "Install Commit Hook" above), then:
 git commit --amend
 ```
 
@@ -302,8 +306,8 @@ Build/Scripts/runTests.sh -s cgl
 ### Key v14 API Changes for Patches **[v14 only]**
 
 When writing Core patches for v14, be aware of:
-- `$GLOBALS['TSFE']` fully removed — use request attributes.
-- `$GLOBALS['TCA']` is read-only at runtime — no runtime TCA modifications.
+- **`$GLOBALS['TSFE']`:** direct global access was removed (see changelog). Prefer request attributes / PSR-7; `TypoScriptFrontendController` may still exist internally while APIs migrate — verify current Core for your branch.
+- **`$GLOBALS['TCA']`:** loading base TCA from `$GLOBALS['TCA']` inside static TCA files was restricted; **`Configuration/TCA/Overrides/*.php` and runtime adjustments via documented APIs remain the normal place** for extension TCA changes. Do not confuse “no hacks in base TCA files” with “TCA is immutable everywhere.”
 - Fluid 5.0 with strict typing.
 - Backend modals use native `<dialog>` instead of Bootstrap Modal.
 - Symfony Translation Component replaces custom localization parsers.

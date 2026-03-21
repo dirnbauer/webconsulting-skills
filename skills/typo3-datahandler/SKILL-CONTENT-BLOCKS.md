@@ -278,6 +278,7 @@ final class AccordionService
 
             // Collection child table: parenttable_fieldname
             $inlineData['myvendor_accordion_items'][$newId] = [
+                'pid' => $pid,
                 'title' => $item['title'],
                 'content' => $item['content'],
             ];
@@ -482,13 +483,10 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Service;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class ContentBlocksRecordService
 {
-    public function __construct(
-        private readonly DataHandler $dataHandler,
-    ) {}
-
     /**
      * Generic method for creating any Content Blocks element
      *
@@ -499,6 +497,8 @@ final class ContentBlocksRecordService
         string $cType,
         array $fields
     ): int {
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+
         $data = [
             'tt_content' => [
                 'NEW_1' => array_merge(
@@ -508,10 +508,10 @@ final class ContentBlocksRecordService
             ],
         ];
 
-        $this->dataHandler->start($data, []);
-        $this->dataHandler->process_datamap();
+        $dataHandler->start($data, []);
+        $dataHandler->process_datamap();
 
-        return (int) ($this->dataHandler->substNEWwithIDs['NEW_1'] ?? 0);
+        return (int) ($dataHandler->substNEWwithIDs['NEW_1'] ?? 0);
     }
 }
 ```

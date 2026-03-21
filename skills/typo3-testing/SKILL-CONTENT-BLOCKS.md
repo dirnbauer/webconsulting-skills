@@ -44,26 +44,18 @@ triggers:
 
 ## 2. Testing Content Element Rendering
 
-### Test Fixture
+### Test fixture (CSV)
 
-```xml
-<!-- Tests/Functional/Fixtures/ContentBlocks/hero.xml -->
-<dataset>
-    <pages>
-        <uid>1</uid>
-        <pid>0</pid>
-        <title>Test Page</title>
-        <slug>/test</slug>
-    </pages>
-    <tt_content>
-        <uid>1</uid>
-        <pid>1</pid>
-        <CType>myvendor_hero</CType>
-        <header>Hero Headline</header>
-        <myvendor_hero_subheadline>Subheadline Text</myvendor_hero_subheadline>
-        <myvendor_hero_cta_link>t3://page?uid=1</myvendor_hero_cta_link>
-    </tt_content>
-</dataset>
+`importCSVDataSet()` expects CSV; keep table blocks in one file (adjust columns to match your DB strictness).
+
+```csv
+# Tests/Functional/Fixtures/ContentBlocks/hero.csv
+"pages"
+,"uid","pid","title","slug","doktype","deleted","hidden","is_siteroot"
+,1,0,"Test Page","/test",1,0,0,1
+"tt_content"
+,"uid","pid","CType","header","myvendor_hero_subheadline","myvendor_hero_cta_link"
+,1,1,"myvendor_hero","Hero Headline","Subheadline Text","t3://page?uid=1"
 ```
 
 ### Functional Test
@@ -76,16 +68,14 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Tests\Functional\ContentBlocks;
 
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class HeroContentBlockTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/my_extension',
-    ];
-
-    protected array $coreExtensionsToLoad = [
-        'content_blocks',
+        'friendsoftypo3/content-blocks',
     ];
 
     protected function setUp(): void
@@ -280,6 +270,7 @@ namespace Vendor\MyExtension\Tests\Functional\ContentBlocks;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class ContentBlockRenderingTest extends FunctionalTestCase

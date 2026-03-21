@@ -1,7 +1,7 @@
 ---
 name: typo3-security
 description: >-
-  Security hardening checklist and best practices for TYPO3 TYPO3 v14 installations,
+  Security hardening checklist and best practices for TYPO3 v14 installations,
   covering configuration, file permissions, and common vulnerabilities. Use when working
   with security, hardening, permissions, authentication, vulnerabilities.
 compatibility: TYPO3 14.x
@@ -177,7 +177,6 @@ Never expose these in `public/`:
 <IfModule mod_headers.c>
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "SAMEORIGIN"
-    Header always set X-XSS-Protection "1; mode=block"
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
@@ -204,7 +203,6 @@ location ~ ^/fileadmin/.*\.php$ {
 # Security headers
 add_header X-Content-Type-Options "nosniff" always;
 add_header X-Frame-Options "SAMEORIGIN" always;
-add_header X-XSS-Protection "1; mode=block" always;
 add_header Referrer-Policy "strict-origin-when-cross-origin" always;
 add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
 ```
@@ -269,12 +267,14 @@ Supported providers:
 - TOTP (Time-based One-Time Password)
 - Recovery Codes
 
+Configure MFA enforcement in **`config/system/settings.php`** via [`$GLOBALS['TYPO3_CONF_VARS']['BE']['requireMfa']`](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Configuration/Typo3ConfVars/BE.html#typo3confvars-be-requiremfa) (`0`–`3` per Core docs), or per user/group with **user TSconfig** [`auth.mfa.required`](https://docs.typo3.org/m/typo3/reference-typoscript/main/en-us/UserTsconfig/Auth.html):
+
 ```typoscript
-# User or backend group TSconfig — require MFA for those accounts (see TSconfig Reference → auth)
+# User or group TSconfig — require MFA for those accounts (overrides global when set)
 auth.mfa.required = 1
 ```
 
-System-wide option (when available for your core version): `$GLOBALS['TYPO3_CONF_VARS']['BE']['requireMfa']` — verify in [Multi-factor authentication](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Authentication/MultiFactorAuthentication/Index.html).
+See [Multi-factor authentication](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Authentication/MultiFactorAuthentication/Index.html).
 
 ### Backend Access Logging
 
@@ -496,8 +496,7 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 
 ## 12. Security Resources
 
-- **TYPO3 Security Team**: https://typo3.org/teams/security
-- **Security Bulletins**: https://typo3.org/security/advisory
+- **TYPO3 Security**: https://typo3.org/security (advisories, team contact, coordinated releases)
 - **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/Index.html
 - **v14 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 

@@ -194,7 +194,7 @@ final class RenderingService
 }
 ```
 
-### ExtBase controller response (TYPO3 v14)
+### Extbase controller response (TYPO3 v14)
 
 ```php
 <?php
@@ -263,8 +263,8 @@ final class ModifyPageLinkListener
 // Configuration/Backend/Modules.php
 return [
     'web_myextension_mymodule' => [
-        'parent' => 'web',
-        'position' => ['after' => 'web_info'],
+        'parent' => 'content',
+        'position' => ['after' => 'records'],
         'access' => 'user,group',
         'iconIdentifier' => 'myextension-module',
         'path' => '/module/web/myextension',
@@ -444,10 +444,12 @@ Search for TYPO3 v14-compatible alternatives on:
 ### Database Issues
 
 ```bash
-# Check schema differences
+# Schema diff / update command name and options depend on your CLI entry point.
+# TYPO3 Core exposes `database:updateschema` when available — confirm with:
+#   ddev typo3 list | rg database
 ddev typo3 database:updateschema --verbose
 
-# Safe schema update (add only)
+# Safe schema update (add only) — adjust wildcards per `typo3 database:updateschema --help`
 ddev typo3 database:updateschema "*.add,*.change"
 
 # Full update (includes destructive)
@@ -490,8 +492,8 @@ public function __construct(
 ## 10. Resources
 
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
-- **Upgrade Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Upgrading/Index.html
-- **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
+- **Upgrade Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Administration/Upgrade/Index.html
+- **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 
 ## v14-only Rector targets
 

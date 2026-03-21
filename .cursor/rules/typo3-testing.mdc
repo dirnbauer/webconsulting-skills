@@ -46,6 +46,8 @@ Tests/
 
 ### PHPUnit Configuration
 
+> **Do not** run **functional** tests with `UnitTestsBootstrap.php`. Either split configs (recommended: `UnitTests.xml` + `FunctionalTests.xml` as below) or use a single `phpunit.xml` **only** for suites that share the same bootstrap.
+
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -56,9 +58,6 @@ Tests/
     <testsuites>
         <testsuite name="Unit">
             <directory>Tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Functional">
-            <directory>Tests/Functional</directory>
         </testsuite>
         <testsuite name="Architecture">
             <directory>Tests/Architecture</directory>
@@ -324,7 +323,8 @@ final class ArchitectureTest
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Domain\Model'))
-            ->shouldNotDependOn()
+            ->shouldNot()
+            ->dependOn()
             ->classes(
                 Selector::inNamespace('Vendor\MyExtension\Controller'),
                 Selector::inNamespace('Vendor\MyExtension\Infrastructure'),
@@ -335,7 +335,8 @@ final class ArchitectureTest
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Service'))
-            ->shouldNotDependOn()
+            ->shouldNot()
+            ->dependOn()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 
@@ -344,7 +345,8 @@ final class ArchitectureTest
         return PHPat::rule()
             ->classes(Selector::classname('/.*Repository$/', true))
             ->excluding(Selector::classname('/.*Interface$/', true))
-            ->shouldImplement()
+            ->should()
+            ->implement()
             ->classes(Selector::classname('/.*RepositoryInterface$/', true));
     }
 
@@ -352,7 +354,8 @@ final class ArchitectureTest
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Domain\Repository'))
-            ->shouldNotDependOn()
+            ->shouldNot()
+            ->dependOn()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 }

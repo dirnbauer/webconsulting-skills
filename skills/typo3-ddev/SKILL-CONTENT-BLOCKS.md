@@ -30,7 +30,7 @@ triggers:
 # Start DDEV
 ddev start
 
-# Install Content Blocks
+# Install Content Blocks (Composer package; TYPO3 may integrate Content Blocks more deeply over time — confirm your Core + extension docs)
 ddev composer require friendsoftypo3/content-blocks
 
 # Activate extension
@@ -87,8 +87,8 @@ ddev typo3 cache:flush -g system
 # After adding new fields
 ddev typo3 extension:setup
 
-# Or via Install Tool
-ddev launch /typo3/install.php
+# Install Tool: in Composer-based sites use **Admin Tools → Maintenance** in the backend, or open the URL your project exposes (often `/typo3/install.php` when enabled — paths differ by setup). `ddev launch` without a path opens the site root.
+ddev launch
 ```
 
 ---

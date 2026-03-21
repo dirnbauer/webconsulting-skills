@@ -333,8 +333,8 @@ services:
 // Configuration/Backend/Modules.php
 return [
     'web_myextension' => [
-        'parent' => 'web',
-        'position' => ['after' => 'web_info'],
+        'parent' => 'content',
+        'position' => ['after' => 'records'],
         'access' => 'user,group',
         'iconIdentifier' => 'myextension-module',
         'path' => '/module/web/myextension',
@@ -774,7 +774,7 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 |------------|------------|
 | `web` | `content` |
 | `file` | `media` |
-| `tools` | `administration` |
+| `tools` | `admin` |
 
 ### Runtime TCA Modifications Forbidden **[v14 only]**
 

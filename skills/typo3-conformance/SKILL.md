@@ -30,7 +30,7 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 
 ## Enforcement Behavior (Required)
 
-When this skill states a quality gate (for example `PHPStan level 9+`, blocking CI,
+When this skill states a quality gate (for example `PHPStan level 10`, blocking CI,
 or no deprecations), treat it as an implementation requirement, not a suggestion.
 
 1. **Check actual config files first** (`phpstan.neon`, `composer.json`, CI workflow).
@@ -58,7 +58,7 @@ or no deprecations), treat it as an implementation requirement, not a suggestion
 |----------|------------|--------------|
 | Architecture | 20 | Directory structure, namespace, autoloading |
 | Coding Guidelines | 20 | PSR-12/PER, strict_types, documentation |
-| PHP Quality | 20 | Types, PHPStan level 9+, no deprecations |
+| PHP Quality | 20 | Types, PHPStan level 10 (transitional level 9 only with documented baseline), no deprecations |
 | Testing | 20 | Unit tests, functional tests, 70%+ coverage |
 | Best Practices | 20 | CI/CD, quality tools, documentation |
 
@@ -137,6 +137,7 @@ declare(strict_types=1);
 
 namespace Vendor\MyExtension\Service;
 
+use Doctrine\DBAL\ParameterType;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 
@@ -157,7 +158,12 @@ final readonly class ItemService
         return $queryBuilder
             ->select('*')
             ->from('tx_myext_items')
-            ->where($queryBuilder->expr()->eq('active', 1))
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'active',
+                    $queryBuilder->createNamedParameter(1, ParameterType::INTEGER),
+                ),
+            )
             ->executeQuery()
             ->fetchAllAssociative();
     }
@@ -168,14 +174,18 @@ final readonly class ItemService
 
 ### Required Patterns
 
+Compare keys (`parent`, `position`, `path`) with **your** TYPO3 version in `typo3/sysext/backend/Configuration/Backend/Modules.php`. On **v14**, primary web modules use `parent` => `content`; `web_info` was replaced by module id `content_status` (alias `web_info` may still exist).
+
+Extbase submodules may still use `extensionName` + `controllerActions` (see EXT:form). Pure non-Extbase modules prefer `routes` + `target` (Core style).
+
 ```php
 <?php
 // Configuration/Backend/Modules.php
 return [
     'web_myextension' => [
-        'parent' => 'web',
-        'position' => ['after' => 'web_info'],
-        'access' => 'user,group',
+        'parent' => 'content',
+        'position' => ['after' => 'records'],
+        'access' => 'user',
         'iconIdentifier' => 'myextension-module',
         'path' => '/module/web/myextension',
         'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
@@ -332,7 +342,8 @@ final class ArchitectureTest
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Domain\Model'))
-            ->shouldNotDependOn()
+            ->shouldNot()
+            ->dependOn()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 
@@ -340,7 +351,8 @@ final class ArchitectureTest
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Service'))
-            ->shouldNotDependOn()
+            ->shouldNot()
+            ->dependOn()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 }
@@ -371,7 +383,7 @@ jobs:
         run: composer install
         
       - name: PHPStan
-        run: vendor/bin/phpstan analyse --level=9
+        run: vendor/bin/phpstan analyse --level=10
         
       - name: PHP-CS-Fixer
         run: vendor/bin/php-cs-fixer fix --dry-run --diff
@@ -389,7 +401,7 @@ includes:
     - vendor/saschaegerer/phpstan-typo3/extension.neon
 
 parameters:
-    level: 9
+    level: 10
     paths:
         - Classes
         - Tests
@@ -425,7 +437,7 @@ parameters:
 - **Static TCA only** — runtime TCA modifications are forbidden.
 - **`composer.json` required** — even in classic (non-Composer) mode.
 - **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
-- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → `administration`.
+- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`admin`** (module id `admin`; do not use the non-existent string `administration`).
 - **No deprecated localization hooks** — use Symfony Translation Component.
 
 ### Updated Backend Module Standards **[v14 only]**

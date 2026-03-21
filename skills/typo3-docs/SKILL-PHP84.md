@@ -26,6 +26,8 @@ triggers:
 
 ### Index.rst
 
+> Omit `.. include:: /Includes.rst.txt` unless your documentation tree actually provides that file (legacy Sphinx pattern; `render-guides init` may not generate it).
+
 ```rst
 .. include:: /Includes.rst.txt
 

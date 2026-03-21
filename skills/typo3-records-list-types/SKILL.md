@@ -22,7 +22,7 @@ license: MIT / CC-BY-SA-4.0
 > Extension key: `records_list_types` / Composer package name: `webconsulting/records-list-types`
 > GitHub: https://github.com/dirnbauer/typo3-records-list-types
 >
-> **Composer:** The package name matches upstream `composer.json`. If it is not yet published on Packagist, add a VCS `repositories` entry pointing at GitHub or install with `composer require webconsulting/records-list-types:dev-main` (or a tagged version) per your workflow.
+> **Composer / Packagist:** Confirm on [Packagist](https://packagist.org/) whether `webconsulting/records-list-types` is published. If not, add a **`repositories` → `vcs`** entry in the **root** `composer.json` pointing at the GitHub repo, then `composer require vendor/package:dev-main` (or a tag). Plain `composer require webconsulting/records-list-types` **fails** until the package is registered or aliased.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
@@ -350,7 +350,7 @@ final class RegisterKanbanViewListener
     {
         $event->addViewMode('kanban', [
             'label' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang.xlf:viewMode.kanban',
-            'icon' => 'actions-view-table-columns',
+            'icon' => 'module-list',
             'description' => 'Kanban board view',
         ]);
     }

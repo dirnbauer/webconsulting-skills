@@ -340,7 +340,7 @@ name: myvendor/person-employee
 table: tx_mysitepackage_domain_model_person
 typeField: person_type
 typeName: employee
-priority: 999  # Default type (loaded first)
+# Ordering/priority of record types is defined by Content Blocks / TCA docs for your version — do not copy a fictional `priority: 999` key unless the official schema lists it.
 labelField: name
 languageAware: false
 workspaceAware: false

@@ -264,8 +264,8 @@ For decorative images (no informational value):
                 role="tab"
                 id="tab-{data.uid}-{iter.index}"
                 aria-controls="tabpanel-{data.uid}-{iter.index}"
-                aria-selected="{f:if(condition: '{iter.isFirst}', then: 'true', else: 'false')}"
-                tabindex="{f:if(condition: '{iter.isFirst}', then: '0', else: '-1')}"
+                aria-selected="{f:if(condition: iter.isFirst, then: 'true', else: 'false')}"
+                tabindex="{f:if(condition: iter.isFirst, then: '0', else: '-1')}"
             >
                 {item.header}
             </button>
@@ -340,7 +340,7 @@ final class AccessibilityLangMiddleware implements MiddlewareInterface
 }
 ```
 
-Register via `Configuration/RequestMiddlewares.php` (supported in v12–v14):
+Register via `Configuration/RequestMiddlewares.php` (TYPO3 v14; same registration file exists on supported older majors if you maintain multi-version code):
 
 ```php
 <?php
@@ -596,7 +596,6 @@ class AccessibleDialog {
     init() {
         this.dialog.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') this.close();
-            if (e.key === 'Tab') this.trapFocus(e);
         });
 
         this.dialog.addEventListener('click', (e) => {
@@ -606,33 +605,13 @@ class AccessibleDialog {
 
     open() {
         this.previousFocus = document.activeElement;
+        // showModal() provides built-in focus trapping in supporting browsers; skip custom Tab loops unless you must target legacy engines.
         this.dialog.showModal();
-
-        const firstFocusable = this.dialog.querySelector(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        firstFocusable?.focus();
     }
 
     close() {
         this.dialog.close();
         this.previousFocus?.focus();
-    }
-
-    trapFocus(e) {
-        const focusable = this.dialog.querySelectorAll(
-            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        );
-        const first = focusable[0];
-        const last = focusable[focusable.length - 1];
-
-        if (e.shiftKey && document.activeElement === first) {
-            e.preventDefault();
-            last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
-            e.preventDefault();
-            first.focus();
-        }
     }
 }
 ```
@@ -640,7 +619,7 @@ class AccessibleDialog {
 Use the native `<dialog>` element in Fluid:
 
 ```html
-<dialog id="my-dialog" aria-labelledby="dialog-title" aria-modal="true">
+<dialog id="my-dialog" aria-labelledby="dialog-title">
     <h2 id="dialog-title">{dialogTitle}</h2>
     <div>{dialogContent}</div>
     <button type="button" data-close-dialog>
@@ -721,7 +700,10 @@ Usage: `window.liveAnnouncer.announce('3 results found');`
     outline: none;
 }
 
-/* Touch targets */
+/*
+ * Touch targets: WCAG 2.2 AA requires at least 24×24 CSS px (see 2.5.8 Target Size (Minimum)).
+ * 44×44 px matches stricter mobile / AAA-style guidance — use knowingly, not as the AA floor.
+ */
 button, a, input, select, textarea, [role="button"] {
     min-height: 44px;
     min-width: 44px;
@@ -787,10 +769,10 @@ $GLOBALS['TCA']['tt_content']['columns']['header_layout']['config']['items'] = [
 $GLOBALS['TCA']['tt_content']['columns']['header_layout']['config']['default'] = '2';
 ```
 
-**v12 fallback:** Use numeric array keys `[0]` = label, `[1]` = value:
+**Legacy TCA `items` shape (pre–label/value arrays):** numeric keys `[0]` = label, `[1]` = value — **avoid on v14-only projects**; kept here only for reading older extensions:
 
 ```php
-// v12 style
+// Legacy style (do not use for new v14-only TCA)
 $GLOBALS['TCA']['tt_content']['columns']['header_layout']['config']['items'] = [
     ['H1', '1'],
     ['H2', '2'],
@@ -841,9 +823,7 @@ declare(strict_types=1);
 namespace Vendor\SitePackage\EventListener;
 
 use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\Security\ContentSecurityPolicy\Directive;
 use TYPO3\CMS\Core\Security\ContentSecurityPolicy\Event\PolicyMutatedEvent;
-use TYPO3\CMS\Core\Security\ContentSecurityPolicy\HashValue;
 
 #[AsEventListener(identifier: 'vendor/site-package/csp-accessibility')]
 final class CspAccessibilityListener

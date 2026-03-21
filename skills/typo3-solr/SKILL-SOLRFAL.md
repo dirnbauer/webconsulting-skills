@@ -44,7 +44,7 @@ When files are indexed, search results display differently from page results:
 | EXT:solr | 13.1 | Yes |
 | EXT:solrfal | 13.0 | Yes |
 | EXT:tika | 13.1 | Yes |
-| Apache Tika Server | 3.2.2+ | Yes (CVE-2025-54988 fix) |
+| Apache Tika Server | 3.2.3+ (align with main Solr skill / vendor advisories) | Yes |
 | EB Partner access | -- | Yes (funding extension) |
 
 ## 3. Installation
@@ -63,7 +63,7 @@ The recommended approach is running Tika Server as a Docker container:
 ```yaml
 services:
   tika:
-    image: apache/tika:3.2.2
+    image: apache/tika:3.2.3
     ports:
       - "9998:9998"
     restart: unless-stopped
@@ -75,7 +75,7 @@ For DDEV, create `.ddev/docker-compose.tika.yaml`:
 services:
   tika:
     container_name: ddev-${DDEV_SITENAME}-tika
-    image: apache/tika:3.2.2
+    image: apache/tika:3.2.3
     restart: "no"
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}

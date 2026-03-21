@@ -27,7 +27,7 @@ license: MIT / CC-BY-SA-4.0
 | **Primary shapes** | White `#FFFFFF` on colored bg | `currentColor` (adapts to theme) |
 | **Accent color** | Hardcoded brand color (e.g. `#5BA34F`) | `var(--icon-color-accent, #ff8700)` |
 | **Secondary elements** | `opacity="0.25"` / `0.75` with hardcoded fill | `opacity=".4"` with `currentColor` |
-| **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | `0 0 64 64` always |
+| **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | **Module icons:** `0 0 64 64` — match Core SVGs for plugin/record/extension icons (Core often uses `0 0 64 64`; do not assume `16×16` viewBox for those) |
 | **SVG wrapper** | `version="1.1"`, `xmlns:xlink`, `enable-background`, generator comments | Minimal: `xmlns` + `viewBox` only |
 | **Detail colors** | `#333333` for text lines, brand color for accents | `currentColor` + accent variable |
 
@@ -212,7 +212,7 @@ Every v14-style module icon follows this structure:
 
 4. **`opacity=".4"` for depth** — Secondary or decorative elements (shadows, background layers, filled areas behind outlines) use 40% opacity with `currentColor`. This works in both light and dark modes because the base color adapts via `currentColor`.
 
-5. **64×64 viewBox** — All module icons use `viewBox="0 0 64 64"`. No exceptions.
+5. **64×64 viewBox** — Backend **module** icons use `viewBox="0 0 64 64"`. For other icon types, copy the viewBox from the Core icon you are visually matching.
 
 6. **Clean SVG markup** — No `version`, no `xmlns:xlink`, no `enable-background`, no `xml:space`, no generator comments, no `id` attributes unless needed for sprites.
 
@@ -223,8 +223,7 @@ Every v14-style module icon follows this structure:
 ### Dark/Light Mode Support
 
 TYPO3 v14 supports both dark and light color schemes. Icons MUST render correctly in both
-modes. The backend uses `data-color-scheme` and `data-bs-theme` on the document (Bootstrap
-integration); do not assume a generic `data-theme` alone drives icon colors. Color mode is
+modes. The backend documents theme via attributes such as **`data-color-scheme`** and **`data-theme`** on the HTML element. A **`data-bs-theme`** attribute may still appear from bundled Bootstrap styles, but **follow TYPO3 Core / `PageRenderer` output**, not generic Bootstrap examples alone. Color mode is
 not controlled via `prefers-color-scheme` media queries in the backend UI.
 
 #### How `currentColor` Adapts
@@ -303,7 +302,7 @@ do not need to handle these. Just use `currentColor` and let TYPO3 manage overri
 #### Why NOT to Use `prefers-color-scheme`
 
 The TYPO3 backend does NOT use `prefers-color-scheme` for its color mode. It uses
-`data-color-scheme` and `data-bs-theme` attributes set on the HTML element. Using
+`data-color-scheme` / `data-theme` (and related TYPO3 theme attributes) on the HTML element. Using
 `prefers-color-scheme` in icon SVGs would cause them to be out of sync with the backend
 theme when a user manually overrides the system preference.
 
@@ -487,7 +486,7 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 | `IconSize::LARGE` | 48px | Module menu sub-icons |
 | `IconSize::MEDIUM` | 32px | Default, toolbar |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
-| `IconSize::DEFAULT` | 1em | Scales with font size |
+| `IconSize::DEFAULT` | **16×16 px** (same pixel dimensions as `SMALL` in Core) | Do not assume “1em” scaling — use `MEDIUM`/`LARGE` when you need visibly larger icons |
 
 ## Step 5: Migration Checklist
 

@@ -75,6 +75,11 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 
+**Not 1:1 replacements (verify before batch-rewriting):**
+
+- **`drawHeaderHook` / `drawFooterHook`** — Legacy backend doc-header integration points. `ModifyButtonBarEvent` covers the **button bar** only; full header/footer chrome may need a different Core event or a documented alternative for your module type.
+- **`tslib_fe->contentPostProc`** — TypoScript hook variants (`all`, `cached`, `output`, etc.) run at different FE pipeline stages. `AfterCacheableContentIsGeneratedEvent` matches **cacheable** HTML generation, not every `contentPostProc` use case.
+
 ### 2. TCA modernization (TYPO3 v14)
 
 **Research**: Scan all `Configuration/TCA/` and `Configuration/TCA/Overrides/` files.

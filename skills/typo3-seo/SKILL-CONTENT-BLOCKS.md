@@ -95,10 +95,10 @@ fields:
         <f:for each="{data.items}" as="item" iteration="iter">
         {
             "@type": "Question",
-            "name": "{item.question -> f:format.htmlspecialchars()}",
+            "name": "{item.question}",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "{item.answer -> f:format.stripTags() -> f:format.htmlspecialchars()}"
+                "text": "{item.answer -> f:format.stripTags()}"
             }
         }<f:if condition="!{iter.isLast}">,</f:if>
         </f:for>
@@ -106,6 +106,8 @@ fields:
 }
 </script>
 ```
+
+> **JSON-LD safety:** Do not use `f:format.htmlspecialchars()` inside `<script type="application/ld+json">` — entities like `&quot;` break JSON. Keep FAQ text plain, or emit JSON from PHP / a dedicated ViewHelper with proper `json_encode`.
 
 ---
 

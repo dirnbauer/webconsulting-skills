@@ -53,7 +53,7 @@ This meta-package installs all TYPO3-specific file processors:
 - `a9f/fractor-typoscript` (TypoScript/TSconfig processing)
 - `a9f/fractor-yaml` (YAML processing)
 - `a9f/fractor-htaccess` (Htaccess processing)
-- `a9f/fractor-composer-json` (composer.json processing)
+- `a9f/fractor-composer-json` (composer.json processing — **not** always installed as a transitive dependency of `a9f/typo3-fractor`; add `composer require --dev a9f/fractor-composer-json` if you need it)
 
 ## 2. Configuration
 
@@ -81,7 +81,7 @@ return FractorConfiguration::configure()
         __DIR__ . '/packages/',
     ])
     ->withSets([
-        Typo3LevelSetList::UP_TO_TYPO3_13,
+        Typo3LevelSetList::UP_TO_TYPO3_14,
     ]);
 ```
 
@@ -281,7 +281,7 @@ Apply rules for a single version only:
 <?php
 use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\FractorTypoScript\Configuration\TypoScriptProcessorOption;
-use Helmich\TypoScriptParser\Printer\PrettyPrinterConfiguration;
+use Helmich\TypoScriptParser\Parser\Printer\PrettyPrinterConfiguration;
 use Helmich\TypoScriptParser\Parser\Printer\PrettyPrinterConditionTermination;
 
 return FractorConfiguration::configure()
@@ -425,7 +425,7 @@ declare(strict_types=1);
 use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\Typo3Fractor\Set\Typo3LevelSetList;
 use a9f\FractorTypoScript\Configuration\TypoScriptProcessorOption;
-use Helmich\TypoScriptParser\Printer\PrettyPrinterConfiguration;
+use Helmich\TypoScriptParser\Parser\Printer\PrettyPrinterConfiguration;
 
 return FractorConfiguration::configure()
     ->withPaths([

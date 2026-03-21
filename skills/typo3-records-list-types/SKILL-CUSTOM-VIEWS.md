@@ -440,7 +440,7 @@ final class RegisterCustomViewListener
     {
         $event->addViewMode('kanban', [
             'label' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang.xlf:viewMode.kanban',
-            'icon' => 'actions-view-table-columns',
+            'icon' => 'module-list',
             'description' => 'Kanban board view',
             'template' => 'KanbanView',
             'css' => 'EXT:my_extension/Resources/Public/Css/kanban.css',

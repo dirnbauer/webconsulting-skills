@@ -260,7 +260,7 @@ page.includeJSFooter.powermailCond.defer = 1
 
 ## 10. Known Limitations
 
-- **Multi-step forms**: Cannot use powermail multi-step forms with powermail_cond
+- **Multi-step + conditions**: `powermail_cond` ships JavaScript that listens on multi-step (`powermail_morestep`) forms. If you combine both, use **matching majors** of Powermail and powermail_cond and test the full wizard (see [SKILL-EXAMPLES.md](./SKILL-EXAMPLES.md)). Report edge cases to the extension vendors rather than assuming an old “never combine” blanket rule.
 - **One container per form**: Each form can have exactly one condition container
 - **XCLASS approach**: Only one extension can XCLASS `InputValidator` -- conflicts possible with other extensions modifying the same class
 - **jQuery not required**: Since powermail_cond 10.0.0, vanilla JS is used (no jQuery dependency)

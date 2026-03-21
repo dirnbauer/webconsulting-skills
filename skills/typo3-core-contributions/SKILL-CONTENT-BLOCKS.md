@@ -73,14 +73,16 @@ composer test
 
 ## 4. Pull Request Guidelines
 
-### Commit Message Format
+### Commit messages and PR linking (GitHub)
+
+Content Blocks uses **GitHub**, not Forge/Gerrit footers. Prefer [Conventional Commits](https://www.conventionalcommits.org/) or a short imperative subject, and link issues in the PR description with **`Fixes #123`** / **`Closes #123`** (GitHub will auto-close). Do **not** copy-paste Core-style `Resolves: #nnnn` footers unless your project explicitly requires them.
 
 ```
-[FEATURE] Add support for new field type
+feat: add support for custom field type
 
 Add FieldType::Custom for user-defined field implementations.
 
-Resolves: #123
+Fixes #123
 ```
 
 ### PR Checklist

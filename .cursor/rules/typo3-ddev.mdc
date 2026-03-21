@@ -210,7 +210,8 @@ ddev composer require vendor/extension-name
 # Setup extensions (generate PackageStates.php)
 ddev typo3 extension:setup
 
-# Run setup / migrations for one extension (Core ships `extension:setup`, not `extension:activate`)
+# Run setup / migrations for one extension (`extension:setup` is the usual Composer-mode workflow;
+# `extension:activate` exists in Core but is often disabled in Composer installations — see Core docs)
 ddev typo3 extension:setup -e my_extension
 
 # Remove a Composer-managed extension: `ddev composer remove vendor/package` then clear caches
@@ -228,7 +229,7 @@ ddev composer update
 # Update single package
 ddev composer update typo3/cms-core --with-dependencies
 
-# Require new package (with TYPO3 v14 dual compatibility)
+# Require new package (match constraints to TYPO3 v14 + your PHP version)
 ddev composer require "vendor/package:^1.0"
 
 # Remove package
@@ -357,6 +358,7 @@ ddev get ddev/ddev-solr
 
 ```yaml
 # .ddev/docker-compose.redis.yaml
+# Attach the service to the DDEV project network so the `web` container can reach hostname `redis`.
 services:
   redis:
     image: redis:7-alpine
@@ -367,9 +369,15 @@ services:
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
+    networks: [default]
 
 volumes:
   redis-data:
+
+networks:
+  default:
+    name: ddev-${DDEV_SITENAME}_default
+    external: true
 ```
 
 ### Redis Caching Configuration (TYPO3 v14)
@@ -413,11 +421,9 @@ ddev logs -s db
 ```bash
 # Check what's using a port
 lsof -i :80
-
-# Use different ports in config.yaml
-router_http_port: "8080"
-router_https_port: "8443"
 ```
+
+`router_http_port` and `router_https_port` are **global** DDEV settings. Configure them in **`~/.ddev/global_config.yaml`** (or `ddev config global`), not in the project’s `.ddev/config.yaml`.
 
 ### Permission Issues
 

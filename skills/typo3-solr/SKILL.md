@@ -159,11 +159,11 @@ typo3lib: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/typo3lib'
 configsets:
   - name: 'ext_solr_13_1_0'
     path: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets/ext_solr_13_1_0'
-cores:
-  - name: 'core_en'
-    schema: 'english/schema.xml'
-  - name: 'core_de'
-    schema: 'german/schema.xml'
+    cores:
+      - name: 'core_en'
+        schema: 'english/schema.xml'
+      - name: 'core_de'
+        schema: 'german/schema.xml'
 ```
 
 Auto-initialize cores on boot in `.ddev/config.yaml`:
@@ -213,18 +213,11 @@ Deploy the configset from EXT:solr into your Solr installation:
 cp -r vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/* $SOLR_INSTALL_DIR/server/solr/
 ```
 
-Create cores via `core.properties` files or REST API:
+Create cores via `core.properties` files, `solrctl`, or the Solr Admin API. **Payload shape differs by Solr major** (v8 vs v9 “v2” APIs) — treat any one-liner `curl` as illustrative and follow the Solr version you run.
 
 ```bash
-curl -X POST http://localhost:8983/api/cores -H 'Content-Type: application/json' -d '{
-  "create": {
-    "name": "core_en",
-    "configSet": "ext_solr_13_1_0",
-    "schema": "english/schema.xml",
-    "instanceDir": "cores/core_en",
-    "dataDir": "/var/solr/data/core_en"
-  }
-}'
+# Illustrative only — confirm against your Solr admin API docs / use bin/solr or ddev solrctl for local setups
+curl -sS -X POST "http://localhost:8983/solr/admin/cores?action=CREATE&name=core_en&configSet=ext_solr_13_1_0"
 ```
 
 ### Managed Hosting: Mittwald
@@ -682,6 +675,8 @@ Copy default templates from EXT:solr to your extension path and modify them.
 | `DelayedProcessingFinishedEvent` | Delayed processing complete (scheduler) |
 
 ### Indexing Events
+
+Event class names and namespaces vary slightly by **EXT:solr** version — always confirm in `vendor/apache-solr-for-typo3/solr/Classes/Event/`. The [official EXT:solr development docs](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Development/Indexing.html) list page vs record document events.
 
 | Event | Fired when |
 |-------|-----------|
@@ -1763,22 +1758,31 @@ declare(strict_types=1);
 
 namespace MyVendor\MyExt\Tests\Functional;
 
-use ApacheSolrForTypo3\Solr\Tests\Integration\IntegrationTestCase;
+use ApacheSolrForTypo3\Solr\Tests\Integration\IntegrationTestBase;
 
-final class CustomIndexingTest extends IntegrationTestCase
+/**
+ * EXT:solr ships IntegrationTestBase (see vendor path Tests/Integration/). Method names
+ * differ by version — copy patterns from EXT:solr's own Tests/Integration tree.
+ */
+final class CustomIndexingTest extends IntegrationTestBase
 {
     protected array $testExtensionsToLoad = [
         'apache-solr-for-typo3/solr',
         'my-vendor/my-ext',
     ];
 
-    public function testNewsRecordIsIndexed(): void
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->writeDefaultSolrTestSiteConfiguration();
+    }
+
+    public function testFollowExtSolrIntegrationPatterns(): void
     {
         $this->importCSVDataSet(__DIR__ . '/Fixtures/news_records.csv');
-        $this->indexQueue('news');
-
-        $searchResult = $this->searchInSolr('test news title');
-        self::assertGreaterThan(0, $searchResult->getResultCount());
+        // Queue + indexing: mirror EXT:solr Tests/Integration (e.g. IndexServiceTest). Helpers such as
+        // assertSolrContainsDocumentCount() exist on IntegrationTestBase once documents are indexed.
+        $this->assertSolrIsEmpty();
     }
 }
 ```
