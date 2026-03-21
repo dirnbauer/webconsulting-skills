@@ -16,6 +16,7 @@ license: MIT / CC-BY-SA-4.0
 # TYPO3 Content Blocks Development
 
 > **Compatibility:** This skill targets **TYPO3 v14.x** with **Content Blocks 2.x**. Always match the [Packagist `friendsoftypo3/content-blocks`](https://packagist.org/packages/friendsoftypo3/content-blocks) constraint to your Core version.
+> For **Content Blocks 1.x on TYPO3 v13**, upstream typically requires **TYPO3 ≥ 13.1** (not plain 13.0) — confirm on Packagist.
 > Examples use TYPO3 v14 APIs and CB 2.x; adjust `composer.json` if upstream constraints differ.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
@@ -673,7 +674,7 @@ In Fluid templates, access custom metadata through FAL references:
 | `Textarea` | Multi-line text | `type: Textarea` |
 | `Email` | Email address | `type: Email` |
 | `Link` | Link/URL | `type: Link` |
-| `Number` | Integer/Float | `type: Number` |
+| `Number` | Integer/Float | `type: Number` (+ `format: integer` or `format: decimal` as needed; legacy YAML sometimes used a non-existent `Integer` type — use `Number`) |
 | `DateTime` | Date and/or time | `type: DateTime` |
 | `Color` | Color picker | `type: Color` |
 | `Checkbox` | Boolean checkbox | `type: Checkbox` |

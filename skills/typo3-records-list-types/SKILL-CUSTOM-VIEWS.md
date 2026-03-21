@@ -96,7 +96,7 @@ Restrict a view type to specific pages using TSconfig conditions:
 
 ```tsconfig
 # Timeline only on the Events page (uid=42)
-[page["uid"] == 42]
+[traverse(page, "uid") == 42]
     mod.web_list.viewMode {
         allowed = list,timeline
         default = timeline
@@ -114,13 +114,13 @@ Restrict a view type to specific pages using TSconfig conditions:
 [END]
 
 # Grid-only for media folders (doktype 254 = sysfolder)
-[page["doktype"] == 254]
+[traverse(page, "doktype") == 254]
     mod.web_list.viewMode.default = grid
     mod.web_list.viewMode.allowed = list,grid
 [END]
 
 # Custom view for an entire page tree (pid=100 and its children)
-[page["uid"] == 100 || page["pid"] == 100]
+[traverse(page, "uid") == 100 || traverse(page, "pid") == 100]
     mod.web_list.viewMode {
         allowed = list,grid,catalog
         default = catalog
@@ -171,7 +171,7 @@ mod.web_list.viewMode.types.addressbook {
 ### Event Calendar (reuses TeaserView)
 
 ```tsconfig
-[page["uid"] == 55]
+[traverse(page, "uid") == 55]
     mod.web_list.viewMode {
         allowed = list,eventlist
         default = eventlist
@@ -244,8 +244,8 @@ mod.web_list.viewMode.types.fulllist {
 **`columnsFromTCA = 1`** (default) -- resolution order:
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
-2. **TSconfig `showFields`** (`mod.web_list.table.<table>.showFields`)
-3. **TCA search metadata** — on TYPO3 v14 Core, `ctrl.searchFields` was removed; use per-column `'searchable' => true`. This extension’s fallback may still consider legacy `ctrl.searchFields` on older TCA.
+2. **This extension’s TSconfig / resolver logic** — not Core `mod.web_list.table.*.showFields`.
+3. **TCA label + heuristics** — v14 has no `ctrl.searchFields`; list display does not use backend “search fields”.
 4. **Label field only** (final fallback)
 
 **`columnsFromTCA = 0`** -- uses the explicit `displayColumns` list exactly.
@@ -353,7 +353,7 @@ Use TYPO3 CSS variables for dark mode:
 ```css
 .kanban-column {
     background: var(--typo3-component-bg, #fff);
-    border: 1px solid var(--typo3-component-border-color, #d4d4d8);
+    border: 1px solid var(--typo3-border-mix, #d4d4d8);
     color: var(--typo3-text-color-base, #18181b);
 }
 ```

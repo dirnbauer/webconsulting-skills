@@ -44,7 +44,7 @@ This skill is based on the following authoritative sources:
 
 ## 1. Architecture Overview
 
-EXT:solr connects TYPO3 CMS to an Apache Solr search server, providing full-text search, faceted navigation, autocomplete, and (since Solr 9.8) vector/semantic search.
+EXT:solr connects TYPO3 CMS to an Apache Solr search server, providing full-text search, faceted navigation, autocomplete, and (on supported **Solr 9.x** builds) dense-vector / semantic features where enabled.
 
 ```mermaid
 graph LR
@@ -327,7 +327,7 @@ graph TD
 - Only indexing pages and structured records (news, events, products) via Index Queue
 - EXT:solr handles page content and record fields natively without Tika
 
-**Version:** EXT:tika 13.1 requires Apache Tika Server/App **3.2.3+**. The 13.1 line addresses **CVE-2025-54988** and **CVE-2025-66516**.
+**Version:** EXT:tika 13.1 requires Apache Tika Server/App **3.2.3+**. Track **Apache Tika** and **Apache Solr** security advisories for your deployed versions — do not rely on unverified CVE numbers in skills; verify on [Apache Solr security](https://solr.apache.org/security.html) / vendor advisories.
 
 See [SKILL-SOLRFAL.md](SKILL-SOLRFAL.md) for complete file indexing setup.
 
@@ -368,16 +368,11 @@ Use dynamic field suffixes to add custom fields without modifying the schema:
 
 Full reference: [Dynamic Fields Appendix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/DynamicFieldTypes.html)
 
-### Site Hash Strategy
+### Site hash / multi-site indexing
 
-In some EXT:solr branches the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new **TYPO3 v14** projects is **site-identifier-based** (`siteHashStrategy = 1`).
+**EXT:solr** builds a per-request **site hash** so separate TYPO3 sites do not leak each other’s Solr documents. The exact **setting names and storage** (global extension config vs site / **site-language** config) **changed across majors** — do **not** hard-code a fake `siteHashStrategy` key here. Use the [official EXT:solr documentation](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/) and your installed version’s `Configuration/SiteConfiguration` + Extension Settings UI.
 
-Configure this in **Admin Tools -> Settings -> Extension Configuration -> solr**. This is an **extension configuration** setting, not TypoScript.
-
-- `siteHashStrategy = 1` -> site identifier (recommended)
-- `siteHashStrategy = 0` -> domain (deprecated, but still the default in `release-13.1.x`)
-
-If you switch strategies on an existing installation, re-index all documents.
+If searches return no hits after a migration, compare **domain**, **site identifier**, and **language-specific Solr connection** fields against the Solr core naming your indexer uses, then **re-index**.
 
 ## 6. Index Queue Configuration
 
@@ -841,7 +836,7 @@ final class IndexExternalCommand extends Command
 
 ## 11. LLM & Vector Search (Solr Server Native)
 
-Apache Solr 9.8+ ships the **`language-models` Solr module** (text-to-vector / embedding integrations) for semantic/vector search. This runs on the **Solr server side** — EXT:solr only issues queries to Solr.
+**KNN / dense vectors** exist from **Solr 9.0+**; **text-to-vector** / LLM integrations use the **`language-models`** (or successor) module on **newer 9.x** releases — confirm module names for your Solr version. This runs on the **Solr server** — EXT:solr only issues queries.
 
 ```mermaid
 graph LR
@@ -867,7 +862,7 @@ graph LR
 
 ### Prerequisites
 
-- Apache Solr **9.8+** with the **`language-models` Solr module** enabled (see [Solr modules](https://solr.apache.org/guide/solr/latest/configuration-guide/solr-modules.html) and [Text to Vector](https://solr.apache.org/guide/solr/latest/query-guide/text-to-vector.html))
+- Apache Solr **9.x** (matrix per EXT:solr version guide) with the appropriate **vector / language-model** modules enabled (see [Solr modules](https://solr.apache.org/guide/solr/latest/configuration-guide/solr-modules.html))
 - An external embedding API / model registered in Solr's text-to-vector model store (LangChain4j-backed in current Solr docs)
 
 ### Schema: DenseVectorField
@@ -1167,7 +1162,7 @@ Check in Solr Admin:
 q=*:*&rows=0&facet=true&facet.field=siteHash
 ```
 
-Compare with what EXT:solr expects: open Extension Settings (Admin Tools → Settings → Extension Configuration → solr) and check `siteHashStrategy`. On `release-13.1.x`, the default extension configuration is still **domain** (`0`, deprecated); **site identifier** (`1`) is the recommended setting for new installations.
+Compare Solr cores and TYPO3 site / **language** endpoints against the EXT:solr version you run — use Extension Settings + Site Configuration as documented for that major (names moved between releases).
 
 If the hashes don't match: **re-index** (Backend → Web → Search → Index Queue → clear and re-queue all).
 
@@ -1731,7 +1726,7 @@ UPDATE tx_solr_indexqueue_item SET errors = '' WHERE errors != '';
 | Symptom | Likely Cause | Fix |
 |---------|-------------|-----|
 | "Search is currently not available" | Solr connection misconfigured | Check site config, initialize connection |
-| No results for any query | Site hash mismatch | Check `siteHashStrategy`, re-index |
+| No results for any query | Site hash mismatch | Verify site / language Solr config vs indexed `site` field, then re-index |
 | Empty Index Queue | TypoScript not loaded on root page | Include EXT:solr static templates |
 | Queue items never indexed | Scheduler task not running | Create "Index Queue Worker" task |
 | Items in queue with errors | Indexing failure (memory, URL) | Check `errors` column in DB |
@@ -1743,7 +1738,7 @@ UPDATE tx_solr_indexqueue_item SET errors = '' WHERE errors != '';
 | Docker: permission denied on `/var/solr` | Volume ownership wrong | Ensure UID 8983 owns the volume |
 | DDEV: port 8984 not reachable | Addon not installed or Solr down | `ddev add-on get ddev/ddev-typo3-solr && ddev restart` |
 | Configset version mismatch | Wrong configset deployed | Redeploy matching `ext_solr_13_1_0` |
-| Jar loading error (Solr 9.8+) | CVE-2025-24814 migration needed | Move `typo3lib/` to server root, or pull Docker 13.0.1+ |
+| Jar loading error (Solr 9.8+ config) | Solr hardened `<lib>` / configset loading (**CVE-2025-24814** class of issue) | Follow EXT:solr / Solr release notes: relocate `typo3lib/`, update Docker image (**13.0.1+** image tag), align configset with supported layout |
 | Tika: connection timeout | Tika Server not running or wrong port | Check Docker container, test connection in extension settings |
 | Language core missing | No core for language | Create core with matching language schema |
 
@@ -1829,15 +1824,15 @@ final class EnrichSolrDocumentsTest extends TestCase
 - [ ] Scheduler task "Index Queue Worker" running regularly
 - [ ] Logging disabled in production
 - [ ] Solr data volume backed up
-- [ ] CVE patches applied (Solr 9.8.0+ jar migration)
-- [ ] Extension Configuration reviewed intentionally: `siteHashStrategy = 1` recommended for new installs, legacy `0` only if retained knowingly
+- [ ] Solr / EXT:solr security + configset notes applied for your Solr minor (jar / `typo3lib` layout)
+- [ ] Extension + **per-language** Solr connection reviewed against official EXT:solr docs for your major
 
 ### Security
 
 - Solr must **never** be publicly accessible. Use firewall rules or bind to `127.0.0.1`
 - Use a reverse proxy (nginx/Apache) with authentication if remote access is needed
 - Monitor [Apache Solr security advisories](https://solr.apache.org/security.html)
-- Keep Tika Server updated (EXT:tika 13.1 requires Apache Tika 3.2.3+ and addresses CVE-2025-54988 / CVE-2025-66516)
+- Keep Tika Server updated (EXT:tika 13.1 requires Apache Tika **3.2.3+** — verify current advisories on Apache Tika / Solr sites)
 
 ### Performance
 

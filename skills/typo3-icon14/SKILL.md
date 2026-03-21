@@ -206,7 +206,7 @@ Every v14-style module icon follows this structure:
 
 1. **No background** — The SVG has a transparent background. No rectangles or paths covering the full viewBox.
 
-2. **`currentColor` for primary shapes** — All main outlines, strokes, and primary filled shapes use `currentColor`. This adapts automatically to the backend theme and color scheme (white text on dark sidebar, dark text on light content areas).
+2. **`currentColor` for primary shapes** — Use `fill="currentColor"` **and** `stroke="currentColor"` where applicable; strip hardcoded `#…` fills/strokes and inline `style="fill:…"` on children so the icon tracks the theme.
 
 3. **`var(--icon-color-accent, #ff8700)` for accent** — One or two key elements use the TYPO3 accent color CSS variable. The fallback `#ff8700` ensures visibility when the variable is not set. TYPO3 overrides this variable per theme and context (see Dark/Light Mode section below).
 

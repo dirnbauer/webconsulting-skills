@@ -172,10 +172,12 @@ $cmd = [
 
 TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
-1. Create a **fresh** `DataHandler` instance
-2. Call `start($data, $cmd[, $backendUser])`
+1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** or **constructor DI** — avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
+2. Call `start($data, $cmd[, $backendUser])` **before** any `process_*` call.
 3. Call `process_datamap()` and / or `process_cmdmap()`
-4. Inspect `$dataHandler->errorLog`
+4. Inspect **`$dataHandler->errorLog`**, verify expected keys in **`$dataHandler->substNEWwithIDs`** for new records, and (in workspaces) review **`$dataHandler->autoVersionIdMap`** when you expect version rows.
+
+**Cache:** Prefer `CacheManager` / cache groups or PSR-14 cache events instead of legacy DataHandler cache helpers.
 
 The official docs do **not** define a general transaction contract for DataHandler. In normal extension code, use the plain API first and only add your own transaction handling after carefully validating the database connections and side effects involved in your specific use case.
 

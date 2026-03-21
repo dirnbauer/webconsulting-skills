@@ -135,7 +135,7 @@ git push gerrit HEAD:refs/for/main
 
 | Flag | Meaning |
 |------|---------|
-| `[SECURITY]` | Coordinated security fix — use with a normal type, usually `[BUGFIX][SECURITY]`, per Security Team process (not a standalone “type” on its own) |
+| `[SECURITY]` | Security flag **prepended** to the real type, e.g. `[SECURITY][BUGFIX] Fix XSS in form engine` — not a standalone type (follow Security Team process) |
 | `[!!!]` | Breaking change prefix (e.g., `[!!!][TASK]`) |
 
 ### Required Footer
@@ -147,6 +147,7 @@ Releases: main
 
 - `Resolves:` - Issue number on forge.typo3.org
 - `Releases:` - Target branches (`main` for current development; stable backport branches per Forge issue)
+- **`Change-Id:`** — Gerrit requires this trailer on every commit; it is added by the **commit-msg** hook (`composer gerrit:setup` or `cp Build/git-hooks/commit-msg …`). Without it, `git push` to Gerrit is rejected.
 
 ### Example Commit Messages
 
@@ -216,6 +217,7 @@ git fetch origin
 git checkout <target-branch>   # e.g. stable branch named in the issue
 git pull origin <target-branch>
 
+# Prefer the exact cherry-pick command from Gerrit’s patch “Download” menu when copying a single revision
 git cherry-pick -x <merge-commit-on-main>
 
 # Push for review on THAT branch (not main)

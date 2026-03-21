@@ -22,7 +22,7 @@ Systematic framework for upgrading TYPO3 extensions **to TYPO3 v14** (and verify
 
 | Tool | Purpose | Files |
 |------|---------|-------|
-| Extension Scanner | Diagnose deprecated APIs | TYPO3 Backend |
+| Extension Scanner | Diagnose **PHP** deprecations / removals in scanned classes | TYPO3 Backend (does **not** analyze Fluid, TypoScript, FlexForm, or YAML — use Fractor + manual review there) |
 | Rector | Automated PHP migrations | `.php` |
 | Fractor | Non-PHP migrations (see `typo3-fractor` skill) | FlexForms, TypoScript, YAML, Fluid |
 | PHPStan | Static analysis | `.php` |

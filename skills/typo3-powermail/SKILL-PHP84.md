@@ -3,7 +3,7 @@ name: typo3-powermail-php84
 description: PHP 8.4 patterns for TYPO3 Powermail and powermail_cond development. Property hooks for finishers, validators, and condition DTOs. Asymmetric visibility for mail results. New array functions for answer processing.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "14.x"
+typo3_compatibility: "13.4+ (verify Packagist for v14)"
 related_skills:
   - typo3-powermail
   - php-modernization
@@ -16,12 +16,14 @@ triggers:
 
 # Powermail with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v14.x, Powermail 13.x
+> **Compatibility:** PHP 8.4+, Powermail 13.x — TYPO3 **13.4** per Packagist until the package declares v14; verify before upgrading Core.
 > 
 > **Related Skills:** 
 > - [typo3-powermail](./SKILL.md) - Main Powermail guide
 > - [typo3-powermail CONDITIONS](./SKILL-CONDITIONS.md) - Conditional fields
 > - [php-modernization/SKILL-PHP84](../php-modernization/SKILL-PHP84.md) - PHP 8.4 features
+
+**PHP 8.4:** Do **not** combine `readonly` on a class with properties that use **`set` hooks** — readonly properties cannot have set hooks (fatal error). Use a non-readonly class for validated setters, or keep `readonly` on stateless services **without** hooked setters.
 
 ---
 

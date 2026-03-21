@@ -53,6 +53,7 @@ page {
         og:type = website
         og:site_name = {$site.name}
         og:locale = de_AT
+        # Recommended social image: 1200×630 px; add og:image:width / og:image:height when known for faster previews
         
         # Twitter Cards
         twitter:card = summary_large_image
@@ -90,6 +91,8 @@ languages:
     hreflang: en-GB
     title: English
 ```
+
+Add an **`x-default`** `hreflang` (often the primary market language) in site config when you target international SEO — EXT:seo emits tags from `languages` entries.
 
 ## 3. XML Sitemap Configuration
 
@@ -130,6 +133,7 @@ plugin.tx_seo {
                         lastModifiedField = tstamp
                         changeFreqField = sitemap_changefreq
                         priorityField = sitemap_priority
+                        # Google largely ignores changefreq/priority — keep for other crawlers; focus on accurate lastmod
                         additionalWhere = {#hidden} = 0 AND {#deleted} = 0
                         pid = 123
                         url {
@@ -137,6 +141,7 @@ plugin.tx_seo {
                             fieldToParameterMap {
                                 uid = tx_news_pi1[news]
                             }
+                            # Typical Extbase plugin also needs controller/action, e.g. add via additionalParams or provider docs
                         }
                     }
                 }
@@ -443,7 +448,7 @@ $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_allowUpscaling'] = false;
 | Extension | Purpose | TYPO3 v14 Support |
 |-----------|---------|-----------------|
 | `typo3/cms-seo` | Core SEO functionality | ✓ |
-| `yoast-seo-for-typo3/yoast_seo` | Content analysis (historical) | **Not for v14** — Packagist releases target up to **TYPO3 10.x** only; do **not** list as v14-compatible |
+| `yoast-seo-for-typo3/yoast_seo` | Content analysis (historical) | **Verify Packagist** — current 11.x lines target up to **TYPO3 13.4** in published constraints; **no `^14` until declared** |
 | `brotkrueml/schema` | Advanced structured data | ✓ (verify `require.typo3/cms-core` on Packagist) |
 | `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as TYPO3 v14 default; prefer `typo3/cms-seo` |
 

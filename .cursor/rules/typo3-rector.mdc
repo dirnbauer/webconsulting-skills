@@ -502,8 +502,8 @@ public function __construct(
 | `TypoScriptFrontendController` | Use request attributes (`frontend.page.information`, `language`) |
 | Extbase annotations (`@validate`, `@ignorevalidation`) | Use PHP attributes (`#[Validate]`, `#[IgnoreValidation]`) |
 | `FlexFormService` class | Merged into `FlexFormTools` (#107945) |
-| `BackendUtility` localization methods | Use new APIs (#106393) |
-| `MailMessage->send()` | Use `Mailer::send()` |
+| Various `BackendUtility` helpers (#106393) | Deprecated in v14, removal planned for v15 — migrate per changelog for each method |
+| `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `GeneralUtility::createVersionNumberedFilename()` | Use System Resource API |
 | `PathUtility::getPublicResourceWebPath()` | Use System Resource API |
 | `PathUtility::getRelativePath()` / `getRelativePathTo()` | Use new path resolution |

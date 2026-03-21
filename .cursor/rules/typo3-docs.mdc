@@ -414,7 +414,7 @@ Documentation is automatically rendered when:
 
 ## Complete Index.rst Example
 
-> **Includes.rst.txt:** Older Sphinx-based manuals often started with `.. include:: /Includes.rst.txt`. Current **render-guides** `init` output may not ship that file — **do not copy-paste** that include unless the file exists in your project.
+> **`Includes.rst.txt`:** When your project root contains this file, the TYPO3 documentation rendering toolchain **merges** it automatically for many manuals — you often **do not** need a manual `.. include::` in every `Index.rst`. If your template or older tutorial shows `.. include:: /Includes.rst.txt`, only keep it when that file actually exists in **your** tree; otherwise remove the directive.
 
 ```rst
 .. _start:

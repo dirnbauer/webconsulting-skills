@@ -40,7 +40,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '14.0.0-14.99.99',
-            'php' => '8.2.0-8.4.99',
+            'php' => '8.2.0-8.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],
@@ -64,6 +64,8 @@ $EM_CONF[$_EXTKEY] = [
     }
 }
 ```
+
+> **Content Blocks:** `friendsoftypo3/content-blocks` may require **`typo3/cms-core` ^14.1** or higher — match the [Packagist constraint](https://packagist.org/packages/friendsoftypo3/content-blocks) before pinning `^14.0` only.
 
 ## 2. PHP Requirements
 
@@ -432,7 +434,7 @@ return [
 
 ### Auto-Created Columns from ctrl
 
-Since TYPO3 v14, column definitions for fields referenced in `ctrl` are **auto-created** by the Core. You no longer need explicit `'columns'` entries for:
+Since **TYPO3 v13.3+**, column definitions for fields referenced in `ctrl` are **auto-created** by the Core. You no longer need explicit `'columns'` entries for:
 
 - `enablecolumns` fields: `hidden`/`disabled`, `starttime`, `endtime`, `fe_group`
 - Language fields: `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
@@ -640,8 +642,10 @@ final class ProcessCommand extends Command
 
 ### Command Registration
 
+With **`autoconfigure: true`** in `Services.yaml` defaults, **`#[AsCommand]` is enough** — you do **not** need the `console.command` tag unless autoconfigure is disabled for that service.
+
 ```yaml
-# Configuration/Services.yaml
+# Optional — only when not using #[AsCommand] + autoconfigure
 services:
   Vendor\Extension\Command\ProcessCommand:
     tags:
@@ -684,7 +688,7 @@ jobs:
     strategy:
       matrix:
         typo3: ['^14.0']
-        php: ['8.2', '8.3']
+        php: ['8.2', '8.3', '8.4']
     
     steps:
       - uses: actions/checkout@v4
@@ -726,6 +730,7 @@ ddev typo3 cache:flush
 # 5. Register extensions and align database schema
 ddev typo3 extension:setup
 # Schema compare/apply (CLI entry point depends on your project: `typo3`, `vendor/bin/typo3`, typo3-console, etc.)
+# `database:updateschema` is from **helhum/typo3-console**, not plain Core — omit if you only have `vendor/bin/typo3`.
 ddev typo3 database:updateschema
 
 # 6. Test thoroughly
@@ -740,7 +745,7 @@ ddev typo3 database:updateschema
 ## 13. v14-Only Changes (Manual — Not Handled by Rector)
 
 > The following changes apply **exclusively to TYPO3 v14** and require **manual migration**.
-> They are NOT covered by `ssch/typo3-rector` (v3.12+, 47 TYPO314 rules).
+> They are NOT fully covered by `ssch/typo3-rector` (check your installed version; the TYPO3 14 rule set counts **tens** of rules and changes between releases).
 > For automated migrations, run `Typo3LevelSetList::UP_TO_TYPO3_14` first, then address these manually.
 
 ### Fluid 5.0 Template Changes **[v14 only]**
@@ -776,7 +781,7 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 |------------|------------|
 | `web` | `content` |
 | `file` | `media` |
-| `tools` | `admin` |
+| `tools` | `admin` **or** `system` (Core split tools into multiple parents — map each module to its new parent in `Configuration/Backend/Modules.php`) |
 
 ### Runtime TCA Modifications Forbidden **[v14 only]**
 
@@ -784,15 +789,13 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 
 ### Plugin Subtypes Removed **[v14 only]**
 
-Requires manual restructuring — not a code-level replacement:
-- `list_type` subtypes and `switchableControllerActions` are fully removed.
-- Each plugin variant needs its own plugin registration via `configurePlugin()`.
-- Existing TypoScript/FlexForm configurations must be split per plugin.
+- **`switchableControllerActions`:** removed in **TYPO3 v10** (#88496) — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
+- **`list_type` subtypes / plugin list types:** further tightened in **v14** (#105538) — each variant needs its own `configurePlugin()` / registration and TypoScript/FlexForm split.
 
 ### EXT:form Hooks → PSR-14 Events **[v14 only]**
 
 Hook-to-event migration requires manual rewrite of hook implementations:
-- All EXT:form hooks removed: `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`.
+- All EXT:form hooks removed (incl. **`afterInitializeCurrentPage`**, Breaking #107566): `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`, `afterInitializeCurrentPage`.
 - Replace with corresponding PSR-14 events (e.g., `BeforeFormIsSavedEvent`, `BeforeRenderableIsRenderedEvent`).
 
 ### Frontend Asset Pipeline **[v14 only]**
@@ -807,7 +810,7 @@ Rector removes PHP configuration (`RemoveConcatenateAndCompressHandlerRector`), 
 New features to adopt (not migrations):
 - **New TCA type `country`** (#99911) for country selection fields.
 - **New `itemsProcessors`** option (#107889) for dynamic item generation.
-- **Type-specific `ctrl` properties** in TCA `types` section — [Feature #108027](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-108027-Type-SpecificCtrlPropertiesInTCATypes.html).
+- **Type-specific `title` (and `previewRenderer`) in TCA `types`** — [Feature #108027](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-108027-Type-SpecificCtrlPropertiesInTCATypes.html) (not “arbitrary ctrl copies” per type — see changelog).
 - **Type-specific TCA defaults** (#107281).
 
 ### New Fluid ViewHelpers **[v14 only]**
@@ -829,11 +832,7 @@ Rector handles parser class replacement (`ReplaceLocalizationParsersWithLoaders`
 
 ### v14.1 Features **[v14.1+ only]**
 
-- **Default theme "Camino"** — ready-to-use frontend theme, no third-party deps.
-- **Content Element restrictions per column** — `content_defender` functionality merged into Core.
-- **Fluid Components integration** — improved Fluid namespace configuration.
-- **EXT:form Storage Adapters** — pluggable form storage backends.
-- **PHP 8.5 compatibility** enhancements.
+Verify each item in the [official v14.1 changelog](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html) for your minor (entries change over time). Examples that have appeared in v14.1 discussions include **default theme “Camino”**, **per-column content restrictions**, **Fluid Components** tuning, and **PHP 8.5** support — confirm before documenting them for a specific project.
 
 ### v14.2 Features **[v14.2+ only]**
 
@@ -845,10 +844,15 @@ Rector handles parser class replacement (`ReplaceLocalizationParsersWithLoaders`
 
 ### New v14 Deprecations (removed in v15) — Not Yet Handled by Rector
 
+**v14.0 (examples):**
+
 - `ExtensionManagementUtility::addPiFlexFormValue()` — use direct FlexForm TCA.
-- `ExtensionManagementUtility::addFieldsToUserSettings` — use TCA for user settings.
-- `PageRenderer->addInlineLanguageDomain()`.
-- `FormEngine "additionalHiddenFields"` key.
+
+**v14.2+ (verify changelog IDs):**
+
+- `ExtensionManagementUtility::addFieldsToUserSettings` (#108843) — use TCA for user settings.
+- `PageRenderer->addInlineLanguageDomain()` (#108963).
+- `FormEngine "additionalHiddenFields"` key (#109102).
 
 ---
 

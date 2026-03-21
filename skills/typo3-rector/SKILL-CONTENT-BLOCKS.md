@@ -49,6 +49,7 @@ namespace Vendor\MyExtension\Rector;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
 use Rector\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class ContentBlocksCTypeMigrationRector extends AbstractRector
@@ -62,7 +63,17 @@ final class ContentBlocksCTypeMigrationRector extends AbstractRector
     {
         return new RuleDefinition(
             'Migrate classic CTypes to Content Blocks CTypes',
-            []
+            [
+                new CodeSample(
+                    <<<'PHP'
+$ctype = 'myext_hero';
+PHP
+                    ,
+                    <<<'PHP'
+$ctype = 'myvendor_hero';
+PHP
+                ),
+            ]
         );
     }
 

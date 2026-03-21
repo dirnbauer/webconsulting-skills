@@ -9,7 +9,7 @@ description: >-
 compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+license: Apache-2.0 / CC-BY-SA-4.0
 ---
 
 # TYPO3 Code Simplifier
@@ -41,7 +41,7 @@ Find custom implementations that duplicate what TYPO3 already provides.
 | `new FlashMessage(...)` + manual queue | `FlashMessageService` via DI |
 | Manual JSON response construction | `JsonResponse` from PSR-7 |
 | `GeneralUtility::makeInstance()` | Constructor injection via `Services.yaml` |
-| `$GLOBALS['TSFE']->id` | `$request->getAttribute('routing')->getPageId()` |
+| `$GLOBALS['TSFE']->id` | `$request->getAttribute('frontend.page.information')?->getId()` (canonical on v14; `routing` page id also works) |
 | `$GLOBALS['BE_USER']` | Inject `Context` or `BackendUserAuthentication` |
 | `ObjectManager::get()` | Constructor DI |
 | Manual file path resolution | `PathUtility`, `Environment::getPublicPath()` |
@@ -60,14 +60,24 @@ Find custom implementations that duplicate what TYPO3 already provides.
 | `$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']` hooks | PSR-14 events |
 | `ext_tables.php` module registration | `Configuration/Backend/Modules.php` |
 | `XCLASS` | PSR-14 events or DI decoration |
-| `switchableControllerActions` | Separate plugins per action |
-| `$querySettings->setRespectStoragePage(false)` in repo | Set in controller, not repository |
-| Signal/Slot | PSR-14 events |
-| `AbstractPlugin` (pi_base) | Extbase controller or middleware |
 | TCA `eval` for `required`,`trim`,`null` | Dedicated TCA keys: `required`, `nullable` |
 | `renderType => 'inputDateTime'` | `'type' => 'datetime'` |
 | `'type' => 'input', 'eval' => 'int'` | `'type' => 'number'` |
 | `items` with numeric array keys | `items` with `label`/`value` keys |
+
+### Historical removals (pre–v14 code you may still read)
+
+| Removed / legacy | When | Modern approach |
+|---|---|---|
+| `switchableControllerActions` | Removed in **v10** (#88496) | Separate plugin registrations |
+| Signal/Slot `Dispatcher` | Removed in **v12** | PSR-14 events |
+| `AbstractPlugin` (pi_base) | Deprecated v12.4, removed **v13** | Extbase or middleware |
+
+### Code quality (not deprecations)
+
+| Topic | Guidance |
+|---|---|
+| `$querySettings->setRespectStoragePage(false)` | Valid Extbase API — prefer setting **query settings in the repository factory or controller**, not scattered in repositories, for clarity |
 
 ## Pass 2: Code Quality
 
@@ -142,8 +152,8 @@ final class MyService
 - [ ] Remove `'default' => ''` on string fields (already default)
 - [ ] Consolidate palette definitions (remove single-field palettes)
 - [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` on TYPO3 v14: `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
-- [ ] Use palettes for enablecolumns: `visibility` for `hidden`, `access` for `starttime, endtime`
-- [ ] Remove convention fields from `ext_tables.sql` (auto-added to database)
+- [ ] Use palettes for enablecolumns: Core uses palette key **`hidden`** for `hidden`, **`access`** for `starttime`, `endtime`, `fe_group` (verify keys in your table’s `types` `showitem`)
+- [ ] Remove **standard ctrl columns** from `ext_tables.sql` when `ctrl` enables them (`hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_source`, `sorting`, `deleted`, `crdate`, `tstamp`) — only if they are auto-managed for that table
 - [ ] Remove unused `showitem` fields from types
 
 ### Services.yaml
@@ -151,14 +161,14 @@ final class MyService
 - [ ] Use autowiring (remove explicit argument definitions when type-hintable)
 - [ ] Use `_defaults: autowire: true, autoconfigure: true, public: false`
 - [ ] Remove manual service definitions for classes that autowiring handles
-- [ ] Replace unnecessary `factory:` service definitions with autowiring or a small dedicated factory class (Symfony’s `#[Autoconfigure]` is for attribute-based compiler config, not a general substitute for `factory:` in TYPO3 extensions)
+- [ ] Replace unnecessary `factory:` blocks with autowiring or a dedicated factory **service** — `#[Autoconfigure]` (Symfony `Symfony\Component\DependencyInjection\Attribute\Autoconfigure`) tags/configures services; it does **not** replace `factory:` construction
 - [ ] Remove `public: true` unless needed for `GeneralUtility::makeInstance()`
 
 ### ext_localconf.php / ext_tables.php
 
 - [ ] Minimize code — move to `Configuration/` files where possible
 - [ ] Plugin registration only (no business logic)
-- [ ] Use `ExtensionUtility::configurePlugin()` (not `registerPlugin` for frontend)
+- [ ] Frontend plugins: `ExtensionUtility::configurePlugin()` in `ext_localconf.php` **and** `ExtensionUtility::registerPlugin()` (or TCA `items`) in `Configuration/TCA/Overrides/tt_content.php` — both are required for a complete registration
 - [ ] No `addPageTSConfig` — use `Configuration/page.tsconfig`
 - [ ] No `addUserTSConfig` — use `Configuration/user.tsconfig`
 - [ ] No `addTypoScript` — use `Configuration/TypoScript/setup.typoscript`
@@ -172,7 +182,7 @@ final class MyService
 - [ ] Avoid N+1 queries in Extbase repositories (use `JOIN` or batch loading)
 - [ ] Use `TYPO3\CMS\Core\Resource\ProcessedFileRepository` not re-processing on every request
 - [ ] Remove `findAll()` calls without pagination
-- [ ] Lazy-load file references with `@TYPO3\CMS\Extbase\Annotation\ORM\Lazy`
+- [ ] Lazy-load file references with `#[\TYPO3\CMS\Extbase\Attribute\ORM\Lazy]` (replace legacy `@Lazy` annotation)
 - [ ] Replace `foreach` + manual `in_array()` filtering with QueryBuilder `WHERE IN`
 - [ ] Remove redundant `cache:flush` calls in CLI commands
 
@@ -202,7 +212,7 @@ Applied 7 fixes. No behavior changes. Run tests to verify.
 
 ## Version fallbacks
 
-When simplifying TYPO3 v14 code that still uses transitional patterns:
+When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version extensions), you may temporarily keep transitional patterns:
 - Register PSR-15 middleware in `Configuration/RequestMiddlewares.php` (Core-supported pattern)
 - Keep `Services.yaml` event listener config alongside `#[AsEventListener]`
 - Keep numeric TCA `items` arrays alongside `label`/`value` format
@@ -217,13 +227,13 @@ When simplifying TYPO3 v14 code that still uses transitional patterns:
 | Pattern | Simplification |
 |---------|---------------|
 | `$GLOBALS['TSFE']` access | Replace with `$request->getAttribute('frontend.page.information')` |
-| Extbase annotations (`@validate`) | Replace with `#[Validate]` PHP attribute |
-| `MailMessage->send()` | Replace with `Mailer::send()` |
+| Extbase annotations (`@validate`) | Replace with `#[\TYPO3\CMS\Extbase\Attribute\Validate]` |
+| `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `FlexFormService` usage | Replace with `FlexFormTools` |
-| Bootstrap Modal JS | Replace with native `<dialog>` pattern |
-| TCA `ctrl.searchFields` | Replace with per-column `'searchable' => true` |
+| Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
+| TCA `ctrl.searchFields` (removed in v14) | In v14, fields are **searchable by default**; set `'searchable' => false` to **exclude** columns from backend search |
 | Custom localization parsers | Remove, use Symfony Translation Component |
-| `GeneralUtility::createVersionNumberedFilename()` | Remove, use System Resource API |
+| `GeneralUtility::createVersionNumberedFilename()` | Replace with **System Resource API** (#107537) |
 
 ---
 

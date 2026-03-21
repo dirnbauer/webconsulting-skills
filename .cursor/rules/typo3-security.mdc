@@ -45,7 +45,7 @@ return [
         'debug' => false,
         'lockIP' => 0,                    // Usually 0 for frontend (mobile users)
         'sessionTimeout' => 86400,
-        // `FE.lockSSL` was removed in v12 — enforce HTTPS with the web server / reverse proxy
+        // `FE.lockSSL` was removed in v12 — enforce HTTPS at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
         'passwordHashing' => [
             'className' => \TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2idPasswordHash::class,
             'options' => [],
@@ -62,8 +62,8 @@ return [
         // Encryption key (generate unique per installation)
         'encryptionKey' => 'generate-unique-key-per-installation',
         
-        // Trusted hosts pattern (CRITICAL)
-        'trustedHostsPattern' => 'example\\.com|www\\.example\\.com',
+        // Trusted hosts pattern (CRITICAL) — anchor patterns; avoid `.*\\.example\\.com` (matches `evil-example.com`)
+        'trustedHostsPattern' => '^(www\\.)?example\\.com$',
         
         // File handling security
         'textfile_ext' => 'txt,html,htm,css,js,tmpl,ts,typoscript,xml,svg',
@@ -72,6 +72,9 @@ return [
         // Security feature toggles — names and availability differ by minor release; confirm in Core docs for your exact version
         'features' => [
             'security.backend.enforceReferrer' => true,
+            // Frontend CSP toggles (names stable from v12+; confirm in reference for your minor)
+            'security.frontend.enforceContentSecurityPolicy' => false,
+            'security.frontend.reportContentSecurityPolicy' => false,
         ],
     ],
     
@@ -104,14 +107,23 @@ return [
 // ✅ SECURE - Explicit host list
 'trustedHostsPattern' => 'example\\.com|www\\.example\\.com',
 
-// ✅ SECURE - Regex for subdomains
-'trustedHostsPattern' => '(.*\\.)?example\\.com',
+// ✅ SECURE - Regex for subdomains (still anchored to your registrable domain)
+'trustedHostsPattern' => '^(.*\\.)?example\\.com$',
 
 // Development with DDEV
 'trustedHostsPattern' => '(.*\\.)?example\\.com|.*\\.ddev\\.site',
 ```
 
 ## 3. File System Security
+
+### `fileDenyPattern` (upload / public file access)
+
+Keep Core’s deny list strict — extend only when you understand the risk:
+
+```php
+// Example: tighten executable uploads (adjust to your policy)
+$GLOBALS['TYPO3_CONF_VARS']['BE']['fileDenyPattern'] = '\\.(php[0-9]?|phtml|phar|sh|bash|cgi|pl|py|asp|aspx|jsp)(\\..*)?$';
+```
 
 ### Directory Permissions
 
@@ -518,7 +530,7 @@ use TYPO3\CMS\Core\Crypto\Cipher\CipherService;
 use TYPO3\CMS\Core\Crypto\Cipher\SharedKey;
 
 $cipherService = GeneralUtility::makeInstance(CipherService::class);
-// SharedKey must be 32 bytes; use a secrets manager in real projects — this is illustrative only.
+// Derive keys via Core helpers where documented (e.g. `KeyFactory`) instead of ad-hoc `SharedKey` + `encryptionKey` hashing in production.
 $key = new SharedKey(hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true));
 $cipherValue = $cipherService->encrypt('sensitive data', $key);
 $decrypted = $cipherService->decrypt($cipherValue, $key);

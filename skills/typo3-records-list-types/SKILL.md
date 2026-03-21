@@ -1,7 +1,7 @@
 ---
 name: typo3-records-list-types
 description: Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.
-version: 1.1.0
+version: 1.0.0
 typo3_compatibility: "14.0 - 14.x"
 triggers:
   - records list types
@@ -21,6 +21,8 @@ license: MIT / CC-BY-SA-4.0
 > **Compatibility:** TYPO3 v14.0+ / PHP 8.3+
 > Extension key: `records_list_types` / Composer package name: `webconsulting/records-list-types`
 > GitHub: https://github.com/dirnbauer/typo3-records-list-types
+>
+> **Extension version:** Use the **GitHub repository** / `composer.json` of `webconsulting/records-list-types` as the source of truth — this skill’s YAML `version` is for the **skill document** only.
 >
 > **Composer / Packagist:** Confirm on [Packagist](https://packagist.org/) whether `webconsulting/records-list-types` is published. If not, add a **`repositories` → `vcs`** entry in the **root** `composer.json` pointing at the GitHub repo, then `composer require vendor/package:dev-main` (or a tag). Plain `composer require webconsulting/records-list-types` **fails** until the package is registered or aliased.
 
@@ -233,8 +235,9 @@ Use TYPO3 CSS variables for automatic dark mode:
 
 ```css
 .timeline-item {
+    /* Core-ish fallbacks; extension UI often uses `--gv-*` tokens — align with backend DevTools in your TYPO3 minor */
     background: var(--typo3-component-bg, #fff);
-    border: 1px solid var(--typo3-component-border-color, #d4d4d8);
+    border: 1px solid var(--typo3-border-mix, #d4d4d8);
 }
 ```
 
@@ -261,7 +264,7 @@ mod.web_list.viewMode.types.addressbook {
 Restrict views to specific pages:
 
 ```tsconfig
-[page["uid"] == 42]
+[traverse(page, "uid") == 42]
     mod.web_list.viewMode {
         allowed = list,timeline
         default = timeline
@@ -281,9 +284,8 @@ Two modes control which fields appear:
 ### `columnsFromTCA = 1` Resolution Order
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
-2. **TSconfig `showFields`** (`mod.web_list.table.<table>.showFields`)
-3. **TCA search metadata** — on TYPO3 v14 Core, `ctrl.searchFields` was removed; use per-column `'searchable' => true`. This extension’s fallback may still consider legacy `ctrl.searchFields` on older TCA.
-4. **Label field only** (final fallback)
+2. **This extension’s own TSconfig / template resolution** — not Core `mod.web_list.table.<table>.showFields` (that path is not a documented Core column picker). See extension docs and `GridConfigurationService` behaviour for your release.
+3. **TCA `ctrl.label` and sensible text/date fallbacks** (see “Special Column Names” below) — v14 has no `ctrl.searchFields`; backend search uses per-column `searchable`, which is unrelated to this list display.
 
 ### Special Column Names
 
@@ -431,6 +433,7 @@ services:
 ### JavaScript Hooks
 
 ```javascript
+// Event prefix `recordsGridview:` matches the historical extension codename (same story as TypoScript `module.tx_recordsgridview`).
 document.addEventListener('recordsGridview:viewModeChanged', (event) => {
     console.log('View mode changed to:', event.detail.mode);
 });
@@ -453,7 +456,7 @@ document.addEventListener('recordsGridview:viewModeChanged', (event) => {
 
 | ViewHelper | Purpose |
 |------------|---------|
-| `RecordActionsViewHelper` | Renders cached record actions (`<gridview:recordActions>`) |
+| `RecordActionsViewHelper` | Renders cached record actions (`<gridview:recordActions>`). Register namespace in Fluid: `xmlns:gridview="http://typo3.org/ns/Webconsulting/RecordsListTypes/ViewHelpers"` (or rely on the extension’s shipped templates). |
 
 ### CSS Architecture
 
@@ -486,7 +489,7 @@ Custom view types automatically receive `base.css`.
 ### Grid as Default for Media Folders
 
 ```tsconfig
-[page["doktype"] == 254]
+[traverse(page, "doktype") == 254]
     mod.web_list.viewMode.default = grid
     mod.web_list.viewMode.allowed = list,grid
     mod.web_list.gridView.cols = 6
@@ -496,7 +499,7 @@ Custom view types automatically receive `base.css`.
 ### Disable Extension for Specific Pages
 
 ```tsconfig
-[page["uid"] == 123 || page["pid"] == 123]
+[traverse(page, "uid") == 123 || traverse(page, "pid") == 123]
     mod.web_list.viewMode.allowed = list
 [END]
 ```
@@ -504,7 +507,7 @@ Custom view types automatically receive `base.css`.
 ### Force View for User Group
 
 ```tsconfig
-# User TSconfig
+# User TSconfig — **`options.layout.records.forceView` is provided by EXT:records_list_types**, not Core TYPO3.
 options.layout.records.forceView = grid
 ```
 

@@ -259,7 +259,9 @@ final class ItemRepositoryTest extends FunctionalTestCase
 ,3,1,"Inactive Item",0,0
 ```
 
-### Controller Functional Test
+### Frontend functional test (Extbase controller)
+
+Calling `$controller->listAction()` directly **bypasses** Extbase routing, security, and view resolution. Prefer a **frontend sub-request** through the TYPO3 application stack:
 
 ```php
 <?php
@@ -269,26 +271,32 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Tests\Functional\Controller;
 
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
-use Vendor\MyExtension\Controller\ItemController;
 
-final class ItemControllerTest extends FunctionalTestCase
+final class ItemControllerFrontendTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = [
         'typo3conf/ext/my_extension',
     ];
 
-    #[Test]
-    public function listActionReturnsHtmlResponse(): void
+    protected function setUp(): void
     {
+        parent::setUp();
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Pages.csv');
         $this->importCSVDataSet(__DIR__ . '/Fixtures/Items.csv');
+        $this->setUpFrontendRootPage(
+            1,
+            ['EXT:my_extension/Configuration/TypoScript/setup.typoscript'],
+        );
+    }
 
-        $request = new ServerRequest('https://example.com/items', 'GET');
-        $controller = $this->get(ItemController::class);
-
-        $response = $controller->listAction();
+    #[Test]
+    public function listPageReturnsHtml(): void
+    {
+        $response = $this->executeFrontendSubRequest(
+            (new InternalRequest())->withPageId(1),
+        );
 
         self::assertSame(200, $response->getStatusCode());
         self::assertStringContainsString('text/html', $response->getHeaderLine('Content-Type'));

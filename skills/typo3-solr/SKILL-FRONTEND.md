@@ -128,7 +128,7 @@ class SolrSuggest {
   async fetchSuggestions(query) {
     try {
       const url = new URL(this.options.suggestUrl, window.location.origin);
-      url.searchParams.set('tx_solr[queryString]', query);
+      url.searchParams.set('tx_solr[q]', query);
 
       const response = await fetch(url.toString(), {
         headers: { 'Accept': 'application/json' },

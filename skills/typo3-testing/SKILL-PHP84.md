@@ -1,6 +1,6 @@
 ---
 name: typo3-testing-php84
-description: PHP 8.4 testing patterns for TYPO3. PHPUnit 11/12/13 compatibility, new assertions, and property hooks testing.
+description: PHP 8.4 testing patterns for TYPO3. PHPUnit 11/12 compatibility (and future 13.x when released), new assertions, and property hooks testing.
 version: 1.0.0
 php_compatibility: "8.4+"
 typo3_compatibility: "14.x"
@@ -199,7 +199,7 @@ final class CounterTest extends TestCase
         // Use Reflection to verify visibility
         $reflection = new \ReflectionProperty(Counter::class, 'value');
         self::assertTrue($reflection->isPublic());
-        // Note: ReflectionProperty doesn't expose asymmetric visibility directly
+        // PHP 8.4+: for asymmetric visibility use isPrivateSet() / isProtectedSet() on the ReflectionProperty
     }
 }
 ```
@@ -259,9 +259,9 @@ final class ArrayFunctionsTest extends TestCase
 
 ---
 
-## 5. PHPUnit 11+ Attribute Syntax
+## 5. PHPUnit attribute syntax (10+)
 
-PHPUnit **10+** prefers PHP 8 attributes over docblock annotations; **PHPUnit 12+** drops annotation support. The patterns below apply to **11.x, 12.x, and 13.x** (confirm `composer.json` constraints against [PHPUnit’s requirements](https://docs.phpunit.de/)).
+PHPUnit **10+** prefers PHP 8 attributes over docblock annotations; **PHPUnit 12+** drops annotation support. The patterns below apply to **11.x and 12.x** (and future **13.x** when released — confirm `composer.json` against [PHPUnit’s requirements](https://docs.phpunit.de/)).
 
 ### Attribute example
 

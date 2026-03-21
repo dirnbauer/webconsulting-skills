@@ -35,7 +35,6 @@ declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
-use Rector\Php84\Rector\Param\ExplicitNullableParamTypeRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -44,11 +43,10 @@ return RectorConfig::configure()
     ])
     ->withSets([
         LevelSetList::UP_TO_PHP_84,
-    ])
-    ->withRules([
-        ExplicitNullableParamTypeRector::class,
     ]);
 ```
+
+`ExplicitNullableParamTypeRector` is already included in `UP_TO_PHP_84` — use `->withRules([...])` only for additional rules not covered by the set.
 
 ---
 

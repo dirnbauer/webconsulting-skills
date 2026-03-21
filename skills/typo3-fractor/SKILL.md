@@ -235,9 +235,9 @@ Apply rules for a single version only:
 |------|-----------|
 | `AbstractMessageGetSeverityFluidFractor` | Migrate severity constants in Fluid |
 
-### TypoScript rules (Fractor `TYPO3_13` set)
+### TypoScript rules (bundle id `TYPO3_13`)
 
-These rules ship in **`Typo3SetList::TYPO3_13`**; they still run when you apply the cumulative **`Typo3LevelSetList::UP_TO_TYPO3_14`** set.
+These rules are published under the historical set name **`Typo3SetList::TYPO3_13`** (v13-targeted rules). They still run when you apply the cumulative **`Typo3LevelSetList::UP_TO_TYPO3_14`** level set on a v14 codebase.
 
 | Rule | Migration |
 |------|-----------|

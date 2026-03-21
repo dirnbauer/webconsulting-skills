@@ -29,7 +29,7 @@ This skill is based on 18 authoritative sources:
 5. [PSR-14 Events (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Events/Index.html)
 6. [Versioning & Workspaces (TYPO3 Explained / Core API)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Workspaces/Index.html)
 7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Properties/VersioningWSAlwaysAllowLiveEdit.html)
-8. [Restriction Builder (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/RestrictionBuilder/Index.html)
+8. [Restriction Builder (TYPO3 Explained / Doctrine DBAL)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/DoctrineDbal/RestrictionBuilder/Index.html)
 9. [b13 Blog: The Elegant Efficiency of TYPO3 Overlays (Benni Mack)](https://b13.com/blog/mastering-localization-and-content-staging)
 10. [Scheduler Tasks (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Scheduler/Index.html)
 11. [Users Guide (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/UsersGuide/Index.html)
@@ -302,7 +302,7 @@ Use this checklist to verify your workspace setup is complete:
 #### Backend Users
 
 - [ ] Users are assigned to the workspace user group
-- [ ] Users can see the workspace selector in the top bar
+- [ ] Users can see the workspace selector in the **backend sidebar** (v14.2+; earlier v14 builds may still show it in the top bar)
 - [ ] Non-admin users have LIVE workspace access only if they need it
 
 #### Workspace Record
@@ -348,6 +348,7 @@ declare(strict_types=1);
 
 namespace MyVendor\MySitepackage\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -358,16 +359,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * CLI command to create a workspace with base configuration.
  *
- * Register in Configuration/Services.yaml:
- *   console.command.tag: 'console.command'
- *   command: 'workspace:setup'
+ * With `autoconfigure: true` in `Services.yaml`, `#[AsCommand]` is enough — no `console.command` tag needed.
  */
+#[AsCommand(
+    name: 'workspace:setup',
+    description: 'Create a workspace with backend group and base configuration',
+)]
 final class SetupWorkspaceCommand extends Command
 {
-    protected function configure(): void
-    {
-        $this->setDescription('Create a workspace with backend group and base configuration');
-    }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -436,23 +435,12 @@ final class SetupWorkspaceCommand extends Command
             'Configure DB mounts and file mounts on the group',
             'Set up Scheduler tasks: "Workspaces auto-publication" + "Workspaces cleanup preview links"',
             'Configure TSconfig: options.workspaces.previewLinkTTLHours = 48',
-            'Test: switch to the workspace in the backend top bar and edit a page',
+            'Test: switch to the workspace in the backend sidebar and edit a page',
         ]);
 
         return Command::SUCCESS;
     }
 }
-```
-
-**Register in `Configuration/Services.yaml`:**
-
-```yaml
-services:
-  MyVendor\MySitepackage\Command\SetupWorkspaceCommand:
-    tags:
-      - name: 'console.command'
-        command: 'workspace:setup'
-        description: 'Create workspace with base configuration'
 ```
 
 **Run:**
@@ -886,7 +874,7 @@ final class ItemRepository extends Repository
         private readonly ConnectionPool $connectionPool,
         private readonly PageRepository $pageRepository,
     ) {
-        // parent constructor is called automatically via DI
+        parent::__construct();
     }
 
     /**
@@ -1120,26 +1108,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 $workspaceId = GeneralUtility::makeInstance(Context::class)
     ->getPropertyFromAspect('workspace', 'id', 0);
 
-// Check if user can edit in current workspace
-$cannotEdit = $GLOBALS['BE_USER']->workspaceCannotEditRecord('tt_content', $row);
-if ($cannotEdit) {
-    // $cannotEdit contains error message explaining why
-    throw new \RuntimeException('Cannot edit: ' . $cannotEdit);
-}
+// Table modify permission (does not replace full workspace record ACL — use FormEngine/DataHandler for authoritative checks)
+$mayModifyTable = $GLOBALS['BE_USER']->check('tables_modify', 'tt_content');
 
-// Check if new records can be created on a page
-$canCreate = $GLOBALS['BE_USER']->workspaceCreateNewRecord($pageId, 'tt_content');
+// Creating new records in workspace: BackendUserAuthentication API name is workspaceCanCreateNewRecord(string $table): bool (no $pageId)
+$canCreate = $GLOBALS['BE_USER']->workspaceCanCreateNewRecord('tt_content');
 
-// Check user's workspace access level
+// Workspace membership / role for the current user
 $workspaceAccess = $GLOBALS['BE_USER']->checkWorkspace($workspaceId);
-// Returns: array with 'uid', '_ACCESS' key ('admin', 'owner', 'member', or false)
+// Returns array|false — `_ACCESS` may be `admin`, `owner`, `member`, `online`, or `false` depending on context (see Core source for your minor)
 ```
 
 ### Common Issues & Solutions
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| Records not visible in workspace | `versioningWS = false` on table | Set `versioningWS = true`, run `database:updateschema` |
+| Records not visible in workspace | `versioningWS = false` on table | Set `versioningWS = true`, then `extension:setup` / schema update per your CLI (**`database:updateschema` needs typo3-console**) |
 | Workspace changes visible on live site | Missing `WorkspaceRestriction` in custom query | Add `FrontendRestrictionContainer` or manual `WorkspaceRestriction` |
 | "Editing not possible" error | User lacks edit permission or stage access | Check user/group `tables_modify`, DB mounts, workspace membership |
 | Preview shows wrong content | Missing `versionOL()` call in extension | Add `BackendUtility::workspaceOL()` or `PageRepository->versionOL()` after query |
@@ -1490,7 +1474,7 @@ bin/phpunit -c Build/phpunit-functional.xml \
 
 ### Pages with Content Elements (Standard Workflow)
 
-1. Editor switches to the custom workspace via the top bar selector
+1. Editor switches to the custom workspace via the backend sidebar selector (v14.2+)
 2. Editor navigates to the page and edits content elements
 3. TYPO3 automatically creates workspace versions of modified records
 4. Editor previews via "View webpage" button (shows workspace version)
