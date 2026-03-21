@@ -55,6 +55,13 @@ triggers:
 └─────────────────────────────────────────┘
 ```
 
+For TYPO3 v14, Content Blocks does **not** ship as a Core system extension. Install it explicitly via Composer, and note that current v14 releases require TYPO3 **^14.1**:
+
+```bash
+ddev composer require friendsoftypo3/content-blocks:"^2.0"
+ddev composer require "typo3/cms-core:^14.1" --no-update
+```
+
 ---
 
 ## 3. Quick Conversion Example
@@ -104,11 +111,16 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsCommand(name: 'myext:migrate-to-content-blocks')]
 final class MigrateCommand extends Command
 {
+    public function __construct(
+        private readonly ConnectionPool $connectionPool,
+    ) {
+        parent::__construct();
+    }
+
     private const MIGRATIONS = [
         ['old_ctype' => 'myext_hero', 'new_ctype' => 'myvendor_hero'],
         ['old_ctype' => 'myext_card', 'new_ctype' => 'myvendor_card'],
@@ -116,8 +128,7 @@ final class MigrateCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tt_content');
+        $connection = $this->connectionPool->getConnectionForTable('tt_content');
 
         foreach (self::MIGRATIONS as $migration) {
             $count = $connection->update(

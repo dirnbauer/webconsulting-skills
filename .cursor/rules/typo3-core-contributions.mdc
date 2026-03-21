@@ -284,9 +284,6 @@ git push gerrit HEAD:refs/for/main --force
 Build/Scripts/runTests.sh -s unit
 Build/Scripts/runTests.sh -s functional
 
-# Composer meta-target (name may be `composer tests` plural — check composer.json)
-composer tests
-
 # Run PHP-CS-Fixer
 Build/Scripts/runTests.sh -s cgl
 ```

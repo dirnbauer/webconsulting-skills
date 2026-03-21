@@ -148,22 +148,16 @@ ddev exec vendor/bin/phpunit -c Build/phpunit-functional.xml
 
 ### Test Fixtures
 
-```xml
-<!-- Tests/Functional/Fixtures/pages.xml -->
-<dataset>
-    <pages>
-        <uid>1</uid>
-        <pid>0</pid>
-        <title>Test Page</title>
-    </pages>
-    <tt_content>
-        <uid>1</uid>
-        <pid>1</pid>
-        <CType>myvendor_hero</CType>
-        <header>Test Hero</header>
-        <myvendor_hero_subheadline>Test Subheadline</myvendor_hero_subheadline>
-    </tt_content>
-</dataset>
+```csv
+# Tests/Functional/Fixtures/pages.csv
+"pages",uid,pid,title
+ ,1,0,"Test Page"
+```
+
+```csv
+# Tests/Functional/Fixtures/content.csv
+"tt_content",uid,pid,CType,header,myvendor_hero_subheadline
+ ,1,1,"myvendor_hero","Test Hero","Test Subheadline"
 ```
 
 ---

@@ -155,31 +155,20 @@ final class TeamMemberRepositoryTest extends FunctionalTestCase
 
 ### Fixture with Inline Records
 
-```xml
-<!-- Tests/Functional/Fixtures/ContentBlocks/accordion.xml -->
-<dataset>
-    <tt_content>
-        <uid>1</uid>
-        <pid>1</pid>
-        <CType>myvendor_accordion</CType>
-        <myvendor_accordion_items>2</myvendor_accordion_items>
-    </tt_content>
-    <myvendor_accordion_items>
-        <uid>1</uid>
-        <pid>1</pid>
-        <foreign_table_parent_uid>1</foreign_table_parent_uid>
-        <title>First Item</title>
-        <content>First content</content>
-    </myvendor_accordion_items>
-    <myvendor_accordion_items>
-        <uid>2</uid>
-        <pid>1</pid>
-        <foreign_table_parent_uid>1</foreign_table_parent_uid>
-        <title>Second Item</title>
-        <content>Second content</content>
-    </myvendor_accordion_items>
-</dataset>
+```csv
+# Tests/Functional/Fixtures/ContentBlocks/accordion-content.csv
+"tt_content",uid,pid,CType,myvendor_accordion_items
+ ,1,1,"myvendor_accordion",2
 ```
+
+```csv
+# Tests/Functional/Fixtures/ContentBlocks/accordion-items.csv
+"tx_sitepackage_accordion_item",uid,pid,foreign_table_parent_uid,title,content
+ ,1,1,1,"First Item","First content"
+ ,2,1,1,"Second Item","Second content"
+```
+
+Load both fixtures with `importCSVDataSet()` in the functional test setup.
 
 ---
 

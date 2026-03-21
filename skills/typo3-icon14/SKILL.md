@@ -60,8 +60,8 @@ license: MIT / CC-BY-SA-4.0
 | `Configuration/Icons.php` | Icon registration array — must exist for v14 |
 | `Configuration/Backend/Modules.php` | `iconIdentifier` for each module |
 | `Configuration/TCA/*.php` | `typeicon_classes`, `iconIdentifier` in ctrl/types |
-| `Configuration/TCA/Overrides/*.php` | Plugin icons (`pluginIcon`), page type icons |
-| `ext_localconf.php` | Do **not** bootstrap `IconRegistry` here in v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Deprecation-104778-DoNotCallIconRegistryRegisterIconInExtLocalconf.html)) — use `Configuration/Icons.php`. The `registerIcon()` **method** is not `@deprecated`; the anti-pattern is imperative registration during `ext_localconf.php` bootstrap. |
+| `Configuration/TCA/Overrides/*.php` | Plugin icons (`pluginIcon`), page type icons — do **not** instantiate `IconRegistry` here either; the deprecation covers bootstrap before `BootCompletedEvent` |
+| `ext_localconf.php` | Do **not** bootstrap `IconRegistry` here in v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.3/Deprecation-104778-InstantiationOfIconRegistryInExtLocalconf.html)) — use `Configuration/Icons.php`. The `registerIcon()` **method** is not `@deprecated`; the anti-pattern is imperative registration during bootstrap files. |
 | `ext_tables.php` | Should not contain icon registration |
 
 ### Default output paths (use these if user does not specify)
@@ -332,12 +332,15 @@ Study these core icons for the correct visual language:
 </svg>
 ```
 
-**module-system** (System settings — gear):
+**module-config** (actual TYPO3 Core module icon reference):
 ```xml
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <path fill="currentColor" d="M32.93 52c-.83 0-1.53-.6-1.63-1.4l-.48-3.72..."/>
-  <path fill="var(--icon-color-accent, #ff8700)" d="M20.48 34.95c.08.6.6 1.05 1.22 1.05h1.98v-.54..."/>
-</svg>
+<symbol viewBox="0 0 64 64" id="module-config" xmlns="http://www.w3.org/2000/svg">
+  <path fill="currentColor" d="M36.51 52c-.67 0-1.24-.49-1.32-1.14l-.39-3.02c-.29-.11-.56-.24-.82-.39s-.51-.31-.75-.49l-2.89 1.18c-.62.25-1.34.02-1.67-.55l-2.49-4.19c-.34-.57-.19-1.29.35-1.69l2.5-1.84c-.02-.15-.03-.3-.03-.44v-.88c0-.14.01-.29.03-.44l-2.5-1.84c-.54-.4-.69-1.12-.35-1.69l2.49-4.19c.34-.57 1.05-.8 1.67-.55l2.89 1.18c.24-.17.5-.34.77-.49.27-.15.53-.28.8-.39l.39-3.02c.08-.65.65-1.14 1.32-1.14h4.98c.67 0 1.24.49 1.32 1.14l.39 3.02c.29.11.56.24.82.39s.51.31.75.49l2.89-1.18c.62-.25 1.34-.02 1.67.55l2.49 4.19c.34.57.19 1.29-.35 1.69l-2.5 1.84c.02.15.03.3.03.44v.88c0 .14-.02.29-.07.44l2.5 1.84c.54.4.69 1.12.35 1.69l-2.49 4.19c-.34.57-1.06.8-1.68.55l-2.85-1.18c-.24.17-.5.34-.77.49s-.53.28-.8.39l-.39 3.02c-.08.65-.65 1.14-1.32 1.14H36.5Zm2.56-8.45c1.29 0 2.39-.44 3.3-1.33s1.37-1.96 1.37-3.22-.46-2.33-1.37-3.22-2.01-1.33-3.3-1.33-2.42.44-3.32 1.33c-.9.89-1.35 1.96-1.35 3.22s.45 2.33 1.35 3.22c.9.89 2.01 1.33 3.32 1.33Z"/>
+  <path fill="currentColor" opacity=".4" d="M16 52c-1.1 0-2-.9-2-2V14c0-1.1.9-2 2-2s2 .9 2 2v36c0 1.1-.9 2-2 2Zm12.67-4.4-2.49-4.19c-.34-.57-.19-1.29.35-1.69l2.5-1.84c-.02-.15-.03-.3-.03-.44v-.88c0-.14.01-.29.03-.44l-2.5-1.84c-.54-.4-.69-1.12-.35-1.69l2.49-4.19c.28-.46.81-.69 1.33-.62V14c0-1.1-.9-2-2-2s-2 .9-2 2v36c0 1.1.9 2 2 2s2-.9 2-2v-1.78c-.52.07-1.05-.16-1.33-.62ZM41.49 26c.18 0 .35.04.51.1V14c0-1.1-.9-2-2-2s-2 .9-2 2v12h3.49Z"/>
+  <rect width="12" height="8" x="10" y="36" fill="var(--icon-color-accent, #ff8700)" rx="1.33" ry="1.33"/>
+  <path fill="var(--icon-color-accent, #ff8700)" d="M28.67 30.4c.34-.57 1.05-.8 1.67-.55l2.89 1.18c.24-.17.5-.34.77-.49v-3.21c0-.74-.6-1.33-1.33-1.33h-9.33c-.74 0-1.33.6-1.33 1.33v5.33c0 .74.6 1.33 1.33 1.33h3.2l2.14-3.6Z"/>
+  <rect width="12" height="8" x="34" y="16" fill="var(--icon-color-accent, #ff8700)" rx="1.33" ry="1.33"/>
+</symbol>
 ```
 
 **module-site** (Globe):
@@ -423,7 +426,7 @@ return [
 ### Avoid: `IconRegistry::registerIcon()` during `ext_localconf.php`
 
 New and migrated extensions should register icons in **`Configuration/Icons.php`**. Calling
-`IconRegistry::registerIcon()` from `ext_localconf.php` was disallowed for v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Deprecation-104778-DoNotCallIconRegistryRegisterIconInExtLocalconf.html)) — the method itself is still valid when used from supported contexts (e.g. rare dynamic registration), but not from bootstrap files.
+`IconRegistry::registerIcon()` from `ext_localconf.php` was disallowed for v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.3/Deprecation-104778-InstantiationOfIconRegistryInExtLocalconf.html)) — the method itself is still valid when used from supported contexts (e.g. rare dynamic registration), but not from bootstrap files such as `ext_localconf.php` or `Configuration/TCA/Overrides/*.php`.
 
 ```php
 // Legacy — do not add this in new code; use Configuration/Icons.php instead
@@ -460,7 +463,7 @@ public function __construct(
 
 public function getIcon(): string
 {
-    // Optional 3rd/4th args: ?bool $forceOverlay = null, ?IconState $state = null (e.g. IconState::STATE_DISABLED)
+    // Optional 3rd/4th args: ?string $overlayIdentifier = null, ?IconState $state = null
     return $this->iconFactory
         ->getIcon('module-myext', IconSize::SMALL)
         ->render();
@@ -482,11 +485,13 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 | Enum Value | Size | Use Case |
 |------------|------|----------|
 | `IconSize::MEGA` | 64px | New Content Element wizard, large previews |
-| `IconSize::LARGE` | 48px | Module menu sub-icons |
+| `IconSize::LARGE` | 48px | Wizard icons, large previews |
 | `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
 | `IconSize::DEFAULT` | **1em** in CSS (`--icon-size: 1em`) — scales with font size; `getDimensions()` still reports 16×16 as fallback | Prefer `SMALL` when you need a fixed **16px** icon |
 | `IconSize::OVERLAY` | 16px | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
+
+When no size is passed to `IconFactory->getIcon()`, the default is `IconSize::MEDIUM` (32px).
 
 ## Step 5: Migration Checklist
 
@@ -534,7 +539,7 @@ the outlined/hollow appearance.
 Choose ONE of these accent strategies per icon:
 
 1. **Background layer** — A secondary shape behind the main icon in accent color (like module-web's second document)
-2. **Inner detail** — A small detail inside the main shape (like module-system's smaller gear)
+2. **Inner detail** — A small detail inside the main shape (for example the smaller gear detail in `module-config`)
 3. **Border/outline** — The outer ring or border (like module-site's circle)
 
 Do NOT use accent for the entire primary shape — that looks like the old solid style.

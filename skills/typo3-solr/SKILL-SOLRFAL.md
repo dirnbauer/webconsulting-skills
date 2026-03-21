@@ -128,7 +128,7 @@ plugin.tx_solr.index.queue {
 }
 ```
 
-The `attachments.fields` setting specifies which FAL relation fields contain files to index.
+The `attachments.fields` setting specifies which FAL relation fields contain files to index in relation-based file indexing setups. In EXT:solr / EXT:tika projects, always confirm the exact field path and indexer you use before assuming this setting applies unchanged.
 
 ### Supported File Types
 

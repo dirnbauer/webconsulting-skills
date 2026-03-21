@@ -88,9 +88,8 @@ declare(strict_types=1);
 namespace Vendor\MyExt\Finisher;
 
 use In2code\Powermail\Finisher\AbstractFinisher;
-use In2code\Powermail\Finisher\FinisherInterface;
 
-final class CrmFinisher extends AbstractFinisher implements FinisherInterface
+final class CrmFinisher extends AbstractFinisher
 {
     public function crmSyncFinisher(): void
     {
@@ -378,8 +377,9 @@ final class ValidationRule
 
     public string $errorMessage = 'Validation failed';
 
-    public bool $isValid {
-        get => fn(string $value) => (bool)preg_match($this->pattern, $value);
+    public function isValid(string $value): bool
+    {
+        return (bool)preg_match($this->pattern, $value);
     }
 }
 ```
@@ -397,7 +397,7 @@ use In2code\Powermail\Events\CustomValidatorEvent;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 
 #[AsEventListener('vendor-myext/typed-validator')]
-final readonly class TypedValidatorListener
+final class TypedValidatorListener
 {
     /** @var array<ValidationRule> */
     private array $rules {
@@ -485,7 +485,7 @@ final class ConditionResult
         get => $this->fieldActions !== []
             && array_any(
                 $this->fieldActions,
-                fn(FieldAction $a) => $a->action === 'hide'
+                fn(FieldAction $a) => $a->action === FieldActionType::Hide
             );
     }
 

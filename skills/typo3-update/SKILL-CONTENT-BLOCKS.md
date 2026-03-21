@@ -41,7 +41,7 @@ triggers:
 
 ```bash
 # Focus on core upgrade first
-ddev composer require typo3/cms-core:^14.0
+ddev composer require typo3/cms-core:^14.1
 ddev typo3 extension:setup
 ddev typo3 upgrade:run
 ```
@@ -108,10 +108,15 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 
 final class MigrateDuringUpgradeCommand extends Command
 {
+    public function __construct(
+        private readonly ConnectionPool $connectionPool,
+    ) {
+        parent::__construct();
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $connection = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getConnectionForTable('tt_content');
+        $connection = $this->connectionPool->getConnectionForTable('tt_content');
 
         // Migrate CType
         $connection->update(

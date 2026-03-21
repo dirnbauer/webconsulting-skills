@@ -69,7 +69,7 @@ Find custom implementations that duplicate what TYPO3 already provides.
 
 | Removed / legacy | When | Modern approach |
 |---|---|---|
-| `switchableControllerActions` | Removed in **v10** (#88496) | Separate plugin registrations |
+| `switchableControllerActions` | Deprecated in **v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)), removed later | Separate plugin registrations |
 | Signal/Slot `Dispatcher` | Removed in **v12** | PSR-14 events |
 | `AbstractPlugin` (pi_base) | Deprecated v12.4, removed **v13** | Extbase or middleware |
 
@@ -229,11 +229,11 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 | `$GLOBALS['TSFE']` access | Replace with `$request->getAttribute('frontend.page.information')` |
 | Extbase annotations (`@validate`) | Replace with `#[\TYPO3\CMS\Extbase\Attribute\Validate]` |
 | `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
-| `FlexFormService` usage | Replace with `FlexFormTools` |
+| `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
 | Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
-| TCA `ctrl.searchFields` (removed in v14) | In v14, fields are **searchable by default**; set `'searchable' => false` to **exclude** columns from backend search |
+| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` where supported |
 | Custom localization parsers | Remove, use Symfony Translation Component |
-| `GeneralUtility::createVersionNumberedFilename()` | Replace with **System Resource API** (#107537) |
+| `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |
 
 ---
 

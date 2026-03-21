@@ -135,7 +135,7 @@ ProductService
       Find all active products.
 
       :returns: Array of active products
-      :rtype: Product[]
+      :returntype: Product[]
 
       **Example:**
 

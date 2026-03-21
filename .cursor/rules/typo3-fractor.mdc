@@ -53,7 +53,7 @@ This meta-package installs all TYPO3-specific file processors:
 - `a9f/fractor-typoscript` (TypoScript/TSconfig processing)
 - `a9f/fractor-yaml` (YAML processing)
 - `a9f/fractor-htaccess` (Htaccess processing)
-- `a9f/fractor-composer-json` (composer.json processing — **not** always installed as a transitive dependency of `a9f/typo3-fractor`; add `composer require --dev a9f/fractor-composer-json` if you need it)
+- `a9f/fractor-composer-json` (composer.json processing — **not installed as a dependency** of `a9f/typo3-fractor`; add `composer require --dev a9f/fractor-composer-json` if you need it)
 
 ## 2. Configuration
 
@@ -373,7 +373,7 @@ final class MyCustomFlexFormFractor extends AbstractXmlFractor
     public function canHandle(\DOMNode $node): bool
     {
         return $node->nodeName === 'config'
-            && $node->parentNode?->nodeName === 'TCEforms';
+            && $node->parentNode instanceof \DOMElement;
     }
 
     public function refactor(DOMNode $node): DOMNode|int|null
@@ -487,7 +487,7 @@ vendor/bin/fractor process --dry-run
 ## 10. Resources
 
 - **Fractor Repository**: https://github.com/andreaswolf/fractor
-- **TYPO3 Fractor Package**: https://github.com/andreaswolf/fractor-typo3-fractor
+- **TYPO3 Fractor Package**: https://github.com/andreaswolf/fractor/tree/main/packages/typo3-fractor
 - **Packagist**: https://packagist.org/packages/a9f/typo3-fractor
 - **TYPO3 Rector** (PHP companion): https://github.com/sabbelasichon/typo3-rector
 - **Related Skills**: `typo3-extension-upgrade` (full upgrade workflow), `typo3-rector` (PHP migrations)
@@ -496,13 +496,10 @@ vendor/bin/fractor process --dry-run
 
 > The following non-PHP migration targets are **v14-specific** and handled by Fractor `Typo3SetList::TYPO3_14` rules.
 
-### TCA Migrations **[v14 only]**
+### What Fractor does **not** cover
 
-- **`ctrl.searchFields` removed** — migrate to per-column `'searchable' => true` configuration.
-- **`ctrl.is_static` removed** — remove from TCA ctrl arrays.
-- **TCA `interface` settings removed** (#106412) — remove `interface` key from TCA.
-- **TCA tab labels consolidated** (#107789) — use `core.form.tabs` short-form references.
-- **FlexForm pointer fields removed** (#107047) — use direct TCA column references.
+- **TCA migrations in PHP files** such as `ctrl.searchFields`, `ctrl.is_static`, or `interface` cleanup belong to **Rector** / manual PHP edits, not Fractor.
+- **PHP API migrations** such as `FlexFormService` -> `FlexFormTools` also belong to **Rector** / manual PHP refactoring.
 
 ### TypoScript Migrations **[v14 only]**
 
@@ -515,10 +512,10 @@ vendor/bin/fractor process --dry-run
 
 - **Updated default `.htaccess` template** (#105244) — Fractor can apply the updated template.
 
-### FlexForm Migrations **[v14 only]**
+### FlexForm / XML Migrations **[v14 only]**
 
-- **FlexForm `pointer` field functionality removed** (#107047) — migrate to direct TCA references.
-- **`FlexFormService` merged into `FlexFormTools`** (#107945) — update PHP references.
+- Use Fractor for **non-PHP FlexForm XML** cleanups that are backed by actual Fractor rules in the installed package.
+- If the change is a **PHP class rename** or a **TCA migration**, switch to the `typo3-rector` skill instead.
 
 ---
 

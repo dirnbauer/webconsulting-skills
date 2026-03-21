@@ -54,20 +54,38 @@ The suggest controller returns JSON with suggestions and optional top results:
 
 ### TypoScript Setup
 
-Do NOT include the jQuery TypoScript template. Instead, configure the AJAX page type manually:
+Use EXT:solr's shipped Ajaxify example (or include the corresponding TypoScript template) instead of the old `pi_base` copy pattern:
 
 ```typoscript
-plugin.tx_solr_PiResults_Results < tt_content.list.20.solr_pi_results
-
-solr_ajax = PAGE
-solr_ajax {
+tx_solr_ajaxPage = PAGE
+tx_solr_ajaxPage {
     typeNum = 7383
     config {
         disableAllHeaderCode = 1
-        additionalHeaders.10.header = Content-Type: text/html;charset=utf-8
-        no_cache = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        additionalHeaders.10.header = Content-type: text/plain
+        no_cache = 0
     }
-    10 < plugin.tx_solr_PiResults_Results
+
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Solr
+        pluginName = pi_results
+        vendorName = ApacheSolrForTypo3
+        controller = Search
+        action = results
+        switchableControllerActions {
+            Search {
+                1 = results
+                2 = form
+            }
+        }
+        view < plugin.tx_solr.view
+        persistence < plugin.tx_solr.persistence
+        settings < plugin.tx_solr.settings
+    }
 }
 ```
 

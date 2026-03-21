@@ -69,6 +69,8 @@ composer test:functional
 composer test
 ```
 
+Verify the actual Composer script names in the extension's `composer.json` before documenting them. Some extensions use `composer test`, others only expose direct `phpunit` or CI helper commands.
+
 ---
 
 ## 4. Pull Request Guidelines

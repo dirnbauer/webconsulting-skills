@@ -235,9 +235,9 @@ Use TYPO3 CSS variables for automatic dark mode:
 
 ```css
 .timeline-item {
-    /* Core-ish fallbacks; extension UI often uses `--gv-*` tokens — align with backend DevTools in your TYPO3 minor */
+    /* TYPO3 Core fallbacks; `--gv-*` tokens are defined by this extension, not by TYPO3 Core */
     background: var(--typo3-component-bg, #fff);
-    border: 1px solid var(--typo3-border-mix, #d4d4d8);
+    border: 1px solid var(--typo3-component-border-color, #d4d4d8);
 }
 ```
 
@@ -285,7 +285,7 @@ Two modes control which fields appear:
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
 2. **This extension’s own TSconfig / template resolution** — not Core `mod.web_list.table.<table>.showFields` (that path is not a documented Core column picker). See extension docs and `GridConfigurationService` behaviour for your release.
-3. **TCA `ctrl.label` and sensible text/date fallbacks** (see “Special Column Names” below) — v14 has no `ctrl.searchFields`; backend search uses per-column `searchable`, which is unrelated to this list display.
+3. **TCA `ctrl.label` and sensible text/date fallbacks** (see “Special Column Names” below) — TYPO3 v14 removed `ctrl.searchFields`; backend search now auto-includes suitable fields and can be tuned per-column via `searchable`, which is unrelated to this list display.
 
 ### Special Column Names
 
@@ -390,16 +390,33 @@ module.tx_recordsgridview {
 Listen to `ModifyRecordListRecordActionsEvent` (TYPO3 Core event):
 
 ```php
+use TYPO3\CMS\Backend\RecordList\Event\ModifyRecordListRecordActionsEvent;
+use TYPO3\CMS\Backend\Template\Components\ActionGroup;
+use TYPO3\CMS\Backend\Template\Components\ComponentFactory;
+use TYPO3\CMS\Core\Attribute\AsEventListener;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
+
 #[AsEventListener]
 final class CustomRecordActionListener
 {
+    public function __construct(
+        private readonly ComponentFactory $componentFactory,
+        private readonly IconFactory $iconFactory,
+    ) {}
+
     public function __invoke(ModifyRecordListRecordActionsEvent $event): void
     {
-        if ($event->getTable() === 'tx_yourext_domain_model_item') {
+        $record = $event->getRecord();
+        if ($record->getMainType() === 'tx_yourext_domain_model_item') {
             $event->setAction(
-                action: '<a href="..." title="My Action"><span class="icon">...</span></a>',
+                action: $this->componentFactory
+                    ->createLinkButton()
+                    ->setHref('/my/custom/action?uid=' . $record->getUid())
+                    ->setTitle('My Action')
+                    ->setIcon($this->iconFactory->getIcon('actions-open', IconSize::SMALL)),
                 actionName: 'myCustomAction',
-                group: 'primary',
+                group: ActionGroup::secondary,
                 after: 'edit'
             );
         }

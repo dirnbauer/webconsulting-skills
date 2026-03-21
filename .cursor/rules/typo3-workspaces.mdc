@@ -28,13 +28,12 @@ This skill is based on 18 authoritative sources:
 4. [Configuration Options (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Configuration/Index.html)
 5. [PSR-14 Events (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Events/Index.html)
 6. [Versioning & Workspaces (TYPO3 Explained / Core API)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Workspaces/Index.html)
-7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Properties/VersioningWSAlwaysAllowLiveEdit.html)
+7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Properties/VersioningWS.html)
 8. [Restriction Builder (TYPO3 Explained / Doctrine DBAL)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/DoctrineDbal/RestrictionBuilder/Index.html)
 9. [b13 Blog: The Elegant Efficiency of TYPO3 Overlays (Benni Mack)](https://b13.com/blog/mastering-localization-and-content-staging)
 10. [Scheduler Tasks (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Scheduler/Index.html)
 11. [Users Guide (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/UsersGuide/Index.html)
 12. [TYPO3-CORE-SA-2025-022: Information Disclosure in Workspaces Module](https://typo3.org/security/advisory/typo3-core-sa-2025-022)
-13. [Forge Bug #88021: FAL preview fails when file changed in workspace](https://forge.typo3.org/issues/88021)
 14. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
 15. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
 16. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
@@ -104,7 +103,7 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 - Files in `fileadmin/` live exclusively in the **LIVE workspace**
 - If you **overwrite** a file, the change affects **ALL workspaces immediately**
 - `sys_file_reference` records are workspace-versioned; physical files and `sys_file` records are not versioned like content overlays
-- Replacing an image in a workspace content element may fail in preview (Forge #88021)
+- Replacing files inside existing references can still have edge cases in workspace previews; test on your exact TYPO3 minor and prefer new filenames over in-place replacement when possible.
 
 ### The Predictable Filename Security Problem
 
@@ -285,7 +284,7 @@ Use this checklist to verify your workspace setup is complete:
 #### Extension & System
 
 - [ ] `typo3/cms-workspaces` is installed and activated
-- [ ] Database schema is up to date (`bin/typo3 database:updateschema`)
+- [ ] Database schema is up to date (`bin/typo3 extension:setup` or your project's equivalent schema-update wrapper)
 - [ ] `typo3/cms-scheduler` is installed (required for auto-publish)
 - [ ] Scheduler cron job is configured on server
 
@@ -553,7 +552,7 @@ The `t3ver_*` database columns are **auto-created** when `versioningWS = true` -
 After enabling, run:
 
 ```bash
-bin/typo3 database:updateschema
+bin/typo3 extension:setup
 ```
 
 ### Step 2: Disable Versioning for Specific Tables
@@ -1032,7 +1031,7 @@ When workspaces "don't work", check these in order:
 | 6 | DB columns exist? | `DESCRIBE <table>` -- look for `t3ver_oid`, `t3ver_wsid`, `t3ver_state` |
 | 7 | DB mounts correct? | User/group must have DB mounts covering the pages being edited |
 | 8 | File mounts correct? | User/group must have file mounts for media access |
-| 9 | Schema up to date? | `bin/typo3 database:updateschema` |
+| 9 | Schema up to date? | `bin/typo3 extension:setup` (or your project's schema-update wrapper) |
 | 10 | Cache cleared? | `bin/typo3 cache:flush` |
 
 ### SQL Queries for Debugging (DDEV Local Only)
@@ -1123,7 +1122,7 @@ $workspaceAccess = $GLOBALS['BE_USER']->checkWorkspace($workspaceId);
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
-| Records not visible in workspace | `versioningWS = false` on table | Set `versioningWS = true`, then `extension:setup` / schema update per your CLI (**`database:updateschema` needs typo3-console**) |
+| Records not visible in workspace | `versioningWS = false` on table | Set `versioningWS = true`, then run `extension:setup` (or your project's schema-update wrapper) |
 | Workspace changes visible on live site | Missing `WorkspaceRestriction` in custom query | Add `FrontendRestrictionContainer` or manual `WorkspaceRestriction` |
 | "Editing not possible" error | User lacks edit permission or stage access | Check user/group `tables_modify`, DB mounts, workspace membership |
 | Preview shows wrong content | Missing `versionOL()` call in extension | Add `BackendUtility::workspaceOL()` or `PageRepository->versionOL()` after query |

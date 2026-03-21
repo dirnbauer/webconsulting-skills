@@ -267,7 +267,7 @@ return [
         'position' => ['after' => 'records'],
         'access' => 'user,group',
         'iconIdentifier' => 'myextension-module',
-        'path' => '/module/web/myextension',
+        'path' => '/module/content/myextension',
         'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
         'extensionName' => 'MyExtension',
         'controllerActions' => [

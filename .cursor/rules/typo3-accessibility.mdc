@@ -333,10 +333,10 @@ final class AccessibilityLangMiddleware implements MiddlewareInterface
             1
         );
 
-        $response->getBody()->rewind();
-        $response->getBody()->write($body);
+        $newBody = new \TYPO3\CMS\Core\Http\Stream('php://temp', 'rw');
+        $newBody->write($body);
 
-        return $response;
+        return $response->withBody($newBody);
     }
 }
 ```
@@ -710,7 +710,7 @@ button, a, input, select, textarea, [role="button"] {
     min-width: 44px;
 }
 
-/* Ensure readable line height (WCAG 1.4.12) */
+/* Good default; test with user-overridden spacing per WCAG 1.4.12 */
 body {
     line-height: 1.6;
 }
@@ -949,7 +949,7 @@ Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#
 - Inert background
 - No JavaScript framework dependency
 
-Update any custom backend JavaScript that uses `Modal.show()` or `Modal.confirm()` from the Bootstrap-based API.
+Update custom backend JavaScript that listens to **Bootstrap modal events** such as `show.bs.modal` / `hidden.bs.modal` — TYPO3 v14 uses events like `typo3-modal-show`, `typo3-modal-shown`, `typo3-modal-hide`, and `typo3-modal-hidden`. Also replace Bootstrap modal triggers such as `data-bs-toggle="modal"` with TYPO3's `t3js-modal-trigger` class where appropriate.
 
 ### Fluid 5.0 Accessibility Impact **[v14 only]**
 

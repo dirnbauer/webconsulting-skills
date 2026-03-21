@@ -221,7 +221,7 @@ Functional tests:
 
 CI pipeline:
   1. Create .github/workflows/ci.yml
-  2. Configure PHP matrix (8.2, 8.3, 8.4)
+  2. Configure PHP matrix (8.2, 8.3, 8.4, 8.5)
   3. Configure CI matrix (TYPO3 v14, PHP 8.2+)
 ```
 
@@ -238,7 +238,7 @@ CI pipeline:
 2. Use asymmetric visibility (public private(set)) on DTOs
 3. Replace array_search + if with array_find() **only after checking semantics** — `array_search()` returns a **key** for a given value; `array_find()` takes a **callback** and returns the first matching **value** (or null). Not drop-in replacements.
 4. Replace array_filter + reset with array_find() where a callback-based “first match” is what you need
-5. Replace manual array_key_exists checks with array_any/array_all
+5. Replace `foreach` + conditional checks with `array_any()` / `array_all()` for value-based logic. These do **not** replace `array_key_exists()` (key-based checks).
 6. Add #[\Deprecated] attribute to legacy methods
 7. Run php -l to verify syntax
 ```
@@ -332,7 +332,7 @@ Stop the batch and report if:
 |----------------|-----------------|
 | Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
 | Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
-| `MailMessage->send()` → inject `TYPO3\CMS\Core\Mail\MailerInterface` and `$this->mailer->send($email)` | All email-sending code; avoid raw Symfony `MailerInterface` in TYPO3 DI ([Breaking #108097](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-108097-UseSymfonyMailerInterface.html)) |
+| `MailMessage->send()` removed (#108097) → inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` | All email-sending code ([Breaking #108097](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-108097-MailMessage-sendRemoved.html)) |
 | `ctrl.searchFields` removed (v14) → per-field `searchable` in field `config` | See [Breaking: #106972](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-106972-TCAControlOptionSearchFieldsRemoved.html) |
 | TCA `interface` removal | All TCA files with `interface` key |
 | Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |

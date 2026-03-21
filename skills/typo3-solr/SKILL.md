@@ -180,7 +180,7 @@ hooks:
 |---------|-------------|
 | `ddev solrctl apply` | Create cores from config |
 | `ddev solrctl wipe` | Delete all cores |
-| `ddev solr version` | Check Solr version |
+| `ddev exec -s solr solr --version` | Check Solr version inside the Solr service |
 | `ddev launch :8984` | Open Solr Admin UI |
 | `ddev logs -s typo3-solr` | View Solr logs |
 
@@ -546,7 +546,7 @@ plugin.tx_solr.search {
 }
 ```
 
-**Facet types:** `options` (default), `queryGroup`, `hierarchy`, `dateRange`, `numericRange`.
+**Facet / rendering modes:** `options` (default), `optionsFiltered`, `optionsPrefixGrouped`, `optionsSinglemode`, `optionsToggle`, `queryGroup`, `hierarchy`, `dateRange`, `numericRange`, `rootline`.
 
 ### Suggest / Autocomplete
 
@@ -643,8 +643,16 @@ plugin.tx_solr {
 | `Templates/Search/Results.html` | Main search results page |
 | `Templates/Search/Form.html` | Search form |
 | `Partials/Result/Document.html` | Single result item |
-| `Partials/Facets/Options.html` | Options facet rendering (Fluid partial name; not `OptionsFacet.html`) |
-| `Partials/Facets/QueryGroupFacet.html` | Query group facet |
+| `Partials/Facets/Options.html` | Standard options facet rendering |
+| `Partials/Facets/OptionsFiltered.html` | Options facet with active filtering state |
+| `Partials/Facets/OptionsPrefixGrouped.html` | Prefix-grouped options rendering |
+| `Partials/Facets/OptionsSinglemode.html` | Single-select options rendering |
+| `Partials/Facets/OptionsToggle.html` | Toggle-style options rendering |
+| `Partials/Facets/Hierarchy.html` | Hierarchy facet |
+| `Partials/Facets/RangeDate.html` | Date range facet |
+| `Partials/Facets/RangeNumeric.html` | Numeric range facet |
+| `Partials/Facets/Rootline.html` | Rootline facet |
+| `Partials/Facets/Default.html` | Default / fallback rendering (including queryGroup fallback) |
 
 Copy default templates from EXT:solr to your extension path and modify them.
 
@@ -654,6 +662,8 @@ Copy default templates from EXT:solr to your extension path and modify them.
 
 | Event | Fired when |
 |-------|-----------|
+| `RecordInsertedEvent` | A monitored record is inserted |
+| `RecordUpdatedEvent` | A monitored record is updated |
 | `VersionSwappedEvent` | A version is swapped (workspace publish) |
 | `RecordMovedEvent` | A record is moved |
 | `RecordGarbageCheckEvent` | A garbage check is triggered |
@@ -669,24 +679,57 @@ Copy default templates from EXT:solr to your extension path and modify them.
 | `DelayedProcessingQueuingFinishedEvent` | Update queued in event queue (delayed mode) |
 | `DelayedProcessingFinishedEvent` | Delayed processing complete (scheduler) |
 
-### Indexing Events
-
-Event class names and namespaces vary slightly by **EXT:solr** version — always confirm in `vendor/apache-solr-for-typo3/solr/Classes/Event/`. The [official EXT:solr development docs](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Development/Indexing.html) list page vs record document events.
+### Index Queue Events
 
 | Event | Fired when |
 |-------|-----------|
+| `AfterIndexQueueHasBeenInitializedEvent` | Index queue initialization finished |
+| `AfterIndexQueueItemHasBeenMarkedForReindexingEvent` | An index queue item was marked for reindexing |
+| `AfterRecordsForIndexQueueItemsHaveBeenRetrievedEvent` | Records for index queue items were fetched |
+
+### Indexing Events
+
+The following classes exist in current EXT:solr releases; always confirm against your installed `vendor/typo3-solr/ext-solr/Classes/` tree.
+
+| Event | Fired when |
+|-------|-----------|
+| `AfterFrontendPageUriForIndexingHasBeenGeneratedEvent` | Frontend page URI for indexing was generated |
+| `AfterItemHasBeenIndexedEvent` | One item was indexed |
+| `AfterItemsHaveBeenIndexedEvent` | A batch of items was indexed |
 | `BeforePageDocumentIsProcessedForIndexingEvent` | Before page document is processed (add extra documents) |
 | `AfterPageDocumentIsCreatedForIndexingEvent` | After page document created (replace/substitute) |
 | `BeforeDocumentIsProcessedForIndexingEvent` | Before non-page record document is processed |
 | `BeforeDocumentsAreIndexedEvent` | Before documents are sent to Solr (add custom fields) |
+| `BeforeItemIsIndexedEvent` | Before one item is indexed |
+| `BeforeItemsAreIndexedEvent` | Before a batch of items is indexed |
+
+### Search Events
+
+| Event | Fired when |
+|-------|-----------|
+| `AfterFrequentlySearchHasBeenExecutedEvent` | Frequently-searched query finished |
+| `AfterInitialSearchResultSetHasBeenCreatedEvent` | Initial result set was created before later processing |
+| `AfterSearchHasBeenExecutedEvent` | Search finished |
+| `AfterSearchQueryHasBeenPreparedEvent` | Search query object prepared |
+| `AfterSuggestQueryHasBeenPreparedEvent` | Suggest query object prepared |
+| `BeforeSearchFormIsShownEvent` | Search form rendering starts |
+| `BeforeSearchResultIsShownEvent` | Search result rendering starts |
+
+### Routing Events
+
+| Event | Fired when |
+|-------|-----------|
+| `BeforeVariableInCachedUrlAreReplacedEvent` | Cached URL variables are about to be substituted |
+| `BeforeCachedVariablesAreProcessedEvent` | Cached URL variables are about to be processed |
+| `AfterUriIsProcessedEvent` | Final search URI was processed |
 
 ### Other Events
 
 | Event | Fired when |
 |-------|-----------|
 | `AfterFacetIsParsedEvent` | Facet component modification |
-| `AfterUriIsProcessedEvent` | URI building in search context |
 | `AfterSiteHashHasBeenDeterminedForSiteEvent` | Override calculated site hash |
+| `AfterVariantIdWasBuiltEvent` | Variant id generation finished |
 
 ### Example: Add custom fields to documents (TYPO3 v14)
 
@@ -2128,7 +2171,7 @@ If your custom record TCA uses `ctrl.searchFields` for Solr indexing configurati
 
 - **dkd Internet Service GmbH** for developing and maintaining EXT:solr, EXT:tika, and the TYPO3-Solr ecosystem
 - **Apache Software Foundation** for Apache Solr and Apache Tika
-- **b13** for maintaining the ddev-typo3-solr addon
+- **DDEV addon maintainers** (historically b13, now also the `ddev` org) for the `ddev-typo3-solr` addon
 - **Helmut Hummel (helhum)** for dotenv-connector
 - **Mittwald** for managed Solr hosting documentation
 

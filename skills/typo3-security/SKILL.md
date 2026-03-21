@@ -28,11 +28,11 @@ return [
         // Disable debug in production
         'debug' => false,
         
-        // Session security
-        'lockIP' => 4,                    // Lock backend session to full IP
+        // Session security (example hardening values — tune for proxies/load balancers)
+        'lockIP' => 4,                    // Example: bind backend sessions to the full IPv4 address
         'lockIPv6' => 8,                  // Lock to IPv6 prefix
         'sessionTimeout' => 3600,         // 1 hour session timeout
-        'lockSSL' => true,                // Force HTTPS for backend
+        'lockSSL' => true,                // Example: require HTTPS for backend requests
         
         // Password policy (TYPO3 v14)
         'passwordHashing' => [
@@ -43,7 +43,7 @@ return [
     
     'FE' => [
         'debug' => false,
-        'lockIP' => 0,                    // Usually 0 for frontend (mobile users)
+        'lockIP' => 0,                    // Common for frontend sessions; mobile users / proxies often change IPs
         'sessionTimeout' => 86400,
         // `FE.lockSSL` was removed in v12 — enforce HTTPS at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
         'passwordHashing' => [
@@ -104,14 +104,14 @@ return [
 // ❌ DANGEROUS - Allows any host
 'trustedHostsPattern' => '.*',
 
-// ✅ SECURE - Explicit host list
-'trustedHostsPattern' => 'example\\.com|www\\.example\\.com',
+// ✅ SECURE - Explicit host list (fully anchored)
+'trustedHostsPattern' => '^(?:example\\.com|www\\.example\\.com)$',
 
 // ✅ SECURE - Regex for subdomains (still anchored to your registrable domain)
 'trustedHostsPattern' => '^(.*\\.)?example\\.com$',
 
 // Development with DDEV
-'trustedHostsPattern' => '(.*\\.)?example\\.com|.*\\.ddev\\.site',
+'trustedHostsPattern' => '^(?:(?:.*\\.)?example\\.com|.*\\.ddev\\.site)$',
 ```
 
 ## 3. File System Security
@@ -225,7 +225,8 @@ add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
 
 ```bash
 # Remove enable file after installation
-rm public/typo3conf/ENABLE_INSTALL_TOOL
+# Composer-based installs typically use ENABLE_INSTALL_TOOL in the project root.
+rm ENABLE_INSTALL_TOOL
 ```
 
 ### Secure Install Tool Password
@@ -530,8 +531,9 @@ use TYPO3\CMS\Core\Crypto\Cipher\CipherService;
 use TYPO3\CMS\Core\Crypto\Cipher\SharedKey;
 
 $cipherService = GeneralUtility::makeInstance(CipherService::class);
-// Derive keys via Core helpers where documented (e.g. `KeyFactory`) instead of ad-hoc `SharedKey` + `encryptionKey` hashing in production.
-$key = new SharedKey(hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true));
+// Obtain a SharedKey from your documented key-management flow; do not hash the TYPO3 encryptionKey ad hoc.
+/** @var SharedKey $key */
+$key = $sharedKeyProvider->getEncryptionKey();
 $cipherValue = $cipherService->encrypt('sensitive data', $key);
 $decrypted = $cipherService->decrypt($cipherValue, $key);
 ```

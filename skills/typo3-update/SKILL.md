@@ -339,7 +339,7 @@ return [
         'position' => ['after' => 'records'],
         'access' => 'user,group',
         'iconIdentifier' => 'myextension-module',
-        'path' => '/module/web/myextension',
+        'path' => '/module/content/myextension',
         'labels' => 'LLL:EXT:my_extension/Resources/Private/Language/locallang_mod.xlf',
         'extensionName' => 'MyExtension',
         'controllerActions' => [
@@ -789,7 +789,7 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 
 ### Plugin Subtypes Removed **[v14 only]**
 
-- **`switchableControllerActions`:** removed in **TYPO3 v10** (#88496) — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
+- **`switchableControllerActions`:** deprecated in **TYPO3 v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)) and removed later — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
 - **`list_type` subtypes / plugin list types:** further tightened in **v14** (#105538) — each variant needs its own `configurePlugin()` / registration and TypoScript/FlexForm split.
 
 ### EXT:form Hooks → PSR-14 Events **[v14 only]**
@@ -817,7 +817,7 @@ New features to adopt (not migrations):
 
 - `<f:page.meta>` — set page meta tags from Fluid templates.
 - `<f:page.title>` — set page title from Fluid templates.
-- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Feature-107056-FluidViewHelpersForHeaderAndFooterData.html)).
+- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107056-FluidViewHelpersForHeaderAndFooterData.html)).
 
 ### Localization System **[v14 only]**
 
@@ -846,9 +846,9 @@ Verify each item in the [official v14.1 changelog](https://docs.typo3.org/c/typo
 
 **v14.0 (examples):**
 
-- `ExtensionManagementUtility::addPiFlexFormValue()` — use direct FlexForm TCA.
+- `ExtensionManagementUtility::addPiFlexFormValue()` ([#107047](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-107047-ExtensionManagementUtilityAddPiFlexFormValue.html)) — use direct FlexForm TCA.
 
-**v14.2+ (verify changelog IDs):**
+**v14.2+ examples:**
 
 - `ExtensionManagementUtility::addFieldsToUserSettings` (#108843) — use TCA for user settings.
 - `PageRenderer->addInlineLanguageDomain()` (#108963).

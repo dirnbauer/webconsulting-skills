@@ -33,9 +33,7 @@ type: typo3
 docroot: public
 php_version: "8.4"
 webserver_type: nginx-fpm
-database:
-  type: mariadb
-  version: "10.11"
+database: mariadb:10.11
 
 # Recommended for PHP 8.4
 composer_version: "2"
@@ -66,9 +64,7 @@ PHP 8.4 requires Xdebug 3.4+.
 
 ```ini
 [xdebug]
-xdebug.mode=debug,develop
 xdebug.start_with_request=trigger
-xdebug.client_host=host.docker.internal
 xdebug.client_port=9003
 xdebug.idekey=CURSOR
 xdebug.log_level=0
@@ -77,6 +73,8 @@ xdebug.log_level=0
 xdebug.show_local_vars=1
 xdebug.var_display_max_depth=5
 ```
+
+Do **not** hardcode `xdebug.mode` or `xdebug.client_host` in custom ini files. DDEV manages Xdebug enable/disable state and the correct client host automatically across macOS, Linux, and Windows.
 
 ### Enable/Disable Xdebug
 

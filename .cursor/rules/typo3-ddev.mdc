@@ -75,9 +75,7 @@ type: typo3
 docroot: public
 php_version: "8.3"    # 8.2 minimum for TYPO3 v14; 8.3/8.4 common locally
 webserver_type: nginx-fpm
-database:
-  type: mariadb
-  version: "10.11"    # 10.11+ or 11.x recommended for TYPO3 v14
+database: mariadb:10.11    # 10.11+ or 11.x recommended for TYPO3 v14
 
 # Fixed port for external tools (MySQL MCP, etc.)
 host_db_port: "33060"
@@ -130,11 +128,13 @@ ssh user@server "mysqldump -u root dbname | gzip" | gunzip | ddev import-db
 
 ```bash
 # Standard export
-ddev export-db --file=backup.sql.gz
+ddev export-db --file=/tmp/backup.sql.gz
 
 # Without gzip
-ddev export-db --gzip=false --file=backup.sql
+ddev export-db --gzip=false --file=/tmp/backup.sql
 ```
+
+If you prefer relative paths, note that DDEV resolves them from the project root. Absolute paths are the documented convention.
 
 ### Database Snapshots
 
@@ -301,12 +301,7 @@ ddev xdebug status
 
 ### Xdebug Environment
 
-```yaml
-# .ddev/config.yaml
-web_environment:
-  - XDEBUG_MODE=debug,develop
-  - XDEBUG_CONFIG=client_host=host.docker.internal
-```
+Avoid setting `XDEBUG_MODE`, `XDEBUG_CONFIG`, or hardcoded `client_host` values in `.ddev/config.yaml` for normal projects. DDEV manages these automatically via `ddev xdebug on`, `ddev xdebug off`, and `ddev xdebug toggle`, including the correct host value per platform.
 
 ## 8. Multi-Site Configuration
 

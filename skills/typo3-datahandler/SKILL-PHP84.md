@@ -220,7 +220,7 @@ final class RecordService
 $result = $recordService->processDataMap($data);
 
 echo $result->success;        // ✅ Readable
-echo $result->createdRecords; // ✅ Readable
+print_r($result->createdRecords); // ✅ Readable nested array output
 $result->success = false;     // ❌ Error: Cannot modify
 ```
 
@@ -356,11 +356,6 @@ final class LegacyContentService
     )]
     public function createContentArray(array $data): int
     {
-        trigger_error(
-            'createContentArray() is deprecated, use createContent() with typed command',
-            E_USER_DEPRECATED
-        );
-
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $dataHandler->start(['tt_content' => ['NEW_1' => $data]], []);
         $dataHandler->process_datamap();

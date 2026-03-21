@@ -241,10 +241,9 @@ declare(strict_types=1);
 namespace Vendor\MyExt\Finisher;
 
 use In2code\Powermail\Finisher\AbstractFinisher;
-use In2code\Powermail\Finisher\FinisherInterface;
 use In2code\Powermail\Domain\Model\Mail;
 
-final class CrmFinisher extends AbstractFinisher implements FinisherInterface
+final class CrmFinisher extends AbstractFinisher
 {
     /**
      * Method name MUST end with "Finisher"

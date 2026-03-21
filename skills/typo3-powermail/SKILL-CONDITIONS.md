@@ -2,7 +2,7 @@
 name: typo3-powermail-conditions
 description: Conditional field and page visibility for TYPO3 Powermail forms using powermail_cond. AJAX-based dynamic show/hide of fields and fieldsets based on user input with 10 comparison operators.
 version: 1.0.0
-typo3_compatibility: "14.x"
+typo3_compatibility: "13.4"
 triggers:
   - powermail_cond
   - powermail condition
@@ -14,7 +14,7 @@ triggers:
 
 # Powermail Conditions (powermail_cond)
 
-> **Compatibility:** TYPO3 v14.x with Powermail 13.x and powermail_cond 13.x (verify both on Packagist for your Core)
+> **Compatibility:** TYPO3 **13.4** with Powermail 13.x and powermail_cond 13.x (verify both on Packagist before assuming TYPO3 v14 support)
 > **Requires:** `in2code/powermail: ^13.0` (adjust when upgrading majors)
 
 ## 1. Overview

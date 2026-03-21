@@ -95,7 +95,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '14.0.0-14.99.99',
-            'php' => '8.2.0-8.4.99',
+            'php' => '8.2.0-8.5.99',
         ],
     ],
 ];
@@ -271,7 +271,7 @@ public function listAction(): void
     $this->view->assign('items', $items);
 }
 
-// ✅ NEW (TYPO3 v14)
+// ✅ Required since TYPO3 v12 (still mandatory in v14)
 public function listAction(): ResponseInterface
 {
     $this->view->assign('items', $items);
@@ -307,7 +307,7 @@ final class MyListener
 ### Static TCA (No Runtime Modifications)
 
 ```php
-// ❌ OLD (runtime TCA mutation — not allowed since TYPO3 v12; still seen in very old extensions)
+// ❌ OLD (runtime TCA mutation — enforcement switched to static TCA in TYPO3 v12; still seen in very old extensions)
 // ext_tables.php
 $GLOBALS['TCA']['tt_content']['columns']['myfield'] = [...];
 
@@ -438,8 +438,8 @@ Before considering upgrade complete:
 |--------|-----------|
 | `$GLOBALS['TSFE']` / `TypoScriptFrontendController` removed | Use request attributes (`frontend.page.information`, `language`) |
 | Extbase annotations removed | Use `#[Validate]`, `#[IgnoreValidation]` PHP attributes |
-| `MailMessage->send()` removed | Inject `TYPO3\CMS\Core\Mail\MailerInterface` (Core facade over Symfony Mailer) and send `FluidEmail` / `Email` instances so TYPO3 transport config applies |
-| `FlexFormService` removed | Use `FlexFormTools` |
+| `MailMessage->send()` removed | Inject `TYPO3\CMS\Core\Mail\MailerInterface` (TYPO3 Core mail transport interface) and send `FluidEmail` / `Email` instances so TYPO3 transport config applies |
+| `FlexFormService` merged into `FlexFormTools` | Use `FlexFormTools` (BC alias exists until v15) |
 | DataHandler `userid`/`admin`/`storeLogMessages` removed | Use `$GLOBALS['BE_USER']` / context APIs as documented in the changelog entry |
 | Frontend asset concat/compress removed | Delegate to web server or build tools |
 | Plugin subtypes removed | Register separate plugins via `configurePlugin()` |

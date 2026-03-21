@@ -245,7 +245,7 @@ mod.web_list.viewMode.types.fulllist {
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
 2. **This extension’s TSconfig / resolver logic** — not Core `mod.web_list.table.*.showFields`.
-3. **TCA label + heuristics** — v14 has no `ctrl.searchFields`; list display does not use backend “search fields”.
+3. **TCA label + heuristics** — TYPO3 v14 removed `ctrl.searchFields`; list display does not use backend “search fields”.
 4. **Label field only** (final fallback)
 
 **`columnsFromTCA = 0`** -- uses the explicit `displayColumns` list exactly.
@@ -299,7 +299,7 @@ Your template receives these variables:
 | `canReorder` | Whether drag-drop is enabled |
 | `lastRecordUid` | Last record UID (for drag-drop end zone) |
 | `paginator` | `DatabasePaginator` (PaginatorInterface) |
-| `pagination` | `SlidingWindowPagination` (PaginationInterface) |
+| `pagination` | Pagination object implementing `PaginationInterface` (exact class can vary by TYPO3 minor / extension implementation) |
 | `paginationUrl` | Base URL for pagination links |
 | `formActionUrl` | Form action URL for multi-record selection |
 | `hasMore` | Whether there are more records than shown (multi-table mode) |
@@ -353,7 +353,7 @@ Use TYPO3 CSS variables for dark mode:
 ```css
 .kanban-column {
     background: var(--typo3-component-bg, #fff);
-    border: 1px solid var(--typo3-border-mix, #d4d4d8);
+    border: 1px solid var(--typo3-component-border-color, #d4d4d8);
     color: var(--typo3-text-color-base, #18181b);
 }
 ```

@@ -131,6 +131,8 @@ namespace Vendor\MyExtension\Rector;
 use PhpParser\Node;
 use PhpParser\Node\Scalar\String_;
 use Rector\Rector\AbstractRector;
+use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 final class ContentBlocksFieldMigrationRector extends AbstractRector
 {
@@ -139,6 +141,24 @@ final class ContentBlocksFieldMigrationRector extends AbstractRector
         'tx_myext_image' => 'myvendor_hero_image',
         'tx_myext_cta_link' => 'myvendor_hero_cta_link',
     ];
+
+    public function getRuleDefinition(): RuleDefinition
+    {
+        return new RuleDefinition(
+            'Migrate classic field names to Content Blocks field identifiers',
+            [
+                new CodeSample(
+                    <<<'PHP'
+$fieldName = 'tx_myext_image';
+PHP
+                    ,
+                    <<<'PHP'
+$fieldName = 'myvendor_hero_image';
+PHP
+                ),
+            ]
+        );
+    }
 
     public function getNodeTypes(): array
     {

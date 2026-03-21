@@ -49,7 +49,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '14.0.0-14.99.99',
-            'php' => '8.2.0-8.4.99',
+            'php' => '8.2.0-8.5.99',
         ],
     ],
 ];
@@ -85,10 +85,7 @@ return RectorConfig::configure()
 
 ### Implicit Nullable
 
-```bash
-# Find all occurrences
-grep -rn "= null" Classes/ | grep -v "?.*= null"
-```
+Prefer Rector (`LevelSetList::UP_TO_PHP_84`) or PHPStan to catch implicit-nullable parameters reliably. A plain `grep "= null"` misses multiline signatures and also matches unrelated property defaults or assignments.
 
 ```php
 // Fix pattern
@@ -120,7 +117,8 @@ parameters:
     paths:
         - Classes
     excludePaths:
-        - Classes/Domain/Model/*
+        # Only exclude generated code you truly cannot fix yet.
+        - var/cache/*
 ```
 
 ---

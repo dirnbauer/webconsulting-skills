@@ -69,7 +69,7 @@ Content Blocks supports four content types:
 | `ContentElements` | `ContentBlocks/ContentElements/` | `tt_content` | Frontend content (hero, accordion, CTA) |
 | `RecordTypes` | `ContentBlocks/RecordTypes/` | Custom/existing | Structured records (news, products, team) |
 | `PageTypes` | `ContentBlocks/PageTypes/` | `pages` | Custom page types (blog, landing page) |
-| `FileTypes` | `ContentBlocks/FileTypes/` | `sys_file_metadata` | Extended file metadata (photographer, copyright) |
+| `FileTypes` | `ContentBlocks/FileTypes/` | `sys_file_reference` | Extended file references (photographer, copyright) |
 
 ## 4. Folder Structure
 
@@ -135,7 +135,7 @@ ddev typo3 extension:setup --extension=my_sitepackage
 
 ### Predefined Basics (content elements)
 
-List under `basics:` to pull in Core field groups: **`TYPO3/Header`**, **`TYPO3/Appearance`**, **`TYPO3/Links`**, **`TYPO3/Categories`**. See the [Content Blocks basics reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/ContentElements/Index.html).
+List under `basics:` to pull in Core field groups: **`TYPO3/Header`**, **`TYPO3/Appearance`**, **`TYPO3/Links`**, **`TYPO3/Categories`**. See the [Content Blocks basics reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/Basics/Index.html).
 
 ### Minimal Content Element
 
@@ -338,7 +338,7 @@ fields:
 
 ### Record Type options (reference)
 
-Content Blocks exposes many **optional** root keys on record types — always confirm names against the current [Record Types YAML reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/RecordTypes/Index.html). Commonly used flags include:
+Content Blocks exposes many **optional** root keys on record types — always confirm names against the current [Record Types YAML reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/RecordTypes/Index.html). Commonly used flags include:
 
 | Option | Role |
 |--------|------|
@@ -360,7 +360,7 @@ name: myvendor/person-employee
 table: tx_mysitepackage_domain_model_person
 typeField: person_type
 typeName: employee
-priority: 0  # Integer ordering for record types (default 0; higher sorts later — confirm in Content Blocks YAML reference for your version)
+priority: 0  # Integer ordering; higher values load first (higher priority)
 labelField: name
 languageAware: false
 workspaceAware: false
@@ -528,7 +528,7 @@ page {
         
         dataProcessing {
             # Process Content Blocks page data
-            1 = content-blocks
+            1 = record-transformation
         }
     }
 }
@@ -566,7 +566,7 @@ options {
 
 > New in version 1.2
 
-File Types extend the `sys_file_metadata` table with custom fields – perfect for photographer credits, copyright notices, or additional file options.
+File Types extend the `sys_file_reference` table with custom fields – perfect for photographer credits, copyright notices, or additional reference-level options.
 
 ### Available File Type Names
 
@@ -633,7 +633,7 @@ fields:
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `typeName` | string | ✓ | One of: `text`, `image`, `audio`, `video`, `application` |
-| `prefixFields` | boolean | | Disable prefixing (recommended: `false`) |
+| `prefixFields` | boolean | | Common root option inherited by File Types; not File-Type-specific (often `false` for shared field names) |
 
 ### Use Cases for File Types
 

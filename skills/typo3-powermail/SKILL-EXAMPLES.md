@@ -2,7 +2,7 @@
 name: typo3-powermail-examples
 description: Comprehensive multi-step shop form example with Austrian legal types, conditional fields, GDPR compliance, translations, workspace support, and two implementation approaches (DDEV SQL and DataHandler CLI command).
 version: 1.1.0
-typo3_compatibility: "14.x"
+typo3_compatibility: "13.4"
 related_skills:
   - typo3-powermail
   - typo3-ddev
@@ -19,6 +19,8 @@ triggers:
 ---
 
 # Powermail Examples: Multi-Step Shop with Conditions
+
+> **Compatibility:** Powermail 13.x currently targets TYPO3 **13.4** per Packagist. Treat v14 usage as pending until the package declares it.
 
 > **Related Skills:**
 > - [SKILL.md](./SKILL.md) - Main Powermail guide

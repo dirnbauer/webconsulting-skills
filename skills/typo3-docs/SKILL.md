@@ -91,7 +91,7 @@ TYPO3 sets these as **attributes on `<extension …/>`**, not as a generic `<set
 ```xml
     <extension
         class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
-        edit-on-github="vendor/my-extension"
+        edit-on-github="https://github.com/vendor/my-extension"
         edit-on-github-branch="main"
         interlink-shortcode="vendor/my-extension"
         project-home="https://github.com/vendor/my-extension"
@@ -310,7 +310,7 @@ docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
 ```bash
 # Fail the build on warnings/errors — flag name varies by image; confirm with `-h` before relying on `--fail-on-log`
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress
+  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --fail-on-log
 
 # Validate guides.xml — `lint-guides-xml` must be the first CLI argument (do not prefix with `--config=…` on the same argv slot)
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
@@ -483,23 +483,19 @@ This extension provides functionality for managing items.
 
 ### XLIFF 2.x Support **[v14 only]**
 
-TYPO3 v14 supports **XLIFF 2.x** translation files (#107710) alongside the existing XLIFF 1.2 format. Document which XLIFF version your extension uses.
+TYPO3 v14 supports **XLIFF 2.x** translation files ([Feature #107710](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107710-SupportXLIFF20Files.html)) alongside the existing XLIFF 1.2 format. Document which XLIFF version your extension uses.
 
 ### Translation Domain Mapping **[v14 only]**
 
-New **translation domain mapping** feature (#93334) allows flexible XLIFF file resolution. Extensions can map translation domains to specific XLIFF files without following the convention-based path.
+Translation domain mapping ([Feature #93334](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-93334-TranslationDomainMapping.html)) allows flexible XLIFF file resolution. Extensions can map translation domains to specific XLIFF files without following the convention-based path.
 
 ### TranslateViewHelper Domain Syntax **[v14 only]**
 
-The `TranslateViewHelper` (`<f:translate>`) supports a new **domain syntax** (#107759) for referencing translations across extension boundaries using `LLL:EXT:` shorthand.
+The `TranslateViewHelper` (`<f:translate>`) supports translation domain mapping ([Feature #107759](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107759-TranslateViewHelperDomainSupport.html)) for cross-extension translation references. `LLL:EXT:` itself is long-standing TYPO3 syntax.
 
 ### Symfony Translation Component **[v14 only]**
 
-TYPO3's localization system now uses the **Symfony Translation Component** (#107436) internally. This affects how translation files are parsed and cached. Custom localization parser implementations are deprecated.
-
-### `xml:space` Attribute in XLIFF **[v14.2+ only]**
-
-XLIFF files now respect the `xml:space` attribute for whitespace handling. Document any whitespace-sensitive translations appropriately.
+TYPO3's localization system now uses the **Symfony Translation Component** ([Feature #107436](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107436-UseSymfonyTranslationComponentForXliffParsing.html)) internally. This affects how translation files are parsed and cached. Custom localization parser implementations are deprecated.
 
 ---
 

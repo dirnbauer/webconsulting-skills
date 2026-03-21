@@ -136,7 +136,8 @@ final class ContentBlocksMediaService
                     'pid' => $pid,
                     'CType' => 'myvendor_hero',
                     'header' => $header,
-                    // File field creates sys_file_reference
+                    // File field creates sys_file_reference; for inline/IRRE handling DataHandler resolves
+                    // uid_foreign automatically. In non-IRRE contexts, set uid_foreign explicitly.
                     'myvendor_hero_image' => 'NEW_image',
                 ],
             ],
@@ -209,7 +210,8 @@ final class TeamMemberService
             'tx_myvendor_team_member' => [
                 'NEW_member' => [
                     'pid' => $pid,
-                    // Fields use identifier directly (no prefix for Record Types)
+                    // Dedicated custom table: fields use identifiers directly.
+                    // Record Types on shared tables such as tt_content still use Content Blocks prefixing.
                     'name' => $name,
                     'position' => $position,
                     'email' => $email,
@@ -425,8 +427,7 @@ public function findTeamMembers(int $pid): array
         ->select('*')
         ->from('tx_myvendor_team_member')
         ->where(
-            $queryBuilder->expr()->eq('pid', $pid),
-            $queryBuilder->expr()->eq('deleted', 0)
+            $queryBuilder->expr()->eq('pid', $pid)
         )
         ->orderBy('sorting')
         ->executeQuery()
@@ -535,7 +536,7 @@ public function validateCType(string $cType): bool
 
     foreach ($registry->getAll() as $contentBlock) {
         $name = $contentBlock->getName(); // e.g. myvendor/hero
-        $expectedCType = str_replace('/', '_', $name);
+        $expectedCType = str_replace(['-', '/'], ['', '_'], $name);
         if ($cType === $expectedCType || $cType === $name) {
             return true;
         }

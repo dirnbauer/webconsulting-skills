@@ -173,7 +173,7 @@ $cmd = [
 TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
 1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** or **constructor DI** — avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
-2. Call `start($data, $cmd[, $backendUser])` **before** any `process_*` call.
+2. Call `start($data, $cmd[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
 3. Call `process_datamap()` and / or `process_cmdmap()`
 4. Inspect **`$dataHandler->errorLog`**, verify expected keys in **`$dataHandler->substNEWwithIDs`** for new records, and (in workspaces) review **`$dataHandler->autoVersionIdMap`** when you expect version rows.
 
@@ -534,7 +534,7 @@ $EM_CONF[$_EXTKEY] = [
 
 [Feature #107519](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107519-AddDiscardCommandToDataHandler.html) adds a **first-class `discard` command** on the **cmdmap** so you can drop workspace versions without the old `version` + `clearWSID` / `flush` workaround. Internal discard-related logic existed in Core before v14; what is **new** is this explicit public cmdmap API. Use the **versioned** record UID (`t3ver_wsid` > 0), not the live record.
 
-The legacy `version` actions remain supported but are **deprecated** in favor of `discard`.
+The legacy `version` actions remain supported but are considered **deprecated in the changelog sense** in favor of `discard`. TYPO3 v14 does **not** emit a dedicated runtime deprecation notice for them.
 
 ```php
 $cmd = [
