@@ -50,7 +50,7 @@ Documentation/
 When no `Documentation/` directory exists, use the init command:
 
 ```bash
-docker run --rm --pull always -v $(pwd):/project -it \
+docker run --rm --pull always -v $(pwd):/project -w /project -it \
   ghcr.io/typo3-documentation/render-guides:latest init
 ```
 
@@ -60,30 +60,45 @@ docker run --rm --pull always -v $(pwd):/project -it \
 
 ## guides.xml Configuration
 
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<guides xmlns="https://www.phpdoc.org/guides" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://www.phpdoc.org/guides https://docs.typo3.org/render-guides/guides.xsd">
-    <project title="My Extension"/>
-    <extension name="my_extension"/>
-</guides>
-```
+Official reference: [guides.xml (How to document)](https://docs.typo3.org/permalink/h2document:guides-xml). The `docker … init` command generates a file from the [render-guides template](https://github.com/TYPO3-Documentation/render-guides/blob/main/packages/typo3-guides-cli/resources/templates/guides.xml.twig); prefer that output over copying fragments by hand.
 
-### With GitHub Integration
+Minimal RST manual (matches TYPO3 theme expectations — adjust `interlink-shortcode` to your Composer package name):
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<guides xmlns="https://www.phpdoc.org/guides" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="https://www.phpdoc.org/guides https://docs.typo3.org/render-guides/guides.xsd">
-    <project title="My Extension" version="1.0.0"/>
-    <extension name="my_extension"/>
+<?xml version="1.0" encoding="UTF-8" ?>
+<guides
+    xmlns="https://www.phpdoc.org/guides"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.phpdoc.org/guides vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+    input-format="rst"
+>
+    <project title="My Extension" copyright="The contributors"/>
+    <extension
+        class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+        interlink-shortcode="vendor/my-extension"
+        typo3-core-preferred="stable"
+    />
     <inventory id="t3coreapi" url="https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/"/>
-    <settings>
-        <setting name="edit_on_github" value="https://github.com/vendor/my-extension/edit/main/Documentation/"/>
-        <setting name="edit_on_github_branch" value="main"/>
-    </settings>
 </guides>
 ```
+
+### GitHub “edit on” and project links
+
+TYPO3 sets these as **attributes on `<extension …/>`**, not as a generic `<settings>` block. Example:
+
+```xml
+    <extension
+        class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+        edit-on-github="vendor/my-extension"
+        edit-on-github-branch="main"
+        interlink-shortcode="vendor/my-extension"
+        project-home="https://github.com/vendor/my-extension"
+        project-repository="https://github.com/vendor/my-extension"
+        typo3-core-preferred="stable"
+    />
+```
+
+Use `docker run … configure` (TYPO3 Guides CLI) to adjust values interactively, then run `lint-guides-xml` (below) to validate against the XSD.
 
 ## RST Syntax Reference
 
@@ -267,29 +282,37 @@ max_line_length = 80
 ### Local Rendering
 
 ```bash
-# Render documentation
-docker run --rm --pull always -v $(pwd):/project -it \
+# Render documentation (working directory = project root inside the container)
+docker run --rm --pull always -v $(pwd):/project -w /project -it \
   ghcr.io/typo3-documentation/render-guides:latest
 
 # Output is in Documentation-GENERATED-temp/
 ```
 
-### With Live Preview
+### With live preview
+
+phpDocumentor Guides exposes a **`serve`** command (dev server with file watching). Default port is **1337** (override with `--port`). From the extension root (documentation in `Documentation/`):
 
 ```bash
-# Start watch mode for live preview
-docker run --rm --pull always -v $(pwd):/project -p 8080:8080 -it \
-  ghcr.io/typo3-documentation/render-guides:latest --watch
+docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
+  ghcr.io/typo3-documentation/render-guides:latest \
+  serve Documentation --output=Documentation-GENERATED-temp
 
-# Open http://localhost:8080 in browser
+# Open http://localhost:1337 in the browser
 ```
+
+> Older instructions sometimes used `--watch` on the container; current images forward to the Guides CLI — use `serve` and confirm options with `docker run … ghcr.io/typo3-documentation/render-guides:latest -h` for your tag.
 
 ### Validation
 
 ```bash
-# Validate RST syntax
-docker run --rm --pull always -v $(pwd):/project -it \
+# Fail the build on warnings/errors in the render log
+docker run --rm --pull always -v $(pwd):/project -w /project -it \
   ghcr.io/typo3-documentation/render-guides:latest --no-progress --fail-on-log
+
+# Validate all guides.xml files under Documentation/ against the XSD
+docker run --rm --pull always -v $(pwd):/project -w /project -it \
+  ghcr.io/typo3-documentation/render-guides:latest lint-guides-xml Documentation
 ```
 
 ## Screenshots
@@ -447,8 +470,8 @@ This extension provides functionality for managing items.
 ## Resources
 
 - **TYPO3 Documentation Guide**: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/
-- **RST Primer**: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/WritingReST/
-- **Render Guides**: https://github.com/TYPO3-Documentation/render-guides
+- **guides.xml reference**: https://docs.typo3.org/permalink/h2document:guides-xml
+- **Render Guides** (container + CLI source): https://github.com/TYPO3-Documentation/render-guides
 - **Intercept**: https://intercept.typo3.com/
 
 ## v14-Only Documentation Changes

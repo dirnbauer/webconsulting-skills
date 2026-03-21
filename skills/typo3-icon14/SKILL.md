@@ -61,7 +61,7 @@ license: MIT / CC-BY-SA-4.0
 | `Configuration/Backend/Modules.php` | `iconIdentifier` for each module |
 | `Configuration/TCA/*.php` | `typeicon_classes`, `iconIdentifier` in ctrl/types |
 | `Configuration/TCA/Overrides/*.php` | Plugin icons (`pluginIcon`), page type icons |
-| `ext_localconf.php` | **REMOVED in v14** — no `IconRegistry::registerIcon()` calls |
+| `ext_localconf.php` | Avoid new `IconRegistry::registerIcon()` calls — registration belongs in `Configuration/Icons.php`; the registry API is **deprecated** (use `IconFactory` / icon packs as per changelog), not a place for new v14-style icons |
 | `ext_tables.php` | Should not contain icon registration |
 
 ### Default output paths (use these if user does not specify)
@@ -93,7 +93,7 @@ EXT:my_extension/
 │           ├── record-{extkey}-*.svg      ← Record type icons (16×16)
 │           ├── record-folder-contains-{extkey}.svg  ← Folder icon (16×16)
 │           └── actions-*.svg              ← Custom action icons (16×16)
-└── ext_localconf.php                      ← Do NOT register icons here (v14)
+└── ext_localconf.php                      ← Do not add icon registration here; use Configuration/Icons.php
 ```
 
 #### Concrete example: `t3g/blog` extension
@@ -223,8 +223,9 @@ Every v14-style module icon follows this structure:
 ### Dark/Light Mode Support
 
 TYPO3 v14 supports both dark and light color schemes. Icons MUST render correctly in both
-modes. The backend uses `data-color-scheme` and `data-bs-theme` attributes (not
-`prefers-color-scheme` media queries) to control the mode.
+modes. The backend uses `data-color-scheme` and `data-bs-theme` on the document (Bootstrap
+integration); do not assume a generic `data-theme` alone drives icon colors. Color mode is
+not controlled via `prefers-color-scheme` media queries in the backend UI.
 
 #### How `currentColor` Adapts
 
@@ -420,12 +421,15 @@ return [
 ];
 ```
 
-### REMOVED in v14
+### Deprecated: `IconRegistry::registerIcon()` in bootstrap
 
-The following patterns are **no longer supported** in TYPO3 v14:
+`IconRegistry::registerIcon()` is **deprecated**; new and migrated extensions should register
+icons in `Configuration/Icons.php` (and reference them by `iconIdentifier`). The imperative
+pattern below is what you are replacing — not because the API vanished overnight, but because
+it blocks caching/DI expectations and conflicts with the v14 icon pipeline:
 
 ```php
-// WRONG — removed in v14
+// Legacy — do not add this in new code; use Configuration/Icons.php instead
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
     \TYPO3\CMS\Core\Imaging\IconRegistry::class
 );

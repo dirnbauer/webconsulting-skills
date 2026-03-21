@@ -19,8 +19,10 @@ license: MIT / CC-BY-SA-4.0
 # TYPO3 Records List Types
 
 > **Compatibility:** TYPO3 v14.0+ / PHP 8.3+
-> Extension key: `records_list_types` / Composer: `webconsulting/records-list-types`
+> Extension key: `records_list_types` / Composer package name: `webconsulting/records-list-types`
 > GitHub: https://github.com/dirnbauer/typo3-records-list-types
+>
+> **Composer:** The package name matches upstream `composer.json`. If it is not yet published on Packagist, add a VCS `repositories` entry pointing at GitHub or install with `composer require webconsulting/records-list-types:dev-main` (or a tagged version) per your workflow.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
 
@@ -368,6 +370,8 @@ $event->getViewModes(): array
 ## 13. Extending
 
 ### Override Templates via TypoScript
+
+TypoScript goes under the **plugin namespace** `module.tx_recordsgridview` (historical key from the extension’s early name). The extension key remains `records_list_types`.
 
 ```typoscript
 module.tx_recordsgridview {

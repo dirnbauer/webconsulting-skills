@@ -236,7 +236,7 @@ ddev typo3 cache:flush
 ### ViewFactory (Replaces StandaloneView)
 
 ```php
-// ❌ OLD (deprecated in v13, removed in v14)
+// ❌ OLD (legacy Fluid standalone rendering; prefer Core ViewFactory on v13+)
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 $view = GeneralUtility::makeInstance(StandaloneView::class);
@@ -343,8 +343,8 @@ return [
 
 | Removed/Changed | Replacement |
 |-----------------|-------------|
-| `StandaloneView` | `ViewFactoryInterface` |
-| `ObjectManager` | Constructor injection |
+| `StandaloneView` (legacy) | `ViewFactoryInterface` |
+| `ObjectManager` / `GeneralUtility::makeInstance` for services | Constructor injection (Extbase ObjectManager was removed in v10+) |
 | `TSFE->fe_user->user` | Request attribute |
 | Various hooks | PSR-14 events |
 
@@ -353,8 +353,9 @@ return [
 | Removed/Changed | Replacement |
 |-----------------|-------------|
 | Runtime TCA changes | Static TCA only |
-| Legacy backend modules | Modules.php |
-| `$GLOBALS['TYPO3_DB']` | QueryBuilder |
+| Legacy backend modules | `Configuration/Backend/Modules.php` |
+
+> **Historical note:** `$GLOBALS['TYPO3_DB']` was removed long before v14 (use `Connection`/QueryBuilder). If you still see references while upgrading very old code, treat them as a separate legacy cleanup, not a v14-only item.
 
 ## Troubleshooting
 
@@ -433,32 +434,26 @@ Before considering upgrade complete:
 
 ## v14-Only Upgrade Targets
 
-> The following upgrade targets are **v14-specific** breaking changes to address during extension upgrades.
+> The following items are **common v14 migration topics**. Always confirm against the [TYPO3 v14 changelog](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html) for your exact minor, because details evolve between releases.
 
-### Critical v14 Breaking Changes
+### Notable v14 breaking changes
 
 | Change | Migration |
 |--------|-----------|
 | `$GLOBALS['TSFE']` / `TypoScriptFrontendController` removed | Use request attributes (`frontend.page.information`, `language`) |
 | Extbase annotations removed | Use `#[Validate]`, `#[IgnoreValidation]` PHP attributes |
-| `MailMessage->send()` removed | Use `Mailer::send()` |
+| `MailMessage->send()` removed | Inject `Symfony\Component\Mailer\MailerInterface` and call `send()` with a `Email` / `FluidEmail` instance |
 | `FlexFormService` removed | Use `FlexFormTools` |
-| DataHandler `userid`/`admin`/`storeLogMessages` removed | Use `$GLOBALS['BE_USER']` directly |
+| DataHandler `userid`/`admin`/`storeLogMessages` removed | Use `$GLOBALS['BE_USER']` / context APIs as documented in the changelog entry |
 | Frontend asset concat/compress removed | Delegate to web server or build tools |
 | Plugin subtypes removed | Register separate plugins via `configurePlugin()` |
 | TCA `ctrl.searchFields` removed | Use per-column `'searchable' => true` |
-| Backend module parent IDs changed | `web` → `content`, `file` → `media`, `tools` → `administration` |
-| Fluid 5.0 strict types | Fix ViewHelper argument types, remove underscore-prefixed variables |
+| Backend module menu identifiers | Parent ids were reorganized in v14 (for example `content`, `media`, `administration`). Compare with Core `Configuration/Backend/Modules.php` — do not assume a 1:1 string rename from older examples. |
+| Fluid 5.0 strict types | Fix ViewHelper argument types; remove underscore-prefixed variables |
 
-### v14.2 Deprecations (prepare for v15)
+### Changelog-first for upcoming minors
 
-| Deprecated | Impact |
-|------------|--------|
-| `PageDoktypeRegistry` methods | Migrate to TCA `allowedRecordTypes` |
-| `ExtensionManagementUtility::addFieldsToUserSettings` | Use TCA |
-| Localization parsers (`XliffParser`) | Symfony Translation Component |
-| `ButtonBar`/`Menu` `make*` methods | Use `ComponentFactory` |
-| Scheduler task registration via `SC_OPTIONS` | Use TCA-based registration |
+For deprecations and removals in **v14.1, v14.2, …**, read the corresponding `Breaking-*` / `Deprecation-*` entries in the official changelog rather than relying on static tables in this skill.
 
 ---
 

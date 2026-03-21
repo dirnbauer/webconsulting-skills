@@ -176,7 +176,7 @@ Apply all rules up to a target version:
 
 | Set List | Includes |
 |----------|----------|
-| `Typo3LevelSetList::UP_TO_TYPO3_10` | v7 + v8 + v10 |
+| `Typo3LevelSetList::UP_TO_TYPO3_10` | Imports `UP_TO_TYPO3_9` plus `TYPO3_10` rules only (see package `config/level/up-to-typo3-10.php`) |
 | `Typo3LevelSetList::UP_TO_TYPO3_11` | ... + v11 |
 | `Typo3LevelSetList::UP_TO_TYPO3_12` | ... + v12 |
 | `Typo3LevelSetList::UP_TO_TYPO3_13` | ... + v13 |
@@ -214,6 +214,7 @@ Apply rules for a single version only:
 | Rule | Migration |
 |------|-----------|
 | `MigrateTypoScriptLoginUserAndUsergroupConditionsFractor` | Legacy conditions → Symfony expressions |
+| `MigrateDeprecatedTypoScriptConditionsFractor` | Deprecated TypoScript `[compatVersion]` / old condition syntax → supported forms |
 | `RemoveConfigDisablePageExternalUrlFractor` | Remove `config.disablePageExternalUrl` |
 | `RemoveConfigDoctypeSwitchFractor` | Remove `config.doctypeSwitch` |
 | `RemoveConfigMetaCharsetFractor` | Remove `config.metaCharset` |
@@ -278,7 +279,7 @@ Apply rules for a single version only:
 use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\FractorTypoScript\Configuration\TypoScriptProcessorOption;
 use Helmich\TypoScriptParser\Printer\PrettyPrinterConfiguration;
-use a9f\FractorTypoScript\Configuration\PrettyPrinterConditionTermination;
+use Helmich\TypoScriptParser\Parser\Printer\PrettyPrinterConditionTermination;
 
 return FractorConfiguration::configure()
     ->withPaths([__DIR__ . '/Configuration/'])
@@ -308,7 +309,7 @@ return FractorConfiguration::configure()
 <?php
 use a9f\Fractor\Configuration\FractorConfiguration;
 use a9f\FractorXml\Configuration\XmlProcessorOption;
-use a9f\FractorXml\Configuration\Indent;
+use a9f\Fractor\ValueObject\Indent;
 
 return FractorConfiguration::configure()
     ->withPaths([__DIR__ . '/Configuration/'])
@@ -350,7 +351,7 @@ return FractorConfiguration::configure()
 
 ### Custom XML/FlexForm Rule
 
-Subclass `\a9f\FractorXml\XmlFractor` for XML-based rules:
+Extend `AbstractXmlFractor` (in package `a9f/fractor-xml`). `XmlFractor` in `a9f\FractorXml\Contract` is the interface; the abstract base provides the DOM visitor wiring.
 
 ```php
 <?php
@@ -358,11 +359,11 @@ declare(strict_types=1);
 
 namespace Vendor\MyExtension\Fractor;
 
-use a9f\FractorXml\XmlFractor;
-use DOMDocument;
+use a9f\FractorXml\AbstractXmlFractor;
 use DOMNode;
+use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
-final class MyCustomFlexFormFractor extends XmlFractor
+final class MyCustomFlexFormFractor extends AbstractXmlFractor
 {
     public function canHandle(\DOMNode $node): bool
     {
@@ -376,9 +377,9 @@ final class MyCustomFlexFormFractor extends XmlFractor
         return $node;
     }
 
-    public function getDescription(): string
+    public function getRuleDefinition(): RuleDefinition
     {
-        return 'Migrate custom FlexForm configuration';
+        return new RuleDefinition('Migrate custom FlexForm configuration', []);
     }
 }
 ```

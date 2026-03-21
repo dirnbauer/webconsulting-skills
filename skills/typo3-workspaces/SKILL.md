@@ -414,6 +414,7 @@ final class SetupWorkspaceCommand extends Command
             // Publish access: 0 = no restriction, 1 = only publish-stage content, 2 = only owners can publish
             'publish_access' => 0,
             // Allow editing of non-versionable records (live edit)
+            // Field name matches Core TCA / DB column (historical spelling "notificaton")
             'edit_allow_notificaton_settings' => 0,
         ];
 
@@ -726,6 +727,7 @@ final class ItemService
 
 return [
     'my_module' => [
+        // v14: primary web modules often use parent `content`; compare with Core `Configuration/Backend/Modules.php`
         'parent' => 'web',
         'position' => ['after' => 'web_info'],
         'access' => 'user',
