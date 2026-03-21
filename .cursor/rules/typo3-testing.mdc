@@ -347,15 +347,12 @@ final class ArchitectureTest
             ->classes(Selector::classname('/.*RepositoryInterface$/', true));
     }
 
-    public function testOnlyServicesCanAccessRepositories(): Rule
+    public function testRepositoriesShouldStayFreeOfControllers(): Rule
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Domain\Repository'))
-            ->canOnlyBeAccessedBy()
-            ->classes(
-                Selector::inNamespace('Vendor\MyExtension\Service'),
-                Selector::inNamespace('Vendor\MyExtension\Tests'),
-            );
+            ->shouldNotDependOn()
+            ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 }
 ```

@@ -450,7 +450,7 @@ tt_content.image.settings.responsive_image_rendering = 1
 
 ```bash
 ddev composer require yoast-seo-for-typo3/yoast_seo
-ddev typo3 extension:activate yoast_seo
+ddev typo3 extension:setup -e yoast_seo
 ```
 
 Features:

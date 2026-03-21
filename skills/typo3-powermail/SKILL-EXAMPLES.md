@@ -420,7 +420,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, validation_configuration, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Quantity Website Basic', 'input', 'produkt1_menge', 0, 2, 9, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Quantity Website Basic', 'input', 'produkt1_menge', 0, 2, 4, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 2: Website Professional (display card + quantity input)
 INSERT INTO tx_powermail_domain_model_field
@@ -433,7 +433,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, validation_configuration, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Quantity Website Professional', 'input', 'produkt2_menge', 0, 4, 9, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Quantity Website Professional', 'input', 'produkt2_menge', 0, 4, 4, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 3: SEO Package
 INSERT INTO tx_powermail_domain_model_field
@@ -446,7 +446,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, validation_configuration, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Quantity SEO Package', 'input', 'produkt3_menge', 0, 6, 9, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Quantity SEO Package', 'input', 'produkt3_menge', 0, 6, 4, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 4: Maintenance Contract
 INSERT INTO tx_powermail_domain_model_field
@@ -459,7 +459,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, validation_configuration, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Quantity Maintenance Contract', 'input', 'produkt4_menge', 0, 8, 9, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Quantity Maintenance Contract', 'input', 'produkt4_menge', 0, 8, 4, '', 0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Notes (optional free text) + GDPR consent checkboxes (all mandatory)
 -- type='textarea': multi-line text input
