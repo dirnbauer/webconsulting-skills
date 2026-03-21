@@ -1,11 +1,11 @@
 ---
 name: typo3-powermail
 description: >-
-  Expert guidance on the Powermail **extension** 13.x with TYPO3 v14. Creating forms, custom finishers,
+  Expert guidance on the Powermail **extension** 13.x with TYPO3 **13.4+** (verify Packagist for newer Core constraints). Creating forms, custom finishers,
   validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
   templates, backend modules, and extension development. Use when working with powermail
   forms, mail handling, form validation, or extending powermail functionality.
-compatibility: TYPO3 14.x (verify `in2code/powermail` / `in2code/powermail_cond` on Packagist for your Core)
+compatibility: TYPO3 13.4+ (Powermail 13.x `composer.json` currently requires `typo3/cms-core: ^13.4` — check Packagist before assuming TYPO3 v14)
 metadata:
   version: "1.0.0"
   related_skills:
@@ -17,8 +17,8 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Powermail Development
 
-> **Compatibility:** This collection assumes **TYPO3 v14.x**. Powermail **13.x** is the current major line — confirm [Packagist `in2code/powermail`](https://packagist.org/packages/in2code/powermail) and `powermail_cond` declare compatibility with your Core before upgrading.
-> All examples use PHP 8.2+ and TYPO3 v14 APIs.
+> **Compatibility:** Powermail **13.x** currently targets **TYPO3 13.4** per Packagist — do **not** assume v14 until the package declares it. Examples use modern TYPO3 APIs where possible; adjust for your Core version.
+> All examples use PHP 8.2+.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
@@ -26,6 +26,18 @@ license: MIT / CC-BY-SA-4.0
 > - [SKILL-CONDITIONS.md](SKILL-CONDITIONS.md) - Conditional field/page visibility (powermail_cond)
 > - [SKILL-PHP84.md](SKILL-PHP84.md) - PHP 8.4 patterns (property hooks, asymmetric visibility, new array functions)
 > - [SKILL-EXAMPLES.md](SKILL-EXAMPLES.md) - Multi-step shop form with Austrian legal types, DDEV SQL + DataHandler CLI
+
+## Powermail vs Core EXT:form
+
+These are **different systems**. Do not mix migration advice between them.
+
+| | **Powermail (`in2code/powermail`)** | **TYPO3 Core EXT:form** |
+|---|-------------------------------------|-------------------------|
+| **Purpose** | Mail forms built in the Powermail backend module; stored in `tx_powermail_*` tables | Declarative forms (often YAML), `form` framework, finishers defined in YAML/PHP |
+| **Rendering** | Powermail plugins / ViewHelpers / TypoScript | Fluid templates + Core form runtime |
+| **This skill** | Documents Powermail APIs, finishers, validators, events **as shipped by in2code** | Only where **your** code also touches EXT:form (bridges, shared sites, dual form stacks) |
+
+Sections labeled **EXT:form** under [v14-Only Changes](#v14-only-changes) describe **Core** form-framework removals (hooks → PSR-14, storage adapters). They apply to custom code that hooks into **EXT:form**, not to ordinary Powermail-only projects—unless you explicitly integrate both.
 
 ## 1. Architecture Overview
 
@@ -52,7 +64,7 @@ Mail (tx_powermail_domain_model_mail)
 composer require in2code/powermail
 ```
 
-Requires: PHP ^8.2, TYPO3 14.x (verify `typo3/cms-core` on Packagist for the exact range), ext-json, ext-gd, ext-fileinfo, ext-curl
+Typical requirements (always confirm the **current** release on [Packagist](https://packagist.org/packages/in2code/powermail)): PHP **^8.2**, **`typo3/cms-core: ^13.4`** (latest stable line at time of writing), plus ext-json, ext-gd, ext-fileinfo, ext-curl. **Do not assume TYPO3 v14** until the package constraint is updated upstream.
 
 ## 2. Field Types
 
@@ -144,11 +156,11 @@ plugin.tx_powermail {
                     honeypod = 5
                     link = 3
                     name = 3
-                    session = 1
+                    session = 5
                     unique = 2
                     blacklistString = 7
                     blacklistIp = 7
-                    rateLimit = 10
+                    rateLimit = 100
                 }
                 # Factor threshold (0-100): reject if >=
                 factor = 75
@@ -208,7 +220,7 @@ plugin.tx_powermail.settings.setup.finishers {
     0.class = In2code\Powermail\Finisher\RateLimitFinisher
     10.class = In2code\Powermail\Finisher\SaveToAnyTableFinisher
     20.class = In2code\Powermail\Finisher\SendParametersFinisher
-    100.class = In2code\Powermail\Finisher\RedirectFinisher
+    finally.class = In2code\Powermail\Finisher\RedirectFinisher
 
     # Custom finisher
     50.class = Vendor\MyExt\Finisher\CrmFinisher
@@ -271,7 +283,7 @@ final class CrmFinisher extends AbstractFinisher implements FinisherInterface
 | `RateLimitFinisher` | 0 | Consumes rate limiter tokens |
 | `SaveToAnyTableFinisher` | 10 | Save answers to custom DB tables |
 | `SendParametersFinisher` | 20 | POST form data to external URL |
-| `RedirectFinisher` | 100 | Redirect after submission |
+| `RedirectFinisher` | `finally` | Runs last — special TypoScript key, not a numeric sort key |
 
 ### SaveToAnyTable Configuration
 
@@ -339,7 +351,7 @@ final class CustomValidatorListener
 | `UploadValidator` | File size, extension whitelist |
 | `PasswordValidator` | Password match and strength |
 | `CaptchaValidator` | Built-in CAPTCHA |
-| `SpamShieldValidator` | Multi-method spam detection |
+| *(Spam shield)* | Uses `Domain\Service\SpamShield\AbstractMethod` subclasses (`HoneyPodMethod`, `LinkMethod`, …) — **not** a single `SpamShieldValidator` class |
 | `UniqueValidator` | Unique field values |
 | `ForeignValidator` | Validate against foreign table |
 | `CustomValidator` | TypoScript-based custom rules |
@@ -351,11 +363,11 @@ final class CustomValidatorListener
 | `HoneyPodMethod` | 5 | Hidden honeypot field |
 | `LinkMethod` | 3 | Excessive links detection |
 | `NameMethod` | 3 | Suspicious name patterns |
-| `SessionMethod` | 1 | Session token validation |
+| `SessionMethod` | 5 | Session token validation |
 | `UniqueMethod` | 2 | Duplicate submission check |
 | `ValueBlacklistMethod` | 7 | Blacklisted content |
 | `IpBlacklistMethod` | 7 | Blacklisted IP addresses |
-| `RateLimitMethod` | 10 | Request rate limiting |
+| `RateLimitMethod` | 100 | Request rate limiting |
 
 ## 6. PSR-14 Events
 
@@ -783,7 +795,7 @@ final class ApiCheckMethod extends AbstractMethod
 {
     public function spamCheck(): bool
     {
-        $mail = $this->getMail();
+        $mail = $this->mail;
         // Return true if spam detected
         return $this->callExternalApi($mail);
     }
@@ -1120,11 +1132,11 @@ if ($translatedFormUid) {
 
 ## v14-Only Changes
 
-> The following Powermail-related changes apply when running on **TYPO3 v14 only**.
+> The following items apply when the **TYPO3 Core** in your project is **v14** (and Powermail itself supports that Core version per its `composer.json`). Until Packagist allows `typo3/cms-core:^14`, treat v14 notes as **forward-looking** for integrations and custom code audits.
 
 ### EXT:form Hooks Removed **[v14 only]**
 
-If your Powermail extensions also interact with EXT:form, note that **all EXT:form hooks are removed** in v14:
+If your **custom extension code** integrates with **Core EXT:form** (not only Powermail), note that **all EXT:form hooks are removed** in v14:
 - `beforeRendering`, `afterSubmit`, `initializeFormElement`
 - `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`
 - `afterBuildingFinished`, `beforeRemoveFromParentRenderable`

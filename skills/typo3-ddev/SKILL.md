@@ -345,13 +345,13 @@ languages:
 
 ```bash
 # Redis (for caching)
-ddev get ddev/ddev-redis
+ddev add-on get ddev/ddev-redis
 
 # Elasticsearch
-ddev get ddev/ddev-elasticsearch
+ddev add-on get ddev/ddev-elasticsearch
 
 # Solr
-ddev get ddev/ddev-solr
+ddev add-on get ddev/ddev-solr
 ```
 
 ### Custom Services
@@ -423,7 +423,7 @@ ddev logs -s db
 lsof -i :80
 ```
 
-`router_http_port` and `router_https_port` are **global** DDEV settings. Configure them in **`~/.ddev/global_config.yaml`** (or `ddev config global`), not in the project’s `.ddev/config.yaml`.
+`router_http_port` and `router_https_port` may be set **globally** in `~/.ddev/global_config.yaml` **or per project** in `.ddev/config.yaml` (DDEV documents both scopes). Global values affect all projects unless overridden locally.
 
 ### Permission Issues
 
@@ -518,7 +518,7 @@ php_version: "8.5"
 TYPO3 v14.1 ships with the **Camino** default frontend theme. For quick-start setups:
 ```bash
 ddev composer require typo3/theme-camino
-ddev typo3 extension:setup -e camino
+ddev typo3 extension:setup -e theme_camino
 ```
 
 ### composer.json Required in Classic Mode **[v14 only]**

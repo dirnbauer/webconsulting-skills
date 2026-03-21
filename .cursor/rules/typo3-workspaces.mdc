@@ -91,8 +91,8 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 ### Publishing Workflow
 
 - **Publish**: Draft content replaces live content through the workspace publish process.
-- TYPO3 TYPO3 v14 use publish workflows; do not rely on legacy workspace-level swap mode.
-- **IMPORTANT**: The `swap` action is no longer allowed in TYPO3 v14. Use `action => 'publish'` instead of `action => 'swap'`.
+- TYPO3 v14 still accepts DataHandler `version` commands with **`action => 'publish'`** (preferred) or **`action => 'swap'`** (alias handled the same as publish in `DataHandlerHook`). The parameter key for the workspace version UID remains **`swapWith`**, not `uid`.
+- Do not rely on historic **bidirectional workspace “swap modes”** on `sys_workspace` (removed in v11, #92206) — that is separate from the `swap` **keyword** in cmdmaps.
 
 ## 2. CRITICAL: File/FAL Limitation
 
@@ -1360,8 +1360,7 @@ final class WorkspaceAwareTest extends FunctionalTestCase
     /**
      * Test: Workspace publish command makes staged content live for a record pair.
      *
-     * DEPRECATED: The 'swap' action is no longer allowed in TYPO3 v14.
-     * Use 'action' => 'publish' instead. The 'swapWith' key is replaced by 'uid' (workspace version uid).
+     * Publish live tt_content uid=10 using the workspace version row (swapWith = offline version uid).
      */
     public function testPublishWorkspaceRecordPairMakesContentLive(): void
     {
@@ -1373,7 +1372,7 @@ final class WorkspaceAwareTest extends FunctionalTestCase
                 10 => [
                     'version' => [
                         'action' => 'publish',
-                        'uid' => $this->getWorkspaceVersionUid('tt_content', 10, 1),
+                        'swapWith' => $this->getWorkspaceVersionUid('tt_content', 10, 1),
                     ],
                 ],
             ],
@@ -1660,16 +1659,19 @@ The workspace selector has been moved from the top bar to the **backend sidebar*
 
 The workspace "Publish" module now shows **editor information** (#106074) — which backend user last modified each record. This helps reviewers identify who made changes.
 
-### `swap` Action Fully Removed **[v14 only]**
+### `swap` vs `publish` in cmdmaps **[v14]**
 
-The DataHandler workspace `swap` action is **removed** on TYPO3 v14. Use `action => 'publish'` exclusively:
+`DataHandlerHook` treats **`swap` and `publish` as aliases** — both call `version_swap()`. Prefer **`action => 'publish'`** in new code. The workspace version UID must always be passed as **`swapWith`** (Core reads `(int)$value['swapWith']`):
 
 ```php
-// ❌ Removed in v14
-$cmd['pages'][123]['version'] = ['action' => 'swap', 'swapWith' => 456];
+// ✅ Always pass the offline/workspace version uid as swapWith (live record id is the cmdmap key)
+$cmd['tt_content'][10]['version'] = [
+    'action' => 'publish',
+    'swapWith' => $workspaceVersionUid,
+];
 
-// ✅ v14 pattern
-$cmd['pages'][123]['version'] = ['action' => 'publish'];
+// 'swap' still works as an alias but publish is clearer
+$cmd['tt_content'][10]['version'] = ['action' => 'swap', 'swapWith' => $workspaceVersionUid];
 ```
 
 ---

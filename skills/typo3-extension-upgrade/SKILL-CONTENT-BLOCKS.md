@@ -104,6 +104,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsCommand(name: 'myext:migrate-to-content-blocks')]
 final class MigrateCommand extends Command

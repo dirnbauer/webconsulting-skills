@@ -241,8 +241,8 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = '$argon2id$...'; // h
 ```php
 <?php
 // ext_localconf.php of site extension
-$GLOBALS['TYPO3_CONF_VARS']['BE']['passwordPolicy'] = 'default';
-$GLOBALS['TYPO3_CONF_VARS']['BE']['passwordPolicies']['default'] = [
+$GLOBALS['TYPO3_CONF_VARS']['BE']['passwordPolicy'] = 'default'; // policy *name* only
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['passwordPolicies']['default'] = [
     'validators' => [
         \TYPO3\CMS\Core\PasswordPolicy\Validator\CorePasswordValidator::class => [
             'options' => [
@@ -267,7 +267,7 @@ Supported providers:
 - TOTP (Time-based One-Time Password)
 - Recovery Codes
 
-Configure MFA enforcement in **`config/system/settings.php`** via [`$GLOBALS['TYPO3_CONF_VARS']['BE']['requireMfa']`](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Configuration/Typo3ConfVars/BE.html#typo3confvars-be-requiremfa) (`0`–`3` per Core docs), or per user/group with **user TSconfig** [`auth.mfa.required`](https://docs.typo3.org/m/typo3/reference-typoscript/main/en-us/UserTsconfig/Auth.html):
+Configure MFA enforcement in **`config/system/settings.php`** via [`$GLOBALS['TYPO3_CONF_VARS']['BE']['requireMfa']`](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Configuration/Typo3ConfVars/BE.html#typo3confvars-be-requiremfa): `0` disabled, `1` all users, `2` non-admins, `3` admins only, **`4` system maintainers only** — confirm exact semantics in Core docs for your minor), or per user/group with **user TSconfig** [`auth.mfa.required`](https://docs.typo3.org/m/typo3/reference-typoscript/main/en-us/UserTsconfig/Auth.html):
 
 ```typoscript
 # User or group TSconfig — require MFA for those accounts (overrides global when set)
@@ -295,7 +295,8 @@ $GLOBALS['TYPO3_CONF_VARS']['LOG']['TYPO3']['CMS']['Backend']['Authentication'][
 
 TYPO3 v14 has built-in CSP support. Enable it:
 
-Enable CSP through `config/system/settings.php` / Install Tool using the **feature flags documented for your TYPO3 minor** (toggle names have changed across releases — check Core docs rather than copying stale keys).
+Enable CSP through `config/system/settings.php` / Install Tool. Frontend toggles (names may evolve — verify in Core for your minor) commonly include:
+`$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.frontend.enforceContentSecurityPolicy']` and `security.frontend.reportContentSecurityPolicy`. **Backend CSP is enforced by default since v13** — there is no equivalent FE-style toggle for BE.
 
 ### CSP Configuration via Events (TYPO3 v14)
 
@@ -457,7 +458,7 @@ TYPO3 v14 includes built-in rate limiting:
 // Rate limiting: check current Core / feature documentation — do not assume a stable `security.backend.rateLimiter` toggle name
 
 // Configure rate limits
-$GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
+$GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // max attempts per default interval (see `loginRateLimitInterval`, often ~15 minutes — not “per minute”)
 ```
 
 ## 11. Security Audit Checklist

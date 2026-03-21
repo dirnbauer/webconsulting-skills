@@ -119,7 +119,6 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Service;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class ContentBlocksMediaService
@@ -399,8 +398,8 @@ final class ContentBlocksRepository
             ->from('tt_content')
             ->where(
                 $queryBuilder->expr()->eq('pid', $pid),
-                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('myvendor_hero')),
-                $queryBuilder->expr()->eq('deleted', 0)
+                $queryBuilder->expr()->eq('CType', $queryBuilder->createNamedParameter('myvendor_hero'))
+                // `deleted` / workspace / language: DefaultRestrictionContainer is applied for QueryBuilder — no manual `deleted = 0` unless you bypass restrictions on purpose.
             )
             ->executeQuery()
             ->fetchAllAssociative();
@@ -518,6 +517,10 @@ final class ContentBlocksRecordService
 
 ### Validate CType Exists
 
+> **`ContentBlockRegistry` is `@internal` in Content Blocks** — prefer validating against your own allowlist in extension code, or rely on Core/Content Blocks validation at save time. The snippet below is illustrative only.
+
+Typical Content Blocks `CType` values match the block **name** with `/` replaced by `_` (e.g. `myvendor/hero` → `myvendor_hero`). **Do not** infer the name only with `str_replace('_', '/', $cType)` when the vendor or slug contains underscores or dashes — compare using the registry’s real name / type, or maintain an explicit map.
+
 ```php
 <?php
 
@@ -531,7 +534,9 @@ public function validateCType(string $cType): bool
     $registry = GeneralUtility::makeInstance(ContentBlockRegistry::class);
 
     foreach ($registry->getAll() as $contentBlock) {
-        if ($contentBlock->getName() === str_replace('_', '/', $cType)) {
+        $name = $contentBlock->getName(); // e.g. myvendor/hero
+        $expectedCType = str_replace('/', '_', $name);
+        if ($cType === $expectedCType || $cType === $name) {
             return true;
         }
     }

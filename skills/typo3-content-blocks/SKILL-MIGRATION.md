@@ -69,17 +69,26 @@ This section guides you through converting traditional TYPO3 extensions (with se
 
 | TCA Type | TCA renderType | Content Blocks Type | Notes |
 |----------|----------------|---------------------|-------|
-| `input` | - | `Text` | Basic text input |
-| `input` | `inputDateTime` | `DateTime` | Date/time picker |
-| `input` | `inputLink` | `Link` | Link browser |
-| `input` | `colorPicker` | `Color` | Color picker |
-| `input` | `slug` | `Slug` | URL slug |
+| `datetime` | - | `DateTime` | **Preferred** standalone type (v12+) |
+| `link` | - | `Link` | **Preferred** standalone type |
+| `color` | - | `Color` | **Preferred** standalone type |
+| `email` | - | `Email` | **Preferred** standalone type |
+| `number` | - | `Number` | **Preferred** standalone type |
+| `password` | - | `Password` | **Preferred** standalone type |
+| `slug` | - | `Slug` | **Preferred** standalone type |
+| `country` | - | `Country` | Country selector |
+| `uuid` | - | `Uuid` | UUID string |
+| `input` | - | `Text` | Legacy/basic text (pre–standalone types) |
+| `input` | `inputDateTime` | `DateTime` | **Legacy** combo — migrate to `type: datetime` in TCA |
+| `input` | `inputLink` | `Link` | **Legacy** combo — migrate to `type: link` |
+| `input` | `colorPicker` | `Color` | **Legacy** combo — migrate to `type: color` |
+| `input` | `slug` | `Slug` | **Legacy** combo — migrate to `type: slug` |
 | `text` | - | `Textarea` | Multi-line text |
 | `text` | (richtext) | `Textarea` + `enableRichtext: true` | RTE |
 | `check` | - | `Checkbox` | Boolean checkbox |
 | `radio` | - | `Radio` | Radio buttons |
 | `select` | `selectSingle` | `Select` | Single selection |
-| `select` | `selectMultipleSideBySide` | `Select` + `multiple: true` | Multiple selection |
+| `select` | `selectMultipleSideBySide` | `Select` + `renderType: selectMultipleSideBySide` (+ `multiple: true` if required by schema) | Side-by-side multi-select |
 | `select` | `selectCheckBox` | `Select` + `renderType: selectCheckBox` | Checkbox group |
 | `group` | - | `Relation` or `File` | Depends on internal_type |
 | `file` | - | `File` | FAL references |
@@ -91,6 +100,8 @@ This section guides you through converting traditional TYPO3 extensions (with se
 ### Migration Example 1: Content Element (tt_content)
 
 **BEFORE (Classic):**
+
+> `ExtensionManagementUtility::addPlugin()` for CType registration is **deprecated since TYPO3 v12** — shown here for legacy codebases; new extensions should register via `Configuration/TCA/Overrides/tt_content.php` `items` or Content Blocks.
 
 ```php
 // Configuration/TCA/Overrides/tt_content.php
@@ -629,21 +640,15 @@ fields:
 <?php
 // Configuration/TCA/Overrides/tt_content.php
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-
 defined('TYPO3') or die();
 
-// Register the content element
-ExtensionManagementUtility::addPlugin(
-    [
-        'label' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang.xlf:ce.hero.title',
-        'value' => 'myext_hero',
-        'icon' => 'EXT:my_ext/Resources/Public/Icons/ContentElements/hero.svg',
-        'group' => 'default',
-    ],
-    'CType',
-    'my_ext'
-);
+// Register CType in tt_content selector (avoid deprecated addPlugin for new code)
+$GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = [
+    'label' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang.xlf:ce.hero.title',
+    'value' => 'myext_hero',
+    'icon' => 'EXT:my_ext/Resources/Public/Icons/ContentElements/hero.svg',
+    'group' => 'default',
+];
 
 // Define columns
 $tempColumns = [

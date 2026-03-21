@@ -723,7 +723,9 @@ ddev typo3 upgrade:run
 # 4. Clear caches
 ddev typo3 cache:flush
 
-# 5. Update database schema
+# 5. Register extensions and align database schema
+ddev typo3 extension:setup
+# Schema compare/apply (CLI entry point depends on your project: `typo3`, `vendor/bin/typo3`, typo3-console, etc.)
 ddev typo3 database:updateschema
 
 # 6. Test thoroughly
@@ -732,7 +734,7 @@ ddev typo3 database:updateschema
 ## 12. Resources
 
 - **v14 Documentation**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/
-- **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
+- **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 
 ## 13. v14-Only Changes (Manual — Not Handled by Rector)
@@ -778,7 +780,7 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 
 ### Runtime TCA Modifications Forbidden **[v14 only]**
 
-`$GLOBALS['TCA']` is **read-only after boot**. Any code modifying TCA at runtime (e.g., in `ext_localconf.php`, middleware, event listeners) must be moved to static `Configuration/TCA/` files. This requires architectural changes, not simple find-and-replace.
+`$GLOBALS['TCA']` is **read-only after boot** in TYPO3 v14 — stricter than older majors. Static TCA under `Configuration/TCA/` has been the supported approach **since v12**; extensions still mutating TCA from `ext_tables.php`, middleware, or event listeners must be refactored (architectural change, not a one-line replace).
 
 ### Plugin Subtypes Removed **[v14 only]**
 
@@ -805,14 +807,14 @@ Rector removes PHP configuration (`RemoveConcatenateAndCompressHandlerRector`), 
 New features to adopt (not migrations):
 - **New TCA type `country`** (#99911) for country selection fields.
 - **New `itemsProcessors`** option (#107889) for dynamic item generation.
-- **Type-specific `ctrl` properties** in TCA `types` section (#108027).
+- **Type-specific `ctrl` properties** in TCA `types` section — [Feature #108027](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-108027-Type-SpecificCtrlPropertiesInTCATypes.html).
 - **Type-specific TCA defaults** (#107281).
 
 ### New Fluid ViewHelpers **[v14 only]**
 
 - `<f:page.meta>` — set page meta tags from Fluid templates.
 - `<f:page.title>` — set page title from Fluid templates.
-- `<f:asset.headerData>` / `<f:asset.footerData>` — inject raw HTML into head/footer.
+- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Feature-107056-FluidViewHelpersForHeaderAndFooterData.html)).
 
 ### Localization System **[v14 only]**
 

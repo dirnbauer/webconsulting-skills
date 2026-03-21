@@ -495,7 +495,7 @@ page.headerData.1000.value (
 
 ### Sitemap GET Parameters Namespaced **[v14 only]**
 
-Sitemap GET parameters use the **`tx_seo[...]`** namespace (see [Breaking: #85323](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-85323-SeoParameterNamespace.html)). Update route enhancers and templates that still expect flat `sitemap` / `page` arguments.
+Sitemap GET parameters use the **`tx_seo[...]`** namespace (see [Breaking: #104422](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-104422-SeoParameterNamespace.html)). Update route enhancers and templates that still expect flat `sitemap` / `page` arguments.
 
 ### Fluid Page Meta & Title ViewHelpers **[v14 only]**
 

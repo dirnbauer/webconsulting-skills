@@ -23,6 +23,8 @@ triggers:
 
 ## 1. Content Block Reference
 
+Use `:name:` on each `.. confval::` when the **display title is not unique** across the manual (TYPO3 [How to Document — confval](https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/Reference/ReStructuredText/Code/Confval.html)); prefix names with the block or table (e.g. `myvendor-hero-header`).
+
 ```rst
 Content Elements
 ================
@@ -37,17 +39,20 @@ The hero banner element displays a full-width header section.
 **Fields:**
 
 .. confval:: header
+   :name: myvendor-hero-header
    :type: string
    :required: true
 
    Main headline of the hero section.
 
 .. confval:: subheadline
+   :name: myvendor-hero-subheadline
    :type: string
 
    Optional subheadline text.
 
 .. confval:: image
+   :name: myvendor-hero-image
    :type: file
    :maxitems: 1
 
@@ -149,17 +154,20 @@ The team member record stores information about team members.
 **Table:** ``tx_myvendor_team_member``
 
 .. confval:: name
+   :name: team-member-name
    :type: string
    :required: true
 
    Full name of the team member.
 
 .. confval:: position
+   :name: team-member-position
    :type: string
 
    Job title or position.
 
 .. confval:: photo
+   :name: team-member-photo
    :type: file
    :maxitems: 1
 

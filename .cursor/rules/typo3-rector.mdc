@@ -444,16 +444,12 @@ Search for TYPO3 v14-compatible alternatives on:
 ### Database Issues
 
 ```bash
-# Schema diff / update command name and options depend on your CLI entry point.
-# TYPO3 Core exposes `database:updateschema` when available — confirm with:
+# Core CLI: extension setup / schema alignment
+ddev typo3 extension:setup --extension=my_extension
+
+# `database:updateschema` is provided by helhum/typo3-console, not plain Core — only if installed:
 #   ddev typo3 list | rg database
-ddev typo3 database:updateschema --verbose
-
-# Safe schema update (add only) — adjust wildcards per `typo3 database:updateschema --help`
-ddev typo3 database:updateschema "*.add,*.change"
-
-# Full update (includes destructive)
-ddev typo3 database:updateschema "*"
+# ddev typo3 database:updateschema --verbose
 ```
 
 ## 9. Common Rector Rules

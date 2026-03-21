@@ -133,7 +133,11 @@ namespace Vendor\MyExtension\DataHandler;
 
 final class DataHandlerResult
 {
-    /** @var array<string, int> */
+    /**
+     * Created record UIDs per table (a table may have multiple NEW_* placeholders in one run).
+     *
+     * @var array<string, list<int>>
+     */
     public private(set) array $createdRecords = [];
 
     /** @var array<string> */
@@ -143,7 +147,7 @@ final class DataHandlerResult
 
     public function addCreatedRecord(string $table, int $uid): void
     {
-        $this->createdRecords[$table] = $uid;
+        $this->createdRecords[$table][] = $uid;
     }
 
     public function addError(string $error): void
@@ -181,8 +185,10 @@ final class RecordService
         $dataHandler->process_datamap();
 
         foreach ($dataHandler->substNEWwithIDs as $newId => $uid) {
-            $table = $this->extractTableFromNewId($newId);
-            $result->addCreatedRecord($table, (int) $uid);
+            $table = $this->resolveTableForNewId($data, $newId);
+            if ($table !== null) {
+                $result->addCreatedRecord($table, (int) $uid);
+            }
         }
 
         foreach ($dataHandler->errorLog as $error) {
@@ -192,10 +198,21 @@ final class RecordService
         return $result;
     }
 
-    private function extractTableFromNewId(string $newId): string
+    /**
+     * Match placeholder id (e.g. NEW_1) to the table key from the submitted $data map.
+     */
+    private function resolveTableForNewId(array $data, string $newId): ?string
     {
-        // Logic to extract table name
-        return 'tt_content';
+        foreach ($data as $table => $records) {
+            if (!is_array($records)) {
+                continue;
+            }
+            if (array_key_exists($newId, $records)) {
+                return (string) $table;
+            }
+        }
+
+        return null;
     }
 }
 
@@ -328,6 +345,7 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\Service;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use Vendor\MyExtension\DataHandler\CreateContentCommand;
 
 final class LegacyContentService
@@ -343,7 +361,7 @@ final class LegacyContentService
             E_USER_DEPRECATED
         );
 
-        $dataHandler = new DataHandler();
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
         $dataHandler->start(['tt_content' => ['NEW_1' => $data]], []);
         $dataHandler->process_datamap();
 
@@ -427,7 +445,7 @@ final readonly class DataHandlerFactory
 
 - [typo3-datahandler SKILL.md](./SKILL.md) - Main DataHandler guide
 - [php-modernization SKILL-PHP84.md](../php-modernization/SKILL-PHP84.md) - PHP 8.4 features
-- [TYPO3 DataHandler Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Typo3CoreEngine/Database/Index.html)
+- [TYPO3 DataHandler Documentation](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/DataHandler/Database/Index.html)
 
 ---
 

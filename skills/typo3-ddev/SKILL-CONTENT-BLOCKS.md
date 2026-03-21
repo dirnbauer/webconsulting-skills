@@ -87,7 +87,7 @@ ddev typo3 cache:flush -g system
 # After adding new fields
 ddev typo3 extension:setup
 
-# Install Tool: in Composer-based sites use **Admin Tools → Maintenance** in the backend, or open the URL your project exposes (often `/typo3/install.php` when enabled — paths differ by setup). `ddev launch` without a path opens the site root.
+# Install Tool (Composer mode): use **Admin Tools → Maintenance** in the TYPO3 backend — do not rely on a fixed `/typo3/install.php` path. `ddev launch` without a path opens the site root.
 ddev launch
 ```
 

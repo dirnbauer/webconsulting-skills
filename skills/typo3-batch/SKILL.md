@@ -54,7 +54,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 3. Create new event listener class with #[AsEventListener]
 4. Move logic from hook method to __invoke()
 5. Remove hook registration from ext_localconf.php
-6. Add Services.yaml entry (DI / event listener registration)
+6. If **not** using `#[AsEventListener]`: register the listener in `Services.yaml`. With the attribute and `autoconfigure: true` (default), no extra `tags:` entry is required.
 7. Run php -l on new file
 ```
 
@@ -71,16 +71,18 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `drawFooterHook` | `ModifyButtonBarEvent` |
 | `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
 | `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (asset rendering) — confirm vs. your hook usage |
-| `tslib_fe->contentPostProc` | `AfterCacheableContentIsGeneratedEvent` |
+| `tslib_fe->contentPostProc` (cached) | `AfterCacheableContentIsGeneratedEvent` |
+| `tslib_fe->contentPostProc` (output) | `AfterCachedPageIsPersistedEvent` — verify name in Core for your TYPO3 version |
+| `tslib_fe->contentPostProc` (all) | No single PSR-14 replacement — split by what the hook actually does |
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 
 **Not 1:1 replacements (verify before batch-rewriting):**
 
 - **`drawHeaderHook` / `drawFooterHook`** — Legacy backend doc-header integration points. `ModifyButtonBarEvent` covers the **button bar** only; full header/footer chrome may need a different Core event or a documented alternative for your module type.
-- **`tslib_fe->contentPostProc`** — TypoScript hook variants (`all`, `cached`, `output`, etc.) run at different FE pipeline stages. `AfterCacheableContentIsGeneratedEvent` matches **cacheable** HTML generation, not every `contentPostProc` use case.
+- **`tslib_fe->contentPostProc`** — Sub-hooks (`all`, `cached`, `output`) run at different FE pipeline stages. Map **cached** → `AfterCacheableContentIsGeneratedEvent`, **output** → `AfterCachedPageIsPersistedEvent` where applicable; **`all`** has no drop-in event — re-check Core docs.
 
-### 2. TCA modernization (TYPO3 v14)
+### 2. TCA modernization (cumulative toward v14 target)
 
 **Research**: Scan all `Configuration/TCA/` and `Configuration/TCA/Overrides/` files.
 
@@ -234,8 +236,8 @@ CI pipeline:
 ```
 1. Add property hooks where getter/setter pattern exists
 2. Use asymmetric visibility (public private(set)) on DTOs
-3. Replace array_search + if with array_find()
-4. Replace array_filter + reset with array_find()
+3. Replace array_search + if with array_find() **only after checking semantics** — `array_search()` returns a **key** for a given value; `array_find()` takes a **callback** and returns the first matching **value** (or null). Not drop-in replacements.
+4. Replace array_filter + reset with array_find() where a callback-based “first match” is what you need
 5. Replace manual array_key_exists checks with array_any/array_all
 6. Add #[\Deprecated] attribute to legacy methods
 7. Run php -l to verify syntax
@@ -252,8 +254,8 @@ CI pipeline:
 ```
 1. Create ContentBlocks/ContentElements/<name>/config.yaml
 2. Map TCA columns to YAML fields
-3. Move Fluid template to ContentBlocks/ContentElements/<name>/Source/
-4. Create EditorInterface.yaml
+3. Move Fluid template to `ContentBlocks/ContentElements/<name>/templates/` (not `Source/`)
+4. Align field definitions in `config.yaml` with TCA columns (no separate `EditorInterface.yaml` in Content Blocks)
 5. Remove old TCA override file
 6. Remove SQL from ext_tables.sql (columns become automatic)
 7. Test rendering in frontend
@@ -330,7 +332,7 @@ Stop the batch and report if:
 |----------------|-----------------|
 | Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
 | Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
-| `MailMessage->send()` → inject `Symfony\Component\Mailer\MailerInterface` (or TYPO3 façade) | All email-sending code; avoid static `Mailer::send()` |
+| `MailMessage->send()` → inject `TYPO3\CMS\Core\Mail\MailerInterface` and `$this->mailer->send($email)` | All email-sending code; avoid raw Symfony `MailerInterface` in TYPO3 DI ([Breaking #108097](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-108097-UseSymfonyMailerInterface.html)) |
 | `ctrl.searchFields` removed (v14) → per-field `searchable` in field `config` | See [Breaking: #106972](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-106972-TCAControlOptionSearchFieldsRemoved.html) |
 | TCA `interface` removal | All TCA files with `interface` key |
 | Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |

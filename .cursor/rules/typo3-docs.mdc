@@ -16,6 +16,8 @@ Create and maintain TYPO3 extension documentation following official docs.typo3.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
+> **Supplements:** [SKILL-PHP84.md](SKILL-PHP84.md) (PHP version badges, PHP 8.4 in RST) · [SKILL-CONTENT-BLOCKS.md](SKILL-CONTENT-BLOCKS.md) (Content Blocks fields with `.. confval::` and `:name:`)
+
 ## When to Use
 
 - Creating documentation from scratch (no `Documentation/` exists)
@@ -98,7 +100,7 @@ TYPO3 sets these as **attributes on `<extension …/>`**, not as a generic `<set
     />
 ```
 
-Use `docker run … configure` (TYPO3 Guides CLI) to adjust values interactively, then run `lint-guides-xml` (below) to validate against the XSD.
+Some image tags ship a `configure` helper for `guides.xml` — confirm with `docker run --rm ghcr.io/typo3-documentation/render-guides:latest -h` before documenting it for users. Then run `lint-guides-xml` (below) to validate against the XSD.
 
 ## RST Syntax Reference
 
@@ -163,6 +165,8 @@ This section can be referenced from anywhere.
 ## TYPO3 Directives
 
 ### confval (Configuration Values)
+
+If the **display title** of a `.. confval::` is not unique in your manual, you **must** set **`:name:`** to a unique slug (TYPO3 merges duplicate titles poorly in indexes). See [Configuration values (confval)](https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/Reference/ReStructuredText/Code/Confval.html) and the Content Blocks supplement for multi-field examples.
 
 ```rst
 ..  confval:: encryptionMethod
@@ -291,35 +295,32 @@ docker run --rm --pull always -v $(pwd):/project -w /project -it \
 
 ### With live preview
 
-phpDocumentor Guides exposes a **`serve`** command (dev server with file watching). Default port is **1337** (override with `--port`). From the extension root (documentation in `Documentation/`):
+Many current **`render-guides`** images use **`--watch`** (with `--config=Documentation`) instead of a `serve` subcommand. Default port is often **1337** — verify with `-h` for your tag.
 
 ```bash
 docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
   ghcr.io/typo3-documentation/render-guides:latest \
-  --config=Documentation serve --output=Documentation-GENERATED-temp
-
-# Open http://localhost:1337 in the browser
+  --config=Documentation --watch
 ```
 
-> **`serve` availability** depends on the image tag — run `docker run --rm ghcr.io/typo3-documentation/render-guides:latest -h` and use the subcommands your build exposes. Older tags used different flags (`--watch`, etc.).
+> If your image still documents `serve`, follow that subcommand; CLI entry points change between releases — always check `-h` output.
 
 ### Validation
 
 ```bash
-# Fail the build on warnings/errors in the render log
+# Fail the build on warnings/errors — flag name varies by image; confirm with `-h` before relying on `--fail-on-log`
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress --fail-on-log
+  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation --no-progress
 
-# Validate guides.xml (CLI varies by image — confirm with `-h`; often no extra path when using --config)
+# Validate guides.xml — `lint-guides-xml` must be the first CLI argument (do not prefix with `--config=…` on the same argv slot)
 docker run --rm --pull always -v $(pwd):/project -w /project -it \
-  ghcr.io/typo3-documentation/render-guides:latest --config=Documentation lint-guides-xml
+  ghcr.io/typo3-documentation/render-guides:latest lint-guides-xml
 ```
 
 ## Screenshots
 
 ### Requirements
-- PNG format
-- 72 DPI
+- PNG format (official TYPO3 screenshot guidelines focus on **dimensions**, not DPI — e.g. full-page shots around **1400×1050 px**; confirm current docs)
 - Appropriate size (not too large)
 - Always include `:alt:` text
 
@@ -386,9 +387,9 @@ After installation, activate the extension:
 
 ..  code-block:: bash
 
-    vendor/bin/typo3 extension:setup my_extension
+    vendor/bin/typo3 extension:setup -e my_extension
 
-> Extension CLI flags change between Core versions — run `vendor/bin/typo3 extension:setup --help` and use the documented option for a single extension (often a positional name or `-e`, depending on your TYPO3).
+> Extension CLI flags change between Core versions — run `vendor/bin/typo3 extension:setup --help` (typically **`-e` / `--extension`**).
 ```
 
 ## Deployment to docs.typo3.org
@@ -413,11 +414,9 @@ Documentation is automatically rendered when:
 
 ## Complete Index.rst Example
 
-> **Includes.rst.txt:** Older Sphinx-based manuals often started with `.. include:: /Includes.rst.txt`. Current **render-guides** `init` output may not ship that file — omit the line or add the file only if your project still uses the shared-include pattern.
+> **Includes.rst.txt:** Older Sphinx-based manuals often started with `.. include:: /Includes.rst.txt`. Current **render-guides** `init` output may not ship that file — **do not copy-paste** that include unless the file exists in your project.
 
 ```rst
-..  include:: /Includes.rst.txt
-
 .. _start:
 
 ==============

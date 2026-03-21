@@ -1,6 +1,6 @@
 ---
 name: typo3-testing-php84
-description: PHP 8.4 testing patterns for TYPO3. PHPUnit 11/12 compatibility, new assertions, and property hooks testing.
+description: PHP 8.4 testing patterns for TYPO3. PHPUnit 11/12/13 compatibility, new assertions, and property hooks testing.
 version: 1.0.0
 php_compatibility: "8.4+"
 typo3_compatibility: "14.x"
@@ -259,9 +259,11 @@ final class ArrayFunctionsTest extends TestCase
 
 ---
 
-## 5. PHPUnit 12 Attribute Changes
+## 5. PHPUnit 11+ Attribute Syntax
 
-### New Attribute Syntax
+PHPUnit **10+** prefers PHP 8 attributes over docblock annotations; **PHPUnit 12+** drops annotation support. The patterns below apply to **11.x, 12.x, and 13.x** (confirm `composer.json` constraints against [PHPUnit’s requirements](https://docs.phpunit.de/)).
+
+### Attribute example
 
 ```php
 <?php
@@ -353,7 +355,7 @@ final class ProductServiceTest extends TestCase
 
 ## 7. Migration Checklist
 
-- [ ] Update PHPUnit to 11.x or 12.x
+- [ ] Update PHPUnit to 11.x, 12.x, or 13.x (match `typo3/testing-framework` compatibility)
 - [ ] Replace annotation-based test markers with Attributes
 - [ ] Update `@covers` to `#[CoversClass]`
 - [ ] Update `@dataProvider` to `#[DataProvider]`

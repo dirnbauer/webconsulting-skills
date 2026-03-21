@@ -73,7 +73,7 @@ xdebug.client_port=9003
 xdebug.idekey=CURSOR
 xdebug.log_level=0
 
-; PHP 8.4 specific: Better property hooks debugging
+; Shows local variables in stack traces (helpful when debugging property hooks and complex state)
 xdebug.show_local_vars=1
 xdebug.var_display_max_depth=5
 ```
@@ -137,10 +137,8 @@ ddev restart
 
 ```yaml
 # Additional PHP extensions — package names must match `php_version` (e.g. php8.4-* when using PHP 8.4)
+# Only list extensions not already shipped in the default DDEV web image (intl/gd/zip are usually present).
 webimage_extra_packages:
-  - php8.4-intl
-  - php8.4-gd
-  - php8.4-zip
   - php8.4-bcmath
 ```
 

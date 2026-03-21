@@ -185,7 +185,7 @@ ddev exec vendor/bin/fractor process
 
 - [typo3-rector SKILL.md](./SKILL.md)
 - [typo3-content-blocks SKILL-MIGRATION](../typo3-content-blocks/SKILL-MIGRATION.md)
-- [Rector Custom Rules](https://getrector.com/documentation/custom-rules)
+- [Rector Custom Rules](https://getrector.com/documentation/custom-rule)
 
 ---
 

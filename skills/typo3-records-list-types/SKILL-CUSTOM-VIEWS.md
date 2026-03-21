@@ -111,13 +111,13 @@ Restrict a view type to specific pages using TSconfig conditions:
             itemsPerPage = 50
         }
     }
-[end]
+[END]
 
 # Grid-only for media folders (doktype 254 = sysfolder)
 [page["doktype"] == 254]
     mod.web_list.viewMode.default = grid
     mod.web_list.viewMode.allowed = list,grid
-[end]
+[END]
 
 # Custom view for an entire page tree (pid=100 and its children)
 [page["uid"] == 100 || page["pid"] == 100]
@@ -125,7 +125,7 @@ Restrict a view type to specific pages using TSconfig conditions:
         allowed = list,grid,catalog
         default = catalog
     }
-[end]
+[END]
 ```
 
 ## Real-World Examples
@@ -184,7 +184,7 @@ mod.web_list.viewMode.types.addressbook {
             itemsPerPage = 30
         }
     }
-[end]
+[END]
 ```
 
 ### News Dashboard (editor-controlled columns)
@@ -245,7 +245,7 @@ mod.web_list.viewMode.types.fulllist {
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
 2. **TSconfig `showFields`** (`mod.web_list.table.<table>.showFields`)
-3. **TCA `searchFields`**
+3. **TCA search metadata** — on TYPO3 v14 Core, `ctrl.searchFields` was removed; use per-column `'searchable' => true`. This extension’s fallback may still consider legacy `ctrl.searchFields` on older TCA.
 4. **Label field only** (final fallback)
 
 **`columnsFromTCA = 0`** -- uses the explicit `displayColumns` list exactly.

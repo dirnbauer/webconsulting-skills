@@ -648,7 +648,7 @@ plugin.tx_solr {
 | `Templates/Search/Results.html` | Main search results page |
 | `Templates/Search/Form.html` | Search form |
 | `Partials/Result/Document.html` | Single result item |
-| `Partials/Facets/OptionsFacet.html` | Options facet rendering |
+| `Partials/Facets/Options.html` | Options facet rendering (Fluid partial name; not `OptionsFacet.html`) |
 | `Partials/Facets/QueryGroupFacet.html` | Query group facet |
 
 Copy default templates from EXT:solr to your extension path and modify them.

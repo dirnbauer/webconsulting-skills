@@ -44,14 +44,15 @@ git config --global user.email "your.email@example.com"
 **Recommended:** clone the public Git repository, then add Gerrit as a **push** remote (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the current URLs and the `git remote set-url origin --push …` variant).
 
 ```bash
-git clone https://github.com/TYPO3/typo3.git
+git clone https://github.com/typo3/typo3.git typo3
 cd typo3
-
-# Push remote to Gerrit (many developers name this `gerrit`)
-git remote add gerrit ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git
+# Official guide: configure origin’s *push* URL to Gerrit (preferred over a second remote):
+#   git remote set-url --push origin "ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git"
+# Alternative: extra remote named `gerrit`
+#   git remote add gerrit ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git
 ```
 
-After `composer install`, set **`COMPOSER_ROOT_VERSION`** as described in the guide (required for a proper Core checkout).
+From the Core root directory, set **`COMPOSER_ROOT_VERSION`** **before** `composer install` (required for a correct checkout), e.g. `export COMPOSER_ROOT_VERSION=14.0.x-dev` — see the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the value matching your branch, then run `composer install`.
 
 ### Install Commit Hook (Change-Id)
 
@@ -101,7 +102,7 @@ git commit
 **Commit Message Format:**
 
 ```
-[TYPE] Subject line (imperative, max 52 chars)
+[TYPE] Subject line (imperative; aim ~52 chars, **hard max 72**)
 
 Description explaining how and why the change was made.
 Can be multiple paragraphs.
@@ -129,7 +130,12 @@ git push gerrit HEAD:refs/for/main
 | `[FEATURE]` | New feature |
 | `[TASK]` | Refactoring, cleanup, maintenance |
 | `[DOCS]` | Documentation only |
-| `[SECURITY]` | Security fix (coordinate with security team) |
+
+### Flags (combine with a primary type)
+
+| Flag | Meaning |
+|------|---------|
+| `[SECURITY]` | Coordinated security fix — use with a normal type, usually `[BUGFIX][SECURITY]`, per Security Team process (not a standalone “type” on its own) |
 | `[!!!]` | Breaking change prefix (e.g., `[!!!][TASK]`) |
 
 ### Required Footer
@@ -224,17 +230,19 @@ Use the remote name your checkout uses (`gerrit` or an `origin` push URL). See t
 
 | Vote | Meaning |
 |------|---------|
-| +2 | Approved, ready for merge |
-| +1 | Looks good, needs second review |
+| +2 | **Core Merger** approval — ready to merge into the target branch |
+| +1 | You approve of the patch (non-binding for merge) |
 | 0 | Comment only |
-| -1 | Changes needed |
-| -2 | Major issues, do not merge |
+| -1 | You do not approve / request changes |
+| -2 | **Core Merger** veto — do not merge (serious issues) |
+
+**+2 / −2** are only available to Core Mergers; regular contributors use +1 / −1 / 0.
 
 ### CI Requirements
 
 All patches must pass:
 - [ ] Coding standards (PHP-CS-Fixer)
-- [ ] PHPStan at the level enforced by Core CI for your branch (verify in `Build/phpstan.neon` / docs)
+- [ ] PHPStan at the level enforced by Core CI for your branch (verify the **actual** config path in your checkout — it may move between releases)
 - [ ] Unit tests
 - [ ] Functional tests
 - [ ] Acceptance tests (if applicable)
@@ -270,9 +278,12 @@ git push gerrit HEAD:refs/for/main --force
 2. Run tests locally:
 
 ```bash
-# Run specific test suite
+# Run specific test suite (official Core helper)
 Build/Scripts/runTests.sh -s unit
 Build/Scripts/runTests.sh -s functional
+
+# Composer meta-target (name may be `composer tests` plural — check composer.json)
+composer tests
 
 # Run PHP-CS-Fixer
 Build/Scripts/runTests.sh -s cgl

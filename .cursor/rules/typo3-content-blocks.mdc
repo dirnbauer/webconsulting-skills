@@ -132,6 +132,10 @@ ddev typo3 cache:flush -g system
 ddev typo3 extension:setup --extension=my_sitepackage
 ```
 
+### Predefined Basics (content elements)
+
+List under `basics:` to pull in Core field groups: **`TYPO3/Header`**, **`TYPO3/Appearance`**, **`TYPO3/Links`**, **`TYPO3/Categories`**. See the [Content Blocks basics reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/ContentElements/Index.html).
+
 ### Minimal Content Element
 
 ```yaml
@@ -294,6 +298,7 @@ restriction:
   disabled: true
   startTime: true
   endTime: true
+  userGroup: true  # fe_group visibility fields when applicable
 security:
   ignorePageTypeRestriction: true  # Allow on normal pages
 fields:
@@ -330,6 +335,20 @@ fields:
         type: Link
 ```
 
+### Record Type options (reference)
+
+Content Blocks exposes many **optional** root keys on record types — always confirm names against the current [Record Types YAML reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/RecordTypes/Index.html). Commonly used flags include:
+
+| Option | Role |
+|--------|------|
+| `editLocking` | Editor locking behaviour |
+| `sortField` / `sortable` | Manual sorting (`sorting` column) |
+| `rootLevelType` | Allow records at PID 0 |
+| `readOnly` | Read-only in FormEngine |
+| `adminOnly` | Visible to admins only |
+| `hideAtCopy` / `appendLabelAtCopy` | Copy behaviour |
+| `group` | Backend selector grouping |
+
 ### Multi-Type Records (Single Table Inheritance)
 
 Create multiple types for one table:
@@ -340,7 +359,7 @@ name: myvendor/person-employee
 table: tx_mysitepackage_domain_model_person
 typeField: person_type
 typeName: employee
-# Ordering/priority of record types is defined by Content Blocks / TCA docs for your version — do not copy a fictional `priority: 999` key unless the official schema lists it.
+priority: 0  # Integer ordering for record types (default 0; higher sorts later — confirm in Content Blocks YAML reference for your version)
 labelField: name
 languageAware: false
 workspaceAware: false
@@ -453,6 +472,7 @@ fields:
 |--------|------|----------|-------------|
 | `typeName` | integer | ✓ | Unique doktype number (use Unix timestamp) |
 | `group` | string | | Group in selector: `default`, `link`, `special` |
+| `allowedRecordTypes` | array | | Record types allowed on this doktype (default includes pages, `sys_category`, `sys_file_reference`, `sys_file_collection`; `*` wildcard possible — see official Page Types API) |
 
 **Reserved typeName values:** 199, 254 (cannot be used)
 
@@ -707,6 +727,8 @@ fields:
 
 ### File Field Example
 
+> **TCA-only options:** Keys like `appearance` / `behaviour` belong in generated TCA, not always in Content Blocks YAML. If the schema rejects them, add a **TCA override** for that field after generation (see Content Blocks docs on extending TCA).
+
 ```yaml
 fields:
   - identifier: gallery_images
@@ -714,11 +736,6 @@ fields:
     allowed: common-image-types
     minitems: 1
     maxitems: 10
-    appearance:
-      createNewRelationLinkTitle: Add Image
-      showAllLocalizationLink: true
-    behaviour:
-      allowLanguageSynchronization: true
 ```
 
 ### Select Field Example
@@ -906,9 +923,10 @@ If `webprofil/make` is installed:
 # Create Content Block with webprofil/make
 ddev make:content_blocks
 
-# Clear caches and update database
+# Clear caches and update database (prefer Core CLI)
 ddev typo3 cache:flush
-ddev typo3 database:updateschema
+ddev typo3 extension:setup --extension=my_sitepackage
+# `database:updateschema` exists only with helhum/typo3-console — do not assume it in plain Core projects
 ```
 
 ### Integration with Extbase
@@ -937,9 +955,11 @@ skeleton-path: content-blocks-skeleton
 config:
   content-element:
     basics:
+      - TYPO3/Header
       - TYPO3/Appearance
       - TYPO3/Links
-    group: common
+      - TYPO3/Categories
+    group: default
     prefixFields: true
     prefixType: full
   
@@ -1028,8 +1048,9 @@ ddev typo3 extension:setup --extension=my_sitepackage
 ### Database Errors
 
 ```bash
-# Update database schema
-ddev typo3 database:updateschema
+# Update database schema (Core)
+ddev typo3 extension:setup --extension=my_sitepackage
+# With typo3-console only: ddev typo3 database:updateschema
 
 # Or use Compare Tool
 # Admin Tools > Maintenance > Analyze Database Structure
@@ -1044,12 +1065,12 @@ ddev typo3 database:updateschema
 
 ## 17. Version constraints
 
-Use **TYPO3 v14** with **Content Blocks 2.x** (see Packagist for exact `require` ranges).
+Use **TYPO3 v14.1+** with **Content Blocks 2.x** (`friendsoftypo3/content-blocks` currently requires `typo3/cms-core: ^14.1` — confirm on [Packagist](https://packagist.org/packages/friendsoftypo3/content-blocks)).
 
 ```php
-// ext_emconf.php — TYPO3 v14 + Content Blocks 2.x
+// ext_emconf.php — TYPO3 v14.1+ + Content Blocks 2.x
 'depends' => [
-    'typo3' => '14.0.0-14.99.99',
+    'typo3' => '14.1.0-14.99.99',
     'content_blocks' => '2.0.0-2.99.99',
 ],
 ```

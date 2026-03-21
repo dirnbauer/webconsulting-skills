@@ -266,7 +266,7 @@ Restrict views to specific pages:
         allowed = list,timeline
         default = timeline
     }
-[end]
+[END]
 ```
 
 ## 9. Column Display
@@ -282,7 +282,7 @@ Two modes control which fields appear:
 
 1. **Editor's "Show columns" selection** (stored per-user per-table)
 2. **TSconfig `showFields`** (`mod.web_list.table.<table>.showFields`)
-3. **TCA `searchFields`** (the table's most relevant fields)
+3. **TCA search metadata** — on TYPO3 v14 Core, `ctrl.searchFields` was removed; use per-column `'searchable' => true`. This extension’s fallback may still consider legacy `ctrl.searchFields` on older TCA.
 4. **Label field only** (final fallback)
 
 ### Special Column Names
@@ -490,7 +490,7 @@ Custom view types automatically receive `base.css`.
     mod.web_list.viewMode.default = grid
     mod.web_list.viewMode.allowed = list,grid
     mod.web_list.gridView.cols = 6
-[end]
+[END]
 ```
 
 ### Disable Extension for Specific Pages
@@ -498,7 +498,7 @@ Custom view types automatically receive `base.css`.
 ```tsconfig
 [page["uid"] == 123 || page["pid"] == 123]
     mod.web_list.viewMode.allowed = list
-[end]
+[END]
 ```
 
 ### Force View for User Group

@@ -49,6 +49,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '14.0.0-14.99.99',
+            'php' => '8.2.0-8.4.99',
         ],
     ],
 ];
@@ -135,9 +136,6 @@ jobs:
       matrix:
         php: ['8.2', '8.3', '8.4']
         typo3: ['^14.0']
-        exclude:
-          - php: '8.2'
-            typo3: '^14.0'
 ```
 
 ---

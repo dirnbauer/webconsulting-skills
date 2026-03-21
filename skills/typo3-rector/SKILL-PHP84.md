@@ -171,7 +171,7 @@ jobs:
 ## References
 
 - [typo3-rector SKILL.md](./SKILL.md)
-- [Rector Documentation](https://getrector.com/documentation)
+- [Rector Documentation](https://getrector.com/documentation) (custom rules: `/documentation/custom-rule`)
 - [php-modernization SKILL-PHP84](../php-modernization/SKILL-PHP84.md)
 
 ---

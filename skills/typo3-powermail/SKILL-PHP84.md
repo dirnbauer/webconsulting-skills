@@ -58,8 +58,9 @@ final class CrmFinisherConfig
 
     public int $timeout = 30;
 
+    /** Example hook body only — prefer Environment / feature flags over `$GLOBALS` in production code. */
     public bool $dryRun {
-        get => $this->dryRun && ($GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] !== '');
+        get => $this->dryRun && (($GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] ?? '') !== '');
     }
 
     /** Virtual property: build from TypoScript config array */

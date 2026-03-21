@@ -91,8 +91,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 
 ```html
 <!-- EXT:site_package/Resources/Private/Layouts/Default.html -->
-<f:layout name="Default" />
-
+<!-- Layout files must NOT contain <f:layout> — that tag belongs in Templates to select a layout. -->
 <f:render section="Main" />
 ```
 
@@ -106,9 +105,8 @@ Run through this checklist before every deployment. Mark items as you fix them.
 </a>
 
 <header>
-    <nav aria-label="{f:translate(key: 'LLL:EXT:site_package/Resources/Private/Language/locallang.xlf:nav.main')}">
-        <f:cObject typoscriptObjectPath="lib.mainNavigation" />
-    </nav>
+    <!-- Main nav landmark lives in the partial (e.g. MainMenu.html) to avoid nested <nav>. -->
+    <f:cObject typoscriptObjectPath="lib.mainNavigation" />
 </header>
 
 <main id="main-content">
@@ -155,7 +153,8 @@ Run through this checklist before every deployment. Mark items as you fix them.
             title="{image.title}"
             width="{dimensions.width}"
             height="{dimensions.height}"
-            loading="{f:if(condition: '{lazyLoad}', then: 'lazy', else: 'eager')}"
+            loading="{f:if(condition: lazyLoad, then: 'lazy', else: 'eager')}"
+            additionalAttributes="{decoding: 'async'}"
         />
         <f:if condition="{image.description}">
             <figcaption>{image.description}</figcaption>
@@ -174,7 +173,7 @@ For decorative images (no informational value):
 
 ```html
 <!-- Partial: Resources/Private/Partials/ContentElement/Header.html -->
-<f:if condition="{data.header} && {data.header_layout} != 100">
+<f:if condition="{data.header} && {data.header_layout} != '100'">
     <f:switch expression="{data.header_layout}">
         <f:case value="1"><h1>{data.header}</h1></f:case>
         <f:case value="2"><h2>{data.header}</h2></f:case>
@@ -191,6 +190,7 @@ For decorative images (no informational value):
 ```html
 <!-- Partial: Resources/Private/Partials/Navigation/MainMenu.html -->
 <nav aria-label="{f:translate(key: 'LLL:EXT:site_package/Resources/Private/Language/locallang.xlf:nav.main')}">
+    <!-- role="list" restores list semantics in Safari/VoiceOver when list-style:none strips native list role -->
     <ul role="list">
         <f:for each="{menu}" as="item">
             <li>
@@ -208,7 +208,7 @@ For decorative images (no informational value):
                         <f:for each="{item.children}" as="child">
                             <li>
                                 <a href="{child.link}"
-                                   {f:if(condition: '{child.active}', then: 'aria-current="page"')}>
+                                   {f:if(condition: child.active, then: 'aria-current="page"')}>
                                     {child.title}
                                 </a>
                             </li>
@@ -227,7 +227,8 @@ For decorative images (no informational value):
 <div class="accordion" data-accordion>
     <f:for each="{items}" as="item" iteration="iter">
         <div class="accordion__item">
-            <h3>
+            <!-- Use role="heading" + aria-level so level matches page outline (pass headingLevel 2–6 from CE). -->
+            <div role="heading" aria-level="{f:if(condition: headingLevel, then: headingLevel, else: '3')}">
                 <button
                     type="button"
                     class="accordion__trigger"
@@ -238,7 +239,7 @@ For decorative images (no informational value):
                 >
                     {item.header}
                 </button>
-            </h3>
+            </div>
             <div
                 id="accordion-panel-{data.uid}-{iter.index}"
                 role="region"
@@ -426,11 +427,8 @@ final class SrOnlyViewHelper extends AbstractTagBasedViewHelper
 {
     protected $tagName = 'span';
 
-    public function initializeArguments(): void
-    {
-        parent::initializeArguments();
-        $this->registerUniversalTagAttributes();
-    }
+    // Fluid 5.x / TYPO3 v14: do not call registerUniversalTagAttributes() — it was removed from
+    // AbstractTagBasedViewHelper; universal attributes are handled by the base class.
 
     public function render(): string
     {
@@ -594,12 +592,13 @@ class AccessibleDialog {
     }
 
     init() {
-        this.dialog.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') this.close();
+        // showModal() closes on Escape natively; listen to 'close' for focus restore only.
+        this.dialog.addEventListener('close', () => {
+            this.previousFocus?.focus();
         });
 
         this.dialog.addEventListener('click', (e) => {
-            if (e.target === this.dialog) this.close();
+            if (e.target === this.dialog) this.dialog.close();
         });
     }
 
@@ -611,7 +610,6 @@ class AccessibleDialog {
 
     close() {
         this.dialog.close();
-        this.previousFocus?.focus();
     }
 }
 ```
@@ -700,11 +698,14 @@ Usage: `window.liveAnnouncer.announce('3 results found');`
     outline: none;
 }
 
-/*
- * Touch targets: WCAG 2.2 AA requires at least 24×24 CSS px (see 2.5.8 Target Size (Minimum)).
- * 44×44 px matches stricter mobile / AAA-style guidance — use knowingly, not as the AA floor.
- */
+/* Touch targets: WCAG 2.2 AA 2.5.8 minimum = 24×24 CSS px (baseline below). */
 button, a, input, select, textarea, [role="button"] {
+    min-height: 24px;
+    min-width: 24px;
+}
+
+/* Optional comfort target — intentionally stricter than AA; common for mobile tap areas */
+.touch-target-comfort {
     min-height: 44px;
     min-width: 44px;
 }

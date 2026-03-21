@@ -56,7 +56,7 @@ ConditionContainer (tx_powermailcond_domain_model_conditioncontainer)
 | 8 | `contains value from field` | Field value matches another field's value |
 | 9 | `contains not value from field` | Field value differs from another field's value |
 
-Operators 0-7 compare against a static string (`cond_string`).
+Operators **2–7** compare against a static string (`cond_string`). Operators **0–1** test field presence (“is set” / “is not set”) and ignore `cond_string`.
 Operators 8-9 compare against another form field (`equal_field`).
 
 ## 3. Backend Configuration

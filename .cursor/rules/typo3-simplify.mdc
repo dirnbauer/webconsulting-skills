@@ -151,7 +151,7 @@ final class MyService
 - [ ] Use autowiring (remove explicit argument definitions when type-hintable)
 - [ ] Use `_defaults: autowire: true, autoconfigure: true, public: false`
 - [ ] Remove manual service definitions for classes that autowiring handles
-- [ ] Replace `factory` definitions with `#[Autoconfigure]` where possible
+- [ ] Replace unnecessary `factory:` service definitions with autowiring or a small dedicated factory class (Symfony’s `#[Autoconfigure]` is for attribute-based compiler config, not a general substitute for `factory:` in TYPO3 extensions)
 - [ ] Remove `public: true` unless needed for `GeneralUtility::makeInstance()`
 
 ### ext_localconf.php / ext_tables.php
@@ -206,7 +206,7 @@ When simplifying TYPO3 v14 code that still uses transitional patterns:
 - Register PSR-15 middleware in `Configuration/RequestMiddlewares.php` (Core-supported pattern)
 - Keep `Services.yaml` event listener config alongside `#[AsEventListener]`
 - Keep numeric TCA `items` arrays alongside `label`/`value` format
-- Use `#[Autoconfigure]` where appropriate (TYPO3 v14)
+- Prefer `Services.yaml` `_defaults` (`autowire` / `autoconfigure`) plus Core registration attributes (`#[AsCommand]`, `#[AsEventListener]`, …) over ad-hoc `factory:` blocks
 
 ## v14-Only Simplification Targets
 

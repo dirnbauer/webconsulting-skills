@@ -307,7 +307,7 @@ final class MyListener
 ### Static TCA (No Runtime Modifications)
 
 ```php
-// ❌ OLD (runtime TCA modification - forbidden in v14)
+// ❌ OLD (runtime TCA mutation — not allowed since TYPO3 v12; still seen in very old extensions)
 // ext_tables.php
 $GLOBALS['TCA']['tt_content']['columns']['myfield'] = [...];
 
@@ -319,7 +319,7 @@ $GLOBALS['TCA']['tt_content']['columns']['myfield'] = [...];
 ### Backend Module Registration
 
 ```php
-// ❌ OLD (ext_tables.php registration)
+// ❌ OLD (ext_tables.php registration — migrate to Modules.php when modernizing)
 ExtensionUtility::registerModule(...);
 
 // ✅ NEW (Configuration/Backend/Modules.php)
@@ -347,13 +347,8 @@ return [
 | `ObjectManager` / `GeneralUtility::makeInstance` for services | Constructor injection |
 | `TSFE->fe_user->user` | Request attribute |
 | Various hooks | PSR-14 events |
-
-### TYPO3 v14 breaking changes
-
-| Removed/Changed | Replacement |
-|-----------------|-------------|
-| Runtime TCA changes | Static TCA only |
-| Legacy backend modules | `Configuration/Backend/Modules.php` |
+| Runtime TCA mutation in `ext_tables.php` | Static TCA under `Configuration/TCA/` (required since **v12**; still common in extensions that predate that layout) |
+| Legacy `ExtensionUtility::registerModule()` in `ext_tables.php` | `Configuration/Backend/Modules.php` (same — not new in v14, but a frequent upgrade gap) |
 
 > **Historical note:** `$GLOBALS['TYPO3_DB']` was removed long before v14 (use `Connection`/QueryBuilder). If you still see references while upgrading very old code, treat them as a separate legacy cleanup, not a v14-only item.
 
@@ -403,10 +398,13 @@ ddev typo3 extension:setup
 ### Database Issues
 
 ```bash
-# Check for schema differences
+# After installing/updating an extension (registers tables, TCA, etc.)
+ddev typo3 extension:setup
+
+# Check for schema differences (CLI binary name may be `typo3`, `vendor/bin/typo3`, or typo3-console’s `typo3` — use your project’s documented wrapper)
 ddev typo3 database:updateschema --verbose
 
-# Apply schema changes
+# Apply safe schema changes
 ddev typo3 database:updateschema "*.add,*.change"
 ```
 

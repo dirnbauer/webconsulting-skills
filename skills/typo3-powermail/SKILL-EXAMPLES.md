@@ -646,7 +646,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Anzahl Website Basis', 'input', 'produkt1_menge', 0, 2, 9, 1, @f_p1_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Anzahl Website Basis', 'input', 'produkt1_menge', 0, 2, 4, 1, @f_p1_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 2: German HTML card
 INSERT INTO tx_powermail_domain_model_field
@@ -658,7 +658,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Anzahl Website Professional', 'input', 'produkt2_menge', 0, 4, 9, 1, @f_p2_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Anzahl Website Professional', 'input', 'produkt2_menge', 0, 4, 4, 1, @f_p2_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 3: German HTML card (SEO-Paket)
 INSERT INTO tx_powermail_domain_model_field
@@ -670,7 +670,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Anzahl SEO-Paket', 'input', 'produkt3_menge', 0, 6, 9, 1, @f_p3_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Anzahl SEO-Paket', 'input', 'produkt3_menge', 0, 6, 4, 1, @f_p3_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Product 4: German HTML card (Wartungsvertrag)
 INSERT INTO tx_powermail_domain_model_field
@@ -682,7 +682,7 @@ VALUES
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
-  (1, @page3_uid, 'Anzahl Wartungsvertrag', 'input', 'produkt4_menge', 0, 8, 9, 1, @f_p4_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
+  (1, @page3_uid, 'Anzahl Wartungsvertrag', 'input', 'produkt4_menge', 0, 8, 4, 1, @f_p4_qty, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 
 -- Notes + GDPR checkboxes (German labels)
 INSERT INTO tx_powermail_domain_model_field

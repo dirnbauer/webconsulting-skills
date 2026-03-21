@@ -26,11 +26,9 @@ triggers:
 
 ### Index.rst
 
-> Omit `.. include:: /Includes.rst.txt` unless your documentation tree actually provides that file (legacy Sphinx pattern; `render-guides init` may not generate it).
+> Only add `.. include:: /Includes.rst.txt` if your documentation tree actually ships that file (legacy Sphinx pattern; `render-guides init` often does not).
 
 ```rst
-.. include:: /Includes.rst.txt
-
 ============
 My Extension
 ============
@@ -54,7 +52,7 @@ My Extension
    GPL-2.0-or-later
 
 :PHP:
-   8.2 - 8.4
+   8.2 - 8.5
 
 :TYPO3:
    14.0 - 14.x
@@ -100,8 +98,8 @@ PHP Compatibility
 =================
 
 .. important::
-   This extension requires PHP 8.2 or higher. PHP 8.4 is recommended
-   for full feature support.
+   This extension requires PHP 8.2 or higher. PHP 8.4+ is recommended
+   for full feature support; PHP 8.5 is in scope for current TYPO3 v14 minors — confirm against the official system requirements for your exact Core version.
 
 PHP 8.4 Features Used
 ---------------------

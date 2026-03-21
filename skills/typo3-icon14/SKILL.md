@@ -61,7 +61,7 @@ license: MIT / CC-BY-SA-4.0
 | `Configuration/Backend/Modules.php` | `iconIdentifier` for each module |
 | `Configuration/TCA/*.php` | `typeicon_classes`, `iconIdentifier` in ctrl/types |
 | `Configuration/TCA/Overrides/*.php` | Plugin icons (`pluginIcon`), page type icons |
-| `ext_localconf.php` | Avoid new `IconRegistry::registerIcon()` calls — registration belongs in `Configuration/Icons.php`; the registry API is **deprecated** (use `IconFactory` / icon packs as per changelog), not a place for new v14-style icons |
+| `ext_localconf.php` | Do **not** bootstrap `IconRegistry` here in v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Deprecation-104778-DoNotCallIconRegistryRegisterIconInExtLocalconf.html)) — use `Configuration/Icons.php`. The `registerIcon()` **method** is not `@deprecated`; the anti-pattern is imperative registration during `ext_localconf.php` bootstrap. |
 | `ext_tables.php` | Should not contain icon registration |
 
 ### Default output paths (use these if user does not specify)
@@ -223,7 +223,7 @@ Every v14-style module icon follows this structure:
 ### Dark/Light Mode Support
 
 TYPO3 v14 supports both dark and light color schemes. Icons MUST render correctly in both
-modes. The backend documents theme via attributes such as **`data-color-scheme`** and **`data-theme`** on the HTML element. A **`data-bs-theme`** attribute may still appear from bundled Bootstrap styles, but **follow TYPO3 Core / `PageRenderer` output**, not generic Bootstrap examples alone. Color mode is
+modes. The TYPO3 **backend** documents theme via **`data-color-scheme`** and **`data-theme`** on the HTML element. The **`data-bs-theme`** attribute is not part of normal backend HTML output (it may appear in the **styleguide** extension’s frontend demos). Prefer inspecting real backend markup, not generic Bootstrap documentation. Color mode is
 not controlled via `prefers-color-scheme` media queries in the backend UI.
 
 #### How `currentColor` Adapts
@@ -302,7 +302,7 @@ do not need to handle these. Just use `currentColor` and let TYPO3 manage overri
 #### Why NOT to Use `prefers-color-scheme`
 
 The TYPO3 backend does NOT use `prefers-color-scheme` for its color mode. It uses
-`data-color-scheme` / `data-theme` (and related TYPO3 theme attributes) on the HTML element. Using
+`data-color-scheme` and `data-theme` on the HTML element. Using
 `prefers-color-scheme` in icon SVGs would cause them to be out of sync with the backend
 theme when a user manually overrides the system preference.
 
@@ -420,12 +420,10 @@ return [
 ];
 ```
 
-### Deprecated: `IconRegistry::registerIcon()` in bootstrap
+### Avoid: `IconRegistry::registerIcon()` during `ext_localconf.php`
 
-`IconRegistry::registerIcon()` is **deprecated**; new and migrated extensions should register
-icons in `Configuration/Icons.php` (and reference them by `iconIdentifier`). The imperative
-pattern below is what you are replacing — not because the API vanished overnight, but because
-it blocks caching/DI expectations and conflicts with the v14 icon pipeline:
+New and migrated extensions should register icons in **`Configuration/Icons.php`**. Calling
+`IconRegistry::registerIcon()` from `ext_localconf.php` was disallowed for v14 ([Deprecation-104778](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.4/Deprecation-104778-DoNotCallIconRegistryRegisterIconInExtLocalconf.html)) — the method itself is still valid when used from supported contexts (e.g. rare dynamic registration), but not from bootstrap files.
 
 ```php
 // Legacy — do not add this in new code; use Configuration/Icons.php instead
@@ -462,6 +460,7 @@ public function __construct(
 
 public function getIcon(): string
 {
+    // Optional 3rd/4th args: ?bool $forceOverlay = null, ?IconState $state = null (e.g. IconState::STATE_DISABLED)
     return $this->iconFactory
         ->getIcon('module-myext', IconSize::SMALL)
         ->render();
@@ -482,11 +481,12 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 
 | Enum Value | Size | Use Case |
 |------------|------|----------|
-| `IconSize::MEGA` | 64px | Module menu main icons |
+| `IconSize::MEGA` | 64px | New Content Element wizard, large previews |
 | `IconSize::LARGE` | 48px | Module menu sub-icons |
-| `IconSize::MEDIUM` | 32px | Default, toolbar |
+| `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
-| `IconSize::DEFAULT` | **16×16 px** (same pixel dimensions as `SMALL` in Core) | Do not assume “1em” scaling — use `MEDIUM`/`LARGE` when you need visibly larger icons |
+| `IconSize::DEFAULT` | **1em** in CSS (`--icon-size: 1em`) — scales with font size; `getDimensions()` still reports 16×16 as fallback | Prefer `SMALL` when you need a fixed **16px** icon |
+| `IconSize::OVERLAY` | 16px | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
 
 ## Step 5: Migration Checklist
 
@@ -499,7 +499,7 @@ For each extension icon that needs updating:
 - [ ] Replace brand-color accent fills with `var(--icon-color-accent, #ff8700)`
 - [ ] Replace `#333333` detail fills with `currentColor`
 - [ ] Normalize opacity values to `.4` for secondary elements
-- [ ] Set viewBox to `0 0 64 64`
+- [ ] Set **viewBox** per icon type — `0 0 64 64` for backend **module** icons; `0 0 16 16` for many action/plugin/record icons (match a Core reference SVG)
 - [ ] Remove all legacy attributes (`version`, `xmlns:xlink`, `enable-background`, `xml:space`, `id`)
 - [ ] Remove generator comments
 - [ ] Redesign shapes from filled-on-background to outlined/line-art
