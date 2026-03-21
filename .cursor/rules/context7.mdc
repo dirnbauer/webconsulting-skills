@@ -5,6 +5,7 @@ description: >-
   API docs, framework patterns, or code examples for any library.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Context7 Documentation Lookup Skill

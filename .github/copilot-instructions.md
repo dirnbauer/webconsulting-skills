@@ -19,7 +19,6 @@ To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and f
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
 
-
 ## License
 
 Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.

@@ -7,6 +7,7 @@ description: >-
   synthetic media, prnu, image authentication, video verification, disinformation.
 metadata:
   version: "1.2.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Deepfake Detection & Media Authentication

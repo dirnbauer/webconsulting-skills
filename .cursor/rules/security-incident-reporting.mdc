@@ -7,6 +7,7 @@ description: >-
   analysis, cve correlation, nist 800-61.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Security Incident Reporting

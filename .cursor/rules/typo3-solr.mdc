@@ -149,7 +149,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix currently recommends **Solr 9.10.1** for TYPO3 13.4/14.x. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix often recommends **Solr 9.10.1** for current TYPO3 v14 stacks. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 
@@ -377,7 +377,7 @@ Full reference: [Dynamic Fields Appendix](https://docs.typo3.org/p/apache-solr-f
 
 ### Site Hash Strategy
 
-In `release-13.1.x`, the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new TYPO3 13.4+ projects is **site-identifier-based** (`siteHashStrategy = 1`).
+In some EXT:solr branches the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new **TYPO3 v14** projects is **site-identifier-based** (`siteHashStrategy = 1`).
 
 Configure this in **Admin Tools -> Settings -> Extension Configuration -> solr**. This is an **extension configuration** setting, not TypoScript.
 
@@ -698,7 +698,7 @@ Copy default templates from EXT:solr to your extension path and modify them.
 | `AfterUriIsProcessedEvent` | URI building in search context |
 | `AfterSiteHashHasBeenDeterminedForSiteEvent` | Override calculated site hash |
 
-### Example: Add Custom Fields to Documents (TYPO3 13.4+)
+### Example: Add custom fields to documents (TYPO3 v14)
 
 ```php
 <?php

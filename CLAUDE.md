@@ -14,11 +14,10 @@ To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and f
 
 ## Key Conventions
 
-- TYPO3 skills target **v14.x only**; **always confirm third-party extensions** (Packagist `require.typo3/cms-core`) for your project
+- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
 - Most TYPO3 skills include `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md` supplements
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
-
 
 ## License
 

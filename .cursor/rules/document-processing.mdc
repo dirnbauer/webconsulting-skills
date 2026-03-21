@@ -4,7 +4,7 @@ description: >-
   Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working
   with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text
   extraction, form filling, document creation, and data analysis.
-license: MIT
+license: Source-available (see github.com/anthropics/skills)
 metadata:
   version: "1.0.0"
 ---

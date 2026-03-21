@@ -367,3 +367,5 @@ These are common mistakes in visionOS design. Avoid them.
 | Sustained arm raising | Physical fatigue in minutes | Design for hands resting at sides |
 | Custom window chrome | Breaks platform consistency | Use system window controls |
 | Z-fighting layers | Visual flicker, unclear hierarchy | Use intentional depth offsets |
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

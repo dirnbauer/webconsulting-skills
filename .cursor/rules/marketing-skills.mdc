@@ -6,6 +6,7 @@ description: >-
   marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.
 metadata:
   version: "1.0.0"
+license: MIT
 ---
 
 # Marketing Skills for AI Agents

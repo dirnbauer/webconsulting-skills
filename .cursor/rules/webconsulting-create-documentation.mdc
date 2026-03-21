@@ -1,6 +1,7 @@
 ---
 name: webconsulting-create-documentation
 description: Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.
+license: MIT / CC-BY-SA-4.0
 ---
 
 # webconsulting — Create Documentation

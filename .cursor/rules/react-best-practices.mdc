@@ -141,3 +141,5 @@ Each rule file contains:
 ## Full Compiled Document
 
 For the complete guide with all rules expanded: `AGENTS.md`
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

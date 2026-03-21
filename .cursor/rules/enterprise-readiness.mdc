@@ -6,6 +6,7 @@ description: >-
   enterprise, openssf, slsa, security, scorecard, supply chain, badge.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Enterprise Readiness Assessment

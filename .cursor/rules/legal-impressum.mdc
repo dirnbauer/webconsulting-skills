@@ -6,6 +6,7 @@ description: >-
   impressum, legal notice, imprint, austria, österreich, ECG, mediengesetz, offenlegung.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Austrian Impressum Requirements

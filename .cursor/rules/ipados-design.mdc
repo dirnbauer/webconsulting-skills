@@ -665,3 +665,5 @@ Claiming Cmd+H, Cmd+Tab, Cmd+Space, or Globe shortcuts will not work and confuse
 
 ### DO NOT: Present Dense Content Without Scrolling
 Large iPad screens tempt designers to show everything at once. Content should still scroll when it exceeds the visible area. Never truncate content to avoid scrolling.
+
+Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
