@@ -1,6 +1,6 @@
 {
   "$schema": "./sync-config.schema.json",
-  "description": "External skill sources for automatic synchronization",
+  "description": "External skill sources for automatic synchronization. The eleven skills originally adapted from Netresearch DTT (php-modernization, enterprise-readiness, security-audit, cli-tools, context7, typo3-ddev, typo3-testing, typo3-conformance, typo3-docs, typo3-core-contributions, typo3-extension-upgrade) are canonical in this repo only: do not configure or enable sync from github.com/netresearch. Thank-you and attribution text in AGENTS.md, README, and each skill remains unchanged.",
   "skills": [
     {
       "name": "agent-md-refactor",
@@ -202,19 +202,6 @@
       "branch": "main",
       "enabled": true,
       "path": "skills/tvos"
-    },
-    {
-      "name": "typo3-docs",
-      "source": "https://github.com/netresearch/typo3-docs-skill.git",
-      "branch": "main",
-      "enabled": false
-    },
-    {
-      "name": "typo3-update",
-      "source": "https://github.com/netresearch/typo3-update-skill.git",
-      "branch": "main",
-      "enabled": false,
-      "note": "Repository may no longer exist upstream; kept for reference"
     },
     {
       "name": "visionos-design",

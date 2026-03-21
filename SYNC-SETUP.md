@@ -67,6 +67,14 @@ The collection supports two types of skills:
 1. **Local Skills**: Created and maintained within this repository
 2. **Upstream Skills**: Synced from external Git repositories
 
+### Netresearch-derived skills (in-repo only)
+
+The following skills were **adapted from** [Netresearch DTT GmbH](https://www.netresearch.de/) and are **maintained exclusively in this repository**. They must **not** be wired to automatic sync from `github.com/netresearch` (no refetch / overwrite from upstream):
+
+`php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`, `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`, `typo3-core-contributions`, `typo3-extension-upgrade`
+
+Gratitude and historical links to the original Netresearch repositories stay in **AGENTS.md**, **README.md**, and the credits sections of those skills.
+
 ## Adding an Upstream Skill
 
 ### 1. Edit `.sync-config.json`
