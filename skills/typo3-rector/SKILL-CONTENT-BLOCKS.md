@@ -173,7 +173,7 @@ For non-PHP files (TypoScript, Fluid), use Fractor:
 
 ```bash
 # Install Fractor
-ddev composer require --dev ssch/typo3-fractor
+ddev composer require --dev a9f/typo3-fractor
 
 # Run Fractor for TypoScript/Fluid
 ddev exec vendor/bin/fractor process

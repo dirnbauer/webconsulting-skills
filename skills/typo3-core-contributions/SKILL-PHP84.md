@@ -26,7 +26,7 @@ triggers:
 
 ### TYPO3 v14 PHP Requirements
 
-TYPO3 v14 requires PHP 8.3+ and fully supports PHP 8.4 features.
+TYPO3 v14 requires **PHP 8.2+** (see Core `composer.json` / system requirements); PHP 8.4 is supported on current branches.
 
 ### When to Use PHP 8.4 Features in Core
 
@@ -114,8 +114,7 @@ Releases: main
 # Run Core tests with PHP 8.4
 Build/Scripts/runTests.sh -p 8.4 -s functional
 
-# Check for deprecations
-Build/Scripts/runTests.sh -s checkDeprecations
+# List available suites for your checkout: `Build/Scripts/runTests.sh -h`
 ```
 
 ---

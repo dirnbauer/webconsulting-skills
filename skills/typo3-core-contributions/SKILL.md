@@ -226,7 +226,7 @@ git push gerrit HEAD:refs/for/13.4
 
 All patches must pass:
 - [ ] Coding standards (PHP-CS-Fixer)
-- [ ] PHPStan level 8
+- [ ] PHPStan at the level enforced by Core CI for your branch (verify in `Build/phpstan.neon` / docs)
 - [ ] Unit tests
 - [ ] Functional tests
 - [ ] Acceptance tests (if applicable)

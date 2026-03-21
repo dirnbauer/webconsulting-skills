@@ -348,15 +348,12 @@ final class ArchitectureTest
             ->classes(Selector::classname('/.*RepositoryInterface$/', true));
     }
 
-    public function testOnlyServicesCanAccessRepositories(): Rule
+    public function testRepositoriesShouldStayFreeOfControllers(): Rule
     {
         return PHPat::rule()
             ->classes(Selector::inNamespace('Vendor\MyExtension\Domain\Repository'))
-            ->canOnlyBeAccessedBy()
-            ->classes(
-                Selector::inNamespace('Vendor\MyExtension\Service'),
-                Selector::inNamespace('Vendor\MyExtension\Tests'),
-            );
+            ->shouldNotDependOn()
+            ->classes(Selector::inNamespace('Vendor\MyExtension\Controller'));
     }
 }
 ```
@@ -571,15 +568,17 @@ jobs:
 
 ### Testing Framework Version **[v14 only]**
 
-TYPO3 v14 requires `typo3/testing-framework:^9.0`. The v13 version (`^8.2`) is not compatible:
+Pick **`typo3/testing-framework`** to match your **TYPO3 core line** (see [Packagist](https://packagist.org/packages/typo3/testing-framework) `require.typo3/cms-core` for each major). Example for a **v14-only** tree:
 
 ```json
 {
     "require-dev": {
-        "typo3/testing-framework": "^8.2 || ^9.0"
+        "typo3/testing-framework": "^9.0"
     }
 }
 ```
+
+Dual-version CI usually means **separate Composer lock files or CI matrix jobs** per core version, not a single constraint that spans incompatible testing-framework majors.
 
 ### Fluid 5.0 in Functional Tests **[v14 only]**
 

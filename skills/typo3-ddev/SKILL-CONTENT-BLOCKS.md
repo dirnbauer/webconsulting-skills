@@ -65,10 +65,10 @@ my-typo3-project/
 
 ```bash
 # Create Content Element
-ddev typo3 make:content-block myvendor/hero --type=content-element
+ddev typo3 make:content-block --content-type=content-element --vendor=myvendor --name=hero --extension=my_sitepackage
 
 # Create Record Type
-ddev typo3 make:content-block myvendor/team-member --type=record-type
+ddev typo3 make:content-block --content-type=record-type --vendor=myvendor --name=team-member --extension=my_sitepackage
 ```
 
 ### Cache Management
@@ -118,7 +118,8 @@ return [
 
 ```bash
 # Dump TCA for Content Block element
-ddev typo3 configuration:show TCA.tt_content.types.myvendor_hero
+# Inspect merged TCA in the backend (DB compare) or use a debugging helper.
+# `configuration:show` is provided by helhum/typo3-console, not TYPO3 Core alone.
 ```
 
 ### Check Database Columns
@@ -197,7 +198,7 @@ ddev cb-flush
 | Content Block not appearing | Run `ddev typo3 cache:flush` |
 | Database columns missing | Run `ddev typo3 extension:setup` |
 | CType not registered | Check config.yaml syntax |
-| Template not found | Verify `templates/frontend.html` path |
+| Template not found | Verify `templates/frontend.fluid.html` path |
 
 ---
 

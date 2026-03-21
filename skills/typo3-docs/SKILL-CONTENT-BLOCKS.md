@@ -81,7 +81,7 @@ Frontend Template
 -----------------
 
 .. code-block:: html
-   :caption: ContentBlocks/ContentElements/hero/templates/frontend.html
+   :caption: ContentBlocks/ContentElements/hero/templates/frontend.fluid.html
 
    <section class="hero">
        <f:if condition="{data.image}">

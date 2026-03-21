@@ -28,7 +28,7 @@ triggers:
 | TYPO3 Version | PHP Minimum | PHP Maximum | PHP 8.4 Support |
 |---------------|-------------|-------------|-----------------|
 | v13.x | 8.2 | 8.4 | ✅ Supported |
-| v14.x | 8.3 | 8.4 | ✅ Recommended |
+| v14.x | 8.2 | 8.4+ (see release notes) | ✅ Supported |
 
 ---
 

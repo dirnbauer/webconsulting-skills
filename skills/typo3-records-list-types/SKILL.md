@@ -61,7 +61,7 @@ All views include: pagination, sorting, search, record actions, workspace indica
 
 ```bash
 composer require webconsulting/records-list-types
-./vendor/bin/typo3 extension:activate records_list_types
+./vendor/bin/typo3 extension:setup -e records_list_types
 ```
 
 After activation, view mode toggle buttons appear in the Records module header.

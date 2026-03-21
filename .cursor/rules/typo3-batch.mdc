@@ -57,17 +57,19 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 7. Run php -l on new file
 ```
 
-**Hook → Event mapping (common):**
+**Hook → event mapping (verify in Core event documentation):**
 
-| Hook | PSR-14 Event |
+> **DataHandler:** Core does **not** ship generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` under `DataHandling\Event`. Use **`SC_OPTIONS`** DataHandler hooks for datamap/cmdmap (see typo3-datahandler skill §9).
+
+| Hook / legacy API | Typical direction |
 |---|---|
-| `processDatamap_afterDatabaseOperations` | `AfterRecordOperationEvent` |
-| `processDatamap_preProcessFieldArray` | `BeforeRecordOperationEvent` |
-| `processCmdmap_postProcess` | `AfterRecordOperationEvent` |
+| `processDatamap_afterDatabaseOperations` | Keep **`processDatamapClass`** hook (no 1:1 Core event) |
+| `processDatamap_preProcessFieldArray` | Keep hook unless a documented Core event fits |
+| `processCmdmap_postProcess` | Keep **`processCmdmapClass`** hook |
 | `drawHeaderHook` | `ModifyButtonBarEvent` |
 | `drawFooterHook` | `ModifyButtonBarEvent` |
-| `checkFlexFormValue` | `AfterFlexFormDataStructureParsedEvent` |
-| `pageRendererRender` | `BeforePageIsResolvedEvent` |
+| `checkFlexFormValue` | Often still a hook; `AfterFlexFormDataStructureParsedEvent` is not a drop-in validator |
+| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (verify vs. hook) |
 | `tslib_fe->contentPostProc` | `AfterCacheableContentIsGeneratedEvent` |
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
@@ -322,14 +324,14 @@ Stop the batch and report if:
 |----------------|-----------------|
 | Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
 | Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
-| `MailMessage->send()` → `Mailer` | All email-sending code |
-| `ctrl.searchFields` → `searchable` | All TCA files with searchFields in ctrl |
+| `MailMessage->send()` → inject `MailerInterface` | All email-sending code |
+| `ctrl.searchFields` removed (v14) → per-field `searchable` | Changelog #106972 |
 | TCA `interface` removal | All TCA files with `interface` key |
 | Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |
 | Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
 | FlexForm pointer fields | All FlexForm XML with pointer configurations |
 | Asset `external` property | All TypoScript with `external = 1` |
-| `configurePlugin()` subtypes | All plugin registrations using switchableControllerActions |
+| Remove `switchableControllerActions` | Removed in v12 — legacy code only |
 
 ---
 

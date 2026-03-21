@@ -393,132 +393,26 @@ $GLOBALS['BE_USER']->setWorkspace(0);
 $GLOBALS['BE_USER']->setWorkspace($previousWorkspace);
 ```
 
-## 9. PSR-14 Events (Preferred Pattern)
+## 9. Extending DataHandler: Hooks and Real Core Events
 
-> **Important:** PSR-14 events are the preferred way to react to DataHandler operations in TYPO3 v13/v14. Legacy hooks still work in v13 but should be migrated to events.
+> **Facts for v13/v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. For reactions after datamap DB writes, use **`SC_OPTIONS` hook classes**. Confirm APIs in [DataHandling events](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
 
-### Available DataHandler Events
+### 9.1 `SC_OPTIONS` hook classes (primary pattern for datamap/cmdmap)
 
-| Event | Triggered When |
-|-------|----------------|
-| `BeforeRecordOperationEvent` | Before any record operation |
-| `AfterRecordOperationEvent` | After any record operation |
-| `AfterDatabaseOperationsEvent` | After database operations complete |
-| `ModifyRecordBeforeInsertEvent` | Before a new record is inserted |
+Register on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these in **v13 and v14**.
 
-### Event Listener Registration (Services.yaml)
-
-```yaml
-# Configuration/Services.yaml
-services:
-  Vendor\Extension\EventListener\ContentCreatedListener:
-    tags:
-      - name: event.listener
-        identifier: 'vendor-extension/content-created'
-```
-
-### Event Listener Implementation (v13/v14 Compatible)
+`ext_localconf.php`:
 
 ```php
-<?php
-declare(strict_types=1);
-
-namespace Vendor\Extension\EventListener;
-
-use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\DataHandling\Event\AfterDatabaseOperationsEvent;
-
-#[AsEventListener(identifier: 'vendor-extension/content-created')]
-final class ContentCreatedListener
-{
-    public function __invoke(AfterDatabaseOperationsEvent $event): void
-    {
-        $table = $event->getTable();
-        $status = $event->getStatus();
-        $recordUid = $event->getRecordUid();
-        $fields = $event->getFields();
-        $dataHandler = $event->getDataHandler();
-
-        if ($table !== 'tt_content') {
-            return;
-        }
-
-        if ($status === 'new') {
-            // Handle new record creation
-            $newUid = $dataHandler->substNEWwithIDs[$recordUid] ?? $recordUid;
-            // Your logic here...
-        }
-
-        if ($status === 'update') {
-            // Handle record update
-        }
-    }
-}
-```
-
-### Modifying Records Before Insert
-
-```php
-<?php
-declare(strict_types=1);
-
-namespace Vendor\Extension\EventListener;
-
-use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\DataHandling\Event\ModifyRecordBeforeInsertEvent;
-
-#[AsEventListener(identifier: 'vendor-extension/modify-before-insert')]
-final class ModifyBeforeInsertListener
-{
-    public function __invoke(ModifyRecordBeforeInsertEvent $event): void
-    {
-        if ($event->getTable() !== 'tx_myext_domain_model_item') {
-            return;
-        }
-
-        $record = $event->getRecord();
-        
-        // Modify the record before it's inserted
-        $record['crdate'] = time();
-        $record['tstamp'] = time();
-        
-        $event->setRecord($record);
-    }
-}
-```
-
-## 10. Legacy Hooks (Deprecated, v13 Only)
-
-> **Warning:** Legacy hooks are deprecated in TYPO3 v14. Use PSR-14 events instead. The following is for reference when maintaining legacy code.
-
-Register hooks in `ext_localconf.php`:
-
-```php
-<?php
-declare(strict_types=1);
-
-// ⚠️ DEPRECATED - Use PSR-14 events for new code
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][]
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
-
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass'][]
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
 ```
 
-Hook implementation:
+Hook class (after DB operations on the datamap):
 
 ```php
-<?php
-declare(strict_types=1);
-
-namespace Vendor\Extension\Hooks;
-
-use TYPO3\CMS\Core\DataHandling\DataHandler;
-
-/**
- * @deprecated Use PSR-14 events instead. This hook works in v13 but should be migrated.
- */
 final class DataHandlerHook
 {
     public function processDatamap_afterDatabaseOperations(
@@ -526,25 +420,26 @@ final class DataHandlerHook
         string $table,
         string|int $id,
         array $fieldArray,
-        DataHandler $dataHandler
+        \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
     ): void {
         if ($table !== 'tt_content') {
             return;
         }
-
         if ($status === 'new') {
-            // Handle new record creation
             $newUid = $dataHandler->substNEWwithIDs[$id] ?? $id;
-        }
-
-        if ($status === 'update') {
-            // Handle record update
         }
     }
 }
 ```
 
-## 11. Version Constraints for Extensions
+### 9.2 Real PSR-14 events in `TYPO3\CMS\Core\DataHandling\Event`
+
+| Event | Purpose |
+|-------|---------|
+| `IsTableExcludedFromReferenceIndexEvent` | Exclude a table from the Reference Index |
+| `AppendLinkHandlerElementsEvent` | Extend SoftRef link-handler UI elements |
+
+## 10. Version Constraints for Extensions
 
 When creating extensions that use DataHandler, ensure proper version constraints:
 
@@ -576,12 +471,12 @@ $EM_CONF[$_EXTKEY] = [
 
 ### New `discard` Command **[v14 only]**
 
-DataHandler now supports a `discard` command to programmatically discard workspace changes:
+See [Feature #107519](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107519-AddDiscardCommandToDataHandler.html). Use the **versioned** record UID (`t3ver_wsid` > 0), not the live record.
 
 ```php
 $cmd = [
     'tt_content' => [
-        123 => ['discard' => true],
+        $versionedUid => ['discard' => true],
     ],
 ];
 ```

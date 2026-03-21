@@ -104,7 +104,7 @@ host_webserver_port: "8080"
 host_https_port: "8443"
 
 # Enable Mailpit for email testing (replaced Mailhog in newer DDEV)
-mailpit_http_port: "8025"
+# mailpit_http_port defaults to 8025; omit unless you need a non-default port
 
 # PHP settings
 web_environment:
@@ -168,8 +168,8 @@ ddev snapshot --list
 # Restore snapshot
 ddev snapshot restore before-upgrade
 
-# Delete snapshot
-ddev snapshot delete before-upgrade
+# Remove old snapshots (interactive cleanup; there is no `snapshot delete` subcommand)
+ddev snapshot --cleanup
 ```
 
 ### Direct MySQL Access
@@ -203,8 +203,9 @@ ddev typo3 cache:flush
 # Clear specific cache
 ddev typo3 cache:flush --group=pages
 
-# Update database schema
-ddev typo3 database:updateschema
+# Database schema: use Backend → Admin Tools → Maintenance → Analyze Database Structure,
+# or run extension setup (applies pending schema for extensions). The `database:updateschema`
+# command exists only when `helhum/typo3-console` is installed.
 
 # Reference index
 ddev typo3 referenceindex:update
@@ -220,7 +221,7 @@ ddev typo3 upgrade:run
 ### Extension Management
 
 ```bash
-# Install extension from TER
+# System extension (Composer metapackage, ships with TYPO3 distribution)
 ddev composer require typo3/cms-seo
 
 # Install extension from Packagist
@@ -229,11 +230,10 @@ ddev composer require vendor/extension-name
 # Setup extensions (generate PackageStates.php)
 ddev typo3 extension:setup
 
-# Activate extension
-ddev typo3 extension:activate my_extension
+# Run setup / migrations for one extension (Core ships `extension:setup`, not `extension:activate`)
+ddev typo3 extension:setup -e my_extension
 
-# Deactivate extension
-ddev typo3 extension:deactivate my_extension
+# Remove a Composer-managed extension: `ddev composer remove vendor/package` then clear caches
 ```
 
 ## 5. Composer Operations
@@ -549,7 +549,7 @@ ln -s ../../../ v14/packages/my_extension
 | TYPO3 v13 | `https://v13.my-extension.ddev.site/typo3/` |
 | TYPO3 v14 | `https://v14.my-extension.ddev.site/typo3/` |
 
-**Default Credentials**: admin / Joh316!
+**Admin user:** Created during `typo3/setup` or the install wizard; use the password you set. Do not rely on old documentation defaults.
 
 ### Version-Specific Commands
 
@@ -580,8 +580,8 @@ php_version: "8.5"
 
 TYPO3 v14.1 ships with the **Camino** default frontend theme. For quick-start setups:
 ```bash
-ddev composer require typo3/cms-camino
-ddev typo3 extension:activate camino
+ddev composer require typo3/theme-camino
+ddev typo3 extension:setup -e camino
 ```
 
 ### composer.json Required in Classic Mode **[v14 only]**

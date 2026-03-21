@@ -85,7 +85,7 @@ packages/my_ext/
         └── hero/
             ├── config.yaml
             └── templates/
-                └── frontend.html
+                └── frontend.fluid.html
 ```
 
 ---

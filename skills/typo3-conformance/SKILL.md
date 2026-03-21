@@ -196,6 +196,7 @@ return [
 // Resources/Public/JavaScript/MyModule.js
 import Modal from '@typo3/backend/modal.js';
 import Notification from '@typo3/backend/notification.js';
+import Severity from '@typo3/backend/severity.js';
 
 export default class MyModule {
     constructor() {
@@ -213,7 +214,7 @@ export default class MyModule {
         Modal.confirm(
             'Delete Item',
             'Are you sure?',
-            Modal.severity.warning,
+            Severity.warning,
             [
                 { text: 'Cancel', trigger: () => Modal.dismiss() },
                 { text: 'Delete', trigger: () => this.performDelete(), btnClass: 'btn-danger' }
@@ -255,18 +256,18 @@ declare(strict_types=1);
 namespace Vendor\MyExtension\EventListener;
 
 use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\DataHandling\Event\AfterRecordOperationEvent;
+use TYPO3\CMS\Core\DataHandling\Event\IsTableExcludedFromReferenceIndexEvent;
 
-#[AsEventListener(identifier: 'myext/after-record-operation')]
-final readonly class RecordOperationListener
+#[AsEventListener(identifier: 'myext/reference-index-example')]
+final readonly class ReferenceIndexExampleListener
 {
-    public function __invoke(AfterRecordOperationEvent $event): void
+    public function __invoke(IsTableExcludedFromReferenceIndexEvent $event): void
     {
         if ($event->getTable() !== 'tx_myext_items') {
             return;
         }
-        
-        // Handle event...
+
+        // Example: exclude a cache table from reference index (real Core event).
     }
 }
 ```

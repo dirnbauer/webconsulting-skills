@@ -5,7 +5,7 @@ description: >-
   using TYPO3 Content Blocks extension - the single source of truth for content modeling.
   Use when working with content-blocks, content-element, record-type, page-type,
   file-type, make:content-block, friendsoftypo3/content-blocks, irre.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 13.4+ / 14.x — `friendsoftypo3/content-blocks` 1.4.x on v13, 2.x on v14 (Packagist)
 metadata:
   version: "1.4.0"
   related_skills:
@@ -15,10 +15,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Content Blocks Development
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All code examples in this skill are designed to work on both TYPO3 v13 and v14.
+> **Compatibility:** Match the **Content Blocks major** to the core: **1.4.x** requires **TYPO3 ^13.4.19**; **2.x** requires **TYPO3 ^14.0 / ^14.1** (see [Packagist `friendsoftypo3/content-blocks`](https://packagist.org/packages/friendsoftypo3/content-blocks)). v14 preferred when on CB 2.x.
+> Examples assume the correct extension major for your core; adjust `composer.json` constraints accordingly.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version by checking the official TYPO3 documentation.
 
 ## 1. The Single Source of Truth Principle
 
@@ -82,8 +82,8 @@ EXT:my_sitepackage/
     │       ├── language/
     │       │   └── labels.xlf
     │       ├── templates/
-    │       │   ├── backend-preview.html
-    │       │   ├── frontend.html
+    │       │   ├── backend-preview.fluid.html
+    │       │   ├── frontend.fluid.html
     │       │   └── partials/
     │       └── config.yaml
     ├── RecordTypes/
@@ -102,7 +102,7 @@ EXT:my_sitepackage/
     │       ├── language/
     │       │   └── labels.xlf
     │       ├── templates/
-    │       │   └── backend-preview.html
+    │       │   └── backend-preview.fluid.html
     │       └── config.yaml
     └── FileTypes/
         └── image-extended/
@@ -178,7 +178,7 @@ fields:
 ### Frontend Template
 
 ```html
-<!-- templates/frontend.html -->
+<!-- templates/frontend.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
       data-namespace-typo3-fluid="true">
@@ -211,7 +211,7 @@ fields:
 ### Backend Preview Template
 
 ```html
-<!-- templates/backend-preview.html -->
+<!-- templates/backend-preview.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       data-namespace-typo3-fluid="true">
@@ -471,10 +471,10 @@ ContentBlocks/PageTypes/blog-article/
 
 ### Backend Preview
 
-Create a `backend-preview.html` to preview custom page properties:
+Create a `backend-preview.fluid.html` to preview custom page properties:
 
 ```html
-<!-- templates/backend-preview.html -->
+<!-- templates/backend-preview.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       data-namespace-typo3-fluid="true">
@@ -660,6 +660,11 @@ In Fluid templates, access custom metadata through FAL references:
 | `Radio` | Radio buttons | `type: Radio` |
 | `Slug` | URL slug | `type: Slug` |
 | `Password` | Password field | `type: Password` |
+| `Basic` | Shared “basic” field helper | `type: Basic` |
+| `Country` | Country selection (aligns with TCA `country` where supported) | `type: Country` |
+| `Pass` | Pass-through / display field | `type: Pass` |
+| `SelectNumber` | Select with numeric values | `type: SelectNumber` |
+| `Uuid` | UUID string | `type: Uuid` |
 
 ### Relational Fields
 
@@ -1039,19 +1044,20 @@ ddev typo3 database:updateschema
 
 ## 17. Version Constraints
 
+Match **Content Blocks major** to **TYPO3**: **1.4.x** on TYPO3 v13, **2.x** on TYPO3 v14 (see Packagist). Do not require CB 2.x on a v13-only project.
+
 ```php
-// ext_emconf.php
-$EM_CONF[$_EXTKEY] = [
-    'title' => 'My Extension',
-    'version' => '1.0.0',
-    'state' => 'stable',
-    'constraints' => [
-        'depends' => [
-            'typo3' => '13.0.0-14.99.99',
-            'content_blocks' => '2.0.0-2.99.99',
-        ],
-    ],
-];
+// ext_emconf.php — TYPO3 v13 + Content Blocks 1.4.x
+'depends' => [
+    'typo3' => '13.4.19-13.4.99',
+    'content_blocks' => '1.4.0-1.99.99',
+],
+
+// TYPO3 v14 + Content Blocks 2.x
+'depends' => [
+    'typo3' => '14.0.0-14.99.99',
+    'content_blocks' => '2.0.0-2.99.99',
+],
 ```
 
 ---

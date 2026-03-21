@@ -362,7 +362,7 @@ After installation, activate the extension:
 
 ..  code-block:: bash
 
-    vendor/bin/typo3 extension:activate my_extension
+    vendor/bin/typo3 extension:setup -e my_extension
 ```
 
 ## Deployment to docs.typo3.org

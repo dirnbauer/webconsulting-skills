@@ -203,7 +203,7 @@ Applied 7 fixes. No behavior changes. Run tests to verify.
 ## Version Fallbacks
 
 When simplifying for v12/v13 compatibility:
-- Keep `Configuration/RequestMiddlewares.php` alongside `#[AsMiddleware]`
+- Register PSR-15 middleware in `Configuration/RequestMiddlewares.php` (Core-supported pattern)
 - Keep `Services.yaml` event listener config alongside `#[AsEventListener]`
 - Keep numeric TCA `items` arrays alongside `label`/`value` format
 - Use `#[Autoconfigure]` only on v14+ (not available in v12)
@@ -232,6 +232,6 @@ When simplifying for v12/v13 compatibility:
 Adapted from Boris Cherny's (Anthropic) [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
 agent and Claude Code's bundled `/simplify` skill for TYPO3 contexts.
 
-**Copyright (c) Anthropic** — Code simplification patterns (MIT License)
+**Copyright (c) Anthropic** — Code simplification patterns (Apache-2.0 License)
 
 Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

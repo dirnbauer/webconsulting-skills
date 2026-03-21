@@ -34,8 +34,8 @@ packages/my_extension/
 │   │   │   ├── config.yaml
 │   │   │   ├── labels.xlf
 │   │   │   └── templates/
-│   │   │       ├── frontend.html
-│   │   │       └── backend-preview.html
+│   │   │       ├── frontend.fluid.html
+│   │   │       └── backend-preview.fluid.html
 │   │   └── accordion/
 │   │       └── ...
 │   └── RecordTypes/
@@ -90,7 +90,7 @@ fields:
 
 ## 4. Template Standards
 
-### frontend.html Requirements
+### frontend.fluid.html Requirements
 
 ```html
 <!-- Must be valid Fluid template -->
@@ -122,8 +122,8 @@ fields:
 - [ ] Proper field types used
 
 ### Templates
-- [ ] `frontend.html` exists and is valid Fluid
-- [ ] `backend-preview.html` for complex elements
+- [ ] `frontend.fluid.html` exists and is valid Fluid
+- [ ] `backend-preview.fluid.html` for complex elements
 - [ ] No hardcoded strings (use labels.xlf)
 
 ### Translations

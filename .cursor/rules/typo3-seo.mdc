@@ -22,7 +22,7 @@ metadata:
 
 ```bash
 ddev composer require typo3/cms-seo
-ddev typo3 extension:activate seo
+ddev typo3 extension:setup -e seo
 ddev typo3 cache:flush
 ```
 
@@ -449,7 +449,7 @@ tt_content.image.settings.responsive_image_rendering = 1
 
 ```bash
 ddev composer require yoast-seo-for-typo3/yoast_seo
-ddev typo3 extension:activate yoast_seo
+ddev typo3 extension:setup -e yoast_seo
 ```
 
 Features:
@@ -462,7 +462,7 @@ Features:
 
 ```bash
 ddev composer require brotkrueml/schema
-ddev typo3 extension:activate schema
+ddev typo3 extension:setup -e schema
 ```
 
 Features:

@@ -299,11 +299,10 @@ final class ModifyCacheLifetimeListener
 
 | Event | Purpose |
 |-------|---------|
-| `BeforeRecordOperationEvent` | Before DataHandler operations |
-| `AfterRecordOperationEvent` | After DataHandler operations |
 | `ModifyPageLinkConfigurationEvent` | Modify link building |
 | `ModifyCacheLifetimeForPageEvent` | Adjust page cache |
 | `BeforeStdWrapFunctionsInitializedEvent` | Modify stdWrap |
+| *(DataHandler)* | Core ships **no** generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent`; use **`SC_OPTIONS`** DataHandler hooks or documented `TYPO3\CMS\Core\DataHandling\Event\*` only ([list](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html)) |
 
 ### Services.yaml Registration
 

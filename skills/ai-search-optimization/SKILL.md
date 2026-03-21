@@ -973,7 +973,7 @@ routes:
 
 ```bash
 ddev composer require brotkrueml/schema:"^4.2"
-ddev typo3 extension:activate schema
+ddev typo3 extension:setup -e schema
 ```
 
 Include the static TypoScript template in your site package.

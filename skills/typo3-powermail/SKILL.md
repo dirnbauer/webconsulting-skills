@@ -5,7 +5,7 @@ description: >-
   validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
   templates, backend modules, and extension development. Use when working with powermail
   forms, mail handling, form validation, or extending powermail functionality.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 13.4+ (Packagist `in2code/powermail`; TYPO3 v14 not in published `composer.json` yet)
 metadata:
   version: "1.0.0"
   related_skills:
@@ -17,10 +17,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Powermail Development
 
-> **Compatibility:** TYPO3 v13.x and v14.x with Powermail 13.x
-> All code examples target PHP 8.2+ and TYPO3 v13/v14.
+> **Compatibility:** Powermail 13.x on **TYPO3 13.4+** per [Packagist `in2code/powermail`](https://packagist.org/packages/in2code/powermail) and upstream `composer.json` (`typo3/cms-core: ^13.4`). Do **not** claim TYPO3 v14 support until a published release widens that constraint.
+> All code examples target PHP 8.2+ and TYPO3 v13.4 APIs; re-check for v14 when upstream supports it.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version by checking the official TYPO3 documentation.
 
 > **Supplements:**
 > - [SKILL-CONDITIONS.md](SKILL-CONDITIONS.md) - Conditional field/page visibility (powermail_cond)
@@ -311,21 +311,15 @@ final class CustomValidatorListener
     public function __invoke(CustomValidatorEvent $event): void
     {
         $mail = $event->getMail();
-        $field = $event->getField();
+        $validator = $event->getCustomValidator();
 
-        // Validate specific field by marker
-        if ($field->getMarker() === 'company_vat') {
-            $answer = null;
-            foreach ($mail->getAnswers() as $a) {
-                if ($a->getField()?->getUid() === $field->getUid()) {
-                    $answer = $a;
-                    break;
-                }
+        foreach ($mail->getAnswers() as $answer) {
+            $field = $answer->getField();
+            if ($field === null || $field->getMarker() !== 'company_vat') {
+                continue;
             }
-
-            if ($answer !== null && !$this->isValidVat((string)$answer->getValue())) {
-                $event->setIsValid(false);
-                $event->setValidationMessage('Invalid VAT number');
+            if (!$this->isValidVat((string)$answer->getValue())) {
+                $validator->setErrorAndMessage($field, 'Invalid VAT number');
             }
         }
     }
@@ -450,7 +444,9 @@ FormControllerOptinConfirmActionBeforeRenderViewEvent
 FormControllerDisclaimerActionBeforeRenderViewEvent
 ```
 
-### Example: Modify Receiver Email
+### Example: Modify Receiver Email (from form answers)
+
+`ReceiverMailReceiverPropertiesServiceSetReceiverEmailsEvent` only exposes `getEmailArray()` / `setEmailArray()` and `getService()` — the service does **not** publish the `Mail` model, so you cannot read field markers from that event alone. For routing based on answers, listen when the mail is available, e.g. **`SendMailServicePrepareAndSendEvent`**:
 
 ```php
 <?php
@@ -459,32 +455,30 @@ declare(strict_types=1);
 
 namespace Vendor\MyExt\EventListener;
 
-use In2code\Powermail\Events\ReceiverMailReceiverPropertiesServiceSetReceiverEmailsEvent;
+use In2code\Powermail\Events\SendMailServicePrepareAndSendEvent;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 
 #[AsEventListener('vendor-myext/dynamic-receiver')]
 final class DynamicReceiverListener
 {
-    public function __invoke(
-        ReceiverMailReceiverPropertiesServiceSetReceiverEmailsEvent $event
-    ): void {
-        $mail = $event->getMail();
+    public function __invoke(SendMailServicePrepareAndSendEvent $event): void
+    {
+        $mail = $event->getSendMailService()->getMail();
         $answers = $mail->getAnswersByFieldMarker();
-
-        // Route to department based on form field
         $department = $answers['department'] ?? null;
-        if ($department !== null) {
-            $value = (string)$department->getValue();
-            $emails = match ($value) {
-                'sales' => ['sales@example.com'],
-                'support' => ['support@example.com'],
-                default => $event->getReceiverEmails(),
-            };
-            $event->setReceiverEmails($emails);
+        if ($department === null) {
+            return;
         }
+
+        $value = (string)$department->getValue();
+        $emailConfig = $event->getEmail();
+        // Adjust the receiver list inside $emailConfig for your Powermail / Symfony Mailer setup, then:
+        // $event->setEmail($emailConfig);
     }
 }
 ```
+
+To tweak the raw address list earlier in the pipeline, use **`ReceiverMailReceiverPropertiesServiceSetReceiverEmailsEvent`** with `getEmailArray()` / `setEmailArray()` when you do not need access to individual answers.
 
 ### Example: Prevent DB Save
 
@@ -815,8 +809,8 @@ plugin.tx_powermail.settings.setup.spamshield.methods {
 ```typoscript
 plugin.tx_powermail.settings.setup.manipulateVariablesInPowermailAllMarker {
     timestamp = TEXT
-    timestamp.data = date:U
-    timestamp.strftime = %Y-%m-%d %H:%M:%S
+    # Avoid `strftime` (removed in PHP 8.4); use TEXT `date:` data instead
+    timestamp.data = date:Y-m-d H:i:s
 }
 ```
 

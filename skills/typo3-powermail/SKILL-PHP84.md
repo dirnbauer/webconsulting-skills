@@ -407,22 +407,25 @@ final readonly class TypedValidatorListener
 
     public function __invoke(CustomValidatorEvent $event): void
     {
-        $field = $event->getField();
-        $marker = $field->getMarker();
+        $mail = $event->getMail();
+        $validator = $event->getCustomValidator();
 
-        $rule = array_find(
-            $this->rules,
-            fn(ValidationRule $r) => $r->fieldMarker === $marker
-        );
-
-        if ($rule === null) {
-            return;
-        }
-
-        $answer = $this->findAnswer($event);
-        if ($answer !== null && !preg_match($rule->pattern, (string)$answer->getValue())) {
-            $event->setIsValid(false);
-            $event->setValidationMessage($rule->errorMessage);
+        foreach ($mail->getAnswers() as $answer) {
+            $field = $answer->getField();
+            if ($field === null) {
+                continue;
+            }
+            $marker = $field->getMarker();
+            $rule = array_find(
+                $this->rules,
+                static fn(ValidationRule $r) => $r->fieldMarker === $marker
+            );
+            if ($rule === null) {
+                continue;
+            }
+            if (!preg_match($rule->pattern, (string)$answer->getValue())) {
+                $validator->setErrorAndMessage($field, $rule->errorMessage);
+            }
         }
     }
 
@@ -433,14 +436,6 @@ final readonly class TypedValidatorListener
         $rule->pattern = $pattern;
         $rule->errorMessage = $message;
         return $rule;
-    }
-
-    private function findAnswer(CustomValidatorEvent $event): ?\In2code\Powermail\Domain\Model\Answer
-    {
-        $mail = $event->getMail();
-        $fieldUid = $event->getField()->getUid();
-        $answers = $mail->getAnswers()->toArray();
-        return array_find($answers, fn($a) => $a->getField()?->getUid() === $fieldUid);
     }
 }
 ```

@@ -136,19 +136,20 @@ ddev restart
 ### .ddev/config.yaml
 
 ```yaml
-# Additional PHP extensions for 8.4
+# Additional PHP extensions — package names must match `php_version` (e.g. php8.4-* when using PHP 8.4)
 webimage_extra_packages:
   - php8.4-intl
   - php8.4-gd
   - php8.4-zip
   - php8.4-bcmath
+```
 
-# Custom php.ini settings
-php_ini_defs:
-  error_reporting: E_ALL
-  display_errors: "On"
-  max_execution_time: 240
-  memory_limit: 512M
+Custom PHP directives belong in **`.ddev/php/*.ini`** (DDEV merges them into the container PHP config), not in a non-standard `php_ini_defs` key:
+
+```ini
+; .ddev/php/typo3-dev.ini
+max_execution_time = 240
+memory_limit = 512M
 ```
 
 ---
@@ -178,7 +179,7 @@ ddev exec vendor/bin/rector process --dry-run
 ## References
 
 - [typo3-ddev SKILL.md](./SKILL.md)
-- [DDEV Documentation](https://ddev.readthedocs.io/)
+- [DDEV Documentation](https://docs.ddev.com/)
 - [php-modernization SKILL-PHP84](../php-modernization/SKILL-PHP84.md)
 
 ---

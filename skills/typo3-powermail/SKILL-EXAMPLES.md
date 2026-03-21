@@ -95,7 +95,7 @@ Form: "Bestellformular / Order Form"
 │
 ├── Page 3: "Bestellübersicht" (Order Overview)
 │   ├── produkt1_info (html) -- Product 1: image + description
-│   ├── produkt1_menge (input) -- Quantity (integer, validation=9)
+│   ├── produkt1_menge (input) -- Quantity (numbers only, validation=4)
 │   ├── produkt2_info (html) -- Product 2: image + description
 │   ├── produkt2_menge (input) -- Quantity (integer)
 │   ├── produkt3_info (html) -- Product 3: image + description
@@ -185,7 +185,7 @@ Before diving into the SQL, here's what each column means across the powermail t
 | `mandatory` | tinyint | `1` = required field, `0` = optional |
 | `settings` | text | **Options for select/radio/check** — one option per line (`\n`-separated). Also used for prefill values |
 | `sorting` | int | Display order within the page |
-| `validation` | int | **Validation type**: `0` = none, `1` = email, `2` = URL, `3` = phone, `4` = numbers only, `9` = integer (custom), etc. |
+| `validation` | int | **Validation type**: `0` = none, `1` = email, `2` = URL, `3` = phone, `4` = numbers only, `9` = **length** (see `validation_configuration`), etc. |
 | `validation_configuration` | varchar | Extra config for validation (e.g., min/max length) |
 | `text` | text | **HTML content** for `type=html` or `type=text` fields — renders raw HTML or static text |
 | `sender_name` | tinyint | `1` = use this field's value as the sender name in notification emails |
@@ -404,7 +404,7 @@ SET @f_obmann    = (SELECT uid FROM tx_powermail_domain_model_field WHERE marker
 -- Each product has two fields:
 --   1. type='html': renders raw HTML (product image, title, description, price)
 --      The 'text' column contains the HTML markup. No user input — display only.
---   2. type='input': quantity field with validation=9 (integer only, no decimals)
+--   2. type='input': quantity field with validation=4 (numbers only)
 --      mandatory=0 because the user may not want every product.
 
 -- Product 1: Website Basic (display card + quantity input)
@@ -416,7 +416,7 @@ VALUES
    0, 0, UNIX_TIMESTAMP(), UNIX_TIMESTAMP());
 -- type='html': renders the 'text' column as raw HTML in the form (no input, display only)
 
--- Quantity input: validation=9 means "integer only" — user can only enter whole numbers
+-- Quantity input: validation=4 = "Numbers Only" in Powermail backend labels
 INSERT INTO tx_powermail_domain_model_field
   (pid, page, title, type, marker, mandatory, sorting, validation, validation_configuration, sys_language_uid, l10n_parent, tstamp, crdate)
 VALUES
@@ -1209,7 +1209,7 @@ final class CreateShopFormCommand extends Command
         // ----- Page 3 Fields: Product Catalog -----
         // Each product has 2 fields:
         //   type='html': display-only card with image, title, description, price (from 'text' column)
-        //   type='input' with validation=9: integer-only quantity input
+        //   type='input' with validation=4: numbers-only quantity input
 
         // Product definitions: [marker_info, marker_qty, title_en, html_content]
         $products = [
@@ -1242,7 +1242,7 @@ final class CreateShopFormCommand extends Command
                 'sorting' => $sortIdx++,
                 'text' => $htmlContent,         // Raw HTML rendered in form
             ];
-            // Quantity input (validation=9 = integer only)
+            // Quantity input (validation=4 = numbers only)
             $data['tx_powermail_domain_model_field']['NEW_f_' . $qtyMarker] = [
                 'pid' => self::STORAGE_PID,
                 'title' => $qtyTitle,
@@ -1250,7 +1250,7 @@ final class CreateShopFormCommand extends Command
                 'marker' => $qtyMarker,
                 'mandatory' => 0,              // Optional: user may not want this product
                 'sorting' => $sortIdx++,
-                'validation' => 9,             // 9 = integer validation (whole numbers only)
+                'validation' => 4,             // 4 = numbers only (see Powermail TCA / XLF)
             ];
         }
 
@@ -1859,14 +1859,13 @@ UPDATE tx_powermail_domain_model_field
 SELECT 'Records staged for review' AS status;
 "
 
-# Actually publish: use the TYPO3 CLI (recommended over raw SQL!)
-# This properly handles all workspace swapping, cache clearing, and index updates.
-ddev typo3 workspace:publish 1
+# Actually publish: use the **Workspaces** backend module (recommended over raw SQL).
+# That path runs the proper swap, reference index, and cache handling. Core may ship
+# workspace-related CLI commands (`vendor/bin/typo3 list workspace`); `workspace:autopublish`
+# handles scheduled publishing, not manual review workflows.
 ```
 
-> **Best practice:** Always use `ddev typo3 workspace:publish <workspace_id>` or the
-> backend Workspaces module to publish. Raw SQL `UPDATE ... SET t3ver_wsid=0` will
-> break reference index and skip workspace events.
+> **Best practice:** Publish through the **Workspaces** backend module. Raw SQL `UPDATE ... SET t3ver_wsid=0` will break the reference index and skip workspace events.
 
 ### DataHandler CLI: Workspace-Aware Form Creation
 
@@ -1932,9 +1931,9 @@ ddev typo3 shop:create-form -g -c
 # Create form as draft in workspace 1
 ddev typo3 shop:create-form -g -c --workspace=1
 
-# Create form in workspace 1, then publish
+# Create form in workspace 1, then publish from Backend → Workspaces, then:
 ddev typo3 shop:create-form -g -c -w 1
-ddev typo3 workspace:publish 1 && ddev typo3 cache:flush
+ddev typo3 cache:flush
 
 # Check which workspace a form lives in
 ddev mysql -e "
@@ -1949,7 +1948,7 @@ ORDER BY uid DESC LIMIT 5;
 
 | Issue | Cause | Fix |
 |-------|-------|-----|
-| Form invisible in frontend | Records still in workspace (`t3ver_wsid > 0`) | Publish via backend module or `workspace:publish` CLI |
+| Form invisible in frontend | Records still in workspace (`t3ver_wsid > 0`) | Publish via **Workspaces** backend module (verify CLI commands with `vendor/bin/typo3 list workspace`) |
 | Conditions not working in preview | Condition container not in same workspace | Ensure conditions have same `t3ver_wsid` as form |
 | Duplicate fields after publish | Localization created both live + workspace copies | Use DataHandler `localize` instead of raw SQL |
 | Form shows in workspace preview but fields missing | Field `page` column points to wrong page version | Use DataHandler — it resolves IRRE relations correctly |

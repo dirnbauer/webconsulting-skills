@@ -298,11 +298,10 @@ final class ModifyCacheLifetimeListener
 
 | Event | Purpose |
 |-------|---------|
-| `BeforeRecordOperationEvent` | Before DataHandler operations |
-| `AfterRecordOperationEvent` | After DataHandler operations |
 | `ModifyPageLinkConfigurationEvent` | Modify link building |
 | `ModifyCacheLifetimeForPageEvent` | Adjust page cache |
 | `BeforeStdWrapFunctionsInitializedEvent` | Modify stdWrap |
+| *(DataHandler)* | No generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` in Core; use **`SC_OPTIONS`** hooks or documented `DataHandling\Event` classes only |
 
 ### Services.yaml Registration
 

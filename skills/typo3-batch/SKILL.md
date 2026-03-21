@@ -58,17 +58,19 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 7. Run php -l on new file
 ```
 
-**Hook → Event mapping (common):**
+**Hook → event mapping (verify in [Core event lists](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Index.html)):**
 
-| Hook | PSR-14 Event |
+> **DataHandler (`t3lib/class.t3lib_tcemain.php`):** TYPO3 Core does **not** expose generic PSR-14 events named like `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` under `TYPO3\CMS\Core\DataHandling\Event`. For datamap/cmdmap reactions, use **`SC_OPTIONS` hook classes** (see [typo3-datahandler](../typo3-datahandler/SKILL.md) §9). Do not “migrate” those hooks to non-existent events.
+
+| Hook / legacy API | Typical direction |
 |---|---|
-| `processDatamap_afterDatabaseOperations` | `AfterRecordOperationEvent` |
-| `processDatamap_preProcessFieldArray` | `BeforeRecordOperationEvent` |
-| `processCmdmap_postProcess` | `AfterRecordOperationEvent` |
+| `processDatamap_afterDatabaseOperations` / related `SC_OPTIONS` | Keep **`processDatamapClass`** hook methods (no 1:1 Core event) |
+| `processDatamap_preProcessFieldArray` | Keep hook or narrow Core events for your table/field if documented |
+| `processCmdmap_postProcess` | Keep **`processCmdmapClass`** hook methods |
 | `drawHeaderHook` | `ModifyButtonBarEvent` |
 | `drawFooterHook` | `ModifyButtonBarEvent` |
-| `checkFlexFormValue` | `AfterFlexFormDataStructureParsedEvent` |
-| `pageRendererRender` | `BeforePageIsResolvedEvent` |
+| `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
+| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (asset rendering) — confirm vs. your hook usage |
 | `tslib_fe->contentPostProc` | `AfterCacheableContentIsGeneratedEvent` |
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
@@ -323,14 +325,14 @@ Stop the batch and report if:
 |----------------|-----------------|
 | Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
 | Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
-| `MailMessage->send()` → `Mailer` | All email-sending code |
-| `ctrl.searchFields` → `searchable` | All TCA files with searchFields in ctrl |
+| `MailMessage->send()` → inject `Symfony\Component\Mailer\MailerInterface` (or TYPO3 façade) | All email-sending code; avoid static `Mailer::send()` |
+| `ctrl.searchFields` removed (v14) → per-field `searchable` in field `config` | See [Breaking: #106972](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-106972-TCAControlOptionSearchFieldsRemoved.html) |
 | TCA `interface` removal | All TCA files with `interface` key |
 | Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |
 | Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
 | FlexForm pointer fields | All FlexForm XML with pointer configurations |
 | Asset `external` property | All TypoScript with `external = 1` |
-| `configurePlugin()` subtypes | All plugin registrations using switchableControllerActions |
+| Remove legacy `switchableControllerActions` / plugin subtypes | Removed in **v12** — not a v14-only migration |
 
 ---
 

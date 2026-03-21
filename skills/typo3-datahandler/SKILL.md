@@ -2,11 +2,12 @@
 name: typo3-datahandler
 description: >-
   Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring
-  transactional safety, PSR-14 event handling, and reference index integrity. Use when
-  working with database, datahandler, tcemain, records, content, pages.
+  transactional safety, correct extension points (SC_OPTIONS hooks and documented
+  PSR-14 events), and reference index integrity. Use when working with database,
+  datahandler, tcemain, records, content, pages.
 compatibility: TYPO3 13.0 - 14.x
 metadata:
-  version: "2.0.0"
+  version: "2.1.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -27,7 +28,7 @@ You **MUST** use the `DataHandler` to ensure:
 - Cache clearing
 - Version history (`sys_history`)
 - Workspace compatibility
-- PSR-14 event dispatching
+- Correct hook/event integration where Core defines it (see §9)
 - FlexForm handling
 - MM relation management
 
@@ -167,9 +168,16 @@ $cmd = [
 ];
 ```
 
-## 3. Transactional Execution Pattern (Mandatory)
+## 3. Execution Pattern
 
-DataHandler already wraps its own database writes in transactions. Only wrap the call yourself when you have to bundle multiple DataHandler runs or adjacent custom writes on the **same** connection. Do not mix different connections inside one transaction.
+TYPO3's public DataHandler API for v13/v14 is simply:
+
+1. Create a **fresh** `DataHandler` instance
+2. Call `start($data, $cmd[, $backendUser])`
+3. Call `process_datamap()` and / or `process_cmdmap()`
+4. Inspect `$dataHandler->errorLog`
+
+The official docs do **not** define a general transaction contract for DataHandler. In normal extension code, use the plain API first and only add your own transaction handling after carefully validating the database connections and side effects involved in your specific use case.
 
 ```php
 <?php
@@ -178,78 +186,44 @@ declare(strict_types=1);
 namespace Vendor\Extension\Service;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 final class ContentService
 {
-    public function __construct(
-        private readonly ConnectionPool $connectionPool,
-    ) {}
-
-    public function createContentWithTransaction(array $data, array $cmd = []): array
+    public function createOrUpdateContent(array $data, array $cmd = []): array
     {
+        /** @var DataHandler $dataHandler */
         $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
-        
-        // 1. Prepare
         $dataHandler->start($data, $cmd);
 
-        // 2. Get Connection & Start Transaction
-        $connection = $this->connectionPool->getConnectionForTable('tt_content');
-        $connection->beginTransaction();
-
-        try {
-            // 3. Process DataMap
-            if (!empty($data)) {
-                $dataHandler->process_datamap();
-            }
-
-            // 4. Process CmdMap
-            if (!empty($cmd)) {
-                $dataHandler->process_cmdmap();
-            }
-
-            // 5. Validate
-            if (!empty($dataHandler->errorLog)) {
-                throw new \RuntimeException(
-                    'DataHandler Error: ' . implode(', ', $dataHandler->errorLog),
-                    1700000001
-                );
-            }
-
-            // 6. Commit
-            $connection->commit();
-
-            // 7. Return substituted UIDs for NEW records
-            return $dataHandler->substNEWwithIDs;
-
-        } catch (\Throwable $e) {
-            // 8. Rollback on Failure
-            $connection->rollBack();
-            
-            // Log and re-throw
-            throw $e;
+        if ($data !== []) {
+            $dataHandler->process_datamap();
         }
+
+        if ($cmd !== []) {
+            $dataHandler->process_cmdmap();
+        }
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
+
+        return $dataHandler->substNEWwithIDs;
     }
 }
 ```
 
-## 4. Admin Context
+## 4. Backend Context
 
-When running from CLI (Symfony Command) or scheduler tasks, you **MUST** ensure the backend user has admin privileges:
+DataHandler requires a valid **backend user context**. It does **not** require you to manually fake admin mode by mutating `$GLOBALS['BE_USER']->user`.
 
-```php
-<?php
-declare(strict_types=1);
-
-// Set admin context for DataHandler operations
-$GLOBALS['BE_USER']->user['admin'] = 1;
-$GLOBALS['BE_USER']->workspace = 0; // Live workspace
-
-// Alternative: Use the BackendUserAuthentication properly
-$backendUser = $GLOBALS['BE_USER'];
-$backendUser->setWorkspace(0);
-```
+- In **CLI / scheduler** contexts, initialize backend authentication before using DataHandler
+- TYPO3 commands use the `_cli_` backend user
+- If you need another backend user, pass a proper `BackendUserAuthentication` object as the **third** argument to `start()`
+- Use permission checks and a real backend user object instead of manually setting `$GLOBALS['BE_USER']->user['admin'] = 1`
 
 ### CLI Command Setup (v13/v14 Compatible)
 
@@ -273,19 +247,59 @@ final class ImportCommand extends Command
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // Initialize backend for DataHandler operations
         Bootstrap::initializeBackendAuthentication();
-        
+
         // Your DataHandler logic here...
-        
+
         return Command::SUCCESS;
+    }
+}
+```
+
+### Using an Alternative Backend User
+
+```php
+<?php
+declare(strict_types=1);
+
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+final class ImportService
+{
+    public function runAsUser(
+        array $data,
+        array $cmd,
+        BackendUserAuthentication $backendUser
+    ): void {
+        /** @var DataHandler $dataHandler */
+        $dataHandler = GeneralUtility::makeInstance(DataHandler::class);
+        $dataHandler->start($data, $cmd, $backendUser);
+        $dataHandler->process_datamap();
+        $dataHandler->process_cmdmap();
     }
 }
 ```
 
 ## 5. Reference Index Handling
 
-After bulk operations, always update the reference index:
+For **normal DataHandler writes**, TYPO3 keeps the Reference Index in sync automatically. You usually **do not** need to call `ReferenceIndex` manually after ordinary `process_datamap()` / `process_cmdmap()` usage.
+
+Manual Reference Index updates are primarily relevant for:
+
+- Deployments and TYPO3 upgrades
+- Changes to TCA-defined relations
+- Migrations or scripts that bypass DataHandler
+- Repair / maintenance scenarios
+
+### Rebuild the full Reference Index
+
+```bash
+vendor/bin/typo3 referenceindex:update
+```
+
+### Update a specific record manually (rare)
 
 ```php
 <?php
@@ -295,12 +309,7 @@ use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 $referenceIndex = GeneralUtility::makeInstance(ReferenceIndex::class);
-
-// Update for a specific record
 $referenceIndex->updateRefIndexTable('tt_content', 123);
-
-// Or update all (for migrations)
-// Run via CLI: vendor/bin/typo3 referenceindex:update
 ```
 
 ## 6. Common Pitfalls
@@ -315,15 +324,20 @@ $data = ['tt_content' => ['NEW_1' => ['header' => 'Test']]];
 $data = ['tt_content' => ['NEW_1' => ['pid' => 1, 'header' => 'Test']]];
 ```
 
-### Pitfall 2: Using String UIDs for Existing Records
+### Pitfall 2: Assuming String vs Integer UIDs Matter (Usually They Do Not)
+
+DataHandler uses `MathUtility::canBeInterpretedAsInteger()` for many UID checks. A **numeric string** such as `'123'` is treated like `123` for typical existing-record keys.
 
 ```php
-// ❌ WRONG - String UID for existing record
-$data = ['tt_content' => ['123' => ['header' => 'Test']]];
+// Both are valid for UID 123 in common cases
+$data = ['tt_content' => [123 => ['header' => 'Int key']]];
+$data = ['tt_content' => ['123' => ['header' => 'String key']]];
 
-// ✅ CORRECT - Integer UID for existing record
-$data = ['tt_content' => [123 => ['header' => 'Test']]];
+// ✅ Prefer integer keys for clarity and static analysis
+$data = ['tt_content' => [123 => ['header' => 'Recommended style']]];
 ```
+
+**Still wrong:** using non-numeric strings as placeholders **without** the `NEW` prefix (e.g. arbitrary slugs instead of `NEW_1`). New records must use `NEW…` placeholders as shown in §2. **Edge case:** strings that are not valid integer strings per `MathUtility::canBeInterpretedAsInteger()` (e.g. some leading-zero forms) — use integers or plain digit strings.
 
 ### Pitfall 3: Forgetting process_datamap() / process_cmdmap()
 
@@ -394,112 +408,20 @@ $GLOBALS['BE_USER']->setWorkspace(0);
 $GLOBALS['BE_USER']->setWorkspace($previousWorkspace);
 ```
 
-## 9. PSR-14 Events (Preferred Pattern)
+## 9. Extending DataHandler: Hooks and Real Core Events
 
-> **Important:** PSR-14 events are the preferred way to react to DataHandler operations in TYPO3 v13/v14. Legacy hooks still work in v13 but should be migrated to events.
+> **Facts for v13/v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. To run code **after** datamap DB writes, use **`SC_OPTIONS` hook classes** (below). Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
 
-### Available DataHandler Events
+### 9.1 `SC_OPTIONS` hook classes (primary pattern for datamap/cmdmap)
 
-| Event | Triggered When |
-|-------|----------------|
-| `BeforeRecordOperationEvent` | Before any record operation |
-| `AfterRecordOperationEvent` | After any record operation |
-| `AfterDatabaseOperationsEvent` | After database operations complete |
-| `ModifyRecordBeforeInsertEvent` | Before a new record is inserted |
+Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these in **v13 and v14**; they are the supported extension point for many DataHandler reactions.
 
-### Event Listener Registration (Services.yaml)
-
-```yaml
-# Configuration/Services.yaml
-services:
-  Vendor\Extension\EventListener\ContentCreatedListener:
-    tags:
-      - name: event.listener
-        identifier: 'vendor-extension/content-created'
-```
-
-### Event Listener Implementation (v13/v14 Compatible)
+`ext_localconf.php`:
 
 ```php
 <?php
 declare(strict_types=1);
 
-namespace Vendor\Extension\EventListener;
-
-use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\DataHandling\DataHandler;
-use TYPO3\CMS\Core\DataHandling\Event\AfterDatabaseOperationsEvent;
-
-#[AsEventListener(identifier: 'vendor-extension/content-created')]
-final class ContentCreatedListener
-{
-    public function __invoke(AfterDatabaseOperationsEvent $event): void
-    {
-        $table = $event->getTable();
-        $status = $event->getStatus();
-        $recordUid = $event->getRecordUid();
-        $fields = $event->getFields();
-        $dataHandler = $event->getDataHandler();
-
-        if ($table !== 'tt_content') {
-            return;
-        }
-
-        if ($status === 'new') {
-            // Handle new record creation
-            $newUid = $dataHandler->substNEWwithIDs[$recordUid] ?? $recordUid;
-            // Your logic here...
-        }
-
-        if ($status === 'update') {
-            // Handle record update
-        }
-    }
-}
-```
-
-### Modifying Records Before Insert
-
-```php
-<?php
-declare(strict_types=1);
-
-namespace Vendor\Extension\EventListener;
-
-use TYPO3\CMS\Core\Attribute\AsEventListener;
-use TYPO3\CMS\Core\DataHandling\Event\ModifyRecordBeforeInsertEvent;
-
-#[AsEventListener(identifier: 'vendor-extension/modify-before-insert')]
-final class ModifyBeforeInsertListener
-{
-    public function __invoke(ModifyRecordBeforeInsertEvent $event): void
-    {
-        if ($event->getTable() !== 'tx_myext_domain_model_item') {
-            return;
-        }
-
-        $record = $event->getRecord();
-        
-        // Modify the record before it's inserted
-        $record['crdate'] = time();
-        $record['tstamp'] = time();
-        
-        $event->setRecord($record);
-    }
-}
-```
-
-## 10. Legacy Hooks (Deprecated, v13 Only)
-
-> **Warning:** Legacy hooks are deprecated in TYPO3 v14. Use PSR-14 events instead. The following is for reference when maintaining legacy code.
-
-Register hooks in `ext_localconf.php`:
-
-```php
-<?php
-declare(strict_types=1);
-
-// ⚠️ DEPRECATED - Use PSR-14 events for new code
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][]
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
 
@@ -507,7 +429,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
 ```
 
-Hook implementation:
+Hook class (after database operations on the datamap — same signature Core calls):
 
 ```php
 <?php
@@ -517,9 +439,6 @@ namespace Vendor\Extension\Hooks;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 
-/**
- * @deprecated Use PSR-14 events instead. This hook works in v13 but should be migrated.
- */
 final class DataHandlerHook
 {
     public function processDatamap_afterDatabaseOperations(
@@ -534,18 +453,52 @@ final class DataHandlerHook
         }
 
         if ($status === 'new') {
-            // Handle new record creation
             $newUid = $dataHandler->substNEWwithIDs[$id] ?? $id;
+            // …
         }
 
         if ($status === 'update') {
-            // Handle record update
+            // …
         }
     }
 }
 ```
 
-## 11. Version Constraints for Extensions
+Other keys on the same `SC_OPTIONS` path include `moveRecordClass`, `processTranslateToClass`, `checkModifyAccessList`, `clearPageCacheEval`, `clearCachePostProc`, etc. — inspect `DataHandler` in Core for the full set.
+
+### 9.2 Real PSR-14 events in `TYPO3\CMS\Core\DataHandling\Event`
+
+Core currently documents **only** these events under that namespace (reference index / link parsing — **not** generic “before every save”):
+
+| Event | Purpose |
+|-------|---------|
+| [`IsTableExcludedFromReferenceIndexEvent`](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/IsTableExcludedFromReferenceIndexEvent.html) | Exclude a table from the Reference Index |
+| [`AppendLinkHandlerElementsEvent`](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/AppendLinkHandlerElementsEvent.html) | Extend SoftRef link-handler UI elements |
+
+Example listener (Reference Index exclusion):
+
+```php
+<?php
+declare(strict_types=1);
+
+namespace Vendor\Extension\EventListener;
+
+use TYPO3\CMS\Core\Attribute\AsEventListener;
+use TYPO3\CMS\Core\DataHandling\Event\IsTableExcludedFromReferenceIndexEvent;
+
+#[AsEventListener(identifier: 'vendor-extension/skip-my-cache-table-from-refindex')]
+final class ExcludeTableFromReferenceIndexListener
+{
+    public function __invoke(IsTableExcludedFromReferenceIndexEvent $event): void
+    {
+        if ($event->getTable() === 'tx_myext_cache') {
+            $event->markAsExcluded();
+        }
+    }
+}
+```
+
+## 10. Version Constraints for Extensions
 
 When creating extensions that use DataHandler, ensure proper version constraints:
 
@@ -575,14 +528,16 @@ $EM_CONF[$_EXTKEY] = [
 - **`DataHandler->storeLogMessages`** removed (#106118). Logging behavior is no longer configurable via this property.
 - **`DataHandler->copyWhichTables`**, **`DataHandler->neverHideAtCopy`**, **`DataHandler->copyTree`** removed (#107856). These internal properties are no longer accessible.
 
-### New `discard` Command **[v14 only]**
+### New `discard` cmdmap command **[v14 only]**
 
-DataHandler now supports a `discard` command to programmatically discard workspace changes:
+[Feature #107519](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107519-AddDiscardCommandToDataHandler.html) adds a **first-class `discard` command** on the **cmdmap** so you can drop workspace versions without the old `version` + `clearWSID` / `flush` workaround. Internal discard-related logic existed in Core before v14; what is **new** is this explicit public cmdmap API. Use the **versioned** record UID (`t3ver_wsid` > 0), not the live record.
+
+The legacy `version` actions remain supported but are **deprecated** in favor of `discard`.
 
 ```php
 $cmd = [
     'tt_content' => [
-        123 => ['discard' => true],
+        $versionedUid => ['discard' => true],
     ],
 ];
 ```

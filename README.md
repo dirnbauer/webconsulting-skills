@@ -362,7 +362,7 @@ Create a Content Block Record Type for team members with: name, position, email,
 
 **Accordion Content Element:**
 ```
-Create a Content Block for an accordion with unlimited items. Each item has a title, richtext content, and "initially open" checkbox. Include frontend.html and backend-preview.html templates.
+Create a Content Block for an accordion with unlimited items. Each item has a title, richtext content, and "initially open" checkbox. Include frontend.fluid.html and backend-preview.fluid.html templates.
 ```
 
 **FAQ with Categories:**

@@ -45,7 +45,7 @@ return [
         'debug' => false,
         'lockIP' => 0,                    // Usually 0 for frontend (mobile users)
         'sessionTimeout' => 86400,
-        'lockSSL' => true,
+        // `FE.lockSSL` was removed in v12 — enforce HTTPS with the web server / reverse proxy
         'passwordHashing' => [
             'className' => \TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2idPasswordHash::class,
             'options' => [],
@@ -69,11 +69,9 @@ return [
         'textfile_ext' => 'txt,html,htm,css,js,tmpl,ts,typoscript,xml,svg',
         'mediafile_ext' => 'gif,jpg,jpeg,png,webp,svg,pdf,mp3,mp4,webm',
         
-        // Security features (v13/v14)
+        // Security feature toggles — names and availability differ by minor release; confirm in Core docs for your exact version
         'features' => [
             'security.backend.enforceReferrer' => true,
-            'security.frontend.enforceContentSecurityPolicy' => true,
-            'security.backend.enforceContentSecurityPolicy' => true,
         ],
     ],
     
@@ -271,11 +269,12 @@ Supported providers:
 - TOTP (Time-based One-Time Password)
 - Recovery Codes
 
-```php
-// Force MFA for all admin users (recommended)
-// Backend user TSconfig
-options.backendUserLanguage = default
+```typoscript
+# User or backend group TSconfig — require MFA for those accounts (see TSconfig Reference → auth)
+auth.mfa.required = 1
 ```
+
+System-wide option (when available for your core version): `$GLOBALS['TYPO3_CONF_VARS']['BE']['requireMfa']` — verify in [Multi-factor authentication](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Authentication/MultiFactorAuthentication/Index.html).
 
 ### Backend Access Logging
 
@@ -296,11 +295,7 @@ $GLOBALS['TYPO3_CONF_VARS']['LOG']['TYPO3']['CMS']['Backend']['Authentication'][
 
 TYPO3 v13+ has built-in CSP support. Enable it:
 
-```php
-// config/system/settings.php
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.frontend.enforceContentSecurityPolicy'] = true;
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.backend.enforceContentSecurityPolicy'] = true;
-```
+Enable CSP through `config/system/settings.php` / Install Tool using the **feature flags documented for your TYPO3 minor** (toggle names have changed across releases — check Core docs rather than copying stale keys).
 
 ### CSP Configuration via Events (v13/v14)
 
@@ -320,12 +315,15 @@ final class ContentSecurityPolicyListener
 {
     public function __invoke(PolicyMutatedEvent $event): void
     {
-        // Only modify frontend policy
-        if ($event->getScope()->type->isFrontend()) {
-            $event->getCurrentPolicy()
-                ->extend(Directive::ScriptSrc, new UriValue('https://cdn.example.com'))
-                ->extend(Directive::StyleSrc, new UriValue('https://fonts.googleapis.com'));
+        if (!$event->scope->type->isFrontend()) {
+            return;
         }
+
+        $policy = $event->getCurrentPolicy()
+            ->extend(Directive::ScriptSrc, new UriValue('https://cdn.example.com'))
+            ->extend(Directive::StyleSrc, new UriValue('https://fonts.googleapis.com'));
+
+        $event->setCurrentPolicy($policy);
     }
 }
 ```
@@ -443,10 +441,10 @@ final class MyController
 ### Frontend Forms (Extbase)
 
 ```html
-<!-- Fluid form with CSRF -->
+<!-- Extbase forms: use <f:form> so the framework injects CSRF / form protection as configured -->
 <f:form action="submit" controller="Contact" method="post">
+    <!-- `__trustedProperties` is for Extbase property-mapping allow-lists, not a substitute for CSRF -->
     <f:form.hidden name="__trustedProperties" value="{trustedProperties}" />
-    <!-- Form fields -->
 </f:form>
 ```
 
@@ -456,7 +454,7 @@ TYPO3 v13+ includes built-in rate limiting:
 
 ```php
 // config/system/additional.php
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['features']['security.backend.rateLimiter'] = true;
+// Rate limiting: check current Core / feature documentation — do not assume a stable `security.backend.rateLimiter` toggle name
 
 // Configure rate limits
 $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
@@ -470,7 +468,7 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 - [ ] `debug` = false (BE and FE)
 - [ ] `trustedHostsPattern` configured
 - [ ] Install Tool disabled
-- [ ] HTTPS enforced (`lockSSL` = true)
+- [ ] HTTPS enforced at the edge (web server / proxy); `FE.lockSSL` no longer exists
 - [ ] Strong backend passwords (12+ chars)
 - [ ] MFA enabled for admins
 - [ ] File permissions correct
@@ -501,8 +499,8 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 - **TYPO3 Security Team**: https://typo3.org/teams/security
 - **Security Bulletins**: https://typo3.org/security/advisory
 - **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/Index.html
-- **v13 Security Features**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13/Index.html
-- **v14 Security Features**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
+- **v13 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13.html
+- **v14 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 
 ## v14-Only Security Changes
 
@@ -517,11 +515,14 @@ TYPO3 v14 uses a **stronger cryptographic algorithm for HMAC** (#106307). Existi
 New `CipherService` (#108002) provides **symmetric encryption/decryption** out of the box. Use it instead of custom encryption implementations:
 
 ```php
-use TYPO3\CMS\Core\Crypto\CipherService;
+use TYPO3\CMS\Core\Crypto\Cipher\CipherService;
+use TYPO3\CMS\Core\Crypto\Cipher\SharedKey;
 
 $cipherService = GeneralUtility::makeInstance(CipherService::class);
-$encrypted = $cipherService->encrypt('sensitive data');
-$decrypted = $cipherService->decrypt($encrypted);
+// SharedKey must be 32 bytes; use a secrets manager in real projects — this is illustrative only.
+$key = new SharedKey(hash('sha256', $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'], true));
+$cipherValue = $cipherService->encrypt('sensitive data', $key);
+$decrypted = $cipherService->decrypt($cipherValue, $key);
 ```
 
 ### MFA Failed Verification Notifications **[v14 only]**

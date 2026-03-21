@@ -23,7 +23,7 @@ license: MIT / CC-BY-SA-4.0
 
 ```bash
 ddev composer require typo3/cms-seo
-ddev typo3 extension:activate seo
+ddev typo3 extension:setup -e seo
 ddev typo3 cache:flush
 ```
 
@@ -444,7 +444,7 @@ tt_content.image.settings.responsive_image_rendering = 1
 | `typo3/cms-seo` | Core SEO functionality | ✓ |
 | `yoast-seo-for-typo3/yoast_seo` | Content analysis, readability | ✓ |
 | `brotkrueml/schema` | Advanced structured data | ✓ |
-| `b13/seo_basics` | Additional SEO tools | ✓ |
+| `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as v13/v14 default; prefer `typo3/cms-seo` |
 
 ### Yoast SEO Integration
 
@@ -463,7 +463,7 @@ Features:
 
 ```bash
 ddev composer require brotkrueml/schema
-ddev typo3 extension:activate schema
+ddev typo3 extension:setup -e schema
 ```
 
 Features:
@@ -505,7 +505,7 @@ page.headerData.1000.value (
 
 ### Sitemap GET Parameters Namespaced **[v14 only]**
 
-Sitemap GET parameters have been moved into a namespace (#104422). Route enhancers and custom sitemap providers must be updated. The `sitemap` and `sitemapType` parameters are now namespaced under `tx_seo_sitemap`.
+Sitemap GET parameters use the **`tx_seo[...]`** namespace (see [Breaking: #85323](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-85323-SeoParameterNamespace.html)). Update route enhancers and templates that still expect flat `sitemap` / `page` arguments.
 
 ### Fluid Page Meta & Title ViewHelpers **[v14 only]**
 
@@ -522,9 +522,9 @@ New ViewHelpers for setting page meta tags and titles directly from Fluid templa
 
 These complement (and can replace) PHP-based `PageTitleProvider` and `MetaTagManager` approaches.
 
-### RecordTitleTagProvider **[v14 only]**
+### RecordTitleProvider **[v14 only]**
 
-New `RecordTitleTagProvider` (#106232) automatically generates page titles from displayed records. Useful for Extbase detail views without needing a custom title provider.
+`RecordTitleProvider` (PageTitle API) ties the browser title to rendered records where configured. Useful for Extbase detail views — confirm the exact registration flags in Core docs for your minor version.
 
 ### Regex-Based Slug Replacements **[v14 only]**
 
@@ -532,7 +532,7 @@ Slugs now support **regex-based replacements** (#106072) for advanced URL transf
 
 ### headerData / footerData ViewHelpers **[v14 only]**
 
-New `<f:asset.headerData>` and `<f:asset.footerData>` ViewHelpers allow injecting raw HTML (e.g., JSON-LD structured data) directly from Fluid templates without TypoScript.
+Use `<f:page.headerData>` / `<f:page.footerData>` (Fluid / TYPO3 core ViewHelpers) to inject raw head markup such as JSON-LD — confirm availability in your Fluid / core combination.
 
 ---
 

@@ -27,7 +27,7 @@ triggers:
 ### Proper Heading Hierarchy
 
 ```html
-<!-- ContentBlocks/ContentElements/hero/templates/frontend.html -->
+<!-- ContentBlocks/ContentElements/hero/templates/frontend.fluid.html -->
 <header class="hero" role="banner">
     <h1>{data.header}</h1>
     <f:if condition="{data.subheadline}">
@@ -39,7 +39,7 @@ triggers:
 ### Article Content Block
 
 ```html
-<!-- ContentBlocks/ContentElements/article/templates/frontend.html -->
+<!-- ContentBlocks/ContentElements/article/templates/frontend.fluid.html -->
 <article itemscope itemtype="https://schema.org/Article">
     <header>
         <h2 itemprop="headline">{data.header}</h2>
@@ -76,7 +76,7 @@ fields:
 ```
 
 ```html
-<!-- templates/frontend.html -->
+<!-- templates/frontend.fluid.html -->
 <div class="faq">
     <f:for each="{data.items}" as="item">
         <details>
@@ -162,7 +162,7 @@ fields:
 ## 5. Breadcrumb Schema
 
 ```html
-<!-- ContentBlocks/ContentElements/breadcrumb/templates/frontend.html -->
+<!-- ContentBlocks/ContentElements/breadcrumb/templates/frontend.fluid.html -->
 <nav aria-label="Breadcrumb">
     <ol itemscope itemtype="https://schema.org/BreadcrumbList">
         <f:for each="{data.items}" as="item" iteration="iter">

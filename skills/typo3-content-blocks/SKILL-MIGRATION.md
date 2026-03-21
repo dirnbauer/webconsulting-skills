@@ -182,7 +182,7 @@ fields:
 ```
 
 ```html
-<!-- ContentBlocks/ContentElements/hero/templates/frontend.html -->
+<!-- ContentBlocks/ContentElements/hero/templates/frontend.fluid.html -->
 <section class="hero">
     <f:if condition="{data.image}">
         <f:for each="{data.image}" as="img">
@@ -485,8 +485,8 @@ fields:
 
 ## For Each Content Type
 - [ ] Create config.yaml with field mappings
-- [ ] Create frontend.html template
-- [ ] Create backend-preview.html (optional)
+- [ ] Create frontend.fluid.html template
+- [ ] Create backend-preview.fluid.html (optional)
 - [ ] Create labels.xlf translations
 - [ ] Run cache:flush and extension:setup
 

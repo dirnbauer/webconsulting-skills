@@ -81,8 +81,8 @@ EXT:my_sitepackage/
     │       ├── language/
     │       │   └── labels.xlf
     │       ├── templates/
-    │       │   ├── backend-preview.html
-    │       │   ├── frontend.html
+    │       │   ├── backend-preview.fluid.html
+    │       │   ├── frontend.fluid.html
     │       │   └── partials/
     │       └── config.yaml
     ├── RecordTypes/
@@ -101,7 +101,7 @@ EXT:my_sitepackage/
     │       ├── language/
     │       │   └── labels.xlf
     │       ├── templates/
-    │       │   └── backend-preview.html
+    │       │   └── backend-preview.fluid.html
     │       └── config.yaml
     └── FileTypes/
         └── image-extended/
@@ -177,7 +177,7 @@ fields:
 ### Frontend Template
 
 ```html
-<!-- templates/frontend.html -->
+<!-- templates/frontend.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:cb="http://typo3.org/ns/TYPO3/CMS/ContentBlocks/ViewHelpers"
       data-namespace-typo3-fluid="true">
@@ -210,7 +210,7 @@ fields:
 ### Backend Preview Template
 
 ```html
-<!-- templates/backend-preview.html -->
+<!-- templates/backend-preview.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       data-namespace-typo3-fluid="true">
@@ -470,10 +470,10 @@ ContentBlocks/PageTypes/blog-article/
 
 ### Backend Preview
 
-Create a `backend-preview.html` to preview custom page properties:
+Create a `backend-preview.fluid.html` to preview custom page properties:
 
 ```html
-<!-- templates/backend-preview.html -->
+<!-- templates/backend-preview.fluid.html -->
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       data-namespace-typo3-fluid="true">

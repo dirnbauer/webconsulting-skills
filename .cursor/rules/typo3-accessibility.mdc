@@ -75,7 +75,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 ### Motion & Interaction
 - [ ] `prefers-reduced-motion` respected (CSS and JS)
 - [ ] No content flashes more than 3 times per second
-- [ ] Touch targets >= 44x44 CSS pixels
+- [ ] Touch targets meet **WCAG 2.2 AA 2.5.8** (minimum **24×24 CSS pixels**); use **44×44** as a stricter comfort target where feasible
 - [ ] `user-scalable=no` is NOT set in viewport meta
 
 ### TYPO3-Specific
@@ -105,7 +105,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
     <f:translate key="LLL:EXT:site_package/Resources/Private/Language/locallang.xlf:skip_to_content" />
 </a>
 
-<header role="banner">
+<header>
     <nav aria-label="{f:translate(key: 'LLL:EXT:site_package/Resources/Private/Language/locallang.xlf:nav.main')}">
         <f:cObject typoscriptObjectPath="lib.mainNavigation" />
     </nav>
@@ -167,7 +167,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 For decorative images (no informational value):
 
 ```html
-<f:image image="{image}" alt="" role="presentation" />
+<f:image image="{image}" alt="" />
 ```
 
 ### 2.4 Accessible Content Element Wrapper
@@ -278,7 +278,7 @@ For decorative images (no informational value):
             id="tabpanel-{data.uid}-{iter.index}"
             aria-labelledby="tab-{data.uid}-{iter.index}"
             tabindex="0"
-            {f:if(condition: '!{iter.isFirst}', then: 'hidden')}
+            {f:if(condition: iter.isFirst, then: '', else: 'hidden')}
         >
             <f:format.html>{item.bodytext}</f:format.html>
         </div>
@@ -303,13 +303,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use TYPO3\CMS\Core\Attribute\AsMiddleware;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 
-#[AsMiddleware(
-    identifier: 'vendor/site-package/accessibility-lang',
-    after: 'typo3/cms-frontend/content-length-headers',
-)]
 final class AccessibilityLangMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -345,11 +340,11 @@ final class AccessibilityLangMiddleware implements MiddlewareInterface
 }
 ```
 
-**v12/v13 fallback:** Register via `Configuration/RequestMiddlewares.php` instead of the `#[AsMiddleware]` attribute:
+Register via `Configuration/RequestMiddlewares.php` (supported in v12–v14):
 
 ```php
 <?php
-// Configuration/RequestMiddlewares.php (v12/v13)
+// Configuration/RequestMiddlewares.php
 return [
     'frontend' => [
         'vendor/site-package/accessibility-lang' => [
@@ -360,37 +355,25 @@ return [
 ];
 ```
 
-### 3.2 Image Alt Text Validation (PSR-14 Event)
+### 3.2 Image Alt Text Validation (DataHandler hook)
 
-Warn editors when images lack alt text:
+Warn editors when images lack alt text. Use a **`processDatamapClass`** hook on `sys_file_metadata` saves — not workspace publish events (`AfterRecordPublishedEvent` is under **Workspaces** and relates to publishing).
 
 ```php
 <?php
 
 declare(strict_types=1);
 
-namespace Vendor\SitePackage\EventListener;
+namespace Vendor\SitePackage\Hooks;
 
-use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-#[AsEventListener(identifier: 'vendor/site-package/alt-text-check')]
-final class ImageAltTextValidationListener
+final class ImageAltTextValidationHook
 {
-    public function __construct(
-        private readonly FlashMessageService $flashMessageService,
-    ) {}
-
-    public function __invoke(\TYPO3\CMS\Core\DataHandling\Event\AfterRecordPublishedEvent|object $event): void
-    {
-        // For DataHandler processDatamap_afterDatabaseOperations hook style usage:
-        // This can be adapted as a DataHandler hook or PSR-14 event depending on version.
-    }
-
     public function processDatamap_afterDatabaseOperations(
         string $status,
         string $table,
@@ -411,7 +394,7 @@ final class ImageAltTextValidationListener
                 true,
             );
 
-            $this->flashMessageService
+            GeneralUtility::makeInstance(FlashMessageService::class)
                 ->getMessageQueueByIdentifier()
                 ->addMessage($message);
         }
@@ -419,11 +402,11 @@ final class ImageAltTextValidationListener
 }
 ```
 
-Register as DataHandler hook in `ext_localconf.php`:
+Register in `ext_localconf.php`:
 
 ```php
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][]
-    = \Vendor\SitePackage\EventListener\ImageAltTextValidationListener::class;
+    = \Vendor\SitePackage\Hooks\ImageAltTextValidationHook::class;
 ```
 
 ### 3.3 Accessible Fluid ViewHelper: SrOnly
@@ -868,7 +851,7 @@ final class CspAccessibilityListener
 {
     public function __invoke(PolicyMutatedEvent $event): void
     {
-        if ($event->getScope()->type->isFrontend()) {
+        if ($event->scope->type->isFrontend()) {
             // Prefer external CSS over extending CSP for inline styles
         }
     }
@@ -923,7 +906,7 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 |-----------|---------|-----|-----|-----|
 | `typo3/cms-core` | Built-in ARIA, focus management | ✓ | ✓ | ✓ |
 | `brotkrueml/schema` | Structured data (WebPage, Article) | ✓ | ✓ | ✓ |
-| `wapplersystems/a11y` | Accessibility toolbar for frontend | ✓ | ✓ | — |
+| *(no stable Packagist/TER listing verified)* | Third-party accessibility toolbars change often — evaluate extensions individually before recommending |
 | `b13/container` | Accessible grid/container layouts | ✓ | ✓ | ✓ |
 
 ## 9. WCAG 2.2 Quick Reference
@@ -944,7 +927,7 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 | 2.4.3 Focus Order | A | Logical DOM order |
 | 2.4.7 Focus Visible | AA | `:focus-visible` styles |
 | 2.4.11 Focus Not Obscured | AA | `scroll-margin-top`, no sticky overlaps |
-| 2.5.8 Target Size | AA | 44x44px minimum |
+| 2.5.8 Target Size (Minimum) | AA | **24×24 CSS px** minimum; larger targets improve usability |
 | 3.1.1 Language of Page | A | `<html lang>` via middleware |
 | 3.1.2 Language of Parts | AA | `lang` attribute on multilingual content |
 | 3.3.1 Error Identification | A | `aria-invalid`, `aria-describedby` |
@@ -990,9 +973,7 @@ Update any custom backend JavaScript that uses `Modal.show()` or `Modal.confirm(
 
 ### Fluid 5.0 Accessibility Impact **[v14 only]**
 
-Fluid 5.0 strict typing means ViewHelper arguments must be correctly typed. This affects accessibility-related ViewHelpers:
-- `tabindex` attributes must be integers, not strings
-- Boolean ARIA attributes (`aria-hidden`, `aria-expanded`) must be proper booleans
+Fluid 5.x is stricter about ViewHelper arguments in some setups. Prefer correct types for numeric and boolean attributes (`tabindex`, `aria-expanded`, etc.) and validate templates after upgrades.
 
 ---
 

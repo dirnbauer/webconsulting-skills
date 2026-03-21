@@ -1380,10 +1380,10 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-simplify | ✓ | ✓ | ✓ | ✓ | ✓ |
 | typo3-batch | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-powermail | ✓ | ✓ | ✓ | ✓ | ✓ |
+| typo3-powermail | ✓ | | ✓ | ✓ | ✓ |
 | typo3-records-list-types | | ✓ | | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-solr | ✓ | | ✓ | ✓ | ✓ |
+| typo3-solr | ✓ | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
 | security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
