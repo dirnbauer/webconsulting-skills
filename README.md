@@ -1,5 +1,7 @@
 # webconsulting Agent Skills
 
+> **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
+
 A curated collection of **61 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
 > **Works with:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, Windsurf, GitHub Copilot, Kiro, Cline, Continue.dev, Aider, and more
@@ -207,7 +209,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-docs` | documentation, rst, docs | "Create RST documentation for my extension" |
 | `typo3-core-contributions` | core, gerrit, forge, patch | "Submit a patch to TYPO3 Core" |
 | `typo3-rector` | rector, refactoring, deprecation | "Use Rector to fix deprecations" |
-| `typo3-update` | update, upgrade, v13, v14, migration | "Make my code compatible with v13 and v14" |
+| `typo3-update` | update, upgrade, v14, migration, TYPO3 core | "Follow TYPO3 v14 patterns for my extension" |
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-fractor` | fractor, flexform, typoscript migration, fluid migration | "Use Fractor to migrate FlexForms and TypoScript" |
 | `typo3-icon14` | icons, backend module icons, icon migration, SVG icons, icon registry | "Migrate extension icons to TYPO3 v14 line-art style" |
@@ -479,7 +481,7 @@ Create a repository for my Product model with methods: findByCategory(), findInP
 
 **Extbase Controller:**
 ```
-Create an Extbase controller with list, show, and filter actions for my Event model. Include proper request handling for v13/v14.
+Create an Extbase controller with list, show, and filter actions for my Event model. Include proper request handling for TYPO3 v14.
 ```
 
 **PSR-14 Event Listener:**
@@ -508,7 +510,7 @@ Create a PSR-15 middleware that adds security headers (CSP, X-Frame-Options, etc
 
 **Extension Upgrade v12 → v14:**
 ```
-Upgrade my extension from TYPO3 v12 to support both v13 and v14. Use Rector for automated refactoring and show me what needs manual attention.
+Upgrade my extension from TYPO3 v12 to support TYPO3 v14. Use Rector for automated refactoring and show me what needs manual attention.
 ```
 
 **Fix Deprecations:**
@@ -516,9 +518,9 @@ Upgrade my extension from TYPO3 v12 to support both v13 and v14. Use Rector for 
 Scan my extension for deprecated code and fix all deprecations for TYPO3 v14. Use typo3-rector rules.
 ```
 
-**Dual-Version Compatibility:**
+**TYPO3 v14 patterns:**
 ```
-My extension needs to work on both TYPO3 v13 and v14. Show me how to write version-compatible code for the breaking changes.
+My extension targets TYPO3 v14. Show me current core APIs and patterns for the v14 breaking changes.
 ```
 
 **Fractor for Non-PHP Files:**
@@ -547,7 +549,7 @@ Write Playwright E2E tests for my contact form: test form submission, validation
 
 **GitHub Actions CI:**
 ```
-Create a GitHub Actions workflow that runs PHPUnit tests, PHPStan analysis, and PHP-CS-Fixer on PHP 8.2 and 8.3 with TYPO3 v13 and v14.
+Create a GitHub Actions workflow that runs PHPUnit tests, PHPStan analysis, and PHP-CS-Fixer on PHP 8.2 and 8.3 with TYPO3 v14.
 ```
 
 ---
@@ -2060,7 +2062,7 @@ grep -r "DataHandler" skills/
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | webconsulting |
 | **Upgrade & Migration** | | |
 | `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
-| `typo3-update` | TYPO3 v13/v14 migration guide (prefers v14) | webconsulting |
+| `typo3-update` | TYPO3 TYPO3 v14 migration guide (prefers v14) | webconsulting |
 | `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | webconsulting |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | webconsulting |
 | `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | webconsulting |
@@ -2304,7 +2306,7 @@ The `sync-skills.yml` workflow runs weekly (Mondays 06:00 UTC) and can be trigge
 Skills in this collection cover:
 
 - **PHP 8.2+** with strict types (PHP 8.4 supplements available)
-- **TYPO3 v13/v14** for CMS projects
+- **TYPO3 v14.x** for CMS projects (skills are v14-only)
 - **React/Remotion** for video creation
 - **DDEV** for local development
 - **Next.js/Astro** for frontend (AI Search Optimization)

@@ -12,7 +12,7 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 > taught me a lot about structuring effective agent skills and whose work forms the foundation
 > for many of the TYPO3 and PHP skills in this collection.
 
-> **TYPO3 Skills:** All TYPO3 skills support v13.x and v14.x (v14 preferred). Code examples work on both versions simultaneously.
+> **TYPO3 Skills:** All TYPO3-related skills target **TYPO3 v14.x only**. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
 
 > **PHP 8.4 & Content Blocks:** Most TYPO3 skills include supplement files:
 > - `SKILL-PHP84.md` - PHP 8.4 specific patterns and migration
@@ -252,8 +252,8 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-conformance` | Extension standards compliance checker | 1.0.0 | conformance, standards, quality |
 | `typo3-docs` | Documentation using docs.typo3.org standards | 1.0.0 | documentation, rst, docs |
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | 1.0.0 | core, contributions, gerrit, forge |
-| `typo3-rector` | TYPO3 upgrade patterns using Rector for dual-version support | 2.0.0 | rector, upgrade, migration, refactoring |
-| `typo3-update` | TYPO3 v13/v14 dual-version development guide | 2.0.0 | update, upgrade, v13, v14 |
+| `typo3-rector` | TYPO3 v14 upgrade patterns using Rector | 2.0.0 | rector, upgrade, migration, refactoring |
+| `typo3-update` | TYPO3 v14 development guide (constraints, APIs, upgrades) | 2.0.0 | update, upgrade, v14, migration |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | 1.0.0 | fractor, flexform, typoscript migration, fluid migration |
 | `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | 1.0.0 | icons, backend module icons, icon migration, SVG icons, icon registry |
@@ -452,12 +452,12 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-conformance**: Extension quality assessment and standards compliance
 - **typo3-docs**: Official documentation standards with RST and TYPO3 directives
 - **typo3-core-contributions**: Contributing to TYPO3 Core via Gerrit and Forge
-- **typo3-rector**: Automated code refactoring with Rector for dual-version support
-- **typo3-update**: Version migration and compatibility strategies for v13/v14
+- **typo3-rector**: Automated code refactoring with Rector for TYPO3 v14
+- **typo3-update**: Version migration and compatibility strategies for TYPO3 v14
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
 - **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, Htaccess)
 - **typo3-icon14**: Migrate extension icons from solid-background to v14 line-art style (currentColor, CSS custom properties)
-- **typo3-security**: Production hardening checklist for v13/v14
+- **typo3-security**: Production hardening checklist for TYPO3 v14
 - **typo3-seo**: Search engine optimization with EXT:seo
 - **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
 - **typo3-simplify**: Simplify TYPO3 code for clarity and maintainability (adapted from Boris Cherny/Anthropic)
@@ -514,7 +514,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 
 **🔧 Extension Development (typo3-datahandler, typo3-update)**
 - "CRUD operations with DataHandler and transactions"
-- "Extbase controller with list/show actions for v13+v14"
+- "Extbase controller with list/show actions for TYPO3 v14"
 - "PSR-14 event listener with AsEventListener attribute"
 - "Custom repository with QueryBuilder methods"
 - "Scheduler task with progress reporting"
@@ -554,7 +554,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "SAML SSO integration with Azure AD"
 
 **🔄 Fractor Non-PHP Migrations (typo3-fractor)**
-- "Set up Fractor for TYPO3 v13/v14 non-PHP migrations"
+- "Set up Fractor for TYPO3 TYPO3 v14 non-PHP migrations"
 - "Migrate FlexForm eval=required to required=1"
 - "Migrate TypoScript INCLUDE_TYPOSCRIPT to @import syntax"
 - "Migrate FlexForm indexed items to label/value format"
@@ -566,7 +566,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Configure Fractor file extension filtering"
 
 **🔄 Upgrades (typo3-rector, typo3-extension-upgrade)**
-- "Upgrade extension from v12 to v13/v14 with Rector"
+- "Upgrade extension from v12 to TYPO3 v14 with Rector"
 - "Fix all deprecations for TYPO3 v14"
 - "Fractor for TypoScript and Fluid migrations"
 - "Site migration from v10 to v14 with URL preservation"
@@ -583,7 +583,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Unit tests with mocked repositories"
 - "Functional tests with database fixtures"
 - "E2E tests with Playwright for contact form"
-- "GitHub Actions CI for PHP 8.2/8.3 + TYPO3 v13/v14"
+- "GitHub Actions CI for PHP 8.2/8.3 + TYPO3 v14"
 
 **🔒 Security Hardening (typo3-security, security-audit)**
 - "Security audit for XSS, CSRF, SQL injection"
@@ -863,7 +863,7 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 
 **🔍 Conformance (typo3-conformance)**
 - "Run conformance check on my TYPO3 extension"
-- "Evaluate extension quality for v13/v14 standards"
+- "Evaluate extension quality for TYPO3 v14 standards"
 - "Generate conformance report with recommendations"
 - "Check extension for deprecated API usage"
 - "Assess code quality metrics for TYPO3 extension"
@@ -1277,7 +1277,7 @@ Use case: PDF manipulation, Word document creation, PowerPoint presentations, Ex
 
 ### Backend Session
 Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
-Use case: Extension development, Content Blocks, database operations, forms, search, backend views, v13/v14 compatible code
+Use case: Extension development, Content Blocks, database operations, forms, search, backend views, TYPO3 v14 code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -1285,7 +1285,7 @@ Use case: Server configuration, deployment, hardening, security audits, incident
 
 ### Upgrade Session
 Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `php-modernization`
-Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, icon modernization, dual-version compatibility, batch migrations
+Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, icon modernization, TYPO3 v14 upgrades, batch migrations
 
 ### Code Quality Session
 Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-modernization`
@@ -1361,73 +1361,73 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 
 ## Version Compatibility Matrix
 
-| Skill | TYPO3 v13 | TYPO3 v14 | PHP 8.2 | PHP 8.3 | PHP 8.4 |
-|-------|-----------|-----------|---------|---------|---------|
-| typo3-content-blocks | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-datahandler | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-ddev | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-conformance | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-docs | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-core-contributions | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-rector | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-update | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-fractor | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-icon14 | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-security | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-accessibility | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-simplify | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-batch | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-powermail | ✓ | | ✓ | ✓ | ✓ |
-| typo3-records-list-types | | ✓ | | ✓ | ✓ |
-| typo3-workspaces | ✓ | ✓ | ✓ | ✓ | ✓ |
-| typo3-solr | ✓ | ✓ | ✓ | ✓ | ✓ |
-| ai-search-optimization | ✓ | ✓ | ✓ | ✓ | ✓ |
-| security-audit | ✓ | ✓ | ✓ | ✓ | ✓ |
-| security-incident-reporting | ✓ | ✓ | ✓ | ✓ | ✓ |
-| deepfake-detection | ✓ | ✓ | ✓ | ✓ | ✓ |
-| enterprise-readiness | ✓ | ✓ | ✓ | ✓ | ✓ |
-| readiness-report | ✓ | ✓ | ✓ | ✓ | ✓ |
-| php-modernization | ✓ | ✓ | ✓ | ✓ | ✓ |
-| cli-tools | ✓ | ✓ | ✓ | ✓ | ✓ |
-| context7 | ✓ | ✓ | ✓ | ✓ | ✓ |
-| webconsulting-branding | ✓ | ✓ | ✓ | ✓ | ✓ |
-| ui-design-patterns | ✓ | ✓ | ✓ | ✓ | ✓ |
-| postgres-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
-| marketing-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
-| og-image | ✓ | ✓ | ✓ | ✓ | ✓ |
-| react-best-practices | ✓ | ✓ | ✓ | ✓ | ✓ |
-| frontend-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| web-design-guidelines | ✓ | ✓ | ✓ | ✓ | ✓ |
-| document-processing | ✓ | ✓ | ✓ | ✓ | ✓ |
-| firecrawl | ✓ | ✓ | ✓ | ✓ | ✓ |
-| skill-creator | ✓ | ✓ | ✓ | ✓ | ✓ |
-| android-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| ios-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| ipados-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| macos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| tvos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| visionos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| watchos-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| web-platform-design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| cro-funnel | ✓ | ✓ | ✓ | ✓ | ✓ |
-| programmatic-seo | ✓ | ✓ | ✓ | ✓ | ✓ |
-| launch-strategy | ✓ | ✓ | ✓ | ✓ | ✓ |
-| ab-testing | ✓ | ✓ | ✓ | ✓ | ✓ |
-| agent-md-refactor | ✓ | ✓ | ✓ | ✓ | ✓ |
-| refactor | ✓ | ✓ | ✓ | ✓ | ✓ |
-| refactor-clean | ✓ | ✓ | ✓ | ✓ | ✓ |
-| find-skills | ✓ | ✓ | ✓ | ✓ | ✓ |
-| shadcn-ui | ✓ | ✓ | ✓ | ✓ | ✓ |
-| webconsulting-create-documentation | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Skill | TYPO3 v14.x | PHP 8.2 | PHP 8.3 | PHP 8.4 |
+|-------|-------------|---------|---------|---------|
+| typo3-content-blocks | ✓ | ✓ | ✓ | ✓ |
+| typo3-datahandler | ✓ | ✓ | ✓ | ✓ |
+| typo3-ddev | ✓ | ✓ | ✓ | ✓ |
+| typo3-testing | ✓ | ✓ | ✓ | ✓ |
+| typo3-conformance | ✓ | ✓ | ✓ | ✓ |
+| typo3-docs | ✓ | ✓ | ✓ | ✓ |
+| typo3-core-contributions | ✓ | ✓ | ✓ | ✓ |
+| typo3-rector | ✓ | ✓ | ✓ | ✓ |
+| typo3-update | ✓ | ✓ | ✓ | ✓ |
+| typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ |
+| typo3-fractor | ✓ | ✓ | ✓ | ✓ |
+| typo3-icon14 | ✓ | ✓ | ✓ | ✓ |
+| typo3-security | ✓ | ✓ | ✓ | ✓ |
+| typo3-seo | ✓ | ✓ | ✓ | ✓ |
+| typo3-accessibility | ✓ | ✓ | ✓ | ✓ |
+| typo3-simplify | ✓ | ✓ | ✓ | ✓ |
+| typo3-batch | ✓ | ✓ | ✓ | ✓ |
+| typo3-powermail | ✓ | ✓ | ✓ | ✓ |
+| typo3-records-list-types | ✓ | ✓ | ✓ | ✓ |
+| typo3-workspaces | ✓ | ✓ | ✓ | ✓ |
+| typo3-solr | ✓ | ✓ | ✓ | ✓ |
+| ai-search-optimization | ✓ | ✓ | ✓ | ✓ |
+| security-audit | ✓ | ✓ | ✓ | ✓ |
+| security-incident-reporting | ✓ | ✓ | ✓ | ✓ |
+| deepfake-detection | ✓ | ✓ | ✓ | ✓ |
+| enterprise-readiness | ✓ | ✓ | ✓ | ✓ |
+| readiness-report | ✓ | ✓ | ✓ | ✓ |
+| php-modernization | ✓ | ✓ | ✓ | ✓ |
+| cli-tools | ✓ | ✓ | ✓ | ✓ |
+| context7 | ✓ | ✓ | ✓ | ✓ |
+| webconsulting-branding | ✓ | ✓ | ✓ | ✓ |
+| ui-design-patterns | ✓ | ✓ | ✓ | ✓ |
+| postgres-best-practices | ✓ | ✓ | ✓ | ✓ |
+| marketing-skills | ✓ | ✓ | ✓ | ✓ |
+| og-image | ✓ | ✓ | ✓ | ✓ |
+| react-best-practices | ✓ | ✓ | ✓ | ✓ |
+| frontend-design | ✓ | ✓ | ✓ | ✓ |
+| web-design-guidelines | ✓ | ✓ | ✓ | ✓ |
+| document-processing | ✓ | ✓ | ✓ | ✓ |
+| firecrawl | ✓ | ✓ | ✓ | ✓ |
+| skill-creator | ✓ | ✓ | ✓ | ✓ |
+| android-design | ✓ | ✓ | ✓ | ✓ |
+| ios-design | ✓ | ✓ | ✓ | ✓ |
+| ipados-design | ✓ | ✓ | ✓ | ✓ |
+| macos-design | ✓ | ✓ | ✓ | ✓ |
+| tvos-design | ✓ | ✓ | ✓ | ✓ |
+| visionos-design | ✓ | ✓ | ✓ | ✓ |
+| watchos-design | ✓ | ✓ | ✓ | ✓ |
+| web-platform-design | ✓ | ✓ | ✓ | ✓ |
+| cro-funnel | ✓ | ✓ | ✓ | ✓ |
+| programmatic-seo | ✓ | ✓ | ✓ | ✓ |
+| launch-strategy | ✓ | ✓ | ✓ | ✓ |
+| ab-testing | ✓ | ✓ | ✓ | ✓ |
+| agent-md-refactor | ✓ | ✓ | ✓ | ✓ |
+| refactor | ✓ | ✓ | ✓ | ✓ |
+| refactor-clean | ✓ | ✓ | ✓ | ✓ |
+| find-skills | ✓ | ✓ | ✓ | ✓ |
+| shadcn-ui | ✓ | ✓ | ✓ | ✓ |
+| webconsulting-create-documentation | ✓ | ✓ | ✓ | ✓ |
 
 ## Adding New Skills
 
 1. Create directory: `skills/my-new-skill/`
 2. Add `SKILL.md` with YAML frontmatter
-3. Include `typo3_compatibility: "13.0 - 14.x"` in frontmatter
+3. Include `typo3_compatibility: "14.x"` (and `compatibility: TYPO3 14.x`) in frontmatter for TYPO3-related skills
 4. Run `./install.sh` to deploy
 5. This index updates automatically via GitHub Actions
 

@@ -1,10 +1,10 @@
 ---
 name: typo3-seo
 description: >-
-  SEO configuration and best practices for TYPO3 v13/v14, including EXT:seo setup,
+  SEO configuration and best practices for TYPO3 v14, including EXT:seo setup,
   sitemaps, meta tags, and structured data. Use when working with seo, sitemap, meta,
   robots, structured data, opengraph.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -12,10 +12,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 SEO Configuration
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All SEO configurations in this skill work on both v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All SEO configurations in this skill work on TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. Core SEO Extension Setup
 
@@ -39,7 +39,7 @@ After installation, pages have an "SEO" tab with:
 
 ## 2. Meta Tags Configuration
 
-### TypoScript Setup (v13/v14)
+### TypoScript Setup (TYPO3 v14)
 
 ```typoscript
 page {
@@ -104,7 +104,7 @@ routeEnhancers:
       sitemap.xml: 1533906435
 ```
 
-### TypoScript Sitemap Configuration (v13/v14)
+### TypoScript Sitemap Configuration (TYPO3 v14)
 
 ```typoscript
 plugin.tx_seo {
@@ -381,7 +381,7 @@ page.headerData.50.value (
 <link rel="dns-prefetch" href="https://www.google-analytics.com">
 )
 
-# Lazy load images (built-in v13/v14)
+# Lazy load images (built-in TYPO3 v14)
 lib.contentElement {
     settings {
         media {
@@ -391,13 +391,13 @@ lib.contentElement {
 }
 ```
 
-### Image Optimization (v13/v14)
+### Image Optimization (TYPO3 v14)
 
 ```php
 // config/system/additional.php
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_allowUpscaling'] = false;
 
-// WebP is automatically generated in v13/v14 when supported
+// WebP is automatically generated in TYPO3 v14 when supported
 ```
 
 ```typoscript
@@ -435,16 +435,16 @@ tt_content.image.settings.responsive_image_rendering = 1
 - [ ] Fresh, regularly updated content
 - [ ] Structured data where applicable
 
-## 9. SEO Extensions (v13/v14 Compatible)
+## 9. SEO Extensions (TYPO3 v14)
 
 ### Recommended Extensions
 
-| Extension | Purpose | v13/v14 Support |
+| Extension | Purpose | TYPO3 v14 Support |
 |-----------|---------|-----------------|
 | `typo3/cms-seo` | Core SEO functionality | ✓ |
 | `yoast-seo-for-typo3/yoast_seo` | Content analysis, readability | ✓ |
 | `brotkrueml/schema` | Advanced structured data | ✓ |
-| `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as v13/v14 default; prefer `typo3/cms-seo` |
+| `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as TYPO3 v14 default; prefer `typo3/cms-seo` |
 
 ### Yoast SEO Integration
 

@@ -2,7 +2,7 @@
 name: typo3-extension-upgrade-content-blocks
 description: Converting extensions to Content Blocks during upgrade. Step-by-step migration from classic TCA.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-extension-upgrade
   - typo3-content-blocks
@@ -13,7 +13,7 @@ triggers:
 
 # Extension Upgrade with Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-extension-upgrade](./SKILL.md) - Main extension upgrade guide

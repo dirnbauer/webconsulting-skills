@@ -3,7 +3,7 @@ name: typo3-rector-php84
 description: Rector rules for PHP 8.4 migration. Automated refactoring for property hooks, implicit nullable, and deprecated functions.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-rector
   - php-modernization
@@ -16,7 +16,7 @@ triggers:
 
 # Rector for PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-rector](./SKILL.md) - Main Rector guide

@@ -5,16 +5,19 @@ description: >-
   FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes.
   Use when working with fractor, flexform, typoscript migration, fluid migration,
   non-php upgrade, yaml migration.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.1.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Fractor Skill
 
 Fractor is a generic file refactoring tool that automates non-PHP migrations for TYPO3 upgrades. It complements [Rector](https://github.com/sabbelasichon/typo3-rector) (which handles PHP) by migrating FlexForms, TypoScript, Fluid templates, YAML, Htaccess files, and composer.json.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+**Target:** TYPO3 **v14.x** for this skill collection. Upstream Fractor sets may still be named `TYPO3_12`, `TYPO3_13`, etc. — those are historical bundle identifiers for rules you apply while moving code **toward** a v14 codebase.
+
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 > **Safety:** Never run Fractor on production. Always run on a development environment with version control. Review and test changes before releasing.
 
@@ -232,7 +235,7 @@ Apply rules for a single version only:
 |------|-----------|
 | `AbstractMessageGetSeverityFluidFractor` | Migrate severity constants in Fluid |
 
-### TypoScript Rules (v13)
+### TypoScript rules (Fractor `TYPO3_13` / `TYPO3_14` sets)
 
 | Rule | Migration |
 |------|-----------|

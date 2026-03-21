@@ -2,7 +2,7 @@
 name: typo3-rector-content-blocks
 description: Rector patterns for Content Blocks migration. Automating TCA to Content Blocks conversion and code updates.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-rector
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # Rector for Content Blocks Migration
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-rector](./SKILL.md) - Main Rector guide

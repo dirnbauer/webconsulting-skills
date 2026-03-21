@@ -2,7 +2,7 @@
 name: typo3-update-content-blocks
 description: Content Blocks as an upgrade path for TYPO3 extensions. Modernizing classic TCA during version updates.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-update
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # Content Blocks as Upgrade Path
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-update](./SKILL.md) - Main update guide

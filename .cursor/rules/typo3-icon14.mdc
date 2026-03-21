@@ -7,9 +7,10 @@ description: >-
   and updates Configuration/Icons.php registration. Use when working with icons, backend
   module icons, icon migration, icon update, module icon, TYPO3 v14 icons, icon redesign,
   SVG icons, icon registry, icon modernization.
-compatibility: TYPO3 13.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 v14 Icon Modernizer
@@ -92,7 +93,7 @@ EXT:my_extension/
 │           ├── record-{extkey}-*.svg      ← Record type icons (16×16)
 │           ├── record-folder-contains-{extkey}.svg  ← Folder icon (16×16)
 │           └── actions-*.svg              ← Custom action icons (16×16)
-└── ext_localconf.php                      ← Do NOT register icons here (v14)
+└── ext_localconf.php                      ← Do not add icon registration here; use Configuration/Icons.php
 ```
 
 #### Concrete example: `t3g/blog` extension

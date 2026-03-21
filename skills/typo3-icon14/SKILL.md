@@ -7,7 +7,7 @@ description: >-
   and updates Configuration/Icons.php registration. Use when working with icons, backend
   module icons, icon migration, icon update, module icon, TYPO3 v14 icons, icon redesign,
   SVG icons, icon registry, icon modernization.
-compatibility: TYPO3 13.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
 license: MIT / CC-BY-SA-4.0

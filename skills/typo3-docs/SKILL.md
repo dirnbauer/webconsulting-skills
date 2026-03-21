@@ -4,7 +4,7 @@ description: >-
   Create and maintain TYPO3 extension documentation following official docs.typo3.org
   standards. RST syntax, TYPO3 directives, rendering, and deployment. Use when working
   with documentation, rst, docs, readme, typo3 documentation.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -14,7 +14,7 @@ license: MIT / CC-BY-SA-4.0
 
 Create and maintain TYPO3 extension documentation following official docs.typo3.org standards.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## When to Use
 
@@ -370,7 +370,7 @@ This chapter explains how to install the extension.
 Requirements
 ============
 
--   TYPO3 v13.4 or v14.x
+-   TYPO3 v14.x
 -   PHP 8.2 or higher
 
 Installation via Composer

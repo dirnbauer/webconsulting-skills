@@ -3,7 +3,7 @@ name: typo3-update-php84
 description: PHP 8.4 considerations for TYPO3 version updates. Breaking changes, compatibility, and migration strategies.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-update
   - php-modernization
@@ -15,7 +15,7 @@ triggers:
 
 # TYPO3 Updates with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-update](./SKILL.md) - Main update guide
@@ -27,12 +27,11 @@ triggers:
 
 | TYPO3 Version | PHP Minimum | PHP Maximum | PHP 8.4 Support |
 |---------------|-------------|-------------|-----------------|
-| v13.x | 8.2 | 8.4 | ✅ Supported |
 | v14.x | 8.2 | 8.4+ (see release notes) | ✅ Supported |
 
 ---
 
-## 2. Dual-Version Compatibility (v13 + v14 with PHP 8.4)
+## 2. TYPO3 v14 with PHP 8.4
 
 ### composer.json
 
@@ -40,7 +39,7 @@ triggers:
 {
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     }
 }
 ```
@@ -54,7 +53,7 @@ declare(strict_types=1);
 
 namespace Vendor\MyExtension\Service;
 
-// PHP 8.4 features work on both v13 and v14 when PHP 8.4 is used
+// PHP 8.4 features on TYPO3 v14 when running PHP 8.4
 
 final readonly class ProductService
 {
@@ -106,18 +105,18 @@ class Helper {}
 
 ## 4. Upgrade Path
 
-### From v13 + PHP 8.2/8.3 to v14 + PHP 8.4
+### Moving to TYPO3 v14 on PHP 8.4
 
 ```bash
-# 1. Update PHP first (on v13)
+# 1. Target PHP 8.4 in DDEV (or your runtime)
 ddev config --php-version=8.4
 ddev restart
 
-# 2. Run tests and fix deprecations
+# 2. Run Rector / PHPStan on a v14 codebase
 ddev exec vendor/bin/rector process
 ddev exec vendor/bin/phpstan analyse
 
-# 3. Update TYPO3
+# 3. Ensure Core is v14
 ddev composer require typo3/cms-core:^14.0
 
 # 4. Run database updates
@@ -137,7 +136,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'My Extension',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
         ],
     ],
 ];

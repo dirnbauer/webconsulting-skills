@@ -5,7 +5,7 @@ description: >-
   validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
   templates, backend modules, and extension development. Use when working with powermail
   forms, mail handling, form validation, or extending powermail functionality.
-compatibility: TYPO3 13.4+ (Packagist `in2code/powermail`; TYPO3 v14 not in published `composer.json` yet)
+compatibility: TYPO3 14.x (verify `in2code/powermail` / `in2code/powermail_cond` on Packagist for your Core)
 metadata:
   version: "1.0.0"
   related_skills:
@@ -17,10 +17,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Powermail Development
 
-> **Compatibility:** Powermail 13.x on **TYPO3 13.4+** per [Packagist `in2code/powermail`](https://packagist.org/packages/in2code/powermail) and upstream `composer.json` (`typo3/cms-core: ^13.4`). Do **not** claim TYPO3 v14 support until a published release widens that constraint.
-> All code examples target PHP 8.2+ and TYPO3 v13.4 APIs; re-check for v14 when upstream supports it.
+> **Compatibility:** This collection assumes **TYPO3 v14.x**. Powermail **13.x** is the current major line — confirm [Packagist `in2code/powermail`](https://packagist.org/packages/in2code/powermail) and `powermail_cond` declare compatibility with your Core before upgrading.
+> All examples use PHP 8.2+ and TYPO3 v14 APIs.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 > **Supplements:**
 > - [SKILL-CONDITIONS.md](SKILL-CONDITIONS.md) - Conditional field/page visibility (powermail_cond)
@@ -52,7 +52,7 @@ Mail (tx_powermail_domain_model_mail)
 composer require in2code/powermail
 ```
 
-Requires: PHP ^8.2, TYPO3 ^13.4, ext-json, ext-gd, ext-fileinfo, ext-curl
+Requires: PHP ^8.2, TYPO3 14.x (verify `typo3/cms-core` on Packagist for the exact range), ext-json, ext-gd, ext-fileinfo, ext-curl
 
 ## 2. Field Types
 
@@ -715,7 +715,7 @@ services:
         identifier: 'vendor-myext/crm-sync'
 ```
 
-Or use the `#[AsEventListener]` attribute (preferred in TYPO3 v13+).
+Or use the `#[AsEventListener]` attribute (preferred on TYPO3 v14).
 
 ### Access Mail Answers Efficiently
 

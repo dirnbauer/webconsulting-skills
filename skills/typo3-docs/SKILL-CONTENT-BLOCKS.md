@@ -2,7 +2,7 @@
 name: typo3-docs-content-blocks
 description: Documenting Content Blocks extensions. RST patterns for config.yaml, templates, and usage examples.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-docs
   - typo3-content-blocks
@@ -13,7 +13,7 @@ triggers:
 
 # Documenting Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-docs](./SKILL.md) - Main documentation guide

@@ -5,7 +5,7 @@ description: >-
   transactional safety, correct extension points (SC_OPTIONS hooks and documented
   PSR-14 events), and reference index integrity. Use when working with database,
   datahandler, tcemain, records, content, pages.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.1.0"
 license: MIT / CC-BY-SA-4.0
@@ -13,10 +13,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 DataHandler Operations
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All code examples in this skill are designed to work on both TYPO3 v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All code examples in this skill are designed to work on TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. The Prime Directive
 
@@ -170,7 +170,7 @@ $cmd = [
 
 ## 3. Execution Pattern
 
-TYPO3's public DataHandler API for v13/v14 is simply:
+TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
 1. Create a **fresh** `DataHandler` instance
 2. Call `start($data, $cmd[, $backendUser])`
@@ -225,7 +225,7 @@ DataHandler requires a valid **backend user context**. It does **not** require y
 - If you need another backend user, pass a proper `BackendUserAuthentication` object as the **third** argument to `start()`
 - Use permission checks and a real backend user object instead of manually setting `$GLOBALS['BE_USER']->user['admin'] = 1`
 
-### CLI Command Setup (v13/v14 Compatible)
+### CLI Command Setup (TYPO3 v14)
 
 ```php
 <?php
@@ -410,11 +410,11 @@ $GLOBALS['BE_USER']->setWorkspace($previousWorkspace);
 
 ## 9. Extending DataHandler: Hooks and Real Core Events
 
-> **Facts for v13/v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. To run code **after** datamap DB writes, use **`SC_OPTIONS` hook classes** (below). Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
+> **Facts for TYPO3 v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. To run code **after** datamap DB writes, use **`SC_OPTIONS` hook classes** (below). Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
 
 ### 9.1 `SC_OPTIONS` hook classes (primary pattern for datamap/cmdmap)
 
-Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these in **v13 and v14**; they are the supported extension point for many DataHandler reactions.
+Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these on **TYPO3 v14**; they are the supported extension point for many DataHandler reactions.
 
 `ext_localconf.php`:
 
@@ -511,7 +511,7 @@ $EM_CONF[$_EXTKEY] = [
     'state' => 'stable',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
             'php' => '8.2.0-8.4.99',
         ],
     ],

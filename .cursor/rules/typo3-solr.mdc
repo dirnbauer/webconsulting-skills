@@ -6,7 +6,7 @@ description: >-
   search (Solr native), DDEV/Docker/production setup, deep debugging &
   troubleshooting, and file indexing via solrfal. Use when working with solr,
   search, indexing, facets, suggest, autocomplete, vector search, solrfal, tika.
-compatibility: TYPO3 13.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
   related_skills:
@@ -14,13 +14,13 @@ metadata:
     - typo3-datahandler
     - typo3-seo
     - ai-search-optimization
+license: MIT / CC-BY-SA-4.0
 ---
 
 # Apache Solr for TYPO3
 
-> **Compatibility:** TYPO3 v13.4 LTS (current) and v14.x (when EXT:solr 14.0 releases).
-> EXT:solr 13.1 targets TYPO3 13.4. A `task/14LTS_compatibility` dev branch is actively being developed.
-> All custom PHP code in this skill uses TYPO3 v14 conventions (PHP 8.2+, `#[AsEventListener]`, constructor promotion).
+> **Compatibility:** This skill targets **TYPO3 v14.x**. Match **EXT:solr** (and Solr server version) using the [official Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) and Packagist — `14.0.x` availability may lag docs; use the branch/matrix the project documents until a stable tag ships.
+> All custom PHP examples use TYPO3 v14 conventions (PHP 8.2+, constructor promotion, `#[AsEventListener]` where shown).
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs and EXT:solr's TypoScript/PSR-14 events before creating custom implementations. Do not reinvent what EXT:solr already provides.
 
@@ -32,7 +32,7 @@ This skill is based on the following authoritative sources:
 2. [EXT:tika Documentation](https://docs.typo3.org/p/apache-solr-for-typo3/tika/main/en-us/)
 3. [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html)
 4. [GitHub: TYPO3-Solr/ext-solr](https://github.com/TYPO3-Solr/ext-solr)
-5. [GitHub: v14 dev branch](https://github.com/TYPO3-Solr/ext-solr/tree/task/14LTS_compatibility)
+5. [GitHub: main branch (14.0.x-dev)](https://github.com/TYPO3-Solr/ext-solr/tree/main)
 6. [Apache Solr Reference Guide](https://solr.apache.org/guide/solr/latest/)
 7. [Solr Dense Vector Search](https://solr.apache.org/guide/solr/latest/query-guide/dense-vector-search.html)
 8. [Solr Text to Vector (LLM)](https://solr.apache.org/guide/solr/latest/query-guide/text-to-vector.html)
@@ -101,36 +101,36 @@ sequenceDiagram
 
 <!-- SCREENSHOT: backend-module-overview.png - EXT:solr backend module main view -->
 
-## 2. Version Compatibility Matrix
+## 2. Version compatibility matrix (upstream)
+
+**Target for this skill:** TYPO3 **v14.x** with the **EXT:solr** release row that matches your Core on the [official Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html). Older rows are **reference only** for legacy sites.
 
 | EXT:solr | TYPO3 | Apache Solr | Configset | PHP | EXT:tika | EXT:solrfal |
 |----------|-------|-------------|-----------|-----|----------|-------------|
-| **13.1** | **13.4** | **9.10.1** | `ext_solr_13_1_0` | 8.2 - 8.4 | 13.1 | 13.0 |
-| 12.1 | 12.4 | 9.10.1 | `ext_solr_12_1_0` | 8.1 - 8.3 | 12.1 | 12.0 |
+| **14.0.x** (see matrix / Packagist) | **14.x** | per matrix | `ext_solr_14_0_0` (when used) | **^8.2** | per matrix | per matrix |
+| 13.1.x | *(not a target for this collection)* | 9.10.1 | `ext_solr_13_1_0` | ^8.2 | 13.1 | 13.0 |
+
+When **14.0.x** is not yet on Packagist, follow the **TYPO3 v14 Readiness** subsection below (`dev-main` / docs workflow) until a stable tag ships.
 
 ### TYPO3 v14 Readiness
 
-EXT:solr does **not** yet have a stable v14 release. Active development happens on the [`task/14LTS_compatibility`](https://github.com/TYPO3-Solr/ext-solr/tree/task/14LTS_compatibility) branch (last updated Feb 17, 2026).
+The [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) targets **TYPO3 14.3 + EXT:solr 14.0 + Solr 9.10.1 + `ext_solr_14_0_0`**. Upstream development is on [`main`](https://github.com/TYPO3-Solr/ext-solr/tree/main):
 
-**Key v14 changes in the dev branch:**
-- Fluid v5 ViewHelper compatibility
-- TSFE removal: `FrontendEnvironment/Tsfe` refactored to `FrontendSimulation/FrontendAwareEnvironment`
-- `ext_emconf.php` removed (Composer-only)
-- TCA `searchFields` deprecation handled
-- FlexForm registration via `registerPlugin()` instead of `addPiFlexFormValue()`
-- New configset: `ext_solr_14_0_0`
+- `main` requires `typo3/cms-core: 14.*.*@dev` (see `composer.json` on `main`)
+- branch alias **`dev-main` -> `14.0.x-dev`**
+- **Composer reality check:** if Packagist has no `14.0.x` stable yet, use `dev-main` (often requires `minimum-stability: dev` + `prefer-stable: true`) or the GitHub release ZIP workflow documented by EXT:solr for non-TER packages.
 
-**Testing with the dev branch:**
+**Until `14.0` is published on Packagist:**
 
 ```bash
-composer require apache-solr-for-typo3/solr:dev-task/14LTS_compatibility
+composer require apache-solr-for-typo3/solr:dev-main
 ```
 
-> **Warning:** This branch is WIP. Do not use in production.
+> **Warning:** Re-check Packagist/GitHub when you upgrade — switch from `dev-main` to a tagged `^14.0` constraint as soon as stable releases exist.
 
 ### CVE-2025-24814 Migration
 
-Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: pull image v13.0.1+ -- the migration runs automatically.
+Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: use the **EXT:solr** container image **13.0.1+** (image tag, not TYPO3 Core) so this migration runs automatically.
 
 ## 3. Installation & Setup
 
@@ -148,6 +148,8 @@ The recommended local development setup uses the [ddev-typo3-solr](https://githu
 ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
+
+> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix currently recommends **Solr 9.10.1** for TYPO3 13.4/14.x. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 
@@ -246,7 +248,7 @@ mw container port-forward --port 8983
 
 ### Managed Hosting: hosted-solr.com
 
-[hosted-solr.com](https://hosted-solr.com/en/) by dkd provides pre-configured Solr cores optimized for EXT:solr. Plans start at EUR 10/month (2 indexes, 4000 documents). After creating a core, configure it in your TYPO3 site config using the provided host, port, and path.
+[hosted-solr.com](https://hosted-solr.com/en/) by dkd provides pre-configured Solr cores optimized for EXT:solr. As of the live pricing page, the **Small** plan is **10,00 EUR/month** (2 Solr indexes, 4.000 documents; VAT note on site). After creating a core, configure it in your TYPO3 site config using the provided host, port, and path.
 
 ### TYPO3 Site Configuration
 
@@ -312,7 +314,7 @@ graph TD
     Question{"Do you index files?<br/>(PDF, DOCX, XLSX)"}
     Question -->|Yes| NeedTika[Install EXT:tika + EXT:solrfal]
     Question -->|No| SkipTika[Skip -- EXT:solr handles<br/>pages and records natively]
-    NeedTika --> TikaServer["Run Tika Server 3.2.2+<br/>(Docker recommended)"]
+    NeedTika --> TikaServer["Run Tika Server 3.2.3+<br/>(Docker recommended)"]
 ```
 
 **Three backends (choose one):**
@@ -332,7 +334,7 @@ graph TD
 - Only indexing pages and structured records (news, events, products) via Index Queue
 - EXT:solr handles page content and record fields natively without Tika
 
-**Version:** EXT:tika 13.1. Requires Tika Server **3.2.2+** (CVE-2025-54988 fix).
+**Version:** EXT:tika 13.1 requires Apache Tika Server/App **3.2.3+**. The 13.1 line addresses **CVE-2025-54988** and **CVE-2025-66516**.
 
 See [SKILL-SOLRFAL.md](SKILL-SOLRFAL.md) for complete file indexing setup.
 
@@ -375,12 +377,14 @@ Full reference: [Dynamic Fields Appendix](https://docs.typo3.org/p/apache-solr-f
 
 ### Site Hash Strategy
 
-Since EXT:solr 13.0, the default site hash strategy changed from **domain-based** (deprecated) to **site-identifier-based**. Configure in Extension Settings:
+In `release-13.1.x`, the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new TYPO3 13.4+ projects is **site-identifier-based** (`siteHashStrategy = 1`).
 
-- `siteHashStrategy = 1` (site-identifier, **default and recommended**)
-- `siteHashStrategy = 0` (domain, deprecated, removed in 13.1.x+)
+Configure this in **Admin Tools -> Settings -> Extension Configuration -> solr**. This is an **extension configuration** setting, not TypoScript.
 
-If upgrading from 12.x, you must re-index after switching strategies.
+- `siteHashStrategy = 1` -> site identifier (recommended)
+- `siteHashStrategy = 0` -> domain (deprecated, but still the default in `release-13.1.x`)
+
+If you switch strategies on an existing installation, re-index all documents.
 
 ## 6. Index Queue Configuration
 
@@ -694,7 +698,7 @@ Copy default templates from EXT:solr to your extension path and modify them.
 | `AfterUriIsProcessedEvent` | URI building in search context |
 | `AfterSiteHashHasBeenDeterminedForSiteEvent` | Override calculated site hash |
 
-### Example: Add Custom Fields to Documents (v14 Style)
+### Example: Add Custom Fields to Documents (TYPO3 13.4+)
 
 ```php
 <?php
@@ -727,7 +731,7 @@ final class EnrichSolrDocuments
 }
 ```
 
-**v13 fallback** (if `#[AsEventListener]` is not available): register in `Services.yaml`:
+`#[AsEventListener]` is available in TYPO3 13+. If you prefer configuration-based registration, register the same listener in `Services.yaml`:
 
 ```yaml
 MyVendor\MyExt\EventListener\EnrichSolrDocuments:
@@ -842,7 +846,7 @@ final class IndexExternalCommand extends Command
 
 ## 11. LLM & Vector Search (Solr Server Native)
 
-Apache Solr 9.8+ includes a native LLM module for semantic/vector search. This runs on the **Solr server side** -- EXT:solr queries the results.
+Apache Solr 9.8+ ships the **`language-models` Solr module** (text-to-vector / embedding integrations) for semantic/vector search. This runs on the **Solr server side** — EXT:solr only issues queries to Solr.
 
 ```mermaid
 graph LR
@@ -868,8 +872,8 @@ graph LR
 
 ### Prerequisites
 
-- Apache Solr **9.8+** with the `llm` module enabled
-- An external embedding API account (OpenAI, Mistral AI, Cohere, or HuggingFace)
+- Apache Solr **9.8+** with the **`language-models` Solr module** enabled (see [Solr modules](https://solr.apache.org/guide/solr/latest/configuration-guide/solr-modules.html) and [Text to Vector](https://solr.apache.org/guide/solr/latest/query-guide/text-to-vector.html))
+- An external embedding API / model registered in Solr's text-to-vector model store (LangChain4j-backed in current Solr docs)
 
 ### Schema: DenseVectorField
 
@@ -892,7 +896,7 @@ Register the query parser in `solrconfig.xml`:
 
 ```xml
 <queryParser name="knn_text_to_vector"
-             class="org.apache.solr.llm.textvectorisation.search.TextToVectorQParserPlugin"/>
+             class="org.apache.solr.languagemodels.textvectorisation.search.TextToVectorQParserPlugin"/>
 ```
 
 Upload a model definition:
@@ -918,7 +922,7 @@ curl -XPUT 'http://localhost:8983/solr/core_en/schema/text-to-vector-model-store
 }
 ```
 
-Supported providers: OpenAI, Mistral AI, Cohere, HuggingFace. See [LangChain4j Embedding Models](https://docs.langchain4j.dev/category/embedding-models) for all parameters.
+Current Solr text-to-vector documentation lists OpenAI, Mistral AI, Cohere, and Hugging Face models via LangChain4j support. Verify the exact provider set against the Solr version you deploy. See [LangChain4j Embedding Models](https://docs.langchain4j.dev/category/embedding-models) for model-specific parameters.
 
 ### Indexing with Vectors
 
@@ -926,7 +930,7 @@ Add an update processor chain in `solrconfig.xml`:
 
 ```xml
 <updateRequestProcessorChain name="vectorisation">
-  <processor class="solr.llm.textvectorisation.update.processor.TextToVectorUpdateProcessorFactory">
+  <processor class="solr.languagemodels.textvectorisation.update.processor.TextToVectorUpdateProcessorFactory">
     <str name="inputField">_text_</str>
     <str name="outputField">vector</str>
     <str name="model">openai-embed</str>
@@ -975,7 +979,7 @@ Combine vector search with traditional filters:
 
 ### EXT:solr Integration
 
-EXT:solr 13.1 has initial vector search support. For custom integration, use a PSR-14 event listener on `BeforeDocumentsAreIndexedEvent` to add vector data to documents via your own embedding service call.
+Vector-search-related support in the EXT:solr 13.1.x / 14.0 line is still evolving. For custom integration, use a PSR-14 event listener on `BeforeDocumentsAreIndexedEvent` to add vector data to documents via your own embedding service call.
 
 > **Note:** Full native vector search support in EXT:solr (Index Queue -> vector fields, Fluid templates for vector results) is still evolving. Monitor the [GitHub repository](https://github.com/TYPO3-Solr/ext-solr) for updates.
 
@@ -1168,7 +1172,7 @@ Check in Solr Admin:
 q=*:*&rows=0&facet=true&facet.field=siteHash
 ```
 
-Compare with what EXT:solr expects: open Extension Settings (Admin Tools → Settings → Extension Configuration → solr) and check `siteHashStrategy`. Since EXT:solr 13.0, the default is **site-identifier** (not domain).
+Compare with what EXT:solr expects: open Extension Settings (Admin Tools → Settings → Extension Configuration → solr) and check `siteHashStrategy`. On `release-13.1.x`, the default extension configuration is still **domain** (`0`, deprecated); **site identifier** (`1`) is the recommended setting for new installations.
 
 If the hashes don't match: **re-index** (Backend → Web → Search → Index Queue → clear and re-queue all).
 
@@ -1822,14 +1826,14 @@ final class EnrichSolrDocumentsTest extends TestCase
 - [ ] Logging disabled in production
 - [ ] Solr data volume backed up
 - [ ] CVE patches applied (Solr 9.8.0+ jar migration)
-- [ ] `siteHashStrategy = 1` (site-identifier)
+- [ ] Extension Configuration reviewed intentionally: `siteHashStrategy = 1` recommended for new installs, legacy `0` only if retained knowingly
 
 ### Security
 
 - Solr must **never** be publicly accessible. Use firewall rules or bind to `127.0.0.1`
 - Use a reverse proxy (nginx/Apache) with authentication if remote access is needed
 - Monitor [Apache Solr security advisories](https://solr.apache.org/security.html)
-- Keep Tika Server updated (CVE-2025-54988: requires 3.2.2+)
+- Keep Tika Server updated (EXT:tika 13.1 requires Apache Tika 3.2.3+ and addresses CVE-2025-54988 / CVE-2025-66516)
 
 ### Performance
 
@@ -2044,7 +2048,7 @@ The pattern scales -- you can create as many Index Queue configs as needed for t
 - [EXT:solr](https://github.com/TYPO3-Solr/ext-solr)
 - [EXT:tika](https://github.com/TYPO3-Solr/ext-tika)
 - [TYPO3-Solr Organization](https://github.com/TYPO3-Solr)
-- [v14 Development Branch](https://github.com/TYPO3-Solr/ext-solr/tree/task/14LTS_compatibility)
+- [main branch (14.0.x-dev)](https://github.com/TYPO3-Solr/ext-solr/tree/main)
 - [Docker Images](https://hub.docker.com/r/typo3solr/ext-solr/tags)
 
 ### Apache Solr Server
@@ -2053,7 +2057,7 @@ The pattern scales -- you can create as many Index Queue configs as needed for t
 - [Dense Vector Search](https://solr.apache.org/guide/solr/latest/query-guide/dense-vector-search.html)
 - [Text to Vector (LLM Module)](https://solr.apache.org/guide/solr/latest/query-guide/text-to-vector.html)
 - [Solr Modules](https://solr.apache.org/guide/solr/latest/configuration-guide/solr-modules.html)
-- [LLM API Javadoc](https://solr.apache.org/docs/9_8_0/modules/llm/index.html)
+- [Solr 9.8 module Javadoc (historical `llm` path)](https://solr.apache.org/docs/9_8_0/modules/llm/index.html) — current Reference Guide uses the **`language-models` module** and `org.apache.solr.languagemodels.*` / `solr.languagemodels.*` class names; confirm against your Solr version's docs.
 - [Tutorial: Vectors](https://solr.apache.org/guide/solr/latest/getting-started/tutorial-vectors.html)
 
 ### Commercial & Hosting
@@ -2101,7 +2105,7 @@ The pattern scales -- you can create as many Index Queue configs as needed for t
 
 ### EXT:solr v14 Compatibility **[v14 only]**
 
-EXT:solr v14 compatibility is being developed on the `task/14LTS_compatibility` branch. Check [Packagist](https://packagist.org/packages/apache-solr-for-typo3/solr) for the latest v14-compatible release.
+The published [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) lists **EXT:solr 14.0** for **TYPO3 14.3**. Until that version is available as a stable Composer tag, upstream development tracks `main` (`dev-main` / `14.0.x-dev`). Re-check [Packagist](https://packagist.org/packages/apache-solr-for-typo3/solr) and [GitHub releases](https://github.com/TYPO3-Solr/ext-solr/releases) when you plan an upgrade.
 
 ### Fluid 5.0 in Search Templates **[v14 only]**
 

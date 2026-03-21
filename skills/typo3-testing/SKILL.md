@@ -3,7 +3,7 @@ name: typo3-testing
 description: >-
   TYPO3 extension testing (unit, functional, E2E, architecture, mutation). Use when
   setting up test infrastructure, writing tests, or configuring CI/CD.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -13,7 +13,7 @@ license: MIT / CC-BY-SA-4.0
 
 Comprehensive testing infrastructure for TYPO3 extensions: unit, functional, E2E, architecture, and mutation testing.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## Test Type Selection
 
@@ -590,7 +590,7 @@ Functional tests rendering Fluid templates must account for Fluid 5.0 strict typ
 
 ### Deprecated Method Removal **[v14 only]**
 
-Test code using deprecated TYPO3 APIs (e.g., `$GLOBALS['TSFE']`, Extbase annotations, `MailMessage->send()`) will fail in v14. Run tests against both v13 and v14 in CI to catch these early.
+Test code using deprecated TYPO3 APIs (e.g., `$GLOBALS['TSFE']`, Extbase annotations, `MailMessage->send()`) will fail in v14. Run tests against TYPO3 v14 in CI to catch these early.
 
 ---
 

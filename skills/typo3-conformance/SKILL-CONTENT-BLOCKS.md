@@ -2,7 +2,7 @@
 name: typo3-conformance-content-blocks
 description: Content Blocks extension structure conformance. Directory layout, naming conventions, and best practices.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-conformance
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # Content Blocks Conformance
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-conformance](./SKILL.md) - Main conformance guide

@@ -2,7 +2,7 @@
 name: typo3-datahandler-content-blocks
 description: Using DataHandler with Content Blocks records. Creating, updating, and managing Content Blocks-based content programmatically.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-datahandler
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # DataHandler with Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-datahandler](./SKILL.md) - Main DataHandler guide

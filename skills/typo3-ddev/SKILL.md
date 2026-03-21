@@ -2,9 +2,9 @@
 name: typo3-ddev
 description: >-
   Best practices for TYPO3 local development with DDEV, including configuration, database
-  management, multi-version testing, and common workflows for v13/v14. Use when working
+  management, multi-version testing, and common workflows for TYPO3 v14. Use when working
   with ddev, local, development, docker, environment, multi-version.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.1.0"
 license: MIT / CC-BY-SA-4.0
@@ -12,10 +12,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 DDEV Local Development
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All configurations in this skill support both TYPO3 v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All configurations in this skill support TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## Container Priority
 
@@ -48,25 +48,6 @@ ddev composer create "typo3/cms-base-distribution:^14"
 ddev typo3 setup
 ```
 
-### New TYPO3 Project (v13 LTS)
-
-```bash
-# Create project directory
-mkdir my-typo3-project && cd my-typo3-project
-
-# Initialize DDEV with TYPO3 preset
-ddev config --project-type=typo3 --docroot=public --php-version=8.2
-
-# Start the environment
-ddev start
-
-# Install TYPO3 v13 LTS
-ddev composer create "typo3/cms-base-distribution:^13"
-
-# Run TYPO3 setup
-ddev typo3 setup
-```
-
 ### Existing TYPO3 Project
 
 ```bash
@@ -86,17 +67,17 @@ ddev composer install
 
 ## 2. Recommended Configuration
 
-### `.ddev/config.yaml` (v13/v14 Compatible)
+### `.ddev/config.yaml` (TYPO3 v14)
 
 ```yaml
 name: my-typo3-project
 type: typo3
 docroot: public
-php_version: "8.3"    # 8.2 minimum for v13, 8.3 recommended for v14
+php_version: "8.3"    # 8.2 minimum for TYPO3 v14; 8.3/8.4 common locally
 webserver_type: nginx-fpm
 database:
   type: mariadb
-  version: "10.11"    # 10.11+ or 11.x recommended for both v13/v14
+  version: "10.11"    # 10.11+ or 11.x recommended for TYPO3 v14
 
 # Fixed port for external tools (MySQL MCP, etc.)
 host_db_port: "33060"
@@ -124,11 +105,10 @@ hooks:
 host_db_port: "33061"  # If 33060 conflicts
 ```
 
-### PHP Version Matrix
+### PHP version matrix (TYPO3 v14)
 
 | TYPO3 Version | Minimum PHP | Recommended PHP | MariaDB |
 |---------------|-------------|-----------------|---------|
-| v13.4 LTS     | 8.2         | 8.3             | 10.11+  |
 | v14.x         | 8.2         | 8.3 / 8.4       | 10.11+  |
 
 ## 3. Database Operations
@@ -248,7 +228,7 @@ ddev composer update
 # Update single package
 ddev composer update typo3/cms-core --with-dependencies
 
-# Require new package (with v13/v14 dual compatibility)
+# Require new package (with TYPO3 v14 dual compatibility)
 ddev composer require "vendor/package:^1.0"
 
 # Remove package
@@ -260,11 +240,11 @@ ddev composer clear-cache
 
 ### Dual-Version Development
 
-For extensions supporting both v13 and v14:
+For extensions supporting TYPO3 v14:
 
 ```bash
 # Set version constraint in extension's composer.json
-ddev composer require "typo3/cms-core:^13.0 || ^14.0" --no-update
+ddev composer require "typo3/cms-core:^14.0" --no-update
 ```
 
 ## 6. File Operations
@@ -392,7 +372,7 @@ volumes:
   redis-data:
 ```
 
-### Redis Caching Configuration (v13/v14)
+### Redis Caching Configuration (TYPO3 v14)
 
 ```php
 <?php
@@ -488,7 +468,7 @@ $apiKey = $_ENV['MY_API_KEY'];
 1. **Disable Xdebug** when not debugging (`ddev xdebug off`)
 2. **Use snapshots** instead of full imports for quick state changes
 3. **Mount with Mutagen** on macOS for better file sync performance
-4. **Use PHP 8.3** for best performance on v13/v14
+4. **Use PHP 8.3 or 8.4** for best performance on TYPO3 v14
 
 ### Team Workflow
 
@@ -503,66 +483,17 @@ $apiKey = $_ENV['MY_API_KEY'];
 2. **Don't use** DDEV in production
 3. **Rotate** any sensitive data in development databases
 
-## 13. Multi-Version Testing (Extension Development)
+## 13. Extension development against TYPO3 v14
 
-When developing extensions that need to work across multiple TYPO3 versions:
-
-### Setup for Multi-Version Testing
-
-```yaml
-# .ddev/config.yaml
-name: my-extension
-type: php
-docroot: ""
-php_version: "8.3"
-
-additional_hostnames:
-  - v13
-  - v14
-```
-
-### Install Multiple TYPO3 Versions
+Use **one TYPO3 v14 instance** per DDEV project. For CI, matrix-test **PHP 8.2 / 8.3 / 8.4** against the same Core constraint (`typo3/cms-core:^14.0`) instead of running multiple Core versions locally.
 
 ```bash
-# Create version-specific directories
-mkdir -p v13 v14
-
-# Install TYPO3 v13
-cd v13
-ddev composer create "typo3/cms-base-distribution:^13"
-cd ..
-
-# Install TYPO3 v14
-cd v14
-ddev composer create "typo3/cms-base-distribution:^14"
-cd ..
-
-# Symlink extension
-ln -s ../../../ v13/packages/my_extension
-ln -s ../../../ v14/packages/my_extension
+# From project root (Composer-mode site with your extension)
+ddev exec vendor/bin/phpunit
+ddev typo3 cache:flush
 ```
 
-### Access URLs
-
-| Environment | URL |
-|-------------|-----|
-| TYPO3 v13 | `https://v13.my-extension.ddev.site/typo3/` |
-| TYPO3 v14 | `https://v14.my-extension.ddev.site/typo3/` |
-
-**Admin user:** Created during `typo3/setup` or the install wizard; use the password you set. Do not rely on old documentation defaults.
-
-### Version-Specific Commands
-
-```bash
-# Run tests on v13
-ddev exec -d /var/www/html/v13 vendor/bin/phpunit
-
-# Run tests on v14
-ddev exec -d /var/www/html/v14 vendor/bin/phpunit
-
-# Clear cache for specific version
-ddev exec -d /var/www/html/v13 vendor/bin/typo3 cache:flush
-```
+**Admin user:** Created during `typo3 setup` or the install wizard; use the password you set.
 
 ## v14-Only DDEV Changes
 

@@ -6,7 +6,7 @@ description: >-
   search (Solr native), DDEV/Docker/production setup, deep debugging &
   troubleshooting, and file indexing via solrfal. Use when working with solr,
   search, indexing, facets, suggest, autocomplete, vector search, solrfal, tika.
-compatibility: TYPO3 13.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
   related_skills:
@@ -19,9 +19,8 @@ license: MIT / CC-BY-SA-4.0
 
 # Apache Solr for TYPO3
 
-> **Compatibility:** TYPO3 v13.4 LTS and TYPO3 v14.x.
-> For TYPO3 13.4, use EXT:solr 13.1.x (latest stable GitHub/Packagist tag at live check: **13.1.1**). The [official Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) lists **EXT:solr 14.0** for **TYPO3 14.3** with configset `ext_solr_14_0_0`, but as of the same live check there was **no `14.0.x` tag on Packagist/GitHub releases** yet — use `dev-main` / GitHub ZIP (per EXT:solr docs for non-TER installs) until a stable `14.0` publish appears, then prefer `composer require apache-solr-for-typo3/solr:^14.0`.
-> All custom PHP code in this skill uses TYPO3 13.4+ conventions (PHP 8.2+, constructor promotion, `#[AsEventListener]` in TYPO3 13+).
+> **Compatibility:** This skill targets **TYPO3 v14.x**. Match **EXT:solr** (and Solr server version) using the [official Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) and Packagist — `14.0.x` availability may lag docs; use the branch/matrix the project documents until a stable tag ships.
+> All custom PHP examples use TYPO3 v14 conventions (PHP 8.2+, constructor promotion, `#[AsEventListener]` where shown).
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs and EXT:solr's TypoScript/PSR-14 events before creating custom implementations. Do not reinvent what EXT:solr already provides.
 
@@ -102,14 +101,16 @@ sequenceDiagram
 
 <!-- SCREENSHOT: backend-module-overview.png - EXT:solr backend module main view -->
 
-## 2. Version Compatibility Matrix
+## 2. Version compatibility matrix (upstream)
+
+**Target for this skill:** TYPO3 **v14.x** with the **EXT:solr** release row that matches your Core on the [official Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html). Older rows are **reference only** for legacy sites.
 
 | EXT:solr | TYPO3 | Apache Solr | Configset | PHP | EXT:tika | EXT:solrfal |
 |----------|-------|-------------|-----------|-----|----------|-------------|
-| **13.1.x** | **13.4** | **9.10.1** | `ext_solr_13_1_0` | **^8.2** (see `composer.json`) | 13.1 | 13.0 |
-| 12.1 | 12.4 | 9.10.1 | `ext_solr_12_1_0` | 8.1 - 8.3 | 12.1 | 12.0 |
+| **14.0.x** (see matrix / Packagist) | **14.x** | per matrix | `ext_solr_14_0_0` (when used) | **^8.2** | per matrix | per matrix |
+| 13.1.x | *(not a target for this collection)* | 9.10.1 | `ext_solr_13_1_0` | ^8.2 | 13.1 | 13.0 |
 
-Latest stable TYPO3 13 release at time of writing: **EXT:solr 13.1.1**. It is a security release that keeps Solr at **9.10.1** and addresses **CVE-2025-54988**, **CVE-2026-22444**, and **CVE-2026-22022**.
+When **14.0.x** is not yet on Packagist, follow the **TYPO3 v14 Readiness** subsection below (`dev-main` / docs workflow) until a stable tag ships.
 
 ### TYPO3 v14 Readiness
 
@@ -129,7 +130,7 @@ composer require apache-solr-for-typo3/solr:dev-main
 
 ### CVE-2025-24814 Migration
 
-Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: pull image v13.0.1+ -- the migration runs automatically.
+Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: use the **EXT:solr** container image **13.0.1+** (image tag, not TYPO3 Core) so this migration runs automatically.
 
 ## 3. Installation & Setup
 
@@ -148,7 +149,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix currently recommends **Solr 9.10.1** for TYPO3 13.4/14.x. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix often recommends **Solr 9.10.1** for current TYPO3 v14 stacks. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 
@@ -376,7 +377,7 @@ Full reference: [Dynamic Fields Appendix](https://docs.typo3.org/p/apache-solr-f
 
 ### Site Hash Strategy
 
-In `release-13.1.x`, the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new TYPO3 13.4+ projects is **site-identifier-based** (`siteHashStrategy = 1`).
+In some EXT:solr branches the extension configuration default is still **domain-based** (`siteHashStrategy = 0`, deprecated). The **recommended** setting for new **TYPO3 v14** projects is **site-identifier-based** (`siteHashStrategy = 1`).
 
 Configure this in **Admin Tools -> Settings -> Extension Configuration -> solr**. This is an **extension configuration** setting, not TypoScript.
 
@@ -697,7 +698,7 @@ Copy default templates from EXT:solr to your extension path and modify them.
 | `AfterUriIsProcessedEvent` | URI building in search context |
 | `AfterSiteHashHasBeenDeterminedForSiteEvent` | Override calculated site hash |
 
-### Example: Add Custom Fields to Documents (TYPO3 13.4+)
+### Example: Add custom fields to documents (TYPO3 v14)
 
 ```php
 <?php

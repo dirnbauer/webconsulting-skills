@@ -2,7 +2,7 @@
 name: typo3-core-contributions-content-blocks
 description: Contributing to Content Blocks extension. Patch workflow, testing, and documentation for the Content Blocks project.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-core-contributions
   - typo3-content-blocks
@@ -13,7 +13,7 @@ triggers:
 
 # Contributing to Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-core-contributions](./SKILL.md) - Main contributions guide

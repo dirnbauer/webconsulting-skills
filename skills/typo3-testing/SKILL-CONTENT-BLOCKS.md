@@ -2,7 +2,7 @@
 name: typo3-testing-content-blocks
 description: Testing Content Blocks elements. Unit tests, functional tests, and E2E testing for Content Blocks-based content.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-testing
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # Testing Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-testing](./SKILL.md) - Main testing guide

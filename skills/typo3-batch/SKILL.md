@@ -6,7 +6,7 @@ description: >-
   renames, and extension-wide upgrades. Decomposes work into independent units, executes
   them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor,
   convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.
-compatibility: TYPO3 12.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -15,7 +15,7 @@ license: MIT / CC-BY-SA-4.0
 # TYPO3 Batch Operations
 
 > Adapted from Boris Cherny's (Anthropic) Claude Code `/batch` skill for TYPO3 contexts.
-> **Target:** TYPO3 v14 (primary), v13, v12.4 LTS.
+> **Target:** TYPO3 v14.x only.
 
 Orchestrate large-scale, parallelizable changes across a TYPO3 codebase. Decompose work
 into 5–30 independent units, present a plan, then execute each unit with verification.
@@ -54,7 +54,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 3. Create new event listener class with #[AsEventListener]
 4. Move logic from hook method to __invoke()
 5. Remove hook registration from ext_localconf.php
-6. Add Services.yaml entry (for v12/v13 fallback)
+6. Add Services.yaml entry (DI / event listener registration)
 7. Run php -l on new file
 ```
 
@@ -75,7 +75,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 
-### 2. TCA Modernization (v12 → v14)
+### 2. TCA modernization (TYPO3 v14)
 
 **Research**: Scan all `Configuration/TCA/` and `Configuration/TCA/Overrides/` files.
 
@@ -93,7 +93,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 7. Replace 'renderType' => 'colorPicker' → 'type' => 'color'
 8. Replace 'type' => 'input', 'eval' => 'email' → 'type' => 'email'
 9. Convert items arrays: [0] => label, [1] => value → ['label' => ..., 'value' => ...]
-10. Remove boilerplate columns auto-created from ctrl (v13.3+): hidden, starttime, endtime, fe_group, language fields
+10. Remove boilerplate columns auto-created from `ctrl` on TYPO3 v14: hidden, starttime, endtime, fe_group, language fields
 11. Use palettes for enablecolumns: visibility → hidden, access → starttime, endtime
 12. Remove convention fields from ext_tables.sql (auto-added to database)
 13. Run php -l to verify syntax
@@ -215,7 +215,7 @@ Functional tests:
 CI pipeline:
   1. Create .github/workflows/ci.yml
   2. Configure PHP matrix (8.2, 8.3, 8.4)
-  3. Configure TYPO3 matrix (v13, v14)
+  3. Configure CI matrix (TYPO3 v14, PHP 8.2+)
 ```
 
 ### 8. PHP 8.4 Migration

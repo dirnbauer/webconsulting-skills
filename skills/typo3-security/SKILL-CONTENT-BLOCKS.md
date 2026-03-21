@@ -2,7 +2,7 @@
 name: typo3-security-content-blocks
 description: Security considerations for Content Blocks. Input validation, XSS prevention, and secure templating.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-security
   - typo3-content-blocks
@@ -13,7 +13,7 @@ triggers:
 
 # Content Blocks Security
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-security](./SKILL.md) - Main security guide

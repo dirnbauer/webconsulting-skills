@@ -3,7 +3,7 @@ name: typo3-docs-php84
 description: Documenting PHP 8.4 features in TYPO3 extension documentation. RST patterns for new language features.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-docs
   - php-modernization
@@ -14,7 +14,7 @@ triggers:
 
 # Documenting PHP 8.4 Features
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-docs](./SKILL.md) - Main documentation guide
@@ -55,7 +55,7 @@ My Extension
    8.2 - 8.4
 
 :TYPO3:
-   13.0 - 14.x
+   14.0 - 14.x
 ```
 
 ---

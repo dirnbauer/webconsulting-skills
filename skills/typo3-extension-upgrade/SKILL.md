@@ -4,7 +4,7 @@ description: >-
   Systematic TYPO3 extension upgrades to newer LTS versions. Covers Extension Scanner,
   Rector, Fractor, PHPStan, and testing. Use when working with extension, upgrade,
   fractor, rector, migration.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.1.0"
 license: MIT / CC-BY-SA-4.0
@@ -14,7 +14,7 @@ license: MIT / CC-BY-SA-4.0
 
 Systematic framework for upgrading TYPO3 extensions to newer LTS versions.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 > **Scope**: Extension code upgrades only. NOT for TYPO3 project/core upgrades.
 
@@ -39,7 +39,7 @@ Before ANY code changes for major upgrades:
 ### Pre-Upgrade Checklist
 
 - [ ] Extension key and current TYPO3 version documented
-- [ ] Target TYPO3 version(s) identified (v13, v14, or both)
+- [ ] Target TYPO3 **v14.x** confirmed
 - [ ] Current PHP version and target PHP version noted
 - [ ] All deprecation warnings from logs collected
 - [ ] Extension Scanner report reviewed
@@ -84,7 +84,7 @@ This ensures the tools can analyze your code against the target version's rules.
 {
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     }
 }
 ```
@@ -94,7 +94,7 @@ This ensures the tools can analyze your code against the target version's rules.
 $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
             'php' => '8.2.0-8.4.99',
         ],
     ],
@@ -236,13 +236,13 @@ ddev typo3 cache:flush
 ### ViewFactory (Replaces StandaloneView)
 
 ```php
-// ❌ OLD (legacy Fluid standalone rendering; prefer Core ViewFactory on v13+)
+// ❌ OLD (legacy Fluid standalone rendering; prefer Core ViewFactory on TYPO3 v14)
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 $view = GeneralUtility::makeInstance(StandaloneView::class);
 $view->setTemplatePathAndFilename('...');
 
-// ✅ NEW (v13/v14 compatible)
+// ✅ NEW (TYPO3 v14)
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 
@@ -271,7 +271,7 @@ public function listAction(): void
     $this->view->assign('items', $items);
 }
 
-// ✅ NEW (v13+ required)
+// ✅ NEW (TYPO3 v14)
 public function listAction(): ResponseInterface
 {
     $this->view->assign('items', $items);
@@ -339,16 +339,16 @@ return [
 
 ## API Changes Reference
 
-### TYPO3 v13 Breaking Changes
+### Typical cleanup when modernizing toward v14
 
 | Removed/Changed | Replacement |
 |-----------------|-------------|
 | `StandaloneView` (legacy) | `ViewFactoryInterface` |
-| `ObjectManager` / `GeneralUtility::makeInstance` for services | Constructor injection (Extbase ObjectManager was removed in v10+) |
+| `ObjectManager` / `GeneralUtility::makeInstance` for services | Constructor injection |
 | `TSFE->fe_user->user` | Request attribute |
 | Various hooks | PSR-14 events |
 
-### TYPO3 v14 Breaking Changes
+### TYPO3 v14 breaking changes
 
 | Removed/Changed | Replacement |
 |-----------------|-------------|
@@ -420,14 +420,12 @@ Before considering upgrade complete:
 - [ ] `php-cs-fixer --dry-run` passes
 - [ ] All unit tests pass
 - [ ] All functional tests pass
-- [ ] Manual testing in target version(s) complete
+- [ ] Manual testing on TYPO3 v14 complete
 - [ ] No deprecation warnings in logs
-- [ ] Extension works in TYPO3 v13
 - [ ] Extension works in TYPO3 v14
 
 ## Resources
 
-- **TYPO3 v13 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13.html
 - **TYPO3 v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 - **Fractor**: https://github.com/andreaswolf/fractor (package: `a9f/typo3-fractor`)

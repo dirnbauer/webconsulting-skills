@@ -3,7 +3,7 @@ name: typo3-seo-php84
 description: PHP 8.4 patterns for TYPO3 SEO services. Modern code patterns for meta tag handling and sitemap generation.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-seo
   - php-modernization
@@ -14,7 +14,7 @@ triggers:
 
 # TYPO3 SEO with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-seo](./SKILL.md) - Main SEO guide

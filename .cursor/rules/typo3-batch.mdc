@@ -6,15 +6,16 @@ description: >-
   renames, and extension-wide upgrades. Decomposes work into independent units, executes
   them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor,
   convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.
-compatibility: TYPO3 12.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Batch Operations
 
 > Adapted from Boris Cherny's (Anthropic) Claude Code `/batch` skill for TYPO3 contexts.
-> **Target:** TYPO3 v14 (primary), v13, v12.4 LTS.
+> **Target:** TYPO3 v14.x only.
 
 Orchestrate large-scale, parallelizable changes across a TYPO3 codebase. Decompose work
 into 5–30 independent units, present a plan, then execute each unit with verification.
@@ -53,28 +54,28 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 3. Create new event listener class with #[AsEventListener]
 4. Move logic from hook method to __invoke()
 5. Remove hook registration from ext_localconf.php
-6. Add Services.yaml entry (for v12/v13 fallback)
+6. Add Services.yaml entry (DI / event listener registration)
 7. Run php -l on new file
 ```
 
-**Hook → event mapping (verify in Core event documentation):**
+**Hook → event mapping (verify in [Core event lists](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Index.html)):**
 
-> **DataHandler:** Core does **not** ship generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` under `DataHandling\Event`. Use **`SC_OPTIONS`** DataHandler hooks for datamap/cmdmap (see typo3-datahandler skill §9).
+> **DataHandler (`t3lib/class.t3lib_tcemain.php`):** TYPO3 Core does **not** expose generic PSR-14 events named like `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` under `TYPO3\CMS\Core\DataHandling\Event`. For datamap/cmdmap reactions, use **`SC_OPTIONS` hook classes** (see [typo3-datahandler](../typo3-datahandler/SKILL.md) §9). Do not “migrate” those hooks to non-existent events.
 
 | Hook / legacy API | Typical direction |
 |---|---|
-| `processDatamap_afterDatabaseOperations` | Keep **`processDatamapClass`** hook (no 1:1 Core event) |
-| `processDatamap_preProcessFieldArray` | Keep hook unless a documented Core event fits |
-| `processCmdmap_postProcess` | Keep **`processCmdmapClass`** hook |
+| `processDatamap_afterDatabaseOperations` / related `SC_OPTIONS` | Keep **`processDatamapClass`** hook methods (no 1:1 Core event) |
+| `processDatamap_preProcessFieldArray` | Keep hook or narrow Core events for your table/field if documented |
+| `processCmdmap_postProcess` | Keep **`processCmdmapClass`** hook methods |
 | `drawHeaderHook` | `ModifyButtonBarEvent` |
 | `drawFooterHook` | `ModifyButtonBarEvent` |
-| `checkFlexFormValue` | Often still a hook; `AfterFlexFormDataStructureParsedEvent` is not a drop-in validator |
-| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (verify vs. hook) |
+| `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
+| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (asset rendering) — confirm vs. your hook usage |
 | `tslib_fe->contentPostProc` | `AfterCacheableContentIsGeneratedEvent` |
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 
-### 2. TCA Modernization (v12 → v14)
+### 2. TCA modernization (TYPO3 v14)
 
 **Research**: Scan all `Configuration/TCA/` and `Configuration/TCA/Overrides/` files.
 
@@ -92,7 +93,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 7. Replace 'renderType' => 'colorPicker' → 'type' => 'color'
 8. Replace 'type' => 'input', 'eval' => 'email' → 'type' => 'email'
 9. Convert items arrays: [0] => label, [1] => value → ['label' => ..., 'value' => ...]
-10. Remove boilerplate columns auto-created from ctrl (v13.3+): hidden, starttime, endtime, fe_group, language fields
+10. Remove boilerplate columns auto-created from `ctrl` on TYPO3 v14: hidden, starttime, endtime, fe_group, language fields
 11. Use palettes for enablecolumns: visibility → hidden, access → starttime, endtime
 12. Remove convention fields from ext_tables.sql (auto-added to database)
 13. Run php -l to verify syntax
@@ -214,7 +215,7 @@ Functional tests:
 CI pipeline:
   1. Create .github/workflows/ci.yml
   2. Configure PHP matrix (8.2, 8.3, 8.4)
-  3. Configure TYPO3 matrix (v13, v14)
+  3. Configure CI matrix (TYPO3 v14, PHP 8.2+)
 ```
 
 ### 8. PHP 8.4 Migration
@@ -324,14 +325,14 @@ Stop the batch and report if:
 |----------------|-----------------|
 | Remove `$GLOBALS['TSFE']` | All PHP files referencing TypoScriptFrontendController |
 | Annotations → Attributes | All `@validate`, `@ignorevalidation` in Extbase controllers |
-| `MailMessage->send()` → inject `MailerInterface` | All email-sending code |
-| `ctrl.searchFields` removed (v14) → per-field `searchable` | Changelog #106972 |
+| `MailMessage->send()` → inject `Symfony\Component\Mailer\MailerInterface` (or TYPO3 façade) | All email-sending code; avoid static `Mailer::send()` |
+| `ctrl.searchFields` removed (v14) → per-field `searchable` in field `config` | See [Breaking: #106972](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-106972-TCAControlOptionSearchFieldsRemoved.html) |
 | TCA `interface` removal | All TCA files with `interface` key |
 | Backend module parent IDs | All `Modules.php` with `web`, `file`, `tools` parents |
 | Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
 | FlexForm pointer fields | All FlexForm XML with pointer configurations |
 | Asset `external` property | All TypoScript with `external = 1` |
-| Remove `switchableControllerActions` | Removed in v12 — legacy code only |
+| Remove legacy `switchableControllerActions` / plugin subtypes | Removed in **v12** — not a v14-only migration |
 
 ---
 

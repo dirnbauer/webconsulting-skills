@@ -3,7 +3,7 @@ name: typo3-datahandler-php84
 description: PHP 8.4 patterns for TYPO3 DataHandler operations. Property hooks for commands, typed arrays, and modern service patterns.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-datahandler
   - php-modernization
@@ -15,7 +15,7 @@ triggers:
 
 # DataHandler with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:** 
 > - [typo3-datahandler](./SKILL.md) - Main DataHandler guide

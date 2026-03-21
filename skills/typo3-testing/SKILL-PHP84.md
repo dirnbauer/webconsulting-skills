@@ -3,7 +3,7 @@ name: typo3-testing-php84
 description: PHP 8.4 testing patterns for TYPO3. PHPUnit 11/12 compatibility, new assertions, and property hooks testing.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-testing
   - php-modernization
@@ -15,7 +15,7 @@ triggers:
 
 # TYPO3 Testing with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-testing](./SKILL.md) - Main testing guide

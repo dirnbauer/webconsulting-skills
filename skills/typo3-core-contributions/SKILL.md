@@ -3,7 +3,7 @@ name: typo3-core-contributions
 description: >-
   TYPO3 Core contribution workflow. Use when working with Forge issues, submitting patches
   to Gerrit, or contributing docs.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -13,7 +13,7 @@ license: MIT / CC-BY-SA-4.0
 
 Guide for TYPO3 Core contribution workflow from account setup to patch submission.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## When to Use
 
@@ -103,7 +103,7 @@ Description explaining how and why the change was made.
 Can be multiple paragraphs.
 
 Resolves: #12345
-Releases: main, 13.4
+Releases: main
 ```
 
 ### 5. Push to Gerrit
@@ -130,11 +130,11 @@ git push gerrit HEAD:refs/for/main
 
 ```
 Resolves: #12345
-Releases: main, 13.4
+Releases: main
 ```
 
 - `Resolves:` - Issue number on forge.typo3.org
-- `Releases:` - Target branches (main, 13.4, 12.4)
+- `Releases:` - Target branches (`main` for current development; stable backport branches per Forge issue)
 
 ### Example Commit Messages
 
@@ -147,7 +147,7 @@ translated page properties. This patch ensures the
 cache is cleared for all language variants.
 
 Resolves: #105737
-Releases: main, 13.4
+Releases: main
 ```
 
 **Breaking Change:**
@@ -200,14 +200,14 @@ After approval on main:
 
 ```bash
 # Switch to target branch
-git checkout 13.4
-git pull origin 13.4
+git checkout main
+git pull origin main
 
 # Cherry-pick with original Change-Id
 git cherry-pick -x <commit-hash>
 
 # Push for review
-git push gerrit HEAD:refs/for/13.4
+git push gerrit HEAD:refs/for/main
 ```
 
 ## Code Review

@@ -2,7 +2,7 @@
 name: security-incident-reporting-typo3
 description: TYPO3-specific incident reporting. Forensic checklist, vulnerability classification, and Security Team communication with PGP templates.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - security-incident-reporting
   - typo3-security
@@ -17,7 +17,7 @@ triggers:
 
 # TYPO3 Security Incident Reporting
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [security-incident-reporting](./SKILL.md) - General incident reporting framework
@@ -37,7 +37,7 @@ Before analyzing an incident, document the exact system state.
 ### Core Information
 | Field | Value |
 |-------|-------|
-| TYPO3 Version | 13.4.2 LTS |
+| TYPO3 Version | 14.x (document exact patch level) |
 | Release Type | LTS / Sprint / ELTS |
 | Installation Method | Composer / Legacy |
 | PHP Version | 8.3.12 |
@@ -460,14 +460,14 @@ TYPO3-CORE-SA-2026-004
 - **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/
 - **Report Issues**: security@typo3.org (PGP encrypted)
 
-### Version Support
+### Version support
 
-| Version | Support Status | Security Updates |
-|---------|----------------|------------------|
-| 13.4 LTS | Active | Until Oct 2026 |
-| 12.4 LTS | Active | Until Apr 2026 |
-| 11.5 ELTS | Extended | Paid support only |
-| < 11.5 | End of Life | No updates |
+Use the official TYPO3 lifecycle and security advisories as the source of truth (dates change over time).
+
+| Version | Notes |
+|---------|--------|
+| **14.x** | Current line for this skill collection — document exact patch level in the inventory |
+| Older majors | See [TYPO3 ELTS / roadmap](https://typo3.org/) when the compromised site is not on v14 |
 
 ---
 

@@ -1,10 +1,10 @@
 ---
 name: typo3-security
 description: >-
-  Security hardening checklist and best practices for TYPO3 v13/v14 installations,
+  Security hardening checklist and best practices for TYPO3 TYPO3 v14 installations,
   covering configuration, file permissions, and common vulnerabilities. Use when working
   with security, hardening, permissions, authentication, vulnerabilities.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -12,14 +12,14 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Security Hardening
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All security configurations in this skill work on both v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All security configurations in this skill work on TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. Critical Configuration Settings
 
-### `config/system/settings.php` (v13/v14 Compatible)
+### `config/system/settings.php` (TYPO3 v14)
 
 ```php
 <?php
@@ -34,7 +34,7 @@ return [
         'sessionTimeout' => 3600,         // 1 hour session timeout
         'lockSSL' => true,                // Force HTTPS for backend
         
-        // Password policy (enhanced in v13/v14)
+        // Password policy (TYPO3 v14)
         'passwordHashing' => [
             'className' => \TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2idPasswordHash::class,
             'options' => [],
@@ -238,7 +238,7 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = '$argon2id$...'; // h
 
 ## 5. Backend User Security
 
-### Strong Password Policy (v13/v14)
+### Strong Password Policy (TYPO3 v14)
 
 ```php
 <?php
@@ -260,9 +260,9 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['passwordPolicies']['default'] = [
 ];
 ```
 
-### Multi-Factor Authentication (Built-in v13/v14)
+### Multi-Factor Authentication (TYPO3 v14)
 
-MFA is built into TYPO3 v13 and v14. Users can configure in:
+MFA is built into TYPO3 v14. Users can configure in:
 **User Settings > Account Security**
 
 Supported providers:
@@ -291,13 +291,13 @@ $GLOBALS['TYPO3_CONF_VARS']['LOG']['TYPO3']['CMS']['Backend']['Authentication'][
 
 ## 6. Content Security Policy (CSP)
 
-### Built-in CSP (v13/v14)
+### Built-in CSP (TYPO3 v14)
 
-TYPO3 v13+ has built-in CSP support. Enable it:
+TYPO3 v14 has built-in CSP support. Enable it:
 
 Enable CSP through `config/system/settings.php` / Install Tool using the **feature flags documented for your TYPO3 minor** (toggle names have changed across releases — check Core docs rather than copying stale keys).
 
-### CSP Configuration via Events (v13/v14)
+### CSP Configuration via Events (TYPO3 v14)
 
 ```php
 <?php
@@ -408,7 +408,7 @@ TCA automatically handles escaping. For custom fields:
 
 ## 9. CSRF Protection
 
-### Backend Requests (v13/v14)
+### Backend Requests (TYPO3 v14)
 
 TYPO3 backend automatically includes CSRF tokens. For custom AJAX:
 
@@ -448,9 +448,9 @@ final class MyController
 </f:form>
 ```
 
-## 10. Rate Limiting (v13/v14)
+## 10. Rate Limiting (TYPO3 v14)
 
-TYPO3 v13+ includes built-in rate limiting:
+TYPO3 v14 includes built-in rate limiting:
 
 ```php
 // config/system/additional.php
@@ -499,7 +499,6 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // attempts per minute
 - **TYPO3 Security Team**: https://typo3.org/teams/security
 - **Security Bulletins**: https://typo3.org/security/advisory
 - **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/Index.html
-- **v13 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13.html
 - **v14 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
 
 ## v14-Only Security Changes

@@ -1,46 +1,45 @@
 ---
 name: typo3-update
 description: >-
-  Comprehensive guide for writing TYPO3 code compatible with both v13 and v14, with
-  preference for v14. Covers version constraints, compatible patterns, and migration
-  strategies. Use when working with update, upgrade, v13, v14, migration, lts,
-  compatibility.
-compatibility: TYPO3 13.0 - 14.x
+  TYPO3 v14 development guide: version constraints, core APIs, extension patterns, and
+  upgrade workflows. Use when working with update, upgrade, v14, migration, lts,
+  TYPO3 core.
+compatibility: TYPO3 14.x
 metadata:
   version: "2.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
-# TYPO3 Dual-Version Development: v13 & v14
+# TYPO3 v14 development
 
-> **Strategy:** Write code that works on both TYPO3 v13 and v14, with v14 as the preferred target.
-> All patterns in this skill are designed for dual-version compatibility.
+> **Strategy:** This collection targets **TYPO3 v14.x only**. Patterns here assume a v14 codebase.
+> For migrating from older majors, use `typo3-rector`, `typo3-extension-upgrade`, Fractor, and the official upgrade guide first.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. Version Strategy
 
-### Target: TYPO3 v13 and v14
+### Target: TYPO3 v14.x only
 
-| Version | Status | PHP | Support Until |
-|---------|--------|-----|---------------|
-| v12.4 LTS | Maintenance | 8.1-8.3 | April 2026 |
-| **v13.4 LTS** | **Active LTS** | 8.2-8.4 | ~2028 |
-| **v14.x** | **Latest** | 8.2-8.4 | ~2029 |
+| Version | Role for this collection |
+|---------|--------------------------|
+| **v14.x** | **Supported target** — examples and constraints assume TYPO3 v14 |
+| Older majors | **Not targeted** — complete a core upgrade, then use these patterns |
 
-**Best Practice:** Target both v13 and v14 for maximum compatibility. New projects should prefer v14.
+**Best Practice:** Declare TYPO3 **v14-only** constraints in `composer.json` and `ext_emconf.php` for new work.
 
 ### Version Constraints
 
 ```php
 <?php
-// ext_emconf.php - Dual version support
+// ext_emconf.php — TYPO3 v14
 $EM_CONF[$_EXTKEY] = [
     'title' => 'My Extension',
     'version' => '2.0.0',
     'state' => 'stable',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
             'php' => '8.2.0-8.4.99',
         ],
         'conflicts' => [],
@@ -50,13 +49,13 @@ $EM_CONF[$_EXTKEY] = [
 ```
 
 ```json
-// composer.json - Dual version support
+// composer.json — TYPO3 v14
 {
     "name": "vendor/my-extension",
     "type": "typo3-cms-extension",
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     },
     "extra": {
         "typo3/cms": {
@@ -70,7 +69,7 @@ $EM_CONF[$_EXTKEY] = [
 
 ### Minimum PHP Version: 8.2
 
-Both v13 and v14 require PHP 8.2+. Use modern PHP features:
+TYPO3 v14 requires PHP 8.2+. Use modern PHP features:
 
 ```php
 <?php
@@ -108,7 +107,7 @@ enum Status: string
 }
 ```
 
-## 3. Controller Patterns (v13/v14 Compatible)
+## 3. Controller Patterns (TYPO3 v14)
 
 ### Extbase Action Controller
 
@@ -128,7 +127,7 @@ final class ItemController extends ActionController
         private readonly ItemRepository $itemRepository,
     ) {}
 
-    // ✅ Must return ResponseInterface (required since v13)
+    // ✅ Must return ResponseInterface (required in TYPO3 v14)
     public function listAction(): ResponseInterface
     {
         $items = $this->itemRepository->findAll();
@@ -190,7 +189,7 @@ final class BackendModuleController
 }
 ```
 
-## 4. View & Templating (v13/v14 Compatible)
+## 4. View & Templating (TYPO3 v14)
 
 ### ViewFactory (Preferred Pattern)
 
@@ -266,11 +265,11 @@ final class RenderingService
 </html>
 ```
 
-## 5. Event System (v13/v14 Compatible)
+## 5. Event System (TYPO3 v14)
 
 ### PSR-14 Event Listeners
 
-PSR-14 events are the standard in both v13 and v14. Always prefer events over hooks.
+PSR-14 events are the standard in TYPO3 v14. Always prefer events over hooks.
 
 ```php
 <?php
@@ -294,14 +293,14 @@ final class ModifyCacheLifetimeListener
 }
 ```
 
-### Common Events (v13/v14)
+### Common Events (TYPO3 v14)
 
 | Event | Purpose |
 |-------|---------|
 | `ModifyPageLinkConfigurationEvent` | Modify link building |
 | `ModifyCacheLifetimeForPageEvent` | Adjust page cache |
 | `BeforeStdWrapFunctionsInitializedEvent` | Modify stdWrap |
-| *(DataHandler)* | No generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent` in Core; use **`SC_OPTIONS`** hooks or documented `DataHandling\Event` classes only |
+| *(DataHandler)* | Core ships **no** generic `BeforeRecordOperationEvent` / `AfterRecordOperationEvent`; use **`SC_OPTIONS`** DataHandler hooks or documented `TYPO3\CMS\Core\DataHandling\Event\*` only ([list](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html)) |
 
 ### Services.yaml Registration
 
@@ -325,7 +324,7 @@ services:
         identifier: 'vendor-extension/my-listener'
 ```
 
-## 6. Backend Module Registration (v13/v14)
+## 6. Backend Module Registration (TYPO3 v14)
 
 ### Configuration/Backend/Modules.php
 
@@ -365,7 +364,7 @@ return [
 ];
 ```
 
-## 7. TCA Configuration (v13/v14 Compatible)
+## 7. TCA Configuration (TYPO3 v14)
 
 ### Static TCA Only
 
@@ -431,9 +430,9 @@ return [
 ];
 ```
 
-### Auto-Created Columns from ctrl (v13.3+)
+### Auto-Created Columns from ctrl
 
-Since TYPO3 v13.3, column definitions for fields referenced in `ctrl` are **auto-created** by the Core. You no longer need explicit `'columns'` entries for:
+Since TYPO3 v14, column definitions for fields referenced in `ctrl` are **auto-created** by the Core. You no longer need explicit `'columns'` entries for:
 
 - `enablecolumns` fields: `hidden`/`disabled`, `starttime`, `endtime`, `fe_group`
 - Language fields: `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
@@ -495,7 +494,7 @@ $GLOBALS['TCA']['tt_content']['types']['myextension_element'] = [
 ];
 ```
 
-## 8. Database Operations (v13/v14 Compatible)
+## 8. Database Operations (TYPO3 v14)
 
 ### QueryBuilder
 
@@ -588,7 +587,7 @@ final class ItemRepository extends Repository
 }
 ```
 
-## 9. CLI Commands (v13/v14 Compatible)
+## 9. CLI Commands (TYPO3 v14)
 
 ```php
 <?php
@@ -649,7 +648,7 @@ services:
       - name: console.command
 ```
 
-## 10. Testing for Dual-Version Compatibility
+## 10. Testing
 
 ### PHPUnit Setup
 
@@ -671,7 +670,7 @@ services:
 </phpunit>
 ```
 
-### Test Both Versions in CI
+### CI matrix (TYPO3 v14)
 
 ```yaml
 # .github/workflows/ci.yaml
@@ -684,7 +683,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        typo3: ['^13.0', '^14.0']
+        typo3: ['^14.0']
         php: ['8.2', '8.3']
     
     steps:
@@ -707,14 +706,14 @@ jobs:
 
 ## 11. Upgrade Process
 
-### From v12 to v13/v14
+### From older majors to v14
 
 ```bash
 # 1. Create backup
 ddev snapshot --name=before-upgrade
 
 # 2. Update composer constraints
-ddev composer require "typo3/cms-core:^13.0 || ^14.0" --no-update
+ddev composer require "typo3/cms-core:^14.0" --no-update
 ddev composer update "typo3/*" --with-all-dependencies
 
 # 3. Run upgrade wizards
@@ -732,9 +731,7 @@ ddev typo3 database:updateschema
 
 ## 12. Resources
 
-- **v13 Documentation**: https://docs.typo3.org/m/typo3/reference-coreapi/13.4/en-us/
 - **v14 Documentation**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/
-- **v13 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13/Index.html
 - **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 
@@ -763,7 +760,7 @@ Not covered by Rector — context-dependent migration requiring manual analysis:
   // ❌ Removed in v14
   $tsfe = $GLOBALS['TSFE'];
   
-  // ✅ v14 pattern (also works in v13)
+  // ✅ TYPO3 v14 pattern
   $pageInformation = $request->getAttribute('frontend.page.information');
   $language = $request->getAttribute('language');
   $typoscript = $request->getAttribute('frontend.typoscript');

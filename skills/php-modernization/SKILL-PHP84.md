@@ -23,7 +23,7 @@ triggers:
 > 
 > **Related Skill:** [php-modernization](./SKILL.md) - General PHP 8.x patterns
 > 
-> **TYPO3:** v14 supports PHP 8.4, v13 supports PHP 8.2-8.4
+> **TYPO3:** v14 supports PHP 8.4 (this collection targets TYPO3 v14 only)
 
 This skill covers PHP 8.4 specific features, deprecations, and migration patterns.
 
@@ -709,7 +709,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'My Extension',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
             'php' => '8.2.0-8.4.99',
         ],
     ],

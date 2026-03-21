@@ -5,7 +5,7 @@ description: >-
   file limitations, file collection workspace safety, query migration, debugging,
   and testing. Use when working with workspace, versioning, staging, publishing,
   review, draft content, workflow, file collection.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -13,10 +13,10 @@ license: MIT / CC-BY-SA-4.0
 
 # TYPO3 Workspaces
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All code examples in this skill are designed to work on both TYPO3 v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All code examples in this skill are designed to work on TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## Sources
 
@@ -66,7 +66,7 @@ Offline (workspace) versions live in the **same database table** as live records
 
 > **Note:** Before TYPO3 v11, offline versions had `pid = -1`. Since v11 (Breaking #92497), workspace records store their **real pid**. If you encounter `pid = -1` in legacy code or documentation, it is outdated.
 
-**t3ver_state values (v13/v14):**
+**t3ver_state values (TYPO3 v14):**
 
 | Value | Meaning |
 |-------|---------|
@@ -75,7 +75,7 @@ Offline (workspace) versions live in the **same database table** as live records
 | `2` | Delete placeholder (record marked for deletion upon publish) |
 | `4` | Move pointer (record to be moved upon publish, stores new pid/sorting) |
 
-> **Removed in v11:** `t3ver_state = -1` (old "new version" pendant), `t3ver_state = 3` (old "move placeholder"), and the `t3ver_move_id` field. If you see these values in legacy code, they are no longer used in v13/v14.
+> **Removed in v11:** `t3ver_state = -1` (old "new version" pendant), `t3ver_state = 3` (old "move placeholder"), and the `t3ver_move_id` field. If you see these values in legacy code, they are not used on TYPO3 v14.
 
 ### The Overlay Mechanism
 
@@ -91,7 +91,7 @@ The `uid` of the live record is **always preserved** during overlay -- this keep
 ### Publishing Workflow
 
 - **Publish**: Draft content replaces live content through the workspace publish process.
-- TYPO3 v13/v14 use publish workflows; do not rely on legacy workspace-level swap mode.
+- TYPO3 TYPO3 v14 use publish workflows; do not rely on legacy workspace-level swap mode.
 - **IMPORTANT**: The `swap` action is no longer allowed in TYPO3 v14. Use `action => 'publish'` instead of `action => 'swap'`.
 
 ## 2. CRITICAL: File/FAL Limitation
@@ -272,7 +272,7 @@ final class CleanupOldCollectionFolderListener
 ### Installation
 
 ```bash
-# Composer (v13/v14)
+# Composer (TYPO3 v14)
 composer require typo3/cms-workspaces
 
 # Non-Composer: activate in Admin Tools > Extensions
@@ -560,7 +560,7 @@ return [
 ];
 ```
 
-The `t3ver_*` database columns are **auto-created** when `versioningWS = true` -- you do NOT need to add them to `ext_tables.sql`. Similarly, `enablecolumns` fields (`hidden`, `starttime`, `endtime`) and language fields (`sys_language_uid`, `l10n_parent`, `l10n_diffsource`) get **auto-created TCA column definitions** from `ctrl` since v13.3 -- you do NOT need to define them in `'columns'`.
+The `t3ver_*` database columns are **auto-created** when `versioningWS = true` -- you do NOT need to add them to `ext_tables.sql`. Similarly, `enablecolumns` fields (`hidden`, `starttime`, `endtime`) and language fields (`sys_language_uid`, `l10n_parent`, `l10n_diffsource`) get **auto-created TCA column definitions** from `ctrl` on TYPO3 v14 -- you do NOT need to define them in `'columns'`.
 
 After enabling, run:
 
@@ -934,13 +934,13 @@ final class ItemRepository extends Repository
 }
 ```
 
-### Pattern E: Migrating Legacy Queries (TYPO3 v10/v11 style to v13/v14)
+### Pattern E: Migrating legacy queries (TYPO3 v10/v11 style to TYPO3 v14)
 
 **BEFORE (deprecated -- old exec_SELECTquery pattern, no longer available):**
 
 ```php
 <?php
-// DEPRECATED: Do NOT use. Not available in v13/v14.
+// DEPRECATED: Do NOT use. Not available on TYPO3 v14.
 // $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*', 'tt_content', 'pid=' . (int)$pageId);
 ```
 
@@ -1007,7 +1007,7 @@ Database example for a tt_content record translated to French in workspace 1:
 | 11 | 20 | 0 | 0 | 0 | 0 | 0 | Article #1 |
 | 31 | 20 | 1 | 0 | 1 | 11 | 1 | Article #1 (fr) |
 
-> **Note:** In TYPO3 v13/v14, workspace-new records are a **single row** with `t3ver_state = 1` and real `pid`. The old two-row pattern (placeholder + version with `pid = -1` and `t3ver_state = -1`) was removed in v11.
+> **Note:** On TYPO3 v14, workspace-new records are a **single row** with `t3ver_state = 1` and real `pid`. The old two-row pattern (placeholder + version with `pid = -1` and `t3ver_state = -1`) was removed in v11.
 
 ### Language Restrictions per Workspace
 
@@ -1163,9 +1163,7 @@ ddev composer require --dev typo3/testing-framework:"^9.0" phpunit/phpunit:"^11.
 composer require --dev typo3/testing-framework:"^9.0" phpunit/phpunit:"^11.0"
 ```
 
-> Adjust `typo3/testing-framework` version to match your TYPO3 version:
-> - TYPO3 v13: `typo3/testing-framework:"^8.2 || ^9.0"`
-> - TYPO3 v14: `typo3/testing-framework:"^9.0"`
+> For TYPO3 v14 use `typo3/testing-framework:"^9.0"` (see `typo3-testing` skill for details).
 
 **Step 2: Create PHPUnit configuration for functional tests**
 
@@ -1486,7 +1484,7 @@ bin/phpunit -c Build/phpunit-functional.xml \
 | `Table 'sys_workspace' doesn't exist` | `workspaces` not in `$coreExtensionsToLoad` | Add `'workspaces'` to array |
 | `Table 'be_users' has no column 'workspace_perms'` | Schema not created for test DB | Ensure `workspaces` is loaded before `setUp()` |
 | `Access denied for user` | Wrong DB credentials | Check env vars or DDEV status (`ddev describe`) |
-| `Call to undefined method setUpBackendUser` | Wrong testing-framework version | Use `typo3/testing-framework ^8.2` (v13) or `^9.0` (v14) |
+| `Call to undefined method setUpBackendUser` | Wrong testing-framework version | Use `typo3/testing-framework ^9.0` on TYPO3 v14 |
 | `Record not found after DataHandler` | CSV fixture malformed | Verify CSV: first row is table name, second row is column headers, data rows start with comma |
 
 ## 10. Best Practices
@@ -1652,7 +1650,7 @@ Workspace "Freeze Editing" feature has been removed (#107323). Workspaces can no
 
 ### Workspace-Aware Inline Child Tables Enforced **[v14 only]**
 
-All inline (IRRE) child tables used in workspace-enabled parent tables **must** have `'versioningWS' => true` in their TCA ctrl (#106821). In v13 this was a deprecation warning; in v14 it is enforced. Missing `versioningWS` on child tables will cause errors.
+All inline (IRRE) child tables used in workspace-enabled parent tables **must** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14 this is **enforced**. Missing `versioningWS` on child tables will cause errors.
 
 ### Workspace Selector Moved to Sidebar **[v14.2+ only]**
 
@@ -1664,7 +1662,7 @@ The workspace "Publish" module now shows **editor information** (#106074) — wh
 
 ### `swap` Action Fully Removed **[v14 only]**
 
-The DataHandler workspace `swap` action that was deprecated in v13 is now fully removed. Use `action => 'publish'` exclusively:
+The DataHandler workspace `swap` action is **removed** on TYPO3 v14. Use `action => 'publish'` exclusively:
 
 ```php
 // ❌ Removed in v14

@@ -145,7 +145,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - robots.txt configuration for AI crawlers (GPTBot, PerplexityBot, ClaudeBot)
   - Content freshness strategies by platform (Perplexity, ChatGPT, Google AI)
   - AI search visibility monitoring tools reference
-  - TYPO3 implementation with EXT:schema and EXT:ai_llms_txt (v13/v14)
+  - TYPO3 implementation with EXT:schema and EXT:ai_llms_txt (TYPO3 v14)
   - Markdown/MDX implementation (Next.js, Astro) with JSON-LD components
   - llms.txt specification and implementation guide
   - Raw MDX view with URL parameters (.md suffix, ?raw=true)
@@ -199,7 +199,7 @@ Thanks to Netresearch DTT GmbH for their contributions.
 - `typo3-seo`: SEO configuration with EXT:seo
 - `typo3-security`: Security hardening checklist
 - `typo3-rector`: TYPO3 upgrade patterns with Rector
-- `typo3-update`: TYPO3 v13/v14 migration guide
+- `typo3-update`: TYPO3 v14 migration guide
 - Cursor IDE integration with master architect rule
 - Installation script (`install.sh`)
 

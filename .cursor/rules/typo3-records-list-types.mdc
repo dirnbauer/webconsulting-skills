@@ -13,6 +13,7 @@ triggers:
   - drag and drop records
   - records module view
   - view mode tsconfig
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Records List Types
@@ -23,7 +24,7 @@ triggers:
 >
 > **Composer:** The package name matches upstream `composer.json`. If it is not yet published on Packagist, add a VCS `repositories` entry pointing at GitHub or install with `composer require webconsulting/records-list-types:dev-main` (or a tagged version) per your workflow.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. Overview
 

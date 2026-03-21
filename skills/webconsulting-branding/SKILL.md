@@ -4,7 +4,7 @@ description: >-
   Enforces webconsulting.at design system, color palettes, typography, and MDX component
   structures for frontend development. Use when working with frontend, design, branding,
   ui, components, styling.
-compatibility: TYPO3 13.0 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "2.0.0"
 license: MIT / CC-BY-SA-4.0
@@ -97,19 +97,15 @@ When generating content or frontend components, use the following structure. **D
 
 ### Interactive Tabs
 
-Use for version comparisons (e.g., TYPO3 v11 vs v12 vs v13 vs v14):
+Use for topic tabs (e.g., “Public site” vs “Editor guide”); for TYPO3, this collection targets **v14 only**:
 
 ```jsx
 <Tabs defaultValue="v14">
   <TabsList>
-    <TabsTrigger value="v13">TYPO3 v13</TabsTrigger>
     <TabsTrigger value="v14">TYPO3 v14</TabsTrigger>
   </TabsList>
-  <TabsContent value="v13">
-    Content for v13...
-  </TabsContent>
   <TabsContent value="v14">
-    Content for v14 (preferred)...
+    Content for TYPO3 v14...
   </TabsContent>
 </Tabs>
 ```
@@ -120,11 +116,11 @@ Use `ComparisonTable` for feature matrices. Supports boolean checkmarks:
 
 ```jsx
 <ComparisonTable 
-  headers={['Feature', 'v13', 'v14']}
+  headers={['Feature', 'TYPO3 v14']}
   rows={[
-    { label: 'Content Blocks', values: [true, true] },
-    { label: 'Symfony 7', values: [false, true] },
-    { label: 'PHP 8.2+', values: [true, true] }
+    { label: 'Content Blocks 2.x', values: [true] },
+    { label: 'Symfony 7.2', values: [true] },
+    { label: 'PHP 8.2+', values: [true] }
   ]} 
 />
 ```

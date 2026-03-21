@@ -7,6 +7,7 @@ description: >-
   ai overviews, generative search, llm visibility.
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # AI Search Optimization (AEO & GEO)
@@ -796,8 +797,8 @@ Perplexity and other AI engines prefer visual content:
 
 ## 13. TYPO3 Implementation Guide
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> All configurations in this section work on both v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> All configurations in this section work on TYPO3 v14.
 
 This section covers TYPO3-specific implementation of AEO/GEO strategies using TYPO3 extensions, configuration, and best practices.
 
@@ -827,7 +828,7 @@ This section covers TYPO3-specific implementation of AEO/GEO strategies using TY
 
 2. **Generate Optimized Autoloaders**: Composer creates a PSR-4 compliant autoloader that loads classes on-demand, improving performance compared to TYPO3's legacy class loading.
 
-3. **Enforce Version Constraints**: The `composer.json` constraint `"typo3/cms-core": "^13.4 || ^14.0"` guarantees only compatible versions are installed.
+3. **Enforce Version Constraints**: The `composer.json` constraint `"typo3/cms-core": "^14.0"` guarantees only compatible versions are installed.
 
 4. **Enable Security Isolation**: The recommended structure places `vendor/`, `config/`, and other sensitive directories outside the web-accessible `/public` folder.
 
@@ -848,14 +849,15 @@ This section covers TYPO3-specific implementation of AEO/GEO strategies using TY
 }
 ```
 
-### Extension Compatibility Matrix
+### Extension compatibility (TYPO3 v14)
 
-| Extension | TYPO3 v13 | TYPO3 v14 | PHP | Composer | TER | Purpose |
-|-----------|-----------|-----------|-----|----------|-----|---------|
-| `typo3/cms-seo` | ✓ | ✓ | 8.2+ | ✓ | ✓ | Core SEO (meta tags, sitemaps, canonicals) |
-| `brotkrueml/schema` | ✓ (v4.x) | ✓ (v4.x) | 8.2+ | ✓ | ✓ | Schema.org structured data (JSON-LD) |
-| `yoast-seo-for-typo3/yoast_seo` | ✓ | ✗ | 8.1+ | ✓ | ✓ | Content analysis, readability (v13 only) |
-| `clickstorm/cs_seo` | ✓ (v9.3+) | ✓ (v9.3+) | 8.2+ | ✓ | ✓ | Extended SEO features, evaluations |
+| Extension | TYPO3 v14 | PHP | Composer | TER | Purpose |
+|-----------|-----------|-----|----------|-----|---------|
+| `typo3/cms-seo` | ✓ | 8.2+ | ✓ | ✓ | Core SEO (meta tags, sitemaps, canonicals) |
+| `brotkrueml/schema` | ✓ (verify v4.x on Packagist) | 8.2+ | ✓ | ✓ | Schema.org structured data (JSON-LD) |
+| `clickstorm/cs_seo` | ✓ (verify v9.3+ on Packagist) | 8.2+ | ✓ | ✓ | Extended SEO features, evaluations |
+
+> Other SEO extensions (e.g. Yoast) may lag Core — always check `require.typo3/cms-core` before installing.
 
 ### 13.1 Required Extensions Installation
 
@@ -866,10 +868,10 @@ This section covers TYPO3-specific implementation of AEO/GEO strategies using TY
 ddev composer require typo3/cms-seo
 
 # Schema.org structured data (essential for AI search)
-# Version constraint ensures v13/v14 compatibility
+# Version constraint ensures TYPO3 v14 compatibility
 ddev composer require brotkrueml/schema:"^4.2"
 
-# Optional: Extended SEO features (v13/v14 compatible)
+# Optional: Extended SEO features (TYPO3 v14)
 ddev composer require clickstorm/cs_seo:"^9.3"
 
 # In Composer mode, extensions are auto-activated
@@ -882,14 +884,14 @@ ddev typo3 extension:list | grep -E "seo|schema"
 ```json
 {
     "require": {
-        "typo3/cms-seo": "^13.4 || ^14.0",
+        "typo3/cms-seo": "^14.0",
         "brotkrueml/schema": "^4.2"
     }
 }
 ```
 
 - `^4.2` = Any version ≥4.2.0 and <5.0.0 (allows minor/patch updates)
-- `^13.4 || ^14.0` = Supports both TYPO3 v13.4+ and v14.0+
+- `^14.0` for `typo3/cms-seo` = TYPO3 v14 line only (this collection’s target)
 
 #### Classic Mode (TER)
 
@@ -1953,7 +1955,7 @@ For sites with extensive documentation, provide a `llms-full.txt` containing you
 TYPO3 has a dedicated extension for llms.txt generation:
 
 ```bash
-# Install the extension (TYPO3 v13+)
+# Install the extension (TYPO3 v14 — verify Packagist)
 ddev composer require web-vision/ai-llms-txt
 ```
 

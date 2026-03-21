@@ -2,7 +2,7 @@
 name: typo3-ddev-content-blocks
 description: Local Content Blocks development with DDEV. Setup, testing, and debugging Content Blocks extensions.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-ddev
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # Content Blocks Development with DDEV
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-ddev](./SKILL.md) - Main DDEV guide

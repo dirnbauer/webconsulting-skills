@@ -1,23 +1,23 @@
 ---
 name: typo3-accessibility
 description: >-
-  WCAG 2.2 AA accessibility audit and implementation for TYPO3 v12–v14 (v14 preferred).
+  WCAG 2.2 AA accessibility audit and implementation for TYPO3 v14.
   Covers Fluid template patterns, PHP middleware, JavaScript enhancements, Content Element
   accessibility, form accessibility, and a full go-live checklist. Use when working with
   accessibility, a11y, wcag, aria, screen reader, keyboard navigation, focus management,
   color contrast, alt text, semantic html, skip link, or accessible forms in TYPO3.
-compatibility: TYPO3 12.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Accessibility (WCAG 2.2 AA)
 
-> **Compatibility:** TYPO3 v14.x (primary), v13.x, v12.4 LTS (fallbacks noted).
-> All code works on v14. Version-specific fallbacks are marked with `v12/v13:`.
+> **Compatibility:** TYPO3 **v14.x only**. Older cores are out of scope for this collection.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, Fluid ViewHelpers, and core
-> features before adding custom markup. Verify methods exist in your target version.
+> features before adding custom markup. Verify methods exist in TYPO3 v14.
 
 > **PHP & JS over TypoScript:** This skill provides PHP middleware, Fluid partials, and
 > vanilla JavaScript solutions. TypoScript examples are avoided; use PHP-based approaches.
@@ -357,7 +357,7 @@ return [
 
 ### 3.2 Image Alt Text Validation (DataHandler hook)
 
-Warn editors when images lack alt text. Use a **`processDatamapClass`** hook on `sys_file_metadata` saves — not workspace publish events (`AfterRecordPublishedEvent` is under **Workspaces** and relates to publishing).
+Warn editors when images lack alt text. Use a **`processDatamapClass`** hook on `sys_file_metadata` saves — not workspace publish events (`AfterRecordPublishedEvent` lives under **Workspaces** and fires on publish workflows).
 
 ```php
 <?php
@@ -765,8 +765,7 @@ Make the alt text field required in file metadata:
 
 $GLOBALS['TCA']['sys_file_metadata']['columns']['alternative']['config']['required'] = true;
 
-// v12/v13 fallback: use eval instead
-// $GLOBALS['TCA']['sys_file_metadata']['columns']['alternative']['config']['eval'] = 'required';
+// On v14 prefer `required` (above). Avoid legacy `eval` = required patterns.
 ```
 
 ### 6.2 TCA: Header Layout Options
@@ -902,12 +901,12 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 
 ## 8. Accessibility Extensions
 
-| Extension | Purpose | v12 | v13 | v14 |
-|-----------|---------|-----|-----|-----|
-| `typo3/cms-core` | Built-in ARIA, focus management | ✓ | ✓ | ✓ |
-| `brotkrueml/schema` | Structured data (WebPage, Article) | ✓ | ✓ | ✓ |
-| *(no stable Packagist/TER listing verified)* | Third-party accessibility toolbars change often — evaluate extensions individually before recommending |
-| `b13/container` | Accessible grid/container layouts | ✓ | ✓ | ✓ |
+| Extension | Purpose | TYPO3 v14 |
+|-----------|---------|-----------|
+| `typo3/cms-core` | Built-in ARIA, focus management | ✓ |
+| `brotkrueml/schema` | Structured data (WebPage, Article) | ✓ (verify Packagist) |
+| *(no stable Packagist/TER listing verified)* | Third-party accessibility toolbars change often — evaluate extensions individually before recommending | — |
+| `b13/container` | Accessible grid/container layouts | ✓ (verify Packagist) |
 
 ## 9. WCAG 2.2 Quick Reference
 

@@ -3,7 +3,7 @@ name: typo3-powermail-php84
 description: PHP 8.4 patterns for TYPO3 Powermail and powermail_cond development. Property hooks for finishers, validators, and condition DTOs. Asymmetric visibility for mail results. New array functions for answer processing.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-powermail
   - php-modernization
@@ -16,7 +16,7 @@ triggers:
 
 # Powermail with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x, Powermail 13.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x, Powermail 13.x
 > 
 > **Related Skills:** 
 > - [typo3-powermail](./SKILL.md) - Main Powermail guide

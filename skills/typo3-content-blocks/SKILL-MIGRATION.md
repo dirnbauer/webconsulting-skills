@@ -2,7 +2,7 @@
 name: typo3-content-blocks-migration
 description: Bidirectional migration between classic TYPO3 TCA/SQL extensions and Content Blocks. Includes step-by-step guides, field mappings, data migration scripts, and checklists for both directions.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-content-blocks
 triggers:
@@ -22,7 +22,7 @@ triggers:
 
 # Content Blocks Migration Guide
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skill:** [typo3-content-blocks](./SKILL.md) - Main Content Blocks development guide
 
@@ -225,7 +225,7 @@ return [
         ],
         'iconfile' => 'EXT:my_ext/Resources/Public/Icons/product.svg',
     ],
-    // hidden, starttime, endtime columns are auto-created from ctrl (v13.3+)
+    // hidden, starttime, endtime columns are auto-created from ctrl (TYPO3 v14)
     'palettes' => [
         'visibility' => ['showitem' => 'hidden'],
         'access' => ['showitem' => 'starttime, endtime'],

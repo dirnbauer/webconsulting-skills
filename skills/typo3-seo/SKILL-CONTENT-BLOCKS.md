@@ -2,7 +2,7 @@
 name: typo3-seo-content-blocks
 description: SEO optimization for Content Blocks elements. Structured data, meta tags, and semantic HTML.
 version: 1.0.0
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-seo
   - typo3-content-blocks
@@ -14,7 +14,7 @@ triggers:
 
 # SEO with Content Blocks
 
-> **Compatibility:** TYPO3 v13.x and v14.x
+> **Compatibility:** TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-seo](./SKILL.md) - Main SEO guide

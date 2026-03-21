@@ -1,6 +1,6 @@
 # Screenshots for typo3-solr Skill
 
-All screenshots should be taken from TYPO3 13.4 LTS with EXT:solr 13.1 and Apache Solr 9.10.1.
+All screenshots should be taken from **TYPO3 v14** with the EXT:solr release that matches the [version matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) and a supported Apache Solr version.
 
 ## Required Screenshots
 

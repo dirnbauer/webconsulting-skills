@@ -3,7 +3,7 @@ name: typo3-conformance-php84
 description: PHP 8.4 coding standards for TYPO3 extension conformance. Property hooks, visibility, and modern patterns.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-conformance
   - php-modernization
@@ -14,7 +14,7 @@ triggers:
 
 # Extension Conformance with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-conformance](./SKILL.md) - Main conformance guide

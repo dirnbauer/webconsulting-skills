@@ -1,20 +1,21 @@
 ---
 name: typo3-rector
 description: >-
-  TYPO3 upgrade patterns using Rector, including automated refactoring rules and
-  dual-version compatibility strategies for v13/v14. Use when working with rector,
-  upgrade, migration, refactoring, deprecation.
-compatibility: TYPO3 13.0 - 14.x
+  TYPO3 v14 upgrade patterns using Rector: automated refactoring rules, level sets, and
+  migration workflows. Use when working with rector, upgrade, migration, refactoring,
+  deprecation.
+compatibility: TYPO3 14.x
 metadata:
   version: "2.1.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Rector Upgrade Patterns
 
-> **Compatibility:** TYPO3 v13.x and v14.x (v14 preferred)
-> This skill covers patterns for writing code that works on both v13 and v14.
+> **Compatibility:** TYPO3 v14.x
+> This skill covers patterns for writing code that works on TYPO3 v14.
 
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in your target TYPO3 version (v13 or v14) by checking the official TYPO3 documentation.
+> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
 ## 1. Introduction to TYPO3 Rector
 
@@ -37,7 +38,7 @@ ddev composer require --dev ssch/typo3-rector
 > miss edge cases that Rector rules handle correctly. Rector also catches deprecated TYPO3
 > namespace changes and method signature updates that are hard to find manually.
 
-### Basic Configuration for Dual-Version Support
+### Basic configuration (TYPO3 v14 target)
 
 Create `rector.php` in your project root:
 
@@ -61,14 +62,13 @@ return RectorConfig::configure()
     ])
     ->withPhpVersion(PhpVersion::PHP_82)
     ->withSets([
-        // PHP upgrades
         LevelSetList::UP_TO_PHP_82,
-        
-        // TYPO3 v13 minimum (works on v14 too)
-        Typo3LevelSetList::UP_TO_TYPO3_13,
+        Typo3LevelSetList::UP_TO_TYPO3_14,
     ])
     ->withImportNames();
 ```
+
+> **Incremental upgrades:** On a very old codebase you may run `UP_TO_TYPO3_13` in a dedicated step first, then `UP_TO_TYPO3_14`. Published extensions should still declare **`typo3/cms-core: ^14.0`** once you ship for v14.
 
 ## 2. Running Rector
 
@@ -99,11 +99,11 @@ ddev typo3 cache:flush
 ddev composer dump-autoload
 ```
 
-## 3. Dual-Version Compatible Patterns
+## 3. Version constraints and extra Rector sets
 
-### Version Constraints
+### Version constraints
 
-For extensions that must work on both v13 and v14:
+For extensions targeting TYPO3 v14:
 
 ```php
 <?php
@@ -114,7 +114,7 @@ $EM_CONF[$_EXTKEY] = [
     'state' => 'stable',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
             'php' => '8.2.0-8.4.99',
         ],
         'conflicts' => [],
@@ -128,35 +128,34 @@ $EM_CONF[$_EXTKEY] = [
 {
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     }
 }
 ```
 
-### Rector Configuration for v13/v14 Dual Support
+### Optional: TYPO3 v14 rule set only
+
+Add explicit v14 rules (in addition to or instead of the level set, depending on your Rector version):
 
 ```php
 <?php
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 use Ssch\TYPO3Rector\Set\Typo3SetList;
 
 return RectorConfig::configure()
     ->withPaths([__DIR__ . '/packages'])
     ->withSets([
-        // Target v13 minimum - these patterns also work on v14
-        Typo3LevelSetList::UP_TO_TYPO3_13,
-        Typo3SetList::TYPO3_13,
+        Typo3SetList::TYPO3_14,
     ]);
 ```
 
-## 4. Key Migration Patterns (v13/v14 Compatible)
+## 4. Key Migration Patterns (TYPO3 v14)
 
 ### Fluid ViewFactory (Replaces StandaloneView)
 
-The ViewFactory approach works on both v13 and v14:
+The ViewFactory approach works on TYPO3 v14:
 
 ```php
 <?php
@@ -195,7 +194,7 @@ final class RenderingService
 }
 ```
 
-### ExtBase Controller Response (Required in v13+)
+### ExtBase controller response (TYPO3 v14)
 
 ```php
 <?php
@@ -208,7 +207,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 final class ItemController extends ActionController
 {
-    // ✅ Correct: Return ResponseInterface (required v13+)
+    // ✅ Correct: Return ResponseInterface (required in TYPO3 v14)
     public function listAction(): ResponseInterface
     {
         $items = $this->itemRepository->findAll();
@@ -234,7 +233,7 @@ final class ItemController extends ActionController
 
 ### PSR-14 Events (Preferred over Hooks)
 
-PSR-14 events work on both v13 and v14. Use them instead of legacy hooks:
+PSR-14 events work on TYPO3 v14. Use them instead of legacy hooks:
 
 ```php
 <?php
@@ -257,7 +256,7 @@ final class ModifyPageLinkListener
 }
 ```
 
-### Backend Module Registration (v13/v14)
+### Backend Module Registration (TYPO3 v14)
 
 ```php
 <?php
@@ -297,7 +296,7 @@ services:
       - '../Classes/Domain/Model/*'
 ```
 
-## 5. TCA Best Practices (v13/v14)
+## 5. TCA Best Practices (TYPO3 v14)
 
 ### Static TCA Only
 
@@ -340,20 +339,15 @@ $GLOBALS['TCA']['tt_content']['types']['myextension_mytype'] = [
 ];
 ```
 
-## 6. Version Compatibility Table
+## 6. TYPO3 v14 platform snapshot
 
-| Feature | TYPO3 v13 | TYPO3 v14 | Notes |
-|---------|-----------|-----------|-------|
-| PHP 8.2 | Required | Required | Minimum for both |
-| PHP 8.3 | Supported | Supported | Recommended |
-| PHP 8.4 | Supported | Supported | Available |
-| Symfony 7 | 7.1 | 7.2 | Minor differences |
-| PSR-14 Events | Full | Full | Preferred pattern |
-| Legacy Hooks | Working | Deprecated | Migrate to events |
-| ViewFactory | Available | Available | Use this approach |
-| StandaloneView | Deprecated | Removed | Migrate now |
-| Content Blocks | Available | Enhanced | New features in v14 |
-| TCA Runtime Changes | Deprecated | Forbidden | Use static TCA only |
+| Topic | TYPO3 v14 |
+|-------|-----------|
+| PHP | 8.2 minimum; 8.3/8.4 supported |
+| PSR-14 events | Preferred over legacy hooks |
+| ViewFactory | Preferred over removed StandaloneView patterns |
+| Content Blocks | Current major aligned with v14 (see Packagist) |
+| TCA | Static `Configuration/TCA` only — no runtime `$GLOBALS['TCA']` writes |
 
 ## 7. Step-by-Step Migration Process
 
@@ -370,7 +364,7 @@ ddev exec vendor/bin/phpunit -c packages/my_extension/Tests/phpunit.xml
 tail -f var/log/typo3_deprecations_*.log
 ```
 
-### 2. Configure Rector for Dual-Version
+### 2. Configure Rector for TYPO3 v14
 
 ```php
 <?php
@@ -382,7 +376,7 @@ use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
 return RectorConfig::configure()
     ->withPaths([__DIR__ . '/packages/my_extension/Classes'])
     ->withSets([
-        Typo3LevelSetList::UP_TO_TYPO3_13,
+        Typo3LevelSetList::UP_TO_TYPO3_14,
     ]);
 ```
 
@@ -406,23 +400,12 @@ git diff
 - Update TCA configurations manually
 - Test all backend modules
 
-### 5. Test on Both Versions
+### 5. Test on TYPO3 v14
 
 ```bash
-# Test on v13
-ddev composer require "typo3/cms-core:^13.0" --no-update
-ddev composer update
-ddev typo3 cache:flush
-
-# Run tests
-ddev exec vendor/bin/phpunit
-
-# Test on v14
 ddev composer require "typo3/cms-core:^14.0" --no-update
 ddev composer update
 ddev typo3 cache:flush
-
-# Run tests again
 ddev exec vendor/bin/phpunit
 ```
 
@@ -430,7 +413,7 @@ ddev exec vendor/bin/phpunit
 
 ```bash
 git add -A
-git commit -m "feat: Add TYPO3 v13/v14 dual-version support"
+git commit -m "feat: Apply Rector migrations for TYPO3 v14"
 ```
 
 ## 8. Troubleshooting
@@ -454,7 +437,7 @@ ddev composer outdated
 ddev composer show -l
 ```
 
-Search for v13/v14-compatible alternatives on:
+Search for TYPO3 v14-compatible alternatives on:
 - https://extensions.typo3.org
 - https://packagist.org
 
@@ -484,7 +467,7 @@ Rector automatically handles namespace changes between versions.
 // ❌ Old (deprecated)
 GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
 
-// ✅ New (v13/v14 compatible)
+// ✅ New (TYPO3 v14)
 $request = $GLOBALS['TYPO3_REQUEST'];
 $normalizedParams = $request->getAttribute('normalizedParams');
 $host = $normalizedParams->getRequestHost();
@@ -494,7 +477,7 @@ $host = $normalizedParams->getRequestHost();
 
 ```php
 <?php
-// ❌ Old (removed in v13+)
+// ❌ Old (removed in TYPO3 v14 migration path)
 $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 $service = $objectManager->get(MyService::class);
 
@@ -508,12 +491,11 @@ public function __construct(
 
 - **TYPO3 Rector**: https://github.com/sabbelasichon/typo3-rector
 - **Upgrade Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Upgrading/Index.html
-- **v13 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-13/Index.html
 - **v14 Changelog**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14/Index.html
 
-## v14-Only Rector Targets
+## v14-only Rector targets
 
-> The following patterns are **v14-only** migration targets for Rector. Use `Typo3LevelSetList::UP_TO_TYPO3_14` when it becomes available, or apply these manually.
+> The following patterns are **v14-focused** migration targets. Prefer `Typo3LevelSetList::UP_TO_TYPO3_14`; apply remaining items manually if Rector skips them.
 
 ### New Rector Migration Targets **[v14 only]**
 

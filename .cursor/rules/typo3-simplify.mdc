@@ -6,15 +6,16 @@ description: >-
   and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature
   or before merging a PR. Use when working with simplify, clean up, refine, code quality,
   reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.
-compatibility: TYPO3 12.4 - 14.x
+compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
+license: MIT / CC-BY-SA-4.0
 ---
 
 # TYPO3 Code Simplifier
 
 > Adapted from Boris Cherny's (Anthropic) code-simplifier agent for TYPO3 contexts.
-> **Target:** TYPO3 v14 (primary), v13, v12.4 LTS (fallbacks noted).
+> **Target:** TYPO3 v14.x only.
 
 Simplify and refine recently changed TYPO3 code. Preserve all functionality. Focus on
 clarity over cleverness, TYPO3 API usage over custom implementations, and v14 patterns
@@ -140,7 +141,7 @@ final class MyService
 - [ ] Use `'nullable' => true` instead of `'eval' => 'null'`
 - [ ] Remove `'default' => ''` on string fields (already default)
 - [ ] Consolidate palette definitions (remove single-field palettes)
-- [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` (v13.3+): `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
+- [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` on TYPO3 v14: `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
 - [ ] Use palettes for enablecolumns: `visibility` for `hidden`, `access` for `starttime, endtime`
 - [ ] Remove convention fields from `ext_tables.sql` (auto-added to database)
 - [ ] Remove unused `showitem` fields from types
@@ -194,18 +195,18 @@ After analysis, report findings grouped by file:
 
 ## Configuration/TCA/Overrides/tt_content.php
 
-:8 — v12 items format ['Label', 'value'] → ['label' => 'Label', 'value' => 'value']
+:8 — legacy items format `['Label', 'value']` → `['label' => 'Label', 'value' => 'value']`
 
 Applied 7 fixes. No behavior changes. Run tests to verify.
 ```
 
-## Version Fallbacks
+## Version fallbacks
 
-When simplifying for v12/v13 compatibility:
-- Keep `Configuration/RequestMiddlewares.php` alongside `#[AsMiddleware]`
+When simplifying TYPO3 v14 code that still uses transitional patterns:
+- Register PSR-15 middleware in `Configuration/RequestMiddlewares.php` (Core-supported pattern)
 - Keep `Services.yaml` event listener config alongside `#[AsEventListener]`
 - Keep numeric TCA `items` arrays alongside `label`/`value` format
-- Use `#[Autoconfigure]` only on v14+ (not available in v12)
+- Use `#[Autoconfigure]` where appropriate (TYPO3 v14)
 
 ## v14-Only Simplification Targets
 
@@ -231,6 +232,6 @@ When simplifying for v12/v13 compatibility:
 Adapted from Boris Cherny's (Anthropic) [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
 agent and Claude Code's bundled `/simplify` skill for TYPO3 contexts.
 
-**Copyright (c) Anthropic** — Code simplification patterns (MIT License)
+**Copyright (c) Anthropic** — Code simplification patterns (Apache-2.0 License)
 
 Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.

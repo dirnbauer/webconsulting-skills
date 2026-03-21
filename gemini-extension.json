@@ -337,15 +337,15 @@
 ,
     "typo3-rector": {
       "name": "typo3-rector",
-      "description": "TYPO3 upgrade patterns using Rector for dual-version support",
+      "description": "TYPO3 v14 upgrade patterns using Rector",
       "triggers": ["rector", "upgrade", "migration", "refactoring"],
       "path": "${extensionPath}/skills/typo3-rector"
     }
 ,
     "typo3-update": {
       "name": "typo3-update",
-      "description": "TYPO3 v13/v14 dual-version development guide",
-      "triggers": ["update", "upgrade", "v13", "v14"],
+      "description": "TYPO3 v14 development guide (constraints, APIs, upgrades)",
+      "triggers": ["update", "upgrade", "v14", "migration"],
       "path": "${extensionPath}/skills/typo3-update"
     }
 ,

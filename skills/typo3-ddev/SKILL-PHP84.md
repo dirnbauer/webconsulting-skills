@@ -3,7 +3,7 @@ name: typo3-ddev-php84
 description: PHP 8.4 configuration for DDEV TYPO3 development. Container setup, Xdebug 3.4, and multi-version testing.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-ddev
   - php-modernization
@@ -15,7 +15,7 @@ triggers:
 
 # DDEV with PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-ddev](./SKILL.md) - Main DDEV guide
@@ -119,7 +119,7 @@ ddev restart
 {
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     },
     "config": {
         "platform": {

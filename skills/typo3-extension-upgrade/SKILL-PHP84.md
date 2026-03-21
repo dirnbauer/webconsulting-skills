@@ -3,7 +3,7 @@ name: typo3-extension-upgrade-php84
 description: Extension upgrade patterns for PHP 8.4. Rector rules, PHPStan configuration, and compatibility fixes.
 version: 1.0.0
 php_compatibility: "8.4+"
-typo3_compatibility: "13.0 - 14.x"
+typo3_compatibility: "14.x"
 related_skills:
   - typo3-extension-upgrade
   - php-modernization
@@ -14,7 +14,7 @@ triggers:
 
 # Extension Upgrade to PHP 8.4
 
-> **Compatibility:** PHP 8.4+, TYPO3 v13.x and v14.x
+> **Compatibility:** PHP 8.4+, TYPO3 v14.x
 > 
 > **Related Skills:**
 > - [typo3-extension-upgrade](./SKILL.md) - Main extension upgrade guide
@@ -30,7 +30,7 @@ triggers:
 {
     "require": {
         "php": "^8.2",
-        "typo3/cms-core": "^13.0 || ^14.0"
+        "typo3/cms-core": "^14.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
@@ -48,7 +48,7 @@ $EM_CONF[$_EXTKEY] = [
     'version' => '3.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '13.0.0-14.99.99',
+            'typo3' => '14.0.0-14.99.99',
         ],
     ],
 ];
@@ -134,7 +134,7 @@ jobs:
     strategy:
       matrix:
         php: ['8.2', '8.3', '8.4']
-        typo3: ['^13.0', '^14.0']
+        typo3: ['^14.0']
         exclude:
           - php: '8.2'
             typo3: '^14.0'
