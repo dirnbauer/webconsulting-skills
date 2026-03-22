@@ -231,7 +231,7 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 | `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
 | Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
-| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime`, `flex`, `json`, `uuid`) where supported |
+| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime` (without custom `dbType`), `flex`, `json`, `uuid`) where supported |
 | Custom localization parsers | Remove, use Symfony Translation Component |
 | `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |
 

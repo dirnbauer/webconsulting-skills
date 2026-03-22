@@ -112,11 +112,11 @@ Releases: main
 
 ### 5. Push to Gerrit
 
-Many developers use a dedicated remote (often named `gerrit`). The [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) also documents configuring **`origin`** with a separate **push** URL to Gerrit (`git remote set-url origin --push …`), in which case you push with `git push origin HEAD:refs/for/main` instead of a `gerrit` remote. **Use the remote name and ref your checkout actually uses.**
+The [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) documents configuring **`origin`** with a separate **push** URL to Gerrit (`git config remote.origin.pushurl …`), so you push with `git push origin HEAD:refs/for/main`. This is the setup shown in Section "Clone TYPO3 Core" above.
 
 ```bash
-# Push for review (example: dedicated remote named "gerrit")
-git push gerrit HEAD:refs/for/main
+# Push for review (using origin with Gerrit push URL)
+git push origin HEAD:refs/for/main
 ```
 
 ## Commit Message Format
@@ -191,7 +191,7 @@ git add .
 git commit --amend
 
 # Push again
-git push gerrit HEAD:refs/for/main
+git push origin HEAD:refs/for/main
 ```
 
 ### Rebase on Latest Main
@@ -204,7 +204,7 @@ git fetch origin main
 git rebase origin/main
 
 # Force push (allowed for your own patches)
-git push gerrit HEAD:refs/for/main --force
+git push origin HEAD:refs/for/main --force
 ```
 
 ### Backporting to a Stable Branch
@@ -270,7 +270,7 @@ git add .
 git rebase --continue
 
 # Push updated patch
-git push gerrit HEAD:refs/for/main --force
+git push origin HEAD:refs/for/main --force
 ```
 
 ### CI Failures

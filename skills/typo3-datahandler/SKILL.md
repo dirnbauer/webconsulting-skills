@@ -280,6 +280,13 @@ final class ImportService
         $dataHandler->start($data, $cmd, $backendUser);
         $dataHandler->process_datamap();
         $dataHandler->process_cmdmap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
     }
 }
 ```

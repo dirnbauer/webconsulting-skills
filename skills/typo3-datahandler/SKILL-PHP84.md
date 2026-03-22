@@ -360,6 +360,13 @@ final class LegacyContentService
         $dataHandler->start(['tt_content' => ['NEW_1' => $data]], []);
         $dataHandler->process_datamap();
 
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
+
         return (int) ($dataHandler->substNEWwithIDs['NEW_1'] ?? 0);
     }
 

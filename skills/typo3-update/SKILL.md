@@ -789,13 +789,13 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 
 ### Plugin Subtypes Removed **[v14 only]**
 
-- **`switchableControllerActions`:** deprecated in **TYPO3 v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)) and removed later — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
+- **`switchableControllerActions`:** deprecated in **TYPO3 v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)) and removed later — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
 - **`list_type` subtypes / plugin list types:** further tightened in **v14** (#105538) — each variant needs its own `configurePlugin()` / registration and TypoScript/FlexForm split.
 
 ### EXT:form Hooks → PSR-14 Events **[v14 only]**
 
 Hook-to-event migration requires manual rewrite of hook implementations:
-- All EXT:form hooks removed (incl. **`afterInitializeCurrentPage`**, Breaking #107566): `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`, `afterInitializeCurrentPage`.
+- EXT:form hooks removed across multiple breaking changes (e.g., #107566 for `afterInitializeCurrentPage`, #107518, #107528, #107568, #107569, #107343, #107380, #107382, #107388, #98239): `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`, `afterInitializeCurrentPage`.
 - Replace with corresponding PSR-14 events (e.g., `BeforeFormIsSavedEvent`, `BeforeRenderableIsRenderedEvent`).
 
 ### Frontend Asset Pipeline **[v14 only]**

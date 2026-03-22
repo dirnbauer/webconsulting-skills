@@ -28,7 +28,7 @@ This skill is based on 17 authoritative sources:
 4. [Configuration Options (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Configuration/Index.html)
 5. [PSR-14 Events (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Events/Index.html)
 6. [Versioning & Workspaces (TYPO3 Explained / Core API)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Workspaces/Index.html)
-7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Index.html#versioningws)
+7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Index.html#confval-ctrl-versioningws)
 8. [Restriction Builder (TYPO3 Explained / Doctrine DBAL)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/DoctrineDbal/RestrictionBuilder/Index.html)
 9. [b13 Blog: The Elegant Efficiency of TYPO3 Overlays (Benni Mack)](https://b13.com/blog/mastering-localization-and-content-staging)
 10. [Scheduler Tasks (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Scheduler/Index.html)

@@ -39,7 +39,7 @@ This skill covers using DataHandler to create and manage Content Blocks records 
 | Approach | Field Pattern | Example |
 |----------|--------------|---------|
 | Classic | `tx_extkey_fieldname` | `tx_myext_subheadline` |
-| Content Blocks (default) | `vendor_name_fieldname` | `myvendor_hero_subheadline` |
+| Content Blocks (default) | `vendor_name_fieldname` (dashes removed from vendor and block name) | `myvendor_hero_subheadline` |
 | Content Blocks (prefixFields: false) | `fieldname` or custom | `subheadline` |
 
 ---

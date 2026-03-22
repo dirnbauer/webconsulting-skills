@@ -350,7 +350,7 @@ final class CustomValidatorListener
 | `UploadValidator` | File size, extension whitelist |
 | `PasswordValidator` | Password match and strength |
 | `CaptchaValidator` | Built-in CAPTCHA |
-| *(Spam shield)* | Uses `Domain\Service\SpamShield\AbstractMethod` subclasses (`HoneyPodMethod`, `LinkMethod`, …) — **not** a single `SpamShieldValidator` class |
+| *(Spam shield)* | Spam checking is distributed across multiple `Domain\Validator\SpamShield\AbstractMethod` subclasses (`HoneyPodMethod`, `LinkMethod`, …), orchestrated by `SpamShieldValidator` |
 | `UniqueValidator` | Unique field values |
 | `ForeignValidator` | Validate against foreign table |
 | `CustomValidator` | TypoScript-based custom rules |

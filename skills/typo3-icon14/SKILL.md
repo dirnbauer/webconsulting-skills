@@ -488,7 +488,7 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 | `IconSize::LARGE` | 48px | Wizard icons, large previews |
 | `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
-| `IconSize::DEFAULT` | 16×16 via `getDimensions()`; rendered size may vary depending on CSS context | Prefer `SMALL` when you need a fixed **16px** icon |
+| `IconSize::DEFAULT` | `1em` (CSS) / 16×16 (PHP `getDimensions()`) — actual rendered size depends on the parent element's `font-size` | Prefer `SMALL` when you need a fixed **16px** icon |
 | `IconSize::OVERLAY` | 16px | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
 
 When no size is passed to `IconFactory->getIcon()`, the default is `IconSize::MEDIUM` (32px).

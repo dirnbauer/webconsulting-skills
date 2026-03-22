@@ -149,7 +149,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of **`solr:9.8`**, while the EXT:solr version matrix often recommends **Solr 9.10.1** for current TYPO3 v14 stacks. For parity with production, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of `solr:9.8`, but the actual `docker-compose.typo3-solr.yaml` fallback is `solr:9.10` — making the runtime default **`solr:9.10`** unless overridden. For explicit control, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 
@@ -191,7 +191,9 @@ hooks:
 ```yaml
 services:
   solr:
-    image: typo3solr/ext-solr:14.0
+    # Note: as of March 2026, no stable 14.0 tag exists on Docker Hub.
+    # Use 14.0.x-dev for testing, or 13.1 for production until 14.0 ships.
+    image: typo3solr/ext-solr:14.0.x-dev
     ports:
       - "8983:8983"
     volumes:
@@ -327,7 +329,7 @@ graph TD
 - Only indexing pages and structured records (news, events, products) via Index Queue
 - EXT:solr handles page content and record fields natively without Tika
 
-**Version:** EXT:tika 13.1 requires Apache Tika Server/App **3.2.3+**. Track **Apache Tika** and **Apache Solr** security advisories for your deployed versions — do not rely on unverified CVE numbers in skills; verify on [Apache Solr security](https://solr.apache.org/security.html) / vendor advisories.
+**Version:** EXT:tika **13.1** (the current v13 release) requires Apache Tika Server/App **3.2.3+**. A v14-compatible EXT:tika release is not yet available on the official Version Matrix — track Packagist and GitHub for updates. For Apache Tika and Solr security advisories, verify on [Apache Solr security](https://solr.apache.org/security.html) / vendor advisories.
 
 See [SKILL-SOLRFAL.md](SKILL-SOLRFAL.md) for complete file indexing setup.
 

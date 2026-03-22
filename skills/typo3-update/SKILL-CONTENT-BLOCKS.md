@@ -171,7 +171,7 @@ final class MigrateDuringUpgradeCommand extends Command
 
 - [typo3-update SKILL.md](./SKILL.md)
 - [typo3-content-blocks SKILL-MIGRATION](../typo3-content-blocks/SKILL-MIGRATION.md)
-- [TYPO3 Upgrade Guide](https://docs.typo3.org/m/typo3/guide-installation/main/en-us/Upgrade/)
+- [TYPO3 Upgrade Guide](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Administration/Upgrade/Index.html)
 
 ---
 

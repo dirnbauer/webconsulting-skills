@@ -62,7 +62,7 @@ return [
         // Encryption key (generate unique per installation)
         'encryptionKey' => 'generate-unique-key-per-installation',
         
-        // Trusted hosts pattern (CRITICAL) — Core wraps the pattern in `/^...$/`; omit `^` and `$`. Avoid `.*\\.example\\.com` (matches `evil-example.com`)
+        // Trusted hosts pattern (CRITICAL) — Core wraps the pattern in `/^...$/`; omit `^` and `$`. Avoid `.*example\\.com` (without `\\.` before `example` — matches `evil-example.com`). Note: `.*\\.example\\.com` requires a subdomain and won't match bare `example.com`.
         'trustedHostsPattern' => '(www\\.)?example\\.com',
         
         // File handling security
