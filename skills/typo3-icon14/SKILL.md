@@ -489,7 +489,7 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 | `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
 | `IconSize::DEFAULT` | `1em` (CSS) / 16×16 (PHP `getDimensions()`) — actual rendered size depends on the parent element's `font-size` | Prefer `SMALL` when you need a fixed **16px** icon |
-| `IconSize::OVERLAY` | 16px | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
+| `IconSize::OVERLAY` | 16×16 (PHP) / 68.75% of parent (CSS) | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
 
 When no size is passed to `IconFactory->getIcon()`, the default is `IconSize::MEDIUM` (32px).
 

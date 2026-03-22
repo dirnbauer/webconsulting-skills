@@ -149,7 +149,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the add-on README documents a default `SOLR_BASE_IMAGE` of `solr:9.8`, but the actual `docker-compose.typo3-solr.yaml` fallback is `solr:9.10` — making the runtime default **`solr:9.10`** unless overridden. For explicit control, override via `.ddev/.env.solr` (see add-on README: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **Solr image version:** the DDEV Solr add-on defaults `SOLR_BASE_IMAGE` to `solr:9`, and the generated compose file is `.ddev/docker-compose.solr.yaml`. For explicit control, override via `.ddev/.env.solr` (for example: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 

@@ -22,6 +22,7 @@ routeEnhancers:
     routePath: '{sitemap}'
     _arguments:
       sitemap: 'tx_seo/sitemap'
+      page: 'tx_seo/page'
 ```
 
 ### Fluid Page Meta & Title ViewHelpers **[v14 only]**

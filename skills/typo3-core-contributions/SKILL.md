@@ -220,10 +220,10 @@ git pull origin <target-branch>
 git cherry-pick -x <merge-commit-on-main>
 
 # Push for review on THAT branch (not main)
-git push <push-remote> HEAD:refs/for/<target-branch>
+git push origin HEAD:refs/for/<target-branch>
 ```
 
-Use the remote name your checkout uses (`gerrit` or an `origin` push URL). See the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the exact branch naming policy.
+Use `origin`, with its Gerrit push URL configured as shown above. See the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the exact branch naming policy.
 
 ## Code Review
 
