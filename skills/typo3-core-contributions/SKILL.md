@@ -41,11 +41,12 @@ git config --global user.email "your.email@example.com"
 
 ### Clone TYPO3 Core
 
-**Recommended:** clone the public Git repository, then configure Gerrit as the **push** target (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for current URLs).
+**Recommended:** use the SSH clone method from the public GitHub mirror, then configure Gerrit as the **push** target (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for current URLs).
 
 ```bash
-git clone https://github.com/typo3/typo3.git typo3
+git clone git@github.com:typo3/typo3.git typo3
 cd typo3
+git config branch.autosetuprebase remote
 # Official guide: configure origin's push URL and refspec to Gerrit:
 git config remote.origin.pushurl "ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git"
 git config remote.origin.push +refs/heads/main:refs/for/main
@@ -137,15 +138,16 @@ git push origin HEAD:refs/for/main
 | `[SECURITY]` | Security flag **prepended** to the real type, e.g. `[SECURITY][BUGFIX] Fix XSS in form engine` — not a standalone type (follow Security Team process) |
 | `[!!!]` | Breaking change prefix (e.g., `[!!!][TASK]`) |
 
-### Required Footer
+### Commit Message Trailers
 
 ```
 Resolves: #12345
 Releases: main
 ```
 
-- `Resolves:` - Issue number on forge.typo3.org
-- `Releases:` - Target branches (`main` for current development; stable backport branches per Forge issue)
+- `Resolves:` - Required Forge issue reference
+- `Related:` - Optional extra Forge issue reference; do not use it on its own
+- `Releases:` - Optional target branches when you explicitly record where the patch should land (for example `main`, or `main, 13.4` for planned backports)
 - **`Change-Id:`** — Gerrit requires this trailer on every commit; it is added by the **commit-msg** hook (`composer gerrit:setup` or `cp Build/git-hooks/commit-msg …`). Without it, `git push` to Gerrit is rejected.
 
 ### Example Commit Messages

@@ -19,10 +19,12 @@ routeEnhancers:
       sitemap.xml: 1533906435
   SitemapPagination:
     type: Simple
-    routePath: '{sitemap}'
+    routePath: '{sitemap}/{page}'
     _arguments:
       sitemap: 'tx_seo/sitemap'
       page: 'tx_seo/page'
+    defaults:
+      page: ''
 ```
 
 ### Fluid Page Meta & Title ViewHelpers **[v14 only]**
