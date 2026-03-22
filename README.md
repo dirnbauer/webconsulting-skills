@@ -2055,15 +2055,15 @@ grep -r "DataHandler" skills/
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
-| `typo3-ddev` | Local DDEV development environment | webconsulting |
-| `typo3-testing` | Unit, functional, E2E, architecture testing | webconsulting |
-| `typo3-conformance` | Extension standards compliance checker | webconsulting |
-| `typo3-docs` | Documentation using docs.typo3.org standards | webconsulting |
-| `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | webconsulting |
+| `typo3-ddev` | Local DDEV development environment | Netresearch |
+| `typo3-testing` | Unit, functional, E2E, architecture testing | Netresearch |
+| `typo3-conformance` | Extension standards compliance checker | Netresearch |
+| `typo3-docs` | Documentation using docs.typo3.org standards | Netresearch |
+| `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | Netresearch |
 | **Upgrade & Migration** | | |
 | `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
 | `typo3-update` | TYPO3 TYPO3 v14 migration guide (prefers v14) | webconsulting |
-| `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | webconsulting |
+| `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | Netresearch |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | webconsulting |
 | `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | webconsulting |
 | **Security & Operations** | | |
@@ -2077,20 +2077,20 @@ grep -r "DataHandler" skills/
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
 | `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
-| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | webconsulting |
+| `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |
 | `deepfake-detection` | Multimodal media authentication, synthetic media forensics | webconsulting |
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
-| `enterprise-readiness` | OpenSSF, SLSA, supply chain security | webconsulting |
+| `enterprise-readiness` | OpenSSF, SLSA, supply chain security | Netresearch |
 | **Code Quality & Refactoring** | | |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | Softaworks |
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | sickn33 |
 | `find-skills` | Discover and install skills from skills.sh ecosystem | Vercel |
 | **PHP & Tools** | | |
-| `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | webconsulting |
-| `cli-tools` | CLI tool management and auto-installation | webconsulting |
-| `context7` | Library documentation lookup via REST API | webconsulting |
+| `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
+| `cli-tools` | CLI tool management and auto-installation | Netresearch |
+| `context7` | Library documentation lookup via REST API | Netresearch |
 | `firecrawl` | Firecrawl CLI for web scraping, search, and research | Firecrawl |
 | `skill-creator` | Guide for creating and packaging Agent Skills | Anthropic |
 | **Database** | | |
@@ -2297,6 +2297,12 @@ To enable/disable external skill syncing, edit `.sync-config.json` and set `enab
 
 The `sync-skills.yml` workflow runs weekly (Mondays 06:00 UTC) and can be triggered manually. It syncs enabled skills from upstream repos and opens a PR on the `chore/sync-skills` branch.
 
+The repository also enforces upstream attribution guardrails in CI via
+`scripts/check_attribution_guardrails.py` and `.github/workflows/attribution-guardrails.yml`.
+That check fails if a Netresearch-derived skill loses its `Credits & Attribution` block, or if any
+upstream-derived skill loses its source link, or if the README stops naming upstream sources and
+their original repositories explicitly.
+
 **Required repo setting:** Go to **Settings > Actions > General > Workflow permissions** and enable **"Allow GitHub Actions to create and approve pull requests"** for the workflow to create PRs automatically.
 
 > **Note:** The installer removes and recreates symlinks on each run, so running `./install.sh` or `./update.sh` after pulling always ensures your skills are up to date.
@@ -2317,10 +2323,17 @@ Skills in this collection cover:
 The following repositories are the source for skills in this collection:
 
 ### Netresearch DTT GmbH (TYPO3, PHP, Security, Enterprise — 11 skills)
-- https://github.com/netresearch
-- Skills: `php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
-  `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
-  `typo3-core-contributions`, `typo3-extension-upgrade`
+- `php-modernization`: https://github.com/netresearch/php-modernization-skill
+- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
+- `security-audit`: https://github.com/netresearch/security-audit-skill
+- `cli-tools`: https://github.com/netresearch/cli-tools-skill
+- `context7`: https://github.com/netresearch/context7-skill
+- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
+- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `typo3-conformance`: https://github.com/netresearch/typo3-conformance-skill
+- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
+- `typo3-core-contributions`: https://github.com/netresearch/typo3-core-contributions-skill
+- `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
 
 ### Softaworks (Agent MD Refactor)
 - https://github.com/softaworks/agent-toolkit
@@ -2352,8 +2365,11 @@ The following repositories are the source for skills in this collection:
 ### OpenHands (AI Readiness)
 - https://github.com/OpenHands/skills
 
-### Anthropic (Document Processing, Frontend Design & Skill Creator)
-- https://github.com/anthropics/skills
+### Anthropic (Document Processing, Frontend Design, Skill Creator, Simplify Inspiration)
+- `document-processing`: https://github.com/anthropics/skills/tree/main/skills/document-processing
+- `frontend-design`: https://github.com/anthropics/skills/tree/main/skills/frontend-design
+- `skill-creator`: https://github.com/anthropics/skills/tree/main/skills/skill-creator
+- `typo3-simplify` inspiration: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
 
 ### ehmo (Platform Design Skills)
 - https://github.com/ehmo/platform-design-skills
@@ -2365,8 +2381,15 @@ The following repositories are the source for skills in this collection:
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
 2. Follow the SKILL.md format (see existing skills)
-3. Run `./install.sh` to test
-4. Submit a pull request
+3. If the skill is adapted from an upstream source, add explicit attribution in `SKILL.md`
+   using `Adapted from [Owner](URL).` or `Original repository: URL`
+4. Keep the full Netresearch `Credits & Attribution` block for Netresearch-derived skills
+5. Run `python3 scripts/check_attribution_guardrails.py` and `./install.sh` to test
+6. Submit a pull request
+
+Most upstream-derived skills are auto-discovered from their `SKILL.md` attribution, so you do not
+need to register every new upstream skill in `scripts/audit_skills.py`. Only add a manual override
+there if the repo should display a different origin owner than the upstream repository itself.
 
 ## License
 
@@ -2403,7 +2426,18 @@ The following 11 skills are adapted from Netresearch's work:
 `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
 `typo3-core-contributions`, `typo3-extension-upgrade`
 
-Original repositories: https://github.com/netresearch
+Original repositories:
+- `php-modernization`: https://github.com/netresearch/php-modernization-skill
+- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
+- `security-audit`: https://github.com/netresearch/security-audit-skill
+- `cli-tools`: https://github.com/netresearch/cli-tools-skill
+- `context7`: https://github.com/netresearch/context7-skill
+- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
+- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `typo3-conformance`: https://github.com/netresearch/typo3-conformance-skill
+- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
+- `typo3-core-contributions`: https://github.com/netresearch/typo3-core-contributions-skill
+- `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
 
 **Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization,
 and enterprise best practices (MIT / CC-BY-SA-4.0)

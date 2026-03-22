@@ -373,4 +373,6 @@ incorporating elements of NIST SP 800-61, SANS frameworks, and industry best pra
 
 Developed by webconsulting.at for the Claude skill collection.
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

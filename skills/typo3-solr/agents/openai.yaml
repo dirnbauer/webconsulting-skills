@@ -1,0 +1,3 @@
+display_name: "Apache Solr for TYPO3"
+short_description: "Expert guidance on Apache Solr search integration for TYPO3: installation, Index Queue, faceting, suggest, PSR-14 events, custom indexers, LLM/vector search (Solr native), DDEV/Docker/production setup, deep debugging & troubleshooting, and file indexing via solrfal."
+default_prompt: "Help me with Apache Solr for TYPO3: expert guidance on apache solr search integration for typo3: installation, index queue, faceting, suggest, psr-14 events, custom indexers, llm/vector search (solr native), ddev/docker/production setup, deep debugging & troubleshooting, and file indexing via solrfal."

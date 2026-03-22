@@ -350,3 +350,5 @@ Adapted from Boris Cherny's (Anthropic) Claude Code bundled `/batch` skill for T
 **Copyright (c) Anthropic** — Batch operation patterns (MIT License)
 
 Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

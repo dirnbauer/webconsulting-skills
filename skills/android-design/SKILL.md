@@ -1,5 +1,5 @@
 ---
-name: android-design-guidelines
+name: android-design
 description: Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.
 license: MIT
 metadata:
@@ -1048,4 +1048,6 @@ Use this checklist to evaluate Android UI implementations:
 | Blocking UI on permission denial | Punishes the user | Graceful degradation |
 | Manual color palette selection | Inconsistent tonal relationships | Use Material Theme Builder |
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

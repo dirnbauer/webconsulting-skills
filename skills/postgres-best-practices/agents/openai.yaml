@@ -1,0 +1,3 @@
+display_name: "Supabase Postgres Best Practices"
+short_description: "Postgres performance optimization and best practices from Supabase."
+default_prompt: "Help me with Supabase Postgres Best Practices: postgres performance optimization and best practices from supabase."

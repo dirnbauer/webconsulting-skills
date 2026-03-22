@@ -200,4 +200,6 @@ Before completing, verify:
 - [ ] theme-color is set to match brand
 - [ ] User informed of cache-busting URLs
 
+
+Adapted from [Stevy Smith](https://github.com/stevysmith/og-image-skill).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

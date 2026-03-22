@@ -1,0 +1,3 @@
+display_name: "Context7 Documentation Lookup Skill"
+short_description: "Fetch up-to-date library documentation via Context7 REST API."
+default_prompt: "Help me with Context7 Documentation Lookup Skill: fetch up-to-date library documentation via context7 rest api."

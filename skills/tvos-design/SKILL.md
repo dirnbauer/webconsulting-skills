@@ -1,5 +1,5 @@
 ---
-name: tvos-design-guidelines
+name: tvos-design
 description: Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback.
 license: MIT
 metadata:
@@ -372,4 +372,6 @@ Use this checklist when reviewing a tvOS app design or implementation.
 | Long forms | Keyboard input is painful on tvOS | Pre-fill, use profiles, or offload to iPhone |
 | Thin/light typography | Disappears on TV displays | Medium weight minimum |
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

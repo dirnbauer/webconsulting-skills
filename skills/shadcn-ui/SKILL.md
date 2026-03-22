@@ -1932,4 +1932,6 @@ export function AdvancedForm() {
 - Tailwind CSS: https://tailwindcss.com
 - Examples: https://ui.shadcn.com/examples
 
+
+Adapted from [Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio/developer-kit).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -39,4 +39,6 @@ When a user provides a file or pattern argument:
 
 If no files specified, ask the user which files to review.
 
+
+Adapted from [Vercel](https://github.com/vercel-labs/agent-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

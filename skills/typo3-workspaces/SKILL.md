@@ -1675,3 +1675,5 @@ Special thanks to the TYPO3 Core Team and **[b13 GmbH](https://b13.com/)** (Benn
 their excellent explanation of the overlay mechanism.
 
 Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

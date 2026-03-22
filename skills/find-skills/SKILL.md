@@ -142,4 +142,6 @@ If this is something you do often, you could create your own skill:
 npx skills init my-xyz-skill
 ```
 
+
+Adapted from [Vercel](https://github.com/vercel-labs/skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -485,4 +485,6 @@ Please add steps to your TodoList, if you have such a thing, to make sure you do
 
 Good luck!
 
+
+Adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

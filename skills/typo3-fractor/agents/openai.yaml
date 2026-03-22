@@ -1,0 +1,3 @@
+display_name: "TYPO3 Fractor Skill"
+short_description: "Automated non-PHP migrations for TYPO3 upgrades using Fractor."
+default_prompt: "Help me with TYPO3 Fractor Skill: automated non-php migrations for typo3 upgrades using fractor."

@@ -1,5 +1,5 @@
 ---
-name: ios-design-guidelines
+name: ios-design
 description: Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.
 license: MIT
 metadata:
@@ -1076,4 +1076,6 @@ These are common mistakes that violate the iOS Human Interface Guidelines. Never
 
 15. **Dark Mode as an afterthought** — Using hardcoded colors means the app is either broken in Dark Mode or light mode. Always use semantic colors.
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

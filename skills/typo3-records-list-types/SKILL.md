@@ -1,19 +1,20 @@
 ---
 name: typo3-records-list-types
 description: Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.
-version: 1.0.0
-typo3_compatibility: "14.0 - 14.x"
-triggers:
-  - records list types
-  - grid view backend
-  - compact view
-  - teaser view
-  - custom view type
-  - backend record cards
-  - drag and drop records
-  - records module view
-  - view mode tsconfig
 license: MIT / CC-BY-SA-4.0
+metadata:
+  version: "1.0.0"
+  typo3_compatibility: "14.0 - 14.x"
+  triggers:
+    - records list types
+    - grid view backend
+    - compact view
+    - teaser view
+    - custom view type
+    - backend record cards
+    - drag and drop records
+    - records module view
+    - view mode tsconfig
 ---
 
 # TYPO3 Records List Types

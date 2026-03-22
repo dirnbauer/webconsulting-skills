@@ -126,4 +126,6 @@ firecrawl credit-usage
 firecrawl credit-usage --json --pretty -o .firecrawl/credits.json
 ```
 
+
+Adapted from [Firecrawl](https://github.com/firecrawl/cli).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -1,0 +1,3 @@
+display_name: "TYPO3 Code Simplifier"
+short_description: "Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability while preserving functionality."
+default_prompt: "Help me with TYPO3 Code Simplifier: simplify and refine typo3 extension code for clarity, consistency, and maintainability while preserving functionality."

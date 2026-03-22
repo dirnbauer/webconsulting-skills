@@ -1,5 +1,5 @@
 ---
-name: macos-design-guidelines
+name: macos-design
 description: Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.
 license: MIT
 metadata:
@@ -1113,4 +1113,6 @@ Before shipping a Mac app, verify:
 
 15. **No drag and drop** — Mac is a drag-and-drop platform. If users can see content, they expect to drag it somewhere.
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

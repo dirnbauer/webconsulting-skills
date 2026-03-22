@@ -1,0 +1,3 @@
+display_name: "TYPO3 Batch Operations"
+short_description: "Orchestrate large-scale TYPO3 code changes across multiple files in parallel."
+default_prompt: "Help me with TYPO3 Batch Operations: orchestrate large-scale typo3 code changes across multiple files in parallel."

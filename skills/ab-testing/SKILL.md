@@ -1,36 +1,37 @@
 ---
-name: ab-test-setup
-version: "1.0.0"
-brand: AgentKits Marketing by AityTech
-category: cro
-difficulty: intermediate
+name: ab-testing
 description: When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions "A/B test," "split test," "experiment," "test this change," "variant copy," "multivariate test," or "hypothesis." For tracking implementation, see analytics-tracking.
-triggers:
-  - A/B test
-  - split test
-  - experiment
-  - test this change
-  - variant copy
-  - multivariate test
-  - hypothesis
-  - statistical significance
-prerequisites:
-  - page-cro
-  - analytics-attribution
-related_skills:
-  - page-cro
-  - analytics-attribution
-agents:
-  - conversion-optimizer
-  - researcher
-mcp_integrations:
-  optional:
-    - google-analytics
-success_metrics:
-  - test_velocity
-  - win_rate
-output_schema: ab-test-plan
 license: MIT
+metadata:
+  version: "1.0.0"
+  brand: AgentKits Marketing by AityTech
+  category: cro
+  difficulty: intermediate
+  triggers:
+    - A/B test
+    - split test
+    - experiment
+    - test this change
+    - variant copy
+    - multivariate test
+    - hypothesis
+    - statistical significance
+  prerequisites:
+    - page-cro
+    - analytics-attribution
+  related_skills:
+    - page-cro
+    - analytics-attribution
+  agents:
+    - conversion-optimizer
+    - researcher
+  mcp_integrations:
+    optional:
+      - google-analytics
+  success_metrics:
+    - test_velocity
+    - win_rate
+  output_schema: ab-test-plan
 ---
 
 # A/B Test Setup
@@ -457,84 +458,13 @@ Learnings:
 
 ## Output Format
 
-### Test Plan Document
-
-```
-# A/B Test: [Name]
-
-## Hypothesis
-[Full hypothesis using framework]
-
-## Test Design
-- Type: A/B / A/B/n / MVT
-- Duration: X weeks
-- Sample size: X per variant
-- Traffic allocation: 50/50
-
-## Variants
-[Control and variant descriptions with visuals]
-
-## Metrics
-- Primary: [metric and definition]
-- Secondary: [list]
-- Guardrails: [list]
-
-## Implementation
-- Method: Client-side / Server-side
-- Tool: [Tool name]
-- Dev requirements: [If any]
-
-## Analysis Plan
-- Success criteria: [What constitutes a win]
-- Segment analysis: [Planned segments]
-```
-
-### Results Summary
-When test is complete
-
-### Recommendations
-Next steps based on results
+For the full test-plan template and closeout format, see [references/output-format.md](references/output-format.md).
 
 ---
 
-## Common Mistakes
+## Appendix
 
-### Test Design
-- Testing too small a change (undetectable)
-- Testing too many things (can't isolate)
-- No clear hypothesis
-- Wrong audience
+For discovery questions and related-skill pointers, see [references/appendix.md](references/appendix.md). For recurring failure patterns, see [references/common-mistakes.md](references/common-mistakes.md).
 
-### Execution
-- Stopping early
-- Changing things mid-test
-- Not checking implementation
-- Uneven traffic allocation
-
-### Analysis
-- Ignoring confidence intervals
-- Cherry-picking segments
-- Over-interpreting inconclusive results
-- Not considering practical significance
-
----
-
-## Questions to Ask
-
-If you need more context:
-1. What's your current conversion rate?
-2. How much traffic does this page get?
-3. What change are you considering and why?
-4. What's the smallest improvement worth detecting?
-5. What tools do you have for testing?
-6. Have you tested this area before?
-
----
-
-## Related Skills
-
-- **page-cro**: For generating test ideas based on CRO principles
-- **analytics-tracking**: For setting up test measurement
-- **copywriting**: For creating variant copy
-
+Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -1,0 +1,3 @@
+display_name: "Agent MD Refactor"
+short_description: "Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles."
+default_prompt: "Help me with Agent MD Refactor: refactor bloated agents.md, claude.md, or similar agent instruction files to follow progressive disclosure principles."

@@ -1,5 +1,5 @@
 ---
-name: watchos-design-guidelines
+name: watchos-design
 description: Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.
 license: MIT
 metadata:
@@ -365,4 +365,6 @@ Use this checklist when reviewing a watchOS design or implementation.
 - [ ] Bold Text preference is respected (SwiftUI handles automatically; custom text checks `@Environment(\.legibilityWeight)`)
 - [ ] Increase Contrast preference is respected (custom colors provide higher-contrast variants)
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

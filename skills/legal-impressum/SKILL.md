@@ -483,91 +483,10 @@ Tel.: +43 1 234 5678
 
 ---
 
-## 6. Additional Required Notices
+## Appendix
 
-### 6.1 Privacy Notice (DSGVO)
+For penalties, legal source links, and attribution notes, see [references/penalties-and-sources.md](references/penalties-and-sources.md). For notice requirements and compliance checklists, see [references/compliance.md](references/compliance.md).
 
-Link to separate Datenschutzerklärung required with:
-- Controller identity
-- DPO contact (if applicable)
-- Processing purposes
-- Legal basis
-- Data categories
-- Recipients
-- Retention periods
-- Data subject rights
-- Complaint right (Datenschutzbehörde)
 
-### 6.2 Cookie Notice (TKG 2021)
-
-Required consent mechanism for non-essential cookies.
-
-### 6.3 ODR Link (for B2C)
-
-Required for businesses selling to consumers online:
-
-```
-Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO:
-Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung 
-(OS) bereit: https://ec.europa.eu/consumers/odr/
-```
-
----
-
-## 7. Compliance Checklist
-
-### Basic Website (All Commercial Sites)
-
-- [ ] Company name/owner name
-- [ ] Physical address
-- [ ] Email address
-- [ ] Phone number (recommended)
-- [ ] Firmenbuch number + court (if registered)
-- [ ] Business purpose
-- [ ] VAT ID (if applicable)
-- [ ] Chamber membership (if trade)
-- [ ] Professional regulations link (if regulated)
-- [ ] Privacy notice link
-- [ ] Cookie consent (if applicable)
-- [ ] ODR link (if B2C online sales)
-
-### Public Media Website (Offenlegungspflicht)
-
-All basic requirements PLUS:
-- [ ] Complete ownership structure
-- [ ] All direct/indirect shareholdings
-- [ ] Silent partnerships
-- [ ] Trust relationships
-- [ ] Foundation details (if applicable)
-- [ ] Grundlegende Richtung statement
-- [ ] Herausgeber (publisher) name
-
----
-
-## 8. Penalties
-
-| Violation | Maximum Penalty |
-|-----------|-----------------|
-| Missing/incomplete Impressum (ECG) | €3,000 |
-| Missing/incomplete Impressum (MedienG) | €20,000 |
-| Missing Offenlegung (MedienG) | €20,000 |
-| DSGVO violations | Up to €20M or 4% of global turnover |
-
----
-
-## 9. Resources
-
-- **WKO Impressum Generator**: https://www.wko.at/service/wirtschaftsrecht-gewerberecht/ecg-service
-- **WKO Impressum Guide**: https://www.wko.at/internetrecht/website-impressum
-- **USP Impressumspflicht**: https://www.usp.gv.at/
-- **RIS (Legal texts)**: https://www.ris.bka.gv.at/
-
----
-
-## Credits & Attribution
-
-This skill is part of the webconsulting.at skills collection.
-
-Sources: WKO, USP.gv.at, Austrian Federal Legal Information System (RIS)
-
+Source: https://github.com/dirnbauer/webconsulting-skills
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

@@ -1,0 +1,3 @@
+display_name: "TYPO3 Workspaces"
+short_description: "Expert guidance on TYPO3 Workspaces: versioning, staging, publishing workflows, file limitations, file collection workspace safety, query migration, debugging, and testing."
+default_prompt: "Help me with TYPO3 Workspaces: expert guidance on typo3 workspaces: versioning, staging, publishing workflows, file limitations, file collection workspace safety, query migration, debugging, and testing."

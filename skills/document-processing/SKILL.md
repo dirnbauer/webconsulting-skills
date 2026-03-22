@@ -11,7 +11,7 @@ metadata:
 
 # Document Processing
 
-> **Source:** This skill is adapted from **[Anthropic's Skills](https://github.com/anthropics/skills)** 
+> **Source:** This skill is adapted from **[Anthropic's document-processing skill](https://github.com/anthropics/skills/tree/main/skills/document-processing)** 
 > document processing skills (pdf, docx, pptx, xlsx) for Claude Code and AI agents.
 
 Create, edit, and analyze office documents including PDFs, Word documents, PowerPoint presentations, 
@@ -643,7 +643,7 @@ sudo apt-get install poppler-utils qpdf libreoffice pandoc
 
 This skill is adapted from **[Anthropic's Skills](https://github.com/anthropics/skills)**.
 
-Original repository: https://github.com/anthropics/skills
+Original repository: https://github.com/anthropics/skills/tree/main/skills/document-processing
 
 **Copyright (c) Anthropic** — The document processing skills (pdf, docx, pptx, xlsx) are
 **source-available** (not open source). See Anthropic's README for terms.

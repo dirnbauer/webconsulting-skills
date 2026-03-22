@@ -1,0 +1,3 @@
+display_name: "TYPO3 Security Hardening"
+short_description: "Security hardening checklist and best practices for TYPO3 v14 installations, covering configuration, file permissions, and common vulnerabilities."
+default_prompt: "Help me with TYPO3 Security Hardening: security hardening checklist and best practices for typo3 v14 installations, covering configuration, file permissions, and common vulnerabilities."

@@ -1,5 +1,5 @@
 ---
-name: supabase-postgres-best-practices
+name: postgres-best-practices
 description: Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.
 license: MIT
 metadata:
@@ -63,4 +63,6 @@ Each rule file contains:
 - https://supabase.com/docs/guides/database/overview
 - https://supabase.com/docs/guides/auth/row-level-security
 
+
+Adapted from [Supabase](https://github.com/supabase/agent-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

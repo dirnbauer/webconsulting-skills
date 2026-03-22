@@ -1,0 +1,3 @@
+display_name: "A/B Test Setup"
+short_description: "When the user wants to plan, design, or implement an A/B test or experiment."
+default_prompt: "Help me with A/B Test Setup: when the user wants to plan, design, or implement an a/b test or experiment."

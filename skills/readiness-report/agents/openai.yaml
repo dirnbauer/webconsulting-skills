@@ -1,0 +1,3 @@
+display_name: "Agent Readiness Report"
+short_description: "Evaluate how well a codebase supports autonomous AI development."
+default_prompt: "Help me with Agent Readiness Report: evaluate how well a codebase supports autonomous ai development."

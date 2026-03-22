@@ -462,111 +462,14 @@ final class MyController
 </f:form>
 ```
 
-## 10. Rate Limiting (TYPO3 v14)
+## Appendix
 
-TYPO3 v14 includes built-in rate limiting:
-
-```php
-// config/system/additional.php
-// Rate limiting: check current Core / feature documentation — do not assume a stable `security.backend.rateLimiter` toggle name
-
-// Configure rate limits
-$GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // max attempts per default interval (see `loginRateLimitInterval`, often ~15 minutes — not “per minute”)
-```
-
-## 11. Security Audit Checklist
-
-### Before Go-Live
-
-- [ ] `displayErrors` = 0
-- [ ] `debug` = false (BE and FE)
-- [ ] `trustedHostsPattern` configured
-- [ ] Install Tool disabled
-- [ ] HTTPS enforced at the edge (web server / proxy); `FE.lockSSL` no longer exists
-- [ ] Strong backend passwords (12+ chars)
-- [ ] MFA enabled for admins
-- [ ] File permissions correct
-- [ ] Sensitive directories protected
-- [ ] Error logs to files, not screen
-- [ ] Encryption key unique
-- [ ] CSP enabled
-- [ ] Rate limiting enabled
-
-### Regular Maintenance
-
-- [ ] Update TYPO3 core monthly
-- [ ] Update extensions monthly
-- [ ] Review security bulletins (https://typo3.org/security)
-- [ ] Audit backend user accounts
-- [ ] Review access logs
-- [ ] Test backup restoration
-
-### Monitoring
-
-- [ ] Set up uptime monitoring
-- [ ] Configure error alerting
-- [ ] Monitor authentication failures
-- [ ] Track file integrity (optional)
-
-## 12. Security Resources
-
-- **TYPO3 Security**: https://typo3.org/security (advisories, team contact, coordinated releases)
-- **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/Index.html
-- **v14 changelog index**: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
-
-## v14-Only Security Changes
-
-> The following security changes apply **exclusively to TYPO3 v14**.
-
-### Stronger HMAC Algorithm **[v14 only]**
-
-TYPO3 v14 uses a **stronger cryptographic algorithm for HMAC** (#106307). Existing HMAC tokens (e.g., in URLs, form tokens) generated with the old algorithm will be invalid after upgrade. Plan for token regeneration.
-
-### Built-in CipherService **[v14 only]**
-
-New `CipherService` (#108002) provides **symmetric encryption/decryption** out of the box. Use it instead of custom encryption implementations:
-
-```php
-use TYPO3\CMS\Core\Crypto\Cipher\CipherService;
-use TYPO3\CMS\Core\Crypto\Cipher\SharedKey;
-
-$cipherService = GeneralUtility::makeInstance(CipherService::class);
-// Obtain a SharedKey from your documented key-management flow; do not hash the TYPO3 encryptionKey ad hoc.
-/** @var SharedKey $key */
-$key = $sharedKeyProvider->getEncryptionKey();
-$cipherValue = $cipherService->encrypt('sensitive data', $key);
-$decrypted = $cipherService->decrypt($cipherValue, $key);
-```
-
-### MFA Failed Verification Notifications **[v14 only]**
-
-Backend users are now **notified on failed MFA verification attempts** (#105783). This provides early warning of potential brute-force attacks against MFA-protected accounts.
-
-### Install Tool Password via CLI **[v14 only]**
-
-New CLI command `install:password:set` (#104058) allows setting the Install Tool password without web access. Useful for automated deployments:
-
-```bash
-vendor/bin/typo3 install:password:set
-```
-
-### Redis-Based Install Tool Sessions **[v14 only]**
-
-Install Tool sessions can now be stored in **Redis** (#101059) instead of the filesystem. This enables Install Tool access in multi-server / shared-nothing deployments without shared filesystems.
-
-### Modal Migration **[v14 only]**
-
-Backend modals migrated from **Bootstrap Modal to native `<dialog>`** element (#107443). Custom backend JavaScript using Bootstrap Modal API must be updated.
-
----
-
-## Related Skills
-
-- [security-incident-reporting/TYPO3](../security-incident-reporting/SKILL-TYPO3.md) - TYPO3 forensics, vulnerability classification, Security Team communication with PGP templates
-- [security-audit](../security-audit/SKILL.md) - General security audit patterns, OWASP, CVSS scoring
+For TYPO3 v14-specific hardening notes and related-skill links, see [references/v14-notes.md](references/v14-notes.md). For go-live checklists, rate limiting, and remaining v14 security notes, see [references/checklists.md](references/checklists.md).
 
 ---
 
 ## Credits & Attribution
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

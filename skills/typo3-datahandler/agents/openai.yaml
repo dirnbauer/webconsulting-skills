@@ -1,0 +1,3 @@
+display_name: "TYPO3 DataHandler Operations"
+short_description: "Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring transactional safety, correct extension points (SC_OPTIONS hooks and documented PSR-14 events), and reference index integrity."
+default_prompt: "Help me with TYPO3 DataHandler Operations: expert guidance on manipulating typo3 records via the datahandler, ensuring transactional safety, correct extension points (sc_options hooks and documented psr-14 events), and reference index integrity."

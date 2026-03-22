@@ -1,9 +1,10 @@
 ---
 name: readiness-report
 description: Evaluate how well a codebase supports autonomous AI development. Analyzes repositories across eight technical pillars (Style & Validation, Build System, Testing, Documentation, Dev Environment, Debugging & Observability, Security, Task Discovery) and five maturity levels. Use when users request `/readiness-report` or want to assess agent readiness, codebase maturity, or identify gaps preventing effective AI-assisted development.
-triggers:
-- /readiness-report
 license: MIT / CC-BY-SA-4.0
+metadata:
+  triggers:
+    - /readiness-report
 ---
 
 # Agent Readiness Report
@@ -127,4 +128,6 @@ After reviewing the report, common fixes can be automated:
 
 Ask to "fix readiness gaps" to begin automated remediation of failing criteria.
 
+
+Adapted from [OpenHands](https://github.com/OpenHands/skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

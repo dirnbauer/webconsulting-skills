@@ -464,26 +464,6 @@ $apiKey = $_ENV['MY_API_KEY'];
 
 ## 12. Best Practices
 
-### Performance
-
-1. **Disable Xdebug** when not debugging (`ddev xdebug off`)
-2. **Use snapshots** instead of full imports for quick state changes
-3. **Mount with Mutagen** on macOS for better file sync performance
-4. **Use PHP 8.3 or 8.4** for best performance on TYPO3 v14
-
-### Team Workflow
-
-1. **Commit** `.ddev/config.yaml` to repository
-2. **Gitignore** `.ddev/config.local.yaml` for personal overrides
-3. **Document** additional setup steps in `README.md`
-4. **Share** database snapshots for consistent development data
-
-### Security
-
-1. **Never expose** DDEV ports publicly
-2. **Don't use** DDEV in production
-3. **Rotate** any sensitive data in development databases
-
 ## 13. Extension development against TYPO3 v14
 
 Use **one TYPO3 v14 instance** per DDEV project. For CI, matrix-test **PHP 8.2 / 8.3 / 8.4** against the same Core constraint (`typo3/cms-core:^14.0`) instead of running multiple Core versions locally.
@@ -496,39 +476,11 @@ ddev typo3 cache:flush
 
 **Admin user:** Created during `typo3 setup` or the install wizard; use the password you set.
 
-## v14-Only DDEV Changes
-
 > The following DDEV-related changes are relevant when setting up **TYPO3 v14 environments**.
 
-### PHP 8.5 Compatibility **[v14.1+ only]**
+## Appendix
 
-TYPO3 v14.1 adds **PHP 8.5 compatibility**. When PHP 8.5 is released, update your DDEV config:
-```yaml
-# .ddev/config.yaml
-php_version: "8.5"
-```
-
-### Camino Default Theme **[v14.1+ only]**
-
-TYPO3 v14.1 ships with the **Camino** default frontend theme. For quick-start setups:
-```bash
-ddev composer require typo3/theme-camino
-ddev typo3 extension:setup -e theme_camino
-```
-
-### composer.json Required in Classic Mode **[v14 only]**
-
-In v14, extensions **must** have a `composer.json` file even in classic (non-Composer) mode. Ensure all local extensions include a valid `composer.json`.
-
-### Frontend Asset Pipeline **[v14 only]**
-
-Frontend CSS/JS concatenation and compression are removed from TYPO3 Core. Configure your DDEV web server or add a build step:
-```yaml
-# .ddev/nginx-site.conf or custom config
-# Enable gzip compression at the web server level
-```
-
----
+For TYPO3 v14-specific DDEV notes and attribution details, see [references/v14-notes.md](references/v14-notes.md). For workflow and team conventions, see [references/workflow-notes.md](references/workflow-notes.md).
 
 ## Credits & Attribution
 

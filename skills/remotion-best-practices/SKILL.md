@@ -61,4 +61,6 @@ Read individual rule files for detailed explanations and code examples:
 - [rules/maps.md](rules/maps.md) - Add a map using Mapbox and animate it
 - [rules/voiceover.md](rules/voiceover.md) - Adding AI-generated voiceover to Remotion compositions using ElevenLabs TTS
 
+
+Adapted from [remotion-dev](https://github.com/remotion-dev/skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

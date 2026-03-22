@@ -1,0 +1,3 @@
+display_name: "Refactor"
+short_description: "'Surgical code refactoring to improve maintainability without changing behavior."
+default_prompt: "Help me with Refactor: 'surgical code refactoring to improve maintainability without changing behavior."

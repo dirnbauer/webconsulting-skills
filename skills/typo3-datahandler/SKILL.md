@@ -560,4 +560,6 @@ The Reference Index check has been moved to the **Install Tool** (#107629). The 
 
 ## Credits & Attribution
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

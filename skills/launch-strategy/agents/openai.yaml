@@ -1,0 +1,3 @@
+display_name: "Launch Strategy"
+short_description: "When the user wants to plan a product launch, feature announcement, or release strategy."
+default_prompt: "Help me with Launch Strategy: when the user wants to plan a product launch, feature announcement, or release strategy."

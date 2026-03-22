@@ -1157,4 +1157,6 @@ Powermail Fluid templates must comply with Fluid 5.0 strict typing:
 - No underscore-prefixed variables in Fluid templates.
 - Verify custom Fluid partials and templates for type mismatches.
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

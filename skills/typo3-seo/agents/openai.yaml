@@ -1,0 +1,3 @@
+display_name: "TYPO3 SEO Configuration"
+short_description: "SEO configuration and best practices for TYPO3 v14, including EXT:seo setup, sitemaps, meta tags, and structured data."
+default_prompt: "Help me with TYPO3 SEO Configuration: seo configuration and best practices for typo3 v14, including ext:seo setup, sitemaps, meta tags, and structured data."

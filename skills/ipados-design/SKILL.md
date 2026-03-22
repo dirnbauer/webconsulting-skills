@@ -1,5 +1,5 @@
 ---
-name: ipados-design-guidelines
+name: ipados-design
 description: Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.
 license: MIT
 metadata:
@@ -666,4 +666,6 @@ Claiming Cmd+H, Cmd+Tab, Cmd+Space, or Globe shortcuts will not work and confuse
 ### DO NOT: Present Dense Content Without Scrolling
 Large iPad screens tempt designers to show everything at once. Content should still scroll when it exceeds the visible area. Never truncate content to avoid scrolling.
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

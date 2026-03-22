@@ -162,6 +162,11 @@ jobs:
           else
             echo "✓ All skills are listed in AGENTS.md"
           fi
+
+      - name: Validate attribution guardrails
+        if: steps.sync.outputs.changes_made == 'true'
+        run: |
+          python3 scripts/check_attribution_guardrails.py
       
       - name: Commit and Push to Sync Branch
         if: steps.sync.outputs.changes_made == 'true'
@@ -208,4 +213,3 @@ jobs:
               --head "chore/sync-skills" \
               --label "automated,skills"
           fi
-

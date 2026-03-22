@@ -1,5 +1,5 @@
 ---
-name: visionos-design-guidelines
+name: visionos-design
 description: Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.
 license: MIT
 metadata:
@@ -368,4 +368,6 @@ These are common mistakes in visionOS design. Avoid them.
 | Custom window chrome | Breaks platform consistency | Use system window controls |
 | Z-fighting layers | Visual flicker, unclear hierarchy | Use intentional depth offsets |
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

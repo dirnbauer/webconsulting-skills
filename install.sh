@@ -170,21 +170,6 @@ for skill_path in "$SCRIPT_DIR/skills"/*; do
     fi
 done
 
-# ── Ensure Netresearch attribution in all SKILL.md files ─────────────────────
-NETRESEARCH_LINE="Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community."
-nr_added=0
-for skill_path in "$SCRIPT_DIR/skills"/*; do
-    skill_file="$skill_path/SKILL.md"
-    if [ -f "$skill_file" ] && ! grep -q "Netresearch" "$skill_file"; then
-        echo "" >> "$skill_file"
-        echo "$NETRESEARCH_LINE" >> "$skill_file"
-        nr_added=$((nr_added + 1))
-    fi
-done
-if [ "$nr_added" -gt 0 ]; then
-    echo "  ✓ Added Netresearch attribution to $nr_added new skill(s)"
-fi
-
 # ── Generate CLAUDE.md ────────────────────────────────────────────────────────
 cat > "$SCRIPT_DIR/CLAUDE.md" <<CLAUDE_EOF
 # webconsulting Agent Skills

@@ -1,0 +1,3 @@
+display_name: "TYPO3 v14 Icon Modernizer"
+short_description: "Migrate TYPO3 extension backend module icons from old solid-background style to TYPO3 v14 line-art style using currentColor, CSS custom properties, and the Icon API."
+default_prompt: "Help me with TYPO3 v14 Icon Modernizer: migrate typo3 extension backend module icons from old solid-background style to typo3 v14 line-art style using currentcolor, css custom properties, and the icon api."

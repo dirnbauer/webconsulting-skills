@@ -1,5 +1,5 @@
 ---
-name: web-design-guidelines
+name: web-platform-design
 description: Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance.
 license: MIT
 metadata:
@@ -1445,4 +1445,6 @@ Use this checklist when building or reviewing web interfaces.
 | `<img>` without dimensions | Add `width` and `height` attributes |
 | Hover-only disclosure | Add `:focus-within` and click handler |
 
+
+Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
 Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

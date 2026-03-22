@@ -1,0 +1,34 @@
+name: Attribution Guardrails
+
+on:
+  pull_request:
+    paths:
+      - "README.md"
+      - "skills/**/SKILL.md"
+      - "scripts/*.py"
+      - ".github/workflows/*.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "README.md"
+      - "skills/**/SKILL.md"
+      - "scripts/*.py"
+      - ".github/workflows/*.yml"
+  workflow_dispatch:
+
+jobs:
+  validate-attribution:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate upstream attribution guardrails
+        run: python3 scripts/check_attribution_guardrails.py
