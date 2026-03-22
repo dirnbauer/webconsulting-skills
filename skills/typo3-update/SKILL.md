@@ -817,7 +817,7 @@ New features to adopt (not migrations):
 
 - `<f:page.meta>` — set page meta tags from Fluid templates.
 - `<f:page.title>` — set page title from Fluid templates.
-- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107056-FluidViewHelpersForHeaderAndFooterData.html)).
+- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107056-IntroduceHeaderDataAndFooterDataViewHelpers.html)).
 
 ### Localization System **[v14 only]**
 

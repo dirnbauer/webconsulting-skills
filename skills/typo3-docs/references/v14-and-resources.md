@@ -13,7 +13,7 @@
 
 ### XLIFF 2.x Support **[v14 only]**
 
-TYPO3 v14 supports **XLIFF 2.x** translation files ([Feature #107710](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107710-SupportXLIFF20Files.html)) alongside the existing XLIFF 1.2 format. Document which XLIFF version your extension uses.
+TYPO3 v14 supports **XLIFF 2.x** translation files ([Feature #107710](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107710-SupportForXLIFF20TranslationFiles.html)) alongside the existing XLIFF 1.2 format. Document which XLIFF version your extension uses.
 
 ### Translation Domain Mapping **[v14 only]**
 
@@ -21,11 +21,11 @@ Translation domain mapping ([Feature #93334](https://docs.typo3.org/c/typo3/cms-
 
 ### TranslateViewHelper Domain Syntax **[v14 only]**
 
-The `TranslateViewHelper` (`<f:translate>`) supports translation domain mapping ([Feature #107759](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107759-TranslateViewHelperDomainSupport.html)) for cross-extension translation references. `LLL:EXT:` itself is long-standing TYPO3 syntax.
+The `TranslateViewHelper` (`<f:translate>`) supports translation domain mapping ([Feature #107759](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107759-TranslateViewHelperSupportsTranslationDomainSyntax.html)) for cross-extension translation references. `LLL:EXT:` itself is long-standing TYPO3 syntax.
 
 ### Symfony Translation Component **[v14 only]**
 
-TYPO3's localization system now uses the **Symfony Translation Component** ([Feature #107436](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107436-UseSymfonyTranslationComponentForXliffParsing.html)) internally. This affects how translation files are parsed and cached. Custom localization parser implementations are deprecated.
+TYPO3's localization system now uses the **Symfony Translation Component** ([Feature #107436](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107436-SymfonyTranslationIntegration.html)) internally. This affects how translation files are parsed and cached. Custom localization parser implementations are deprecated.
 
 ## Credits & Attribution
 

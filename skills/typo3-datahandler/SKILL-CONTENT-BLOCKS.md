@@ -32,7 +32,7 @@ This skill covers using DataHandler to create and manage Content Blocks records 
 | Approach | CType Pattern | Example |
 |----------|--------------|---------|
 | Classic | `extkey_elementname` | `myext_hero` |
-| Content Blocks | `vendor_name` | `myvendor_hero` |
+| Content Blocks | `vendorname_blockname` (dashes removed, `/` becomes `_`) | `myvendor_myhero` |
 
 ### Field Naming Convention
 
@@ -104,6 +104,13 @@ final class ContentBlocksService
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
 
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
+
         return (int) ($dataHandler->substNEWwithIDs['NEW_hero'] ?? 0);
     }
 }
@@ -153,6 +160,13 @@ final class ContentBlocksMediaService
 
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
 
         return (int) ($dataHandler->substNEWwithIDs['NEW_hero'] ?? 0);
     }
@@ -221,6 +235,13 @@ final class TeamMemberService
 
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
 
         return (int) ($dataHandler->substNEWwithIDs['NEW_member'] ?? 0);
     }
@@ -302,6 +323,13 @@ final class AccordionService
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
 
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
+
         return (int) ($dataHandler->substNEWwithIDs['NEW_accordion'] ?? 0);
     }
 }
@@ -340,6 +368,13 @@ final class ContentBlocksUpdateService
 
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
     }
 }
 ```
@@ -363,6 +398,13 @@ public function updateTeamMember(int $uid, array $updates): void
 
     $dataHandler->start($data, []);
     $dataHandler->process_datamap();
+
+    if ($dataHandler->errorLog !== []) {
+        throw new \RuntimeException(
+            'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+            1700000001
+        );
+    }
 }
 ```
 
@@ -510,6 +552,13 @@ final class ContentBlocksRecordService
 
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
 
         return (int) ($dataHandler->substNEWwithIDs['NEW_1'] ?? 0);
     }

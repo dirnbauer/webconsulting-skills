@@ -41,15 +41,14 @@ git config --global user.email "your.email@example.com"
 
 ### Clone TYPO3 Core
 
-**Recommended:** clone the public Git repository, then add Gerrit as a **push** remote (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the current URLs and the `git remote set-url origin --push …` variant).
+**Recommended:** clone the public Git repository, then configure Gerrit as the **push** target (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for current URLs).
 
 ```bash
 git clone https://github.com/typo3/typo3.git typo3
 cd typo3
-# Official guide: configure origin’s *push* URL to Gerrit (preferred over a second remote):
-#   git remote set-url --push origin "ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git"
-# Alternative: extra remote named `gerrit`
-#   git remote add gerrit ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git
+# Official guide: configure origin's push URL and refspec to Gerrit:
+git config remote.origin.pushurl "ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git"
+git config remote.origin.push +refs/heads/main:refs/for/main
 ```
 
 From the Core root directory, set **`COMPOSER_ROOT_VERSION`** **before** `composer install` (required for a correct checkout), e.g. `export COMPOSER_ROOT_VERSION=14.0.x-dev` — see the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the value matching your branch, then run `composer install`.
@@ -284,8 +283,9 @@ git push gerrit HEAD:refs/for/main --force
 Build/Scripts/runTests.sh -s unit
 Build/Scripts/runTests.sh -s functional
 
-# Run PHP-CS-Fixer
-Build/Scripts/runTests.sh -s cgl
+# Run PHP-CS-Fixer (only files in latest commit — practical for contributors)
+Build/Scripts/runTests.sh -s cglGit
+# Or check ALL Core files with: Build/Scripts/runTests.sh -s cgl
 ```
 
 ## Related Skills

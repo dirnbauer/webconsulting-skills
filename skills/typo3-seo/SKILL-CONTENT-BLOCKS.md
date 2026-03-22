@@ -86,28 +86,11 @@ fields:
     </f:for>
 </div>
 
-<!-- FAQPage Schema -->
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        <f:for each="{data.items}" as="item" iteration="iter">
-        {
-            "@type": "Question",
-            "name": "{item.question}",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "{item.answer -> f:format.stripTags()}"
-            }
-        }<f:if condition="!{iter.isLast}">,</f:if>
-        </f:for>
-    ]
-}
-</script>
+<!-- Generate JSON-LD safely in PHP (not via Fluid interpolation) and output as raw HTML: -->
+{faqJsonLd -> f:format.raw()}
 ```
 
-> **JSON-LD safety:** Do not use `f:format.htmlspecialchars()` inside `<script type="application/ld+json">` — entities like `&quot;` break JSON. Keep FAQ text plain, or emit JSON from PHP / a dedicated ViewHelper with proper `json_encode`.
+> **JSON-LD safety:** Always generate JSON-LD in a PHP DataProcessor or ViewHelper using `json_encode()`, then pass the complete `<script>` tag to the template. Fluid interpolation inside `<script type="application/ld+json">` will break on quotes, backslashes, and newlines.
 
 ---
 

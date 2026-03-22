@@ -59,17 +59,11 @@ git checkout -b feature/my-improvement
 ## 3. Running Tests
 
 ```bash
-# Unit tests
-composer test:unit
-
-# Functional tests
-composer test:functional
-
-# All tests
-composer test
+# Run all tests (CGL + PHPStan + unit + functional)
+composer tests
 ```
 
-Verify the actual Composer script names in the extension's `composer.json` before documenting them. Some extensions use `composer test`, others only expose direct `phpunit` or CI helper commands.
+The Content Blocks repository uses a single `composer tests` script (note the `s`). Verify the actual Composer script names in the extension's `composer.json` before running — some extensions expose different script names.
 
 ---
 

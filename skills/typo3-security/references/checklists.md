@@ -66,12 +66,10 @@ New `CipherService` (#108002) provides **symmetric encryption/decryption** out o
 
 ```php
 use TYPO3\CMS\Core\Crypto\Cipher\CipherService;
-use TYPO3\CMS\Core\Crypto\Cipher\SharedKey;
 
 $cipherService = GeneralUtility::makeInstance(CipherService::class);
-// Obtain a SharedKey from your documented key-management flow; do not hash the TYPO3 encryptionKey ad hoc.
-/** @var SharedKey $key */
-$key = $sharedKeyProvider->getEncryptionKey();
+$keyFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Crypto\Cipher\KeyFactory::class);
+$key = $keyFactory->deriveSharedKeyFromEncryptionKey('my-context');
 $cipherValue = $cipherService->encrypt('sensitive data', $key);
 $decrypted = $cipherService->decrypt($cipherValue, $key);
 ```

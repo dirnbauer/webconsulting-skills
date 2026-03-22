@@ -20,7 +20,7 @@ license: MIT / CC-BY-SA-4.0
 
 ## Sources
 
-This skill is based on 18 authoritative sources:
+This skill is based on 17 authoritative sources:
 
 1. [TYPO3 Workspaces Extension Docs](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Index.html)
 2. [Versioning (Workspaces Extension)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Versioning/Index.html)
@@ -28,17 +28,17 @@ This skill is based on 18 authoritative sources:
 4. [Configuration Options (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Configuration/Index.html)
 5. [PSR-14 Events (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Events/Index.html)
 6. [Versioning & Workspaces (TYPO3 Explained / Core API)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Workspaces/Index.html)
-7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Properties/VersioningWS.html)
+7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Index.html#versioningws)
 8. [Restriction Builder (TYPO3 Explained / Doctrine DBAL)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/DoctrineDbal/RestrictionBuilder/Index.html)
 9. [b13 Blog: The Elegant Efficiency of TYPO3 Overlays (Benni Mack)](https://b13.com/blog/mastering-localization-and-content-staging)
 10. [Scheduler Tasks (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Scheduler/Index.html)
 11. [Users Guide (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/UsersGuide/Index.html)
 12. [TYPO3-CORE-SA-2025-022: Information Disclosure in Workspaces Module](https://typo3.org/security/advisory/typo3-core-sa-2025-022)
-14. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
-15. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
-16. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
-17. [Forge Bug #60343: sys_file_metadata does not recognize workspace](https://forge.typo3.org/issues/60343)
-18. [Forge Feature #97923: Combined folder_identifier field for sys_file_collection](https://forge.typo3.org/issues/97923)
+13. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
+14. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
+15. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
+16. [Forge Bug #60343: sys_file_metadata does not recognize workspace](https://forge.typo3.org/issues/60343)
+17. [Forge Feature #97923: Combined folder_identifier field for sys_file_collection](https://forge.typo3.org/issues/97923)
 
 ## 1. Core Concepts
 
@@ -805,10 +805,10 @@ use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 
 // FrontendRestrictionContainer includes:
 // - DeletedRestriction
+// - WorkspaceRestriction  <-- automatically included!
 // - HiddenRestriction
 // - StartTimeRestriction
 // - EndTimeRestriction
-// - WorkspaceRestriction  <-- automatically included!
 // - FrontendGroupRestriction
 $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_news_domain_model_news');
 $queryBuilder->setRestrictions(
@@ -1543,7 +1543,7 @@ Generate via Workspaces module: "Generate page preview links" button. The link w
 - **Document the review process** for editors (which stages, who approves)
 - **Monitor disk space** -- workspace versions accumulate in the database
 - **Clean up** old workspace data periodically (discard unused versions)
-- **Keep patch level current** -- workspace security issues exist (see TYPO3-CORE-SA-2025-022)
+- **Keep patch level current** -- workspace security advisories are published periodically (SA-2025-022 affected TYPO3 9.0–13.4.17; v14.0.0+ shipped with the fix)
 
 ## 11. PSR-14 Events Reference
 

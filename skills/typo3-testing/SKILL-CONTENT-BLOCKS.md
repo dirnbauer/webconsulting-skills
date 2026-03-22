@@ -157,15 +157,17 @@ final class TeamMemberRepositoryTest extends FunctionalTestCase
 
 ```csv
 # Tests/Functional/Fixtures/ContentBlocks/accordion-content.csv
-"tt_content",uid,pid,CType,myvendor_accordion_items
- ,1,1,"myvendor_accordion",2
+"tt_content"
+,uid,pid,CType,myvendor_accordion_items
+,1,1,"myvendor_accordion",2
 ```
 
 ```csv
 # Tests/Functional/Fixtures/ContentBlocks/accordion-items.csv
-"tx_sitepackage_accordion_item",uid,pid,foreign_table_parent_uid,title,content
- ,1,1,1,"First Item","First content"
- ,2,1,1,"Second Item","Second content"
+"tx_sitepackage_accordion_item"
+,uid,pid,foreign_table_parent_uid,title,content
+,1,1,1,"First Item","First content"
+,2,1,1,"Second Item","Second content"
 ```
 
 Load both fixtures with `importCSVDataSet()` in the functional test setup.
@@ -264,6 +266,20 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class ContentBlockRenderingTest extends FunctionalTestCase
 {
+    protected array $testExtensionsToLoad = [
+        'friendsoftypo3/content-blocks',
+        'typo3conf/ext/my_sitepackage',
+    ];
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->importCSVDataSet(__DIR__ . '/Fixtures/pages.csv');
+        $this->setUpFrontendRootPage(1, [
+            'EXT:my_sitepackage/Configuration/TypoScript/setup.typoscript',
+        ]);
+    }
+
     #[Test]
     #[DataProvider('contentBlockTypesProvider')]
     public function contentBlockRendersWithoutError(string $cType, string $fixture): void

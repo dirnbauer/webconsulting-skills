@@ -524,17 +524,23 @@ on: [push, pull_request]
 jobs:
   unit:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php-version }}
           coverage: xdebug
       - run: composer install
       - run: vendor/bin/phpunit -c Tests/UnitTests.xml --coverage-clover coverage.xml
 
   functional:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
     services:
       mysql:
         image: mysql:8.0
@@ -547,17 +553,20 @@ jobs:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php-version }}
       - run: composer install
       - run: vendor/bin/phpunit -c Tests/FunctionalTests.xml
 
   architecture:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version: ['8.2', '8.3', '8.4']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ matrix.php-version }}
       - run: composer install
       - run: vendor/bin/phpstan analyse
 ```

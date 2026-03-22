@@ -41,9 +41,9 @@ When files are indexed, search results display differently from page results:
 
 | Component | Version | Required? |
 |-----------|---------|-----------|
-| EXT:solr | 13.1 | Yes |
-| EXT:solrfal | 13.0 | Yes |
-| EXT:tika | 13.1 | Yes |
+| EXT:solr | 14.0 | Yes |
+| EXT:solrfal | 14.0 | Yes |
+| EXT:tika | 14.0 | Yes |
 | Apache Tika Server | 3.2.3+ (align with main Solr skill / vendor advisories) | Yes |
 | EB Partner access | -- | Yes (funding extension) |
 
@@ -132,7 +132,7 @@ The `attachments.fields` setting specifies which FAL relation fields contain fil
 
 ### Supported File Types
 
-Tika can extract text from ~600 file formats. The most common:
+Tika can extract text from over 1,000 file formats. The most common:
 
 | Format | MIME Type | Extracted Content |
 |--------|----------|-------------------|

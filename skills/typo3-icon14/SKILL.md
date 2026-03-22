@@ -86,7 +86,7 @@ EXT:my_extension/
 ├── Resources/
 │   └── Public/
 │       └── Icons/
-│           ├── Extension.svg              ← Extension Manager icon (16×16)
+│           ├── Extension.svg              ← Extension Manager icon (64×64 viewBox)
 │           ├── module-{extkey}.svg        ← Parent module icon (64×64)
 │           ├── module-{extkey}-*.svg      ← Submodule icons (64×64)
 │           ├── plugin-{extkey}-*.svg      ← Plugin icons (16×16)
@@ -109,7 +109,7 @@ vendor/t3g/blog/
 └── Resources/
     └── Public/
         └── Icons/
-            ├── Extension.svg                      ← Updated (16×16, currentColor)
+            ├── Extension.svg                      ← Updated (64×64 viewBox, currentColor)
             │
             │  Module icons (64×64 viewBox)
             ├── module-blog.svg                    ← Book with accent spine
@@ -155,7 +155,7 @@ vendor/t3g/blog/
 | `plugin-*` | `0 0 16 16` | 16–32px (content wizard, list view) |
 | `record-*` | `0 0 16 16` | 16px (page tree, list view, TCA) |
 | `actions-*` | `0 0 16 16` | 16px (buttons, toolbars) |
-| `Extension.svg` | `0 0 16 16` | 16–32px (Extension Manager) |
+| `Extension.svg` | `0 0 64 64` | 16–32px (Extension Manager) |
 
 ### Detection: Is an icon old-style?
 
@@ -488,7 +488,7 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 | `IconSize::LARGE` | 48px | Wizard icons, large previews |
 | `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
-| `IconSize::DEFAULT` | **1em** in CSS (`--icon-size: 1em`) — scales with font size; `getDimensions()` still reports 16×16 as fallback | Prefer `SMALL` when you need a fixed **16px** icon |
+| `IconSize::DEFAULT` | 16×16 via `getDimensions()`; rendered size may vary depending on CSS context | Prefer `SMALL` when you need a fixed **16px** icon |
 | `IconSize::OVERLAY` | 16px | `@internal` — Core overlays (hidden/locked badges), not for extension icons |
 
 When no size is passed to `IconFactory->getIcon()`, the default is `IconSize::MEDIUM` (32px).

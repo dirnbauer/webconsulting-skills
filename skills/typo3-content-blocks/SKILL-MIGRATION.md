@@ -90,8 +90,8 @@ This section guides you through converting traditional TYPO3 extensions (with se
 | `select` | `selectSingle` | `Select` | Single selection |
 | `select` | `selectMultipleSideBySide` | `Select` + `renderType: selectMultipleSideBySide` (+ `multiple: true` if required by schema) | Side-by-side multi-select |
 | `select` | `selectCheckBox` | `Select` + `renderType: selectCheckBox` | Checkbox group |
-| `group` | - | `Relation` or `File` | Depends on internal_type |
-| `file` | - | `File` | FAL references |
+| `group` | - | `Relation` | `group` always maps to `Relation` in v14 |
+| `file` | - | `File` | FAL references (standalone TCA type since v10) |
 | `inline` | - | `Collection` | IRRE relations |
 | `category` | - | `Category` | System categories |
 | `flex` | - | `FlexForm` | FlexForm container |
@@ -581,7 +581,7 @@ This section guides you through converting Content Blocks back to traditional TY
 | `Select` | `select` | `selectSingle` | `items => [...]` |
 | `Select` + `multiple` | `select` | `selectMultipleSideBySide` | - |
 | `File` | `file` | - | `allowed => '...'` |
-| `Relation` | `group` or `select` | - | `foreign_table => '...'` |
+| `Relation` | `group` | - | `allowed => 'tablename'` |
 | `Category` | `category` | - | - |
 | `Collection` (inline) | `inline` | - | `foreign_table => '...'` |
 | `Collection` (with fields) | `inline` | - | `foreign_table => auto-generated` |

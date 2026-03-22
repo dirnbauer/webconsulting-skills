@@ -437,7 +437,7 @@ parameters:
 - **Static TCA only** — runtime TCA modifications are forbidden.
 - **`composer.json` required** — even in classic (non-Composer) mode.
 - **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
-- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`admin`** (module id `admin`; do not use the non-existent string `administration`).
+- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`system`** (module id `system`; `admin` is the "Administration" module — a different parent).
 - **No deprecated localization hooks** — use Symfony Translation Component.
 
 ### Updated Backend Module Standards **[v14 only]**

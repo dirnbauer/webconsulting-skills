@@ -92,7 +92,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 
 ```
 1. Replace 'eval' => 'required' → 'required' => true
-2. Replace 'eval' => 'trim' → remove (default behavior)
+2. Replace 'eval' => 'trim' → keep where trimming is desired (trim is NOT applied by default)
 3. Replace 'eval' => 'null' → 'nullable' => true
 4. Replace 'eval' => 'int' → 'type' => 'number'
 5. Replace 'renderType' => 'inputDateTime' → 'type' => 'datetime'

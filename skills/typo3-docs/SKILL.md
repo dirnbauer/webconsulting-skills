@@ -91,7 +91,7 @@ TYPO3 sets these as **attributes on `<extension …/>`**, not as a generic `<set
 ```xml
     <extension
         class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
-        edit-on-github="https://github.com/vendor/my-extension"
+        edit-on-github="vendor/my-extension"
         edit-on-github-branch="main"
         interlink-shortcode="vendor/my-extension"
         project-home="https://github.com/vendor/my-extension"

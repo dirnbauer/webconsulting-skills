@@ -61,7 +61,7 @@ final class CrmFinisherConfig
     public int $timeout = 30;
 
     /** Example hook body only — prefer Environment / feature flags over `$GLOBALS` in production code. */
-    public bool $dryRun {
+    public bool $dryRun = false {
         get => $this->dryRun && (($GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask'] ?? '') !== '');
     }
 
@@ -399,9 +399,13 @@ use TYPO3\CMS\Core\Attribute\AsEventListener;
 #[AsEventListener('vendor-myext/typed-validator')]
 final class TypedValidatorListener
 {
-    /** @var array<ValidationRule> */
-    private array $rules {
-        get => [
+    /** @var array<ValidationRule>|null */
+    private ?array $cachedRules = null;
+
+    /** @return array<ValidationRule> */
+    private function getRules(): array
+    {
+        return $this->cachedRules ??= [
             $this->createRule('iban', '/^[A-Z]{2}\d{2}[A-Z0-9]{4,}$/', 'Invalid IBAN'),
             $this->createRule('vat_id', '/^[A-Z]{2}\d{8,12}$/', 'Invalid VAT ID'),
             $this->createRule('zip_at', '/^\d{4}$/', 'Austrian ZIP: 4 digits'),
@@ -420,7 +424,7 @@ final class TypedValidatorListener
             }
             $marker = $field->getMarker();
             $rule = array_find(
-                $this->rules,
+                $this->getRules(),
                 static fn(ValidationRule $r) => $r->fieldMarker === $marker
             );
             if ($rule === null) {

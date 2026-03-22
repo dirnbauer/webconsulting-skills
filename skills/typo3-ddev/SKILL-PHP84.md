@@ -134,10 +134,10 @@ ddev restart
 ### .ddev/config.yaml
 
 ```yaml
-# Additional PHP extensions — package names must match `php_version` (e.g. php8.4-* when using PHP 8.4)
+# Additional PHP extensions — use php${DDEV_PHP_VERSION}-* so Debian packages track the PHP version in `php_version`
 # Only list extensions not already shipped in the default DDEV web image (intl/gd/zip are usually present).
 webimage_extra_packages:
-  - php8.4-bcmath
+  - php${DDEV_PHP_VERSION}-bcmath
 ```
 
 Custom PHP directives belong in **`.ddev/php/*.ini`** (DDEV merges them into the container PHP config), not in a non-standard `php_ini_defs` key:

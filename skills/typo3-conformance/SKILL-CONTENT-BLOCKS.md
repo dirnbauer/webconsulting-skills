@@ -31,8 +31,11 @@ packages/my_extension/
 ├── ContentBlocks/
 │   ├── ContentElements/
 │   │   ├── hero/
+│   │   │   ├── assets/
+│   │   │   │   └── icon.svg
 │   │   │   ├── config.yaml
-│   │   │   ├── labels.xlf
+│   │   │   ├── language/
+│   │   │   │   └── labels.xlf
 │   │   │   └── templates/
 │   │   │       ├── frontend.fluid.html
 │   │   │       └── backend-preview.fluid.html
@@ -40,8 +43,11 @@ packages/my_extension/
 │   │       └── ...
 │   └── RecordTypes/
 │       └── team-member/
+│           ├── assets/
+│           │   └── icon.svg
 │           ├── config.yaml
-│           └── labels.xlf
+│           └── language/
+│               └── labels.xlf
 ├── Classes/
 ├── Configuration/
 ├── Resources/
@@ -127,7 +133,7 @@ fields:
 - [ ] No hardcoded strings (use labels.xlf)
 
 ### Translations
-- [ ] `labels.xlf` for all custom labels
+- [ ] `language/labels.xlf` for all custom labels
 - [ ] Proper XLIFF structure
 
 ---

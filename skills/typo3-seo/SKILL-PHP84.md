@@ -35,37 +35,20 @@ namespace Vendor\MyExtension\Seo;
 
 final class MetaTagService
 {
-    private string $titleValue = '';
-    private string $descriptionValue = '';
-    private array $keywordsValue = [];
-
-    public string $title {
-        set (string $value) {
-            // Auto-truncate to SEO-friendly length
-            $this->titleValue = mb_substr($value, 0, 60);
-        }
-        get => $this->titleValue;
+    public string $title = '' {
+        set => mb_substr($value, 0, 60);
     }
 
-    public string $description {
-        set (string $value) {
-            // Truncate and clean description
-            $clean = strip_tags($value);
-            $this->descriptionValue = mb_substr($clean, 0, 160);
-        }
-        get => $this->descriptionValue;
+    public string $description = '' {
+        set => mb_substr(strip_tags($value), 0, 160);
     }
 
-    public array $keywords {
-        get => $this->keywordsValue;
-        set (array $value) {
-            // Limit keywords and lowercase
-            $this->keywordsValue = array_slice(
-                array_map('strtolower', $value),
-                0,
-                10
-            );
-        }
+    public array $keywords = [] {
+        set => array_slice(
+            array_map('strtolower', $value),
+            0,
+            10
+        );
     }
 }
 ```

@@ -9,7 +9,7 @@ description: >-
 compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
-license: Apache-2.0 / CC-BY-SA-4.0
+license: Apache-2.0 OR CC-BY-SA-4.0
 ---
 
 # TYPO3 Code Simplifier
@@ -69,9 +69,9 @@ Find custom implementations that duplicate what TYPO3 already provides.
 
 | Removed / legacy | When | Modern approach |
 |---|---|---|
-| `switchableControllerActions` | Deprecated in **v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)), removed later | Separate plugin registrations |
+| `switchableControllerActions` | Deprecated in **v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)), removed in **v12.0** | Separate plugin registrations |
 | Signal/Slot `Dispatcher` | Removed in **v12** | PSR-14 events |
-| `AbstractPlugin` (pi_base) | Deprecated v12.4, removed **v13** | Extbase or middleware |
+| `AbstractPlugin` (pi_base) | Made `@internal` **v12.0** (#98281), deprecated **v12.4** (#100639), removed **v13.0** | Extbase or middleware |
 
 ### Code quality (not deprecations)
 
@@ -161,7 +161,7 @@ final class MyService
 - [ ] Use autowiring (remove explicit argument definitions when type-hintable)
 - [ ] Use `_defaults: autowire: true, autoconfigure: true, public: false`
 - [ ] Remove manual service definitions for classes that autowiring handles
-- [ ] Replace unnecessary `factory:` blocks with autowiring or a dedicated factory **service** — `#[Autoconfigure]` (Symfony `Symfony\Component\DependencyInjection\Attribute\Autoconfigure`) tags/configures services; it does **not** replace `factory:` construction
+- [ ] Remove `factory:` blocks when autowiring handles construction; keep `factory:` for non-trivial construction that autowiring cannot resolve. `#[Autoconfigure]` tags/configures services but does **not** replace `factory:` construction
 - [ ] Remove `public: true` unless needed for `GeneralUtility::makeInstance()`
 
 ### ext_localconf.php / ext_tables.php
@@ -226,12 +226,12 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 
 | Pattern | Simplification |
 |---------|---------------|
-| `$GLOBALS['TSFE']` access | Replace with `$request->getAttribute('frontend.page.information')` |
+| `$GLOBALS['TSFE']` access | **Fatal error in v14** (Breaking #107831) — replace with `$request->getAttribute('frontend.page.information')` |
 | Extbase annotations (`@validate`) | Replace with `#[\TYPO3\CMS\Extbase\Attribute\Validate]` |
 | `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
 | Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
-| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` where supported |
+| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime`, `flex`, `json`, `uuid`) where supported |
 | Custom localization parsers | Remove, use Symfony Translation Component |
 | `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |
 

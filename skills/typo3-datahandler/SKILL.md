@@ -173,7 +173,7 @@ $cmd = [
 TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
 1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** or **constructor DI** — avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
-2. Call `start($data, $cmd[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
+2. Call `start($dataMap, $commandMap[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
 3. Call `process_datamap()` and / or `process_cmdmap()`
 4. Inspect **`$dataHandler->errorLog`**, verify expected keys in **`$dataHandler->substNEWwithIDs`** for new records, and (in workspaces) review **`$dataHandler->autoVersionIdMap`** when you expect version rows.
 

@@ -287,6 +287,7 @@ Two modes control which fields appear:
 1. **Editor's "Show columns" selection** (stored per-user per-table)
 2. **This extension’s own TSconfig / template resolution** — not Core `mod.web_list.table.<table>.showFields` (that path is not a documented Core column picker). See extension docs and `GridConfigurationService` behaviour for your release.
 3. **TCA `ctrl.label` and sensible text/date fallbacks** (see “Special Column Names” below) — TYPO3 v14 removed `ctrl.searchFields`; backend search now auto-includes suitable fields and can be tuned per-column via `searchable`, which is unrelated to this list display.
+4. **Label field only** (final fallback)
 
 ### Special Column Names
 
@@ -294,7 +295,7 @@ Two modes control which fields appear:
 |------|-------------|
 | `label` | TCA `ctrl.label` field (record title) |
 | `datetime` | First date field (`datetime`, `date`, `starttime`, `crdate`) |
-| `teaser` | First description field (`teaser`, `abstract`, `description`, `bodytext`) |
+| `teaser` | First description field (`teaser`, `abstract`, `description`, `bodytext`, `short`) |
 
 ## 10. TSconfig Reference
 

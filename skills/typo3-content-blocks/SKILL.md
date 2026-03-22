@@ -325,6 +325,7 @@ fields:
     fields:
       - identifier: platform
         type: Select
+        renderType: selectSingle
         items:
           - label: LinkedIn
             value: linkedin
@@ -528,7 +529,7 @@ page {
         
         dataProcessing {
             # Process Content Blocks page data
-            1 = record-transformation
+            1 = content-blocks
         }
     }
 }
@@ -633,7 +634,7 @@ fields:
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `typeName` | string | ✓ | One of: `text`, `image`, `audio`, `video`, `application` |
-| `prefixFields` | boolean | | Common root option inherited by File Types; not File-Type-specific (often `false` for shared field names) |
+| `prefixFields` | boolean | | Whether to prefix field identifiers with the Content Block name (often `false` for File Types to keep shared field names) |
 
 ### Use Cases for File Types
 

@@ -130,7 +130,7 @@ composer require apache-solr-for-typo3/solr:dev-main
 
 ### CVE-2025-24814 Migration
 
-Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: use the **EXT:solr** container image **13.0.1+** (image tag, not TYPO3 Core) so this migration runs automatically.
+Apache Solr 9.8.0+ disables loading `jar` files via `lib` directive in configsets. **CVE-2025-24814** is a remote-code-execution class issue: if an attacker can replace or supply a configset file that Solr treats as trusted, Solr may load attacker-controlled JARs from that configset (including via the `lib` directive), which can lead to arbitrary code execution. The stricter default blocks that classpath loading from configsets. The `solr-typo3-plugin` must be moved from `/configsets/ext_solr_*/typo3lib/` to `/typo3lib/` at the Solr server root. Docker users: use the **EXT:solr** container image **13.0.1+** (image tag, not TYPO3 Core) so this migration runs automatically.
 
 ## 3. Installation & Setup
 
@@ -157,8 +157,8 @@ Configure `.ddev/typo3-solr/config.yaml`:
 config: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/solr.xml'
 typo3lib: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/typo3lib'
 configsets:
-  - name: 'ext_solr_13_1_0'
-    path: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets/ext_solr_13_1_0'
+  - name: 'ext_solr_14_0_0'
+    path: 'vendor/apache-solr-for-typo3/solr/Resources/Private/Solr/configsets/ext_solr_14_0_0'
     cores:
       - name: 'core_en'
         schema: 'english/schema.xml'
@@ -180,7 +180,7 @@ hooks:
 |---------|-------------|
 | `ddev solrctl apply` | Create cores from config |
 | `ddev solrctl wipe` | Delete all cores |
-| `ddev exec -s solr solr --version` | Check Solr version inside the Solr service |
+| `ddev exec -s typo3-solr solr --version` | Check Solr version inside the Solr service |
 | `ddev launch :8984` | Open Solr Admin UI |
 | `ddev logs -s typo3-solr` | View Solr logs |
 
@@ -191,7 +191,7 @@ hooks:
 ```yaml
 services:
   solr:
-    image: typo3solr/ext-solr:13.1
+    image: typo3solr/ext-solr:14.0
     ports:
       - "8983:8983"
     volumes:
@@ -217,7 +217,7 @@ Create cores via `core.properties` files, `solrctl`, or the Solr Admin API. **Pa
 
 ```bash
 # Illustrative only — confirm against your Solr admin API docs / use bin/solr or ddev solrctl for local setups
-curl -sS -X POST "http://localhost:8983/solr/admin/cores?action=CREATE&name=core_en&configSet=ext_solr_13_1_0"
+curl -sS -X POST "http://localhost:8983/solr/admin/cores?action=CREATE&name=core_en&configSet=ext_solr_14_0_0"
 ```
 
 ### Managed Hosting: Mittwald
@@ -233,7 +233,7 @@ module "solr" {
 }
 ```
 
-Access Solr at `http://solr:8983` inside the container. For local debugging:
+Access Solr at `http://typo3-solr:8983` inside the container. For local debugging:
 
 ```bash
 mw container port-forward --port 8983
@@ -300,7 +300,7 @@ In `config/system/additional.php`, override site config values programmatically 
 
 ## 4. EXT:tika -- When You Need It (and When Not)
 
-EXT:tika integrates Apache Tika for metadata extraction, language detection, and text extraction from ~1200 file formats.
+EXT:tika integrates Apache Tika for metadata extraction, language detection, and text extraction from over 1,000 file formats.
 
 ```mermaid
 graph TD
@@ -333,12 +333,12 @@ See [SKILL-SOLRFAL.md](SKILL-SOLRFAL.md) for complete file indexing setup.
 
 ## 5. Configset & Schema
 
-The configset defines how Solr processes and indexes text. EXT:solr ships configsets at `Resources/Private/Solr/configsets/ext_solr_13_1_0/`.
+The configset defines how Solr processes and indexes text. EXT:solr ships configsets at `Resources/Private/Solr/configsets/ext_solr_14_0_0/`.
 
 ### Structure
 
 ```
-ext_solr_13_1_0/
+ext_solr_14_0_0/
 ├── conf/
 │   ├── solrconfig.xml
 │   ├── english/
@@ -1090,7 +1090,7 @@ solr_scheme_read: https
 
 ```bash
 # DDEV: test if Solr responds
-ddev exec curl -s http://solr:8983/solr/core_en/admin/ping
+ddev exec curl -s http://typo3-solr:8983/solr/core_en/admin/ping
 
 # Expected: {"status":"OK"}
 # If "Connection refused": Solr container is not running → ddev restart
@@ -1448,31 +1448,31 @@ Bypass TYPO3 entirely and talk to Solr directly:
 
 ```bash
 # Ping (is Solr alive?)
-ddev exec curl -s http://solr:8983/solr/core_en/admin/ping | python3 -m json.tool
+ddev exec curl -s http://typo3-solr:8983/solr/core_en/admin/ping | python3 -m json.tool
 
 # Total document count
-ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/select?q=*:*&rows=0' | python3 -m json.tool
 
 # Search with debug
-ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=test&debugQuery=true&fl=uid,title,score&wt=json' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/select?q=test&debugQuery=true&fl=uid,title,score&wt=json' | python3 -m json.tool
 
 # Check a specific document by uid
-ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=uid:42&fl=*' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/select?q=uid:42&fl=*' | python3 -m json.tool
 
 # List all field names in the index
-ddev exec curl -s 'http://solr:8983/solr/core_en/admin/luke?numTerms=0&wt=json' | python3 -m json.tool | grep '"name"'
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/admin/luke?numTerms=0&wt=json' | python3 -m json.tool | grep '"name"'
 
 # Document count by type
-ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=type' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=type' | python3 -m json.tool
 
 # Check what siteHash values exist
-ddev exec curl -s 'http://solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=siteHash' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/select?q=*:*&rows=0&facet=true&facet.field=siteHash' | python3 -m json.tool
 
 # Analyze how a term is tokenized (for field type "text")
-ddev exec curl -s 'http://solr:8983/solr/core_en/analysis/field?analysis.fieldname=content&analysis.fieldvalue=TYPO3+Content+Management&wt=json' | python3 -m json.tool
+ddev exec curl -s 'http://typo3-solr:8983/solr/core_en/analysis/field?analysis.fieldname=content&analysis.fieldvalue=TYPO3+Content+Management&wt=json' | python3 -m json.tool
 ```
 
-**From host** (replace `ddev exec curl -s http://solr:8983` with `curl -sk https://<project>.ddev.site:8984`).
+**From host** (replace `ddev exec curl -s http://typo3-solr:8983` with `curl -sk https://<project>.ddev.site:8984`).
 
 #### Layer 6: Database-level inspection
 
@@ -1559,11 +1559,11 @@ graph TD
 3. Test from CLI:
    ```bash
    # Inside DDEV container
-   ddev exec curl -s http://solr:8983/solr/core_en/admin/ping
+   ddev exec curl -s http://typo3-solr:8983/solr/core_en/admin/ping
    # From host
    curl -sk https://<project>.ddev.site:8984/solr/core_en/admin/ping
    ```
-4. **DDEV networking:** Inside the container, Solr is reachable at hostname `solr` on port `8983`. From the host, use `<project>.ddev.site:8984` with HTTPS.
+4. **DDEV networking:** Inside the container, Solr is reachable at hostname `typo3-solr` on port `8983`. From the host, use `<project>.ddev.site:8984` with HTTPS.
 5. **Firewall:** Ensure port 8983 (or 8984 for DDEV) is open
 6. **HTTPS:** DDEV uses self-signed certificates. Use `solr_scheme_read: https` with DDEV.
 
@@ -1680,7 +1680,7 @@ If indexing fails, you'll see the Solr error response:
 
 ```
 [DEBUG] Solr query: q=test+search&fq=siteHash:abc123&fl=*,score
-[DEBUG] Solr raw GET: http://solr:8983/solr/core_en/select?q=test+search&...
+[DEBUG] Solr raw GET: http://typo3-solr:8983/solr/core_en/select?q=test+search&...
 [DEBUG] Search words: ["test", "search"]
 [DEBUG] Response: 15 results in 3ms
 ```
@@ -1724,7 +1724,7 @@ q=*:*&fq=-content:[* TO *]&fl=uid,title,type
 q=*:*&fl=uid,title,access&rows=10
 ```
 
-**Core Admin:** Reload a core after schema changes (Core Admin -> Reload button, or via API: `curl http://solr:8983/solr/admin/cores?action=RELOAD&core=core_en`).
+**Core Admin:** Reload a core after schema changes (Core Admin -> Reload button, or via API: `curl http://typo3-solr:8983/solr/admin/cores?action=RELOAD&core=core_en`).
 
 **Analysis screen:** Test how text is tokenized and stemmed. In Solr Admin -> Analysis, select the field type (e.g., `text`), paste text in the "Field Value (Index)" box, and click "Analyse Values". This shows every processing step: char filters, tokenizer, token filters (lowercase, stop words, stemming).
 
@@ -1780,7 +1780,7 @@ UPDATE tx_solr_indexqueue_item SET errors = '' WHERE errors != '';
 | URL generation fails for records | `detailPid` not configured | Set the correct detail page ID |
 | Docker: permission denied on `/var/solr` | Volume ownership wrong | Ensure UID 8983 owns the volume |
 | DDEV: port 8984 not reachable | Addon not installed or Solr down | `ddev add-on get ddev/ddev-typo3-solr && ddev restart` |
-| Configset version mismatch | Wrong configset deployed | Redeploy matching `ext_solr_13_1_0` |
+| Configset version mismatch | Wrong configset deployed | Redeploy matching `ext_solr_14_0_0` |
 | Jar loading error (Solr 9.8+ config) | Solr hardened `<lib>` / configset loading (**CVE-2025-24814** class of issue) | Follow EXT:solr / Solr release notes: relocate `typo3lib/`, update Docker image (**13.0.1+** image tag), align configset with supported layout |
 | Tika: connection timeout | Tika Server not running or wrong port | Check Docker container, test connection in extension settings |
 | Language core missing | No core for language | Create core with matching language schema |
@@ -1861,7 +1861,7 @@ final class EnrichSolrDocumentsTest extends TestCase
 
 ### Production Checklist
 
-- [ ] Correct configset version deployed (`ext_solr_13_1_0`)
+- [ ] Correct configset version deployed (`ext_solr_14_0_0`)
 - [ ] Solr JVM memory configured (`SOLR_JAVA_MEM=-Xms512m -Xmx1g`)
 - [ ] Solr NOT publicly accessible (firewall, reverse proxy)
 - [ ] Scheduler task "Index Queue Worker" running regularly

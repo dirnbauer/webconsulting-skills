@@ -43,7 +43,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 - [ ] No auto-playing media with sound
 
 ### Color & Contrast
-- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.66px bold)
+- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.5px bold)
 - [ ] UI components and graphical objects >= 3:1 contrast
 - [ ] Information not conveyed by color alone (add icon, text, or pattern)
 - [ ] Dark mode (if implemented) maintains contrast ratios
@@ -938,11 +938,11 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 
 ### Accessible Combobox Pattern **[v14 only]**
 
-TYPO3 v14 introduces a new **accessible combobox pattern** (#106637) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
+TYPO3 v14 introduces a new **accessible combobox pattern** (#90694) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
 
 ### Native `<dialog>` Element **[v14 only]**
 
-Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#107443). The native dialog provides better accessibility out of the box:
+Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#90594). The native dialog provides better accessibility out of the box:
 - Built-in focus trapping
 - Proper `aria-modal` semantics
 - `Escape` key handling
@@ -951,7 +951,7 @@ Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#
 
 Update custom backend JavaScript that listens to **Bootstrap modal events** such as `show.bs.modal` / `hidden.bs.modal` — TYPO3 v14 uses events like `typo3-modal-show`, `typo3-modal-shown`, `typo3-modal-hide`, and `typo3-modal-hidden`. Also replace Bootstrap modal triggers such as `data-bs-toggle="modal"` with TYPO3's `t3js-modal-trigger` class where appropriate.
 
-### Fluid 5.0 Accessibility Impact **[v14 only]**
+### Fluid 5.x Accessibility Impact **[v14 only]**
 
 Fluid 5.x is stricter about ViewHelper arguments in some setups. Prefer correct types for numeric and boolean attributes (`tabindex`, `aria-expanded`, etc.) and validate templates after upgrades.
 

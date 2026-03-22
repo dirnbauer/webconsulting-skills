@@ -407,6 +407,13 @@ final readonly class ImmutableRecordService
         $dataHandler->start($dataMap, []);
         $dataHandler->process_datamap();
 
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
+
         return (int) ($dataHandler->substNEWwithIDs['NEW_1'] ?? 0);
     }
 }

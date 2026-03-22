@@ -353,7 +353,7 @@ ddev add-on get ddev/ddev-solr
 
 ```yaml
 # .ddev/docker-compose.redis.yaml
-# Attach the service to the DDEV project network so the `web` container can reach hostname `redis`.
+# DDEV merges compose files into the project network; the `web` container can reach hostname `redis`.
 services:
   redis:
     image: redis:7-alpine
@@ -364,15 +364,9 @@ services:
     labels:
       com.ddev.site-name: ${DDEV_SITENAME}
       com.ddev.approot: $DDEV_APPROOT
-    networks: [default]
 
 volumes:
   redis-data:
-
-networks:
-  default:
-    name: ddev-${DDEV_SITENAME}_default
-    external: true
 ```
 
 ### Redis Caching Configuration (TYPO3 v14)

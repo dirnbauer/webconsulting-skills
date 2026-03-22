@@ -62,8 +62,8 @@ return [
         // Encryption key (generate unique per installation)
         'encryptionKey' => 'generate-unique-key-per-installation',
         
-        // Trusted hosts pattern (CRITICAL) — anchor patterns; avoid `.*\\.example\\.com` (matches `evil-example.com`)
-        'trustedHostsPattern' => '^(www\\.)?example\\.com$',
+        // Trusted hosts pattern (CRITICAL) — Core wraps the pattern in `/^...$/`; omit `^` and `$`. Avoid `.*\\.example\\.com` (matches `evil-example.com`)
+        'trustedHostsPattern' => '(www\\.)?example\\.com',
         
         // File handling security
         'textfile_ext' => 'txt,html,htm,css,js,tmpl,ts,typoscript,xml,svg',
@@ -104,14 +104,14 @@ return [
 // ❌ DANGEROUS - Allows any host
 'trustedHostsPattern' => '.*',
 
-// ✅ SECURE - Explicit host list (fully anchored)
-'trustedHostsPattern' => '^(?:example\\.com|www\\.example\\.com)$',
+// ✅ SECURE - Explicit host list (Core adds `/^...$/` around the pattern)
+'trustedHostsPattern' => '(?:example\\.com|www\\.example\\.com)',
 
-// ✅ SECURE - Regex for subdomains (still anchored to your registrable domain)
-'trustedHostsPattern' => '^(.*\\.)?example\\.com$',
+// ✅ SECURE - Regex for subdomains (tie to your registrable domain)
+'trustedHostsPattern' => '(.*\\.)?example\\.com',
 
 // Development with DDEV
-'trustedHostsPattern' => '^(?:(?:.*\\.)?example\\.com|.*\\.ddev\\.site)$',
+'trustedHostsPattern' => '(?:(?:.*\\.)?example\\.com|.*\\.ddev\\.site)',
 ```
 
 ## 3. File System Security
@@ -225,8 +225,8 @@ add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
 
 ```bash
 # Remove enable file after installation
-# Composer-based installs typically use ENABLE_INSTALL_TOOL in the project root.
-rm ENABLE_INSTALL_TOOL
+# Composer-based TYPO3 v14: file is in var/transient/
+rm var/transient/ENABLE_INSTALL_TOOL
 ```
 
 ### Secure Install Tool Password

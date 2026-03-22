@@ -115,7 +115,6 @@ declare(strict_types=1);
 use Rector\Config\RectorConfig;
 use Rector\Set\ValueObject\LevelSetList;
 use Ssch\TYPO3Rector\Set\Typo3LevelSetList;
-use Ssch\TYPO3Rector\Set\Typo3SetList;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -132,7 +131,6 @@ return RectorConfig::configure()
         
         // TYPO3 upgrades (v14 target — adjust if you intentionally stop at v13)
         Typo3LevelSetList::UP_TO_TYPO3_14,
-        Typo3SetList::TYPO3_14,
     ])
     ->withImportNames();
 ```
@@ -265,7 +263,7 @@ public function render(ServerRequestInterface $request): string
 ### Controller ResponseInterface
 
 ```php
-// ❌ OLD (v12 and earlier)
+// ❌ OLD (v11 and earlier)
 public function listAction(): void
 {
     $this->view->assign('items', $items);
