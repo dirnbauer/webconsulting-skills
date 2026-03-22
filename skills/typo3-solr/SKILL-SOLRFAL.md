@@ -41,9 +41,9 @@ When files are indexed, search results display differently from page results:
 
 | Component | Version | Required? |
 |-----------|---------|-----------|
-| EXT:solr | 14.0 | Yes |
-| EXT:solrfal | 14.0 | Yes |
-| EXT:tika | 14.0 | Yes |
+| EXT:solr | Match your TYPO3 Core (see [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html)) | Yes |
+| EXT:solrfal | Match EXT:solr major (v14 not yet released — check Version Matrix) | Yes |
+| EXT:tika | Match EXT:solr major (v14 not yet released — check Version Matrix) | Yes |
 | Apache Tika Server | 3.2.3+ (align with main Solr skill / vendor advisories) | Yes |
 | EB Partner access | -- | Yes (funding extension) |
 

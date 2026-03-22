@@ -510,17 +510,22 @@ public function __construct(
 | `AbstractTypolinkBuilder->build()` | Use `TypolinkBuilderInterface` |
 | `DataHandler->userid` / `->admin` / `->storeLogMessages` | Removed, no replacement |
 
+### v14.0 Deprecation Targets (prepare for v15 removal)
+
+| Deprecated | Migration |
+|------------|-----------|
+| `ButtonBar`/`Menu`/`MenuRegistry` `make*` methods (#107823) | Use `ComponentFactory` |
+| Scheduler task registration via `SC_OPTIONS` (#98453) | Use TCA-based registration |
+| `Localization parsers` (XliffParser, etc.) (#107436) | Symfony Translation Component |
+
 ### v14.2 Deprecation Targets (prepare for v15 removal)
 
 | Deprecated | Migration |
 |------------|-----------|
 | `PageDoktypeRegistry` config methods | Migrate to TCA `allowedRecordTypes` |
-| `PageRenderer->addInlineLanguageDomain()` | Use alternative API |
-| `ExtensionManagementUtility::addFieldsToUserSettings` | Use TCA for user settings |
-| `ButtonBar`/`Menu`/`MenuRegistry` `make*` methods | Use `ComponentFactory` |
-| Scheduler task registration via `SC_OPTIONS` | Use TCA-based registration |
-| `FormEngine "additionalHiddenFields"` key | Removed in v15 |
-| `Localization parsers` (XliffParser, etc.) | Symfony Translation Component |
+| `PageRenderer->addInlineLanguageDomain()` (#108963) | Use alternative API |
+| `ExtensionManagementUtility::addFieldsToUserSettings` (#108843) | Use TCA for user settings |
+| `FormEngine "additionalHiddenFields"` key (#109102) | Removed in v15 |
 
 ---
 

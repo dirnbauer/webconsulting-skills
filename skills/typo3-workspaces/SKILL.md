@@ -1609,7 +1609,7 @@ final class CustomWorkspaceSortListener
 }
 ```
 
-### All Available Events
+### Key Events
 
 | Event | When Fired |
 |-------|------------|
@@ -1617,7 +1617,9 @@ final class CustomWorkspaceSortListener
 | `AfterDataGeneratedForWorkspaceEvent` | After generating all workspace version data |
 | `AfterRecordPublishedEvent` | After a record is published to live |
 | `GetVersionedDataEvent` | After preparing/cleaning workspace version data |
+| `IsReferenceConsideredForDependencyEvent` | When evaluating whether a reference is considered a workspace dependency |
 | `ModifyVersionDifferencesEvent` | When computing diffs between live and workspace version |
+| `RetrievedPreviewUrlEvent` | When adjusting the preview URL for a workspace record |
 | `SortVersionedDataEvent` | After sorting workspace version data in the module |
 
 All events are in the `\TYPO3\CMS\Workspaces\Event\` namespace.
