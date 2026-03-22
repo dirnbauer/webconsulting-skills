@@ -12,6 +12,8 @@ tmp
 # IDE/Editor directories
 .idea/
 .vscode/
+__pycache__/
+*.pyc
 *.swp
 *.swo
 *~
