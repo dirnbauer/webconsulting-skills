@@ -606,7 +606,7 @@ records_list_types/
 
 - **Keyboard drag-and-drop**: Space/Enter to grab, arrows to move, Space/Enter to drop, Escape to cancel
 - **ARIA live regions**: Announce drag state and position ("Position 3 of 12")
-- **Semantic markup**: `role="listbox"` on grids, `role="option"` on cards
+- **Semantic markup**: Interactive card grids use the **grid pattern** — `role="grid"` on the container and `role="gridcell"` on each card (`listbox`/`option` is wrong here: options must not contain separate interactive controls such as drag handles and action buttons)
 - **Focus management**: Visible focus indicators, proper tab order
 
 ## 18. Dark Mode

@@ -27,7 +27,7 @@ license: MIT / CC-BY-SA-4.0
 | **Primary shapes** | White `#FFFFFF` on colored bg | `currentColor` (adapts to theme) |
 | **Accent color** | Hardcoded brand color (e.g. `#5BA34F`) | `var(--icon-color-accent, #ff8700)` |
 | **Secondary elements** | `opacity="0.25"` / `0.75` with hardcoded fill | `opacity=".4"` with `currentColor` |
-| **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | **Module icons:** `0 0 64 64` — match Core SVGs for plugin/record/extension icons (Core often uses `0 0 64 64`; do not assume `16×16` viewBox for those) |
+| **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | **Module / backend-module icons:** `0 0 64 64`. **Action, plugin, record, and similar small icons:** `0 0 16 16` — match the Core SVG you are replacing (do not mix module and plugin viewBoxes). |
 | **SVG wrapper** | `version="1.1"`, `xmlns:xlink`, `enable-background`, generator comments | Minimal: `xmlns` + `viewBox` only |
 | **Detail colors** | `#333333` for text lines, brand color for accents | `currentColor` + accent variable |
 
@@ -486,7 +486,7 @@ Icons.getIcon('module-myext', Icons.sizes.small).then((icon) => {
 |------------|------|----------|
 | `IconSize::MEGA` | 64px | New Content Element wizard, large previews |
 | `IconSize::LARGE` | 48px | Wizard icons, large previews |
-| `IconSize::MEDIUM` | 32px | Default toolbar / sidebar module icons |
+| `IconSize::MEDIUM` | 32px | Default **module menu / sidebar** module icons (top toolbar uses smaller icons — closer to `SMALL`) |
 | `IconSize::SMALL` | 16px | Inline, lists, TCA |
 | `IconSize::DEFAULT` | `1em` (CSS) / 16×16 (PHP `getDimensions()`) — actual rendered size depends on the parent element's `font-size` | Prefer `SMALL` when you need a fixed **16px** icon |
 | `IconSize::OVERLAY` | 16×16 (PHP) / 68.75% of parent (CSS) | `@internal` — Core overlays (hidden/locked badges), not for extension icons |

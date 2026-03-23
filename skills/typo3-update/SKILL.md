@@ -387,7 +387,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,description',
+        // v14: ctrl `searchFields` removed (Breaking #106972) — mark searchable columns in `columns` instead.
         'iconIdentifier' => 'myextension-item',
     ],
     'palettes' => [
@@ -417,6 +417,7 @@ return [
                 'size' => 50,
                 'max' => 255,
                 'required' => true,
+                'searchable' => true,
             ],
         ],
         'description' => [
@@ -426,6 +427,7 @@ return [
                 'cols' => 40,
                 'rows' => 5,
                 'enableRichtext' => true,
+                'searchable' => true,
             ],
         ],
     ],

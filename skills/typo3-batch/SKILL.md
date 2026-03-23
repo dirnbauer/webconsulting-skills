@@ -339,7 +339,8 @@ Stop the batch and report if:
 | Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
 | FlexForm pointer fields | All FlexForm XML with pointer configurations |
 | Asset `external` property | All TypoScript with `external = 1` |
-| Remove legacy `switchableControllerActions` / plugin subtypes | Removed in **v12** — not a v14-only migration |
+| Remove legacy `switchableControllerActions` | Removed in **v12** — not a v14-only migration |
+| Remove legacy plugin subtypes / `list_type` wiring | Removed in **v14** (Important [#105538](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-105538-ListTypeAndSubTypes.html)) |
 
 ---
 

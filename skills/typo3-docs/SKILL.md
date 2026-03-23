@@ -295,7 +295,7 @@ docker run --rm --pull always -v $(pwd):/project -w /project -it \
 
 ### With live preview
 
-Current **`render-guides`** images (0.36.0+) support **both** `run --watch` and a `serve` subcommand for live preview. Default port is often **1337** — verify with `-h` for your tag.
+Current **`render-guides`** images expose **`render` / `run`**, **`migrate`**, **`init`**, **`lint-guides-xml`**, **`configure`**, **`create-redirects-from-git`**, etc. — confirm with **`-h`** for your tag. **Live preview** is provided by **`--watch`** on the render command (default port is often **1337**); there is **no separate `serve` subcommand** in current entrypoints.
 
 ```bash
 docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
@@ -303,7 +303,7 @@ docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
   --config=Documentation --watch
 ```
 
-> Both `--watch` (on `run`) and `serve` coexist in current releases. CLI entry points can change between image tags — always check `-h` output.
+> CLI flags and defaults change between image tags — always check **`-h`**. Use **`--watch`** on `render` for live preview; do not assume a `serve` command exists.
 
 ### Validation
 

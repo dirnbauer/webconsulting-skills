@@ -323,7 +323,7 @@ Use this checklist to verify your workspace setup is complete:
 - [ ] Tables requiring live-editing in workspace have `'versioningWS_alwaysAllowLiveEdit' => true`
 - [ ] `t3ver_*` database columns exist (auto-created when `versioningWS = true`)
 
-> **Inline / IRRE child tables (Deprecation [#106821](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-106821-EnforceVersioningWSForInlineChildTables.html)):** If `versioningWS` is missing on a child table, Core **logs a deprecation** and may **auto-add** the flag at TCA build time — it does **not** throw a hard error. Set the flag explicitly in TCA; it will become a **hard requirement in v15**.
+> **Inline / IRRE child tables (Deprecation [#106821](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-106821-WorkspaceAwareInlineChildTablesAreEnforced.html)):** If `versioningWS` is missing on a child table, Core **logs a deprecation** and may **auto-add** the flag at TCA build time — it does **not** throw a hard error. Set the flag explicitly in TCA; it will become a **hard requirement in v15**.
 
 #### Scheduler Tasks
 
@@ -1634,9 +1634,9 @@ All events are in the `\TYPO3\CMS\Workspaces\Event\` namespace.
 
 Workspace "Freeze Editing" feature has been removed (#107323). Workspaces can no longer be frozen to prevent editing. Remove any code that references `freezeEditingWorkspace` or relies on frozen workspace state.
 
-### Workspace-Aware Inline Child Tables Enforced **[v14 only]**
+### Workspace-Aware Inline Child Tables **[v14 only]**
 
-All inline (IRRE) child tables used in workspace-enabled parent tables **should** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14 a missing flag triggers a **deprecation warning** and the flag is auto-added at TCA build time. This will become a **hard requirement in v15**.
+All inline (IRRE) child tables used in workspace-enabled parent tables **should** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14, a missing flag triggers a **deprecation** and Core may **auto-add** it at TCA compile time — set the flag explicitly in extensions now; it becomes a **hard requirement in v15**.
 
 ### Workspace Selector Moved to Sidebar **[v14.2+ only]**
 

@@ -33,11 +33,13 @@ triggers:
         "typo3/cms-core": "^14.0"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.10",
-        "rector/rector": "^1.0"
+        "phpstan/phpstan": "^2.0",
+        "rector/rector": "^2.0"
     }
 }
 ```
+
+> **`ssch/typo3-rector` v3.x** expects `rector/rector: ^2.3.7` — keep Rector on the **2.x** line when using current typo3-rector.
 
 ### ext_emconf.php
 

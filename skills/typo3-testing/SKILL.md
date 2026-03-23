@@ -588,7 +588,7 @@ jobs:
 
 ### Testing Framework Version **[v14 only]**
 
-Pick **`typo3/testing-framework`** to match your **TYPO3 core line** (see [Packagist](https://packagist.org/packages/typo3/testing-framework) `require.typo3/cms-core` for each major). Example for a **v14-only** tree:
+Pick **`typo3/testing-framework`** to match your **TYPO3 core line** (see [Packagist](https://packagist.org/packages/typo3/testing-framework) `require.typo3/cms-core` for each major). **`^9.0` supports TYPO3 v13 and v14** — use it for v14 projects (and v13+v14 dual-version trees with the appropriate CI matrix / locks):
 
 ```json
 {

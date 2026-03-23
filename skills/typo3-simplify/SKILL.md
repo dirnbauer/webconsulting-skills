@@ -232,7 +232,7 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 | Extbase annotations (`@validate`) | Replace with `#[\TYPO3\CMS\Extbase\Attribute\Validate]` |
 | `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
-| Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
+| Bootstrap Modal JS | **Frontend:** native `<dialog>` where appropriate. **Backend:** use `@typo3/backend/modal` — it wraps **native `<dialog>`** in v14 (Breaking #107443); do not use raw Bootstrap modal JS |
 | TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime` (without custom `dbType`), `flex`, `json`, `uuid`) where supported |
 | Custom localization parsers | Remove, use Symfony Translation Component |
 | `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |

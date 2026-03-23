@@ -419,11 +419,11 @@ $GLOBALS['BE_USER']->setWorkspace($previousWorkspace);
 
 ## 9. Extending DataHandler: Hooks and Real Core Events
 
-> **Facts for TYPO3 v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. To run code **after** datamap DB writes, use **`SC_OPTIONS` hook classes** (below). Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
+> **Facts for TYPO3 v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. For datamap/cmdmap extension points beyond documented PSR-14 events, use **`SC_OPTIONS` hook classes** (below). Those hooks expose callbacks throughout the lifecycle (`*_beforeStart`, `*_preProcess`, `*_postProcess`, `*_afterDatabaseOperations`, `*_afterAllOperations` / `*_afterFinish`, etc.) — not a single “after everything” moment. Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
 
 ### 9.1 `SC_OPTIONS` hook classes (primary pattern for datamap/cmdmap)
 
-Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these on **TYPO3 v14**; they are the supported extension point for many DataHandler reactions.
+Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these on **TYPO3 v14**. Each registration receives **multiple** hook methods over the datamap/cmdmap lifecycle (before start, pre/post process, after DB, after all) — see your hook class naming pattern in Core’s `DataHandler`.
 
 `ext_localconf.php`:
 
@@ -438,7 +438,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
 ```
 
-Hook class (after database operations on the datamap — same signature Core calls):
+Hook class (example: `processDatamap_afterDatabaseOperations` — one of several methods Core may call on the same class):
 
 ```php
 <?php

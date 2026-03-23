@@ -30,7 +30,7 @@ Module icons: https://typo3.github.io/TYPO3.Icons/icons/module.html
 | Using `prefers-color-scheme` in SVG | Don't — TYPO3 uses `data-color-scheme`, not media queries |
 | Keeping `xmlns:xlink` | Remove — not needed for modern SVG |
 | Registering in `ext_localconf.php` | Move to `Configuration/Icons.php` |
-| Using `IconRegistry::registerIcon()` | Use the declarative array in `Icons.php` |
+| Calling `registerIcon()` from `ext_localconf.php` / bootstrap | Use the declarative array in `Configuration/Icons.php` instead — the **`registerIcon()` method is not deprecated**; imperative registration during bootstrap files is. |
 | Forgetting to clear browser cache | Icons are cached in browser localStorage |
 | Using 32×32 viewBox for parent module | Always use 64×64 for consistency |
 | Assuming accent is always orange | Fresh theme uses purple (`#bf9aff`/`#b68cff`) in sidebar |

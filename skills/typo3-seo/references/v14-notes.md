@@ -8,23 +8,33 @@
 
 Sitemap GET parameters use the **`tx_seo[...]`** namespace (see [Breaking: #104422](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-104422-SeoParameterNamespace.html)). Update route enhancers and templates that still expect flat `sitemap` / `page` arguments.
 
-Configure route enhancers for clean sitemap URLs:
+Configure route enhancers for the sitemap page type plus an **optional custom** enhancer for paginated child sitemaps (Core still emits query parameters by default — treat pretty URLs as site-specific):
 
 ```yaml
 # config/sites/<site>/config.yaml
 routeEnhancers:
-  Sitemap:
+  PageTypeSuffix:
     type: PageType
     map:
       sitemap.xml: 1533906435
-  SitemapPagination:
+  # Optional custom — define aspects; adjust routePath and StaticRangeMapper bounds to your URLs.
+  CustomSitemapPagination:
     type: Simple
-    routePath: '{sitemap}/{page}'
+    routePath: 'sitemap/{sitemap}/{page}'
+    aspects:
+      sitemap:
+        type: StaticRangeMapper
+        start: '0'
+        end: '99'
+      page:
+        type: StaticRangeMapper
+        start: '0'
+        end: '999'
+    defaults:
+      page: '0'
     _arguments:
       sitemap: 'tx_seo/sitemap'
       page: 'tx_seo/page'
-    defaults:
-      page: ''
 ```
 
 ### Fluid Page Meta & Title ViewHelpers **[v14 only]**
@@ -46,9 +56,9 @@ These complement (and can replace) PHP-based `PageTitleProvider` and `MetaTagMan
 
 `RecordTitleProvider` (PageTitle API) ties the browser title to rendered records where configured. Useful for Extbase detail views — confirm the exact registration flags in Core docs for your minor version.
 
-### Regex-Based Slug Replacements **[v14 only]**
+### Advanced slug configuration **[v14 only]**
 
-Slugs now support **regex-based replacements** (#106072) for advanced URL transformation rules beyond simple character substitution.
+Slug handling supports richer transformation rules than simple character replacement (see Core **SlugFieldWizard** / routing documentation for your minor version). Prefer official docs over ad-hoc Forge numbers — changelog IDs move when entries are renamed.
 
 ### headerData / footerData ViewHelpers **[v14 only]**
 

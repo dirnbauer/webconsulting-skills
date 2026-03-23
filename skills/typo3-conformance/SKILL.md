@@ -20,6 +20,11 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
+### v14 wording precision (reviews)
+
+- **`$GLOBALS['TSFE']`:** Access from extension code is removed in v14 (Breaking [#107831](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107831-DeprecatedTyposcriptFrontendControllerRemoved.html)). The `TypoScriptFrontendController` **class may still exist internally** until a later v14 release — prefer **request attributes** and public FE APIs instead of the old global.
+- **TCA:** **Base** TCA files must be static (Important [#107328](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-107328-NoDynamicTCAInBaseConfigurationFiles.html)). **`Configuration/TCA/Overrides/`** remains the supported place for modifications — that is not a “ban on runtime TCA”. Programmatic TCA changes are also supported via PSR-14: `BeforeTcaOverridesEvent` and `AfterTcaCompilationEvent` (see [Core DataHandling / TCA events](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/Configuration/Index.html)).
+
 ## Skill Delegation
 
 | Skill | Use For |
@@ -204,9 +209,9 @@ return [
 
 ```javascript
 // Resources/Public/JavaScript/MyModule.js
-import Modal from '@typo3/backend/modal.js';
-import Notification from '@typo3/backend/notification.js';
-import Severity from '@typo3/backend/severity.js';
+import Modal from '@typo3/backend/modal';
+import Notification from '@typo3/backend/notification';
+import Severity from '@typo3/backend/severity';
 
 export default class MyModule {
     constructor() {
@@ -226,15 +231,22 @@ export default class MyModule {
             'Are you sure?',
             Severity.warning,
             [
-                { text: 'Cancel', trigger: () => Modal.dismiss() },
-                { text: 'Delete', trigger: () => this.performDelete(), btnClass: 'btn-danger' }
+                { text: 'Cancel', trigger: (event, modal) => modal.hideModal() },
+                {
+                    text: 'Delete',
+                    trigger: (event, modal) => {
+                        this.performDelete();
+                        modal.hideModal();
+                    },
+                    btnClass: 'btn-danger',
+                }
             ]
         );
     }
 }
 ```
 
-> **v14 note:** `Modal.confirm()` still works but the underlying implementation migrated from Bootstrap Modal to native `<dialog>` (Breaking #107443). Bootstrap CSS classes like `btn-danger` may render differently — verify visual appearance after upgrading.
+> **v14 note:** `Modal.confirm()` still works; the implementation uses **native `<dialog>`** (Breaking [#107443](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107443-MigrateModalComponentFromBootstrapToNativeDialog.html)). Button callbacks use **`(event, modal) => modal.hideModal()`** (not `Modal.dismiss()`). Bootstrap-style **`btnClass`** values (e.g. `btn-danger`) may render differently — verify appearance or prefer TYPO3 button classes.
 
 ## PHP Architecture Requirements
 

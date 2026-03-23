@@ -149,48 +149,76 @@ plugin.tx_powermail {
                 redirect = # Page UID for redirect after submit
             }
 
-            # Spam protection — each method has a numeric key with class + indication weight
+            # Spam protection — numeric `methods` keys (matches EXT:powermail `12_Spamshield.typoscript`)
             spamshield {
                 _enable = 1
+                factor = 75
                 methods {
                     1 {
-                        class = In2code\Powermail\Domain\Validator\SpamShield\HoneyPodMethod
                         _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\HoneyPodMethod
                         indication = 5
+                        configuration { }
                     }
                     2 {
-                        class = In2code\Powermail\Domain\Validator\SpamShield\LinkMethod
                         _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\LinkMethod
                         indication = 3
-                        configuration.linkLimit = 2
+                        configuration {
+                            linkLimit = 2
+                        }
                     }
                     3 {
+                        _enable = 1
                         class = In2code\Powermail\Domain\Validator\SpamShield\NameMethod
-                        _enable = 1
                         indication = 3
+                        configuration { }
                     }
+                    # SessionMethod sets a cookie when enabled — shipping TypoScript uses _enable = 0
                     4 {
+                        _enable = 0
                         class = In2code\Powermail\Domain\Validator\SpamShield\SessionMethod
-                        _enable = 1
                         indication = 5
+                        configuration { }
                     }
                     5 {
-                        class = In2code\Powermail\Domain\Validator\SpamShield\UniqueMethod
                         _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\UniqueMethod
                         indication = 2
+                        configuration { }
                     }
                     6 {
-                        class = In2code\Powermail\Domain\Validator\SpamShield\BlacklistStringMethod
                         _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\ValueBlacklistMethod
                         indication = 7
+                        configuration {
+                            values = TEXT
+                            values.value = viagra,sex,porn
+                        }
                     }
                     7 {
-                        class = In2code\Powermail\Domain\Validator\SpamShield\IpBlacklistMethod
                         _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\IpBlacklistMethod
                         indication = 7
+                        configuration {
+                            values = TEXT
+                            values.value = 203.0.113.1
+                        }
+                    }
+                    8 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\RateLimitMethod
+                        indication = 100
+                        configuration {
+                            interval = 5 minutes
+                            limit = 10
+                            restrictions {
+                                10 = __ipAddress
+                                20 = __formIdentifier
+                            }
+                        }
                     }
                 }
-                factor = 75
             }
 
             # Validation
@@ -389,7 +417,7 @@ final class CustomValidatorListener
 | `HoneyPodMethod` | 5 | Hidden honeypot field |
 | `LinkMethod` | 3 | Excessive links detection |
 | `NameMethod` | 3 | Suspicious name patterns |
-| `SessionMethod` | 5 | Session token validation |
+| `SessionMethod` | 5 | Session/cookie check (shipping TypoScript: **`_enable = 0`** — opt-in because it sets a cookie) |
 | `UniqueMethod` | 2 | Duplicate submission check |
 | `ValueBlacklistMethod` | 7 | Blacklisted content |
 | `IpBlacklistMethod` | 7 | Blacklisted IP addresses |
