@@ -234,8 +234,8 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 | `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
 | Bootstrap Modal JS | **Frontend:** native `<dialog>` where appropriate. **Backend:** use `@typo3/backend/modal` — it wraps **native `<dialog>`** in v14 (Breaking #107443); do not use raw Bootstrap modal JS |
 | TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime` (without custom `dbType`), `flex`, `json`, `uuid`) where supported |
-| Custom localization parsers | Remove, use Symfony Translation Component |
-| `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |
+| Custom localization parsers | Deprecated in v14 ([#107436](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-107436-DeprecatedCustomLocalizationParsers.html)); migrate to Symfony Translation Component. Removed in v15 |
+| `GeneralUtility::createVersionNumberedFilename()` | Replace with `SystemResourceFactory` / `SystemResourcePublisherInterface` (System Resource API, [Feature #107537](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107537-SystemResourcePublisherSupportForVersionedAssets.html)) |
 
 ---
 

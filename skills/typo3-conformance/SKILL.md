@@ -246,7 +246,7 @@ export default class MyModule {
 }
 ```
 
-> **v14 note:** `Modal.confirm()` still works; the implementation uses **native `<dialog>`** (Breaking [#107443](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107443-MigrateModalComponentFromBootstrapToNativeDialog.html)). Button callbacks use **`(event, modal) => modal.hideModal()`** (not `Modal.dismiss()`). Bootstrap-style **`btnClass`** values (e.g. `btn-danger`) may render differently — verify appearance or prefer TYPO3 button classes.
+> **v14 note:** `Modal.confirm()` still works; the implementation uses **native `<dialog>`** (Breaking [#107443](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107443-MigrateModalComponentFromBootstrapToNativeDialog.html)). Button trigger callbacks use **`(event, modal) => modal.hideModal()`**. `Modal.dismiss()` remains available for dismissing the current modal from other contexts. Bootstrap-style **`btnClass`** values (e.g. `btn-danger`) may render differently — verify appearance or prefer TYPO3 button classes.
 
 ## PHP Architecture Requirements
 

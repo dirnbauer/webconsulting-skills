@@ -293,9 +293,13 @@ docker run --rm --pull always -v $(pwd):/project -w /project -it \
 # Output is in Documentation-GENERATED-temp/
 ```
 
-### With live preview
+### Preview generated output
 
-Current **`render-guides`** images expose **`render` / `run`**, **`migrate`**, **`init`**, **`lint-guides-xml`**, **`configure`**, **`create-redirects-from-git`**, etc. — confirm with **`-h`** for your tag. **Live preview** is provided by **`--watch`** on the render command (default port is often **1337**); there is **no separate `serve` subcommand** in current entrypoints.
+Current **`render-guides`** images expose **`render`**, **`migrate`**, **`init`**,
+**`lint-guides-xml`**, **`configure`**, **`create-redirects-from-git`**, etc. — confirm with
+**`-h`** for your tag. **Live preview** is provided by **`--watch`** on the render flow (default
+port is often **1337**). `run` is the internal Symfony command name, not the Docker subcommand,
+and there is **no separate `serve` subcommand** in current entrypoints.
 
 ```bash
 docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
@@ -303,7 +307,9 @@ docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
   --config=Documentation --watch
 ```
 
-> CLI flags and defaults change between image tags — always check **`-h`**. Use **`--watch`** on `render` for live preview; do not assume a `serve` command exists.
+> Always check `docker run --rm ghcr.io/typo3-documentation/render-guides:latest -h` for the
+> commands and flags your image tag actually exposes. `--watch` depends on image support and the
+> required runtime extensions (for example inotify). Do not assume a `serve` command exists.
 
 ### Validation
 

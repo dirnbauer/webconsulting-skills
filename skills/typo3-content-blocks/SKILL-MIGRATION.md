@@ -88,7 +88,7 @@ This section guides you through converting traditional TYPO3 extensions (with se
 | `check` | - | `Checkbox` | Boolean checkbox |
 | `radio` | - | `Radio` | Radio buttons |
 | `select` | `selectSingle` | `Select` | Single selection |
-| `select` | `selectMultipleSideBySide` | `Select` + `renderType: selectMultipleSideBySide` (+ `multiple: true` if required by schema) | Side-by-side multi-select |
+| `select` | `selectMultipleSideBySide` | `Select` + `renderType: selectMultipleSideBySide` + `maxitems: 2` (or higher) | Side-by-side multi-select |
 | `select` | `selectCheckBox` | `Select` + `renderType: selectCheckBox` | Checkbox group |
 | `group` | - | `Relation` | `group` always maps to `Relation` in v14 |
 | `file` | - | `File` | FAL references (standalone TCA type since v10) |
@@ -579,7 +579,7 @@ This section guides you through converting Content Blocks back to traditional TY
 | `Slug` | `slug` | - | `generatorOptions => [...]` |
 | `Password` | `password` | - | - |
 | `Select` | `select` | `selectSingle` | `items => [...]` |
-| `Select` + `multiple` | `select` | `selectMultipleSideBySide` | - |
+| `Select` | `select` | `selectMultipleSideBySide` | `maxitems => 2` (or higher) for multi-select |
 | `File` | `file` | - | `allowed => '...'` |
 | `Relation` | `group` | - | `allowed => 'tablename'` |
 | `Category` | `category` | - | - |

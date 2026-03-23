@@ -693,7 +693,7 @@ Copy default templates from EXT:solr to your extension path and modify them.
 
 ### Indexing Events
 
-The following classes exist in current EXT:solr releases; always confirm against your installed `vendor/typo3-solr/ext-solr/Classes/` tree.
+The following classes exist in current EXT:solr releases; always confirm against your installed `vendor/apache-solr-for-typo3/solr/Classes/` tree.
 
 | Event | Fired when |
 |-------|-----------|

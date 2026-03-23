@@ -119,8 +119,8 @@ plugin.tx_seo {
                 pages {
                     provider = TYPO3\CMS\Seo\XmlSitemap\PagesXmlSitemapDataProvider
                     config {
-                        excludedDoktypes = 3,4,6,7,199,254,255
-                        additionalWhere = no_index = 0 AND nav_hide = 0
+                        excludedDoktypes = 3,4,6,7,199,254
+                        additionalWhere = {#no_index} = 0 AND {#canonical_link} = ''
                     }
                 }
                 

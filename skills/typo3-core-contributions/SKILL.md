@@ -135,7 +135,7 @@ git push origin HEAD:refs/for/main
 
 | Flag | Meaning |
 |------|---------|
-| `[SECURITY]` | Security flag **prepended** to the real type, e.g. `[SECURITY][BUGFIX] Fix XSS in form engine` — not a standalone type (follow Security Team process) |
+| `[SECURITY]` | Security flag used **standalone or combined** with another type, e.g. `[SECURITY] Escape record title` or `[SECURITY][BUGFIX] Fix XSS in form engine` (follow Security Team process) |
 | `[!!!]` | Breaking change prefix (e.g., `[!!!][TASK]`) |
 
 ### Commit Message Trailers

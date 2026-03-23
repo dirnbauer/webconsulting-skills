@@ -686,7 +686,7 @@ In Fluid templates, access custom metadata through FAL references:
 | `Password` | Password field | `type: Password` |
 | `Basic` | Shared “basic” field helper | `type: Basic` |
 | `Country` | Country selection (aligns with TCA `country` where supported) | `type: Country` |
-| `Pass` | Pass-through / display field | `type: Pass` |
+| `Pass` | Virtual field, not visible in the backend; used for storing data handled by extension logic | `type: Pass` |
 | `SelectNumber` | Select with numeric values | `type: SelectNumber` |
 | `Uuid` | UUID string | `type: Uuid` |
 

@@ -427,9 +427,9 @@ final class SrOnlyViewHelper extends AbstractTagBasedViewHelper
 {
     protected $tagName = 'span';
 
-    // Fluid 5.x / TYPO3 v14: `registerUniversalTagAttributes()` and `registerTagAttribute()` were removed
-    // from AbstractTagBasedViewHelper. Register only what this ViewHelper needs via `registerArgument()`
-    // in `initializeArguments()`; universal/common attributes are handled by the base class.
+    // Fluid 5.x / TYPO3 v14: `registerUniversalTagAttributes()` and `registerTagAttribute()` were
+    // removed from AbstractTagBasedViewHelper. Register explicit arguments via `registerArgument()`
+    // in `initializeArguments()`; unregistered attributes pass through via handleAdditionalArguments().
 
     public function render(): string
     {
