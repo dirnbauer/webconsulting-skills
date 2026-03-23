@@ -149,21 +149,29 @@ plugin.tx_powermail {
                 redirect = # Page UID for redirect after submit
             }
 
-            # Spam protection
+            # Spam protection — numeric `methods` keys with `class`, `indication`, optional `configuration`
+            # (matches EXT:powermail `Configuration/TypoScript/Main/Configuration/12_Spamshield.typoscript`)
             spamshield {
                 _enable = 1
-                indicator {
-                    honeypod = 5
-                    link = 3
-                    name = 3
-                    session = 5
-                    unique = 2
-                    blacklistString = 7
-                    blacklistIp = 7
-                    rateLimit = 100
-                }
-                # Factor threshold (0-100): reject if >=
                 factor = 75
+                methods {
+                    1 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\HoneyPodMethod
+                        indication = 5
+                        configuration { }
+                    }
+                    2 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\LinkMethod
+                        indication = 3
+                        configuration {
+                            linkLimit = 2
+                        }
+                    }
+                    # Full default set: NameMethod, SessionMethod, UniqueMethod, ValueBlacklistMethod,
+                    # IpBlacklistMethod, RateLimitMethod — copy from 12_Spamshield.typoscript as needed.
+                }
             }
 
             # Validation

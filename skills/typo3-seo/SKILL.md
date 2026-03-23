@@ -209,6 +209,8 @@ Without route enhancers, the underlying page type is usually requested via `?typ
 
 See [references/v14-notes.md](references/v14-notes.md) for the complete configuration.
 
+> **Pagination & route enhancers:** Core maps `sitemap.xml` to the SEO page type; **sitemap index pagination stays on query parameters** by design (Core does not ship a `SitemapPagination` enhancer for `tx_seo/page`). Any **custom** Pretty-URL enhancer for paginated sitemaps is **optional** and must define proper `aspects` (e.g. `StaticValueMapper`) — do not treat copy-paste snippets as Core defaults.
+
 ## 4. Robots.txt Configuration
 
 ### Static Robots.txt

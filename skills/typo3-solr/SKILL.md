@@ -149,7 +149,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the DDEV Solr add-on defaults `SOLR_BASE_IMAGE` to `solr:9`, and the generated compose file is `.ddev/docker-compose.solr.yaml`. For explicit control, override via `.ddev/.env.solr` (for example: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **DDEV Solr add-on:** installs **`.ddev/docker-compose.typo3-solr.yaml`** (service `typo3-solr`). Default image is **`${SOLR_BASE_IMAGE:-solr:9.10}`**. Override `SOLR_BASE_IMAGE` in `.ddev/.env`, your shell environment, or a dedicated env file (e.g. `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 
@@ -339,16 +339,20 @@ The configset defines how Solr processes and indexes text. EXT:solr ships config
 
 ### Structure
 
+`typo3lib/` ships as a **sibling** of `configsets/` under `Resources/Private/Solr/` (not inside a single configset folder):
+
 ```
-ext_solr_14_0_0/
-├── conf/
-│   ├── solrconfig.xml
-│   ├── english/
-│   │   └── schema.xml
-│   ├── german/
-│   │   └── schema.xml
-│   └── ... (other languages)
-└── typo3lib/             # moved to server root since Solr 9.8
+Resources/Private/Solr/
+├── configsets/
+│   └── ext_solr_14_0_0/
+│       └── conf/
+│           ├── solrconfig.xml
+│           ├── english/
+│           │   └── schema.xml
+│           ├── german/
+│           │   └── schema.xml
+│           └── ... (other languages)
+└── typo3lib/             # TYPO3 Solr plugin JARs; sibling of configsets/ (since Solr 9.8 often mirrored at server root)
 ```
 
 Each language has its own `schema.xml` with language-specific analyzers (stemmer, stop words).

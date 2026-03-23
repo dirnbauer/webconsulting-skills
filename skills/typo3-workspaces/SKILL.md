@@ -323,6 +323,8 @@ Use this checklist to verify your workspace setup is complete:
 - [ ] Tables requiring live-editing in workspace have `'versioningWS_alwaysAllowLiveEdit' => true`
 - [ ] `t3ver_*` database columns exist (auto-created when `versioningWS = true`)
 
+> **Inline / IRRE child tables (Deprecation [#106821](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-106821-EnforceVersioningWSForInlineChildTables.html)):** If `versioningWS` is missing on a child table, Core **logs a deprecation** and may **auto-add** the flag at TCA build time — it does **not** throw a hard error. Set the flag explicitly in TCA; it will become a **hard requirement in v15**.
+
 #### Scheduler Tasks
 
 - [ ] "Workspaces auto-publication" task created and enabled

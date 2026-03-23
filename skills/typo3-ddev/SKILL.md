@@ -42,7 +42,26 @@ ddev config --project-type=typo3 --docroot=public --php-version=8.3
 ddev start
 
 # Install TYPO3 v14 (preferred)
-ddev composer create "typo3/cms-base-distribution:^14"
+ddev composer create-project "typo3/cms-base-distribution:^14"
+
+# Run TYPO3 setup
+ddev typo3 setup
+```
+
+### New TYPO3 Project (v13 LTS)
+
+```bash
+# Create project directory
+mkdir my-typo3-project && cd my-typo3-project
+
+# Initialize DDEV with TYPO3 preset
+ddev config --project-type=typo3 --docroot=public --php-version=8.2
+
+# Start the environment
+ddev start
+
+# Install TYPO3 v13 LTS
+ddev composer create-project "typo3/cms-base-distribution:^13"
 
 # Run TYPO3 setup
 ddev typo3 setup

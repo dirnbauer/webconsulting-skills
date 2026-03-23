@@ -51,6 +51,8 @@ ddev composer require friendsoftypo3/content-blocks
 ddev typo3 cache:flush
 ```
 
+> **Version constraint:** Content Blocks **1.x** requires TYPO3 **≥ 13.4** (`typo3/cms-core: ^13.4` in the package). TYPO3 **13.1–13.3** do **not** satisfy that Composer constraint.
+
 ### Security Configuration (Classic Mode)
 
 For non-composer installations, deny web access to ContentBlocks folder:

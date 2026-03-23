@@ -20,6 +20,11 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
+### v14 wording precision (reviews)
+
+- **`$GLOBALS['TSFE']`:** Access from extension code is removed in v14 (Breaking [#107831](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107831-DeprecatedTyposcriptFrontendControllerRemoved.html)). The `TypoScriptFrontendController` **class may still exist internally** until a later v14 release — prefer **request attributes** and public FE APIs instead of the old global.
+- **TCA:** **Base** TCA files must be static (Important [#107328](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-107328-NoDynamicTCAInBaseConfigurationFiles.html)). **`Configuration/TCA/Overrides/`** remains the supported place for modifications — that is not a “ban on runtime TCA”.
+
 ## Skill Delegation
 
 | Skill | Use For |
@@ -233,6 +238,8 @@ export default class MyModule {
     }
 }
 ```
+
+> **v14 note:** Backend UI favors **native `<dialog>`** patterns (Forge [#107443](https://forge.typo3.org/issues/107443)). `Modal.confirm()` from `@typo3/backend/modal.js` remains usable, but **Bootstrap-style `btnClass` values** (e.g. `btn-danger`) may not match v14 styling — prefer TYPO3’s button classes or dialog-based flows where the Core UI does.
 
 ## PHP Architecture Requirements
 
