@@ -428,7 +428,8 @@ final class SrOnlyViewHelper extends AbstractTagBasedViewHelper
     protected $tagName = 'span';
 
     // Fluid 5.x / TYPO3 v14: do not call registerUniversalTagAttributes() — it was removed from
-    // AbstractTagBasedViewHelper; universal attributes are handled by the base class.
+    // AbstractTagBasedViewHelper. Universal tag attributes (class, id, style, …) are no longer
+    // auto-registered; register only what this ViewHelper needs (e.g. via registerTagAttribute()).
 
     public function render(): string
     {
@@ -938,11 +939,11 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 
 ### Accessible Combobox Pattern **[v14 only]**
 
-TYPO3 v14 introduces a new **accessible combobox pattern** (#90694) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
+TYPO3 v14 introduces a new **accessible combobox pattern** (Forge [#106637](https://forge.typo3.org/issues/106637); do not confuse with unrelated Gerrit change IDs) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
 
 ### Native `<dialog>` Element **[v14 only]**
 
-Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#90594). The native dialog provides better accessibility out of the box:
+Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (Forge [#107443](https://forge.typo3.org/issues/107443)). The native dialog provides better accessibility out of the box:
 - Built-in focus trapping
 - Proper `aria-modal` semantics
 - `Escape` key handling

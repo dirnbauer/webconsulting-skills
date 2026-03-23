@@ -60,7 +60,8 @@ Find custom implementations that duplicate what TYPO3 already provides.
 | `$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']` hooks | PSR-14 events |
 | `ext_tables.php` module registration | `Configuration/Backend/Modules.php` |
 | `XCLASS` | PSR-14 events or DI decoration |
-| TCA `eval` for `required`,`trim`,`null` | Dedicated TCA keys: `required`, `nullable` |
+| TCA `eval` for `required`, `null` | Dedicated TCA keys: `required`, `nullable` |
+| TCA `eval` for `trim` | Still valid in v14 — no dedicated TCA replacement; keep `trim` in `eval` when you need it |
 | `renderType => 'inputDateTime'` | `'type' => 'datetime'` |
 | `'type' => 'input', 'eval' => 'int'` | `'type' => 'number'` |
 | `items` with numeric array keys | `items` with `label`/`value` keys |
@@ -149,6 +150,7 @@ final class MyService
 - [ ] Use dedicated types: `'type' => 'email'`, `'type' => 'datetime'`, `'type' => 'number'`, `'type' => 'link'`, `'type' => 'color'`, `'type' => 'json'`
 - [ ] Use `'required' => true` instead of `'eval' => 'required'`
 - [ ] Use `'nullable' => true` instead of `'eval' => 'null'`
+- [ ] `eval` => `trim` remains supported — do not remove unless you replace trimming in another layer
 - [ ] Remove `'default' => ''` on string fields (already default)
 - [ ] Consolidate palette definitions (remove single-field palettes)
 - [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` on TYPO3 v14: `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`

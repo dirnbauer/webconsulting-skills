@@ -149,29 +149,48 @@ plugin.tx_powermail {
                 redirect = # Page UID for redirect after submit
             }
 
-            # Spam protection — numeric `methods` keys with `class`, `indication`, optional `configuration`
-            # (matches EXT:powermail `Configuration/TypoScript/Main/Configuration/12_Spamshield.typoscript`)
+            # Spam protection — each method has a numeric key with class + indication weight
             spamshield {
                 _enable = 1
-                factor = 75
                 methods {
                     1 {
-                        _enable = 1
                         class = In2code\Powermail\Domain\Validator\SpamShield\HoneyPodMethod
+                        _enable = 1
                         indication = 5
-                        configuration { }
                     }
                     2 {
-                        _enable = 1
                         class = In2code\Powermail\Domain\Validator\SpamShield\LinkMethod
+                        _enable = 1
                         indication = 3
-                        configuration {
-                            linkLimit = 2
-                        }
+                        configuration.linkLimit = 2
                     }
-                    # Full default set: NameMethod, SessionMethod, UniqueMethod, ValueBlacklistMethod,
-                    # IpBlacklistMethod, RateLimitMethod — copy from 12_Spamshield.typoscript as needed.
+                    3 {
+                        class = In2code\Powermail\Domain\Validator\SpamShield\NameMethod
+                        _enable = 1
+                        indication = 3
+                    }
+                    4 {
+                        class = In2code\Powermail\Domain\Validator\SpamShield\SessionMethod
+                        _enable = 1
+                        indication = 5
+                    }
+                    5 {
+                        class = In2code\Powermail\Domain\Validator\SpamShield\UniqueMethod
+                        _enable = 1
+                        indication = 2
+                    }
+                    6 {
+                        class = In2code\Powermail\Domain\Validator\SpamShield\BlacklistStringMethod
+                        _enable = 1
+                        indication = 7
+                    }
+                    7 {
+                        class = In2code\Powermail\Domain\Validator\SpamShield\IpBlacklistMethod
+                        _enable = 1
+                        indication = 7
+                    }
                 }
+                factor = 75
             }
 
             # Validation

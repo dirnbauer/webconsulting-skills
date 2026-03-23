@@ -1636,7 +1636,7 @@ Workspace "Freeze Editing" feature has been removed (#107323). Workspaces can no
 
 ### Workspace-Aware Inline Child Tables Enforced **[v14 only]**
 
-All inline (IRRE) child tables used in workspace-enabled parent tables **must** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14 this is **enforced**. Missing `versioningWS` on child tables will cause errors.
+All inline (IRRE) child tables used in workspace-enabled parent tables **should** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14 a missing flag triggers a **deprecation warning** and the flag is auto-added at TCA build time. This will become a **hard requirement in v15**.
 
 ### Workspace Selector Moved to Sidebar **[v14.2+ only]**
 

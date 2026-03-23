@@ -94,13 +94,11 @@ TYPO3 sets these as **attributes on `<extension …/>`**, not as a generic `<set
         edit-on-github="myorg/my-extension"
         edit-on-github-branch="main"
         interlink-shortcode="vendor/my-extension"
-        project-home="https://github.com/myorg/my-extension"
-        project-repository="https://github.com/myorg/my-extension"
+        project-home="https://github.com/vendor/my-extension"
+        project-repository="https://github.com/vendor/my-extension"
         typo3-core-preferred="stable"
     />
 ```
-
-`edit-on-github` is **`Organization/Repository`** on GitHub (e.g. `myorg/my-extension`), **not** a Composer package name — `interlink-shortcode` may still use the Composer-style `vendor/package` slug.
 
 Some image tags ship a `configure` helper for `guides.xml` — confirm with `docker run --rm ghcr.io/typo3-documentation/render-guides:latest -h` before documenting it for users. Then run `lint-guides-xml` (below) to validate against the XSD.
 
@@ -297,7 +295,7 @@ docker run --rm --pull always -v $(pwd):/project -w /project -it \
 
 ### With live preview
 
-Many current **`render-guides`** images use **`--watch`** (with `--config=Documentation`) instead of a `serve` subcommand. Default port is often **1337** — verify with `-h` for your tag.
+Current **`render-guides`** images (0.36.0+) support **both** `run --watch` and a `serve` subcommand for live preview. Default port is often **1337** — verify with `-h` for your tag.
 
 ```bash
 docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
@@ -305,7 +303,7 @@ docker run --rm --pull always -v $(pwd):/project -w /project -p 1337:1337 -it \
   --config=Documentation --watch
 ```
 
-> Current images support **`--watch`** (above) **and** a **`serve`** subcommand — they coexist. CLI flags and defaults change between releases — always check **`-h`** for your image tag.
+> Both `--watch` (on `run`) and `serve` coexist in current releases. CLI entry points can change between image tags — always check `-h` output.
 
 ### Validation
 

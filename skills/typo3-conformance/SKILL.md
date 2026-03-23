@@ -20,11 +20,6 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
 
-### v14 wording precision (reviews)
-
-- **`$GLOBALS['TSFE']`:** Access from extension code is removed in v14 (Breaking [#107831](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107831-DeprecatedTyposcriptFrontendControllerRemoved.html)). The `TypoScriptFrontendController` **class may still exist internally** until a later v14 release — prefer **request attributes** and public FE APIs instead of the old global.
-- **TCA:** **Base** TCA files must be static (Important [#107328](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-107328-NoDynamicTCAInBaseConfigurationFiles.html)). **`Configuration/TCA/Overrides/`** remains the supported place for modifications — that is not a “ban on runtime TCA”.
-
 ## Skill Delegation
 
 | Skill | Use For |
@@ -239,7 +234,7 @@ export default class MyModule {
 }
 ```
 
-> **v14 note:** Backend UI favors **native `<dialog>`** patterns (Forge [#107443](https://forge.typo3.org/issues/107443)). `Modal.confirm()` from `@typo3/backend/modal.js` remains usable, but **Bootstrap-style `btnClass` values** (e.g. `btn-danger`) may not match v14 styling — prefer TYPO3’s button classes or dialog-based flows where the Core UI does.
+> **v14 note:** `Modal.confirm()` still works but the underlying implementation migrated from Bootstrap Modal to native `<dialog>` (Breaking #107443). Bootstrap CSS classes like `btn-danger` may render differently — verify visual appearance after upgrading.
 
 ## PHP Architecture Requirements
 
@@ -439,9 +434,9 @@ parameters:
 
 ### v14 Conformance Requirements **[v14 only]**
 
-- **No `$GLOBALS['TSFE']` usage** — fully removed in v14. Use request attributes.
+- **No `$GLOBALS['TSFE']` usage** — access removed in v14 (class still exists internally, will be removed in a later v14 release). Use request attributes.
 - **No Extbase annotations** — only PHP 8 attributes (`#[Validate]`, `#[IgnoreValidation]`).
-- **Static TCA only** — runtime TCA modifications are forbidden.
+- **Base TCA files must be static** — use `TCA/Overrides` for any modifications.
 - **`composer.json` required** — even in classic (non-Composer) mode.
 - **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
 - **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`admin`** (Core alias maps the legacy `tools` parent to `admin`).
