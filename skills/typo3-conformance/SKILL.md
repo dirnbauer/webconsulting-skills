@@ -22,8 +22,8 @@ Evaluate TYPO3 extensions for standards compliance, architecture patterns, and b
 
 ### v14 wording precision (reviews)
 
-- **`$GLOBALS['TSFE']`:** Access from extension code is removed in v14 (Breaking [#107831](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107831-DeprecatedTyposcriptFrontendControllerRemoved.html)). The `TypoScriptFrontendController` **class may still exist internally** until a later v14 release — prefer **request attributes** and public FE APIs instead of the old global.
-- **TCA:** **Base** TCA files must be static (Important [#107328](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-107328-NoDynamicTCAInBaseConfigurationFiles.html)). **`Configuration/TCA/Overrides/`** remains the supported place for modifications — that is not a “ban on runtime TCA”. Programmatic TCA changes are also supported via PSR-14: `BeforeTcaOverridesEvent` and `AfterTcaCompilationEvent` (see [Core DataHandling / TCA events](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/Configuration/Index.html)).
+- **`$GLOBALS['TSFE']`:** Access from extension code is removed in v14 (Breaking [#107831](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107831-RemovedTypoScriptFrontendController.html)). The `TypoScriptFrontendController` **class may still exist internally** until a later v14 release — prefer **request attributes** and public FE APIs instead of the old global.
+- **TCA:** **Base** TCA files must be static (Important [#107328](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-107328-GLOBALSTCAInBaseTCAFiles.html)). **`Configuration/TCA/Overrides/`** remains the supported place for modifications — that is not a “ban on runtime TCA”. Programmatic TCA changes are also supported via PSR-14: `BeforeTcaOverridesEvent` and `AfterTcaCompilationEvent` (see [Core DataHandling / TCA events](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/Configuration/Index.html)).
 
 ## Skill Delegation
 
@@ -451,7 +451,7 @@ parameters:
 - **Base TCA files must be static** — use `TCA/Overrides` for any modifications.
 - **`composer.json` required** — even in classic (non-Composer) mode.
 - **Fluid 5.0 compliance** — strict ViewHelper argument types, no underscore-prefixed variables.
-- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`admin`** (Core alias maps the legacy `tools` parent to `admin`).
+- **Backend module parent identifiers** updated: `web` → `content`, `file` → `media`, `tools` → **`system`** for system-maintainer modules, while modules previously placed under legacy `system` move to **`admin`** where appropriate.
 - **No deprecated localization hooks** — use Symfony Translation Component.
 
 ### Updated Backend Module Standards **[v14 only]**

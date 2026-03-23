@@ -70,7 +70,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `drawHeaderHook` | `ModifyButtonBarEvent` |
 | `drawFooterHook` | `ModifyButtonBarEvent` |
 | `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
-| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (asset rendering) — confirm vs. your hook usage |
+| `PageRenderer` render hooks (`render-preProcess`, `render-postProcess`) | No 1:1 PSR-14 replacement; prefer PSR-15 middleware for render-pipeline manipulation |
 | `tslib_fe->contentPostProc` (cached) | `AfterCacheableContentIsGeneratedEvent` |
 | `tslib_fe->contentPostProc` (output) | `AfterCachedPageIsPersistedEvent` — verify name in Core for your TYPO3 version |
 | `tslib_fe->contentPostProc` (all) | No single PSR-14 replacement — split by what the hook actually does |
