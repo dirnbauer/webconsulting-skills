@@ -761,6 +761,8 @@ fields:
 
 ### Collection Field Example (Inline IRRE)
 
+**Important:** Collections cannot be nested — a Collection field must NOT contain another Collection as a sub-field. See "Common Pitfalls" section for details.
+
 ```yaml
 fields:
   - identifier: accordion_items
@@ -1150,6 +1152,115 @@ Content Block Fluid templates must comply with Fluid 5.0 strict typing:
 ### Content Element Restrictions per Column **[v14.1+ only]**
 
 TYPO3 v14.1 integrates `content_defender` functionality into Core. Backend layouts can now restrict which Content Elements (including Content Blocks) are allowed per `colPos` without third-party extensions.
+
+---
+
+## Common Pitfalls & Hard-Won Lessons
+
+These rules come from real debugging sessions. Violating them causes errors that are difficult to trace.
+
+### 1. No Nested Collections (CRITICAL)
+
+Content Blocks does **NOT** support a Collection inside another Collection. This causes a fatal `Undefined array key "typeName"` error in `ProcessingInput.php` during TYPO3 bootstrap — preventing `composer install`, `cache:flush`, and all CLI commands.
+
+```yaml
+# BROKEN — nested Collection crashes content-blocks
+fields:
+  - identifier: groups
+    type: Collection
+    fields:
+      - identifier: title
+        type: Text
+      - identifier: items        # <-- Collection inside Collection = FATAL
+        type: Collection
+        fields:
+          - identifier: label
+            type: Text
+          - identifier: link
+            type: Link
+
+# FIXED — flatten the inner Collection to a Textarea
+fields:
+  - identifier: groups
+    type: Collection
+    fields:
+      - identifier: title
+        type: Text
+      - identifier: items         # <-- Textarea with one entry per line
+        type: Textarea
+        label: Items (one per line)
+        rows: 5
+```
+
+The error message (`Undefined array key "typeName"` on table `pages`, type `record-type`) is misleading — it does not point to the actual nested Collection that causes it. If you see this error, grep for nested Collections: `type: Collection` inside another `type: Collection`.
+
+### 2. Dashes in typeName Values
+
+When Content Blocks auto-generates `typeName` from the `name` field, it **strips all dashes**. If you set `typeName` explicitly, it must follow the same convention — no dashes.
+
+```yaml
+# WRONG — dash in typeName causes CType mismatch
+name: myvendor/my-block
+typeName: myvendor_my-block
+
+# CORRECT — no dashes, matches auto-generation
+name: myvendor/my-block
+typeName: myvendor_myblock
+```
+
+The auto-generation logic (`UniqueIdentifierCreator::removeDashes`) converts `myvendor/my-block` to `myvendor_myblock`. If your explicit `typeName` uses dashes, it won't match existing database records created by auto-generation.
+
+### 3. Reserved Field Identifier: `description`
+
+The identifier `description` is a **top-level config.yaml key** (the content block's description shown in the backend). Using it as a field identifier creates a type conflict — the config key is a string, but a Textarea field resolves to a different type.
+
+```yaml
+# WRONG — conflicts with the config.yaml root key
+description: My content block description
+fields:
+  - identifier: description      # <-- conflicts with root "description"
+    type: Textarea
+
+# CORRECT — use a distinct identifier
+description: My content block description
+fields:
+  - identifier: description_text  # <-- no conflict
+    type: Textarea
+```
+
+### 4. Template Field References Must Match config.yaml Identifiers
+
+Every `{data.fieldname}` in `frontend.html` must exactly match an `identifier` in `config.yaml`. There is no runtime error — the field simply renders empty, making this a silent bug.
+
+```yaml
+# config.yaml defines:
+- identifier: features_list
+  type: Textarea
+```
+
+```html
+<!-- WRONG — silent failure, renders empty -->
+{data.features -> f:split(separator: '\n')}
+
+<!-- CORRECT — matches the identifier -->
+{data.features_list -> f:split(separator: '\n')}
+```
+
+When renaming field identifiers (e.g., to resolve conflicts), always search templates for the old name.
+
+### 5. Collection Identifier Naming — Avoid Table Name Collisions
+
+Never name a Collection field with an identifier that matches an existing TYPO3 database table (e.g., `pages`, `tt_content`, `sys_file`). Content Blocks generates table names from Collection identifiers, and a collision with a core table causes unpredictable errors.
+
+```yaml
+# DANGEROUS — "pages" collides with TYPO3 core table
+- identifier: pages
+  type: Collection
+
+# SAFE — use a descriptive, unique identifier
+- identifier: page_items
+  type: Collection
+```
 
 ---
 
