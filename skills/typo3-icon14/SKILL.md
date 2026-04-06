@@ -9,7 +9,7 @@ description: >-
   SVG icons, icon registry, icon modernization.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.0.0"
+  version: "1.1.1"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -26,7 +26,7 @@ license: MIT / CC-BY-SA-4.0
 | **Background** | Solid color rectangle (`<rect fill="#5BA34F"/>` or `<path fill="#5BA34F" d="M0,0h64v64H0V0z"/>`) | No background — transparent |
 | **Primary shapes** | White `#FFFFFF` on colored bg | `currentColor` (adapts to theme) |
 | **Accent color** | Hardcoded brand color (e.g. `#5BA34F`) | `var(--icon-color-accent, #ff8700)` |
-| **Secondary elements** | `opacity="0.25"` / `0.75` with hardcoded fill | `opacity=".4"` with `currentColor` |
+| **Secondary elements** | `opacity="0.25"` / `0.75` with hardcoded fill | `opacity=".8"` with `currentColor` for module/sidebar icons; `opacity=".4"` for subtle content-area secondary layers |
 | **ViewBox** | `0 0 64 64` (modules) or `0 0 32 32` (parent) | **Module / backend-module icons:** `0 0 64 64`. **Action, plugin, record, and similar small icons:** `0 0 16 16` — match the Core SVG you are replacing (do not mix module and plugin viewBoxes). |
 | **SVG wrapper** | `version="1.1"`, `xmlns:xlink`, `enable-background`, generator comments | Minimal: `xmlns` + `viewBox` only |
 | **Detail colors** | `#333333` for text lines, brand color for accents | `currentColor` + accent variable |
@@ -191,14 +191,22 @@ Every v14-style module icon follows this structure:
 
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Secondary/decorative elements at reduced opacity -->
-  <path fill="currentColor" opacity=".4" d="..."/>
-  <!-- Primary shape outlines -->
+  <!-- Depth/fill layer — .8 opacity for strong fill mass in dark sidebar -->
+  <path fill="currentColor" opacity=".8" d="..."/>
+  <!-- Primary shape outline — full opacity, ring width ≥ 6px for module icons -->
   <path fill="currentColor" d="..."/>
-  <!-- Accent color elements (1-2 key elements only) -->
+  <!-- Accent color elements (1–2 key elements, ≥ 12 units in smallest dimension) -->
   <path fill="var(--icon-color-accent, #ff8700)" d="..."/>
 </svg>
 ```
+
+### XML comments (optional)
+
+Short comments above layers (depth, outline, accent) help maintainers; they are not required for rendering.
+
+**XML 1.0 comment rule:** The text inside `<!-- … -->` must not contain the substring `--` (two consecutive hyphens). That forbids spelling a CSS custom property with its leading `--` inside a comment—for example, `<!-- … --icon-color-accent … -->` is invalid and may confuse editors or strict parsers.
+
+**Recommended phrasing:** Describe the accent without echoing the `--` prefix—for example, `<!-- Accent: theme accent color (matches fill on next element) -->`—or omit the comment and rely on `fill="var(--icon-color-accent, #ff8700)"` on the element itself. If you name the token in prose, use `icon-color-accent` without a leading `--`.
 
 ### Design Rules
 
@@ -208,7 +216,7 @@ Every v14-style module icon follows this structure:
 
 3. **`var(--icon-color-accent, #ff8700)` for accent** — One or two key elements use the TYPO3 accent color CSS variable. The fallback `#ff8700` ensures visibility when the variable is not set. TYPO3 overrides this variable per theme and context (see Dark/Light Mode section below).
 
-4. **`opacity=".4"` for depth** — Secondary or decorative elements (shadows, background layers, filled areas behind outlines) use 40% opacity with `currentColor`. This works in both light and dark modes because the base color adapts via `currentColor`.
+4. **`opacity=".8"` for depth fill** — Use 80% opacity for the interior fill layer of module/sidebar icons. This provides strong visible fill mass against the dark Fresh theme sidebar while still leaving a 20% contrast step against the full-opacity ring outline. Validated in real TYPO3 v14 backend. Do not use `.4` for module icons — it renders too faint on dark backgrounds. Reserve `.4` only for subtle decorative elements in content-area icons.
 
 5. **64×64 viewBox** — Backend **module** icons use `viewBox="0 0 64 64"`. For other icon types, copy the viewBox from the Core icon you are visually matching.
 
@@ -217,6 +225,55 @@ Every v14-style module icon follows this structure:
 7. **Semantic shape preservation** — The icon's meaning (gear = settings, speech bubble = comments, document = posts) must be preserved. Only the rendering style changes.
 
 8. **Line-art aesthetic** — Prefer outlined shapes with consistent stroke weight (simulated via path outlines) over solid fills. The new style feels lighter and more modern.
+
+### Contrast Rules for Sidebar Icons
+
+Module icons render at **32px (MEDIUM)** in the TYPO3 sidebar — half the 64-unit viewBox. Thin details that look fine at design size will disappear at render size. Apply these rules to all `module-*` and `Extension.svg` icons.
+
+#### Ring / outline thickness
+
+- Target a **minimum 6px ring width** for outlined shapes.
+- Calculate as: `outer edge coordinate − inner cutout coordinate`. For a symmetric shape, both sides must be ≥ 6 units inset.
+- A 4px ring (4 units in 64-unit viewBox) scales to 2px at 32px render — essentially invisible on a dark background.
+- When building an outlined shape with two subpaths (outer minus inner cutout), if the outer top point is at y=6, the inner top point must be at y=12 or deeper (not y=10).
+
+**Example — too thin (4px ring, avoid):**
+```xml
+<path fill="currentColor" d="M32 6 ...outer... Zm0 4 ...inner...Z"/>
+<!--                                        ↑ only 4 units = ~2px at 32px render -->
+```
+
+**Example — correct (6px ring):**
+```xml
+<path fill="currentColor" d="M32 6 ...outer... Zm0 6 ...inner...Z"/>
+<!--                                        ↑ 6 units = ~3px at 32px render, readable -->
+```
+
+#### Depth fill opacity
+
+Use **`.8`** for module/sidebar icons. This was validated against the real TYPO3 v14 Fresh theme dark sidebar.
+
+| Context | Opacity |
+|---------|---------|
+| Module icon depth fill (sidebar) | **`.8`** |
+| Content-area icon secondary layer | `.4` |
+| Plugin/record icon depth fill | `.8` |
+
+#### Accent element minimum size
+
+Accent shapes must be large enough to register at 32px:
+- Minimum **12 units** in the smallest dimension for module icons (64×64 viewBox)
+- Minimum **4 units** in the smallest dimension for plugin/record icons (16×16 viewBox)
+- A tiny 4×4 accent shape in a 64-unit viewBox scales to 2×2px — indistinguishable from a rendering artifact
+
+#### Contrast self-check before saving
+
+Mentally render your icon at half size (32px for module icons, 8px for 16×16 icons). Ask:
+- [ ] Is the primary outline still a readable, distinct shape?
+- [ ] Is the depth fill visible as a separate layer (not invisible)?
+- [ ] Is the accent element recognizable, not just a smudge?
+
+If any answer is no → increase ring width, raise opacity, or enlarge the accent shape.
 
 ### Dark/Light Mode Support
 
@@ -289,10 +346,10 @@ do not need to handle these. Just use `currentColor` and let TYPO3 manage overri
 - [ ] **NEVER hardcode colors** — No `#fff`, `#000`, `#333`, or any hex color in SVG
 - [ ] **Use only `currentColor`** for primary/secondary shapes
 - [ ] **Use only `var(--icon-color-accent, #ff8700)`** for accent elements
-- [ ] **Test opacity at `.4`** in both modes — ensure secondary elements are visible but
-      not dominant on both light and dark backgrounds
-- [ ] **Accent must contrast** against both light and dark backgrounds — TYPO3's cascade
-      handles this, but verify the fallback `#ff8700` has sufficient contrast ratio
+- [ ] **Depth fill opacity `.8` for module/sidebar icons** — validated against TYPO3 v14 Fresh theme dark sidebar; `.4` renders too faint
+- [ ] **Outline ring ≥ 6px** — measure outer-minus-inner coordinate gap; thin rings disappear at 32px render size
+- [ ] **Accent element ≥ 12 units** in smallest dimension for 64×64 module icons
+- [ ] **Accent must contrast** against both light and dark backgrounds — TYPO3's cascade handles this, but verify the fallback `#ff8700` has sufficient contrast ratio
 - [ ] **No `fill="white"`** — this breaks in light mode (invisible on white background)
 - [ ] **No `fill="black"`** — this breaks in dark mode (invisible on dark background)
 - [ ] **Clear browser localStorage** after changes — icons are cached client-side
