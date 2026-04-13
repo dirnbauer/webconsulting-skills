@@ -411,9 +411,6 @@ def audit_skill(skill_dir: Path, duplicate_names: dict[str, list[str]]) -> Skill
     if owner == "webconsulting" and source_url and source_url not in text:
         pass_2.append("repo-level source override exists but the skill body does not mention it")
 
-    if not (skill_dir / "agents" / "openai.yaml").exists():
-        pass_3.append("missing `agents/openai.yaml` metadata recommended by skill-creator")
-
     if description and description.rstrip().endswith("..."):
         pass_3.append("description appears truncated with an ellipsis")
 

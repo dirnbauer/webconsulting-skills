@@ -1,3 +1,0 @@
-display_name: "TYPO3 v14 Icon Modernizer"
-short_description: "Design and migrate TYPO3 v14 extension icons with live Core icon references, correct icon types, and Configuration/Icons.php registration."
-default_prompt: "Help me design or migrate TYPO3 v14 extension icons using the current Core icon language, the right icon type for each use case, and Configuration/Icons.php registration."

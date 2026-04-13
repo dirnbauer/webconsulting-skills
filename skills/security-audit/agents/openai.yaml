@@ -1,3 +1,0 @@
-display_name: "Security Audit Skill"
-short_description: "Security audit patterns for PHP/OWASP."
-default_prompt: "Help me with Security Audit Skill: security audit patterns for php/owasp."

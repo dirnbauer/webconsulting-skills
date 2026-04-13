@@ -1,3 +1,0 @@
-display_name: "TYPO3 DDEV Local Development"
-short_description: "Best practices for TYPO3 local development with DDEV, including configuration, database management, multi-version testing, and common workflows for TYPO3 v14."
-default_prompt: "Help me with TYPO3 DDEV Local Development: best practices for typo3 local development with ddev, including configuration, database management, multi-version testing, and common workflows for typo3 v14."

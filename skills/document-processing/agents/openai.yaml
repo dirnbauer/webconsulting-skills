@@ -1,3 +1,0 @@
-display_name: "Document Processing"
-short_description: "Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX)."
-default_prompt: "Help me with Document Processing: create, edit, and analyze office documents (pdf, docx, pptx, xlsx)."

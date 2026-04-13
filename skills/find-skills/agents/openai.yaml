@@ -1,3 +1,0 @@
-display_name: "Find Skills"
-short_description: "Helps users discover and install agent skills when they ask questions like \"how do I do X\", \"find a skill for X\", \"is there a skill that can...\", or express interest in extending capabilities."
-default_prompt: "Help me with Find Skills: helps users discover and install agent skills when they ask questions like \"how do i do x\", \"find a skill for x\", \"is there a skill that can...\", or express interest in extending capabilities."
