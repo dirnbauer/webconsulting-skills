@@ -24,7 +24,7 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 |----------|--------|-------------|
 | **TYPO3 CMS** | 21 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
-| **Security & Enterprise** | 5 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
+| **Security & Enterprise** | 4 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
 | **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
@@ -33,7 +33,7 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 | **Frontend & Design** | 7 skills | UI patterns, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
 | **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
-| **Legal & Compliance** | 4 skills | Impressum (AT, DE, EU, international) |
+| **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
 
 ---
@@ -2076,12 +2076,13 @@ grep -r "DataHandler" skills/
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
-| `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |
 | `deepfake-detection` | Multimodal media authentication, synthetic media forensics | webconsulting |
-| `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | `enterprise-readiness` | OpenSSF, SLSA, supply chain security | Netresearch |
+| **AI & SEO** | | |
+| `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
+| `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | **Code Quality & Refactoring** | | |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | Softaworks |
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
@@ -2111,10 +2112,7 @@ grep -r "DataHandler" skills/
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | webconsulting |
 | **Legal & Compliance** | | |
-| `legal-impressum` | Austrian Impressum (all Gesellschaftsformen) | webconsulting |
-| `legal-impressum/GERMANY` | German Impressum (DDG, MStV) | webconsulting |
-| `legal-impressum/EU` | EU eCommerce Directive compliance | webconsulting |
-| `legal-impressum/WORLD` | International (UK, CH, US) | webconsulting |
+| `legal-impressum` | Austrian Impressum base skill with `GERMANY`, `EU`, and `WORLD` supplements | webconsulting |
 | **Platform Design** | | |
 | `android-design` | Material Design 3, Jetpack Compose, dynamic color | ehmo |
 | `ios-design` | Apple HIG for iPhone, SwiftUI, Dynamic Type | ehmo |
@@ -2293,6 +2291,12 @@ The `.sync-config.json` file defines external skill sources that are automatical
 
 To enable/disable external skill syncing, edit `.sync-config.json` and set `enabled: true/false`.
 
+This repo also mirrors the full upstream repository behind
+`npx skills add coreyhaines31/marketingskills` into
+`external/coreyhaines31-marketingskills/`. That mirror is refreshed by
+`./update.sh` and kept separate from the curated top-level `skills/` directory
+to avoid name collisions with existing local skills.
+
 **GitHub Actions Auto-Sync:**
 
 The `sync-skills.yml` workflow runs weekly (Mondays 06:00 UTC) and can be triggered manually. It syncs enabled skills from upstream repos and opens a PR on the `chore/sync-skills` branch.
@@ -2322,60 +2326,67 @@ Skills in this collection cover:
 
 The following repositories are the source for skills in this collection:
 
-### Netresearch DTT GmbH (TYPO3, PHP, Security, Enterprise — 11 skills)
-- `php-modernization`: https://github.com/netresearch/php-modernization-skill
-- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
-- `security-audit`: https://github.com/netresearch/security-audit-skill
+<!-- EXTERNAL_REPOS:START -->
+### Netresearch DTT GmbH (11 skills)
 - `cli-tools`: https://github.com/netresearch/cli-tools-skill
 - `context7`: https://github.com/netresearch/context7-skill
-- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
-- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
+- `php-modernization`: https://github.com/netresearch/php-modernization-skill
+- `security-audit`: https://github.com/netresearch/security-audit-skill
 - `typo3-conformance`: https://github.com/netresearch/typo3-conformance-skill
-- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-core-contributions`: https://github.com/netresearch/typo3-core-contributions-skill
+- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
+- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
+- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
 
-### Softaworks (Agent MD Refactor)
-- https://github.com/softaworks/agent-toolkit
+### Supabase (1 skill)
+- `postgres-best-practices`: https://github.com/supabase/agent-skills
 
-### GitHub (Code Refactoring)
-- https://github.com/github/awesome-copilot
+### Corey Haines (1 skill + 1 repo mirror)
+- `marketing-skills`: https://github.com/coreyhaines31/marketingskills
+- full repo mirror `coreyhaines31-marketingskills`: https://github.com/coreyhaines31/marketingskills -> `external/coreyhaines31-marketingskills`
 
-### sickn33 (Clean Code Refactoring)
-- https://github.com/sickn33/antigravity-awesome-skills
+### Stevy Smith (1 skill)
+- `og-image`: https://github.com/stevysmith/og-image-skill
 
-### Giuseppe Trisciuoglio (shadcn/ui)
-- https://github.com/giuseppe-trisciuoglio/developer-kit
+### Vercel (3 skills)
+- `react-best-practices` and `web-design-guidelines`: https://github.com/vercel-labs/agent-skills
+- `find-skills`: https://github.com/vercel-labs/skills
 
-### Vercel (Find Skills, React, Web Design)
-- https://github.com/vercel-labs/skills
+### Giuseppe Trisciuoglio (1 skill)
+- `shadcn-ui`: https://github.com/giuseppe-trisciuoglio/developer-kit
 
-### Supabase (Postgres)
-- https://github.com/supabase/agent-skills
+### Softaworks (1 skill)
+- `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
-### Corey Haines (Marketing)
-- https://github.com/coreyhaines31/marketingskills
+### GitHub (1 skill)
+- `refactor`: https://github.com/github/awesome-copilot
 
-### Stevy Smith (OG Images)
-- https://github.com/stevysmith/og-image-skill
+### sickn33 (1 skill)
+- `refactor-clean`: https://github.com/sickn33/antigravity-awesome-skills
 
-### Vercel (React & Next.js)
-- https://github.com/vercel-labs/agent-skills
+### ehmo (8 skills)
+- `android-design`, `ios-design`, `ipados-design`, `macos-design`, `tvos-design`, `visionos-design`, `watchos-design`, and `web-platform-design`: https://github.com/ehmo/platform-design-skills
 
-### OpenHands (AI Readiness)
-- https://github.com/OpenHands/skills
+### AITYTech (4 skills)
+- `ab-testing`, `cro-funnel`, `launch-strategy`, and `programmatic-seo`: https://github.com/aitytech/agentkits-marketing
 
-### Anthropic (Document Processing, Frontend Design, Skill Creator, Simplify Inspiration)
+### Anthropic (4 skills)
+- `typo3-simplify`: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
 - `document-processing`: https://github.com/anthropics/skills/tree/main/skills/document-processing
 - `frontend-design`: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 - `skill-creator`: https://github.com/anthropics/skills/tree/main/skills/skill-creator
-- `typo3-simplify` inspiration: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
 
-### ehmo (Platform Design Skills)
-- https://github.com/ehmo/platform-design-skills
+### Firecrawl / Mendable, Inc. (1 skill)
+- `firecrawl`: https://github.com/firecrawl/cli
 
-### AITYTech (AgentKits Marketing)
-- https://github.com/aitytech/agentkits-marketing
+### Remotion (1 skill)
+- `remotion-best-practices`: https://github.com/remotion-dev/skills
+
+### OpenHands (1 skill)
+- `readiness-report`: https://github.com/OpenHands/skills
+<!-- EXTERNAL_REPOS:END -->
 
 ## Contributing
 
@@ -2416,148 +2427,210 @@ See individual SKILL.md files for per-skill attribution and license details.
 
 ## Acknowledgements
 
+<!-- ACKNOWLEDGEMENTS:START -->
 We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their
 foundational contributions to this skill collection. The majority of TYPO3-related skills and
 several cross-domain skills are based on Netresearch's original open-source skill repositories.
 Their deep expertise in TYPO3 development, enterprise PHP engineering, and AI-augmented workflows
 has been instrumental in shaping the quality and depth of these guidelines.
 
-The following 11 skills are adapted from Netresearch's work:
-`php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
-`typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
-`typo3-core-contributions`, `typo3-extension-upgrade`
+Adapted skills: `cli-tools`, `context7`, `enterprise-readiness`, `php-modernization`, `security-audit`, `typo3-conformance`, `typo3-core-contributions`, `typo3-ddev`, `typo3-docs`, `typo3-extension-upgrade`, and `typo3-testing`
 
 Original repositories:
-- `php-modernization`: https://github.com/netresearch/php-modernization-skill
-- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
-- `security-audit`: https://github.com/netresearch/security-audit-skill
 - `cli-tools`: https://github.com/netresearch/cli-tools-skill
 - `context7`: https://github.com/netresearch/context7-skill
-- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
-- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
+- `php-modernization`: https://github.com/netresearch/php-modernization-skill
+- `security-audit`: https://github.com/netresearch/security-audit-skill
 - `typo3-conformance`: https://github.com/netresearch/typo3-conformance-skill
-- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-core-contributions`: https://github.com/netresearch/typo3-core-contributions-skill
+- `typo3-ddev`: https://github.com/netresearch/typo3-ddev-skill
+- `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
+- `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
 
-**Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization,
-and enterprise best practices (MIT / CC-BY-SA-4.0)
+**Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization, and enterprise best practices (MIT / CC-BY-SA-4.0)
 See: [netresearch.de](https://www.netresearch.de/)
 
 ---
 
-We also thank **[Supabase](https://supabase.com/)** for their excellent Postgres best practices
-and AI agent skills. The `postgres-best-practices` skill is adapted from their open-source
-repository: https://github.com/supabase/agent-skills
+We also thank **[Supabase](https://supabase.com/)** for their excellent open-source work.
+The `postgres-best-practices` skill in this collection builds on that contribution.
+
+Adapted skill: `postgres-best-practices`
+
+Original repositories:
+- `postgres-best-practices`: https://github.com/supabase/agent-skills
 
 **Copyright (c) Supabase** - Postgres performance optimization guidelines
 See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-best-practices-for-ai-agents)
 
 ---
 
-We also thank **[Corey Haines](https://coreyhaines.com/)** for his excellent marketing skills
-collection. The `marketing-skills` skill is adapted from his open-source repository:
-https://github.com/coreyhaines31/marketingskills
+We also thank **[Corey Haines](https://corey.co/)** for their excellent open-source work.
+The `marketing-skills` skill in this collection builds on that contribution.
+
+Adapted skill: `marketing-skills`
+
+Original repositories:
+- `marketing-skills`: https://github.com/coreyhaines31/marketingskills
+- full repo mirror `coreyhaines31-marketingskills`: https://github.com/coreyhaines31/marketingskills -> `external/coreyhaines31-marketingskills`
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
 
 ---
 
-We also thank **[Stevy Smith](https://github.com/stevysmith)** for the excellent OG Image skill.
-The `og-image` skill is adapted from their open-source repository:
-https://github.com/stevysmith/og-image-skill
+We also thank **[Stevy Smith](https://github.com/stevysmith)** for their excellent open-source work.
+The `og-image` skill in this collection builds on that contribution.
+
+Adapted skill: `og-image`
+
+Original repositories:
+- `og-image`: https://github.com/stevysmith/og-image-skill
 
 **Copyright (c) Stevy Smith** - OG Image generation and social meta tag configuration
 
 ---
 
-We also thank **[Vercel Engineering](https://vercel.com)** for their excellent React and Next.js
-performance optimization guidelines, web design guidelines, and find-skills discovery tool.
-The `react-best-practices`, `web-design-guidelines`, and `find-skills` skills are adapted from their
-open-source repositories: https://github.com/vercel-labs/agent-skills and https://github.com/vercel-labs/skills
+We also thank **[Vercel](https://vercel.com/)** for their excellent open-source work.
+The `find-skills`, `react-best-practices`, and `web-design-guidelines` skills in this collection build on that contribution.
+
+Adapted skills: `find-skills`, `react-best-practices`, and `web-design-guidelines`
+
+Original repositories:
+- `react-best-practices` and `web-design-guidelines`: https://github.com/vercel-labs/agent-skills
+- `find-skills`: https://github.com/vercel-labs/skills
 
 **Copyright (c) Vercel, Inc.** - React/Next.js optimization, web design guidelines, skill discovery (MIT License)
-Adapted by webconsulting.at for this skill collection
 
 ---
 
-We also thank **[Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio)** for the excellent
-shadcn/ui component patterns skill. The `shadcn-ui` skill is adapted from their open-source repository:
-https://github.com/giuseppe-trisciuoglio/developer-kit
+We also thank **[Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio)** for their excellent open-source work.
+The `shadcn-ui` skill in this collection builds on that contribution.
+
+Adapted skill: `shadcn-ui`
+
+Original repositories:
+- `shadcn-ui`: https://github.com/giuseppe-trisciuoglio/developer-kit
 
 **Copyright (c) Giuseppe Trisciuoglio** - shadcn/ui component patterns with Radix UI and Tailwind CSS
 
 ---
 
-We also thank **[Softaworks](https://github.com/softaworks)** for the excellent agent-md-refactor skill.
-The `agent-md-refactor` skill is adapted from their open-source repository:
-https://github.com/softaworks/agent-toolkit
+We also thank **[Softaworks](https://github.com/softaworks)** for their excellent open-source work.
+The `agent-md-refactor` skill in this collection builds on that contribution.
+
+Adapted skill: `agent-md-refactor`
+
+Original repositories:
+- `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
 **Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure
 
 ---
 
-We also thank **[GitHub](https://github.com/github)** for the excellent refactoring skill from their
-awesome-copilot collection. The `refactor` skill is adapted from their open-source repository:
-https://github.com/github/awesome-copilot
+We also thank **[GitHub](https://github.com/github)** for their excellent open-source work.
+The `refactor` skill in this collection builds on that contribution.
+
+Adapted skill: `refactor`
+
+Original repositories:
+- `refactor`: https://github.com/github/awesome-copilot
 
 **Copyright (c) GitHub** - Code refactoring patterns and best practices
 
 ---
 
-We also thank **[sickn33](https://github.com/sickn33)** for the excellent clean code refactoring skill.
-The `refactor-clean` skill is adapted from their open-source repository:
-https://github.com/sickn33/antigravity-awesome-skills
+We also thank **[sickn33](https://github.com/sickn33)** for their excellent open-source work.
+The `refactor-clean` skill in this collection builds on that contribution.
+
+Adapted skill: `refactor-clean`
+
+Original repositories:
+- `refactor-clean`: https://github.com/sickn33/antigravity-awesome-skills
 
 **Copyright (c) sickn33** - Clean code principles and SOLID design patterns
 
 ---
 
-We also thank **[ehmo](https://github.com/ehmo)** for the excellent platform design skills collection.
-The platform design skills (Android, iOS, iPadOS, macOS, tvOS, visionOS, watchOS, Web) are adapted
-from their open-source repository:
-https://github.com/ehmo/platform-design-skills
+We also thank **[ehmo](https://github.com/ehmo)** for their excellent open-source work.
+The `android-design`, `ios-design`, `ipados-design`, `macos-design`, `tvos-design`, `visionos-design`, `watchos-design`, and `web-platform-design` skills in this collection build on that contribution.
+
+Adapted skills: `android-design`, `ios-design`, `ipados-design`, `macos-design`, `tvos-design`, `visionos-design`, `watchos-design`, and `web-platform-design`
+
+Original repositories:
+- `android-design`, `ios-design`, `ipados-design`, `macos-design`, `tvos-design`, `visionos-design`, `watchos-design`, and `web-platform-design`: https://github.com/ehmo/platform-design-skills
 
 **Copyright (c) platform-design-skills** - Apple HIG and Material Design guidelines (MIT License)
 
 ---
 
-We also thank **[AITYTech](https://github.com/aitytech)** for their excellent AgentKits Marketing
-skills collection. The `cro-funnel`, `programmatic-seo`, `launch-strategy`, and `ab-testing` skills
-are adapted from their open-source repository:
-https://github.com/aitytech/agentkits-marketing
+We also thank **[AITYTech](https://github.com/aitytech)** for their excellent open-source work.
+The `ab-testing`, `cro-funnel`, `launch-strategy`, and `programmatic-seo` skills in this collection build on that contribution.
+
+Adapted skills: `ab-testing`, `cro-funnel`, `launch-strategy`, and `programmatic-seo`
+
+Original repositories:
+- `ab-testing`, `cro-funnel`, `launch-strategy`, and `programmatic-seo`: https://github.com/aitytech/agentkits-marketing
 
 **Copyright (c) AITYTech** - Enterprise-grade AI marketing automation (MIT License)
 
 ---
 
-We also thank **[Anthropic](https://anthropic.com)** for their excellent document processing,
-frontend design, and skill creator skills. The `document-processing`, `frontend-design`, and
-`skill-creator` skills are adapted from their repository:
-https://github.com/anthropics/skills
+We also thank **[Anthropic](https://anthropic.com/)** for their excellent open-source work.
+The `document-processing`, `frontend-design`, `skill-creator`, and `typo3-simplify` skills in this collection build on that contribution.
+
+Adapted skills: `document-processing`, `frontend-design`, `skill-creator`, and `typo3-simplify`
+
+Original repositories:
+- `typo3-simplify`: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
+- `document-processing`: https://github.com/anthropics/skills/tree/main/skills/document-processing
+- `frontend-design`: https://github.com/anthropics/skills/tree/main/skills/frontend-design
+- `skill-creator`: https://github.com/anthropics/skills/tree/main/skills/skill-creator
 
 **Copyright (c) Anthropic** — `frontend-design` and `skill-creator` (Apache-2.0 License);
 `document-processing` (source-available, see Anthropic's README for terms)
 
 ---
 
-We also thank **[Firecrawl / Mendable, Inc.](https://www.firecrawl.dev/)** for their excellent web
-scraping CLI. The `firecrawl` skill is adapted from their open-source repository:
-https://github.com/firecrawl/cli
+We also thank **[Firecrawl / Mendable, Inc.](https://www.firecrawl.dev/)** for their excellent open-source work.
+The `firecrawl` skill in this collection builds on that contribution.
+
+Adapted skill: `firecrawl`
+
+Original repositories:
+- `firecrawl`: https://github.com/firecrawl/cli
 
 **Copyright (c) Firecrawl / Mendable, Inc.** — CLI (ISC License)
 Note: The Firecrawl platform is AGPL-3.0; this skill documents CLI usage patterns only.
 
 ---
 
-We also thank **[Remotion](https://remotion.dev/)** for their excellent video creation framework.
-The `remotion-best-practices` skill is adapted from their skills repository:
-https://github.com/remotion-dev/skills
+We also thank **[Remotion](https://remotion.dev/)** for their excellent open-source work.
+The `remotion-best-practices` skill in this collection builds on that contribution.
+
+Adapted skill: `remotion-best-practices`
+
+Original repositories:
+- `remotion-best-practices`: https://github.com/remotion-dev/skills
 
 Note: The Remotion library uses a custom license (free for individuals / small companies up to
 3 employees; company license required for larger organizations). This skill documents usage
 patterns only and does not include or redistribute Remotion source code.
+
+---
+
+We also thank **[OpenHands](https://github.com/OpenHands)** for their excellent open-source work.
+The `readiness-report` skill in this collection builds on that contribution.
+
+Adapted skill: `readiness-report`
+
+Original repositories:
+- `readiness-report`: https://github.com/OpenHands/skills
+
+
+<!-- ACKNOWLEDGEMENTS:END -->
 
 ---
 

@@ -148,6 +148,16 @@
       "note": "Local version with supplements preferred (upstream split into many skills)"
     },
     {
+      "name": "coreyhaines31-marketingskills",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": ".",
+      "enabled": true,
+      "copyMode": "repo",
+      "target": "external/coreyhaines31-marketingskills",
+      "note": "Mirror the full repo installed by `npx skills add coreyhaines31/marketingskills`"
+    },
+    {
       "name": "og-image",
       "source": "https://github.com/stevysmith/og-image-skill.git",
       "branch": "main",
@@ -322,5 +332,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-04-13T22:18:35Z"
+  "lastSync": "2026-04-13T23:10:08Z"
 }

@@ -109,34 +109,73 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
 
     SKILLS=$(jq -r '.skills[] | select(.enabled == true) | @base64' "$SCRIPT_DIR/.sync-config.json" 2>/dev/null)
 
+    resolve_target_dir() {
+        local target="$1"
+        if [ -z "$target" ]; then
+            return 1
+        fi
+        case "$target" in
+            /*) printf '%s\n' "$target" ;;
+            *) printf '%s\n' "$SCRIPT_DIR/$target" ;;
+        esac
+    }
+
+    copy_repo_tree() {
+        local source_dir="$1"
+        local target_dir="$2"
+        rm -rf "$target_dir"
+        mkdir -p "$target_dir"
+        (
+            cd "$source_dir" || exit 1
+            shopt -s nullglob dotglob
+            for item in * .[!.]* ..?*; do
+                [ "$item" = ".git" ] && continue
+                cp -R "$item" "$target_dir/"
+            done
+        )
+    }
+
     for skill_b64 in $SKILLS; do
         skill=$(echo "$skill_b64" | base64 --decode)
         name=$(echo "$skill" | jq -r '.name')
         source=$(echo "$skill" | jq -r '.source')
         branch=$(echo "$skill" | jq -r '.branch')
         path=$(echo "$skill" | jq -r '.path // "."')
+        copy_mode=$(echo "$skill" | jq -r '.copyMode // "skill"')
+        target=$(echo "$skill" | jq -r '.target // ""')
 
         echo "  Syncing: $name..."
 
         TEMP_DIR=$(mktemp -d)
         if git clone --depth 1 --branch "$branch" "$source" "$TEMP_DIR" 2>/dev/null; then
             SOURCE_DIR="$TEMP_DIR/$path"
-            TARGET_DIR="$SCRIPT_DIR/skills/$name"
 
-            if [ -f "$SOURCE_DIR/SKILL.md" ]; then
-                mkdir -p "$TARGET_DIR"
-                cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
-
-                for subdir in examples rules references scripts assets; do
-                    if [ -d "$SOURCE_DIR/$subdir" ]; then
-                        rm -rf "$TARGET_DIR/$subdir"
-                        cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
-                    fi
-                done
-
-                echo "  ✓ Synced: $name"
+            if [ "$copy_mode" = "repo" ]; then
+                TARGET_DIR=$(resolve_target_dir "$target")
+                if [ -d "$SOURCE_DIR" ]; then
+                    copy_repo_tree "$SOURCE_DIR" "$TARGET_DIR"
+                    echo "  ✓ Mirrored repo: $name"
+                else
+                    echo "  ⚠ No directory found in $source (path: $path)"
+                fi
             else
-                echo "  ⚠ No SKILL.md found in $source (path: $path)"
+                TARGET_DIR="$SCRIPT_DIR/skills/$name"
+
+                if [ -f "$SOURCE_DIR/SKILL.md" ]; then
+                    mkdir -p "$TARGET_DIR"
+                    cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
+
+                    for subdir in examples rules references scripts assets; do
+                        if [ -d "$SOURCE_DIR/$subdir" ]; then
+                            rm -rf "$TARGET_DIR/$subdir"
+                            cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
+                        fi
+                    done
+
+                    echo "  ✓ Synced: $name"
+                else
+                    echo "  ⚠ No SKILL.md found in $source (path: $path)"
+                fi
             fi
         else
             echo "  ⚠ Failed to sync: $name (clone failed)"
@@ -148,6 +187,8 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
         echo ""
         echo "→ Restoring source attribution blocks..."
         python3 "$SCRIPT_DIR/scripts/sync_source_notes.py"
+        echo "→ Refreshing README source owners..."
+        python3 "$SCRIPT_DIR/scripts/sync_readme_sources.py"
         echo "→ Validating attribution guardrails..."
         python3 "$SCRIPT_DIR/scripts/check_attribution_guardrails.py"
     else

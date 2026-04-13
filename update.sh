@@ -140,6 +140,32 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
     
     SYNCED=0
     FAILED=0
+
+    resolve_target_dir() {
+        local target="$1"
+        if [ -z "$target" ]; then
+            return 1
+        fi
+        case "$target" in
+            /*) printf '%s\n' "$target" ;;
+            *) printf '%s\n' "$SCRIPT_DIR/$target" ;;
+        esac
+    }
+
+    copy_repo_tree() {
+        local source_dir="$1"
+        local target_dir="$2"
+        rm -rf "$target_dir"
+        mkdir -p "$target_dir"
+        (
+            cd "$source_dir" || exit 1
+            shopt -s nullglob dotglob
+            for item in * .[!.]* ..?*; do
+                [ "$item" = ".git" ] && continue
+                cp -R "$item" "$target_dir/"
+            done
+        )
+    }
     
     for skill_b64 in $SKILLS; do
         skill=$(echo "$skill_b64" | base64 --decode)
@@ -147,22 +173,41 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
         source=$(echo "$skill" | jq -r '.source')
         branch=$(echo "$skill" | jq -r '.branch')
         path=$(echo "$skill" | jq -r '.path // "."')
+        copy_mode=$(echo "$skill" | jq -r '.copyMode // "skill"')
+        target=$(echo "$skill" | jq -r '.target // ""')
         note=$(echo "$skill" | jq -r '.note // ""')
         
         echo "  Syncing: $name"
         [ -n "$note" ] && echo "    Note: $note"
         
         if [ "$DRY_RUN" = true ]; then
-            echo "    [DRY-RUN] Would clone $source (branch: $branch, path: $path)"
+            if [ "$copy_mode" = "repo" ]; then
+                TARGET_DIR=$(resolve_target_dir "$target")
+                echo "    [DRY-RUN] Would clone $source (branch: $branch, path: $path) and mirror into $TARGET_DIR"
+            else
+                echo "    [DRY-RUN] Would clone $source (branch: $branch, path: $path)"
+            fi
             continue
         fi
         
         TEMP_DIR=$(mktemp -d)
         if git clone --depth 1 --branch "$branch" "$source" "$TEMP_DIR" 2>/dev/null; then
             SOURCE_DIR="$TEMP_DIR/$path"
-            TARGET_DIR="$SCRIPT_DIR/skills/$name"
-            
-            if [ -f "$SOURCE_DIR/SKILL.md" ]; then
+
+            if [ "$copy_mode" = "repo" ]; then
+                TARGET_DIR=$(resolve_target_dir "$target")
+                if [ -d "$SOURCE_DIR" ]; then
+                    copy_repo_tree "$SOURCE_DIR" "$TARGET_DIR"
+                    echo "    ✓ Mirrored repository successfully"
+                    SYNCED=$((SYNCED + 1))
+                else
+                    echo "    ⚠ No directory found at path: $path"
+                    FAILED=$((FAILED + 1))
+                fi
+            else
+                TARGET_DIR="$SCRIPT_DIR/skills/$name"
+
+                if [ -f "$SOURCE_DIR/SKILL.md" ]; then
                 mkdir -p "$TARGET_DIR"
                 cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
                 
@@ -176,9 +221,10 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                 
                 echo "    ✓ Synced successfully"
                 SYNCED=$((SYNCED + 1))
-            else
-                echo "    ⚠ No SKILL.md found at path: $path"
-                FAILED=$((FAILED + 1))
+                else
+                    echo "    ⚠ No SKILL.md found at path: $path"
+                    FAILED=$((FAILED + 1))
+                fi
             fi
         else
             echo "    ⚠ Failed to clone: $source"
@@ -200,6 +246,8 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
             echo ""
             echo "→ Restoring source attribution blocks..."
             python3 "$SCRIPT_DIR/scripts/sync_source_notes.py"
+            echo "→ Refreshing README source owners..."
+            python3 "$SCRIPT_DIR/scripts/sync_readme_sources.py"
             echo "→ Validating attribution guardrails..."
             python3 "$SCRIPT_DIR/scripts/check_attribution_guardrails.py"
         else
@@ -209,6 +257,7 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
     else
         echo ""
         echo "  [DRY-RUN] Would run: python3 scripts/sync_source_notes.py"
+        echo "  [DRY-RUN] Would run: python3 scripts/sync_readme_sources.py"
         echo "  [DRY-RUN] Would run: python3 scripts/check_attribution_guardrails.py"
     fi
 else
