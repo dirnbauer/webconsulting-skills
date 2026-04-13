@@ -1,38 +1,36 @@
 ---
 name: programmatic-seo
+version: "1.0.0"
+brand: AgentKits Marketing by AityTech
+category: seo-growth
+difficulty: advanced
 description: When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions "programmatic SEO," "template pages," "pages at scale," "directory pages," "location pages," "[keyword] + [city] pages," "comparison pages," "integration pages," or "building many pages for SEO." For auditing existing SEO issues, see seo-audit.
-license: MIT
-metadata:
-  version: "1.0.0"
-  brand: AgentKits Marketing by AityTech
-  category: seo-growth
-  difficulty: advanced
-  triggers:
-    - programmatic SEO
-    - template pages
-    - pages at scale
-    - directory pages
-    - location pages
-    - comparison pages
-    - integration pages
-  prerequisites:
-    - seo-mastery
-  related_skills:
-    - seo-mastery
-    - schema-markup
-    - competitor-alternatives
-  agents:
-    - attraction-specialist
-    - seo-specialist
-  mcp_integrations:
-    optional:
-      - google-search-console
-      - semrush
-      - dataforseo
-  success_metrics:
-    - indexed_pages
-    - organic_traffic
-    - keyword_coverage
+triggers:
+  - programmatic SEO
+  - template pages
+  - pages at scale
+  - directory pages
+  - location pages
+  - comparison pages
+  - integration pages
+prerequisites:
+  - seo-mastery
+related_skills:
+  - seo-mastery
+  - schema-markup
+  - competitor-alternatives
+agents:
+  - attraction-specialist
+  - seo-specialist
+mcp_integrations:
+  optional:
+    - google-search-console
+    - semrush
+    - dataforseo
+success_metrics:
+  - indexed_pages
+  - organic_traffic
+  - keyword_coverage
 ---
 
 # Programmatic SEO
@@ -657,6 +655,4 @@ If you need more context:
 - **copywriting**: For the non-templated copy portions
 - **analytics-tracking**: For measuring programmatic page performance
 
-
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

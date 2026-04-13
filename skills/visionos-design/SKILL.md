@@ -1,5 +1,5 @@
 ---
-name: visionos-design
+name: visionos-design-guidelines
 description: Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.
 license: MIT
 metadata:
@@ -88,6 +88,9 @@ If you define custom hand gestures beyond the system pinch, ensure they are easy
 
 **EH-07: Do not require precise hand positioning.**
 Users interact with hands resting naturally in their lap or at their sides. Do not require users to hold their hands in specific positions, reach to specific locations, or maintain sustained gestures. The indirect interaction model exists specifically to reduce physical effort.
+
+**EH-08: Confirm intent at the start of the interaction.**
+As soon as the system recognizes gaze target, pinch, drag pickup, or direct touch contact, show a visible state change. Delayed confirmation breaks the eye-hand loop and makes selection feel uncertain.
 
 ### Spatial Interaction Quick Reference
 
@@ -242,6 +245,9 @@ Not all ornaments need to be visible at all times. Toolbars can appear on hover 
 **OR-06: Use standard ornament styling.**
 Ornaments use the same glass material system as windows but at a slightly different depth. Use system-provided ornament containers rather than custom floating UI. This ensures visual consistency with other visionOS apps.
 
+**OR-07: Keep essential controls discoverable.**
+Use ornaments for commands users must revisit repeatedly, such as navigation, playback, or primary actions. Do not hide essential controls behind memorized gestures or hover-only affordances.
+
 ---
 
 ## 8. Accessibility [CRITICAL]
@@ -368,6 +374,4 @@ These are common mistakes in visionOS design. Avoid them.
 | Custom window chrome | Breaks platform consistency | Use system window controls |
 | Z-fighting layers | Visual flicker, unclear hierarchy | Use intentional depth offsets |
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

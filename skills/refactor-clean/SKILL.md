@@ -1,11 +1,9 @@
 ---
-name: refactor-clean
-description: Refactor code incrementally using clean code principles and SOLID design patterns. Use when the user wants to improve maintainability, reduce duplication or complexity, and keep behavior stable while restructuring an existing codebase.
-license: MIT
-metadata:
-  risk: unknown
-  source: community
-  date_added: "2026-02-27"
+name: code-refactoring-refactor-clean
+description: "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance."
+risk: unknown
+source: community
+date_added: "2026-02-27"
 ---
 
 # Refactor and Clean Code
@@ -55,6 +53,4 @@ $ARGUMENTS
 
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
-
 Adapted from [sickn33](https://github.com/sickn33/antigravity-awesome-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

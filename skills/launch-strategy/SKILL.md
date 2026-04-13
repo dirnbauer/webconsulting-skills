@@ -1,42 +1,40 @@
 ---
 name: launch-strategy
+version: "1.0.0"
+brand: AgentKits Marketing by AityTech
+category: seo-growth
+difficulty: intermediate
 description: "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum."
-license: MIT
-metadata:
-  version: "1.0.0"
-  brand: AgentKits Marketing by AityTech
-  category: seo-growth
-  difficulty: intermediate
-  triggers:
-    - launch
-    - Product Hunt
-    - feature release
-    - announcement
-    - go-to-market
-    - beta launch
-    - early access
-    - waitlist
-    - product update
-  prerequisites:
-    - content-strategy
-    - social-media
-  related_skills:
-    - content-strategy
-    - social-media
-    - email-sequence
-  agents:
-    - planner
-    - project-manager
-    - copywriter
-  mcp_integrations:
-    optional:
-      - slack
-      - twitter
-  success_metrics:
-    - launch_signups
-    - media_coverage
-    - social_engagement
-  output_schema: launch-plan
+triggers:
+  - launch
+  - Product Hunt
+  - feature release
+  - announcement
+  - go-to-market
+  - beta launch
+  - early access
+  - waitlist
+  - product update
+prerequisites:
+  - content-strategy
+  - social-media
+related_skills:
+  - content-strategy
+  - social-media
+  - email-sequence
+agents:
+  - planner
+  - project-manager
+  - copywriter
+mcp_integrations:
+  optional:
+    - slack
+    - twitter
+success_metrics:
+  - launch_signups
+  - media_coverage
+  - social_engagement
+output_schema: launch-plan
 ---
 
 # Launch Strategy
@@ -379,6 +377,4 @@ If you need more context:
 - **marketing-psychology**: For psychology behind waitlists and exclusivity
 - **programmatic-seo**: For comparison pages mentioned in post-launch
 
-
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

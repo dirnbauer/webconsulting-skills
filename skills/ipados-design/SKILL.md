@@ -1,5 +1,5 @@
 ---
-name: ipados-design
+name: ipados-design-guidelines
 description: Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.
 license: MIT
 metadata:
@@ -185,6 +185,10 @@ On iPad, toolbars live at the top of the screen in the navigation bar area, not 
 
 When no item is selected in a list/sidebar, show a meaningful empty state in the detail area. Use a placeholder with icon and instruction text, not a blank screen.
 
+### 3.6 Reduce Recall in Large-Canvas Navigation
+
+Keep sidebar selection, search terms, and disclosure state visible and preserved across size changes and scene switches. In multi-column layouts, users should resume from structure on screen, not from memory.
+
 ---
 
 ## 4. Pointer & Trackpad (HIGH)
@@ -295,6 +299,10 @@ Adapt UI when a hardware keyboard is connected. Hide the on-screen keyboard shor
 ### 5.6 Arrow Key Navigation
 
 Support arrow keys for navigating lists, grids, and collections. Combine with Shift for multi-selection. This is essential for productivity-focused apps.
+
+### 5.7 Shortcuts Must Be Discoverable
+
+Do not rely on users memorizing shortcut vocabularies. Expose commands through the Cmd-hold overlay, menu labels, and visible focus movement so people learn shortcuts by recognition and repetition.
 
 ---
 
@@ -666,6 +674,4 @@ Claiming Cmd+H, Cmd+Tab, Cmd+Space, or Globe shortcuts will not work and confuse
 ### DO NOT: Present Dense Content Without Scrolling
 Large iPad screens tempt designers to show everything at once. Content should still scroll when it exceeds the visible area. Never truncate content to avoid scrolling.
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

@@ -976,4 +976,6 @@ Accessibility patterns adapted from:
 - [W3C WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [WCAG 2.2 Specification](https://www.w3.org/TR/WCAG22/)
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
