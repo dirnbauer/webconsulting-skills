@@ -1,45 +1,50 @@
-# TYPO3 Icon Migration Steps
+# TYPO3 Icon Migration Checklist
 
-## Step 5: Migration Checklist
+Use this checklist when updating existing extension icons.
 
-For each extension icon that needs updating:
+## 1. Inventory
 
-- [ ] Read the current SVG content
-- [ ] Identify the semantic meaning (what does the icon represent?)
-- [ ] Remove solid background rectangle/path
-- [ ] Replace `#FFFFFF` fills with `currentColor`
-- [ ] Replace brand-color accent fills with `var(--icon-color-accent, #ff8700)`
-- [ ] Replace `#333333` detail fills with `currentColor`
-- [ ] Set depth fill opacity to **`.8`** for module/sidebar icons — validated against TYPO3 v14 Fresh theme dark sidebar; `.4` renders too faint
-- [ ] Verify outline ring width is **≥ 6 units** in a 64-unit viewBox (outer gap minus inner cutout)
-- [ ] Verify accent elements are **≥ 12 units** in smallest dimension for 64×64 module icons
-- [ ] Set **viewBox** per icon type — `0 0 64 64` for backend **module** icons; `0 0 16 16` for many action/plugin/record icons (match a Core reference SVG)
-- [ ] Remove all legacy attributes (`version`, `xmlns:xlink`, `enable-background`, `xml:space`, `id`)
-- [ ] Remove generator comments
-- [ ] Redesign shapes from filled-on-background to outlined/line-art
-- [ ] Mental contrast check at half render size (32px for module, 8px for 16×16 icons)
-- [ ] Verify `Configuration/Icons.php` exists and uses `SvgIconProvider`
-- [ ] Verify `Configuration/Backend/Modules.php` references correct `iconIdentifier`
-- [ ] Verify TCA `typeicon_classes` and `pluginIcon` references
-- [ ] Clear TYPO3 caches and browser localStorage after deployment
+- [ ] Read the current SVG files
+- [ ] Read `Configuration/Icons.php`
+- [ ] Read `Configuration/Backend/Modules.php`
+- [ ] Read relevant TCA and TCA override files
 
-## Step 6: Transforming Icon Shapes
+## 2. Classify
 
-### From Filled to Outlined
+- [ ] Assign every icon to one type: module, extension, plugin, record, or action
+- [ ] Confirm the render context and expected viewBox
+- [ ] Keep existing identifiers unless there is a good reason to rename them
 
-Old style icons are typically solid white shapes on a colored background. The v14 style
-uses outlined shapes with an inner/outer path to create the outline effect.
+## 3. Capture meaning
 
-**Old (solid shape on background):**
-```xml
-<path fill="#5BA34F" d="M0,0h64v64H0V0z"/>
-<polygon fill="#FFFFFF" points="18,16 18,44 27,44 32,50 37,44 46,44 46,16"/>
-```
+- [ ] Infer the semantic meaning from module names, record names, plugin names, and old SVGs
+- [ ] If the meaning is not obvious, ask the user what the icon should communicate
+- [ ] For icon families, note which icon is the parent and which are sub-variants
 
-**New (outlined shape, no background):**
-```xml
-<path fill="currentColor" d="M18 16v28h9l5 6 5-6h9V16H18zm26 26H38l-6 7.2L26 42H20V18h24v24z"/>
-```
+## 4. Load references
 
-The outer path defines the full shape, the inner path (after `z` or as a cutout) creates
-the outlined/hollow appearance.
+- [ ] Load the matching live Core icon family from TYPO3.Icons
+- [ ] Check the official Icon API docs for registration details
+- [ ] If available, validate the look in `EXT:styleguide`
+
+## 5. Redraw
+
+- [ ] Remove solid legacy backgrounds
+- [ ] Replace hardcoded white/black/gray with `currentColor`
+- [ ] Use `var(--icon-color-accent, #ff8700)` for accent geometry
+- [ ] Simplify shapes until they are readable at the real render size
+- [ ] Keep module icons and 16x16 icons visually appropriate for their type
+
+## 6. Register and wire up
+
+- [ ] Register the icon in `Configuration/Icons.php`
+- [ ] Update `iconIdentifier` in `Configuration/Backend/Modules.php` if needed
+- [ ] Update `pluginIcon`, `typeicon_classes`, and related references
+- [ ] Remove legacy registration from `ext_localconf.php`
+
+## 7. Verify
+
+- [ ] Confirm the SVG file path matches the registered source
+- [ ] Confirm the icon has the intended viewBox
+- [ ] Confirm the icon is readable in its real backend context
+- [ ] Clear TYPO3 caches and browser local storage if stale icons still appear

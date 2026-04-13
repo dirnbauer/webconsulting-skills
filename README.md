@@ -212,7 +212,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-update` | update, upgrade, v14, migration, TYPO3 core | "Follow TYPO3 v14 patterns for my extension" |
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-fractor` | fractor, flexform, typoscript migration, fluid migration | "Use Fractor to migrate FlexForms and TypoScript" |
-| `typo3-icon14` | icons, backend module icons, icon migration, SVG icons, icon registry | "Migrate extension icons to TYPO3 v14 line-art style" |
+| `typo3-icon14` | icons, module icons, plugin icons, record icons, action icons, icon migration, Configuration/Icons.php | "Design or migrate TYPO3 v14 extension icons with live Core references" |
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
 | `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
@@ -2065,7 +2065,7 @@ grep -r "DataHandler" skills/
 | `typo3-update` | TYPO3 TYPO3 v14 migration guide (prefers v14) | webconsulting |
 | `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | Netresearch |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | webconsulting |
-| `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | webconsulting |
+| `typo3-icon14` | Design and migrate TYPO3 v14 extension icons | webconsulting |
 | **Security & Operations** | | |
 | `typo3-security` | Security hardening checklist | webconsulting |
 | `typo3-seo` | SEO configuration with EXT:seo | webconsulting |

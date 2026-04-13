@@ -1,3 +1,3 @@
 display_name: "TYPO3 v14 Icon Modernizer"
-short_description: "Migrate TYPO3 extension backend module icons from old solid-background style to TYPO3 v14 line-art style using currentColor, CSS custom properties, and the Icon API."
-default_prompt: "Help me with TYPO3 v14 Icon Modernizer: migrate typo3 extension backend module icons from old solid-background style to typo3 v14 line-art style using currentcolor, css custom properties, and the icon api."
+short_description: "Design and migrate TYPO3 v14 extension icons with live Core icon references, correct icon types, and Configuration/Icons.php registration."
+default_prompt: "Help me design or migrate TYPO3 v14 extension icons using the current Core icon language, the right icon type for each use case, and Configuration/Icons.php registration."
