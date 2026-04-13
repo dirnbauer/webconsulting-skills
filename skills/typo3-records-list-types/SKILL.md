@@ -629,4 +629,4 @@ All views support TYPO3 dark mode via CSS custom properties:
 - **Workspace support is experimental.** Visual indicators work, but drag-and-drop within workspaces has limited testing.
 - **Drag-and-drop accessibility**: Keyboard-based drag-and-drop is implemented with ARIA, but screen reader testing (NVDA, JAWS, VoiceOver) has been limited. Standard List View is a more tested fallback.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

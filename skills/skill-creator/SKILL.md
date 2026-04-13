@@ -487,4 +487,4 @@ Good luck!
 
 
 Adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

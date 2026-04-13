@@ -65,4 +65,4 @@ Each rule file contains:
 
 
 Adapted from [Supabase](https://github.com/supabase/agent-skills).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

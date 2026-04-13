@@ -288,4 +288,4 @@ After refactoring, verify:
 
 
 Adapted from [Softaworks](https://github.com/softaworks/agent-toolkit).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

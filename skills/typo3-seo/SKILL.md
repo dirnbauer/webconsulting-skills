@@ -502,4 +502,4 @@ page.headerData.1000.value (
 
 For TYPO3 v14-specific SEO notes, see [references/v14-notes.md](references/v14-notes.md).
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

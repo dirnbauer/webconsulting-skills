@@ -163,6 +163,11 @@ jobs:
             echo "✓ All skills are listed in AGENTS.md"
           fi
 
+      - name: Restore source notes
+        if: steps.sync.outputs.changes_made == 'true'
+        run: |
+          python3 scripts/sync_source_notes.py
+
       - name: Validate attribution guardrails
         if: steps.sync.outputs.changes_made == 'true'
         run: |

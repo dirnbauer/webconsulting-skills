@@ -2219,4 +2219,4 @@ Semrush, Ahrefs, and the broader SEO community's work on generative engine optim
 
 Created by webconsulting.at for the Claude Cursor Skills collection.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

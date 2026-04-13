@@ -11,7 +11,15 @@ from pathlib import Path
 from audit_skills import ROOT, SKILLS_DIR, discover_source_info, find_attribution_markers
 
 
-NETRESEARCH_LINE = "Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community."
+NETRESEARCH_LINE = (
+    "Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their "
+    "generous open-source contributions to the TYPO3 community, which helped shape this "
+    "skill collection."
+)
+LEGACY_NETRESEARCH_LINES = {
+    "Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.",
+    "Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.",
+}
 REPO_SOURCE_URL = "https://github.com/dirnbauer/webconsulting-skills"
 
 
@@ -27,6 +35,7 @@ def insert_source_note(text: str, note: str) -> str:
     if note in text:
         return text
     lines = text.rstrip("\n").splitlines()
+    lines = [NETRESEARCH_LINE if line in LEGACY_NETRESEARCH_LINES else line for line in lines]
     if lines and lines[-1] == NETRESEARCH_LINE:
         lines.insert(len(lines) - 1, "")
         lines.insert(len(lines) - 1, note)

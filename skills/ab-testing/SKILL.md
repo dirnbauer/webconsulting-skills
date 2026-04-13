@@ -467,4 +467,4 @@ For the full test-plan template and closeout format, see [references/output-form
 For discovery questions and related-skill pointers, see [references/appendix.md](references/appendix.md). For recurring failure patterns, see [references/common-mistakes.md](references/common-mistakes.md).
 
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

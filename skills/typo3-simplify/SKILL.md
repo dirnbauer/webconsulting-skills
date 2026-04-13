@@ -246,4 +246,4 @@ agent and Claude Code's bundled `/simplify` skill for TYPO3 contexts.
 
 **Copyright (c) Anthropic** — Code simplification patterns (Apache-2.0 License)
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

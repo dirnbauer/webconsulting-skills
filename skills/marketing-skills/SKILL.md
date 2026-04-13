@@ -227,4 +227,4 @@ Original repository: https://github.com/coreyhaines31/marketingskills
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

@@ -1115,4 +1115,4 @@ Before shipping a Mac app, verify:
 
 
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

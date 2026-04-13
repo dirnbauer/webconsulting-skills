@@ -569,4 +569,4 @@ The Reference Index check has been moved to the **Install Tool** (#107629). The 
 
 
 Source: https://github.com/dirnbauer/webconsulting-skills
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

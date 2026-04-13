@@ -551,4 +551,4 @@ When no size is passed to `IconFactory->getIcon()`, the default is `IconSize::ME
 ## Appendix
 For icon accent strategy, package notes, and common mistake tables, see [references/design-notes.md](references/design-notes.md). For the migration checklist and shape-transformation examples, see [references/migration-steps.md](references/migration-steps.md).
 Source: https://github.com/dirnbauer/webconsulting-skills
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

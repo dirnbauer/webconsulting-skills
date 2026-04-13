@@ -308,4 +308,4 @@ The design system is compatible with shadcn/ui components. Semantic tokens map t
 
 
 Source: https://github.com/dirnbauer/webconsulting-skills
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

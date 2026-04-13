@@ -355,4 +355,4 @@ This skill is adapted from **[AgentKits Marketing](https://github.com/aitytech/a
 **Copyright (c) AITYTech** - MIT License  
 Adapted by webconsulting.at for this skill collection
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

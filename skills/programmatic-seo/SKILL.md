@@ -659,4 +659,4 @@ If you need more context:
 
 
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
