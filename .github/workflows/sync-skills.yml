@@ -1,5 +1,8 @@
 name: Sync External Skills
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 on:
   # Weekly sync on Monday at 06:00 UTC
   schedule:
