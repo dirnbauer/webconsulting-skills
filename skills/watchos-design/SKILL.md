@@ -1,5 +1,5 @@
 ---
-name: watchos-design-guidelines
+name: watchos-design
 description: Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.
 license: MIT
 metadata:
