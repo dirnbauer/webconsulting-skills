@@ -141,4 +141,14 @@ If this is something you do often, you could create your own skill:
 npx skills init my-xyz-skill
 ```
 
-Adapted from [Vercel](https://github.com/vercel-labs/skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Vercel](https://github.com/vercel-labs/skills)**.
+
+Original repository: https://github.com/vercel-labs/skills
+
+Special thanks to [Vercel](https://github.com/vercel-labs/skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

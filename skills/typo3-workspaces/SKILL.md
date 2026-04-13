@@ -1678,6 +1678,5 @@ This skill is based on the official TYPO3 CMS documentation and community resour
 Special thanks to the TYPO3 Core Team and **[b13 GmbH](https://b13.com/)** (Benni Mack) for
 their excellent explanation of the overlay mechanism.
 
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
 
 Source: https://github.com/dirnbauer/webconsulting-skills

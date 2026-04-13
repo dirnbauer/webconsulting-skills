@@ -1121,4 +1121,14 @@ Before shipping a Mac app, verify:
 
 15. **No drag and drop** — Mac is a drag-and-drop platform. If users can see content, they expect to drag it somewhere.
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

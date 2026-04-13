@@ -1,133 +1,134 @@
 ---
-name: readiness-report
-description: Evaluate how well a codebase supports autonomous AI development. Analyzes repositories across eight technical pillars (Style & Validation, Build System, Testing, Documentation, Dev Environment, Debugging & Observability, Security, Task Discovery) and five maturity levels. Use when users request `/readiness-report` or want to assess agent readiness, codebase maturity, or identify gaps preventing effective AI-assisted development.
-license: MIT / CC-BY-SA-4.0
-metadata:
-  triggers:
-    - /readiness-report
+name: agent-readiness-report
+description: Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is.
+triggers:
+- agent-readiness-report
+- readiness report
 ---
 
 # Agent Readiness Report
 
-Evaluate how well a repository supports autonomous AI development by analyzing it across eight technical pillars and five maturity levels.
+Evaluate how well a repository supports autonomous AI-assisted development.
 
-## Overview
+## What this does
 
-Agent Readiness measures how prepared a codebase is for AI-assisted development. Poor feedback loops, missing documentation, or lack of tooling cause agents to waste cycles on preventable errors. This skill identifies those gaps and prioritizes fixes.
+Assess a codebase across five pillars that determine whether an AI agent can
+work effectively in a repository.  The output is a structured report identifying
+what's present and what's missing.
 
-## Quick Start
+## Five Pillars
 
-The user will run `/readiness-report` to evaluate the current repository. The agent will then:
-1. Clone the repo, scan repository structure, CI configs, and tooling
-2. Evaluate 81 criteria across 9 technical pillars
-3. Determine maturity level (L1-L5) based on 80% threshold per level
-4. Provide prioritized recommendations
+| Pillar | Question | Features |
+|--------|----------|----------|
+| **Agent Instructions** | Does the agent know what to do? | 18 |
+| **Feedback Loops** | Does the agent know if it's right? | 16 |
+| **Workflows & Automation** | Does the process support agent work? | 15 |
+| **Policy & Governance** | Does the agent know the rules? | 13 |
+| **Build & Dev Environment** | Can the agent build and run the project? | 12 |
 
-## Workflow
+74 features total.  See `references/criteria.md` for the full list with
+descriptions and evidence examples.
 
-### Step 1: Run Repository Analysis
+## How to run
 
-Execute the analysis script to gather signals from the repository:
+### Step 1: Run the scanner scripts
 
-```bash
-python scripts/analyze_repo.py --repo-path .
-```
-
-This script checks for:
-- Configuration files (.eslintrc, pyproject.toml, etc.)
-- CI/CD workflows (.github/workflows/, .gitlab-ci.yml)
-- Documentation (README, AGENTS.md, CONTRIBUTING.md)
-- Test infrastructure (test directories, coverage configs)
-- Security configurations (CODEOWNERS, .gitignore, secrets management)
-
-### Step 2: Generate Report
-
-After analysis, generate the formatted report:
+Five shell scripts gather filesystem signals — file existence, config patterns,
+directory structures.  They surface what's present so you don't have to run
+dozens of `find` commands manually.
 
 ```bash
-python scripts/generate_report.py --analysis-file /tmp/readiness_analysis.json
+bash scripts/scan_agent_instructions.sh /path/to/repo
+bash scripts/scan_feedback_loops.sh /path/to/repo
+bash scripts/scan_workflows.sh /path/to/repo
+bash scripts/scan_policy.sh /path/to/repo
+bash scripts/scan_build_env.sh /path/to/repo
 ```
 
-### Step 3: Present Results
+Or scan all five at once:
 
-The report includes:
-1. **Overall Score**: Pass rate percentage and maturity level achieved
-2. **Level Progress**: Bar showing L1-L5 completion percentages
-3. **Strengths**: Top-performing pillars with passing criteria
-4. **Opportunities**: Prioritized list of improvements to implement
-5. **Detailed Criteria**: Full breakdown by pillar showing each criterion status
+```bash
+for s in scripts/scan_*.sh; do bash "$s" /path/to/repo; echo; done
+```
 
-## Nine Technical Pillars
+**Important**: The scripts are helpers, not scorers.  They find files and
+patterns but do not evaluate quality.  Many features require judgment that only
+reading the actual files can provide — for example, whether a README includes
+real build commands or just badges, whether inline documentation is systematic or
+scattered, whether an AI usage policy has meaningful boundaries.
 
-Each pillar addresses specific failure modes in AI-assisted development:
+### Step 2: Evaluate each feature
 
-| Pillar | Purpose | Key Signals |
-|--------|---------|-------------|
-| **Style & Validation** | Catch bugs instantly | Linters, formatters, type checkers |
-| **Build System** | Fast, reliable builds | Build docs, CI speed, automation |
-| **Testing** | Verify correctness | Unit/integration tests, coverage |
-| **Documentation** | Guide the agent | AGENTS.md, README, architecture docs |
-| **Dev Environment** | Reproducible setup | Devcontainer, env templates |
-| **Debugging & Observability** | Diagnose issues | Logging, tracing, metrics |
-| **Security** | Protect the codebase | CODEOWNERS, secrets management |
-| **Task Discovery** | Find work to do | Issue templates, PR templates |
-| **Product & Analytics** | Error-to-insight loop | Error tracking, product analytics |
+Walk through `references/criteria.md` pillar by pillar.  For each feature:
 
-See `references/criteria.md` for the complete list of 81 criteria per pillar.
+1. Check the scanner output for relevant signals
+2. For features the scanner can't fully evaluate, inspect the files yourself
+3. Mark each feature: **✓** (present), **✗** (missing), or **—** (not applicable)
 
-## Five Maturity Levels
+Features that require judgment (not fully covered by scanners):
+- Does the README actually contain build/run/test commands? (not just that it exists)
+- Is inline documentation systematic across the public API?
+- Are examples actually runnable?
+- Does the contributing guide include code standards?
+- Is there a meaningful AI usage policy?
+- Is the architecture documentation current?
+- Are tests documented well enough for an agent to run them?
 
-| Level | Name | Description | Agent Capability |
-|-------|------|-------------|------------------|
-| L1 | Initial | Basic version control | Manual assistance only |
-| L2 | Managed | Basic CI/CD and testing | Simple, well-defined tasks |
-| L3 | Standardized | Production-ready for agents | Routine maintenance |
-| L4 | Measured | Comprehensive automation | Complex features |
-| L5 | Optimized | Full autonomous capability | End-to-end development |
+### Step 3: Write the report
 
-**Level Progression**: To unlock a level, pass ≥80% of criteria at that level AND all previous levels.
+Structure the output as:
 
-See `references/maturity-levels.md` for detailed level requirements.
+```
+# Agent Readiness Report: {repo name}
 
-## Interpreting Results
+## Summary
+- Features present: X / 74
+- Strongest pillar: {pillar}
+- Weakest pillar: {pillar}
 
-### Pass vs Fail vs Skip
+## Pillar 1 · Agent Instructions (X / 18)
+✓ Agent instruction file — AGENTS.md at root
+✓ AI IDE configuration — .cursor/rules/ with 3 rule files
+✗ Multi-model support — only Cursor configured
+...
 
-- ✓ **Pass**: Criterion met (contributes to score)
-- ✗ **Fail**: Criterion not met (opportunity for improvement)
-- — **Skip**: Not applicable to this repository type (excluded from score)
+## Pillar 2 · Feedback Loops (X / 16)
+...
 
-### Priority Order
+## Pillar 3 · Workflows & Automation (X / 15)
+...
 
-Fix gaps in this order:
-1. **L1-L2 failures**: Foundation issues blocking basic agent operation
-2. **L3 failures**: Production readiness gaps
-3. **High-impact L4+ failures**: Optimization opportunities
+## Pillar 4 · Policy & Governance (X / 13)
+...
 
-### Common Quick Wins
+## Pillar 5 · Build & Dev Environment (X / 12)
+...
 
-1. **Add AGENTS.md**: Document commands, architecture, and workflows for AI agents
-2. **Configure pre-commit hooks**: Catch style issues before CI
-3. **Add PR/issue templates**: Structure task discovery
-4. **Document single-command setup**: Enable fast environment provisioning
+```
 
-## Resources
+For each passing feature, briefly note what evidence you found.
+For each failing feature, note what's missing.
 
-- `scripts/analyze_repo.py` - Repository analysis script
-- `scripts/generate_report.py` - Report generation and formatting
-- `references/criteria.md` - Complete criteria definitions by pillar
-- `references/maturity-levels.md` - Detailed level requirements
+## What makes these features useful
 
-## Automated Remediation
+Every feature answers: *if this is missing, what goes wrong for the AI agent?*
+Features like "agent instruction file" and "tool server configuration" exist
+because agents need them.  Features like "linter" and "CI pipeline" exist because
+agents need fast, clear feedback on whether their changes are correct — not
+because they're general best practices.
 
-After reviewing the report, common fixes can be automated:
-- Generate AGENTS.md from repository structure
-- Add missing issue/PR templates
-- Configure standard linters and formatters
-- Set up pre-commit hooks
+The criteria were derived from analysis of 123 real repositories across five
+AI-readiness categories, then filtered for features that actually affect agent
+effectiveness.
 
-Ask to "fix readiness gaps" to begin automated remediation of failing criteria.
+---
 
+## Credits & Attribution
 
-Adapted from [OpenHands](https://github.com/OpenHands/skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
+This skill is based on the excellent work by
+**[OpenHands](https://github.com/OpenHands/skills)**.
+
+Original repository: https://github.com/OpenHands/skills
+
+Special thanks to [OpenHands](https://github.com/OpenHands/skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

@@ -94,4 +94,14 @@ Read individual rule files for detailed explanations and code examples:
 - [rules/silence-detection.md](rules/silence-detection.md) - Adaptive silence detection using FFmpeg loudnorm and silencedetect
 - [rules/voiceover.md](rules/voiceover.md) - Adding AI-generated voiceover to Remotion compositions using ElevenLabs TTS
 
-Adapted from [remotion-dev](https://github.com/remotion-dev/skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[remotion-dev](https://github.com/remotion-dev/skills)**.
+
+Original repository: https://github.com/remotion-dev/skills
+
+Special thanks to [remotion-dev](https://github.com/remotion-dev/skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

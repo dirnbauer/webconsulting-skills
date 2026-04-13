@@ -1082,4 +1082,14 @@ These are common mistakes that violate the iOS Human Interface Guidelines. Never
 
 15. **Dark Mode as an afterthought** — Using hardcoded colors means the app is either broken in Dark Mode or light mode. Always use semantic colors.
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

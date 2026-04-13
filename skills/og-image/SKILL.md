@@ -199,4 +199,14 @@ Before completing, verify:
 - [ ] theme-color is set to match brand
 - [ ] User informed of cache-busting URLs
 
-Adapted from [Stevy Smith](https://github.com/stevysmith/og-image-skill).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Stevy Smith](https://github.com/stevysmith/og-image-skill)**.
+
+Original repository: https://github.com/stevysmith/og-image-skill
+
+Special thanks to [Stevy Smith](https://github.com/stevysmith/og-image-skill) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

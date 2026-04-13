@@ -644,4 +644,14 @@ Use this skill when:
 | Replace Type Code with Class/Enum             | Strong typing                         |
 | Replace Inheritance with Delegation           | Composition over inheritance          |
 
-Adapted from [GitHub](https://github.com/github/awesome-copilot).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[GitHub](https://github.com/github/awesome-copilot)**.
+
+Original repository: https://github.com/github/awesome-copilot
+
+Special thanks to [GitHub](https://github.com/github/awesome-copilot) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

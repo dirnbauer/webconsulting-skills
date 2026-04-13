@@ -1,6 +1,6 @@
 {
   "$schema": "./sync-config.schema.json",
-  "description": "External skill sources for automatic synchronization. The eleven skills originally adapted from Netresearch DTT (php-modernization, enterprise-readiness, security-audit, cli-tools, context7, typo3-ddev, typo3-testing, typo3-conformance, typo3-docs, typo3-core-contributions, typo3-extension-upgrade) are canonical in this repo only: do not configure or enable sync from github.com/netresearch. Thank-you and attribution text in AGENTS.md, README, and each skill remains unchanged.",
+  "description": "External skill sources for automatic synchronization. After each sync, source-specific Credits & Attribution blocks are restored automatically. Netresearch-derived skills keep their existing thank-you wording; other upstream-derived skills get the same block style with owner-specific thank-you text.",
   "skills": [
     {
       "name": "agent-md-refactor",
@@ -24,6 +24,22 @@
       "branch": "main",
       "enabled": true,
       "path": "skills/android"
+    },
+    {
+      "name": "cli-tools",
+      "source": "https://github.com/netresearch/cli-tools-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/cli-tools",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "context7",
+      "source": "https://github.com/netresearch/context7-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/context7",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
     },
     {
       "name": "cro-funnel",
@@ -64,6 +80,14 @@
       "path": "skills/xlsx",
       "enabled": false,
       "note": "Bundled into local document-processing skill"
+    },
+    {
+      "name": "enterprise-readiness",
+      "source": "https://github.com/netresearch/enterprise-readiness-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/enterprise-readiness",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
     },
     {
       "name": "find-skills",
@@ -131,6 +155,14 @@
       "enabled": true
     },
     {
+      "name": "php-modernization",
+      "source": "https://github.com/netresearch/php-modernization-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/php-modernization",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
       "name": "postgres-best-practices",
       "source": "https://github.com/supabase/agent-skills.git",
       "branch": "main",
@@ -171,8 +203,9 @@
       "name": "readiness-report",
       "source": "https://github.com/OpenHands/skills.git",
       "branch": "main",
-      "path": "skills/readiness-report",
-      "enabled": true
+      "path": "plugins/onboarding/skills/agent-readiness-report",
+      "enabled": true,
+      "note": "Upstream skill name differs: agent-readiness-report"
     },
     {
       "name": "remotion-best-practices",
@@ -180,6 +213,14 @@
       "branch": "main",
       "path": "skills/remotion",
       "enabled": true
+    },
+    {
+      "name": "security-audit",
+      "source": "https://github.com/netresearch/security-audit-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/security-audit",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
     },
     {
       "name": "shadcn-ui",
@@ -202,6 +243,54 @@
       "branch": "main",
       "enabled": true,
       "path": "skills/tvos"
+    },
+    {
+      "name": "typo3-conformance",
+      "source": "https://github.com/netresearch/typo3-conformance-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-conformance",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "typo3-core-contributions",
+      "source": "https://github.com/netresearch/typo3-core-contributions-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-core-contributions",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "typo3-ddev",
+      "source": "https://github.com/netresearch/typo3-ddev-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-ddev",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "typo3-docs",
+      "source": "https://github.com/netresearch/typo3-docs-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-docs",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "typo3-extension-upgrade",
+      "source": "https://github.com/netresearch/typo3-extension-upgrade-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-extension-upgrade",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
+    },
+    {
+      "name": "typo3-testing",
+      "source": "https://github.com/netresearch/typo3-testing-skill.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/typo3-testing",
+      "note": "Keep full Netresearch credits and thank-you block after sync"
     },
     {
       "name": "visionos-design",
@@ -233,5 +322,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-04-13T21:56:49Z"
+  "lastSync": "2026-04-13T22:18:35Z"
 }

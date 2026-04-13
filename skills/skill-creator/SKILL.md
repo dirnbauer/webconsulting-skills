@@ -484,4 +484,14 @@ Please add steps to your TodoList, if you have such a thing, to make sure you do
 
 Good luck!
 
-Adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator)**.
+
+Original repository: https://github.com/anthropics/skills/tree/main/skills/skill-creator
+
+Special thanks to [Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

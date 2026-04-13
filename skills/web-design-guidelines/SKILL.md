@@ -38,4 +38,14 @@ When a user provides a file or pattern argument:
 
 If no files specified, ask the user which files to review.
 
-Adapted from [Vercel](https://github.com/vercel-labs/agent-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Vercel](https://github.com/vercel-labs/agent-skills)**.
+
+Original repository: https://github.com/vercel-labs/agent-skills
+
+Special thanks to [Vercel](https://github.com/vercel-labs/agent-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

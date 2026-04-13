@@ -174,7 +174,7 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     "typo3-security": {"owner": "webconsulting", "url": None},
     "typo3-seo": {"owner": "webconsulting", "url": None},
     "typo3-simplify": {
-        "owner": "webconsulting",
+        "owner": "Anthropic",
         "url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier",
     },
     "typo3-solr": {"owner": "webconsulting", "url": None},

@@ -1,348 +1,112 @@
 ---
 name: security-audit
-description: >-
-  Security audit patterns for PHP/OWASP. Use when conducting security assessments,
-  identifying vulnerabilities (XXE, SQL injection, XSS), or CVSS scoring.
+description: "Use when conducting security assessments, OWASP/CWE audits, CVSS scoring, auditing PHP/TYPO3 projects for vulnerabilities, scanning dependencies, or reviewing code for security concerns."
+license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
+compatibility: "Requires grep, jq, gh CLI."
 metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+  author: Netresearch DTT GmbH
+  version: "2.6.0"
+  repository: https://github.com/netresearch/security-audit-skill
+allowed-tools: Bash(grep:*) Bash(jq:*) Bash(gh:*) Read Glob Grep
 ---
 
 # Security Audit Skill
 
-Security audits, vulnerability assessment, and secure coding patterns aligned with OWASP.
+Security audit patterns (OWASP Top 10, CWE Top 25 2025, CVSS v4.0) and GitHub project security checks. Deep PHP/TYPO3 code scanning with 80+ checkpoints and 19 reference guides.
 
 ## Expertise Areas
 
-- **Vulnerabilities**: XXE, SQL injection, XSS, CSRF, auth flaws, insecure deserialization
-- **Risk Scoring**: CVSS v3.1 methodology
-- **Secure Coding**: Input validation, output encoding, cryptography, session management
+- **Vulnerabilities**: XXE, SQLi, XSS, CSRF, command injection, path traversal, file upload, deserialization, SSRF, type juggling, SSTI, JWT flaws, insecure randomness
+- **Risk Scoring**: CVSS v3.1 and v4.0
+- **Secure Coding**: Input validation, output encoding, cryptography, session management, authentication, error sanitization
+- **Standards**: OWASP Top 10, CWE Top 25, OWASP ASVS, Proactive Controls
+- **Container/Docker**: Root user detection, file permissions, image pinning, non-root users
 
-## OWASP Top 10 (2021)
+## Reference Files
 
-| Rank | Category | Description |
-|------|----------|-------------|
-| A01 | Broken Access Control | Unauthorized access to resources |
-| A02 | Cryptographic Failures | Weak encryption, exposed secrets |
-| A03 | Injection | SQL, NoSQL, OS, LDAP injection |
-| A04 | Insecure Design | Missing security controls by design |
-| A05 | Security Misconfiguration | Default configs, verbose errors |
-| A06 | Vulnerable Components | Outdated libraries with CVEs |
-| A07 | Auth Failures | Broken authentication/session |
-| A08 | Data Integrity Failures | Insecure deserialization, CI/CD |
-| A09 | Logging Failures | Missing audit logs, monitoring |
-| A10 | SSRF | Server-side request forgery |
+- **Core**: `owasp-top10.md`, `cwe-top25.md`, `xxe-prevention.md`, `cvss-scoring.md`, `api-key-encryption.md`
+- **Vulnerability Prevention**: `deserialization-prevention.md`, `path-traversal-prevention.md`, `file-upload-security.md`, `input-validation.md`
+- **Error Handling**: `error-message-sanitization.md` (API key redaction, exception hierarchy)
+- **Architecture**: `authentication-patterns.md`, `security-headers.md`, `security-logging.md`, `cryptography-guide.md`
+- **Framework Security**: `framework-security.md` (TYPO3, Symfony, Laravel)
+- **Modern Threats**: `modern-attacks.md`, `cve-patterns.md`, `php-security-features.md`
+- **DevSecOps**: `ci-security-pipeline.md`, `supply-chain-security.md`, `automated-scanning.md`, `gha-security.md`
+- **Incident Response**: `supply-chain-incident-response.md`
 
-## XXE Prevention
+All files located in `references/`.
 
-XML External Entity injection allows attackers to read files, perform SSRF, or DoS.
+## Quick Patterns
 
-### Vulnerable Code
-
+**XML parsing (prevent XXE):**
 ```php
-// ❌ VULNERABLE - External entities enabled
-$doc = new DOMDocument();
-$doc->loadXML($userInput);
+$doc->loadXML($input, LIBXML_NONET);
 ```
 
-### Secure Code
-
+**SQL (prevent injection):**
 ```php
-// ✅ SECURE - Disable external entities
-$doc = new DOMDocument();
-$doc->loadXML(
-    $userInput,
-    LIBXML_NONET | LIBXML_NOENT | LIBXML_DTDLOAD
-);
-
-// Or use libxml_disable_entity_loader for older PHP
-libxml_disable_entity_loader(true); // Deprecated in PHP 8.0
-```
-
-### SimpleXML Secure Usage
-
-```php
-// ✅ SECURE
-$xml = simplexml_load_string(
-    $userInput,
-    'SimpleXMLElement',
-    LIBXML_NONET | LIBXML_NOENT
-);
-```
-
-## SQL Injection Prevention
-
-### Vulnerable Code
-
-```php
-// ❌ VULNERABLE - Direct string interpolation
-$query = "SELECT * FROM users WHERE id = " . $_GET['id'];
-$result = $pdo->query($query);
-```
-
-### Secure Code - PDO
-
-```php
-// ✅ SECURE - Prepared statements
 $stmt = $pdo->prepare('SELECT * FROM users WHERE id = ?');
 $stmt->execute([$id]);
-$result = $stmt->fetchAll();
 ```
 
-### Secure Code - TYPO3 QueryBuilder
-
+**Output (prevent XSS):**
 ```php
-// ✅ SECURE - TYPO3 QueryBuilder with named parameters
-$queryBuilder = $this->connectionPool->getQueryBuilderForTable('users');
-$result = $queryBuilder
-    ->select('*')
-    ->from('users')
-    ->where(
-        $queryBuilder->expr()->eq(
-            'uid',
-            $queryBuilder->createNamedParameter($id, Connection::PARAM_INT)
-        )
-    )
-    ->executeQuery()
-    ->fetchAllAssociative();
+echo htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 ```
 
-## XSS Prevention
-
-### Output Encoding
-
+**API keys (encrypt at rest):**
 ```php
-// ✅ SECURE - Escape all output
-echo htmlspecialchars($userInput, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+$nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+$encrypted = 'enc:' . base64_encode($nonce . sodium_crypto_secretbox($apiKey, $nonce, $key));
 ```
 
-### Fluid Templates
-
-```html
-<!-- ✅ SAFE - Auto-escaped -->
-{variable}
-
-<!-- ❌ DANGEROUS - Raw output, use only for trusted HTML -->
-{variable -> f:format.raw()}
-
-<!-- ✅ SAFE - Explicit escaping -->
-{variable -> f:format.htmlspecialchars()}
-```
-
-### Content Security Policy
-
+**Password hashing:**
 ```php
-// Set CSP header
-header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';");
-```
-
-## CSRF Protection
-
-### Form Tokens
-
-```php
-// Generate token
-$token = bin2hex(random_bytes(32));
-$_SESSION['csrf_token'] = $token;
-
-// Validate token
-if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-    throw new SecurityException('CSRF token mismatch');
-}
-```
-
-### TYPO3 CSRF Protection
-
-```php
-use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
-
-// Generate
-$formProtection = $this->formProtectionFactory->createFromRequest($request);
-$token = $formProtection->generateToken('myForm');
-
-// Validate
-$isValid = $formProtection->validateToken($token, 'myForm');
-```
-
-## API Key Encryption at Rest
-
-Never store API keys in plain text. Use sodium for encryption:
-
-```php
-<?php
-declare(strict_types=1);
-
-final class ApiKeyEncryption
-{
-    public function encrypt(string $apiKey, string $key): string
-    {
-        $nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-        $encrypted = sodium_crypto_secretbox($apiKey, $nonce, $key);
-        return 'enc:' . base64_encode($nonce . $encrypted);
-    }
-
-    public function decrypt(string $encrypted, string $key): string
-    {
-        if (!str_starts_with($encrypted, 'enc:')) {
-            throw new \InvalidArgumentException('Invalid encrypted format');
-        }
-
-        $decoded = base64_decode(substr($encrypted, 4));
-        $nonce = substr($decoded, 0, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-        $ciphertext = substr($decoded, SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-
-        $decrypted = sodium_crypto_secretbox_open($ciphertext, $nonce, $key);
-        if ($decrypted === false) {
-            throw new \RuntimeException('Decryption failed');
-        }
-
-        return $decrypted;
-    }
-}
-```
-
-## Password Hashing
-
-### Modern Password Hashing
-
-```php
-// ✅ SECURE - Use password_hash with Argon2id
 $hash = password_hash($password, PASSWORD_ARGON2ID);
-
-// Verify
-if (password_verify($inputPassword, $storedHash)) {
-    // Valid password
-}
-
-// Check if rehash needed (algorithm upgrade)
-if (password_needs_rehash($storedHash, PASSWORD_ARGON2ID)) {
-    $newHash = password_hash($password, PASSWORD_ARGON2ID);
-    // Update stored hash
-}
 ```
 
-### TYPO3 Password Hashing
-
+**Secure randomness (NOT mt_rand/rand):**
 ```php
-use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
-
-$hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)
-    ->getDefaultHashInstance('BE');
-
-$hash = $hashInstance->getHashedPassword($password);
-$isValid = $hashInstance->checkPassword($password, $hash);
+$token = bin2hex(random_bytes(32));
 ```
 
-## CVSS v3.1 Scoring
+For scanning tools (semgrep, trivy, gitleaks), see `references/automated-scanning.md`.
 
-### Base Metrics
+## Security Checklist
 
-| Metric | Values |
-|--------|--------|
-| Attack Vector (AV) | Network (N), Adjacent (A), Local (L), Physical (P) |
-| Attack Complexity (AC) | Low (L), High (H) |
-| Privileges Required (PR) | None (N), Low (L), High (H) |
-| User Interaction (UI) | None (N), Required (R) |
-| Scope (S) | Unchanged (U), Changed (C) |
-| Confidentiality (C) | None (N), Low (L), High (H) |
-| Integrity (I) | None (N), Low (L), High (H) |
-| Availability (A) | None (N), Low (L), High (H) |
+- [ ] `semgrep --config auto` — no high-severity findings
+- [ ] `trivy fs --severity HIGH,CRITICAL` — no unpatched CVEs
+- [ ] `gitleaks detect` — no leaked secrets
+- [ ] bcrypt/Argon2 for passwords, CSRF tokens on state changes
+- [ ] All input validated server-side, parameterized SQL
+- [ ] XML external entities disabled (LIBXML_NONET only)
+- [ ] Context-appropriate output encoding, CSP configured
+- [ ] API keys encrypted at rest (sodium_crypto_secretbox)
+- [ ] Exception messages sanitized (no API keys, paths, or SQL in responses)
+- [ ] TLS 1.2+, secrets not in VCS, audit logging
+- [ ] No unserialize() with user input, use json_decode()
+- [ ] File uploads validated, renamed, stored outside web root
+- [ ] Security headers: HSTS, X-Content-Type-Options set
+- [ ] Dependencies scanned (composer audit), Dependabot enabled
 
-### Severity Ratings
+## GitHub Actions Security
 
-| Score | Severity |
-|-------|----------|
-| 0.0 | None |
-| 0.1 - 3.9 | Low |
-| 4.0 - 6.9 | Medium |
-| 7.0 - 8.9 | High |
-| 9.0 - 10.0 | Critical |
+- **NEVER** interpolate `${{ inputs.* }}` or `${{ github.event.* }}` in `run:` blocks — use `env:` instead
+- Dependency triage: upgrade > override > dismiss with rationale
+- See `references/gha-security.md` for patterns and examples
 
-### Example CVSS Vector
+## Verification
 
-```
-CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
-Score: 9.8 (Critical)
+```bash
+# PHP project security audit
+./scripts/security-audit.sh /path/to/project
 
-Translation:
-- Network accessible
-- Low complexity
-- No privileges required
-- No user interaction
-- Unchanged scope
-- High impact on C/I/A
-```
-
-## Security Audit Checklist
-
-### Authentication & Authorization
-- [ ] Passwords hashed with Argon2id or bcrypt
-- [ ] MFA enabled for privileged accounts
-- [ ] Session tokens regenerated on login
-- [ ] Proper logout (session destruction)
-- [ ] Role-based access control (RBAC)
-
-### Input Validation
-- [ ] All input validated server-side
-- [ ] Parameterized SQL queries (no interpolation)
-- [ ] XML external entities disabled
-- [ ] File uploads restricted (type, size, location)
-
-### Output Encoding
-- [ ] Context-appropriate encoding (HTML, JS, URL)
-- [ ] Content Security Policy configured
-- [ ] X-Content-Type-Options: nosniff
-- [ ] X-Frame-Options: DENY or SAMEORIGIN
-
-### Secrets Management
-- [ ] API keys encrypted at rest
-- [ ] Secrets not in version control
-- [ ] Environment variables for config
-- [ ] Key rotation policy
-
-### Transport Security
-- [ ] TLS 1.2+ enforced
-- [ ] HSTS header set
-- [ ] Certificate validity monitored
-
-### Logging & Monitoring
-- [ ] Authentication events logged
-- [ ] Failed login attempts tracked
-- [ ] Sensitive data not logged
-- [ ] Audit trail for privileged actions
-
-## Secure Configuration (TYPO3)
-
-```php
-// config/system/settings.php
-return [
-    'BE' => [
-        'debug' => false,
-        'lockIP' => 4,
-        'lockSSL' => true,
-    ],
-    'FE' => [
-        'debug' => false,
-        'lockSSL' => true,
-    ],
-    'SYS' => [
-        'displayErrors' => 0,
-        'devIPmask' => '',
-        'trustedHostsPattern' => 'example\\.com|www\\.example\\.com',
-        'features' => [
-            'security.backend.enforceReferrer' => true,
-            'security.frontend.enforceContentSecurityPolicy' => true,
-        ],
-    ],
-];
+# GitHub repository security audit
+./scripts/github-security-audit.sh owner/repo
 ```
 
 ---
 
-## Related Skills
-
-- [security-incident-reporting](../security-incident-reporting/SKILL.md) - Post-incident documentation, NIST/SANS frameworks, DDoS post-mortem, CVE correlation
-- [typo3-security](../typo3-security/SKILL.md) - TYPO3-specific hardening and configuration
+> **Contributing:** https://github.com/netresearch/security-audit-skill
 
 ---
 
@@ -354,4 +118,6 @@ This skill is based on the excellent work by
 Original repository: https://github.com/netresearch/security-audit-skill
 
 **Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
+
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

@@ -1,328 +1,86 @@
 ---
 name: typo3-core-contributions
-description: >-
-  TYPO3 Core contribution workflow. Use when working with Forge issues, submitting patches
-  to Gerrit, or contributing docs.
-compatibility: TYPO3 14.x
-metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+description: "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution."
 ---
 
-# TYPO3 Core Contributions Skill
+# TYPO3 Core Contributions
 
-Guide for TYPO3 Core contribution workflow from account setup to patch submission.
-
-> **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
+Guide for contributing to TYPO3 Core: Forge issues, Gerrit patches, CI debugging, and review workflows.
 
 ## When to Use
 
-- Forge issue URLs (e.g., `https://forge.typo3.org/issues/105737`)
-- Contributing patches, fixing TYPO3 bugs
-- Gerrit review workflow, rebasing, CI failures
+- Forge issue analysis or creation (`forge.typo3.org/issues/*`)
+- Patch submission, CI debugging, Gerrit review workflow
+- Commit message formatting, cherry-picks, rebasing
 
 ## Prerequisites
 
-Before contributing, ensure you have:
+Run `${CLAUDE_SKILL_DIR}/scripts/verify-prerequisites.sh` to check: TYPO3.org account, Gerrit SSH (`ssh -p 29418 <user>@review.typo3.org`), Git email matching Gerrit. See `references/account-setup.md`.
 
-1. **TYPO3.org Account**: Register at https://my.typo3.org/
-2. **Gerrit SSH Key**: Upload to https://review.typo3.org/settings/#SSHKeys
-3. **Git Config**: Email must match your Gerrit account
+## Workflow
 
-```bash
-# Verify git config
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
+1. **Setup**: Account + environment (`${CLAUDE_SKILL_DIR}/scripts/setup-typo3-coredev.sh`, `references/ddev-setup-workflow.md`)
+2. **Branch**: `git checkout -b feature/<issue>-description`
+3. **Analyze**: Understand root cause, reproduction steps, affected versions before coding
+4. **Develop**: Implement fix + tests, validate with typo3-conformance-skill
+5. **Commit**: Follow format below, include `Resolves: #<issue>` + `Releases:`
+6. **Push**: `git push origin HEAD:refs/for/main` (starts as WIP)
+7. **CI**: Wait for all jobs. Read actual GitLab logs at `git.typo3.org/typo3/CI/cms/-/jobs/<id>`. Fix ALL failures in one amend+push
+8. **Ready**: Mark ready via `git push origin HEAD:refs/for/main%ready` or Gerrit UI "Start Review"
+9. **Review**: Address feedback, amend commit, preserve Change-Id. Fetch reviewer's patchset first to preserve their message edits: `git fetch origin refs/changes/XX/NNNNN/N && git reset --soft FETCH_HEAD`
+10. **Update**: `git commit --amend && git push origin HEAD:refs/for/main`
 
-# See "Clone TYPO3 Core" below for Gerrit remote setup
-```
-
-## Environment Setup
-
-### Clone TYPO3 Core
-
-**Recommended:** use the SSH clone method from the public GitHub mirror, then configure Gerrit as the **push** target (see the [official Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for current URLs).
-
-```bash
-git clone git@github.com:typo3/typo3.git typo3
-cd typo3
-git config branch.autosetuprebase remote
-# Official guide: configure origin's push URL and refspec to Gerrit:
-git config remote.origin.pushurl "ssh://<username>@review.typo3.org:29418/Packages/TYPO3.CMS.git"
-git config remote.origin.push +refs/heads/main:refs/for/main
-```
-
-From the Core root directory, set **`COMPOSER_ROOT_VERSION`** **before** `composer install` (required for a correct checkout), e.g. `export COMPOSER_ROOT_VERSION=14.0.x-dev` — see the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the value matching your branch, then run `composer install`.
-
-### Install Commit Hook (Change-Id)
-
-Prefer Core’s documented methods — for example:
-
-```bash
-# After composer install in the Core clone:
-composer gerrit:setup
-# or copy the hook from the repository:
-cp Build/git-hooks/commit-msg .git/hooks/commit-msg
-chmod +x .git/hooks/commit-msg
-```
-
-Avoid relying on `scp` from Gerrit unless you are following an explicit, up-to-date snippet from the guide.
-
-## Contribution Workflow
-
-### 1. Find or Create Issue
-
-- Check existing issues: https://forge.typo3.org/projects/typo3cms-core/issues
-- Create new issue if needed with detailed description
-
-### 2. Create Feature Branch
-
-```bash
-# Update main branch
-git checkout main
-git pull origin main
-
-# Create feature branch
-git checkout -b feature/105737-fix-cache-issue
-```
-
-### 3. Implement Changes
-
-- Follow TYPO3 coding guidelines
-- Write tests (unit, functional)
-- Update documentation if needed
-
-### 4. Commit with Proper Format
-
-```bash
-git add .
-git commit
-```
-
-**Commit Message Format:**
+## Commit Format
 
 ```
-[TYPE] Subject line (imperative; aim ~52 chars, **hard max 72**)
+[TYPE] Subject (imperative mood, max 52 chars)
 
-Description explaining how and why the change was made.
-Can be multiple paragraphs.
+How and why (not what). Wrap at 72 chars.
 
 Resolves: #12345
-Releases: main
+Releases: main, 13.4, 12.4
 ```
 
-### 5. Push to Gerrit
+**Types**: `[BUGFIX]`, `[FEATURE]` (main only), `[TASK]`, `[DOCS]`, `[SECURITY]`
+**Breaking**: `[!!!][TYPE]` prefix, `Releases: main` only
+**Required**: Every commit MUST have `Resolves:` (not just `Related:`)
 
-The [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) documents configuring **`origin`** with a separate **push** URL to Gerrit (`git config remote.origin.pushurl …`), so you push with `git push origin HEAD:refs/for/main`. This is the setup shown in Section "Clone TYPO3 Core" above.
+## CI Debugging
+
+Read ALL failing job logs (never guess). Common jobs: `cgl pre-merge` (code style), `phpstan` (static analysis), `unit`/`functional` (tests). Fix all in one patchset. Local checks:
 
 ```bash
-# Push for review (using origin with Gerrit push URL)
-git push origin HEAD:refs/for/main
+./Build/Scripts/runTests.sh -s unit && ./Build/Scripts/runTests.sh -s functional
+./Build/Scripts/cglFixMyCommit.sh
+./Build/Scripts/runTests.sh -s phpstan
 ```
 
-## Commit Message Format
+## Key Operations
 
-### Types
-
-| Type | Description |
-|------|-------------|
-| `[BUGFIX]` | Bug fix |
-| `[FEATURE]` | New feature |
-| `[TASK]` | Refactoring, cleanup, maintenance |
-| `[DOCS]` | Documentation only |
-
-### Flags (combine with a primary type)
-
-| Flag | Meaning |
+| Task | Command |
 |------|---------|
-| `[SECURITY]` | Security flag used **standalone or combined** with another type, e.g. `[SECURITY] Escape record title` or `[SECURITY][BUGFIX] Fix XSS in form engine` (follow Security Team process) |
-| `[!!!]` | Breaking change prefix (e.g., `[!!!][TASK]`) |
+| Push to Gerrit | `git push origin HEAD:refs/for/main` |
+| Mark ready | `git push origin HEAD:refs/for/main%ready` |
+| Set WIP | `git push origin HEAD:refs/for/main%wip` |
+| Rebase | `git fetch origin && git rebase origin/main` |
+| Cherry-pick patch | `git fetch origin refs/changes/XX/NNNNN/N && git cherry-pick FETCH_HEAD` |
+| Install hook | `cp Build/git-hooks/commit-msg .git/hooks/ && chmod +x .git/hooks/commit-msg` |
+| Fix email mismatch | `GIT_COMMITTER_EMAIL="registered@email" git commit --amend --no-edit` |
+| Forge API | `${CLAUDE_SKILL_DIR}/scripts/create-forge-issue.sh`, `references/forge-api.md` |
 
-### Commit Message Trailers
+## References
 
-```
-Resolves: #12345
-Releases: main
-```
-
-- `Resolves:` - Required Forge issue reference
-- `Related:` - Optional extra Forge issue reference; do not use it on its own
-- `Releases:` - Optional target branches when you explicitly record where the patch should land (for example `main`, or `main, 13.4` for planned backports)
-- **`Change-Id:`** — Gerrit requires this trailer on every commit; it is added by the **commit-msg** hook (`composer gerrit:setup` or `cp Build/git-hooks/commit-msg …`). Without it, `git push` to Gerrit is rejected.
-
-### Example Commit Messages
-
-**Bug Fix:**
-```
-[BUGFIX] Fix cache invalidation for page translations
-
-The cache was not properly invalidated when updating
-translated page properties. This patch ensures the
-cache is cleared for all language variants.
-
-Resolves: #105737
-Releases: main
-```
-
-**Breaking Change (illustrative — match the real changelog entry):**
-```
-[!!!][TASK] Remove deprecated XYZ API
-
-Describe the actual breaking change and the supported
-replacement (Core event, new service API, etc.).
-
-DataHandler datamap/cmdmap reactions often remain on
-`SC_OPTIONS` hook classes unless a documented Core event exists.
-
-Resolves: #98765
-Releases: main
-```
-
-## Gerrit Workflow
-
-### Update Existing Patch
-
-When changes are requested:
-
-```bash
-# Make changes
-# ...
-
-# Amend commit (keep same Change-Id!)
-git add .
-git commit --amend
-
-# Push again
-git push origin HEAD:refs/for/main
-```
-
-### Rebase on Latest Main
-
-```bash
-# Fetch latest
-git fetch origin main
-
-# Rebase
-git rebase origin/main
-
-# Force push (allowed for your own patches)
-git push origin HEAD:refs/for/main --force
-```
-
-### Backporting to a Stable Branch
-
-After the patch is merged on `main`, backports follow **Forge + Gerrit** rules for the target branch (e.g. `13.4`, next patch-level branch). Typical flow:
-
-```bash
-git fetch origin
-git checkout <target-branch>   # e.g. stable branch named in the issue
-git pull origin <target-branch>
-
-# Prefer the exact cherry-pick command from Gerrit’s patch “Download” menu when copying a single revision
-git cherry-pick -x <merge-commit-on-main>
-
-# Push for review on THAT branch (not main)
-git push origin HEAD:refs/for/<target-branch>
-```
-
-Use `origin`, with its Gerrit push URL configured as shown above. See the [Contribution Guide](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/) for the exact branch naming policy.
-
-## Code Review
-
-### Review States
-
-| Vote | Meaning |
-|------|---------|
-| +2 | **Core Merger** approval — ready to merge into the target branch |
-| +1 | You approve of the patch (non-binding for merge) |
-| 0 | Comment only |
-| -1 | You do not approve / request changes |
-| -2 | **Core Merger** veto — do not merge (serious issues) |
-
-**+2 / −2** are only available to Core Mergers; regular contributors use +1 / −1 / 0.
-
-### CI Requirements
-
-All patches must pass:
-- [ ] Coding standards (PHP-CS-Fixer)
-- [ ] PHPStan at the level enforced by Core CI for your branch (verify the **actual** config path in your checkout — it may move between releases)
-- [ ] Unit tests
-- [ ] Functional tests
-- [ ] Acceptance tests (if applicable)
-
-## Troubleshooting
-
-### Push Rejected
-
-```bash
-# Missing Change-Id — reinstall the hook (see "Install Commit Hook" above), then:
-git commit --amend
-```
-
-### Merge Conflicts
-
-```bash
-# Rebase on latest
-git fetch origin main
-git rebase origin/main
-
-# Resolve conflicts
-# Edit conflicting files
-git add .
-git rebase --continue
-
-# Push updated patch
-git push origin HEAD:refs/for/main --force
-```
-
-### CI Failures
-
-1. Check CI output at review.typo3.org
-2. Run tests locally:
-
-```bash
-# Run specific test suite (official Core helper)
-Build/Scripts/runTests.sh -s unit
-Build/Scripts/runTests.sh -s functional
-
-# Run PHP-CS-Fixer (only files in latest commit — practical for contributors)
-Build/Scripts/runTests.sh -s cglGit
-# Or check ALL Core files with: Build/Scripts/runTests.sh -s cgl
-```
-
-## Related Skills
-
-- **typo3-ddev**: Local development environment
-- **typo3-testing**: Writing tests for patches
-- **typo3-conformance**: Code quality validation
-
-## Resources
-
-- **Gerrit**: https://review.typo3.org/
-- **Forge**: https://forge.typo3.org/
-- **Contribution Guide**: https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/
-- **Git Setup**: https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/Setup/Git/
-
-## v14-Only Contribution Notes
-
-> The following notes are relevant when contributing to **TYPO3 v14 (main branch)**.
-
-### v14 Branch and Feature Freeze **[v14 only]**
-
-- v14 development targets the `main` branch.
-- Feature freeze for v14 is **March 31, 2026**. After this date, only bug fixes are accepted.
-- v14.3 LTS release planned for **April 21, 2026**.
-- Patches for v14-specific features should target `main`.
-- Bug fixes should be applied to the oldest affected branch and cherry-picked forward.
-
-### Key v14 API Changes for Patches **[v14 only]**
-
-When writing Core patches for v14, be aware of:
-- **`$GLOBALS['TSFE']`:** direct global access was removed (see changelog). Prefer request attributes / PSR-7; `TypoScriptFrontendController` may still exist internally while APIs migrate — verify current Core for your branch.
-- **`$GLOBALS['TCA']`:** loading base TCA from `$GLOBALS['TCA']` inside static TCA files was restricted; **`Configuration/TCA/Overrides/*.php` and runtime adjustments via documented APIs remain the normal place** for extension TCA changes. Do not confuse “no hacks in base TCA files” with “TCA is immutable everywhere.”
-- Fluid 5.0 with strict typing.
-- Backend modals use native `<dialog>` instead of Bootstrap Modal.
-- Symfony Translation Component replaces custom localization parsers.
+| Topic | File |
+|-------|------|
+| Account setup | `references/account-setup.md` |
+| Commit format | `references/commit-message-format.md` |
+| Gerrit workflow | `references/gerrit-workflow.md` |
+| Review patterns | `references/gerrit-review-patterns.md` |
+| Modern patterns | `references/modern-typo3-patterns.md` |
+| DDEV setup | `references/ddev-setup-workflow.md` |
+| Forge API | `references/forge-api.md` |
+| Commit hook | `references/commit-msg-hook.md` |
+| Troubleshooting | `references/troubleshooting.md` |
 
 ---
 
@@ -334,4 +92,6 @@ This skill is based on the excellent work by
 Original repository: https://github.com/netresearch/typo3-core-contributions-skill
 
 **Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
+
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

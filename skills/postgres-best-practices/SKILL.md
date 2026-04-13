@@ -63,4 +63,14 @@ Each rule file contains:
 - https://supabase.com/docs/guides/database/overview
 - https://supabase.com/docs/guides/auth/row-level-security
 
-Adapted from [Supabase](https://github.com/supabase/agent-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Supabase](https://github.com/supabase/agent-skills)**.
+
+Original repository: https://github.com/supabase/agent-skills
+
+Special thanks to [Supabase](https://github.com/supabase/agent-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

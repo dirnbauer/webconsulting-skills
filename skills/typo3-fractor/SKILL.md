@@ -495,4 +495,3 @@ For Fractor resource links and TYPO3 v14-specific migration notes, see [referenc
 Thanks to [Andreas Wolf](https://github.com/andreaswolf) for creating and maintaining Fractor.
 
 Source: https://github.com/dirnbauer/webconsulting-skills
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

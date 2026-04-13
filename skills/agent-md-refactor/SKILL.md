@@ -286,4 +286,14 @@ After refactoring, verify:
 
 ---
 
-Adapted from [Softaworks](https://github.com/softaworks/agent-toolkit).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Softaworks](https://github.com/softaworks/agent-toolkit)**.
+
+Original repository: https://github.com/softaworks/agent-toolkit
+
+Special thanks to [Softaworks](https://github.com/softaworks/agent-toolkit) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

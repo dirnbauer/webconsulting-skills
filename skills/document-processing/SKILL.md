@@ -641,12 +641,10 @@ sudo apt-get install poppler-utils qpdf libreoffice pandoc
 
 ## Credits & Attribution
 
-This skill is adapted from **[Anthropic's Skills](https://github.com/anthropics/skills)**.
+This skill is based on the excellent work by
+**[Anthropic](https://github.com/anthropics/skills/tree/main/skills/document-processing)**.
 
 Original repository: https://github.com/anthropics/skills/tree/main/skills/document-processing
 
-**Copyright (c) Anthropic** — The document processing skills (pdf, docx, pptx, xlsx) are
-**source-available** (not open source). See Anthropic's README for terms.
+Special thanks to [Anthropic](https://github.com/anthropics/skills/tree/main/skills/document-processing) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection
-
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

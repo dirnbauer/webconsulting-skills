@@ -1,11 +1,16 @@
 ---
 name: context7
-description: >-
-  Fetch up-to-date library documentation via Context7 REST API. Use when needing current
-  API docs, framework patterns, or code examples for any library.
+description: "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.). Fetches current docs via Context7 REST API. Triggers on: how to use library, API docs, framework pattern, import usage, library example."
+license: "(MIT AND CC-BY-SA-4.0)"
+compatibility: "Requires curl or fetch, jq."
 metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+  version: "1.4.0"
+  repository: "https://github.com/netresearch/context7-skill"
+  author: "Netresearch DTT GmbH"
+allowed-tools:
+  - "Bash(curl:*)"
+  - "Bash(jq:*)"
+  - "Read"
 ---
 
 # Context7 Documentation Lookup Skill
@@ -14,148 +19,82 @@ Fetch current library documentation, API references, and code examples via the C
 
 ## When to Use
 
-Activate this skill when:
-- User asks about library APIs or framework patterns
-- Import statements suggest documentation needs: `import`, `require`, `from`
-- Questions about specific library versions or migration
-- Need for official documentation patterns vs generic solutions
-- "How do I use X library?", "What's the API for Y?"
+Use this skill when the user asks about library APIs, framework patterns, or version-specific behavior. Trigger on:
 
-## Workflow
+- Library questions: "How do I use [library]?", "[library] API docs", "[library] patterns"
+- Import statements: `import`, `require`, `from` followed by a library name
+- Framework-specific topics: hooks, routing, middleware, ORM queries, schema definitions
 
-### Step 1: Search for Library ID
+## When NOT to Use
 
-Always search first to get the correct library ID:
+Do NOT use this skill for:
 
-```bash
-curl -s "https://context7.com/api/v1/search?q=library-name" | jq
-```
+- General programming concepts (closures, recursion, design patterns)
+- Code review or refactoring tasks
+- Debugging business logic
+- Writing scripts from scratch without library-specific questions
 
-Example output shows library IDs you can use:
+## Core Workflow
 
-```json
-{
-  "id": "/facebook/react",
-  "name": "React",
-  "snippets": 2135,
-  "score": 79.4
-}
-```
+1. **Search** for the library ID:
+   ```bash
+   scripts/context7.sh search "library-name"
+   ```
 
-### Step 2: Fetch Documentation
+2. **Pick the best result**: Choose the ID with the highest score and most relevant description. Prefer official sources (e.g., `/vercel/next.js` over community forks).
 
-```bash
-curl -s "https://context7.com/api/v1/docs?library=<library-id>&topic=<topic>&mode=<mode>" | jq
-```
+3. **Fetch documentation** with a focused topic:
+   ```bash
+   scripts/context7.sh docs "<library-id>" "<topic>" "<mode>"
+   ```
 
-**Parameters:**
-- `library`: Library ID from search results (e.g., `/facebook/react`)
-- `topic`: Optional focus area (e.g., `hooks`, `routing`)
-- `mode`: `code` (default) for API/examples, `info` for guides
+Always extract a specific topic from the user's question. For "How does React Suspense work with server components?", use topic `suspense server components`.
 
-**Examples:**
+## Parameters
 
-```bash
-# Get React hooks documentation
-curl -s "https://context7.com/api/v1/docs?library=/facebook/react&topic=hooks" | jq
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `library-id` | Yes | From search results, format `/vendor/library` |
+| `topic` | No | Focus area extracted from user query (e.g., `hooks`, `routing`, `validation`) |
+| `mode` | No | `code` (default) for API references; `info` for conceptual guides |
 
-# Get Next.js routing docs
-curl -s "https://context7.com/api/v1/docs?library=/vercel/next.js&topic=routing" | jq
+## Mode Selection
 
-# Get conceptual guide (info mode)
-curl -s "https://context7.com/api/v1/docs?library=/vercel/next.js&topic=app%20router&mode=info" | jq
-```
+Use `code` mode (default) when the user asks for API references, code examples, or implementation patterns.
 
-### Step 3: Apply to User's Question
+Use `info` mode when the user asks for conceptual explanations, architecture guides, or migration tutorials.
 
-Use the returned documentation to:
-1. Provide accurate, version-specific answers
-2. Show official code patterns and examples
-3. Reference correct API signatures
-4. Include relevant caveats or deprecations
-
-## Common Library IDs
-
-| Library | ID |
-|---------|-----|
-| React | `/facebook/react` |
-| Next.js | `/vercel/next.js` |
-| Vue.js | `/vuejs/vue` |
-| Prisma | `/prisma/prisma` |
-| Laravel | `/laravel/laravel` |
-| Symfony | `/symfony/symfony` |
-| TYPO3 | `/typo3/typo3` |
-| Tailwind CSS | `/tailwindlabs/tailwindcss` |
-| TypeScript | `/microsoft/typescript` |
-
-## Documentation Modes
-
-| Mode | Use For |
-|------|---------|
-| `code` | API references, code examples, function signatures (default) |
-| `info` | Conceptual guides, tutorials, architecture docs |
-
-## Example Workflow
+## Examples
 
 ```bash
-# User asks: "How do I use React hooks?"
+# React hooks API
+scripts/context7.sh search "react"
+scripts/context7.sh docs "/facebook/react" "hooks" "code"
 
-# Step 1: Search for React
-curl -s "https://context7.com/api/v1/search?q=react" | jq '.results[0]'
-# Output shows: id: /facebook/react
+# Next.js App Router conceptual guide
+scripts/context7.sh search "nextjs"
+scripts/context7.sh docs "/vercel/next.js" "app router" "info"
 
-# Step 2: Fetch hooks docs
-curl -s "https://context7.com/api/v1/docs?library=/facebook/react&topic=hooks" | jq
+# Django ORM queries
+scripts/context7.sh search "django"
+scripts/context7.sh docs "/django/django" "queryset filter" "code"
 
-# Step 3: Use the returned documentation to answer
+# Laravel Eloquent relationships
+scripts/context7.sh search "laravel"
+scripts/context7.sh docs "/laravel/framework" "eloquent relationships" "code"
 ```
 
-## TYPO3 Documentation Lookup
+## Environment Configuration
 
-For TYPO3-specific documentation:
+Set `CONTEXT7_API_KEY` for higher rate limits (optional):
 
 ```bash
-# Search for TYPO3
-curl -s "https://context7.com/api/v1/search?q=typo3" | jq
-
-# Get DataHandler docs
-curl -s "https://context7.com/api/v1/docs?library=/typo3/typo3&topic=DataHandler" | jq
-
-# Get Fluid ViewHelper docs
-curl -s "https://context7.com/api/v1/docs?library=/typo3/typo3&topic=ViewHelper" | jq
+export CONTEXT7_API_KEY="your-api-key"
 ```
 
-## Error Handling
+---
 
-If requests fail:
-1. Verify `jq` and `curl` are installed
-2. Check the library ID format (`/org/project`)
-3. Try a broader topic or no topic filter
-4. Try `info` mode if `code` returns nothing
-5. Check network connectivity
-
-## MCP Alternative
-
-If you have the Context7 MCP server configured, you can use it directly:
-
-```json
-{
-  "mcpServers": {
-    "context7": {
-      "command": "npx",
-      "args": ["-y", "@context7/mcp-server"]
-    }
-  }
-}
-```
-
-## Notes
-
-- **No persistent context overhead**: Uses REST API directly
-- **API key optional**: Works without key, but rate-limited
-- **Topic filtering**: Use specific topics for focused results
-- **Search first**: Always search to find the correct library ID
-- **Fresh data**: Results are not cached; each call fetches fresh data
+> **Contributing:** https://github.com/netresearch/context7-skill
 
 ---
 
@@ -167,4 +106,6 @@ This skill is based on the excellent work by
 Original repository: https://github.com/netresearch/context7-skill
 
 **Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
+
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

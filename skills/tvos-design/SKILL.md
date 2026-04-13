@@ -378,4 +378,14 @@ Use this checklist when reviewing a tvOS app design or implementation.
 | Long forms | Keyboard input is painful on tvOS | Pre-fill, use profiles, or offload to iPhone |
 | Thin/light typography | Disappears on TV displays | Medium weight minimum |
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

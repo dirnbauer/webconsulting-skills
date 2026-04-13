@@ -195,6 +195,21 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
         TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
         jq --arg ts "$TIMESTAMP" '.lastSync = $ts' "$SCRIPT_DIR/.sync-config.json" > "$SCRIPT_DIR/.sync-config.json.tmp"
         mv "$SCRIPT_DIR/.sync-config.json.tmp" "$SCRIPT_DIR/.sync-config.json"
+
+        if command -v python3 &> /dev/null; then
+            echo ""
+            echo "→ Restoring source attribution blocks..."
+            python3 "$SCRIPT_DIR/scripts/sync_source_notes.py"
+            echo "→ Validating attribution guardrails..."
+            python3 "$SCRIPT_DIR/scripts/check_attribution_guardrails.py"
+        else
+            echo ""
+            echo "→ python3 not installed, skipping attribution restoration and validation"
+        fi
+    else
+        echo ""
+        echo "  [DRY-RUN] Would run: python3 scripts/sync_source_notes.py"
+        echo "  [DRY-RUN] Would run: python3 scripts/check_attribution_guardrails.py"
     fi
 else
     echo "→ No .sync-config.json found, skipping external sync"

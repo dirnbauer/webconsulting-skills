@@ -310,4 +310,14 @@ Consult these files for detailed patterns and code examples:
 - **[references/nextjs-integration.md](references/nextjs-integration.md)** — App Router, Server/Client Components, dark mode, metadata
 - **[references/customization.md](references/customization.md)** — Custom variants, CSS variables, cn() utility, extending components
 
-Adapted from [Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio/developer-kit).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio/developer-kit)**.
+
+Original repository: https://github.com/giuseppe-trisciuoglio/developer-kit
+
+Special thanks to [Giuseppe Trisciuoglio](https://github.com/giuseppe-trisciuoglio/developer-kit) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

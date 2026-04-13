@@ -2070,7 +2070,7 @@ grep -r "DataHandler" skills/
 | `typo3-security` | Security hardening checklist | webconsulting |
 | `typo3-seo` | SEO configuration with EXT:seo | webconsulting |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | webconsulting |
-| `typo3-simplify` | Simplify TYPO3 code for clarity and maintainability | webconsulting |
+| `typo3-simplify` | Simplify TYPO3 code for clarity and maintainability | Anthropic |
 | `typo3-batch` | Batch operations for large-scale TYPO3 migrations | webconsulting |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
@@ -2299,8 +2299,8 @@ The `sync-skills.yml` workflow runs weekly (Mondays 06:00 UTC) and can be trigge
 
 The repository also enforces upstream attribution guardrails in CI via
 `scripts/check_attribution_guardrails.py` and `.github/workflows/attribution-guardrails.yml`.
-That check fails if a Netresearch-derived skill loses its `Credits & Attribution` block, or if any
-upstream-derived skill loses its source link, or if the README stops naming upstream sources and
+That check fails if an upstream-derived skill loses its `Credits & Attribution` block or thank-you
+message, or if the README stops naming upstream sources and
 their original repositories explicitly.
 
 **Required repo setting:** Go to **Settings > Actions > General > Workflow permissions** and enable **"Allow GitHub Actions to create and approve pull requests"** for the workflow to create PRs automatically.
@@ -2381,9 +2381,10 @@ The following repositories are the source for skills in this collection:
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
 2. Follow the SKILL.md format (see existing skills)
-3. If the skill is adapted from an upstream source, add explicit attribution in `SKILL.md`
-   using `Adapted from [Owner](URL).` or `Original repository: URL`
-4. Keep the full Netresearch `Credits & Attribution` block for Netresearch-derived skills
+3. If the skill is adapted from an upstream source, add a full `Credits & Attribution`
+   block in `SKILL.md` with the upstream owner, original repository, thank-you message,
+   and `Adapted by webconsulting.at for this skill collection`
+4. Keep the Netresearch-specific thank-you wording for Netresearch-derived skills
 5. Run `python3 scripts/check_attribution_guardrails.py` and `./install.sh` to test
 6. Submit a pull request
 

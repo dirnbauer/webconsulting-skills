@@ -219,12 +219,10 @@ Use variety: stories, social proof, comparisons, use cases, FAQs.
 
 ## Credits & Attribution
 
-This skill collection is adapted from the excellent marketing skills by
-**[Corey Haines](https://coreyhaines.com/)**.
+This skill is based on the excellent work by
+**[Corey Haines](https://github.com/coreyhaines31/marketingskills)**.
 
 Original repository: https://github.com/coreyhaines31/marketingskills
 
-**Copyright (c) Corey Haines** - Marketing frameworks and best practices
-See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
-
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
+Special thanks to [Corey Haines](https://github.com/coreyhaines31/marketingskills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

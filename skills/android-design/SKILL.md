@@ -1050,4 +1050,14 @@ Use this checklist to evaluate Android UI implementations:
 | Blocking UI on permission denial | Punishes the user | Graceful degradation |
 | Manual color palette selection | Inconsistent tonal relationships | Use Material Theme Builder |
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

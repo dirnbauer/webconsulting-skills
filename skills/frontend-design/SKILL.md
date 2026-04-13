@@ -41,4 +41,14 @@ Interpret creatively and make unexpected choices that feel genuinely designed fo
 
 Remember: Claude is capable of extraordinary creative work. Don't hold back, show what can truly be created when thinking outside the box and committing fully to a distinctive vision.
 
-Adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design)**.
+
+Original repository: https://github.com/anthropics/skills/tree/main/skills/frontend-design
+
+Special thanks to [Anthropic](https://github.com/anthropics/skills/tree/main/skills/frontend-design) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

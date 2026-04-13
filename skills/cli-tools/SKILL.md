@@ -1,247 +1,91 @@
 ---
 name: cli-tools
-description: >-
-  CLI tool management and auto-installation. Use when commands fail with 'command not
-  found', installing tools, or checking project environments.
+description: "Use when ANY command fails with 'command not found', when installing CLI tools (ripgrep, fd, jq, yq, bat, etc.), auditing project environments, or batch-updating tools. Triggers on: command not found, install tool, missing binary, environment audit, update tools, which, apt install, brew install."
+license: "(MIT AND CC-BY-SA-4.0)"
+compatibility: "Requires bash, common package managers."
 metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+  version: "1.6.0"
+  repository: "https://github.com/netresearch/cli-tools-skill"
+  author: "Netresearch DTT GmbH"
+allowed-tools:
+  - "Bash(apt:*)"
+  - "Bash(brew:*)"
+  - "Bash(npm:*)"
+  - "Bash(pip:*)"
+  - "Read"
+  - "Write"
 ---
 
 # CLI Tools Skill
 
-Manage CLI tool installation, environment auditing, and updates.
-
-## Capabilities
-
-1. **Reactive**: Auto-install missing tools on "command not found"
-2. **Proactive**: Audit project dependencies and tool versions
-3. **Maintenance**: Batch update all managed tools
+Install, audit, update, and recommend CLI tools across 74 cataloged entries.
 
 ## Triggers
 
-**Reactive** (auto-install):
-```
-bash: <tool>: command not found
-zsh: command not found: <tool>
-```
+- **Reactive**: `command not found` errors -- auto-resolve
+- **Proactive**: "check environment", "install X", "update tools"
+- **Advisory**: Recommend modern alternatives (`grep`->`rg`, `find`->`fd`, JSON->`jq`)
 
-**Proactive** (audit): "check environment", "what's missing", "update tools"
+## Preferred Modern Tools
 
-## Binary to Tool Mapping
+Recommend over legacy equivalents. See `references/preferred-tools.md` for examples.
 
-Common binary names that differ from package names:
+| Legacy | Modern | Legacy | Modern |
+|--------|--------|--------|--------|
+| `grep -r` | `rg` | `diff` | `difft` |
+| `find` | `fd` | `time` | `hyperfine` |
+| grep on JSON | `jq` | `cat` | `bat` |
+| sed on YAML | `yq` | `cloc` | `tokei`/`scc` |
+| awk on CSV | `qsv` | grep for sec | `semgrep` |
+| sed on TOML | `dasel` | | |
 
-| Binary | Package (Homebrew) | Package (apt) |
-|--------|-------------------|---------------|
-| `rg` | `ripgrep` | `ripgrep` |
-| `fd` | `fd` | `fd-find` |
-| `bat` | `bat` | `bat` |
-| `delta` | `git-delta` | N/A |
-| `exa` / `eza` | `eza` | `eza` |
-| `fzf` | `fzf` | `fzf` |
-| `ag` | `the_silver_searcher` | `silversearcher-ag` |
-| `http` | `httpie` | `httpie` |
-| `jq` | `jq` | `jq` |
-| `yq` | `yq` | N/A |
-| `gh` | `gh` | `gh` |
-| `glab` | `glab` | N/A |
+## Workflows
 
-## Installation Commands
+### Missing Tool Resolution
 
-### macOS (Homebrew)
+1. **Diagnose**: `which <tool>`, `command -v <tool>`, `type -a <tool>`
+2. **Map binary**: Check `references/binary_to_tool_map.md` (`rg`->`ripgrep`, `ansible`->`ansible-core`, `batcat`->`bat`)
+3. **Install**: `scripts/install_tool.sh <tool> install`
+4. **Verify**: `which <tool>` + `<tool> --version`; if still missing: `hash -r`, check PATH
 
-```bash
-# Install single tool
-brew install <package>
+See `references/resolution-workflow.md` for full diagnostic steps.
 
-# Install multiple tools
-brew install ripgrep fd bat eza fzf jq gh
+### Environment Audit
 
-# Update all tools
-brew update && brew upgrade
-```
+Run `scripts/check_environment.sh audit .` and `scripts/detect_project_type.sh`, then cross-reference with `references/project_type_requirements.md` for per-type tool lists.
 
-### Linux (apt)
+### Batch Update
 
-```bash
-# Install single tool
-sudo apt install <package>
+`scripts/auto_update.sh` (all managers) or `scripts/install_tool.sh <tool> update` (single).
 
-# Install multiple tools
-sudo apt install ripgrep fd-find bat fzf jq
+## Troubleshooting
 
-# Update all tools
-sudo apt update && sudo apt upgrade
-```
+| Symptom | Fix |
+|---------|-----|
+| Installed but not found | `hash -r` or add dir to PATH |
+| No sudo | `cargo install`, `pip install --user`, manual binary |
+| Debian `bat`=`batcat`, `fd`=`fdfind` | Symlink to `~/.local/bin/` |
 
-### PHP Tools (Composer)
+See `references/troubleshooting.md` for Docker fallbacks and permission workarounds.
 
-```bash
-# Global PHP tools
-composer global require phpstan/phpstan
-composer global require friendsofphp/php-cs-fixer
-composer global require rector/rector
+## Scripts
 
-# Project-specific
-composer require --dev phpstan/phpstan
-composer require --dev friendsofphp/php-cs-fixer
-```
+| Script | Purpose |
+|--------|---------|
+| `scripts/install_tool.sh` | Install/update/uninstall/status |
+| `scripts/auto_update.sh` | Batch update package managers |
+| `scripts/check_environment.sh` | Audit environment and PATH |
+| `scripts/detect_project_type.sh` | Detect project type |
 
-### Node.js Tools (npm)
+## References
 
-```bash
-# Global Node tools
-npm install -g prettier eslint typescript
-
-# Project-specific
-npm install --save-dev prettier eslint typescript
-```
-
-## Project Type Detection
-
-### PHP Project
-Indicators: `composer.json`, `vendor/`, `*.php`
-
-Required tools:
-- `php` - PHP interpreter
-- `composer` - Dependency manager
-- `phpstan` - Static analysis
-- `php-cs-fixer` - Code style
-
-### TYPO3 Project
-Indicators: `composer.json` with `typo3/cms-core`, `public/typo3/`
-
-Required tools:
-- All PHP tools
-- `ddev` - Local development
-- `typo3` - TYPO3 CLI
-
-### Node.js Project
-Indicators: `package.json`, `node_modules/`
-
-Required tools:
-- `node` - Node.js runtime
-- `npm` / `pnpm` / `yarn` - Package manager
-
-### Go Project
-Indicators: `go.mod`, `*.go`
-
-Required tools:
-- `go` - Go compiler
-- `golangci-lint` - Linter
-
-## Environment Audit
-
-Check if required tools are installed:
-
-```bash
-# Check single tool
-command -v <tool> &> /dev/null && echo "Found" || echo "Missing"
-
-# Check version
-<tool> --version
-
-# PHP project audit
-php --version
-composer --version
-command -v phpstan &> /dev/null || echo "Missing: phpstan"
-command -v php-cs-fixer &> /dev/null || echo "Missing: php-cs-fixer"
-
-# TYPO3 project audit
-php --version
-composer --version
-ddev --version
-```
-
-## Tool Catalog
-
-### Core CLI Tools
-- `curl` - HTTP client
-- `wget` - File downloader
-- `jq` - JSON processor
-- `yq` - YAML processor
-- `tree` - Directory visualizer
-- `htop` - Process viewer
-- `tmux` - Terminal multiplexer
-
-### Development Tools
-- `git` - Version control
-- `gh` - GitHub CLI
-- `glab` - GitLab CLI
-- `docker` - Containerization
-- `ddev` - Local development
-
-### Search & Navigation
-- `ripgrep` (`rg`) - Fast grep
-- `fd` - Fast find
-- `fzf` - Fuzzy finder
-- `bat` - Cat with syntax highlighting
-- `eza` - Modern ls replacement
-- `delta` - Git diff viewer
-
-### PHP Tools
-- `php` - PHP interpreter
-- `composer` - Dependency manager
-- `phpstan` - Static analysis
-- `rector` - Automated refactoring
-- `php-cs-fixer` - Code style fixer
-- `phpunit` - Testing framework
-- `infection` - Mutation testing
-
-### Node.js Tools
-- `node` - JavaScript runtime
-- `npm` / `pnpm` - Package managers
-- `prettier` - Code formatter
-- `eslint` - JavaScript linter
-- `typescript` - TypeScript compiler
-
-### Security Tools
-- `trivy` - Vulnerability scanner
-- `grype` - Container scanner
-- `cosign` - Container signing
-
-## Auto-Install Workflow
-
-When a command fails with "command not found":
-
-1. **Extract tool name** from error message
-2. **Lookup package name** in binary-to-tool mapping
-3. **Detect OS** (macOS/Linux)
-4. **Install** using appropriate package manager
-5. **Retry** original command
-
-Example:
-
-```bash
-# Error: zsh: command not found: rg
-
-# Resolution:
-brew install ripgrep  # macOS
-# or
-sudo apt install ripgrep  # Linux
-
-# Retry
-rg "pattern" .
-```
-
-## Batch Update
-
-Update all managed tools:
-
-```bash
-# macOS
-brew update && brew upgrade
-
-# Linux
-sudo apt update && sudo apt upgrade
-
-# PHP global tools
-composer global update
-
-# Node global tools
-npm update -g
-```
+| File | Purpose |
+|------|---------|
+| `references/binary_to_tool_map.md` | Binary-to-catalog mapping |
+| `references/project_type_requirements.md` | Tools per project type |
+| `references/preferred-tools.md` | Modern tool usage patterns |
+| `references/resolution-workflow.md` | Diagnostic/install/verify flow |
+| `references/troubleshooting.md` | PATH, permissions, fallbacks |
 
 ---
 
@@ -253,4 +97,6 @@ This skill is based on the excellent work by
 Original repository: https://github.com/netresearch/cli-tools-skill
 
 **Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)
+
+Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

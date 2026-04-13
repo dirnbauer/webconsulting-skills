@@ -53,4 +53,19 @@ $ARGUMENTS
 
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
-Adapted from [sickn33](https://github.com/sickn33/antigravity-awesome-skills).
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[sickn33](https://github.com/sickn33/antigravity-awesome-skills)**.
+
+Original repository: https://github.com/sickn33/antigravity-awesome-skills
+
+Special thanks to [sickn33](https://github.com/sickn33/antigravity-awesome-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

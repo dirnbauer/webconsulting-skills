@@ -143,6 +143,17 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
         fi
         rm -rf "$TEMP_DIR"
     done
+
+    if command -v python3 &> /dev/null; then
+        echo ""
+        echo "→ Restoring source attribution blocks..."
+        python3 "$SCRIPT_DIR/scripts/sync_source_notes.py"
+        echo "→ Validating attribution guardrails..."
+        python3 "$SCRIPT_DIR/scripts/check_attribution_guardrails.py"
+    else
+        echo ""
+        echo "→ python3 not installed, skipping attribution restoration and validation"
+    fi
 elif [ "$NO_SYNC" = true ]; then
     echo ""
     echo "→ Skipping external sync (--no-sync)"

@@ -1453,4 +1453,14 @@ Use this checklist when building or reviewing web interfaces.
 | `<img>` without dimensions | Add `width` and `height` attributes |
 | Hover-only disclosure | Add `:focus-within` and click handler |
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

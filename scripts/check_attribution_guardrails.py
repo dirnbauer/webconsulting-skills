@@ -10,20 +10,22 @@ to other upstream-derived skills in the repository.
 from __future__ import annotations
 
 import re
-import sys
-from pathlib import Path
 
 from audit_skills import ROOT, SKILLS_DIR, discover_source_info
 
 
 README = ROOT / "README.md"
 
-REQUIRED_SKILL_SNIPPETS = (
+COMMON_REQUIRED_SKILL_SNIPPETS = (
     "## Credits & Attribution",
     "This skill is based on the excellent work by",
+    "Original repository:",
+    "Special thanks to",
+    "Adapted by webconsulting.at for this skill collection",
+)
+REQUIRED_SKILL_SNIPPETS = (
     "Netresearch DTT GmbH",
     "Copyright (c) Netresearch DTT GmbH",
-    "Adapted by webconsulting.at for this skill collection",
 )
 
 
@@ -58,23 +60,27 @@ def check_skill_file(skill_name: str, owner: str, source_url: str) -> list[str]:
     text = skill_file.read_text()
     issues: list[str] = []
 
-    if owner == "Netresearch":
-        for snippet in REQUIRED_SKILL_SNIPPETS:
-            if snippet not in text:
-                issues.append(
-                    f"{skill_name}/SKILL.md is missing required attribution text: {snippet}"
-                )
-        expected_repo_line = f"Original repository: {source_url}"
-        if expected_repo_line not in text:
-            issues.append(
-                f"{skill_name}/SKILL.md is missing upstream repository line: {expected_repo_line}"
-            )
+    if owner == "webconsulting":
         return issues
 
-    if owner != "webconsulting" and owner not in text:
+    for snippet in COMMON_REQUIRED_SKILL_SNIPPETS:
+        if snippet not in text:
+            issues.append(
+                f"{skill_name}/SKILL.md is missing required attribution text: {snippet}"
+            )
+    for snippet in REQUIRED_SKILL_SNIPPETS if owner == "Netresearch" else ():
+        if snippet not in text:
+            issues.append(
+                f"{skill_name}/SKILL.md is missing required attribution text: {snippet}"
+            )
+
+    expected_repo_line = f"Original repository: {source_url}"
+    if expected_repo_line not in text:
+        issues.append(
+            f"{skill_name}/SKILL.md is missing upstream repository line: {expected_repo_line}"
+        )
+    if owner not in text:
         issues.append(f"{skill_name}/SKILL.md does not name upstream owner `{owner}`")
-    if source_url not in text:
-        issues.append(f"{skill_name}/SKILL.md does not mention upstream repository `{source_url}`")
     return issues
 
 

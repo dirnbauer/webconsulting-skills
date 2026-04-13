@@ -1,185 +1,144 @@
 # Agent Readiness Criteria
 
-Complete reference of all 81 criteria evaluated across nine technical pillars.
-
-## Criteria Format
-
-Each criterion is binary (pass/fail) and includes:
-- **ID**: Unique identifier (snake_case)
-- **Level**: Maturity level (1-5) where criterion is evaluated
-- **Detection**: How to check if the criterion is met
-- **Impact**: What happens when this criterion fails
+Features that make a codebase ready for AI-assisted development, organized into
+five pillars.  Derived from cluster analysis of 123 repositories, but written to
+be tool-agnostic.  Every feature answers one question: *if this is missing, what
+goes wrong for the agent?*
 
 ---
 
-## 1. Style & Validation
+## Pillar 1 · Agent Instructions
 
-Automated tools that catch bugs instantly. Without them, agents waste cycles on syntax errors and style drift.
+How the repo tells AI agents what to do, what to avoid, and how the codebase
+works.  This is the highest-signal pillar — it's the difference between an agent
+that understands the project and one that's guessing.
 
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `formatter` | 1 | Prettier, Black, Ruff format, gofmt config exists | Agent submits code with formatting issues, waits for CI, fixes blindly |
-| `lint_config` | 1 | ESLint, Ruff, golangci-lint, or language-specific linter configured | Style inconsistencies accumulate, harder to review |
-| `type_check` | 1 | TypeScript strict, mypy, Go (static by default) | Type errors caught late in CI instead of immediately |
-| `strict_typing` | 2 | TypeScript strict:true, mypy strict=true | Partial typing allows bugs to slip through |
-| `pre_commit_hooks` | 2 | .pre-commit-config.yaml or Husky config | Checks run in CI instead of locally, slower feedback |
-| `naming_consistency` | 2 | Linter rules or documented conventions | Inconsistent names make codebase harder to navigate |
-| `large_file_detection` | 2 | Git LFS, pre-commit check-added-large-files | Large files bloat repository, slow clones |
-| `code_modularization` | 3 | import-linter, Nx boundaries, Bazel modules | Architecture degrades over time |
-| `cyclomatic_complexity` | 3 | gocyclo, lizard, radon, SonarQube | Complex functions harder to understand and modify |
-| `dead_code_detection` | 3 | vulture, knip, deadcode in CI | Unused code clutters codebase |
-| `duplicate_code_detection` | 3 | jscpd, PMD CPD, SonarQube | Duplicated code increases maintenance burden |
-| `tech_debt_tracking` | 4 | TODO scanner, SonarQube, linter TODO rules | Tech debt accumulates without visibility |
-| `n_plus_one_detection` | 4 | nplusone, bullet gem, query analyzer | Performance issues in database queries |
-
----
-
-## 2. Build System
-
-Fast, reliable builds enable rapid iteration. Slow CI kills agent productivity.
-
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `build_cmd_doc` | 1 | Build commands documented in README/AGENTS.md | Agent doesn't know how to build |
-| `deps_pinned` | 1 | Lockfile exists (package-lock.json, uv.lock, go.sum) | Non-reproducible builds |
-| `vcs_cli_tools` | 1 | gh/glab CLI authenticated | Can't interact with PRs/issues |
-| `fast_ci_feedback` | 2 | CI completes in <10 minutes | Agent waits too long for feedback |
-| `single_command_setup` | 2 | One command to set up dev environment | Agent can't bootstrap quickly |
-| `release_automation` | 2 | Automated release workflow exists | Manual releases slow deployment |
-| `deployment_frequency` | 2 | Regular releases (weekly+) | Infrequent deploys signal process issues |
-| `release_notes_automation` | 3 | Auto-generated changelogs/release notes | Manual release notes are error-prone |
-| `agentic_development` | 3 | AI agent commits visible in history | No prior agent integration |
-| `automated_pr_review` | 3 | Danger.js, automated review bots | Reviews require human intervention |
-| `feature_flag_infrastructure` | 3 | LaunchDarkly, Statsig, Unleash, custom system | Hard to ship incrementally |
-| `build_performance_tracking` | 4 | Build caching, timing metrics | Build times creep up unnoticed |
-| `heavy_dependency_detection` | 4 | Bundle size analysis (webpack-bundle-analyzer) | Bundle bloat goes unnoticed |
-| `unused_dependencies_detection` | 4 | depcheck, deptry in CI | Bloated dependency tree |
-| `dead_feature_flag_detection` | 4 | Stale flag detection tooling | Abandoned flags clutter code |
-| `monorepo_tooling` | 4 | Nx, Turborepo, Bazel for monorepos | Cross-package changes are error-prone |
-| `version_drift_detection` | 4 | Version consistency checks | Packages diverge silently |
-| `progressive_rollout` | 5 | Canary deploys, gradual rollouts | All-or-nothing deployments are risky |
-| `rollback_automation` | 5 | One-click rollback capability | Slow recovery from bad deploys |
+| # | Feature | What to look for | Evidence |
+|---|---------|------------------|----------|
+| 1 | **Agent instruction file** | A dedicated file telling agents how to work in this repo — conventions, banned patterns, common commands | `AGENTS.md`, `CLAUDE.md`, `COPILOT.md`, `CONVENTIONS.md` at root |
+| 2 | **AI IDE configuration** | Settings or rules for AI-powered editors/IDEs | `.cursor/rules/`, `.cursorrules`, `.github/copilot-instructions.md`, `.github/instructions/`, `.claude/settings.json` |
+| 3 | **Multi-model support** | Instructions that work across different AI models/tools, not locked to one vendor | 2+ distinct agent config types from features 1–2 present in same repo |
+| 4 | **Agent skills or capabilities** | Packaged, reusable abilities the agent can invoke | `.claude/skills/`, `.factory/skills/`, `skill.md` files, tool definition files |
+| 5 | **Tool server configuration** | Config for agent tool protocols (lets agents use external tools) | `.mcp.json`, `mcp.config.js`, tool server manifests |
+| 6 | **Agent prompt library** | Pre-built prompts for common tasks in this repo | `.github/prompts/`, `prompts/` directory, prompt template files |
+| 7 | **Component-level agent guidance** | Different parts of the codebase have their own agent instructions | `AGENTS.md` or instruction files in subdirectories (e.g. `frontend/AGENTS.md`, `api/CLAUDE.md`) |
+| 8 | **README with build/run/test** | README includes the commands to build, run, and test the project | `README.md` containing code blocks with build/install/test commands |
+| 9 | **Contributing guide** | How to contribute — code style, PR process, commit conventions | `CONTRIBUTING.md`, `docs/contributing.md`, contributing section in README |
+| 10 | **Architecture documentation** | High-level overview of how the system is structured and why | `ARCHITECTURE.md`, `docs/architecture/`, Mermaid/PlantUML diagrams, `doc/design/` |
+| 11 | **API documentation** | Reference docs for the project's interfaces | `openapi.yaml`, generated HTML docs, `doc.go` files, Swagger UI, `api-docs/` |
+| 12 | **Inline code documentation** | Doc comments, docstrings — agents read these to understand intent | JSDoc `/** */` blocks, Python docstrings, GoDoc comments, RDoc `#` blocks, Rust `///` |
+| 13 | **Runnable examples** | Working example code the agent can study and imitate | `examples/` directory, `_examples/`, example apps with their own READMEs |
+| 14 | **Changelog** | History of what changed and how entries should be written | `CHANGELOG.md`, `CHANGES.md`, `HISTORY.md`, release notes in GitHub Releases |
+| 15 | **Environment variable documentation** | Template or docs for required env vars | `.env.example`, `.env.template`, env var table in README or docs |
+| 16 | **Documentation site or directory** | Organized docs beyond the README | `docs/` directory, Docusaurus/Sphinx/MkDocs/VitePress config, published doc site |
+| 17 | **Decision records** | Documented reasoning behind past architectural choices | `doc/adr/`, `decisions/`, `rfcs/`, numbered markdown decision files |
+| 18 | **Module-level READMEs** | Individual packages/modules have their own READMEs | `packages/*/README.md`, `libs/*/README.md`, per-crate/per-module READMEs |
 
 ---
 
-## 3. Testing
+## Pillar 2 · Feedback Loops
 
-Tests verify that changes work. Without them, agents can't validate their own work.
+How quickly and clearly the agent learns whether its changes are correct.  Fast,
+clear feedback is the difference between an agent that converges on a solution
+and one that spirals.
 
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `unit_tests_exist` | 1 | Test files present (*_test.*, *.spec.*) | No way to verify basic correctness |
-| `unit_tests_runnable` | 1 | Test command documented and works | Agent can't run tests |
-| `test_naming_conventions` | 2 | Consistent test file naming | Tests hard to find |
-| `test_isolation` | 2 | Tests can run in parallel | Slow test runs |
-| `integration_tests_exist` | 3 | E2E/integration test directory | Only unit-level coverage |
-| `test_coverage_thresholds` | 3 | Coverage enforcement in CI | Coverage drifts down |
-| `flaky_test_detection` | 4 | Test retry, quarantine, or tracking | Flaky tests erode trust |
-| `test_performance_tracking` | 4 | Test timing metrics | Slow tests accumulate |
-
----
-
-## 4. Documentation
-
-Documentation tells the agent what it needs to know. Missing docs mean wasted exploration.
-
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `readme` | 1 | README.md exists with setup instructions | Agent doesn't know project basics |
-| `agents_md` | 2 | AGENTS.md or CLAUDE.md exists | Agent lacks operational guidance |
-| `documentation_freshness` | 2 | Key docs updated in last 180 days | Stale docs mislead agent |
-| `api_schema_docs` | 3 | OpenAPI spec, GraphQL schema, or API docs | Agent must reverse-engineer APIs |
-| `automated_doc_generation` | 3 | Doc generation in CI | Docs drift from code |
-| `service_flow_documented` | 3 | Architecture diagrams (mermaid, PlantUML) | Agent lacks system context |
-| `skills` | 3 | Skills directory (.claude/skills/, .factory/skills/) | No specialized agent instructions |
-| `agents_md_validation` | 4 | CI validates AGENTS.md commands work | AGENTS.md becomes stale |
+| # | Feature | What to look for | Evidence |
+|---|---------|------------------|----------|
+| 19 | **Linter** | Static analysis that catches bugs and style issues | `.eslintrc.*`, `ruff.toml`, `.golangci.yml`, `clippy.toml`, `pylintrc`, lint config in `pyproject.toml` |
+| 20 | **Formatter** | Auto-formatter that enforces consistent style | `.prettierrc`, `rustfmt.toml`, `[tool.black]` in pyproject.toml, `gofmt`/`goimports` in CI |
+| 21 | **Type checking** | Static type system or type checker | `tsconfig.json` with `strict`, `mypy.ini`, `[tool.mypy]`, `py.typed` marker, Go (inherent) |
+| 22 | **Pre-commit hooks** | Checks that run before commit — catches issues before CI | `.pre-commit-config.yaml`, `.husky/`, `lefthook.yml`, `lint-staged` config |
+| 23 | **Unit tests** | Tests for individual components | `*_test.go`, `*_test.py`, `*.spec.ts`, `test/`, `__tests__/`, test runner config |
+| 24 | **Integration tests** | Tests that verify components work together | `test/integration/`, `tests/e2e/`, API test suites, test files with service dependencies |
+| 25 | **End-to-end tests** | Full system/browser tests | Playwright config, Cypress config, Selenium tests, `e2e/` directory |
+| 26 | **Test coverage measurement** | Coverage tracking so the agent knows if new code is tested | `.codecov.yml`, `coverageThreshold` in jest config, `--cov` in pytest, `cover` profile in Go |
+| 27 | **CI pipeline** | Automated checks on every push or PR | `.github/workflows/ci.yml`, `.circleci/config.yml`, `.gitlab-ci.yml`, `Jenkinsfile` |
+| 28 | **Fast CI feedback** | CI completes quickly enough for agent iteration | CI workflow with documented expected duration, parallel jobs, test splitting |
+| 29 | **Test run documentation** | Agent knows exactly how to run which tests | Test commands in README, AGENTS.md, CONTRIBUTING.md, or Makefile help target |
+| 30 | **Config/schema validation** | YAML, JSON, config files validated automatically | `yamllint` config, JSON schema `$schema` refs, `actionlint` in CI, `taplo` for TOML |
+| 31 | **Snapshot or golden-file tests** | Tests that detect unexpected output changes | `__snapshots__/` directories, `.snap` files, `testdata/` golden files, VCR cassettes |
+| 32 | **Benchmark suite** | Performance tests the agent can run to check for regressions | `bench/`, `benchmarks/`, `*_bench_test.go`, pytest-benchmark, Criterion.rs |
+| 33 | **Warnings-as-errors** | Compiler/runtime warnings treated as failures | `-Werror`, `warningsAsErrors` in build config, `filterwarnings = error` in pytest |
+| 34 | **Spell/typo checking** | Automated spelling checks in CI or hooks | `.cspell.json`, `codespell` in pre-commit, `typos.toml`, spell check CI step |
 
 ---
 
-## 5. Dev Environment
+## Pillar 3 · Workflows & Automation
 
-Reproducible environments prevent "works on my machine" issues.
+The processes that support agent-driven development — how work is structured,
+tracked, and shipped.
 
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `env_template` | 2 | .env.example or documented env vars | Agent guesses at configuration |
-| `devcontainer` | 3 | .devcontainer/devcontainer.json exists | Environment setup is manual |
-| `devcontainer_runnable` | 3 | Devcontainer builds and works | Devcontainer is broken |
-| `database_schema` | 3 | Schema files or migration directory | Database structure undocumented |
-| `local_services_setup` | 3 | docker-compose.yml for dependencies | External services need manual setup |
-
----
-
-## 6. Debugging & Observability
-
-When things go wrong, observability helps diagnose issues quickly.
-
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `structured_logging` | 2 | Logging library with structured output | Logs hard to parse |
-| `code_quality_metrics` | 2 | Coverage reporting in CI | No visibility into code quality |
-| `error_tracking_contextualized` | 3 | Sentry, Bugsnag with context | Errors lack context for debugging |
-| `distributed_tracing` | 3 | OpenTelemetry, trace IDs | Can't trace requests across services |
-| `metrics_collection` | 3 | Prometheus, Datadog, or custom metrics | No runtime visibility |
-| `health_checks` | 3 | Health/readiness endpoints | Can't verify service status |
-| `profiling_instrumentation` | 4 | CPU/memory profiling tools | Performance issues hard to diagnose |
-| `alerting_configured` | 4 | PagerDuty, OpsGenie, alert rules | Issues discovered late |
-| `deployment_observability` | 4 | Deploy tracking, dashboards | Can't correlate issues to deploys |
-| `runbooks_documented` | 4 | Runbooks directory or linked docs | No guidance for incident response |
-| `circuit_breakers` | 5 | Resilience patterns implemented | Cascading failures |
+| # | Feature | What to look for | Evidence |
+|---|---------|------------------|----------|
+| 35 | **Issue templates** | Structured templates for bug reports, feature requests | `.github/ISSUE_TEMPLATE/` with `bug_report.md`, `feature_request.md`, `config.yml` |
+| 36 | **PR template** | Template that guides PR descriptions | `.github/pull_request_template.md`, PR template with checklist items |
+| 37 | **Dependency update automation** | Automated PRs for dependency updates | `.github/dependabot.yml`, `renovate.json`, `.renovaterc`, Renovate preset configs |
+| 38 | **Release automation** | Automated release pipeline (build, tag, publish) | Release workflow in CI, `semantic-release` config, GoReleaser config, `release-please` |
+| 39 | **Branch protection** | Protected main branch with required checks | Branch protection rules (inferred from merge queue config, required status checks in CI) |
+| 40 | **Merge automation** | Merge queue, auto-merge, or merge bot | `merge_group` trigger in CI, Mergify config, auto-merge labels, `gh pr merge --auto` |
+| 41 | **Task runner** | Single entry point for common commands | `Makefile`, `Justfile`, `Taskfile.yml`, `package.json` scripts section, `Rakefile` |
+| 42 | **Structured change tracking** | Changesets, conventional commits, or similar discipline | `.changeset/` directory, `commitlint` config, conventional commit enforcement in CI |
+| 43 | **CI concurrency control** | Cancel-in-progress, concurrency groups to avoid CI pile-up | `concurrency:` blocks in GitHub Actions, `cancel-in-progress: true` |
+| 44 | **Automated release notes** | Changelog/release notes generated from commits or PRs | `release-please` config, `auto-changelog`, `git-cliff`, `conventional-changelog` |
+| 45 | **Stale issue/PR management** | Automation to close or label stale items | `.github/workflows/stale.yml`, `stale` bot config, issue lifecycle labels |
+| 46 | **Label automation** | Automatic PR/issue labeling based on paths or content | `.github/labeler.yml`, label-sync config, auto-label workflows |
+| 47 | **Multi-platform CI** | CI matrix covering multiple OS, arch, or runtime versions | `matrix:` in CI with `os: [ubuntu, macos, windows]` or multiple language versions |
+| 48 | **Deployment automation** | Automated deployment pipeline | Deploy workflow triggered on merge/tag, staging + production environments in CI |
+| 49 | **Automated code review checks** | Bot-driven review checks beyond CI | Danger.js config, review bot config, required review assignments, CODEOWNERS + required reviews |
 
 ---
 
-## 7. Security
+## Pillar 4 · Policy & Governance
 
-Security criteria protect the codebase and data.
+Rules, ownership, and constraints the agent must know about and respect.
 
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `gitignore_comprehensive` | 1 | .gitignore excludes secrets, build artifacts | Sensitive files committed |
-| `secrets_management` | 2 | GitHub secrets, vault, cloud secrets | Hardcoded secrets |
-| `codeowners` | 2 | CODEOWNERS file exists | No clear ownership |
-| `branch_protection` | 2 | Protected main branch | Unreviewed changes to main |
-| `dependency_update_automation` | 3 | Dependabot, Renovate configured | Dependencies go stale |
-| `log_scrubbing` | 3 | Log sanitization for PII | Sensitive data in logs |
-| `pii_handling` | 3 | PII redaction mechanisms | PII exposure risk |
-| `automated_security_review` | 4 | CodeQL, Snyk, SonarQube in CI | Security issues caught late |
-| `secret_scanning` | 4 | GitHub secret scanning enabled | Leaked credentials |
-| `dast_scanning` | 5 | Dynamic security testing | Runtime vulnerabilities missed |
-| `privacy_compliance` | 5 | GDPR/privacy tooling | Compliance gaps |
-
----
-
-## 8. Task Discovery
-
-Structured task management helps agents find and understand work.
-
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `issue_templates` | 2 | .github/ISSUE_TEMPLATE/ exists | Inconsistent issue quality |
-| `issue_labeling_system` | 2 | Consistent labels on issues | Issues hard to categorize |
-| `pr_templates` | 2 | pull_request_template.md exists | PRs lack context |
-| `backlog_health` | 3 | Issues have descriptive titles, labels | Unclear what to work on |
+| # | Feature | What to look for | Evidence |
+|---|---------|------------------|----------|
+| 50 | **Comprehensive .gitignore** | Covers secrets, build artifacts, IDE files, agent artifacts | `.gitignore` with entries for `.env`, `node_modules/`, build dirs, `.cursor/`, `.claude/` |
+| 51 | **License** | Clear license at root | `LICENSE`, `MIT-LICENSE`, `COPYING`, `LICENSE.md` |
+| 52 | **Code ownership** | File/directory ownership mapping | `CODEOWNERS`, `.github/CODEOWNERS`, docs describing area owners or maintainer teams |
+| 53 | **Security policy** | How to report vulnerabilities | `SECURITY.md`, `.github/security.md`, security reporting instructions |
+| 54 | **Code of conduct** | Community standards | `CODE_OF_CONDUCT.md`, conduct link in contributing guide |
+| 55 | **AI usage policy** | Documented guidelines for AI/agent contributions | AI policy in AGENTS.md, CONTRIBUTING.md, or standalone doc; agent boundary definitions |
+| 56 | **Secrets management** | Secrets handled via environment/vault, not hardcoded | References to `${{ secrets.* }}` in CI, vault config, `.env.example` without values, `git-secrets` |
+| 57 | **Security scanning** | Automated vulnerability scanning in CI | `.github/workflows/codeql.yml`, Snyk config, `gosec` in CI, Trivy, Dependabot security alerts |
+| 58 | **Git attributes** | Line endings, diff drivers, LFS, linguist overrides | `.gitattributes` with `text=auto`, `linguist-generated`, LFS tracking patterns |
+| 59 | **Contributor agreement** | DCO sign-off or CLA process | DCO bot config, `Signed-off-by` requirement in contributing guide, CLA-assistant config |
+| 60 | **Governance model** | Documented maintainer roles, decision-making process | `GOVERNANCE.md`, `MAINTAINERS.md`, governance section in docs, team/role descriptions |
+| 61 | **CI workflow validation** | CI config itself is linted/validated | `actionlint` step in CI, `circleci config validate`, CI config schema validation |
+| 62 | **Environment separation** | Distinct configs for dev/test/prod | `.env.test`, `.env.production`, environment-specific config directories, config per deploy target |
 
 ---
 
-## 9. Product & Analytics
+## Pillar 5 · Build & Dev Environment
 
-Connect errors to insights and understand user behavior.
+Can the agent actually build, run, and iterate on the project?  Reproducibility
+and speed matter — an agent that can't build the project can't do anything.
 
-| Criterion | Level | Detection | Impact |
-|-----------|-------|-----------|--------|
-| `error_to_insight_pipeline` | 5 | Sentry-GitHub issue creation automation | Errors don't become actionable issues |
-| `product_analytics_instrumentation` | 5 | Mixpanel, Amplitude, PostHog, Heap | No user behavior data to inform decisions |
+| # | Feature | What to look for | Evidence |
+|---|---------|------------------|----------|
+| 63 | **Dependency lockfile** | Pinned dependency versions for reproducible installs | `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `uv.lock`, `Cargo.lock`, `go.sum`, `Gemfile.lock`, `poetry.lock` |
+| 64 | **Single-command build** | One documented command to build the entire project | `make build`, `npm run build`, `cargo build` documented in README or agent file |
+| 65 | **Single-command dev setup** | One command to bootstrap a working dev environment | `bin/setup`, `make dev`, `scripts/bootstrap.sh`, `just setup` |
+| 66 | **Dev container** | Containerized dev environment definition | `.devcontainer/devcontainer.json`, `devcontainer.json` at root |
+| 67 | **Containerized services** | Docker-based local development stack | `Dockerfile`, `docker-compose.yml`, `compose.yaml` with dev services |
+| 68 | **Reproducible environment** | Declarative, reproducible dev environment | `flake.nix`, `shell.nix`, `devbox.json`, hermetic build definitions |
+| 69 | **Tool version pinning** | Runtime/tool versions pinned to a file | `.tool-versions`, `mise.toml`, `.node-version`, `.python-version`, `.ruby-version`, `rust-toolchain.toml` |
+| 70 | **Monorepo orchestration** | Tooling for multi-package repositories | Workspace config in `package.json`, `pnpm-workspace.yaml`, Cargo workspace, Go multi-module, Nx/Turborepo/Bazel config |
+| 71 | **Build caching** | Caching for faster rebuilds | CI cache steps (`actions/cache`), Turborepo remote cache, ccache/sccache config, layer caching in Docker |
+| 72 | **Cross-platform support** | Builds on multiple OS/arch | CI matrix with multiple OS entries, cross-compilation configs, multi-arch Docker builds |
+| 73 | **Cloud dev environment** | Cloud-based workspace configuration | `.devcontainer/` with Codespaces features, `.gitpod.yml`, cloud workspace config |
+| 74 | **Package manager configuration** | Custom registry, auth, resolution settings | `.npmrc`, `pip.conf`, `.cargo/config.toml`, registry overrides, resolution overrides |
 
 ---
 
-## Skipped Criteria
+## Summary
 
-Some criteria are skipped based on repository type:
-- **Libraries**: Skip deployment-related criteria (progressive_rollout, health_checks)
-- **CLI tools**: Skip web-specific criteria (dast_scanning)
-- **Database projects**: Skip N+1 detection (they ARE the database)
-- **Single apps**: Skip monorepo tooling criteria
-
-The analysis script automatically determines which criteria to skip based on detected repository characteristics.
+| Pillar | Features | What it answers |
+|--------|----------|-----------------|
+| Agent Instructions | 18 | Does the agent know what to do? |
+| Feedback Loops | 16 | Does the agent know if it's right? |
+| Workflows & Automation | 15 | Does the process support agent work? |
+| Policy & Governance | 13 | Does the agent know the rules? |
+| Build & Dev Environment | 12 | Can the agent build and run the project? |
+| **Total** | **74** | |

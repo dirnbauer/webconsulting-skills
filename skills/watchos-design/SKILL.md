@@ -366,4 +366,14 @@ Use this checklist when reviewing a watchOS design or implementation.
 - [ ] Bold Text preference is respected (SwiftUI handles automatically; custom text checks `@Environment(\.legibilityWeight)`)
 - [ ] Increase Contrast preference is respected (custom colors provide higher-contrast variants)
 
-Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

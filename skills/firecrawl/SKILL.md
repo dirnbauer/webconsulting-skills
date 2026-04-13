@@ -147,4 +147,14 @@ firecrawl credit-usage
 firecrawl credit-usage --json --pretty -o .firecrawl/credits.json
 ```
 
-Adapted from [Firecrawl](https://github.com/firecrawl/cli).
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Firecrawl](https://github.com/firecrawl/cli)**.
+
+Original repository: https://github.com/firecrawl/cli
+
+Special thanks to [Firecrawl](https://github.com/firecrawl/cli) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection
