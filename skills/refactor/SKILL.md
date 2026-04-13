@@ -644,6 +644,4 @@ Use this skill when:
 | Replace Type Code with Class/Enum             | Strong typing                         |
 | Replace Inheritance with Delegation           | Composition over inheritance          |
 
-
 Adapted from [GitHub](https://github.com/github/awesome-copilot).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

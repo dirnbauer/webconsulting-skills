@@ -531,4 +531,6 @@ public function __construct(
 
 ## Credits & Attribution
 
+
+Source: https://github.com/dirnbauer/webconsulting-skills
 Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

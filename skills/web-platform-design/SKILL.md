@@ -552,6 +552,10 @@ Do not disable the submit button. Instead, validate on submit and show errors.
 
 Disabled buttons fail to communicate why the user cannot proceed. If you must disable, provide a visible explanation.
 
+### 3.8 Keep Instructions Near the Field
+
+Place format examples, constraints, and recovery text next to the relevant field via hint and error text. Never explain requirements only once in introductory copy and expect users to remember them later.
+
 ---
 
 ## 4. Typography [HIGH]
@@ -800,6 +804,10 @@ Only apply `will-change` to elements that will animate, and remove it after anim
 /* Bad: blanket will-change */
 /* * { will-change: transform; } */
 ```
+
+### 5.8 Expose Waiting States Promptly
+
+After a user action, acknowledge the new state immediately. If work cannot finish within a brief moment, show progress, skeletons, optimistic UI, or `aria-busy` feedback instead of leaving the interface unchanged.
 
 ---
 
@@ -1445,6 +1453,4 @@ Use this checklist when building or reviewing web interfaces.
 | `<img>` without dimensions | Add `width` and `height` attributes |
 | Hover-only disclosure | Add `:focus-within` and click handler |
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

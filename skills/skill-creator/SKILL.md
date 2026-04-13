@@ -1,7 +1,6 @@
 ---
 name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
-license: Apache-2.0
 ---
 
 # Skill Creator
@@ -485,6 +484,4 @@ Please add steps to your TodoList, if you have such a thing, to make sure you do
 
 Good luck!
 
-
 Adapted from [Anthropic](https://github.com/anthropics/skills/tree/main/skills/skill-creator).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

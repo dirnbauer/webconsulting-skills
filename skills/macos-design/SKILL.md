@@ -140,6 +140,10 @@ struct MyApp: App {
 }
 ```
 
+### Rule 1.6 — Stable Command Names and Locations
+
+Treat the menu bar as the app's command memory. Keep common actions in consistent menus with stable names and shortcuts so users recognize them quickly instead of searching for context-specific variants.
+
 ---
 
 ## 2. Windows (CRITICAL)
@@ -656,6 +660,10 @@ Show a badge on the Dock icon for notification counts. Clear it promptly when th
 NSApp.dockTile.badgeLabel = unreadCount > 0 ? "\(unreadCount)" : nil
 ```
 
+### Rule 7.5 — Match Feedback to Cognitive Cost
+
+Routine actions should acknowledge completion with inline status, toolbar state, or a subtle animation. Use modal alerts only when the user must stop, evaluate consequences, and choose.
+
 ---
 
 ## 8. System Integration (MEDIUM)
@@ -1113,6 +1121,4 @@ Before shipping a Mac app, verify:
 
 15. **No drag and drop** — Mac is a drag-and-drop platform. If users can see content, they expect to drag it somewhere.
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

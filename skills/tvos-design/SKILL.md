@@ -81,6 +81,9 @@ If a user navigates away and returns, focus should restore to the last focused i
 **FOCUS-08: Never trap focus.**
 Users must always be able to move focus away from any element. If focus cannot leave a region, the app feels broken.
 
+**FOCUS-09: Reduce re-orientation cost.**
+Keep row order stable, restore prior focus when returning, and prefer nearby focus destinations so users do not have to rescan the entire screen after each navigation step.
+
 ### Parallax Layer Reference
 
 | Layer | Purpose | Movement Amount |
@@ -119,6 +122,9 @@ Text input via the on-screen keyboard is tedious on tvOS. Always support dictati
 
 **REMOTE-07: Provide click feedback.**
 When the user clicks the touch surface to select an item, provide immediate visual feedback (animation, highlight change, or haptic-style visual pulse) so the click feels responsive.
+
+**REMOTE-08: Never make the on-screen keyboard the only practical text path.**
+For search, sign-in, and setup, prefer dictation, recent queries, autofill, or short code-based flows over long remote-typed text. Remote text entry carries high motor and cognitive cost.
 
 ---
 
@@ -372,6 +378,4 @@ Use this checklist when reviewing a tvOS app design or implementation.
 | Long forms | Keyboard input is painful on tvOS | Pre-fill, use profiles, or offload to iPhone |
 | Thin/light typography | Disappears on TV displays | Medium weight minimum |
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

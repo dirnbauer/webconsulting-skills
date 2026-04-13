@@ -657,6 +657,4 @@ If you need more context:
 - **copywriting**: For the non-templated copy portions
 - **analytics-tracking**: For measuring programmatic page performance
 
-
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

@@ -200,6 +200,9 @@ NavigationStack(path: $path) {
 ### Rule 2.6: Preserve State Across Navigation
 When users navigate back and then forward, or switch tabs, restore the previous scroll position and input state. Use `@SceneStorage` or `@State` to persist view state.
 
+### Rule 2.7: Prefer Recognition Over Recall
+Keep current location, recent choices, and available destinations visible. Restore tab, scroll, filter, and selection state so users continue from recognition instead of reconstructing context from memory.
+
 ---
 
 ## 3. Typography & Dynamic Type
@@ -801,6 +804,9 @@ Button("Complete") {
 }
 ```
 
+### Rule 8.8: Show Waiting States Immediately
+If an action cannot complete immediately, acknowledge the tap at once, then show inline progress, skeletons, or partial results. Never leave the interface visually unchanged while work continues.
+
 ---
 
 ## 9. Privacy & Permissions
@@ -1076,6 +1082,4 @@ These are common mistakes that violate the iOS Human Interface Guidelines. Never
 
 15. **Dark Mode as an afterthought** — Using hardcoded colors means the app is either broken in Dark Mode or light mode. Always use semantic colors.
 
-
 Adapted from [ehmo](https://github.com/ehmo/platform-design-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

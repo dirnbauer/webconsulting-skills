@@ -458,13 +458,84 @@ Learnings:
 
 ## Output Format
 
-For the full test-plan template and closeout format, see [references/output-format.md](references/output-format.md).
+### Test Plan Document
+
+```
+# A/B Test: [Name]
+
+## Hypothesis
+[Full hypothesis using framework]
+
+## Test Design
+- Type: A/B / A/B/n / MVT
+- Duration: X weeks
+- Sample size: X per variant
+- Traffic allocation: 50/50
+
+## Variants
+[Control and variant descriptions with visuals]
+
+## Metrics
+- Primary: [metric and definition]
+- Secondary: [list]
+- Guardrails: [list]
+
+## Implementation
+- Method: Client-side / Server-side
+- Tool: [Tool name]
+- Dev requirements: [If any]
+
+## Analysis Plan
+- Success criteria: [What constitutes a win]
+- Segment analysis: [Planned segments]
+```
+
+### Results Summary
+When test is complete
+
+### Recommendations
+Next steps based on results
 
 ---
 
-## Appendix
+## Common Mistakes
 
-For discovery questions and related-skill pointers, see [references/appendix.md](references/appendix.md). For recurring failure patterns, see [references/common-mistakes.md](references/common-mistakes.md).
+### Test Design
+- Testing too small a change (undetectable)
+- Testing too many things (can't isolate)
+- No clear hypothesis
+- Wrong audience
+
+### Execution
+- Stopping early
+- Changing things mid-test
+- Not checking implementation
+- Uneven traffic allocation
+
+### Analysis
+- Ignoring confidence intervals
+- Cherry-picking segments
+- Over-interpreting inconclusive results
+- Not considering practical significance
+
+---
+
+## Questions to Ask
+
+If you need more context:
+1. What's your current conversion rate?
+2. How much traffic does this page get?
+3. What change are you considering and why?
+4. What's the smallest improvement worth detecting?
+5. What tools do you have for testing?
+6. Have you tested this area before?
+
+---
+
+## Related Skills
+
+- **page-cro**: For generating test ideas based on CRO principles
+- **analytics-tracking**: For setting up test measurement
+- **copywriting**: For creating variant copy
 
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

@@ -5,7 +5,6 @@ metadata:
   author: vercel
   version: "1.0.0"
   argument-hint: <file-or-pattern>
-license: MIT
 ---
 
 # Web Interface Guidelines
@@ -39,6 +38,4 @@ When a user provides a file or pattern argument:
 
 If no files specified, ask the user which files to review.
 
-
 Adapted from [Vercel](https://github.com/vercel-labs/agent-skills).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

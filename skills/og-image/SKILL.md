@@ -1,7 +1,6 @@
 ---
 name: og-image
 description: Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.
-license: MIT
 ---
 
 This skill creates professional Open Graph images for social media sharing. It analyzes the existing codebase to match the project's design system, generates a dedicated OG image page, screenshots it, and configures all necessary meta tags.
@@ -200,6 +199,4 @@ Before completing, verify:
 - [ ] theme-color is set to match brand
 - [ ] User informed of cache-busting URLs
 
-
 Adapted from [Stevy Smith](https://github.com/stevysmith/og-image-skill).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.

@@ -379,6 +379,4 @@ If you need more context:
 - **marketing-psychology**: For psychology behind waitlists and exclusivity
 - **programmatic-seo**: For comparison pages mentioned in post-launch
 
-
 Adapted from [AITYTech](https://github.com/aitytech/agentkits-marketing).
-Special thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their generous open-source contributions to the TYPO3 community, which helped shape this skill collection.
