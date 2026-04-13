@@ -169,3 +169,5 @@ Before finishing:
 - [references/design-notes.md](references/design-notes.md): visual rules, icon-family
   guidance, and common mistakes
 - [references/migration-steps.md](references/migration-steps.md): migration checklist
+
+Source: https://github.com/dirnbauer/webconsulting-skills
