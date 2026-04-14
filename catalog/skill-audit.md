@@ -366,7 +366,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/php-modernization-skill
 - Frontmatter name: php-modernization
-- SKILL.md lines: 104
+- SKILL.md lines: 102
 
 **Pass 1: Structure**
 - No pass 1 issues found.

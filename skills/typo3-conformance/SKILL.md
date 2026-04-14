@@ -1,10 +1,15 @@
 ---
 name: typo3-conformance
-description: "Use when assessing TYPO3 extension quality, conformance checking, standards compliance, modernization to v12/v13/v14, TER readiness, or best practices review. Also triggers on: extension audit, quality score, full assessment, fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance, ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat."
+description: >-
+  Use when assessing TYPO3 extension quality, conformance checking, standards
+  compliance, modernization to v12/v13/v14, TER readiness, or best practices
+  review. Also triggers on: extension audit, quality score, full assessment,
+  fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance,
+  ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.
 metadata:
   version: "2.10.0"
-  repository: https://github.com/netresearch/typo3-conformance-skill
-  author: Netresearch DTT GmbH
+  repository: "https://github.com/netresearch/typo3-conformance-skill"
+  author: "Netresearch DTT GmbH"
 ---
 
 # TYPO3 Extension Conformance Checker

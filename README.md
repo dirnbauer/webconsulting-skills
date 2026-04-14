@@ -270,6 +270,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
 | `webconsulting-create-documentation` | documentation, help page, product video, screenshots, tts, gsap | "Create product documentation with video tour" or "Build a help page" |
+| `excalidraw` | excalidraw, architecture diagram, system diagram, png export, svg export | "Generate an architecture diagram for this project as an .excalidraw file" or "Create a system diagram and export it as SVG" |
 | `react-best-practices` | react, next.js, performance, optimization, bundle size, waterfalls | "Optimize this React component" or "Eliminate request waterfalls" |
 | `deepfake-detection` | deepfake, media forensics, fake detection, synthetic media, prnu | "Verify authenticity of this video" or "Detect AI-generated images" |
 | `readiness-report` | /readiness-report, agent readiness, codebase maturity | "Run /readiness-report to evaluate this repository" |
@@ -343,7 +344,7 @@ Search for available skills related to deployment automation
 ```
 
 ```
-Install the refactor skill from github/awesome-copilot using npx skills
+Install the refactor skill from github/awesome-copilot@refactor using npx skills
 ```
 
 **shadcn/ui Components:**
@@ -880,14 +881,14 @@ Audit my design for "AI slop" indicators and suggest specific improvements for e
 
 ---
 
-#### ♿ Web Accessibility Audit (web-design-guidelines)
+#### ♿ Web Accessibility Review & Implementation (web-design-guidelines + web-platform-design)
 
-The `web-design-guidelines` skill provides **WCAG 2.1 AA compliance checking**, semantic HTML validation, and accessibility best practices.
+Use `web-design-guidelines` for review findings and compliance audits. Use `web-platform-design` when you want accessible patterns implemented in code.
 
-**Color & Contrast:**
+**Color & Contrast (`web-design-guidelines`):**
 
 ```
-Check all text colors in my CSS for WCAG 2.1 AA contrast compliance (4.5:1 for normal text, 3:1 for large text).
+Check all text colors in my CSS for WCAG AA contrast compliance (4.5:1 for normal text, 3:1 for large text).
 ```
 
 ```
@@ -898,7 +899,7 @@ My brand color is #3B82F6. What's the minimum darkness needed for text on white 
 Review my color palette for colorblind accessibility. Suggest alternatives for red/green combinations.
 ```
 
-**Focus States:**
+**Focus States (`web-platform-design`):**
 
 ```
 Audit my interactive elements for visible focus indicators. Show me how to add proper focus-visible styles.
@@ -912,7 +913,7 @@ My designer wants to remove focus outlines. Create accessible alternatives that 
 Add a skip link to my page header that becomes visible on focus.
 ```
 
-**Form Accessibility:**
+**Form Accessibility (`web-platform-design`):**
 
 ```
 Review my form for accessibility issues: labels, error messages, required field indicators, and field grouping.
@@ -926,7 +927,7 @@ Make this form accessible: add proper labels, aria-describedby for help text, an
 Create an accessible date picker pattern with keyboard navigation and screen reader support.
 ```
 
-**Semantic HTML:**
+**Semantic HTML (`web-design-guidelines`):**
 
 ```
 Audit my page structure for semantic HTML issues. Check heading hierarchy, landmarks, and proper element usage.
@@ -940,7 +941,7 @@ Convert this div-soup navigation to proper semantic HTML with nav, ul, li, and a
 Review my table markup. Add proper headers, scope attributes, and caption for accessibility.
 ```
 
-**ARIA Patterns:**
+**ARIA Patterns (`web-platform-design`):**
 
 ```
 Implement an accessible modal dialog with proper focus trapping, escape key handling, and aria attributes.
@@ -958,7 +959,7 @@ Build an accessible accordion using details/summary with enhanced keyboard suppo
 Add ARIA live regions to my notification system so screen readers announce new messages.
 ```
 
-**Keyboard Navigation:**
+**Keyboard Navigation (`web-design-guidelines` + `web-platform-design`):**
 
 ```
 Audit my page for keyboard accessibility. Check tab order, focus traps, and interactive element reachability.
@@ -972,7 +973,7 @@ My dropdown menu isn't keyboard accessible. Fix the tab order and add arrow key 
 Create a keyboard-navigable image gallery with arrow keys, escape to close, and focus restoration.
 ```
 
-**Screen Reader Testing:**
+**Screen Reader Testing (`web-design-guidelines`):**
 
 ```
 What will a screen reader announce for this component? Check all interactive elements and dynamic content.
@@ -986,7 +987,7 @@ Add proper alt text to my images. Some are decorative, some are informational, s
 Review my icon buttons. They need accessible names since they have no visible text.
 ```
 
-**Responsive & Touch:**
+**Responsive & Touch (`web-platform-design`):**
 
 ```
 Audit my touch targets for mobile accessibility. Minimum 44x44px with adequate spacing.
@@ -1000,14 +1001,14 @@ Check my responsive design for accessibility issues at different breakpoints and
 Add prefers-reduced-motion support to my animations for users with vestibular disorders.
 ```
 
-**Quick Accessibility Checklist:**
+**Quick Accessibility Checklist (`web-design-guidelines`):**
 
 ```
 Run a full accessibility audit on my homepage. Check: color contrast, focus states, semantic HTML, ARIA, keyboard nav, and alt text.
 ```
 
 ```
-Prepare my site for WCAG 2.1 AA compliance. Create a checklist of issues and fixes.
+Prepare my site for WCAG 2.2 AA compliance. Create a checklist of issues and fixes.
 ```
 
 ```
@@ -1247,7 +1248,7 @@ The `typo3-solr` skill provides expert guidance on **Apache Solr search integrat
 **Installation & Setup:**
 
 ```
-Set up EXT:solr with DDEV using the ddev-typo3-solr addon. Configure the Solr connection for my TYPO3 13.4 site with two languages (German and English).
+Set up EXT:solr with DDEV using the ddev-typo3-solr addon. Configure the Solr connection for my TYPO3 v14 site with two languages (German and English).
 ```
 
 ```
@@ -1424,21 +1425,31 @@ Create a command that synchronizes translations from a translation management sy
 
 ---
 
-#### 📧 Forms & Email
+#### 📧 Powermail Forms & Email (typo3-powermail)
 
-**EXT:form Custom Finisher:**
+**Powermail Contact Form:**
 ```
-Create a custom form finisher that sends data to a CRM API after form submission. Include error handling and logging.
-```
-
-**EXT:form Custom Validator:**
-```
-Create a custom form validator that checks if an email address is from an allowed domain list and not a disposable email provider.
+Create a Powermail contact form with firstname, lastname, email, company, message, and GDPR consent checkbox. Add a confirmation step and thank-you redirect.
 ```
 
-**Email Template with Fluid:**
+**Custom Powermail Finisher:**
 ```
-Create a styled HTML email template using Fluid that works across email clients. Include inline CSS, responsive design, and plain text fallback.
+Create a custom Powermail finisher that sends submitted data to a CRM API after form submission. Include error handling, logging, and retry-safe behavior.
+```
+
+**Custom Powermail Validator:**
+```
+Create a custom Powermail validator that blocks disposable email domains and only accepts business email addresses from an allowed domain list.
+```
+
+**Powermail Spam Protection:**
+```
+Configure Powermail spam protection for a public contact form: honeypot, time checks, link limits, and sensible thresholds for false positives.
+```
+
+**Powermail Email Templates:**
+```
+Create styled Powermail receiver and sender email templates with Fluid. Keep them email-client friendly, use inline-safe markup, and provide a plain text fallback.
 ```
 
 ---
@@ -1670,6 +1681,30 @@ Create GitHub README documentation with dark/light theme screenshots using <pict
 
 ---
 
+#### 🗺️ Architecture Diagrams (excalidraw)
+
+The `excalidraw` skill generates **real `.excalidraw` diagrams** from codebase analysis and can export them to PNG or SVG.
+
+**Repository Architecture:**
+
+```
+Generate an architecture diagram for this project as an .excalidraw file. Show the main modules, external services, databases, and data flows.
+```
+
+**System Overview Export:**
+
+```
+Create a system diagram for my app in Excalidraw and export it as both .excalidraw and SVG.
+```
+
+**Workflow Visualization:**
+
+```
+Visualize my checkout flow as an Excalidraw diagram: frontend, backend, payment provider, webhooks, and confirmation emails.
+```
+
+---
+
 #### 🖼️ OG Images & Social Sharing
 
 **Generate OG Image:**
@@ -1838,7 +1873,7 @@ How should I incorporate social proof on my landing page? Where should logos, te
 
 #### ⚛️ React & Next.js Performance (Vercel Best Practices)
 
-The `react-best-practices` skill contains **57 rules across 8 priority categories** from Vercel Engineering. It automatically detects performance anti-patterns and suggests fixes prioritized by impact.
+The `react-best-practices` skill contains **69 rules across 8 priority categories** from Vercel Engineering. It automatically detects performance anti-patterns and suggests fixes prioritized by impact.
 
 **Why it's cool:** Instead of guessing what to optimize, you get Vercel's battle-tested rules applied automatically. The skill catches issues like request waterfalls, bundle bloat, and re-render storms that kill Core Web Vitals.
 
@@ -2144,7 +2179,7 @@ grep -r "DataHandler" skills/
 | `web-design-guidelines` | Interface review, WCAG, ARIA, accessibility | Vercel |
 | `excalidraw` | Architecture diagrams as `.excalidraw` with optional PNG/SVG export | ooiyeefei |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
-| `react-best-practices` | React/Next.js performance optimization (57 rules) | Vercel |
+| `react-best-practices` | React/Next.js performance optimization (69 rules) | Vercel |
 | `shadcn-ui` | shadcn/ui component patterns (Radix UI, Tailwind CSS, Zod) | Giuseppe Trisciuoglio |
 | **Documents & Office** | | |
 | `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, analysis | Anthropic |
