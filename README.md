@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **61 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
+A curated collection of **62 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
 > **Works with:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, Windsurf, GitHub Copilot, Kiro, Cline, Continue.dev, Aider, and more
 
@@ -21,8 +21,7 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 ## Skill Categories
 
 This repository currently ships **62 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
-Shared root guides such as `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md`, plus category-specific
-add-ons, are not counted as top-level skills.
+Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
@@ -2134,21 +2133,16 @@ grep -r "DataHandler" skills/
 | `launch-strategy` | Product launches, Product Hunt, go-to-market | AITYTech |
 | `ab-testing` | A/B test design, sample size, statistical significance | AITYTech |
 
-### Skill Supplements
+### Category-Specific Add-ons
 
-The repository keeps two shared root guides for cross-cutting TYPO3 topics, plus a small number of
-category-specific add-ons:
+The repository keeps a small number of category-specific add-on files alongside the main skills:
 
 | Supplement | Purpose |
 |------------|---------|
-| `SKILL-PHP84.md` | Shared PHP 8.4 guide: migration patterns, TYPO3 follow-ups, routing to owning skills |
-| `SKILL-CONTENT-BLOCKS.md` | Shared Content Blocks guide: migration strategy, DataHandler/testing/update routing |
 | `skills/typo3-solr/SKILL-SOLRFAL.md` | File indexing with solrfal and Apache Tika |
 | `skills/typo3-solr/SKILL-FRONTEND.md` | Custom vanilla JS for search, suggest, facets without jQuery |
 
-**Shared root guide routing:**
-- `SKILL-PHP84.md` -> `php-modernization`, `typo3-update`, `typo3-rector`, `typo3-testing`, `typo3-powermail`
-- `SKILL-CONTENT-BLOCKS.md` -> `typo3-content-blocks`, `typo3-content-blocks/SKILL-MIGRATION.md`, `typo3-datahandler`, `typo3-extension-upgrade`, `typo3-testing`, `typo3-update`
+**Add-on routing:**
 - `skills/typo3-solr/SKILL-SOLRFAL.md` -> file indexing with solrfal and Apache Tika
 - `skills/typo3-solr/SKILL-FRONTEND.md` -> custom vanilla JS search frontends
 
@@ -2288,11 +2282,9 @@ The `.sync-config.json` file defines external skill sources that are automatical
 
 To enable/disable external skill syncing, edit `.sync-config.json` and set `enabled: true/false`.
 
-This repo also mirrors the full upstream repository behind
-`npx skills add coreyhaines31/marketingskills` into
-`external/coreyhaines31-marketingskills/`. That mirror is refreshed by
-`./update.sh` and kept separate from the curated top-level `skills/` directory
-to avoid name collisions with existing local skills.
+The curated `skills/marketing-skills/` wrapper remains repo-owned and keeps its
+upstream thank-you/reference text, but it is not backed by a full mirrored copy
+of Corey Haines' repository inside `external/`.
 
 **GitHub Actions Auto-Sync:**
 
@@ -2312,7 +2304,7 @@ their original repositories explicitly.
 
 Skills in this collection cover:
 
-- **PHP 8.2+** with strict types (shared `SKILL-PHP84.md` guide available)
+- **PHP 8.2+** with strict types and modernization guidance in `php-modernization`
 - **TYPO3 v14.x** for CMS projects (skills are v14-only)
 - **React/Remotion** for video creation
 - **DDEV** for local development
@@ -2340,9 +2332,8 @@ The following repositories are the source for skills in this collection:
 ### Supabase (1 skill)
 - `postgres-best-practices`: https://github.com/supabase/agent-skills
 
-### Corey Haines (1 skill + 1 repo mirror)
+### Corey Haines (1 skill)
 - `marketing-skills`: https://github.com/coreyhaines31/marketingskills
-- full repo mirror `coreyhaines31-marketingskills`: https://github.com/coreyhaines31/marketingskills -> `external/coreyhaines31-marketingskills`
 
 ### ooiyeefei (1 skill)
 - `excalidraw`: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
@@ -2474,7 +2465,6 @@ Adapted skill: `marketing-skills`
 
 Original repositories:
 - `marketing-skills`: https://github.com/coreyhaines31/marketingskills
-- full repo mirror `coreyhaines31-marketingskills`: https://github.com/coreyhaines31/marketingskills -> `external/coreyhaines31-marketingskills`
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)

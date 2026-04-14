@@ -24,7 +24,7 @@ license: MIT / CC-BY-SA-4.0
 
 > **Supplements:**
 > - [SKILL-CONDITIONS.md](SKILL-CONDITIONS.md) - Conditional field/page visibility (powermail_cond)
-> - [../../SKILL-PHP84.md](../../SKILL-PHP84.md) - Shared PHP 8.4 guide for migration patterns and TYPO3 follow-ups
+> - PHP 8.4 patterns for finishers, validators, and conditions are covered directly in this skill
 > - [SKILL-EXAMPLES.md](SKILL-EXAMPLES.md) - Multi-step shop form with Austrian legal types, DDEV SQL + DataHandler CLI
 
 ## Powermail vs Core EXT:form

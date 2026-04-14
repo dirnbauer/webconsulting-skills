@@ -15,7 +15,7 @@ To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and f
 ## Key Conventions
 
 - TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Shared root guides `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md` cover TYPO3/PHP cross-cutting topics
+- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example `php-modernization`, `typo3-content-blocks`, `typo3-update`)
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
 

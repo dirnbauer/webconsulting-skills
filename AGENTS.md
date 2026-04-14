@@ -15,10 +15,6 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 
 > **TYPO3 Skills:** All TYPO3-related skills target **TYPO3 v14.x only**. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
 
-> **PHP 8.4 & Content Blocks:** Shared root guides:
-> - `SKILL-PHP84.md` - PHP 8.4 specific patterns and migration
-> - `SKILL-CONTENT-BLOCKS.md` - Content Blocks integration and migration
-
 ---
 
 ## Acknowledgements
@@ -354,7 +350,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
-  - Shared root `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
+  - PHP 8.4 property hooks, asymmetric visibility, and modernization sequencing are covered directly in this skill
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
 - **firecrawl**: Firecrawl CLI for LLM-optimized web scraping, search, and research
@@ -476,7 +472,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-batch**: Batch operations for large-scale TYPO3 migrations and refactoring (adapted from Boris Cherny/Anthropic)
 - **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
   - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
-  - Shared root `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, and conditions
+  - PHP 8.4 patterns for finishers, validators, and conditions are covered directly in the main skill
   - `SKILL-EXAMPLES.md`: Multi-step shop form with Austrian legal types, conditions, translations, DDEV SQL + DataHandler CLI
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
@@ -484,18 +480,6 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-solr**: Apache Solr search integration (Index Queue, facets, suggest, vector search, debugging)
   - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
   - `SKILL-FRONTEND.md`: Custom vanilla JS for search, suggest, facets (no jQuery)
-
-## TYPO3 Shared Guides
-
-The repository keeps two shared root guides for cross-cutting TYPO3 topics:
-
-### `SKILL-PHP84.md`
-
-Shared PHP 8.4 patterns: property hooks, asymmetric visibility, migration sequencing, and routing into the owning skill.
-
-### `SKILL-CONTENT-BLOCKS.md`
-
-Shared Content Blocks guidance: single-source-of-truth modeling, migration strategy, and routing into the owning skill.
 
 ## Usage
 
@@ -1304,11 +1288,11 @@ Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-mode
 Use case: TYPO3 code simplification, batch modernization, API reuse, deprecated pattern removal
 
 ### PHP 8.4 Migration Session
-Active: `SKILL-PHP84.md`, `php-modernization`, `typo3-rector`, `typo3-update`, `typo3-powermail`  
+Active: `php-modernization`, `typo3-rector`, `typo3-update`, `typo3-powermail`  
 Use case: Migrating to PHP 8.4, using new language features, fixing deprecations
 
 ### Content Blocks Migration Session
-Active: `SKILL-CONTENT-BLOCKS.md`, `typo3-content-blocks`, `typo3-datahandler`, `typo3-extension-upgrade`  
+Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-extension-upgrade`  
 Use case: Converting classic TCA/SQL extensions to Content Blocks
 
 ### Documentation Session
