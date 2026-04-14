@@ -20,6 +20,10 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 
 ## Skill Categories
 
+This repository currently ships **61 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+Supplement files such as `SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md`, and category-specific add-ons are
+counted within their parent skill, not as separate skills.
+
 | Category | Skills | Description |
 |----------|--------|-------------|
 | **TYPO3 CMS** | 21 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
@@ -35,19 +39,20 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
+| **Total** | **61 skills** | Top-level skills in `skills/`; supplements are counted within their parent skill |
 
 ---
 
-> ## 📢 Early Adopter Notice
+> ## 📢 A Quick Note
 >
-> **We encourage you to use these skills!** They're designed to boost your development productivity significantly.
-> However, please keep these points in mind:
+> These skills are here to be used. They can speed up research, implementation, and review,
+> and a few ground rules are worth keeping in mind:
 >
-> - **Evolving Technology** — Anthropic, Cursor, and webconsulting are actively improving their platforms. Expect updates and occasional breaking changes.
-> - **Review AI Output** — Always review AI-generated code before committing. These skills enhance productivity, but human judgment remains essential.
-> - **Stay Updated** — Run `git pull && ./install.sh` regularly to get the latest improvements and compatibility fixes.
+> - **Things change** — Anthropic, Cursor, and webconsulting continue to evolve their platforms. Updates and occasional breaking changes are normal.
+> - **Review AI output** — Always check AI-generated code before committing or deploying. Human judgment still matters.
+> - **Keep your local copy current** — Run `git pull && ./install.sh` regularly to pick up new skills, fixes, and compatibility updates.
 >
-> Questions or feedback? We'd love to hear from you!
+> Questions, ideas, or feedback are always welcome.
 
 ---
 

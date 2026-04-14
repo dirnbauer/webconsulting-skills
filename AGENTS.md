@@ -2,8 +2,9 @@
 
 A curated collection of Agent Skills for AI-augmented software development. Skills cover web development, video creation, security auditing, legal compliance, and enterprise software engineering.
 
-> **📢 Early Adopter Notice:** We encourage you to use these skills! Expect occasional updates as 
-> Anthropic, Cursor, and webconsulting evolve their platforms. Always review AI-generated code.
+> **📢 A Quick Note:** These skills are here to be used. Expect updates and occasional changes as
+> Anthropic, Cursor, and webconsulting evolve their platforms. Always review AI-generated code
+> before committing or deploying.
 > See [README](README.md) for details.
 
 > **A note from the maintainer:** This collection is here for the community — practical agent skills
