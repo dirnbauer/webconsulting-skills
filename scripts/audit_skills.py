@@ -59,6 +59,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/enterprise-readiness-skill",
     },
+    "excalidraw": {
+        "owner": "ooiyeefei",
+        "url": "https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw",
+    },
     "find-skills": {
         "owner": "Vercel",
         "url": "https://github.com/vercel-labs/skills",
@@ -215,6 +219,7 @@ GITHUB_OWNER_LABELS = {
     "giuseppe-trisciuoglio": "Giuseppe Trisciuoglio",
     "netresearch": "Netresearch",
     "openhands": "OpenHands",
+    "ooiyeefei": "ooiyeefei",
     "remotion-dev": "remotion-dev",
     "sickn33": "sickn33",
     "softaworks": "Softaworks",

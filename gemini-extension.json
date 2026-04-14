@@ -195,6 +195,13 @@
       "path": "${extensionPath}/skills/web-design-guidelines"
     }
 ,
+    "excalidraw": {
+      "name": "excalidraw",
+      "description": "Generate architecture diagrams as .excalidraw files with optional PNG/SVG export",
+      "triggers": ["excalidraw", "architecture diagram", "system diagram", "visualize codebase", "png export", "svg export"],
+      "path": "${extensionPath}/skills/excalidraw"
+    }
+,
     "og-image": {
       "name": "og-image",
       "description": "Social preview images (Open Graph), meta tags, Twitter cards",

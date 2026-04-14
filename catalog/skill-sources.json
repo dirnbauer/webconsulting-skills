@@ -1,19 +1,32 @@
 [
   {
     "directory": "ab-testing",
-    "skill_name": "ab-testing",
+    "skill_name": "ab-test-setup",
     "description": "When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions \"A/B test,\" \"split test,\" \"experiment,\" \"test this change,\" \"variant copy,\" \"multivariate test,\" or \"hypothesis.\" For tracking implementation, see analytics-tracking.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ab-testing/SKILL.md",
-    "line_count": 471,
+    "line_count": 550,
     "frontmatter_keys": [
       "name",
+      "version",
+      "brand",
+      "category",
+      "difficulty",
       "description",
-      "license",
-      "metadata"
+      "triggers",
+      "prerequisites",
+      "related_skills",
+      "agents",
+      "mcp_integrations",
+      "success_metrics",
+      "output_schema"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `ab-test-setup` does not match directory `ab-testing`",
+      "skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`, `output_schema`",
+      "SKILL.md is 550 lines; skill-creator recommends keeping it under 500"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -24,7 +37,7 @@
     "source_owner": "Softaworks",
     "source_url": "https://github.com/softaworks/agent-toolkit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/agent-md-refactor/SKILL.md",
-    "line_count": 292,
+    "line_count": 300,
     "frontmatter_keys": [
       "name",
       "description",
@@ -39,9 +52,9 @@
     "skill_name": "ai-search-optimization",
     "description": "Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI search platforms. Use when working with aeo, geo, ai search, chatgpt search, perplexity, ai overviews, generative search, llm visibility.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
-    "line_count": 2223,
+    "line_count": 2224,
     "frontmatter_keys": [
       "name",
       "description",
@@ -49,21 +62,19 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 2223 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 2224 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "android-design",
-    "skill_name": "android-design",
+    "skill_name": "android-design-guidelines",
     "description": "Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/android-design/SKILL.md",
-    "line_count": 1054,
+    "line_count": 1064,
     "frontmatter_keys": [
       "name",
       "description",
@@ -71,7 +82,8 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 1054 lines; skill-creator recommends keeping it under 500"
+      "frontmatter name `android-design-guidelines` does not match directory `android-design`",
+      "SKILL.md is 1064 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -79,16 +91,18 @@
   {
     "directory": "cli-tools",
     "skill_name": "cli-tools",
-    "description": "CLI tool management and auto-installation. Use when commands fail with 'command not found', installing tools, or checking project environments.",
+    "description": "Use when ANY command fails with 'command not found', when installing CLI tools (ripgrep, fd, jq, yq, bat, etc.), auditing project environments, or batch-updating tools. Triggers on: command not found, install tool, missing binary, environment audit, update tools, which, apt install, brew install.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/cli-tools-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cli-tools/SKILL.md",
-    "line_count": 257,
+    "line_count": 103,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
+      "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -97,16 +111,18 @@
   {
     "directory": "context7",
     "skill_name": "context7",
-    "description": "Fetch up-to-date library documentation via Context7 REST API. Use when needing current API docs, framework patterns, or code examples for any library.",
+    "description": "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.). Fetches current docs via Context7 REST API. Triggers on: how to use library, API docs, framework pattern, import usage, library example.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/context7-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/context7/SKILL.md",
-    "line_count": 171,
+    "line_count": 112,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
+      "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -119,7 +135,7 @@
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro-funnel/SKILL.md",
-    "line_count": 359,
+    "line_count": 360,
     "frontmatter_keys": [
       "name",
       "description",
@@ -135,9 +151,9 @@
     "skill_name": "deepfake-detection",
     "description": "Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era. Use when working with deepfake, media forensics, fake detection, synthetic media, prnu, image authentication, video verification, disinformation.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/deepfake-detection/SKILL.md",
-    "line_count": 1112,
+    "line_count": 1113,
     "frontmatter_keys": [
       "name",
       "description",
@@ -145,11 +161,9 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1112 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1113 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
@@ -159,7 +173,7 @@
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/document-processing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/document-processing/SKILL.md",
-    "line_count": 653,
+    "line_count": 651,
     "frontmatter_keys": [
       "name",
       "description",
@@ -167,7 +181,7 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 653 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 651 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -175,16 +189,34 @@
   {
     "directory": "enterprise-readiness",
     "skill_name": "enterprise-readiness",
-    "description": "Assess and enhance software projects for enterprise-grade security, quality, and automation. Aligned with OpenSSF Scorecard, SLSA, and S2C2F. Use when working with enterprise, openssf, slsa, security, scorecard, supply chain, badge.",
+    "description": "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates, pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/enterprise-readiness-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
-    "line_count": 338,
+    "line_count": 90,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
+      "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "excalidraw",
+    "skill_name": "excalidraw",
+    "description": "Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats.",
+    "source_owner": "ooiyeefei",
+    "source_url": "https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/excalidraw/SKILL.md",
+    "line_count": 292,
+    "frontmatter_keys": [
+      "name",
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -197,11 +229,10 @@
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/find-skills/SKILL.md",
-    "line_count": 148,
+    "line_count": 155,
     "frontmatter_keys": [
       "name",
-      "description",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -210,16 +241,15 @@
   {
     "directory": "firecrawl",
     "skill_name": "firecrawl",
-    "description": "Web scraping, search, crawling, and browser automation via the Firecrawl CLI. Use this skill whenever the user wants to search the web, find articles, research a topic, look something up online, scrape a webpage, grab content from a URL, extract data from a website, crawl documentation, download a site, or interact with pages that need clicks or logins. Also use when they say \"fetch this page\", \"pull the content from\", \"get the page at https://\", or reference scraping external websites. This provides real-time web search with full page content extraction and cloud browser automation \u2014 capabilities beyond what Claude can do natively with built-in tools. Do NOT trigger for local file operations, git commands, deployments, or code editing tasks.",
+    "description": "Web scraping, search, crawling, and page interaction via the Firecrawl CLI. Use this skill whenever the user wants to search the web, find articles, research a topic, look something up online, scrape a webpage, grab content from a URL, extract data from a website, crawl documentation, download a site, or interact with pages that need clicks or logins. Also use when they say \"fetch this page\", \"pull the content from\", \"get the page at https://\", or reference scraping external websites. This provides real-time web search with full page content extraction and interact capabilities \u2014 beyond what Claude can do natively with built-in tools. Do NOT trigger for local file operations, git commands, deployments, or code editing tasks.",
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
-    "line_count": 132,
+    "line_count": 161,
     "frontmatter_keys": [
       "name",
       "description",
-      "allowed-tools",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -232,7 +262,7 @@
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/frontend-design/SKILL.md",
-    "line_count": 47,
+    "line_count": 55,
     "frontmatter_keys": [
       "name",
       "description",
@@ -244,12 +274,12 @@
   },
   {
     "directory": "ios-design",
-    "skill_name": "ios-design",
+    "skill_name": "ios-design-guidelines",
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ios-design/SKILL.md",
-    "line_count": 1082,
+    "line_count": 1096,
     "frontmatter_keys": [
       "name",
       "description",
@@ -257,19 +287,20 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 1082 lines; skill-creator recommends keeping it under 500"
+      "frontmatter name `ios-design-guidelines` does not match directory `ios-design`",
+      "SKILL.md is 1096 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "ipados-design",
-    "skill_name": "ipados-design",
+    "skill_name": "ipados-design-guidelines",
     "description": "Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ipados-design/SKILL.md",
-    "line_count": 672,
+    "line_count": 688,
     "frontmatter_keys": [
       "name",
       "description",
@@ -277,7 +308,8 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 672 lines; skill-creator recommends keeping it under 500"
+      "frontmatter name `ipados-design-guidelines` does not match directory `ipados-design`",
+      "SKILL.md is 688 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -289,14 +321,25 @@
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch-strategy/SKILL.md",
-    "line_count": 385,
+    "line_count": 391,
     "frontmatter_keys": [
       "name",
+      "version",
+      "brand",
+      "category",
+      "difficulty",
       "description",
-      "license",
-      "metadata"
+      "triggers",
+      "prerequisites",
+      "related_skills",
+      "agents",
+      "mcp_integrations",
+      "success_metrics",
+      "output_schema"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`, `output_schema`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -307,7 +350,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/legal-impressum/SKILL.md",
-    "line_count": 493,
+    "line_count": 492,
     "frontmatter_keys": [
       "name",
       "description",
@@ -320,12 +363,12 @@
   },
   {
     "directory": "macos-design",
-    "skill_name": "macos-design",
+    "skill_name": "macos-design-guidelines",
     "description": "Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/macos-design/SKILL.md",
-    "line_count": 1119,
+    "line_count": 1135,
     "frontmatter_keys": [
       "name",
       "description",
@@ -333,7 +376,8 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 1119 lines; skill-creator recommends keeping it under 500"
+      "frontmatter name `macos-design-guidelines` does not match directory `macos-design`",
+      "SKILL.md is 1135 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -345,7 +389,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-skills/SKILL.md",
-    "line_count": 231,
+    "line_count": 229,
     "frontmatter_keys": [
       "name",
       "description",
@@ -363,11 +407,10 @@
     "source_owner": "Stevy Smith",
     "source_url": "https://github.com/stevysmith/og-image-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/og-image/SKILL.md",
-    "line_count": 206,
+    "line_count": 213,
     "frontmatter_keys": [
       "name",
-      "description",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -376,16 +419,18 @@
   {
     "directory": "php-modernization",
     "skill_name": "php-modernization",
-    "description": "PHP 8.x modernization patterns. Use when upgrading to PHP 8.2/8.3/8.4, implementing type safety, or achieving PHPStan level 10.",
+    "description": "Use when working with ANY PHP modernization task: upgrading PHP 8.1+, adding strict types, configuring PHPStan/Rector/PHP-CS-Fixer, refactoring to enums/DTOs/readonly, improving type safety, or reviewing PHP code quality. Triggers on: PHP upgrade, modernize, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/php-modernization-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/php-modernization/SKILL.md",
-    "line_count": 498,
+    "line_count": 104,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
+      "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -393,19 +438,21 @@
   },
   {
     "directory": "postgres-best-practices",
-    "skill_name": "postgres-best-practices",
+    "skill_name": "supabase-postgres-best-practices",
     "description": "Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.",
     "source_owner": "Supabase",
     "source_url": "https://github.com/supabase/agent-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
-    "line_count": 69,
+    "line_count": 77,
     "frontmatter_keys": [
       "name",
       "description",
       "license",
       "metadata"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `supabase-postgres-best-practices` does not match directory `postgres-best-practices`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -416,7 +463,36 @@
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/programmatic-seo/SKILL.md",
-    "line_count": 663,
+    "line_count": 669,
+    "frontmatter_keys": [
+      "name",
+      "version",
+      "brand",
+      "category",
+      "difficulty",
+      "description",
+      "triggers",
+      "prerequisites",
+      "related_skills",
+      "agents",
+      "mcp_integrations",
+      "success_metrics"
+    ],
+    "pass_1": [
+      "skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`",
+      "SKILL.md is 669 lines; skill-creator recommends keeping it under 500"
+    ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "react-best-practices",
+    "skill_name": "vercel-react-best-practices",
+    "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
+    "source_owner": "Vercel",
+    "source_url": "https://github.com/vercel-labs/agent-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/react-best-practices/SKILL.md",
+    "line_count": 161,
     "frontmatter_keys": [
       "name",
       "description",
@@ -424,44 +500,28 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 663 lines; skill-creator recommends keeping it under 500"
+      "frontmatter name `vercel-react-best-practices` does not match directory `react-best-practices`"
     ],
-    "pass_2": [],
-    "pass_3": []
-  },
-  {
-    "directory": "react-best-practices",
-    "skill_name": "react-best-practices",
-    "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
-    "source_owner": "Vercel",
-    "source_url": "https://github.com/vercel-labs/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/react-best-practices/SKILL.md",
-    "line_count": 148,
-    "frontmatter_keys": [
-      "name",
-      "description",
-      "license",
-      "metadata"
-    ],
-    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "readiness-report",
-    "skill_name": "readiness-report",
-    "description": "Evaluate how well a codebase supports autonomous AI development. Analyzes repositories across eight technical pillars (Style & Validation, Build System, Testing, Documentation, Dev Environment, Debugging & Observability, Security, Task Discovery) and five maturity levels. Use when users request `/readiness-report` or want to assess agent readiness, codebase maturity, or identify gaps preventing effective AI-assisted development.",
+    "skill_name": "agent-readiness-report",
+    "description": "Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is.",
     "source_owner": "OpenHands",
     "source_url": "https://github.com/OpenHands/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/readiness-report/SKILL.md",
-    "line_count": 134,
+    "line_count": 135,
     "frontmatter_keys": [
       "name",
       "description",
-      "license",
-      "metadata"
+      "triggers"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `agent-readiness-report` does not match directory `readiness-report`",
+      "skill-creator schema drift: unexpected top-level keys `triggers`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -472,33 +532,37 @@
     "source_owner": "GitHub",
     "source_url": "https://github.com/github/awesome-copilot",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor/SKILL.md",
-    "line_count": 650,
+    "line_count": 658,
     "frontmatter_keys": [
       "name",
       "description",
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 650 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 658 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "refactor-clean",
-    "skill_name": "refactor-clean",
-    "description": "Refactor code incrementally using clean code principles and SOLID design patterns. Use when the user wants to improve maintainability, reduce duplication or complexity, and keep behavior stable while restructuring an existing codebase.",
+    "skill_name": "code-refactoring-refactor-clean",
+    "description": "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance.",
     "source_owner": "sickn33",
     "source_url": "https://github.com/sickn33/antigravity-awesome-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor-clean/SKILL.md",
-    "line_count": 61,
+    "line_count": 72,
     "frontmatter_keys": [
       "name",
       "description",
-      "license",
-      "metadata"
+      "risk",
+      "source",
+      "date_added"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `code-refactoring-refactor-clean` does not match directory `refactor-clean`",
+      "skill-creator schema drift: unexpected top-level keys `risk`, `source`, `date_added`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -509,11 +573,10 @@
     "source_owner": "remotion-dev",
     "source_url": "https://github.com/remotion-dev/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
-    "line_count": 67,
+    "line_count": 108,
     "frontmatter_keys": [
       "name",
       "description",
-      "license",
       "metadata"
     ],
     "pass_1": [],
@@ -523,16 +586,18 @@
   {
     "directory": "security-audit",
     "skill_name": "security-audit",
-    "description": "Security audit patterns for PHP/OWASP. Use when conducting security assessments, identifying vulnerabilities (XXE, SQL injection, XSS), or CVSS scoring.",
+    "description": "Use when conducting security assessments, OWASP/CWE audits, CVSS scoring, auditing PHP/TYPO3 projects for vulnerabilities, scanning dependencies, or reviewing code for security concerns.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/security-audit-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-audit/SKILL.md",
-    "line_count": 358,
+    "line_count": 124,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
+      "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -545,7 +610,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
-    "line_count": 379,
+    "line_count": 378,
     "frontmatter_keys": [
       "name",
       "description",
@@ -563,16 +628,13 @@
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
-    "line_count": 1938,
+    "line_count": 324,
     "frontmatter_keys": [
       "name",
       "description",
-      "allowed-tools",
-      "license"
+      "allowed-tools"
     ],
-    "pass_1": [
-      "SKILL.md is 1938 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -583,11 +645,10 @@
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/skill-creator/SKILL.md",
-    "line_count": 491,
+    "line_count": 498,
     "frontmatter_keys": [
       "name",
-      "description",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -595,19 +656,21 @@
   },
   {
     "directory": "tvos-design",
-    "skill_name": "tvos-design",
+    "skill_name": "tvos-design-guidelines",
     "description": "Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tvos-design/SKILL.md",
-    "line_count": 378,
+    "line_count": 392,
     "frontmatter_keys": [
       "name",
       "description",
       "license",
       "metadata"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `tvos-design-guidelines` does not match directory `tvos-design`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -616,9 +679,9 @@
     "skill_name": "typo3-accessibility",
     "description": "WCAG 2.2 AA accessibility audit and implementation for TYPO3 v14. Covers Fluid template patterns, PHP middleware, JavaScript enhancements, Content Element accessibility, form accessibility, and a full go-live checklist. Use when working with accessibility, a11y, wcag, aria, screen reader, keyboard navigation, focus management, color contrast, alt text, semantic html, skip link, or accessible forms in TYPO3.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
-    "line_count": 979,
+    "line_count": 981,
     "frontmatter_keys": [
       "name",
       "description",
@@ -627,11 +690,9 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 979 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 981 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
@@ -656,17 +717,15 @@
   {
     "directory": "typo3-conformance",
     "skill_name": "typo3-conformance",
-    "description": "Evaluate TYPO3 extensions for conformance to TYPO3 v14 standards. Use when assessing quality, generating reports, or planning modernization.",
+    "description": "Use when assessing TYPO3 extension quality, conformance checking, standards compliance, modernization to v12/v13/v14, TER readiness, or best practices review. Also triggers on: extension audit, quality score, full assessment, fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance, ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-conformance-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-conformance/SKILL.md",
-    "line_count": 458,
+    "line_count": 113,
     "frontmatter_keys": [
       "name",
       "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "metadata"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -679,7 +738,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
-    "line_count": 1164,
+    "line_count": 1279,
     "frontmatter_keys": [
       "name",
       "description",
@@ -688,7 +747,7 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1164 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1279 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -696,17 +755,14 @@
   {
     "directory": "typo3-core-contributions",
     "skill_name": "typo3-core-contributions",
-    "description": "TYPO3 Core contribution workflow. Use when working with Forge issues, submitting patches to Gerrit, or contributing docs.",
+    "description": "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-core-contributions-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-core-contributions/SKILL.md",
-    "line_count": 336,
+    "line_count": 98,
     "frontmatter_keys": [
       "name",
-      "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -719,7 +775,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
-    "line_count": 566,
+    "line_count": 572,
     "frontmatter_keys": [
       "name",
       "description",
@@ -728,7 +784,7 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 566 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 572 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -736,17 +792,14 @@
   {
     "directory": "typo3-ddev",
     "skill_name": "typo3-ddev",
-    "description": "Best practices for TYPO3 local development with DDEV, including configuration, database management, multi-version testing, and common workflows for TYPO3 v14. Use when working with ddev, local, development, docker, environment, multi-version.",
+    "description": "Use when setting up DDEV for TYPO3 extension development, testing across multiple TYPO3 versions (11.5/12.4/13.4/14.0), configuring local dev environments, or multi-version testing. Also triggers on: ddev start, ddev config, local development, docker environment, PHP version management.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-ddev-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-ddev/SKILL.md",
-    "line_count": 494,
+    "line_count": 116,
     "frontmatter_keys": [
       "name",
-      "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -755,17 +808,18 @@
   {
     "directory": "typo3-docs",
     "skill_name": "typo3-docs",
-    "description": "Create and maintain TYPO3 extension documentation following official docs.typo3.org standards. RST syntax, TYPO3 directives, rendering, and deployment. Use when working with documentation, rst, docs, readme, typo3 documentation.",
+    "description": "Use when creating, editing, or reviewing TYPO3 extension documentation (Documentation/*.rst, guides.xml, README.md), rendering docs with Docker, using TYPO3 RST directives, adding screenshots, deploying to docs.typo3.org, setting up TYPO3 docs webhook, publishing TYPO3 documentation via Intercept, improve docs, add screenshots, fix documentation, or docs accuracy.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-docs-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-docs/SKILL.md",
-    "line_count": 486,
+    "line_count": 100,
     "frontmatter_keys": [
       "name",
       "description",
+      "license",
       "compatibility",
       "metadata",
-      "license"
+      "allowed-tools"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -774,17 +828,14 @@
   {
     "directory": "typo3-extension-upgrade",
     "skill_name": "typo3-extension-upgrade",
-    "description": "Systematic TYPO3 extension upgrades to newer LTS versions. Covers Extension Scanner, Rector, Fractor, PHPStan, and testing. Use when working with extension, upgrade, fractor, rector, migration.",
+    "description": "Use when upgrading TYPO3 extensions to newer LTS versions (v11->v12, v12->v13, v13->v14), running Extension Scanner, Rector, Fractor, PHPStan, fixing deprecated APIs, or resolving compatibility issues. Also triggers on: migration, version upgrade, deprecated API, dual-version compatibility.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-extension-upgrade-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
-    "line_count": 465,
+    "line_count": 100,
     "frontmatter_keys": [
       "name",
-      "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -795,9 +846,9 @@
     "skill_name": "typo3-fractor",
     "description": "Automated non-PHP migrations for TYPO3 upgrades using Fractor. Handles FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when working with fractor, flexform, typoscript migration, fluid migration, non-php upgrade, yaml migration.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-fractor/SKILL.md",
-    "line_count": 497,
+    "line_count": 498,
     "frontmatter_keys": [
       "name",
       "description",
@@ -806,19 +857,17 @@
       "license"
     ],
     "pass_1": [],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-icon14",
     "skill_name": "typo3-icon14",
-    "description": "Migrate TYPO3 extension backend module icons from old solid-background style to TYPO3 v14 line-art style using currentColor, CSS custom properties, and the Icon API. Scans extensions for legacy icon SVGs, creates v14-conformant replacements, and updates Configuration/Icons.php registration. Use when working with icons, backend module icons, icon migration, icon update, module icon, TYPO3 v14 icons, icon redesign, SVG icons, icon registry, icon modernization.",
+    "description": "Design and migrate TYPO3 v14 extension icons with the Core Icon API and the current backend icon language. Use when working with module icons, plugin icons, record icons, action icons, Extension.svg, Configuration/Icons.php, iconIdentifier, pluginIcon, typeicon_classes, TYPO3.Icons, or styleguide icon references.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-icon14/SKILL.md",
-    "line_count": 500,
+    "line_count": 174,
     "frontmatter_keys": [
       "name",
       "description",
@@ -837,7 +886,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-powermail/SKILL.md",
-    "line_count": 1163,
+    "line_count": 1217,
     "frontmatter_keys": [
       "name",
       "description",
@@ -846,7 +895,7 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1163 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1217 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -856,9 +905,9 @@
     "skill_name": "typo3-records-list-types",
     "description": "Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
-    "line_count": 632,
+    "line_count": 634,
     "frontmatter_keys": [
       "name",
       "description",
@@ -866,11 +915,9 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 632 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 634 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
@@ -878,9 +925,9 @@
     "skill_name": "typo3-rector",
     "description": "TYPO3 v14 upgrade patterns using Rector: automated refactoring rules, level sets, and migration workflows. Use when working with rector, upgrade, migration, refactoring, deprecation.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-rector/SKILL.md",
-    "line_count": 530,
+    "line_count": 536,
     "frontmatter_keys": [
       "name",
       "description",
@@ -889,11 +936,9 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 530 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 536 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
@@ -903,7 +948,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-security/SKILL.md",
-    "line_count": 476,
+    "line_count": 475,
     "frontmatter_keys": [
       "name",
       "description",
@@ -920,9 +965,9 @@
     "skill_name": "typo3-seo",
     "description": "SEO configuration and best practices for TYPO3 v14, including EXT:seo setup, sitemaps, meta tags, and structured data. Use when working with seo, sitemap, meta, robots, structured data, opengraph.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-seo/SKILL.md",
-    "line_count": 477,
+    "line_count": 507,
     "frontmatter_keys": [
       "name",
       "description",
@@ -930,20 +975,20 @@
       "metadata",
       "license"
     ],
-    "pass_1": [],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
+    "pass_1": [
+      "SKILL.md is 507 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-simplify",
     "skill_name": "typo3-simplify",
     "description": "Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability while preserving functionality. Reviews PHP classes, Fluid templates, TCA, Services.yaml, and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature or before merging a PR. Use when working with simplify, clean up, refine, code quality, reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.",
-    "source_owner": "webconsulting",
+    "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-simplify/SKILL.md",
-    "line_count": 248,
+    "line_count": 251,
     "frontmatter_keys": [
       "name",
       "description",
@@ -960,9 +1005,9 @@
     "skill_name": "typo3-solr",
     "description": "Expert guidance on Apache Solr search integration for TYPO3: installation, Index Queue, faceting, suggest, PSR-14 events, custom indexers, LLM/vector search (Solr native), DDEV/Docker/production setup, deep debugging & troubleshooting, and file indexing via solrfal. Use when working with solr, search, indexing, facets, suggest, autocomplete, vector search, solrfal, tika.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-solr/SKILL.md",
-    "line_count": 2179,
+    "line_count": 2184,
     "frontmatter_keys": [
       "name",
       "description",
@@ -971,31 +1016,24 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 2179 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 2184 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-testing",
     "skill_name": "typo3-testing",
-    "description": "TYPO3 extension testing (unit, functional, E2E, architecture, mutation). Use when setting up test infrastructure, writing tests, or configuring CI/CD.",
+    "description": "Use when setting up TYPO3 extension test infrastructure, writing unit/functional/E2E tests, configuring PHPUnit, mutation testing, mocking, CI/CD test pipelines, or debugging CI failures. For existing test suites, run the automated-assessment skill first to identify gaps. Also triggers on: ensure proper testing, test matrix, integration testing, e2e testing, coverage, test generation.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-testing-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-testing/SKILL.md",
-    "line_count": 617,
+    "line_count": 107,
     "frontmatter_keys": [
       "name",
-      "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "description"
     ],
-    "pass_1": [
-      "SKILL.md is 617 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -1004,9 +1042,9 @@
     "skill_name": "typo3-update",
     "description": "TYPO3 v14 development guide: version constraints, core APIs, extension patterns, and upgrade workflows. Use when working with update, upgrade, v14, migration, lts, TYPO3 core.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-update/SKILL.md",
-    "line_count": 862,
+    "line_count": 865,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1015,11 +1053,9 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 862 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 865 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {
@@ -1029,7 +1065,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
-    "line_count": 1680,
+    "line_count": 1683,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1038,7 +1074,7 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1680 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1683 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -1050,7 +1086,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
-    "line_count": 870,
+    "line_count": 869,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1058,44 +1094,48 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 870 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 869 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "visionos-design",
-    "skill_name": "visionos-design",
+    "skill_name": "visionos-design-guidelines",
     "description": "Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/visionos-design/SKILL.md",
-    "line_count": 374,
+    "line_count": 388,
     "frontmatter_keys": [
       "name",
       "description",
       "license",
       "metadata"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `visionos-design-guidelines` does not match directory `visionos-design`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "watchos-design",
-    "skill_name": "watchos-design",
+    "skill_name": "watchos-design-guidelines",
     "description": "Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/watchos-design/SKILL.md",
-    "line_count": 371,
+    "line_count": 380,
     "frontmatter_keys": [
       "name",
       "description",
       "license",
       "metadata"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "frontmatter name `watchos-design-guidelines` does not match directory `watchos-design`"
+    ],
     "pass_2": [],
     "pass_3": []
   },
@@ -1106,25 +1146,26 @@
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/agent-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-design-guidelines/SKILL.md",
-    "line_count": 45,
+    "line_count": 52,
     "frontmatter_keys": [
       "name",
       "description",
-      "metadata",
-      "license"
+      "metadata"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "duplicate frontmatter name `web-design-guidelines` shared by web-design-guidelines, web-platform-design"
+    ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "web-platform-design",
-    "skill_name": "web-platform-design",
+    "skill_name": "web-design-guidelines",
     "description": "Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-platform-design/SKILL.md",
-    "line_count": 1451,
+    "line_count": 1467,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1132,7 +1173,9 @@
       "metadata"
     ],
     "pass_1": [
-      "SKILL.md is 1451 lines; skill-creator recommends keeping it under 500"
+      "duplicate frontmatter name `web-design-guidelines` shared by web-design-guidelines, web-platform-design",
+      "frontmatter name `web-design-guidelines` does not match directory `web-platform-design`",
+      "SKILL.md is 1467 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -1144,7 +1187,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
-    "line_count": 312,
+    "line_count": 311,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1161,20 +1204,18 @@
     "skill_name": "webconsulting-create-documentation",
     "description": "Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.",
     "source_owner": "webconsulting",
-    "source_url": null,
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
-    "line_count": 1100,
+    "line_count": 1101,
     "frontmatter_keys": [
       "name",
       "description",
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1100 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1101 lines; skill-creator recommends keeping it under 500"
     ],
-    "pass_2": [
-      "no explicit source note; current assumption is webconsulting-original"
-    ],
+    "pass_2": [],
     "pass_3": []
   }
 ]

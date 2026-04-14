@@ -15,7 +15,7 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 
 > **TYPO3 Skills:** All TYPO3-related skills target **TYPO3 v14.x only**. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
 
-> **PHP 8.4 & Content Blocks:** Most TYPO3 skills include supplement files:
+> **PHP 8.4 & Content Blocks:** Shared root guides:
 > - `SKILL-PHP84.md` - PHP 8.4 specific patterns and migration
 > - `SKILL-CONTENT-BLOCKS.md` - Content Blocks integration and migration
 
@@ -93,6 +93,14 @@ https://github.com/firecrawl/cli
 
 **Copyright (c) Firecrawl / Mendable, Inc.** — CLI (ISC License)
 Note: The Firecrawl platform is AGPL-3.0; this skill documents CLI usage patterns only.
+
+---
+
+We also thank **[ooiyeefei](https://github.com/ooiyeefei)** for the excellent Excalidraw
+architecture diagram skill. The `excalidraw` skill is adapted from the repository:
+https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
+
+**Copyright (c) ooiyeefei** - Excalidraw architecture diagram generation and export workflow (MIT License)
 
 ---
 
@@ -216,7 +224,6 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
-| `php-modernization/PHP84` | PHP 8.4 features: property hooks, asymmetric visibility | 1.0.0 | php 8.4, property hooks |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
 | `context7` | Library documentation lookup via REST API | 1.0.0 | documentation, api, libraries |
 | `firecrawl` | Firecrawl CLI for LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
@@ -226,6 +233,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces | 1.0.0 | frontend, design, creative, beautiful, distinctive, aesthetics |
 | `web-design-guidelines` | Interface review, accessibility audit, WCAG, ARIA, semantic HTML | 1.0.0 | web design, accessibility, a11y, wcag, aria, semantic html |
+| `excalidraw` | Generate architecture diagrams as .excalidraw files with optional PNG/SVG export | 1.0.0 | excalidraw, architecture diagram, system diagram, visualize codebase, png export, svg export |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
 | `react-best-practices` | React/Next.js performance optimization from Vercel (57 rules) | 1.0.0 | react, next.js, performance, optimization, bundle, waterfalls |
 | `shadcn-ui` | shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms | 1.0.0 | shadcn, radix, tailwind, components, form, dialog, button, card |
@@ -265,7 +273,6 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-batch` | Batch TYPO3 migrations: hooks→events, TCA, DI, namespaces (Boris Cherny) | 1.0.0 | batch, migrate, bulk, mass refactor, codemod, upgrade all |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
 | `typo3-powermail/CONDITIONS` | Conditional field/page visibility with powermail_cond 13+ | 1.0.0 | powermail_cond, conditional fields, show hide fields |
-| `typo3-powermail/PHP84` | PHP 8.4 patterns for Powermail finishers, validators, conditions | 1.0.0 | powermail php 8.4, powermail property hooks |
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 2.0.0 | workspace, versioning, staging, publishing, review, draft content |
@@ -347,7 +354,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ### PHP & Tools
 - **php-modernization**: PHP 8.x features, type safety, PHPStan level 10
-  - `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
+  - Shared root `SKILL-PHP84.md`: PHP 8.4 property hooks, asymmetric visibility, new array functions
 - **cli-tools**: CLI tool management, auto-installation on "command not found"
 - **context7**: Library documentation lookup via Context7 REST API
 - **firecrawl**: Firecrawl CLI for LLM-optimized web scraping, search, and research
@@ -372,6 +379,10 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - ARIA patterns and keyboard navigation
   - Responsive design and touch targets
   - Focus states and color contrast
+- **excalidraw**: Architecture diagrams as `.excalidraw` files with optional PNG/SVG export
+  - Generate system and codebase diagrams directly from source analysis
+  - Uses proper Excalidraw bindings, elbow arrows, and component color palettes
+  - Can export diagrams to PNG and SVG via Playwright
 - **og-image**: Social media preview images (Open Graph) and meta tag configuration
   - Creates `/og-image` route matching project design system
   - Screenshots at 1200x630 dimensions
@@ -465,7 +476,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-batch**: Batch operations for large-scale TYPO3 migrations and refactoring (adapted from Boris Cherny/Anthropic)
 - **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
   - `SKILL-CONDITIONS.md`: Conditional field/page visibility with powermail_cond
-  - `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, conditions (property hooks, asymmetric visibility)
+  - Shared root `SKILL-PHP84.md`: PHP 8.4 patterns for finishers, validators, and conditions
   - `SKILL-EXAMPLES.md`: Multi-step shop form with Austrian legal types, conditions, translations, DDEV SQL + DataHandler CLI
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
@@ -474,17 +485,17 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
   - `SKILL-FRONTEND.md`: Custom vanilla JS for search, suggest, facets (no jQuery)
 
-## TYPO3 Skill Supplements
+## TYPO3 Shared Guides
 
-TYPO3 skills include optional supplement files for PHP 8.4 and Content Blocks:
+The repository keeps two shared root guides for cross-cutting TYPO3 topics:
 
-### PHP 8.4 Supplements (`SKILL-PHP84.md`)
+### `SKILL-PHP84.md`
 
-Cover PHP 8.4 specific patterns: property hooks, asymmetric visibility, new array functions, `#[\Deprecated]` attribute.
+Shared PHP 8.4 patterns: property hooks, asymmetric visibility, migration sequencing, and routing into the owning skill.
 
-### Content Blocks Supplements (`SKILL-CONTENT-BLOCKS.md`)
+### `SKILL-CONTENT-BLOCKS.md`
 
-Cover Content Blocks integration: using Content Blocks with the skill's domain, migration from classic TCA/SQL.
+Shared Content Blocks guidance: single-source-of-truth modeling, migration strategy, and routing into the owning skill.
 
 ## Usage
 
@@ -1293,11 +1304,11 @@ Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-mode
 Use case: TYPO3 code simplification, batch modernization, API reuse, deprecated pattern removal
 
 ### PHP 8.4 Migration Session
-Active: `php-modernization/SKILL-PHP84`, `typo3-rector/SKILL-PHP84`, `typo3-update/SKILL-PHP84`, `typo3-powermail/SKILL-PHP84`  
+Active: `SKILL-PHP84.md`, `php-modernization`, `typo3-rector`, `typo3-update`, `typo3-powermail`  
 Use case: Migrating to PHP 8.4, using new language features, fixing deprecations
 
 ### Content Blocks Migration Session
-Active: `typo3-content-blocks`, `typo3-datahandler/SKILL-CONTENT-BLOCKS`, `typo3-extension-upgrade/SKILL-CONTENT-BLOCKS`  
+Active: `SKILL-CONTENT-BLOCKS.md`, `typo3-content-blocks`, `typo3-datahandler`, `typo3-extension-upgrade`  
 Use case: Converting classic TCA/SQL extensions to Content Blocks
 
 ### Documentation Session

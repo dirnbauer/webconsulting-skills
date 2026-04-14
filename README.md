@@ -20,9 +20,9 @@ to the TYPO3 ecosystem and the broader AI-assisted development community are gen
 
 ## Skill Categories
 
-This repository currently ships **61 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
-Supplement files such as `SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md`, and category-specific add-ons are
-counted within their parent skill, not as separate skills.
+This repository currently ships **62 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+Shared root guides such as `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md`, plus category-specific
+add-ons, are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
@@ -34,12 +34,12 @@ counted within their parent skill, not as separate skills.
 | **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
 | **Code Quality & Refactoring** | 4 skills | Agent instruction refactoring, code smells, SOLID patterns, skill discovery |
 | **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
-| **Frontend & Design** | 7 skills | UI patterns, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
+| **Frontend & Design** | 8 skills | UI patterns, architecture diagrams, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
 | **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
-| **Total** | **61 skills** | Top-level skills in `skills/`; supplements are counted within their parent skill |
+| **Total** | **62 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -2108,6 +2108,7 @@ grep -r "DataHandler" skills/
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns | Anthropic |
 | `web-design-guidelines` | Interface review, WCAG, ARIA, accessibility | Vercel |
+| `excalidraw` | Architecture diagrams as `.excalidraw` with optional PNG/SVG export | ooiyeefei |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
 | `react-best-practices` | React/Next.js performance optimization (57 rules) | Vercel |
 | `shadcn-ui` | shadcn/ui component patterns (Radix UI, Tailwind CSS, Zod) | Giuseppe Trisciuoglio |
@@ -2135,35 +2136,26 @@ grep -r "DataHandler" skills/
 
 ### Skill Supplements
 
-Most TYPO3 skills include additional supplement files:
+The repository keeps two shared root guides for cross-cutting TYPO3 topics, plus a small number of
+category-specific add-ons:
 
 | Supplement | Purpose |
 |------------|---------|
-| `SKILL-PHP84.md` | PHP 8.4 specific patterns: property hooks, asymmetric visibility, new array functions |
-| `SKILL-CONTENT-BLOCKS.md` | Content Blocks integration: using Content Blocks with the skill's domain |
-| `SKILL-SOLRFAL.md` | File indexing with solrfal and Apache Tika (typo3-solr only) |
-| `SKILL-FRONTEND.md` | Custom vanilla JS for search, suggest, facets without jQuery (typo3-solr only) |
+| `SKILL-PHP84.md` | Shared PHP 8.4 guide: migration patterns, TYPO3 follow-ups, routing to owning skills |
+| `SKILL-CONTENT-BLOCKS.md` | Shared Content Blocks guide: migration strategy, DataHandler/testing/update routing |
+| `skills/typo3-solr/SKILL-SOLRFAL.md` | File indexing with solrfal and Apache Tika |
+| `skills/typo3-solr/SKILL-FRONTEND.md` | Custom vanilla JS for search, suggest, facets without jQuery |
 
-**Skills with supplements:**
-- `php-modernization/SKILL-PHP84.md` - Comprehensive PHP 8.4 features reference
-- `typo3-datahandler/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - DataHandler with PHP 8.4 and Content Blocks
-- `typo3-ddev/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - DDEV PHP 8.4 config and CB development
-- `typo3-testing/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Testing with PHP 8.4 and Content Blocks
-- `typo3-rector/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Rector rules for PHP 8.4 and CB migration
-- `typo3-update/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Upgrade strategies with PHP 8.4 and CB
-- `typo3-extension-upgrade/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Extension upgrades
-- `typo3-conformance/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Standards with PHP 8.4 and CB
-- `typo3-security/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Security patterns
-- `typo3-seo/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - SEO with structured data
-- `typo3-docs/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Documenting PHP 8.4 and CB
-- `typo3-core-contributions/SKILL-PHP84.md`, `SKILL-CONTENT-BLOCKS.md` - Core contributions
-- `typo3-solr/SKILL-SOLRFAL.md` - File indexing with solrfal and Apache Tika (PDF, DOCX, XLSX)
-- `typo3-solr/SKILL-FRONTEND.md` - Custom vanilla JS for search, suggest, facets (no jQuery)
+**Shared root guide routing:**
+- `SKILL-PHP84.md` -> `php-modernization`, `typo3-update`, `typo3-rector`, `typo3-testing`, `typo3-powermail`
+- `SKILL-CONTENT-BLOCKS.md` -> `typo3-content-blocks`, `typo3-content-blocks/SKILL-MIGRATION.md`, `typo3-datahandler`, `typo3-extension-upgrade`, `typo3-testing`, `typo3-update`
+- `skills/typo3-solr/SKILL-SOLRFAL.md` -> file indexing with solrfal and Apache Tika
+- `skills/typo3-solr/SKILL-FRONTEND.md` -> custom vanilla JS search frontends
 
 ### IDE Integration
 
 - **Cross-client skills**: Same `SKILL.md` files work across all supported AI coding assistants
-- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 61 skills
+- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 62 skills
 - **MCP Configuration**: Placeholder for DDEV, Hetzner, and MySQL servers
 
 ## Architecture
@@ -2320,7 +2312,7 @@ their original repositories explicitly.
 
 Skills in this collection cover:
 
-- **PHP 8.2+** with strict types (PHP 8.4 supplements available)
+- **PHP 8.2+** with strict types (shared `SKILL-PHP84.md` guide available)
 - **TYPO3 v14.x** for CMS projects (skills are v14-only)
 - **React/Remotion** for video creation
 - **DDEV** for local development
@@ -2351,6 +2343,9 @@ The following repositories are the source for skills in this collection:
 ### Corey Haines (1 skill + 1 repo mirror)
 - `marketing-skills`: https://github.com/coreyhaines31/marketingskills
 - full repo mirror `coreyhaines31-marketingskills`: https://github.com/coreyhaines31/marketingskills -> `external/coreyhaines31-marketingskills`
+
+### ooiyeefei (1 skill)
+- `excalidraw`: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
 
 ### Stevy Smith (1 skill)
 - `og-image`: https://github.com/stevysmith/og-image-skill
@@ -2483,6 +2478,18 @@ Original repositories:
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
+
+---
+
+We also thank **[ooiyeefei](https://github.com/ooiyeefei)** for their excellent open-source work.
+The `excalidraw` skill in this collection builds on that contribution.
+
+Adapted skill: `excalidraw`
+
+Original repositories:
+- `excalidraw`: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
+
+**Copyright (c) ooiyeefei** - Excalidraw architecture diagram generation and export workflow (MIT License)
 
 ---
 

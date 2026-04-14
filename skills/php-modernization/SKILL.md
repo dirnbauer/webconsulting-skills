@@ -20,6 +20,8 @@ allowed-tools:
 
 Modernize PHP applications to PHP 8.x with type safety, PSR compliance, and static analysis.
 
+> **Shared Root Guide:** [../../SKILL-PHP84.md](../../SKILL-PHP84.md) - repo-wide PHP 8.4 routing, migration checklist, and TYPO3 follow-ups
+
 ## Expertise Areas
 
 - **PHP 8.x**: Constructor promotion, readonly, enums, match, attributes, union/intersection types, `#[Override]`, typed constants, `#[SensitiveParameter]`, property hooks

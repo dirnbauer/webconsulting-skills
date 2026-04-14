@@ -90,6 +90,14 @@
       "note": "Keep full Netresearch credits and thank-you block after sync"
     },
     {
+      "name": "excalidraw",
+      "source": "https://github.com/ooiyeefei/ccc.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/excalidraw",
+      "note": "Excalidraw architecture diagram generator with optional PNG/SVG export"
+    },
+    {
       "name": "find-skills",
       "source": "https://github.com/vercel-labs/skills.git",
       "branch": "main",

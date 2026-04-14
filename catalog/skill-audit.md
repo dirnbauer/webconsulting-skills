@@ -7,10 +7,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 61
-- Total findings: 33
-- Skills with pass 1 findings: 23
-- Skills with pass 2 findings: 10
+- Skills audited: 62
+- Total findings: 43
+- Skills with pass 1 findings: 32
+- Skills with pass 2 findings: 0
 - Skills with pass 3 findings: 0
 
 ## High-Signal Repo Findings
@@ -23,11 +23,13 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: AITYTech
 - Source URL: https://github.com/aitytech/agentkits-marketing
-- Frontmatter name: ab-testing
-- SKILL.md lines: 471
+- Frontmatter name: ab-test-setup
+- SKILL.md lines: 550
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `ab-test-setup` does not match directory `ab-testing`
+- skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`, `output_schema`
+- SKILL.md is 550 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -40,7 +42,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Softaworks
 - Source URL: https://github.com/softaworks/agent-toolkit
 - Frontmatter name: agent-md-refactor
-- SKILL.md lines: 292
+- SKILL.md lines: 300
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -54,15 +56,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `ai-search-optimization`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: ai-search-optimization
-- SKILL.md lines: 2223
+- SKILL.md lines: 2224
 
 **Pass 1: Structure**
-- SKILL.md is 2223 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 2224 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -71,11 +73,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: android-design
-- SKILL.md lines: 1054
+- Frontmatter name: android-design-guidelines
+- SKILL.md lines: 1064
 
 **Pass 1: Structure**
-- SKILL.md is 1054 lines; skill-creator recommends keeping it under 500
+- frontmatter name `android-design-guidelines` does not match directory `android-design`
+- SKILL.md is 1064 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -88,7 +91,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/cli-tools-skill
 - Frontmatter name: cli-tools
-- SKILL.md lines: 257
+- SKILL.md lines: 103
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -104,7 +107,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/context7-skill
 - Frontmatter name: context7
-- SKILL.md lines: 171
+- SKILL.md lines: 112
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -120,7 +123,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: AITYTech
 - Source URL: https://github.com/aitytech/agentkits-marketing
 - Frontmatter name: cro-funnel
-- SKILL.md lines: 359
+- SKILL.md lines: 360
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -134,15 +137,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `deepfake-detection`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: deepfake-detection
-- SKILL.md lines: 1112
+- SKILL.md lines: 1113
 
 **Pass 1: Structure**
-- SKILL.md is 1112 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1113 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -152,10 +155,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Anthropic
 - Source URL: https://github.com/anthropics/skills/tree/main/skills/document-processing
 - Frontmatter name: document-processing
-- SKILL.md lines: 653
+- SKILL.md lines: 651
 
 **Pass 1: Structure**
-- SKILL.md is 653 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 651 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -168,7 +171,23 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/enterprise-readiness-skill
 - Frontmatter name: enterprise-readiness
-- SKILL.md lines: 338
+- SKILL.md lines: 90
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `excalidraw`
+
+- Source owner: ooiyeefei
+- Source URL: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
+- Frontmatter name: excalidraw
+- SKILL.md lines: 292
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -184,7 +203,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Vercel
 - Source URL: https://github.com/vercel-labs/skills
 - Frontmatter name: find-skills
-- SKILL.md lines: 148
+- SKILL.md lines: 155
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -200,7 +219,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Firecrawl
 - Source URL: https://github.com/firecrawl/cli
 - Frontmatter name: firecrawl
-- SKILL.md lines: 132
+- SKILL.md lines: 161
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -216,7 +235,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Anthropic
 - Source URL: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 - Frontmatter name: frontend-design
-- SKILL.md lines: 47
+- SKILL.md lines: 55
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -231,11 +250,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: ios-design
-- SKILL.md lines: 1082
+- Frontmatter name: ios-design-guidelines
+- SKILL.md lines: 1096
 
 **Pass 1: Structure**
-- SKILL.md is 1082 lines; skill-creator recommends keeping it under 500
+- frontmatter name `ios-design-guidelines` does not match directory `ios-design`
+- SKILL.md is 1096 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -247,11 +267,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: ipados-design
-- SKILL.md lines: 672
+- Frontmatter name: ipados-design-guidelines
+- SKILL.md lines: 688
 
 **Pass 1: Structure**
-- SKILL.md is 672 lines; skill-creator recommends keeping it under 500
+- frontmatter name `ipados-design-guidelines` does not match directory `ipados-design`
+- SKILL.md is 688 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -264,10 +285,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: AITYTech
 - Source URL: https://github.com/aitytech/agentkits-marketing
 - Frontmatter name: launch-strategy
-- SKILL.md lines: 385
+- SKILL.md lines: 391
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`, `output_schema`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -280,7 +301,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: legal-impressum
-- SKILL.md lines: 493
+- SKILL.md lines: 492
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -295,11 +316,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: macos-design
-- SKILL.md lines: 1119
+- Frontmatter name: macos-design-guidelines
+- SKILL.md lines: 1135
 
 **Pass 1: Structure**
-- SKILL.md is 1119 lines; skill-creator recommends keeping it under 500
+- frontmatter name `macos-design-guidelines` does not match directory `macos-design`
+- SKILL.md is 1135 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -312,7 +334,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: marketing-skills
-- SKILL.md lines: 231
+- SKILL.md lines: 229
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -328,7 +350,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Stevy Smith
 - Source URL: https://github.com/stevysmith/og-image-skill
 - Frontmatter name: og-image
-- SKILL.md lines: 206
+- SKILL.md lines: 213
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -344,7 +366,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/php-modernization-skill
 - Frontmatter name: php-modernization
-- SKILL.md lines: 498
+- SKILL.md lines: 104
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -359,11 +381,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: Supabase
 - Source URL: https://github.com/supabase/agent-skills
-- Frontmatter name: postgres-best-practices
-- SKILL.md lines: 69
+- Frontmatter name: supabase-postgres-best-practices
+- SKILL.md lines: 77
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `supabase-postgres-best-practices` does not match directory `postgres-best-practices`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -376,10 +398,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: AITYTech
 - Source URL: https://github.com/aitytech/agentkits-marketing
 - Frontmatter name: programmatic-seo
-- SKILL.md lines: 663
+- SKILL.md lines: 669
 
 **Pass 1: Structure**
-- SKILL.md is 663 lines; skill-creator recommends keeping it under 500
+- skill-creator schema drift: unexpected top-level keys `version`, `brand`, `category`, `difficulty`, `triggers`, `prerequisites`, `related_skills`, `agents`, `mcp_integrations`, `success_metrics`
+- SKILL.md is 669 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -391,11 +414,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: Vercel
 - Source URL: https://github.com/vercel-labs/agent-skills
-- Frontmatter name: react-best-practices
-- SKILL.md lines: 148
+- Frontmatter name: vercel-react-best-practices
+- SKILL.md lines: 161
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `vercel-react-best-practices` does not match directory `react-best-practices`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -407,11 +430,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: OpenHands
 - Source URL: https://github.com/OpenHands/skills
-- Frontmatter name: readiness-report
-- SKILL.md lines: 134
+- Frontmatter name: agent-readiness-report
+- SKILL.md lines: 135
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `agent-readiness-report` does not match directory `readiness-report`
+- skill-creator schema drift: unexpected top-level keys `triggers`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -424,10 +448,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: GitHub
 - Source URL: https://github.com/github/awesome-copilot
 - Frontmatter name: refactor
-- SKILL.md lines: 650
+- SKILL.md lines: 658
 
 **Pass 1: Structure**
-- SKILL.md is 650 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 658 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -439,11 +463,12 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: sickn33
 - Source URL: https://github.com/sickn33/antigravity-awesome-skills
-- Frontmatter name: refactor-clean
-- SKILL.md lines: 61
+- Frontmatter name: code-refactoring-refactor-clean
+- SKILL.md lines: 72
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `code-refactoring-refactor-clean` does not match directory `refactor-clean`
+- skill-creator schema drift: unexpected top-level keys `risk`, `source`, `date_added`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -456,7 +481,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: remotion-dev
 - Source URL: https://github.com/remotion-dev/skills
 - Frontmatter name: remotion-best-practices
-- SKILL.md lines: 67
+- SKILL.md lines: 108
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -472,7 +497,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/security-audit-skill
 - Frontmatter name: security-audit
-- SKILL.md lines: 358
+- SKILL.md lines: 124
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -488,7 +513,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: security-incident-reporting
-- SKILL.md lines: 379
+- SKILL.md lines: 378
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -504,10 +529,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Giuseppe Trisciuoglio
 - Source URL: https://github.com/giuseppe-trisciuoglio/developer-kit
 - Frontmatter name: shadcn-ui
-- SKILL.md lines: 1938
+- SKILL.md lines: 324
 
 **Pass 1: Structure**
-- SKILL.md is 1938 lines; skill-creator recommends keeping it under 500
+- No pass 1 issues found.
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -520,7 +545,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Anthropic
 - Source URL: https://github.com/anthropics/skills/tree/main/skills/skill-creator
 - Frontmatter name: skill-creator
-- SKILL.md lines: 491
+- SKILL.md lines: 498
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -535,11 +560,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: tvos-design
-- SKILL.md lines: 378
+- Frontmatter name: tvos-design-guidelines
+- SKILL.md lines: 392
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `tvos-design-guidelines` does not match directory `tvos-design`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -550,15 +575,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-accessibility`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-accessibility
-- SKILL.md lines: 979
+- SKILL.md lines: 981
 
 **Pass 1: Structure**
-- SKILL.md is 979 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 981 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -584,7 +609,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-conformance-skill
 - Frontmatter name: typo3-conformance
-- SKILL.md lines: 458
+- SKILL.md lines: 113
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -600,10 +625,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-content-blocks
-- SKILL.md lines: 1164
+- SKILL.md lines: 1279
 
 **Pass 1: Structure**
-- SKILL.md is 1164 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1279 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -616,7 +641,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-core-contributions-skill
 - Frontmatter name: typo3-core-contributions
-- SKILL.md lines: 336
+- SKILL.md lines: 98
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -632,10 +657,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-datahandler
-- SKILL.md lines: 566
+- SKILL.md lines: 572
 
 **Pass 1: Structure**
-- SKILL.md is 566 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 572 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -648,7 +673,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-ddev-skill
 - Frontmatter name: typo3-ddev
-- SKILL.md lines: 494
+- SKILL.md lines: 116
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -664,7 +689,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-docs-skill
 - Frontmatter name: typo3-docs
-- SKILL.md lines: 486
+- SKILL.md lines: 100
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -680,7 +705,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-extension-upgrade-skill
 - Frontmatter name: typo3-extension-upgrade
-- SKILL.md lines: 465
+- SKILL.md lines: 100
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -694,15 +719,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-fractor`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-fractor
-- SKILL.md lines: 497
+- SKILL.md lines: 498
 
 **Pass 1: Structure**
 - No pass 1 issues found.
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -712,7 +737,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-icon14
-- SKILL.md lines: 500
+- SKILL.md lines: 174
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -728,10 +753,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-powermail
-- SKILL.md lines: 1163
+- SKILL.md lines: 1217
 
 **Pass 1: Structure**
-- SKILL.md is 1163 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1217 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -742,15 +767,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-records-list-types`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-records-list-types
-- SKILL.md lines: 632
+- SKILL.md lines: 634
 
 **Pass 1: Structure**
-- SKILL.md is 632 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 634 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -758,15 +783,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-rector`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-rector
-- SKILL.md lines: 530
+- SKILL.md lines: 536
 
 **Pass 1: Structure**
-- SKILL.md is 530 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 536 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -776,7 +801,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-security
-- SKILL.md lines: 476
+- SKILL.md lines: 475
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -790,25 +815,25 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-seo`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-seo
-- SKILL.md lines: 477
+- SKILL.md lines: 507
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- SKILL.md is 507 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
 
 ## `typo3-simplify`
 
-- Source owner: webconsulting
+- Source owner: Anthropic
 - Source URL: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
 - Frontmatter name: typo3-simplify
-- SKILL.md lines: 248
+- SKILL.md lines: 251
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -822,15 +847,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-solr`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-solr
-- SKILL.md lines: 2179
+- SKILL.md lines: 2184
 
 **Pass 1: Structure**
-- SKILL.md is 2179 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 2184 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -840,10 +865,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-testing-skill
 - Frontmatter name: typo3-testing
-- SKILL.md lines: 617
+- SKILL.md lines: 107
 
 **Pass 1: Structure**
-- SKILL.md is 617 lines; skill-creator recommends keeping it under 500
+- No pass 1 issues found.
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -854,15 +879,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `typo3-update`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-update
-- SKILL.md lines: 862
+- SKILL.md lines: 865
 
 **Pass 1: Structure**
-- SKILL.md is 862 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 865 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -872,10 +897,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-workspaces
-- SKILL.md lines: 1680
+- SKILL.md lines: 1683
 
 **Pass 1: Structure**
-- SKILL.md is 1680 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1683 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -888,10 +913,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: ui-design-patterns
-- SKILL.md lines: 870
+- SKILL.md lines: 869
 
 **Pass 1: Structure**
-- SKILL.md is 870 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 869 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -903,11 +928,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: visionos-design
-- SKILL.md lines: 374
+- Frontmatter name: visionos-design-guidelines
+- SKILL.md lines: 388
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `visionos-design-guidelines` does not match directory `visionos-design`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -919,11 +944,11 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: watchos-design
-- SKILL.md lines: 371
+- Frontmatter name: watchos-design-guidelines
+- SKILL.md lines: 380
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- frontmatter name `watchos-design-guidelines` does not match directory `watchos-design`
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -936,10 +961,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Vercel
 - Source URL: https://github.com/vercel-labs/agent-skills
 - Frontmatter name: web-design-guidelines
-- SKILL.md lines: 45
+- SKILL.md lines: 52
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- duplicate frontmatter name `web-design-guidelines` shared by web-design-guidelines, web-platform-design
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -951,11 +976,13 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 - Source owner: ehmo
 - Source URL: https://github.com/ehmo/platform-design-skills
-- Frontmatter name: web-platform-design
-- SKILL.md lines: 1451
+- Frontmatter name: web-design-guidelines
+- SKILL.md lines: 1467
 
 **Pass 1: Structure**
-- SKILL.md is 1451 lines; skill-creator recommends keeping it under 500
+- duplicate frontmatter name `web-design-guidelines` shared by web-design-guidelines, web-platform-design
+- frontmatter name `web-design-guidelines` does not match directory `web-platform-design`
+- SKILL.md is 1467 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -968,7 +995,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: webconsulting-branding
-- SKILL.md lines: 312
+- SKILL.md lines: 311
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -982,15 +1009,15 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `webconsulting-create-documentation`
 
 - Source owner: webconsulting
-- Source URL: webconsulting-original / no external upstream recorded
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: webconsulting-create-documentation
-- SKILL.md lines: 1100
+- SKILL.md lines: 1101
 
 **Pass 1: Structure**
-- SKILL.md is 1100 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1101 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
-- no explicit source note; current assumption is webconsulting-original
+- No pass 2 issues found.
 
 **Pass 3: Optimization**
 - No pass 3 issues found.

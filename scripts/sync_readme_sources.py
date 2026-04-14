@@ -31,6 +31,7 @@ OWNER_LINKS = {
     "Netresearch": "https://www.netresearch.de/",
     "Supabase": "https://supabase.com/",
     "Corey Haines": "https://corey.co/",
+    "ooiyeefei": "https://github.com/ooiyeefei",
     "Stevy Smith": "https://github.com/stevysmith",
     "Vercel": "https://vercel.com/",
     "Giuseppe Trisciuoglio": "https://github.com/giuseppe-trisciuoglio",
@@ -58,6 +59,9 @@ OWNER_COPYRIGHT = {
     "Corey Haines": (
         "**Copyright (c) Corey Haines** - Marketing frameworks and best practices\n"
         "See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)"
+    ),
+    "ooiyeefei": (
+        "**Copyright (c) ooiyeefei** - Excalidraw architecture diagram generation and export workflow (MIT License)"
     ),
     "Stevy Smith": (
         "**Copyright (c) Stevy Smith** - OG Image generation and social meta tag configuration"
@@ -103,6 +107,7 @@ OWNER_ORDER = [
     "Netresearch",
     "Supabase",
     "Corey Haines",
+    "ooiyeefei",
     "Stevy Smith",
     "Vercel",
     "Giuseppe Trisciuoglio",

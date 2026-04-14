@@ -1,6 +1,6 @@
 # webconsulting Agent Skills
 
-This repository contains 61 Agent Skills for AI-augmented software development.
+This repository contains 62 Agent Skills for AI-augmented software development.
 
 ## Instructions
 
@@ -19,7 +19,7 @@ To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and f
 ## Key Conventions
 
 - TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Most TYPO3 skills include `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md` supplements
+- Shared root guides `SKILL-PHP84.md` and `SKILL-CONTENT-BLOCKS.md` cover TYPO3/PHP cross-cutting topics
 - Always review AI-generated code before committing
 - When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
 
