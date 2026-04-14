@@ -1,7 +1,7 @@
 {
   "name": "webconsulting-skills",
   "version": "2.0.0",
-  "description": "Curated Agent Skills for AI-augmented software development — universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",
+  "description": "Curated Agent Skills for AI-augmented software development — core installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf",
   "license": "MIT AND CC-BY-SA-4.0",
   "contextFileName": "AGENTS.md",
   "excludeTools": [],

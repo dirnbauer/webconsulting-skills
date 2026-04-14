@@ -2,21 +2,21 @@
 
 > **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **62 Agent Skills** for AI-augmented software development. These skills transform your AI coding assistant into a specialized expert for web development, video creation, security auditing, legal compliance, and enterprise software engineering.
+A curated collection of **62 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
-> **Works with:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, Windsurf, GitHub Copilot, Kiro, Cline, Continue.dev, Aider, and more
+> **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
 ### A Note from the Maintainer
 
-This project exists for one reason: to give the developer community a practical, ready-to-use
-collection of agent skills that make day-to-day work better. No vendor lock-in, no gatekeeping
-— just solid patterns you can drop into your workflow.
+This repository is meant to be useful on real projects: a technically solid collection of
+agent skills from webconsulting that helps teams move faster without lowering engineering quality.
+The goal is straightforward: one place for reusable skill knowledge that can be installed,
+synced, and used across multiple AI coding clients.
 
-A significant portion of the TYPO3 and PHP skills in this collection builds on the outstanding
-work by **[Netresearch DTT GmbH](https://www.netresearch.de/)**. Their open-source skill
-repositories set the bar for quality and depth, and studying their approach taught me a great
-deal about how to structure effective agent skills. Thank you, Netresearch — your contributions
-to the TYPO3 ecosystem and the broader AI-assisted development community are genuinely appreciated.
+Many of the TYPO3 and PHP skills in this collection build on the excellent open-source work by
+**[Netresearch DTT GmbH](https://www.netresearch.de/)**. Their repositories have been an important
+foundation for this collection, and their contribution to practical TYPO3 and PHP engineering
+deserves clear credit. Thank you, Netresearch.
 
 ## Skill Categories
 
@@ -55,24 +55,27 @@ Category-specific add-ons are not counted as top-level skills.
 
 ---
 
-## 🚀 Universal Agent Skills (10+ AI Clients)
+## 🚀 Universal Agent Skills (5 Core Clients + Optional Tools)
 
-Skills are installed as **symlinks** from the central `skills/` directory to each client's discovery path. One source of truth, many consumers.
+Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths. One source of truth, many consumers.
+To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific symlinks or duplicate per-client copies; `./install.sh` and `./update.sh` fan the canonical skill directory out automatically.
 
-### Supported Clients
+### Core Scripted Clients
 
-| Tier | Client | Installation | Discovery |
-|------|--------|-------------|-----------|
-| **1** | **Cursor** | Symlinks to `~/.cursor/skills/` + `.cursor/skills/` + `.mdc` rules | Auto-discovery, `/skill-name` invocation |
-| **1** | **Claude Code** | Symlinks to `~/.claude/skills/` | Auto-loaded from user skills |
-| **1** | **Gemini CLI** | Symlinks to `~/.gemini/skills/` + `gemini-extension.json` | Native extension manifest |
-| **1** | **OpenAI Codex** | Symlinks to `.codex/skills/` | Project-level discovery |
-| **1** | **Windsurf** | Symlinks to `~/.windsurf/skills/` | User-level discovery |
-| **1** | **Kiro** | Symlinks to `~/.kiro/skills/` | User-level discovery |
-| **2** | **GitHub Copilot** | Reads `AGENTS.md` natively | No extra install needed |
-| **2** | **Cline** | Reads `.clinerules/` | Symlinks to project rules |
-| **2** | **Aider** | Reads `AGENTS.md` natively | No extra install needed |
-| **2** | **Continue.dev** | Reads `.continue/rules/` | Config-based |
+| Client | Installation | Discovery |
+|--------|-------------|-----------|
+| **Cursor** | Symlinks to `~/.cursor/skills/` + `.cursor/skills/` + `.mdc` rules | Auto-discovery, `/skill-name` invocation |
+| **Claude Code** | Symlinks to `~/.claude/skills/` | Auto-loaded from user skills |
+| **Gemini CLI** | Symlinks to `~/.gemini/skills/` + `.gemini/skills/` + `gemini-extension.json` | Native extension manifest |
+| **OpenAI Codex** | Symlinks to `~/.codex/skills/` + `.codex/skills/` | User and project-level discovery |
+| **Windsurf** | Symlinks to `~/.codeium/windsurf/skills/` + `.windsurf/skills/` | User and project-level discovery |
+
+### Native and Optional Clients
+
+| Client Type | Setup | Notes |
+|-------------|-------|-------|
+| **GitHub Copilot, Cline, Aider** | Read `AGENTS.md` or their native instruction file | No separate skill-directory install needed |
+| **Kiro and other skill-directory clients** | Add a manual symlink target once | Keep `skills/` as the only source of truth |
 
 ### Directory Structure After Install
 
@@ -80,22 +83,48 @@ Skills are installed as **symlinks** from the central `skills/` directory to eac
 ~/.cursor/skills/          ← Cursor (user-level)
 ~/.claude/skills/          ← Claude Code (user-level)
 ~/.gemini/skills/          ← Gemini CLI (user-level)
-~/.windsurf/skills/        ← Windsurf (user-level)
-~/.kiro/skills/            ← Kiro (user-level)
+~/.codex/skills/           ← OpenAI Codex (user-level)
+~/.codeium/windsurf/skills/← Windsurf (user-level)
 
 .cursor/
   ├── skills/              ← Cursor (project-level)
   └── rules/               ← Legacy .mdc files (backwards compat)
+.gemini/skills/            ← Gemini CLI (project-level)
 .codex/skills/             ← OpenAI Codex (project-level)
-.clinerules/               ← Cline (project-level)
+.windsurf/skills/          ← Windsurf (project-level)
 
 gemini-extension.json      ← Gemini CLI extension manifest
-AGENTS.md                  ← Read natively by Copilot, Aider, Gemini, Codex
+AGENTS.md                  ← Read natively by Copilot, Codex, Windsurf, Cline, Aider
 CLAUDE.md                  ← Claude Code primary instructions (→ AGENTS.md)
 GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
 .github/copilot-instructions.md  ← GitHub Copilot instructions (→ AGENTS.md)
 .windsurfrules             ← Windsurf project rules (→ AGENTS.md)
 ```
+
+### Adding a Skill
+
+1. Create `skills/<slug>/SKILL.md`.
+2. Add `references/`, `examples/`, `scripts/`, or `assets/` only if the skill needs them.
+3. If the skill is upstream-managed, add one entry to `.sync-config.json`.
+4. Run `./install.sh`.
+
+Do not create manual per-client symlinks, duplicate `SKILL.md` files, or client-specific install rules for an individual skill. The installer loops over `skills/*` and populates every core client location automatically.
+
+### Adding Other Tools
+
+If a client has its own skills directory and is not one of the five core scripted clients, wire it once with a simple loop:
+
+```bash
+TARGET_DIR="$HOME/.kiro/skills" # replace with the client's skill path
+mkdir -p "$TARGET_DIR"
+
+for skill_dir in "$PWD"/skills/*; do
+  [ -f "$skill_dir/SKILL.md" ] || continue
+  ln -sfn "$skill_dir" "$TARGET_DIR/$(basename "$skill_dir")"
+done
+```
+
+If the client reads an instruction file instead of a skills directory, point it at `AGENTS.md` or the client's native equivalent. Keep `skills/` as the canonical source and avoid copying `SKILL.md` files into per-tool folders.
 
 ### Using Skills
 
@@ -112,9 +141,13 @@ GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
 1. Skills are discovered via `gemini-extension.json` manifest
 2. Trigger-based activation matches your prompt to relevant skills
 
-**In other clients:**
-1. Skills are discovered from their respective directories
-2. `AGENTS.md` provides cross-client instructions (Copilot, Aider, Gemini)
+**In native-instruction clients:**
+1. Use `AGENTS.md` or the client's native instruction file
+2. No separate skill-directory install is required
+
+**In optional manual clients:**
+1. Point the client at its own skills directory
+2. Use the symlink loop above to mirror `skills/*` into that directory
 
 > **Note:** Legacy `.mdc` rules are still generated in `.cursor/rules/` for backwards compatibility.
 
@@ -146,7 +179,7 @@ git clone git@github.com:dirnbauer/webconsulting-skills.git webconsulting-skills
 cd webconsulting-skills
 ./install.sh
 
-# Skills are installed to all detected AI client directories
+# Skills are installed to the supported core AI client directories
 ```
 
 > The installer auto-detects if it's running from a vendor directory, project subdirectory, or standalone clone, and adjusts paths accordingly.
@@ -174,13 +207,13 @@ Install this skills package directly from GitHub without Packagist.
 composer require --dev webconsulting/webconsulting-skills:dev-main
 ```
 
-The Composer plugin will automatically run `install.sh` after installation to deploy skills to all detected AI client directories.
+The Composer plugin will automatically run `install.sh` after installation to deploy skills to the supported core AI client directories.
 
 ## How to Use Agent Skills
 
 ### Skills for Dummies
 
-**What are Agent Skills?** They're Markdown files (`SKILL.md`) containing expert knowledge that your AI coding assistant reads to become a specialist. After running `./install.sh`, skills are symlinked to all detected AI client directories and automatically discovered.
+**What are Agent Skills?** They're Markdown files (`SKILL.md`) containing expert knowledge that your AI coding assistant reads to become a specialist. After running `./install.sh`, skills are symlinked to the supported core AI client directories and automatically discovered.
 
 **How do they work?** 
 - **Auto-applied**: Cursor's Agent decides when a skill is relevant based on your query
@@ -189,10 +222,12 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 **Where do skills live?**
 - Source files: `skills/*/SKILL.md` (this repo)
-- User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.windsurf/skills/`, `~/.kiro/skills/`
-- Project-level: `.cursor/skills/`, `.codex/skills/`, `.clinerules/`
+- User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.codex/skills/`, `~/.codeium/windsurf/skills/`
+- Project-level: `.cursor/skills/`, `.gemini/skills/`, `.codex/skills/`, `.windsurf/skills/`
 - Legacy rules: `.cursor/rules/*.mdc` (backwards compatibility)
-- Cross-client: `AGENTS.md` (read natively by Copilot, Aider, Gemini CLI)
+- Cross-client: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.windsurfrules`, `.github/copilot-instructions.md`, `gemini-extension.json`
+- Optional/manual clients: any tool-specific skills directory you wire to `skills/`
+- Adding a skill only touches `skills/` and, for upstream-managed skills, `.sync-config.json`
 
 ### Skill Reference
 
@@ -2157,7 +2192,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │   61 SKILL.md     │
+                        │   62 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2168,14 +2203,14 @@ The repository keeps a small number of category-specific add-on files alongside 
     │ ~/.cursor/   │     │ .cursor/skills │    │ AGENTS.md      │
     │ ~/.claude/   │     │ .cursor/rules  │    │ CLAUDE.md      │
     │ ~/.gemini/   │     │ .codex/skills  │    │ GEMINI.md      │
-    │ ~/.windsurf/ │     │ .clinerules/   │    │ .windsurfrules │
-    │ ~/.kiro/     │     │                │    │ .github/       │
-    │              │     │                │    │  copilot-...md │
+    │ ~/.codex/    │     │ .gemini/skills │    │ .windsurfrules │
+    │ ~/.codeium/  │     │ .windsurf/...  │    │ .github/       │
+    │             │     │                │    │  copilot-...md │
     └──────────────┘     └────────────────┘    └────────────────┘
 
-    Cursor, Claude       Cursor, Codex,         No install needed
-    Code, Gemini CLI,    Cline                  — each client reads
-    Windsurf, Kiro                              its native config file
+    Cursor, Claude       Cursor, Gemini,        No install needed
+    Code, Gemini CLI,    Codex, Windsurf        — each client reads
+    Codex, Windsurf                             its native config file
 ```
 
 ## Configuration

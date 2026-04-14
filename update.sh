@@ -12,7 +12,7 @@
 #   --dry-run      Show what would be done without making changes
 #   --help         Show this help message
 #
-# This script updates Agent Skills from external sources and reinstalls them.
+# This script updates Agent Skills from external sources and reinstalls the core client mirrors.
 #
 # License: MIT (code) / CC-BY-SA-4.0 (content)
 # Third-party skills retain their original licenses — see LICENSE for details.
@@ -59,7 +59,7 @@ done
 
 echo "╔══════════════════════════════════════════════════════════════╗"
 echo "║     webconsulting Agent Skills Updater                       ║"
-echo "║     Universal — Cursor · Claude · Gemini · Codex · more     ║"
+echo "║     Core — Cursor · Claude · Gemini · Codex · Windsurf      ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
 

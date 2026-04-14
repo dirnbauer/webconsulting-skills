@@ -3,9 +3,15 @@
 # webconsulting Agent Skills Installer
 # ============================================================================
 #
-# Universal installer for 10+ AI coding clients.
+# Core installer for the 5 most-used AI coding clients.
 #
 # Usage: ./install.sh [options]
+#
+# Skill authoring standard:
+#   • Add each skill once under skills/<name>/SKILL.md
+#   • Optionally add one .sync-config.json entry for upstream-managed skills
+#   • Do not add per-client symlink code for individual skills
+#   • The installer fans every skill out to supported clients automatically
 #
 # Options:
 #   --user-only     Only install user-level skills (skip project-level)
@@ -13,21 +19,19 @@
 #   --no-sync       Skip external skill sync
 #   --help          Show this help message
 #
-# Supported Clients (user-level skills via symlinks):
-#   Tier 1 — Major clients:
+# Core scripted clients (user-level skills via symlinks):
 #     • Cursor IDE        ~/.cursor/skills/
 #     • Claude Code       ~/.claude/skills/
 #     • Gemini CLI        ~/.gemini/skills/
 #     • OpenAI Codex CLI  ~/.codex/skills/
 #     • Windsurf          ~/.codeium/windsurf/skills/
-#     • GitHub Copilot    (reads AGENTS.md natively)
-#
-#   Tier 2 — Additional clients:
-#     • Kiro              ~/.kiro/skills/
-#     • Cline             (reads AGENTS.md natively)
-#     • Continue.dev      (project-level only)
-#     • Aider             (reads CONVENTIONS.md via --read flag)
 #     • Antigravity       (shares Gemini CLI paths)
+#
+# Native / optional clients:
+#     • GitHub Copilot    (reads AGENTS.md natively)
+#     • Cline             (reads AGENTS.md natively)
+#     • Aider             (reads AGENTS.md natively)
+#     • Other tools       (manual link to their skills directory; see README)
 #
 # Project-level skills (symlinks in project root):
 #     • .cursor/skills/       (Cursor)
@@ -35,10 +39,9 @@
 #     • .gemini/skills/       (Gemini CLI / Antigravity)
 #     • .codex/skills/        (OpenAI Codex)
 #     • .windsurf/skills/     (Windsurf)
-#     • .kiro/skills/         (Kiro)
 #
 # Cross-client files (read natively by multiple clients):
-#     • AGENTS.md                       → Copilot, Codex, Windsurf, Cline, Kiro, Aider
+#     • AGENTS.md                       → Copilot, Codex, Windsurf, Cline, Aider
 #     • CLAUDE.md                       → Claude Code
 #     • GEMINI.md                       → Gemini CLI, Antigravity
 #     • .windsurfrules                  → Windsurf
@@ -69,7 +72,7 @@ done
 
 echo "╔══════════════════════════════════════════════════════════════╗"
 echo "║     webconsulting Agent Skills Installer                     ║"
-echo "║     Universal — Cursor · Claude · Gemini · Codex · more     ║"
+echo "║     Core — Cursor · Claude · Gemini · Codex · Windsurf      ║"
 echo "╚══════════════════════════════════════════════════════════════╝"
 echo ""
 
@@ -362,7 +365,7 @@ if [ -f "$AGENTS_FILE" ]; then
   "version": "2.0.0",
 GEMINI_HDR
 
-    printf '  "description": "Curated Agent Skills for AI-augmented software development — universal installer for Cursor, Claude Code, Gemini CLI, Codex, Windsurf, Copilot, Kiro, and more",\n' >> "$GEMINI_JSON"
+    printf '  "description": "Curated Agent Skills for AI-augmented software development — core installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf",\n' >> "$GEMINI_JSON"
     printf '  "license": "MIT AND CC-BY-SA-4.0",\n' >> "$GEMINI_JSON"
     printf '  "contextFileName": "AGENTS.md",\n' >> "$GEMINI_JSON"
     printf '  "excludeTools": [],\n' >> "$GEMINI_JSON"
@@ -456,7 +459,9 @@ else
 fi
 
 # =============================================================================
-# Helper: Install skills via symlinks to a target directory
+# Helper: Install skills via symlinks to a target directory.
+# Adding a new skill should not require client-specific edits here; this helper
+# fans out every directory under skills/ automatically.
 # =============================================================================
 
 install_skills_to() {
@@ -508,7 +513,7 @@ else
     echo "→ Installing user-level skills..."
     echo "  (Symlinks from skills/ → each client's discovery directory)"
 
-    # ── Tier 1: Major clients ──────────────────────────────────────────────
+    # ── Core scripted clients ──────────────────────────────────────────────
 
     # Claude Code + Cursor (shared location)
     install_skills_to "$HOME/.claude/skills" "Claude Code + Cursor (~/.claude/skills)"
@@ -524,11 +529,6 @@ else
 
     # Windsurf (Codeium)
     install_skills_to "$HOME/.codeium/windsurf/skills" "Windsurf (~/.codeium/windsurf/skills)"
-
-    # ── Tier 2: Additional clients ─────────────────────────────────────────
-
-    # Kiro (AWS)
-    install_skills_to "$HOME/.kiro/skills" "Kiro (~/.kiro/skills)"
 
     echo ""
     echo "  Note: GitHub Copilot, Cline, and Aider read AGENTS.md directly"
@@ -558,8 +558,6 @@ else
     # Windsurf
     install_skills_to "$PROJECT_ROOT/.windsurf/skills" "Windsurf (.windsurf/skills)"
 
-    # Kiro
-    install_skills_to "$PROJECT_ROOT/.kiro/skills" "Kiro (.kiro/skills)"
 fi
 
 # =============================================================================
@@ -600,7 +598,7 @@ if [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
     # AGENTS.md → always overwrite (canonical source of truth)
     if [ -f "$SCRIPT_DIR/AGENTS.md" ]; then
         cp "$SCRIPT_DIR/AGENTS.md" "$PROJECT_ROOT/AGENTS.md"
-        echo "  ✓ AGENTS.md (Copilot, Codex, Windsurf, Cline, Kiro, Aider)"
+        echo "  ✓ AGENTS.md (Copilot, Codex, Windsurf, Cline, Aider)"
     fi
 
     # CLAUDE.md → Claude Code primary instructions
@@ -666,19 +664,18 @@ if [ "$IS_CONTAINER" != "true" ] && [ "$PROJECT_ONLY" != "true" ]; then
     echo "  ~/.gemini/skills/              (Gemini CLI + Antigravity)"
     echo "  ~/.codex/skills/               (OpenAI Codex)"
     echo "  ~/.codeium/windsurf/skills/    (Windsurf)"
-    echo "  ~/.kiro/skills/                (Kiro)"
     echo ""
 fi
 
 if [ "$USER_ONLY" != "true" ]; then
     echo "Project-level skills installed to:"
     echo "  .cursor/skills/    .gemini/skills/    .codex/skills/"
-    echo "  .windsurf/skills/  .kiro/skills/      .cursor/rules/*.mdc"
+    echo "  .windsurf/skills/  .cursor/rules/*.mdc"
     echo ""
 fi
 
 echo "Cross-client instruction files:"
-echo "  AGENTS.md                        → Copilot, Codex, Windsurf, Cline, Kiro, Aider"
+echo "  AGENTS.md                        → Copilot, Codex, Windsurf, Cline, Aider"
 echo "  CLAUDE.md                        → Claude Code"
 echo "  GEMINI.md                        → Gemini CLI, Antigravity"
 echo "  .windsurfrules                   → Windsurf"
