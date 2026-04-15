@@ -5,16 +5,6 @@ description: >-
   validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
   templates, backend modules, and extension development. Use when working with powermail
   forms, mail handling, form validation, or extending powermail functionality.
-compatibility: >-
-  TYPO3 13.4+ (Powermail 13.x composer.json currently requires
-  typo3/cms-core ^13.4; check Packagist before assuming TYPO3 v14)
-metadata:
-  version: "1.0.0"
-  related_skills:
-    - typo3-datahandler
-    - typo3-content-blocks
-    - typo3-testing
-license: "MIT / CC-BY-SA-4.0"
 ---
 
 # TYPO3 Powermail Development
