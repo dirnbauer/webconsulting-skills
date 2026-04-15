@@ -21,6 +21,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NORMALIZE_SKILL_FRONTMATTER="$SCRIPT_DIR/scripts/normalize_skill_frontmatter.py"
 SYNC_ONLY=false
 PULL=false
 FORCE=false
@@ -210,6 +211,11 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                 if [ -f "$SOURCE_DIR/SKILL.md" ]; then
                 mkdir -p "$TARGET_DIR"
                 cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
+                if command -v python3 &> /dev/null; then
+                    python3 "$NORMALIZE_SKILL_FRONTMATTER" "$TARGET_DIR/SKILL.md"
+                else
+                    echo "    ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
+                fi
                 
                 # Copy subdirectories if they exist
                 for subdir in examples rules references scripts assets; do
@@ -256,6 +262,7 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
         fi
     else
         echo ""
+        echo "  [DRY-RUN] Would run: python3 scripts/normalize_skill_frontmatter.py <synced-skill>"
         echo "  [DRY-RUN] Would run: python3 scripts/sync_source_notes.py"
         echo "  [DRY-RUN] Would run: python3 scripts/sync_readme_sources.py"
         echo "  [DRY-RUN] Would run: python3 scripts/check_attribution_guardrails.py"

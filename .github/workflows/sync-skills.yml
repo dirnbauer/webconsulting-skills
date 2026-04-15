@@ -87,6 +87,7 @@ jobs:
                 
                 # Copy SKILL.md
                 cp "$SOURCE_DIR/SKILL.md" "skills/$name/SKILL.md"
+                python3 scripts/normalize_skill_frontmatter.py "skills/$name/SKILL.md"
                 echo "✓ Updated skills/$name/SKILL.md"
                 
                 # Copy examples directory if exists

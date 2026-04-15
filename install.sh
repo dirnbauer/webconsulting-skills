@@ -55,6 +55,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+NORMALIZE_SKILL_FRONTMATTER="$SCRIPT_DIR/scripts/normalize_skill_frontmatter.py"
 
 USER_ONLY=false
 PROJECT_ONLY=false
@@ -167,6 +168,11 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
                 if [ -f "$SOURCE_DIR/SKILL.md" ]; then
                     mkdir -p "$TARGET_DIR"
                     cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
+                    if command -v python3 &> /dev/null; then
+                        python3 "$NORMALIZE_SKILL_FRONTMATTER" "$TARGET_DIR/SKILL.md"
+                    else
+                        echo "  ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
+                    fi
 
                     for subdir in examples rules references scripts assets; do
                         if [ -d "$SOURCE_DIR/$subdir" ]; then
