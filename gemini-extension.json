@@ -309,7 +309,7 @@
 ,
     "typo3-idea-extension-blog": {
       "name": "typo3-idea-extension-blog",
-      "description": "Evaluate ideas for TYPO3, build an extension, and draft the German MDX post",
+      "description": "Assess ideas for TYPO3, build an extension, and draft the companion German MDX post",
       "triggers": ["idea to extension", "product announcement", "adapt to TYPO3", "blog post pipeline", "MDX blog"],
       "path": "${extensionPath}/skills/typo3-idea-extension-blog"
     }

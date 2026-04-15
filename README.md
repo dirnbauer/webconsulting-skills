@@ -2135,7 +2135,7 @@ grep -r "DataHandler" skills/
 |-------|---------|--------|
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
-| `typo3-idea-extension-blog` | Evaluate ideas for TYPO3, build an extension, and draft the German MDX post | webconsulting |
+| `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
 | `typo3-ddev` | Local DDEV development environment | Netresearch |
 | `typo3-testing` | Unit, functional, E2E, architecture testing | Netresearch |

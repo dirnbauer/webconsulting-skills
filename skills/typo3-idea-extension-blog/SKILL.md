@@ -1,12 +1,10 @@
 ---
 name: typo3-idea-extension-blog
 description: >-
-  Turn a product announcement, technology article, research idea, or startup concept
-  into a TYPO3 deliverable: verify the source, assess the TYPO3 fit, build a GitHub-ready
-  TYPO3 extension, and write a publication-ready German MDX post for webconsulting.at.
-  Use whenever a user shares a link, launch, paper, or concept and wants to know what
-  it means for TYPO3, whether it should become an extension, or wants the accompanying
-  blog article.
+  Assess whether an external idea, launch, article, paper, or product announcement
+  should become a TYPO3 extension and companion German blog post. Use this whenever
+  a user shares a link or concept and wants it analyzed for TYPO3, wants a GitHub-ready
+  extension built from it, or wants a publication-ready webconsulting.at MDX article.
 compatibility: TYPO3 14.x preferred with TYPO3 13.4 fallback; PHP 8.2+; Git; network access for verification and push
 metadata:
   version: "1.0.0"

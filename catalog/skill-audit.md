@@ -769,7 +769,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: webconsulting-original / no external upstream recorded
 - Frontmatter name: typo3-idea-extension-blog
-- SKILL.md lines: 252
+- SKILL.md lines: 250
 
 **Pass 1: Structure**
 - No pass 1 issues found.
