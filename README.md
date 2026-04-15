@@ -18,7 +18,9 @@ synced, and used across multiple AI coding clients.
 Many of the TYPO3 and PHP skills in this collection build on the excellent open-source work by
 **[Netresearch DTT GmbH](https://www.netresearch.de/)**. Their repositories have been an important
 foundation for this collection, and their contribution to practical TYPO3 and PHP engineering
-deserves clear credit. Thank you, Netresearch.
+deserves clear credit. Thank you, Netresearch, and thank you as well to the engineers,
+maintainers, and contributors behind that work. This collection is better because of the
+care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
@@ -27,19 +29,19 @@ Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 23 skills | Content Blocks, idea-to-extension pipelines, DataHandler, Powermail, Vite, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
-| **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
-| **Security & Enterprise** | 4 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
-| **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
-| **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
-| **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
-| **Code Quality & Refactoring** | 5 skills | Agent instruction refactoring, code smells, SOLID patterns, skill discovery, plan stress testing |
-| **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
-| **Frontend & Design** | 8 skills | UI patterns, architecture diagrams, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
-| **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
-| **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
-| **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
-| **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
+| **TYPO3 CMS** | 23 skills | Content Blocks (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **Video & Animation** | 2 skills | Remotion Best Practices (remotion-dev), Create Documentation (webconsulting) |
+| **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
+| **Database** | 1 skill | Postgres Best Practices (Supabase) |
+| **Marketing** | 1 skill | Marketing Skills (Corey Haines) |
+| **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
+| **Code Quality & Refactoring** | 5 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me (Matt Pocock) |
+| **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
+| **Frontend & Design** | 8 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
+| **Platform Design** | 8 skills | Android Design (ehmo), iOS Design (ehmo), iPadOS Design (ehmo), macOS Design (ehmo), tvOS Design (ehmo), visionOS Design (ehmo), watchOS Design (ehmo), Web Platform Design (ehmo) |
+| **Documents & Office** | 1 skill | Document Processing (Anthropic) |
+| **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
+| **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
 | **Total** | **65 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
