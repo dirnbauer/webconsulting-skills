@@ -433,6 +433,13 @@
       "path": "${extensionPath}/skills/typo3-workspaces"
     }
 ,
+    "typo3-vite": {
+      "name": "typo3-vite",
+      "description": "Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance",
+      "triggers": ["vite", "vite-asset-collector", "scss", "bootstrap", "svg", "postcss", "csp"],
+      "path": "${extensionPath}/skills/typo3-vite"
+    }
+,
     "typo3-solr": {
       "name": "typo3-solr",
       "description": "Apache Solr search: indexing, facets, suggest, vector search, debugging",

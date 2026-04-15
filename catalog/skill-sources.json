@@ -721,11 +721,10 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-conformance-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-conformance/SKILL.md",
-    "line_count": 113,
+    "line_count": 114,
     "frontmatter_keys": [
       "name",
-      "description",
-      "metadata"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -886,16 +885,13 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-powermail/SKILL.md",
-    "line_count": 1217,
+    "line_count": 1209,
     "frontmatter_keys": [
       "name",
-      "description",
-      "compatibility",
-      "metadata",
-      "license"
+      "description"
     ],
     "pass_1": [
-      "SKILL.md is 1217 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1209 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -1056,6 +1052,24 @@
       "SKILL.md is 865 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "typo3-vite",
+    "skill_name": "typo3-vite",
+    "description": "Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance. Use when configuring Vite for TYPO3 projects, setting up SCSS with Bootstrap, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts via font-face, setting up CSS units (rem/em), or customizing Bootstrap variables. Also triggers for: asset hashing, Gzip/Brotli compression, SCSS import chain, global-basics.scss, selective Bootstrap imports.",
+    "source_owner": "Netresearch",
+    "source_url": "https://github.com/netresearch/typo3-vite-skill",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
+    "line_count": 45,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [
+      "expected upstream source is not explicitly attributed inside SKILL.md"
+    ],
     "pass_3": []
   },
   {

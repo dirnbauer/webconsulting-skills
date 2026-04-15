@@ -25,10 +25,10 @@ several cross-domain skills are based on Netresearch's original open-source skil
 Their deep expertise in TYPO3 development, enterprise PHP engineering, and AI-augmented workflows
 has been instrumental in shaping the quality and depth of these guidelines.
 
-The following 11 skills are adapted from Netresearch's work:
+The following 12 skills are adapted from Netresearch's work:
 `php-modernization`, `enterprise-readiness`, `security-audit`, `cli-tools`, `context7`,
 `typo3-ddev`, `typo3-testing`, `typo3-conformance`, `typo3-docs`,
-`typo3-core-contributions`, `typo3-extension-upgrade`
+`typo3-core-contributions`, `typo3-extension-upgrade`, `typo3-vite`
 
 Original repositories: https://github.com/netresearch
 
@@ -272,6 +272,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 2.0.0 | workspace, versioning, staging, publishing, review, draft content |
+| `typo3-vite` | Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance | 1.0.0 | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
 | `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
 | `typo3-solr/FRONTEND` | Custom JS for search, suggest, facets without jQuery | 1.0.0 | solr javascript, vanilla js search, solr ajax |
@@ -477,6 +478,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
 - **typo3-workspaces**: Workspaces versioning, staging, publishing workflows, and debugging
+- **typo3-vite**: Vite build setup for TYPO3 sitepackages with `praetorius/vite-asset-collector`, SCSS architecture, Bootstrap theming, SVG optimization, and CSP-safe asset loading
 - **typo3-solr**: Apache Solr search integration (Index Queue, facets, suggest, vector search, debugging)
   - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
   - `SKILL-FRONTEND.md`: Custom vanilla JS for search, suggest, facets (no jQuery)
@@ -1379,6 +1381,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | ✓ | ✓ | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ |
+| typo3-vite | ✓ | ✓ | ✓ | ✓ |
 | typo3-solr | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ |
 | security-audit | ✓ | ✓ | ✓ | ✓ |

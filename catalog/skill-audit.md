@@ -7,10 +7,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 62
-- Total findings: 43
+- Skills audited: 63
+- Total findings: 44
 - Skills with pass 1 findings: 32
-- Skills with pass 2 findings: 0
+- Skills with pass 2 findings: 1
 - Skills with pass 3 findings: 0
 
 ## High-Signal Repo Findings
@@ -609,7 +609,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-conformance-skill
 - Frontmatter name: typo3-conformance
-- SKILL.md lines: 113
+- SKILL.md lines: 114
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -753,10 +753,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-powermail
-- SKILL.md lines: 1217
+- SKILL.md lines: 1209
 
 **Pass 1: Structure**
-- SKILL.md is 1217 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1209 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -888,6 +888,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 **Pass 2: Source**
 - No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `typo3-vite`
+
+- Source owner: Netresearch
+- Source URL: https://github.com/netresearch/typo3-vite-skill
+- Frontmatter name: typo3-vite
+- SKILL.md lines: 45
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- expected upstream source is not explicitly attributed inside SKILL.md
 
 **Pass 3: Optimization**
 - No pass 3 issues found.

@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **62 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **63 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -20,12 +20,12 @@ deserves clear credit. Thank you, Netresearch.
 
 ## Skill Categories
 
-This repository currently ships **62 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **63 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 21 skills | Content Blocks, DataHandler, Powermail, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
+| **TYPO3 CMS** | 22 skills | Content Blocks, DataHandler, Powermail, Vite, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 4 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
@@ -38,7 +38,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
-| **Total** | **62 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **63 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -257,6 +257,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
+| `typo3-vite` | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp | "Set up Vite for my TYPO3 sitepackage" or "Configure vite-asset-collector with Bootstrap theming" |
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
 | `typo3-solr` | solr, search, indexing, facets, suggest, autocomplete, vector search | "Set up EXT:solr with DDEV" or "Debug Solr indexing issues" |
 | `ai-search-optimization` | aeo, geo, ai search, chatgpt, llms.txt | "Optimize for ChatGPT and Perplexity citations" |
@@ -2149,6 +2150,7 @@ grep -r "DataHandler" skills/
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
+| `typo3-vite` | Vite build setup for TYPO3 with vite-asset-collector, SCSS, Bootstrap, SVG optimization, and CSP compliance | Netresearch |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
 | `security-incident-reporting` | NIST/SANS incident reports, DDoS post-mortem, CVE correlation | webconsulting |
@@ -2219,7 +2221,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ### IDE Integration
 
 - **Cross-client skills**: Same `SKILL.md` files work across all supported AI coding assistants
-- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 62 skills
+- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 63 skills
 - **MCP Configuration**: Placeholder for DDEV, Hetzner, and MySQL servers
 
 ## Architecture
@@ -2386,7 +2388,7 @@ Skills in this collection cover:
 The following repositories are the source for skills in this collection:
 
 <!-- EXTERNAL_REPOS:START -->
-### Netresearch DTT GmbH (11 skills)
+### Netresearch DTT GmbH (12 skills)
 - `cli-tools`: https://github.com/netresearch/cli-tools-skill
 - `context7`: https://github.com/netresearch/context7-skill
 - `enterprise-readiness`: https://github.com/netresearch/enterprise-readiness-skill
@@ -2398,6 +2400,7 @@ The following repositories are the source for skills in this collection:
 - `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
 - `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `typo3-vite`: https://github.com/netresearch/typo3-vite-skill
 
 ### Supabase (1 skill)
 - `postgres-best-practices`: https://github.com/supabase/agent-skills
@@ -2495,7 +2498,7 @@ several cross-domain skills are based on Netresearch's original open-source skil
 Their deep expertise in TYPO3 development, enterprise PHP engineering, and AI-augmented workflows
 has been instrumental in shaping the quality and depth of these guidelines.
 
-Adapted skills: `cli-tools`, `context7`, `enterprise-readiness`, `php-modernization`, `security-audit`, `typo3-conformance`, `typo3-core-contributions`, `typo3-ddev`, `typo3-docs`, `typo3-extension-upgrade`, and `typo3-testing`
+Adapted skills: `cli-tools`, `context7`, `enterprise-readiness`, `php-modernization`, `security-audit`, `typo3-conformance`, `typo3-core-contributions`, `typo3-ddev`, `typo3-docs`, `typo3-extension-upgrade`, `typo3-testing`, and `typo3-vite`
 
 Original repositories:
 - `cli-tools`: https://github.com/netresearch/cli-tools-skill
@@ -2509,6 +2512,7 @@ Original repositories:
 - `typo3-docs`: https://github.com/netresearch/typo3-docs-skill
 - `typo3-extension-upgrade`: https://github.com/netresearch/typo3-extension-upgrade-skill
 - `typo3-testing`: https://github.com/netresearch/typo3-testing-skill
+- `typo3-vite`: https://github.com/netresearch/typo3-vite-skill
 
 **Copyright (c) Netresearch DTT GmbH** — TYPO3 development methodology, PHP modernization, and enterprise best practices (MIT / CC-BY-SA-4.0)
 See: [netresearch.de](https://www.netresearch.de/)

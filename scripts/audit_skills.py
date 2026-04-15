@@ -186,6 +186,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/typo3-testing-skill",
     },
+    "typo3-vite": {
+        "owner": "Netresearch",
+        "url": "https://github.com/netresearch/typo3-vite-skill",
+    },
     "typo3-update": {"owner": "webconsulting", "url": None},
     "typo3-workspaces": {"owner": "webconsulting", "url": None},
     "ui-design-patterns": {"owner": "webconsulting", "url": None},
