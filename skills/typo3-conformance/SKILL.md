@@ -6,10 +6,6 @@ description: >-
   review. Also triggers on: extension audit, quality score, full assessment,
   fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance,
   ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.
-metadata:
-  version: "2.10.0"
-  repository: "https://github.com/netresearch/typo3-conformance-skill"
-  author: "Netresearch DTT GmbH"
 ---
 
 # TYPO3 Extension Conformance Checker
