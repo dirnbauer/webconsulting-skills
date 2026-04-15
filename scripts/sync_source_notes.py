@@ -26,12 +26,14 @@ ADAPTED_LINE = "Adapted by webconsulting.at for this skill collection"
 REPO_SOURCE_URL = "https://github.com/dirnbauer/webconsulting-skills"
 LINK_OVERRIDES = {
     "Netresearch": "https://www.netresearch.de/",
+    "Matt Pocock": "https://github.com/mattpocock",
 }
 DISPLAY_NAME_OVERRIDES = {
     "Netresearch": "Netresearch DTT GmbH",
 }
 COPYRIGHT_LINES = {
     "Netresearch": "**Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)",
+    "Matt Pocock": "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)",
 }
 FOOTER_LINE_PATTERNS = (
     r"^## Credits & Attribution$",

@@ -273,6 +273,23 @@
     "pass_3": []
   },
   {
+    "directory": "grill-me",
+    "skill_name": "grill-me",
+    "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \"grill me\".",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills/tree/main/grill-me",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-me/SKILL.md",
+    "line_count": 26,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "ios-design",
     "skill_name": "ios-design-guidelines",
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
@@ -879,6 +896,27 @@
     "pass_3": []
   },
   {
+    "directory": "typo3-idea-extension-blog",
+    "skill_name": "typo3-idea-extension-blog",
+    "description": "Turn a product announcement, technology article, research idea, or startup concept into a TYPO3 deliverable: verify the source, assess the TYPO3 fit, build a GitHub-ready TYPO3 extension, and write a publication-ready German MDX post for webconsulting.at. Use whenever a user shares a link, launch, paper, or concept and wants to know what it means for TYPO3, whether it should become an extension, or wants the accompanying blog article.",
+    "source_owner": "webconsulting",
+    "source_url": null,
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
+    "line_count": 252,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "compatibility",
+      "metadata",
+      "license"
+    ],
+    "pass_1": [],
+    "pass_2": [
+      "no explicit source note; current assumption is webconsulting-original"
+    ],
+    "pass_3": []
+  },
+  {
     "directory": "typo3-powermail",
     "skill_name": "typo3-powermail",
     "description": "Expert guidance on the Powermail **extension** 13.x with TYPO3 **13.4+** (verify Packagist for newer Core constraints). Creating forms, custom finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email templates, backend modules, and extension development. Use when working with powermail forms, mail handling, form validation, or extending powermail functionality.",
@@ -1061,15 +1099,13 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-vite-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
-    "line_count": 45,
+    "line_count": 59,
     "frontmatter_keys": [
       "name",
       "description"
     ],
     "pass_1": [],
-    "pass_2": [
-      "expected upstream source is not explicitly attributed inside SKILL.md"
-    ],
+    "pass_2": [],
     "pass_3": []
   },
   {

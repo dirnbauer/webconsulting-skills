@@ -34,6 +34,13 @@
       "path": "${extensionPath}/skills/find-skills"
     }
 ,
+    "grill-me": {
+      "name": "grill-me",
+      "description": "Stress-test a plan or design through relentless one-at-a-time interview questions",
+      "triggers": ["grill me", "stress-test plan", "stress-test design", "challenge my plan"],
+      "path": "${extensionPath}/skills/grill-me"
+    }
+,
     "remotion-best-practices": {
       "name": "remotion-best-practices",
       "description": "Video creation in React with Remotion",
@@ -298,6 +305,13 @@
       "description": "Content Elements & Record Types with single source of truth config",
       "triggers": ["content-blocks", "content-element", "record-type", "irre"],
       "path": "${extensionPath}/skills/typo3-content-blocks"
+    }
+,
+    "typo3-idea-extension-blog": {
+      "name": "typo3-idea-extension-blog",
+      "description": "Evaluate ideas for TYPO3, build an extension, and draft the German MDX post",
+      "triggers": ["idea to extension", "product announcement", "adapt to TYPO3", "blog post pipeline", "MDX blog"],
+      "path": "${extensionPath}/skills/typo3-idea-extension-blog"
     }
 ,
     "typo3-datahandler": {

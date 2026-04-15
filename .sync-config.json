@@ -106,6 +106,14 @@
       "note": "Skill discovery and installation via Skills CLI"
     },
     {
+      "name": "grill-me",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "grill-me",
+      "note": "Stress-test plans and designs with one-question-at-a-time interviews"
+    },
+    {
       "name": "firecrawl",
       "source": "https://github.com/firecrawl/cli.git",
       "branch": "main",

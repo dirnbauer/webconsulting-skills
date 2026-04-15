@@ -145,6 +145,14 @@ https://github.com/softaworks/agent-toolkit
 
 ---
 
+We also thank **[Matt Pocock](https://github.com/mattpocock)** for the excellent `grill-me` skill.
+The `grill-me` skill is adapted from their open-source repository:
+https://github.com/mattpocock/skills/tree/main/grill-me
+
+**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
+
+---
+
 We also thank **[GitHub](https://github.com/github)** for the excellent refactoring skill from their
 awesome-copilot collection. The `refactor` skill is adapted from their open-source repository:
 https://github.com/github/awesome-copilot
@@ -187,6 +195,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
+| `grill-me` | Stress-test a plan or design through relentless one-at-a-time interview questions | 1.0.0 | grill me, stress-test plan, stress-test design, challenge my plan |
 | **Video & Animation** | | | |
 | `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | 1.1.0 | documentation, help page, product video, screenshots, tts, gsap |
@@ -218,6 +227,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
+| `grill-me` | Stress-test a plan or design through relentless one-at-a-time interview questions | 1.0.0 | grill me, stress-test plan, stress-test design, challenge my plan |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
@@ -251,6 +261,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `legal-impressum/WORLD` | International requirements (UK, CH, US) | 1.0.0 | impressum, international, uk, switzerland |
 | **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
+| `typo3-idea-extension-blog` | Evaluate ideas for TYPO3, build an extension, and draft the German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
 | `typo3-testing` | Unit, functional, E2E, architecture, mutation testing | 1.0.0 | testing, phpunit, playwright, phpat |
@@ -335,6 +346,10 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - Progressive disclosure: keep essentials at root, organize rest into linked files
   - 5-phase process: Find contradictions → Extract essentials → Categorize → Structure → Prune
   - Templates for root file and linked category files
+- **grill-me**: Stress-test plans and designs through one-question-at-a-time interviews
+  - Walk the decision tree branch by branch until the design is resolved
+  - Ask only one question at a time and provide a recommended answer
+  - Explore the codebase directly when the answer can be discovered locally
 - **refactor**: Code refactoring patterns and best practices from GitHub
   - 10 common code smells with before/after fixes
   - Safe refactoring process (prepare → identify → refactor → verify → clean up)
@@ -455,6 +470,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ### TYPO3 CMS
 - **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
+- **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing
 - **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
@@ -509,6 +525,11 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Revert Content Block to classic TCA/SQL format"
 - "Generate TCA PHP from Content Blocks config.yaml"
 - "Remove Content Blocks dependency safely"
+
+**💡 Idea -> Extension -> Blog (typo3-idea-extension-blog)**
+- "Read this product announcement and tell me if it is genuinely useful for TYPO3"
+- "Turn this startup idea into a TYPO3 extension and a German webconsulting.at article"
+- "Assess this paper for TYPO3, build the meaningful parts, and prepare the MDX draft"
 
 **🔧 Extension Development (typo3-datahandler, typo3-update)**
 - "CRUD operations with DataHandler and transactions"
@@ -1133,6 +1154,12 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "What skills are available for deployment automation?"
 - "Help me find a skill for code review"
 
+**🧠 Plan Stress Testing (grill-me)**
+- "Grill me on this rollout plan until we have no open decisions left"
+- "Stress-test this architecture design one question at a time"
+- "Challenge my migration plan and recommend the best answer for each tradeoff"
+- "Grill me on this feature spec before I start coding"
+
 **🛠️ Skill Creation (skill-creator)**
 - "Create a new skill for database migrations"
 - "Initialize a skill template for my custom workflow"
@@ -1362,6 +1389,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | Skill | TYPO3 v14.x | PHP 8.2 | PHP 8.3 | PHP 8.4 |
 |-------|-------------|---------|---------|---------|
 | typo3-content-blocks | ✓ | ✓ | ✓ | ✓ |
+| typo3-idea-extension-blog | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ |
 | typo3-testing | ✓ | ✓ | ✓ | ✓ |

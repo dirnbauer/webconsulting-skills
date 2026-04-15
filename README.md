@@ -2,9 +2,11 @@
 
 > **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **63 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **65 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
+
+> **Install script status:** The installer has been tested with Cursor, Claude Desktop, and OpenAI Codex.
 
 ### A Note from the Maintainer
 
@@ -20,25 +22,25 @@ deserves clear credit. Thank you, Netresearch.
 
 ## Skill Categories
 
-This repository currently ships **63 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **65 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 22 skills | Content Blocks, DataHandler, Powermail, Vite, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
+| **TYPO3 CMS** | 23 skills | Content Blocks, idea-to-extension pipelines, DataHandler, Powermail, Vite, Solr, Workspaces, Records List Types, Fractor, Icon Migration, accessibility, batch, simplify, upgrades, testing, security |
 | **Video & Animation** | 2 skills | Remotion video creation, product documentation videos (Remotion + GSAP + TTS) |
 | **Security & Enterprise** | 4 skills | OWASP audits, incident reporting, deepfake detection, OpenSSF, supply chain security |
 | **Database** | 1 skill | Postgres performance, RLS, indexes, connection pooling (Supabase) |
 | **Marketing** | 1 skill | CRO, copywriting, SEO, pricing, psychology (Corey Haines) |
 | **CRO & Growth** | 4 skills | Full-funnel CRO, programmatic SEO, launch strategy, A/B testing (AgentKits) |
-| **Code Quality & Refactoring** | 4 skills | Agent instruction refactoring, code smells, SOLID patterns, skill discovery |
+| **Code Quality & Refactoring** | 5 skills | Agent instruction refactoring, code smells, SOLID patterns, skill discovery, plan stress testing |
 | **PHP & Tools** | 5 skills | PHP 8.x modernization, CLI tools, documentation lookup, web scraping, skill creation |
 | **Frontend & Design** | 8 skills | UI patterns, architecture diagrams, shadcn/ui, design systems, accessibility, OG images, React/Next.js, creative frontend |
 | **Platform Design** | 8 skills | Android Material Design, iOS/iPad/Mac/TV/Watch/Vision HIG, Web WCAG |
 | **Documents & Office** | 1 skill | PDF, DOCX, PPTX, XLSX processing |
 | **Legal & Compliance** | 1 skill | Impressum base skill with Germany, EU, and World supplements |
 | **AI & SEO** | 2 skills | AEO/GEO for AI search visibility, agent readiness assessment |
-| **Total** | **63 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **65 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -237,10 +239,12 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `refactor` | refactor, clean up, code smell, improve code, extract method | "Refactor this function" or "Clean up this code and remove duplication" |
 | `refactor-clean` | refactor, clean code, solid, maintainability | "Apply SOLID principles to this module" or "Find code smells and fix them" |
 | `find-skills` | find skill, install skill, npx skills, skills.sh | "Find a skill for React performance" or "Search skills.sh for testing tools" |
+| `grill-me` | grill me, stress-test plan, stress-test design, challenge my plan | "Grill me on this implementation plan" or "Stress-test this architecture one question at a time" |
 | `shadcn-ui` | shadcn, radix, tailwind, components, form, dialog, button | "Set up shadcn/ui in my Next.js project" or "Build a form with Zod validation" |
 | `typo3-accessibility` | accessibility, a11y, wcag, aria, screen reader, keyboard navigation | "Run WCAG 2.2 AA audit on my TYPO3 site" or "Add skip-to-content link" |
 | `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
+| `typo3-idea-extension-blog` | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog | "Turn this product announcement into a TYPO3 extension and German blog post" or "Assess this article for TYPO3 and build the useful parts" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
 | `typo3-testing` | testing, phpunit, e2e, coverage | "Write unit tests for my repository" |
@@ -2129,6 +2133,7 @@ grep -r "DataHandler" skills/
 |-------|---------|--------|
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
+| `typo3-idea-extension-blog` | Evaluate ideas for TYPO3, build an extension, and draft the German MDX post | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
 | `typo3-ddev` | Local DDEV development environment | Netresearch |
 | `typo3-testing` | Unit, functional, E2E, architecture testing | Netresearch |
@@ -2164,6 +2169,7 @@ grep -r "DataHandler" skills/
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | sickn33 |
 | `find-skills` | Discover and install skills from skills.sh ecosystem | Vercel |
+| `grill-me` | Stress-test a plan or design through one-at-a-time interview questions | Matt Pocock |
 | **PHP & Tools** | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
 | `cli-tools` | CLI tool management and auto-installation | Netresearch |
@@ -2424,6 +2430,9 @@ The following repositories are the source for skills in this collection:
 ### Softaworks (1 skill)
 - `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
+### Matt Pocock (1 skill)
+- `grill-me`: https://github.com/mattpocock/skills/tree/main/grill-me
+
 ### GitHub (1 skill)
 - `refactor`: https://github.com/github/awesome-copilot
 
@@ -2486,6 +2495,7 @@ Each retains its original copyright and license terms:
 - **Remotion** — `remotion-best-practices` (custom license, see remotion.dev/license)
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
 - **AITYTech** — AgentKits Marketing automation (MIT)
+- **Matt Pocock** — `grill-me` planning and design stress-test workflow (MIT)
 
 See individual SKILL.md files for per-skill attribution and license details.
 
@@ -2603,6 +2613,18 @@ Original repositories:
 - `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
 **Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure
+
+---
+
+We also thank **[Matt Pocock](https://github.com/mattpocock)** for their excellent open-source work.
+The `grill-me` skill in this collection builds on that contribution.
+
+Adapted skill: `grill-me`
+
+Original repositories:
+- `grill-me`: https://github.com/mattpocock/skills/tree/main/grill-me
+
+**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
 
 ---
 

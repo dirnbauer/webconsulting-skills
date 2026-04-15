@@ -67,6 +67,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Vercel",
         "url": "https://github.com/vercel-labs/skills",
     },
+    "grill-me": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills/tree/main/grill-me",
+    },
     "firecrawl": {"owner": "Firecrawl", "url": "https://github.com/firecrawl/cli"},
     "frontend-design": {
         "owner": "Anthropic",
@@ -221,6 +225,7 @@ GITHUB_OWNER_LABELS = {
     "firecrawl": "Firecrawl",
     "github": "GitHub",
     "giuseppe-trisciuoglio": "Giuseppe Trisciuoglio",
+    "mattpocock": "Matt Pocock",
     "netresearch": "Netresearch",
     "openhands": "OpenHands",
     "ooiyeefei": "ooiyeefei",

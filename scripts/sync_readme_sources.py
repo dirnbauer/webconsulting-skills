@@ -36,6 +36,7 @@ OWNER_LINKS = {
     "Vercel": "https://vercel.com/",
     "Giuseppe Trisciuoglio": "https://github.com/giuseppe-trisciuoglio",
     "Softaworks": "https://github.com/softaworks",
+    "Matt Pocock": "https://github.com/mattpocock",
     "GitHub": "https://github.com/github",
     "sickn33": "https://github.com/sickn33",
     "ehmo": "https://github.com/ehmo",
@@ -76,6 +77,9 @@ OWNER_COPYRIGHT = {
     "Softaworks": (
         "**Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure"
     ),
+    "Matt Pocock": (
+        "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)"
+    ),
     "GitHub": (
         "**Copyright (c) GitHub** - Code refactoring patterns and best practices"
     ),
@@ -112,6 +116,7 @@ OWNER_ORDER = [
     "Vercel",
     "Giuseppe Trisciuoglio",
     "Softaworks",
+    "Matt Pocock",
     "GitHub",
     "sickn33",
     "ehmo",
