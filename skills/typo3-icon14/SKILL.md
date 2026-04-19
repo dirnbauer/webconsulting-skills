@@ -8,7 +8,7 @@ description: >-
   references.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -106,6 +106,43 @@ force a 64x64 module composition into a 16x16 record or action icon.
 See [references/design-notes.md](references/design-notes.md) for the visual rules and
 anti-patterns.
 
+## Light And Dark Mode Are Non-Negotiable
+
+TYPO3 v14 ships auto / light / dark color scheme switching in the backend (introduced
+as a Core feature in v13.3, carried into v14). Every custom icon must render correctly
+in **both** schemes. There is no separate "dark icon" file — the same SVG is used.
+
+The two CSS tokens that the Core ships on `:root` (from `TYPO3.Icons/assets/scss/icons.scss`)
+are:
+
+```css
+:root {
+    --icon-color-primary: currentColor;
+    --icon-color-accent: #ff8700;
+}
+```
+
+How to stay compatible with both schemes:
+
+- Use `currentColor` (or `var(--icon-color-primary, currentColor)`) for the primary
+  silhouette. It inherits the surrounding text color, which flips automatically when
+  the user switches color scheme.
+- Use `var(--icon-color-accent, #ff8700)` for the accent. TYPO3 orange `#ff8700` is the
+  same fallback in both schemes because orange has sufficient contrast on both light
+  and dark backend surfaces. Do **not** replace it with a scheme-specific hex — themes
+  that want a different accent override the CSS variable, not the fallback.
+- Never hardcode `fill="#000"`, `fill="#333"`, `fill="#fff"`, `fill="white"`, or
+  `fill="black"`. Any one of these vanishes on one of the two backgrounds.
+- Never draw a solid background rectangle behind the icon. The backend surface color
+  must show through so the scheme flip works.
+- Opacity-based depth (`fill-opacity=".8"` on top of `currentColor`) is safe because the
+  base tone flips with the scheme.
+- Do not depend on `prefers-color-scheme` media queries inside the SVG. The Core drives
+  the scheme via an attribute on the root element, and relying on
+  `prefers-color-scheme` will miss manual switches from the User Settings dropdown.
+
+Verify every icon in both schemes before shipping (see Verification below).
+
 ## Registration Rules
 
 Register icons in `Configuration/Icons.php`. TYPO3 v14 requires this and no longer allows
@@ -160,6 +197,10 @@ Before finishing:
 - verify there is no solid background layer
 - verify all consumers point to the intended identifier
 - verify the icon remains readable at its real render size
+- verify the icon works in **both** light and dark backend schemes — switch via the
+  user dropdown at the top right or User Settings, and check the icon in its real
+  render context (module menu, content wizard, list module, TCA icons)
+- confirm no hardcoded `#000`, `#333`, `#fff`, `white`, or `black` fills remain
 - clear TYPO3 caches and browser local storage if rendering looks stale
 
 ## References

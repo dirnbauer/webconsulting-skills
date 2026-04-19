@@ -8,6 +8,29 @@
 - Keep SVG markup minimal.
 - Preserve the icon's meaning even when the drawing changes.
 
+## Light and dark mode
+
+TYPO3 v14 backend supports auto / light / dark color schemes. The same SVG must work
+in both. The TYPO3.Icons package defines the tokens on `:root` as:
+
+```css
+--icon-color-primary: currentColor;
+--icon-color-accent: #ff8700;
+```
+
+Guidance:
+
+- `currentColor` inherits the surrounding text color, so the silhouette flips with
+  the scheme automatically — this is why you must never hardcode black or white.
+- `#ff8700` (TYPO3 orange) stays the same in both schemes. Orange has sufficient
+  contrast against the light and dark backend surfaces. Do not introduce a second
+  scheme-specific accent hex; theme authors override the CSS variable if they want
+  a different color.
+- Opacity-based depth layered on top of `currentColor` is safe.
+- Do not rely on `prefers-color-scheme` media queries inside the SVG; the Core
+  drives the scheme via an attribute on the root element, and manual switches from
+  User Settings would be missed.
+
 ## Match the Core icon family
 
 Pick references from the Core family that matches the job:
@@ -52,10 +75,11 @@ Plugin, record, and action icons usually render at 16px.
 
 | Mistake | Fix |
 |---------|-----|
-| `fill="#fff"` or `fill="white"` | Replace with `currentColor` |
-| `fill="#000"` or `fill="#333"` | Replace with `currentColor` |
-| Solid colored background block | Remove it completely |
+| `fill="#fff"` or `fill="white"` | Replace with `currentColor` (vanishes in light mode) |
+| `fill="#000"` or `fill="#333"` | Replace with `currentColor` (vanishes in dark mode) |
+| Solid colored background block | Remove it completely (breaks both schemes) |
 | Hardcoded accent hex everywhere | Use `var(--icon-color-accent, #ff8700)` |
+| Scheme-specific accent hex via `prefers-color-scheme` | Keep a single accent; Core switches schemes programmatically |
 | Registering icons in `ext_localconf.php` | Move to `Configuration/Icons.php` |
 | Treating every icon like a module icon | Respect the icon type and render size |
 | Too many details in 16x16 icons | Simplify until the icon is still readable at 16px |

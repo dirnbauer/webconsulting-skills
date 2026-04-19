@@ -32,6 +32,7 @@ Use this checklist when updating existing extension icons.
 - [ ] Remove solid legacy backgrounds
 - [ ] Replace hardcoded white/black/gray with `currentColor`
 - [ ] Use `var(--icon-color-accent, #ff8700)` for accent geometry
+- [ ] Confirm no `#fff`, `#000`, `#333`, `white`, or `black` fills remain
 - [ ] Simplify shapes until they are readable at the real render size
 - [ ] Keep module icons and 16x16 icons visually appropriate for their type
 
@@ -47,4 +48,6 @@ Use this checklist when updating existing extension icons.
 - [ ] Confirm the SVG file path matches the registered source
 - [ ] Confirm the icon has the intended viewBox
 - [ ] Confirm the icon is readable in its real backend context
+- [ ] Switch the backend color scheme and confirm the icon works in **both**
+      light and dark mode (top-right user dropdown or User Settings)
 - [ ] Clear TYPO3 caches and browser local storage if stale icons still appear
