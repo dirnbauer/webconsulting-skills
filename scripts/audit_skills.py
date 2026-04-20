@@ -71,10 +71,26 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Matt Pocock",
         "url": "https://github.com/mattpocock/skills/tree/main/grill-me",
     },
+    "gsap": {
+        "owner": "HeyGen",
+        "url": "https://github.com/heygen-com/hyperframes",
+    },
     "firecrawl": {"owner": "Firecrawl", "url": "https://github.com/firecrawl/cli"},
     "frontend-design": {
         "owner": "Anthropic",
         "url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
+    },
+    "hyperframes": {
+        "owner": "HeyGen",
+        "url": "https://github.com/heygen-com/hyperframes",
+    },
+    "hyperframes-cli": {
+        "owner": "HeyGen",
+        "url": "https://github.com/heygen-com/hyperframes",
+    },
+    "hyperframes-registry": {
+        "owner": "HeyGen",
+        "url": "https://github.com/heygen-com/hyperframes",
     },
     "ios-design": {
         "owner": "ehmo",
@@ -215,6 +231,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     },
     "webconsulting-branding": {"owner": "webconsulting", "url": None},
     "webconsulting-create-documentation": {"owner": "webconsulting", "url": None},
+    "website-to-hyperframes": {
+        "owner": "HeyGen",
+        "url": "https://github.com/heygen-com/hyperframes",
+    },
 }
 
 GITHUB_OWNER_LABELS = {
@@ -225,6 +245,7 @@ GITHUB_OWNER_LABELS = {
     "firecrawl": "Firecrawl",
     "github": "GitHub",
     "giuseppe-trisciuoglio": "Giuseppe Trisciuoglio",
+    "heygen-com": "HeyGen",
     "mattpocock": "Matt Pocock",
     "netresearch": "Netresearch",
     "openhands": "OpenHands",

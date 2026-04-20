@@ -114,6 +114,38 @@
       "note": "Stress-test plans and designs with one-question-at-a-time interviews"
     },
     {
+      "name": "gsap",
+      "source": "https://github.com/heygen-com/hyperframes.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/gsap",
+      "note": "GSAP animation reference bundled with the HyperFrames skill package"
+    },
+    {
+      "name": "hyperframes",
+      "source": "https://github.com/heygen-com/hyperframes.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/hyperframes",
+      "note": "HTML-based video composition authoring for HyperFrames"
+    },
+    {
+      "name": "hyperframes-cli",
+      "source": "https://github.com/heygen-com/hyperframes.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/hyperframes-cli",
+      "note": "CLI workflow for scaffolding, linting, previewing, and rendering HyperFrames projects"
+    },
+    {
+      "name": "hyperframes-registry",
+      "source": "https://github.com/heygen-com/hyperframes.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/hyperframes-registry",
+      "note": "Registry blocks and components for HyperFrames compositions"
+    },
+    {
       "name": "firecrawl",
       "source": "https://github.com/firecrawl/cli.git",
       "branch": "main",
@@ -331,6 +363,14 @@
       "path": "skills/watchos"
     },
     {
+      "name": "website-to-hyperframes",
+      "source": "https://github.com/heygen-com/hyperframes.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/website-to-hyperframes",
+      "note": "Capture a URL and turn it into a HyperFrames video"
+    },
+    {
       "name": "web-design-guidelines",
       "source": "https://github.com/vercel-labs/agent-skills.git",
       "branch": "main",
@@ -346,5 +386,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-04-14T10:47:45Z"
+  "lastSync": "2026-04-20T18:21:20Z"
 }

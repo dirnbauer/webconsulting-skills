@@ -7,7 +7,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 65
+- Skills audited: 70
 - Total findings: 44
 - Skills with pass 1 findings: 32
 - Skills with pass 2 findings: 1
@@ -252,6 +252,70 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source URL: https://github.com/mattpocock/skills/tree/main/grill-me
 - Frontmatter name: grill-me
 - SKILL.md lines: 26
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `gsap`
+
+- Source owner: HeyGen
+- Source URL: https://github.com/heygen-com/hyperframes
+- Frontmatter name: gsap
+- SKILL.md lines: 226
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `hyperframes`
+
+- Source owner: HeyGen
+- Source URL: https://github.com/heygen-com/hyperframes
+- Frontmatter name: hyperframes
+- SKILL.md lines: 362
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `hyperframes-cli`
+
+- Source owner: HeyGen
+- Source URL: https://github.com/heygen-com/hyperframes
+- Frontmatter name: hyperframes-cli
+- SKILL.md lines: 129
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `hyperframes-registry`
+
+- Source owner: HeyGen
+- Source URL: https://github.com/heygen-com/hyperframes
+- Frontmatter name: hyperframes-registry
+- SKILL.md lines: 119
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -753,7 +817,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-icon14
-- SKILL.md lines: 174
+- SKILL.md lines: 215
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1063,6 +1127,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 **Pass 1: Structure**
 - SKILL.md is 1101 lines; skill-creator recommends keeping it under 500
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `website-to-hyperframes`
+
+- Source owner: HeyGen
+- Source URL: https://github.com/heygen-com/hyperframes
+- Frontmatter name: website-to-hyperframes
+- SKILL.md lines: 135
+
+**Pass 1: Structure**
+- No pass 1 issues found.
 
 **Pass 2: Source**
 - No pass 2 issues found.

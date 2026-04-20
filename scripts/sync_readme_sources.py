@@ -36,6 +36,7 @@ OWNER_LINKS = {
     "Vercel": "https://vercel.com/",
     "Giuseppe Trisciuoglio": "https://github.com/giuseppe-trisciuoglio",
     "Softaworks": "https://github.com/softaworks",
+    "HeyGen": "https://www.heygen.com/",
     "Matt Pocock": "https://github.com/mattpocock",
     "GitHub": "https://github.com/github",
     "sickn33": "https://github.com/sickn33",
@@ -77,6 +78,10 @@ OWNER_COPYRIGHT = {
     "Softaworks": (
         "**Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure"
     ),
+    "HeyGen": (
+        "**Copyright (c) HeyGen** - HyperFrames HTML-to-video composition, CLI, "
+        "registry, and website-to-video workflows (Apache 2.0)"
+    ),
     "Matt Pocock": (
         "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)"
     ),
@@ -116,6 +121,7 @@ OWNER_ORDER = [
     "Vercel",
     "Giuseppe Trisciuoglio",
     "Softaworks",
+    "HeyGen",
     "Matt Pocock",
     "GitHub",
     "sickn33",

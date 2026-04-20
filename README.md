@@ -24,13 +24,13 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **65 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **70 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
 | **TYPO3 CMS** | 23 skills | Content Blocks (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Vite (Netresearch), Solr (webconsulting) |
-| **Video & Animation** | 2 skills | Remotion Best Practices (remotion-dev), Create Documentation (webconsulting) |
+| **Video & Animation** | 7 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
 | **Marketing** | 1 skill | Marketing Skills (Corey Haines) |
@@ -42,7 +42,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **65 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **70 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -276,6 +276,11 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
+| `hyperframes` | hyperframes, video composition, captions, subtitles, voiceover, audio reactive, transitions | "Create a 10-second HTML-based product intro with captions and scene transitions" |
+| `hyperframes-cli` | hyperframes init, hyperframes lint, hyperframes preview, hyperframes render, hyperframes tts | "Scaffold a HyperFrames project, lint it, preview it, and render a draft" |
+| `hyperframes-registry` | hyperframes add, hyperframes.json, block, component, registry | "Install the data-chart block with hyperframes add and wire it into index.html" |
+| `website-to-hyperframes` | website to video, capture this site, turn this into a video, social ad, product tour | "Capture this marketing site and turn it into a 20-second launch video" |
+| `gsap` | gsap, animation, timeline, easing, stagger, quickTo | "Write a GSAP timeline for a HyperFrames scene with staggered text" |
 | `webconsulting-create-documentation` | documentation, help page, product video, screenshots, tts, gsap | "Create product documentation with video tour" or "Build a help page" |
 | `excalidraw` | excalidraw, architecture diagram, system diagram, png export, svg export | "Generate an architecture diagram for this project as an .excalidraw file" or "Create a system diagram and export it as SVG" |
 | `react-best-practices` | react, next.js, performance, optimization, bundle size, waterfalls | "Optimize this React component" or "Eliminate request waterfalls" |
@@ -1551,6 +1556,40 @@ Implement proper error handling for my API: custom exceptions, error codes, mean
 
 ---
 
+#### 🎥 HyperFrames Video Production
+
+**HTML-Based Product Intro:**
+```
+Using the hyperframes skill, create a 10-second product intro with a fade-in title, a background video, and background music.
+```
+
+**Website to Video:**
+```
+Capture https://example.com and turn it into a 25-second product launch video with a clear hook, voiceover, and scene transitions.
+```
+
+**Short-Form Social Video:**
+```
+Make a 9:16 TikTok-style hook video about this feature using HyperFrames, with bouncy captions synced to TTS narration.
+```
+
+**Registry Block Installation:**
+```
+Install the data-chart block with hyperframes add, then wire it into index.html and explain the required data-composition attributes.
+```
+
+**CLI Workflow:**
+```
+Scaffold a new HyperFrames project, lint it, preview it locally, and render a draft MP4. Call out any environment issues first.
+```
+
+**GSAP Scene Animation:**
+```
+Write a GSAP timeline for a HyperFrames scene where the headline, subtitle, and CTA animate in with staggered entrances and a clean transition to the next scene.
+```
+
+---
+
 #### 🎬 Video Creation with Remotion
 
 **Basic Video Composition:**
@@ -2194,6 +2233,11 @@ grep -r "DataHandler" skills/
 | **Documents & Office** | | |
 | `document-processing` | PDF, DOCX, PPTX, XLSX creation, editing, analysis | Anthropic |
 | **Video & Animation** | | |
+| `hyperframes` | HTML-based video compositions, captions, voiceovers, audio-reactive visuals, transitions | HeyGen |
+| `hyperframes-cli` | CLI workflow for HyperFrames init, lint, preview, render, transcribe, and TTS | HeyGen |
+| `hyperframes-registry` | Registry blocks/components via `hyperframes add` | HeyGen |
+| `website-to-hyperframes` | Capture a website and turn it into a HyperFrames video workflow | HeyGen |
+| `gsap` | GSAP animation reference for HyperFrames compositions | HeyGen |
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | webconsulting |
 | **Legal & Compliance** | | |
@@ -2229,7 +2273,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ### IDE Integration
 
 - **Cross-client skills**: Same `SKILL.md` files work across all supported AI coding assistants
-- **Gemini CLI manifest**: `gemini-extension.json` with triggers for all 63 skills
+- **Gemini CLI manifest**: `gemini-extension.json` with triggers for every top-level skill listed in `AGENTS.md`
 - **MCP Configuration**: Placeholder for DDEV, Hetzner, and MySQL servers
 
 ## Architecture
@@ -2432,6 +2476,9 @@ The following repositories are the source for skills in this collection:
 ### Softaworks (1 skill)
 - `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
+### HeyGen (5 skills)
+- `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`: https://github.com/heygen-com/hyperframes
+
 ### Matt Pocock (1 skill)
 - `grill-me`: https://github.com/mattpocock/skills/tree/main/grill-me
 
@@ -2615,6 +2662,18 @@ Original repositories:
 - `agent-md-refactor`: https://github.com/softaworks/agent-toolkit
 
 **Copyright (c) Softaworks** - Agent instruction file refactoring with progressive disclosure
+
+---
+
+We also thank **[HeyGen](https://www.heygen.com/)** for their excellent open-source work.
+The `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes` skills in this collection build on that contribution.
+
+Adapted skills: `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`
+
+Original repositories:
+- `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`: https://github.com/heygen-com/hyperframes
+
+**Copyright (c) HeyGen** - HyperFrames HTML-to-video composition, CLI, registry, and website-to-video workflows (Apache 2.0)
 
 ---
 

@@ -290,6 +290,70 @@
     "pass_3": []
   },
   {
+    "directory": "gsap",
+    "skill_name": "gsap",
+    "description": "GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use when writing GSAP animations in HyperFrames compositions.",
+    "source_owner": "HeyGen",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/gsap/SKILL.md",
+    "line_count": 226,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "hyperframes",
+    "skill_name": "hyperframes",
+    "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For CLI commands (init, lint, preview, render, transcribe, tts) see the hyperframes-cli skill.",
+    "source_owner": "HeyGen",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes/SKILL.md",
+    "line_count": 362,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "hyperframes-cli",
+    "skill_name": "hyperframes-cli",
+    "description": "HyperFrames CLI tool \\u2014 hyperframes init, lint, preview, render, transcribe, tts, doctor, browser, info, upgrade, compositions, docs, benchmark. Use when scaffolding a project, linting or validating compositions, previewing in the studio, rendering to video, transcribing audio, generating TTS, or troubleshooting the HyperFrames environment.",
+    "source_owner": "HeyGen",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
+    "line_count": 129,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "hyperframes-registry",
+    "skill_name": "hyperframes-registry",
+    "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery.",
+    "source_owner": "HeyGen",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
+    "line_count": 119,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "ios-design",
     "skill_name": "ios-design-guidelines",
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
@@ -883,7 +947,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-icon14/SKILL.md",
-    "line_count": 174,
+    "line_count": 215,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1265,6 +1329,22 @@
     "pass_1": [
       "SKILL.md is 1101 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "website-to-hyperframes",
+    "skill_name": "website-to-hyperframes",
+    "description": "Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says \\\"capture this site\\\", \\\"turn this into a video\\\", \\\"make a promo from my site\\\", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL \\u2014 this is the skill to use.",
+    "source_owner": "HeyGen",
+    "source_url": "https://github.com/heygen-com/hyperframes",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
+    "line_count": 135,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   }

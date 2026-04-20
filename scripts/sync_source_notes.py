@@ -26,6 +26,7 @@ ADAPTED_LINE = "Adapted by webconsulting.at for this skill collection"
 REPO_SOURCE_URL = "https://github.com/dirnbauer/webconsulting-skills"
 LINK_OVERRIDES = {
     "Netresearch": "https://www.netresearch.de/",
+    "HeyGen": "https://www.heygen.com/",
     "Matt Pocock": "https://github.com/mattpocock",
 }
 DISPLAY_NAME_OVERRIDES = {
@@ -33,6 +34,7 @@ DISPLAY_NAME_OVERRIDES = {
 }
 COPYRIGHT_LINES = {
     "Netresearch": "**Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)",
+    "HeyGen": "**Copyright (c) HeyGen** - HyperFrames HTML-to-video composition and workflow guidance (Apache 2.0)",
     "Matt Pocock": "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)",
 }
 FOOTER_LINE_PATTERNS = (

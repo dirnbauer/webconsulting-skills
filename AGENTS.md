@@ -198,6 +198,11 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `grill-me` | Stress-test a plan or design through relentless one-at-a-time interview questions | 1.0.0 | grill me, stress-test plan, stress-test design, challenge my plan |
 | **Video & Animation** | | | |
 | `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
+| `hyperframes` | HTML-based video compositions, captions, voiceovers, audio-reactive visuals, transitions | 1.0.0 | hyperframes, video composition, captions, subtitles, tts, audio reactive |
+| `hyperframes-cli` | CLI workflow for HyperFrames init, lint, preview, render, transcribe, tts | 1.0.0 | hyperframes init, hyperframes lint, hyperframes preview, hyperframes render, hyperframes tts |
+| `hyperframes-registry` | Install registry blocks/components and wire them into HyperFrames | 1.0.0 | hyperframes add, hyperframes.json, block, component, registry |
+| `website-to-hyperframes` | Capture a website and turn it into a HyperFrames video | 1.0.0 | website to video, capture this site, turn this into a video, social ad, product tour |
+| `gsap` | GSAP animation reference for HyperFrames compositions | 1.0.0 | gsap, animation, timeline, easing, stagger, quickTo |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | 1.1.0 | documentation, help page, product video, screenshots, tts, gsap |
 | **Security & Enterprise** | | | |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
@@ -292,6 +297,11 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ### Video & Animation
 - **remotion-best-practices**: Video creation in React with Remotion, animations, transitions, audio
+- **hyperframes**: HTML-as-source-of-truth video authoring with GSAP timelines, captions, TTS, audio-reactive visuals, and scene transitions
+- **hyperframes-cli**: `npx hyperframes` workflow for init, lint, preview, render, transcribe, TTS, and environment troubleshooting
+- **hyperframes-registry**: Install and wire reusable registry blocks and components into HyperFrames compositions
+- **website-to-hyperframes**: Capture a website, derive design/story/script artifacts, and turn it into a promo, tour, or social video
+- **gsap**: GSAP tween, timeline, easing, and performance reference used inside HyperFrames compositions
 - **webconsulting-create-documentation**: Product documentation with help pages, AI screenshots, narrated video tours (Remotion + GSAP + ElevenLabs TTS + Suno AI music), GitHub README visual docs
 
 ### Security & Enterprise
@@ -556,6 +566,13 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Multi-language setup with fallback types"
 - "XLIFF translations with pluralization"
 - "Sync translations from Phrase/Lokalise"
+
+**🎥 HyperFrames Video Production (hyperframes, hyperframes-cli, hyperframes-registry, website-to-hyperframes, gsap)**
+- "Create a 10-second product intro in HyperFrames with a fade-in title, background video, and music"
+- "Capture https://example.com and turn it into a 25-second product launch video"
+- "Make a 9:16 TikTok-style hook video with bouncy captions synced to TTS narration"
+- "Install the data-chart block with `hyperframes add` and wire it into index.html"
+- "Scaffold a HyperFrames project, lint it, preview it, and render a draft MP4"
 
 **📧 Forms & Email (typo3-datahandler)**
 - "EXT:form custom finisher for CRM integration"

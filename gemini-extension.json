@@ -48,6 +48,41 @@
       "path": "${extensionPath}/skills/remotion-best-practices"
     }
 ,
+    "hyperframes": {
+      "name": "hyperframes",
+      "description": "HTML-based video compositions, captions, voiceovers, audio-reactive visuals, transitions",
+      "triggers": ["hyperframes", "video composition", "captions", "subtitles", "tts", "audio reactive"],
+      "path": "${extensionPath}/skills/hyperframes"
+    }
+,
+    "hyperframes-cli": {
+      "name": "hyperframes-cli",
+      "description": "CLI workflow for HyperFrames init, lint, preview, render, transcribe, tts",
+      "triggers": ["hyperframes init", "hyperframes lint", "hyperframes preview", "hyperframes render", "hyperframes tts"],
+      "path": "${extensionPath}/skills/hyperframes-cli"
+    }
+,
+    "hyperframes-registry": {
+      "name": "hyperframes-registry",
+      "description": "Install registry blocks/components and wire them into HyperFrames",
+      "triggers": ["hyperframes add", "hyperframes.json", "block", "component", "registry"],
+      "path": "${extensionPath}/skills/hyperframes-registry"
+    }
+,
+    "website-to-hyperframes": {
+      "name": "website-to-hyperframes",
+      "description": "Capture a website and turn it into a HyperFrames video",
+      "triggers": ["website to video", "capture this site", "turn this into a video", "social ad", "product tour"],
+      "path": "${extensionPath}/skills/website-to-hyperframes"
+    }
+,
+    "gsap": {
+      "name": "gsap",
+      "description": "GSAP animation reference for HyperFrames compositions",
+      "triggers": ["gsap", "animation", "timeline", "easing", "stagger", "quickTo"],
+      "path": "${extensionPath}/skills/gsap"
+    }
+,
     "webconsulting-create-documentation": {
       "name": "webconsulting-create-documentation",
       "description": "Product docs, help pages, video tours (Remotion + GSAP + TTS)",
