@@ -1,10 +1,6 @@
 ---
-name: macos-design-guidelines
-description: Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+name: "macos-design-guidelines"
+description: "Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst."
 ---
 
 # macOS Human Interface Guidelines
