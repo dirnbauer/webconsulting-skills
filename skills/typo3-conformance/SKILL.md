@@ -1,11 +1,6 @@
 ---
-name: typo3-conformance
-description: >-
-  Use when assessing TYPO3 extension quality, conformance checking, standards
-  compliance, modernization to v12/v13/v14, TER readiness, or best practices
-  review. Also triggers on: extension audit, quality score, full assessment,
-  fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance,
-  ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.
+name: "typo3-conformance"
+description: "Use when assessing TYPO3 extension quality, conformance checking, standards compliance, modernization to v12/v13/v14, TER readiness, or best practices review. Also triggers on: extension audit, quality score, full assessment, fix all findings, conformance audit, Bootstrap 5 migration, CSP compliance, ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat."
 ---
 
 # TYPO3 Extension Conformance Checker
@@ -95,6 +90,7 @@ grep -rn 'data-toggle\|data-dismiss\|data-ride' Resources/ --include='*.html'
 - `references/report-template.md` -- Report format
 - `references/excellence-indicators.md` -- Bonus scoring
 - `references/best-practices.md` -- Organizational patterns
+- `references/localization-coverage.md` -- XLIFF, raw HTML vs Fluid
 
 Asset templates in `assets/Build/`: PHPStan, PHP-CS-Fixer, Rector, ESLint, Stylelint, TypoScript lint.
 

@@ -1,10 +1,6 @@
 ---
-name: web-design-guidelines
-description: Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+name: "web-design-guidelines"
+description: "Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance."
 ---
 
 # Web Platform Design Guidelines

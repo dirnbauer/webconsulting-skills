@@ -1,5 +1,5 @@
 ---
-name: typo3-core-contributions
+name: "typo3-core-contributions"
 description: "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution."
 ---
 
