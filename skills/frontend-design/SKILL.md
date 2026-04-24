@@ -1,12 +1,22 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.
+description: Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, applications, dashboards, React components, HTML/CSS layouts, or to style/beautify any web UI. When a project already has a design system such as shadcn/ui, Tailwind tokens, TYPO3 Fluid components, or brand guidelines, use that system as the source of truth instead of inventing a new visual language.
 license: Complete terms in LICENSE.txt
 ---
 
 This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
 
 The user provides frontend requirements: a component, page, application, or interface to build. They may include context about the purpose, audience, or technical constraints.
+
+## Existing Design Systems
+
+If the user names a design system, component library, brand guide, or existing app style, treat that as the creative direction. Do not override shadcn/ui, Apple HIG, Material, Bootstrap, a client brand, or an established product UI with a new aesthetic just to be distinctive.
+
+For shadcn/ui work:
+- Use the original shadcn structure, semantic tokens, utility classes, radius, shadows, focus rings, light/dark modes, and component anatomy.
+- Make the result feel polished by improving spacing, hierarchy, state handling, density, and content quality rather than adding decorative effects.
+- For server-rendered stacks such as TYPO3 Fluid, translate shadcn component recipes into local templates and shared components instead of requiring React.
+- Preserve existing content schemas and template contracts unless the task explicitly asks for a content model redesign.
 
 ## Design Thinking
 

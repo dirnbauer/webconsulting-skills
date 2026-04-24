@@ -7,9 +7,11 @@ description: >-
   file-type, make:content-block, friendsoftypo3/content-blocks, irre.
 compatibility: TYPO3 14.x — `friendsoftypo3/content-blocks` 2.x (verify on [Packagist](https://packagist.org/packages/friendsoftypo3/content-blocks))
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   related_skills:
     - typo3-content-blocks-migration
+    - shadcn-ui
+    - typo3-vite
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -216,6 +218,40 @@ fields:
 </section>
 </html>
 ```
+
+### shadcn/ui Frontend Template Pattern
+
+When a Content Block should follow shadcn/ui styling, keep the Content Block YAML as the content model and move repeated visual structure into shared Fluid components. The `frontend.fluid.html` entrypoint should map `{data}` fields to typed atomic components rather than duplicating bespoke CSS in every block.
+
+```html
+<!-- templates/frontend.fluid.html -->
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:d="http://typo3.org/ns/Vendor/Sitepackage/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+
+<section class="py-12 md:py-16">
+    <d:molecule.card class="mx-auto max-w-2xl">
+        <d:molecule.cardHeader>
+            <d:molecule.cardTitle>{data.header}</d:molecule.cardTitle>
+            <f:if condition="{data.subheadline}">
+                <d:molecule.cardDescription>{data.subheadline}</d:molecule.cardDescription>
+            </f:if>
+        </d:molecule.cardHeader>
+        <d:molecule.cardContent>
+            <f:format.html>{data.bodytext}</f:format.html>
+        </d:molecule.cardContent>
+    </d:molecule.card>
+</section>
+</html>
+```
+
+Guidelines:
+- Preserve existing field identifiers, `fixture.json`, labels, and editor workflows unless the content model itself is changing.
+- Use shared Fluid components for shadcn primitives such as Button, Badge, Card, Form controls, Tabs, Accordion, Alert, Table, and Sheet/Dialog shells.
+- Put `<f:argument>` type contracts in reusable Fluid components and partials. Avoid adding required arguments to a Content Block entry template unless the render context is fully controlled.
+- Use `f:asset.css` / `f:asset.script` only for block-specific assets. Shared shadcn/Tailwind tokens and utility classes belong in the site CSS entrypoint.
+- For interactive shadcn patterns, use Alpine or small vanilla controllers with ARIA and `data-state` attributes instead of React/Radix runtime dependencies.
+- Create or update styleguide fixtures so every Content Block can be rendered with realistic content in light and dark mode.
 
 ### Backend Preview Template
 
@@ -553,6 +589,22 @@ Then access fields in your Fluid template:
     </f:for>
 </f:if>
 ```
+
+### PAGEVIEW Content Areas and Columns **[v14.2+ only]**
+
+For TYPO3 v14.2+ PAGEVIEW templates, prefer rendering backend layout columns through Core content areas instead of manually querying `tt_content`. This keeps Content Blocks, Fluid Styled Content, workspace overlays, language handling, and per-column context intact.
+
+```html
+<main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <f:render.contentArea contentArea="{content.main}" />
+</main>
+
+<aside class="space-y-4">
+    <f:render.contentArea contentArea="{content.sidebar}" />
+</aside>
+```
+
+Use backend layout identifiers (`main`, `sidebar`, `footer`, etc.) as the page-template contract. Apply TYPO3 v14 content restrictions per column so wide hero/feature elements stay out of narrow sidebars, and pass the content area context to element templates when their rendering needs to change by column.
 
 ### Remove from Page Tree Drag Area
 
@@ -1125,6 +1177,7 @@ Required private forks for webconsulting stack:
 - [Page Types API](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/PageTypes/Index.html)
 - [File Types YAML Reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/FileTypes/Index.html)
 - [Migration Skill](./SKILL-MIGRATION.md)
+- [shadcn/ui TYPO3 Fluid adapter](../shadcn-ui/references/typo3-fluid-adapter.md)
 - [Packagist: friendsoftypo3/content-blocks](https://packagist.org/packages/friendsoftypo3/content-blocks)
 
 ## v14-Only Changes
@@ -1144,10 +1197,12 @@ New `itemsProcessors` option (#107889) enables dynamic item generation for selec
 - **Type-specific `ctrl` properties** (#108027) — `title`, `label`, and other ctrl properties can now be overridden per record type in the `types` section.
 - **Type-specific TCA defaults** (#107281) — default values can differ per record type.
 
-### Fluid 5.0 Strict Types **[v14 only]**
+### Fluid 5.x / 5.3 Strict Types **[v14 only]**
 
-Content Block Fluid templates must comply with Fluid 5.0 strict typing:
+Content Block Fluid templates must comply with Fluid 5.x strict typing:
 - ViewHelper arguments are strictly typed. Ensure correct types (int vs string).
+- Reusable components and partials should define their public API with root-level `<f:argument>` declarations.
+- Union types are available for component arguments, but use them sparingly because each branch must be handled explicitly.
 - No underscore-prefixed variable names (`_myVar`).
 - CDATA sections are preserved (not stripped).
 
