@@ -258,11 +258,11 @@
   {
     "directory": "frontend-design",
     "skill_name": "frontend-design",
-    "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+    "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, applications, dashboards, React components, HTML/CSS layouts, or to style/beautify any web UI. When a project already has a design system such as shadcn/ui, Tailwind tokens, TYPO3 Fluid components, or brand guidelines, use that system as the source of truth instead of inventing a new visual language.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/frontend-design/SKILL.md",
-    "line_count": 55,
+    "line_count": 65,
     "frontmatter_keys": [
       "name",
       "description",
@@ -705,11 +705,11 @@
   {
     "directory": "shadcn-ui",
     "skill_name": "shadcn-ui",
-    "description": "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
+    "description": "Provides shadcn/ui component patterns, CLI workflows, presets, Tailwind CSS variables, and server-rendered adaptation guidance. Use when setting up shadcn/ui, switching presets from shadcn/create, customizing themes with Tailwind CSS, implementing buttons/cards/dialogs/tables/forms/charts, or translating shadcn/ui patterns into non-React templates such as TYPO3 Fluid, Content Blocks, Alpine-driven UI, or other server-rendered component systems.",
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
-    "line_count": 324,
+    "line_count": 374,
     "frontmatter_keys": [
       "name",
       "description",
@@ -818,7 +818,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
-    "line_count": 1279,
+    "line_count": 1334,
     "frontmatter_keys": [
       "name",
       "description",
@@ -827,7 +827,7 @@
       "license"
     ],
     "pass_1": [
-      "SKILL.md is 1279 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 1334 lines; skill-creator recommends keeping it under 500"
     ],
     "pass_2": [],
     "pass_3": []
@@ -1080,6 +1080,25 @@
     "pass_3": []
   },
   {
+    "directory": "typo3-shadcn-content-elements",
+    "skill_name": "typo3-shadcn-content-elements",
+    "description": "Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
+    "line_count": 88,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "compatibility",
+      "metadata",
+      "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "typo3-simplify",
     "skill_name": "typo3-simplify",
     "description": "Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability while preserving functionality. Reviews PHP classes, Fluid templates, TCA, Services.yaml, and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature or before merging a PR. Use when working with simplify, clean up, refine, code quality, reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.",
@@ -1159,11 +1178,11 @@
   {
     "directory": "typo3-vite",
     "skill_name": "typo3-vite",
-    "description": "Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance. Use when configuring Vite for TYPO3 projects, setting up SCSS with Bootstrap, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts via font-face, setting up CSS units (rem/em), or customizing Bootstrap variables. Also triggers for: asset hashing, Gzip/Brotli compression, SCSS import chain, global-basics.scss, selective Bootstrap imports.",
+    "description": "Vite build setup for TYPO3 v13+ with vite-asset-collector, Tailwind v4/shadcn CSS, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance. Use when configuring Vite for TYPO3 projects, setting up Tailwind or SCSS, adding shadcn/ui tokens to TYPO3, creating entrypoints per content element, optimizing SVGs, configuring PostCSS, loading local fonts, or customizing Bootstrap variables. Also triggers for: asset hashing, Gzip/Brotli compression, Tailwind @theme inline, global CSS entrypoints, shadcn preset CSS, selective Bootstrap imports.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-vite-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
-    "line_count": 59,
+    "line_count": 86,
     "frontmatter_keys": [
       "name",
       "description"

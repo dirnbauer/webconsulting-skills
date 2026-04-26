@@ -7,7 +7,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 70
+- Skills audited: 71
 - Total findings: 44
 - Skills with pass 1 findings: 32
 - Skills with pass 2 findings: 1
@@ -235,7 +235,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Anthropic
 - Source URL: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 - Frontmatter name: frontend-design
-- SKILL.md lines: 55
+- SKILL.md lines: 65
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -609,7 +609,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Giuseppe Trisciuoglio
 - Source URL: https://github.com/giuseppe-trisciuoglio/developer-kit
 - Frontmatter name: shadcn-ui
-- SKILL.md lines: 324
+- SKILL.md lines: 374
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -705,10 +705,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-content-blocks
-- SKILL.md lines: 1279
+- SKILL.md lines: 1334
 
 **Pass 1: Structure**
-- SKILL.md is 1279 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 1334 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -924,6 +924,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 **Pass 3: Optimization**
 - No pass 3 issues found.
 
+## `typo3-shadcn-content-elements`
+
+- Source owner: webconsulting
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
+- Frontmatter name: typo3-shadcn-content-elements
+- SKILL.md lines: 88
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
 ## `typo3-simplify`
 
 - Source owner: Anthropic
@@ -993,7 +1009,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-vite-skill
 - Frontmatter name: typo3-vite
-- SKILL.md lines: 59
+- SKILL.md lines: 86
 
 **Pass 1: Structure**
 - No pass 1 issues found.

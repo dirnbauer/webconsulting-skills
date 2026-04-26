@@ -266,6 +266,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `legal-impressum/WORLD` | International requirements (UK, CH, US) | 1.0.0 | impressum, international, uk, switzerland |
 | **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
+| `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, Fluid atoms/molecules, backend previews, icons, and seed data for TYPO3 Content Blocks | 1.0.0 | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
@@ -480,6 +481,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ### TYPO3 CMS
 - **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
+- **typo3-shadcn-content-elements**: Preset-driven shadcn/ui content element overhauls for Content Blocks, Fluid templates, backend previews, icons, and seed data
 - **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing
@@ -535,6 +537,12 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Revert Content Block to classic TCA/SQL format"
 - "Generate TCA PHP from Content Blocks config.yaml"
 - "Remove Content Blocks dependency safely"
+
+**🎛️ shadcn Content Elements (typo3-shadcn-content-elements)**
+- "Audit EXT:desiderio content elements for shadcn preset b4hb38Fyj, missing fields, previews, icons, and seed coverage"
+- "Apply a new shadcn/create preset to the TYPO3 Fluid component layer and keep tokens scoped by preset id"
+- "Regenerate backend previews so editors see headings, repeatable items, CTAs, thumbnails, and chart summaries"
+- "Update the seed script so every top-level and repeatable field has useful text, links, images, alt text, and chart JSON"
 
 **💡 Idea -> Extension -> Blog (typo3-idea-extension-blog)**
 - "Read this product announcement and tell me if it is genuinely useful for TYPO3"
@@ -1318,7 +1326,7 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`  
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
 Use case: Extension development, Content Blocks, database operations, forms, search, backend views, TYPO3 v14 code
 
 ### Ops Session
@@ -1338,8 +1346,8 @@ Active: `php-modernization`, `typo3-rector`, `typo3-update`, `typo3-powermail`
 Use case: Migrating to PHP 8.4, using new language features, fixing deprecations
 
 ### Content Blocks Migration Session
-Active: `typo3-content-blocks`, `typo3-datahandler`, `typo3-extension-upgrade`  
-Use case: Converting classic TCA/SQL extensions to Content Blocks
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-datahandler`, `typo3-extension-upgrade`
+Use case: Converting classic TCA/SQL extensions to Content Blocks and refining custom content element rendering
 
 ### Documentation Session
 Active: `typo3-docs`, `typo3-conformance`, `webconsulting-create-documentation`  
@@ -1406,6 +1414,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | Skill | TYPO3 v14.x | PHP 8.2 | PHP 8.3 | PHP 8.4 |
 |-------|-------------|---------|---------|---------|
 | typo3-content-blocks | ✓ | ✓ | ✓ | ✓ |
+| typo3-shadcn-content-elements | ✓ | ✓ | ✓ | ✓ |
 | typo3-idea-extension-blog | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ |

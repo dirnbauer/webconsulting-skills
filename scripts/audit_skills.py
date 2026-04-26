@@ -173,6 +173,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "url": "https://github.com/netresearch/typo3-conformance-skill",
     },
     "typo3-content-blocks": {"owner": "webconsulting", "url": None},
+    "typo3-shadcn-content-elements": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "typo3-core-contributions": {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/typo3-core-contributions-skill",

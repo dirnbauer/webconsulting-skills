@@ -1,0 +1,4 @@
+interface:
+  display_name: "TYPO3 shadcn Content Elements"
+  short_description: "Produce TYPO3 Content Blocks styled with shadcn/ui presets."
+  default_prompt: "Use this skill to audit, generate, or overhaul TYPO3 Content Blocks content elements with shadcn/ui preset tokens, Fluid atoms/molecules, icons, backend previews, and seed data coverage."

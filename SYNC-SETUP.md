@@ -114,6 +114,22 @@ Netresearch-derived skills are currently upstream-managed through `.sync-config.
 
 No extra client-specific symlink work is required for the five core clients.
 
+Example local skill layout:
+
+```text
+skills/typo3-shadcn-content-elements/
+├── SKILL.md
+├── agents/openai.yaml
+├── references/
+│   ├── backend-preview-pattern.md
+│   ├── content-element-contract.md
+│   ├── icon-pattern.md
+│   └── shadcn-preset-workflow.md
+└── scripts/audit-content-elements.php
+```
+
+Because the installer scans `skills/*/SKILL.md`, both `./install.sh` and the reinstall phase of `./update.sh` pick up this skill automatically. Only upstream-managed skills need a `.sync-config.json` entry.
+
 ## Adding an Upstream-Managed Skill
 
 1. Add one entry to `.sync-config.json`.
