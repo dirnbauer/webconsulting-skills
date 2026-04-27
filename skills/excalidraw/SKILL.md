@@ -1,6 +1,6 @@
 ---
-name: excalidraw
-description: Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats.
+name: "excalidraw"
+description: "Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats."
 ---
 
 # Excalidraw Diagram Generator

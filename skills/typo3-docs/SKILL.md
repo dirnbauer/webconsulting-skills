@@ -1,13 +1,6 @@
 ---
-name: typo3-docs
-description: "Use when creating, editing, or reviewing TYPO3 extension documentation (Documentation/*.rst, guides.xml, README.md), rendering docs with Docker, using TYPO3 RST directives, adding screenshots, deploying to docs.typo3.org, setting up TYPO3 docs webhook, publishing TYPO3 documentation via Intercept, improve docs, add screenshots, fix documentation, or docs accuracy."
-license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
-compatibility: "Requires php, docker (for rendering). TYPO3 extension with Documentation/ directory."
-metadata:
-  author: Netresearch DTT GmbH
-  version: "2.12.0"
-  repository: https://github.com/netresearch/typo3-docs-skill
-allowed-tools: Bash(php:*) Bash(docker:*) Bash(sed:*) Bash(grep:*) Read Write Glob Grep
+name: "typo3-docs"
+description: "Use when creating, editing, or reviewing TYPO3 extension documentation (Documentation/*.rst, guides.xml, README.md, XLF translations), rendering docs with Docker, using TYPO3 RST directives, adding screenshots, deploying to docs.typo3.org, improve docs, fix documentation, or XLIFF 2-space indentation (TYPO3 v14+)."
 ---
 
 # TYPO3 Documentation Skill

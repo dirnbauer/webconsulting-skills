@@ -66,7 +66,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          coverage: pcov
+          coverage: xdebug
 
       - name: Install dependencies
         run: composer install --no-progress
@@ -186,55 +186,108 @@ steps:
     name: codecov-umbrella
 ```
 
-### PCOV vs Xdebug for Coverage
+### Xdebug vs PCOV for Coverage
 
-**PCOV is recommended for CI/CD** due to significant performance advantages:
+**Xdebug is recommended for CI/CD.** PCOV is faster but gives up enough diagnostic fidelity and local/CI parity that the tradeoff rarely pays off in practice.
 
-| Aspect | PCOV | Xdebug |
-|--------|------|--------|
-| **Speed** | 2-5x faster | Slower (debugger overhead) |
-| **Purpose** | Coverage only | Debugger + Profiler + Coverage |
-| **Memory** | Lower footprint | Higher (full debugger loaded) |
-| **CI/CD** | Ideal | Overkill for just coverage |
+| Aspect | Xdebug | PCOV |
+|--------|--------|------|
+| **Local/CI parity** | ✅ Local coverage runs typically set `XDEBUG_MODE=coverage`; keeping CI on xdebug means local and CI behave identically | ❌ Mismatches local; leaks `beStrictAboutCoverageMetadata`-style drift |
+| **Branch coverage** | ✅ Branch + path coverage | ❌ Line-only |
+| **Purpose** | Debugger + Profiler + Coverage | Coverage only |
+| **Speed** | Slower (debugger overhead) | 2-5× faster |
+| **Memory** | Higher (full debugger loaded) | Lower footprint |
 
-**Why PCOV is faster:**
-- Xdebug hooks into every opcode execution for debugging capabilities
-- PCOV only instruments line coverage — no step debugging, no profiling
-- Less overhead = faster test runs
+**Why Xdebug is the better default:**
+- **Strict coverage metadata**: PHPUnit's `beStrictAboutCoverageMetadata="true"` marks tests as "risky" when they execute code outside their declared `#[CoversClass]` / `#[UsesClass]` attributes. The check only runs under active coverage. Mixing local Xdebug with CI PCOV produced "green locally, red in CI" surprises — switching both to Xdebug eliminates that drift. Observed concretely in [t3x-nr-image-optimize#93](https://github.com/netresearch/t3x-nr-image-optimize/pull/93).
+- **Branch + path coverage**: Xdebug sees `if/else` branches and early returns. PCOV reports only which lines executed, losing the "did we actually test the else-branch?" signal. Matters for Codecov trend reports and mutation testing preparation.
+- **Cost**: ~2-3 min extra CI runtime across a typical 8-job matrix. Acceptable for the diagnostic gain.
 
-**When to use which:**
-- **PCOV**: CI pipelines, large test suites, coverage reports
-- **Xdebug**: Local debugging, step-through, profiling, breakpoints
+**When PCOV is still the right call:**
+- CI matrix has so many jobs (e.g. 20+ combinations) that the 2-5× coverage speed-up genuinely matters.
+- Coverage runs are gated (only on the default branch, not every PR).
+- You're comfortable maintaining `[CoversClass]` / `[UsesClass]` declarations that pass locally and in CI — see the "Strict coverage metadata" note below.
 
-**GitHub Actions setup:**
+**Via `netresearch/typo3-ci-workflows`:**
+
+As of [netresearch/typo3-ci-workflows#72](https://github.com/netresearch/typo3-ci-workflows/pull/72), the default `coverage-tool` is `xdebug`. Consumers can still override explicitly:
+
 ```yaml
-- name: Setup PHP with PCOV (recommended for CI)
-  uses: shivammathur/setup-php@v2
-  with:
-    php-version: ${{ matrix.php }}
-    coverage: pcov
+jobs:
+  ci:
+    uses: netresearch/typo3-ci-workflows/.github/workflows/ci.yml@main
+    with:
+      upload-coverage: true
+      # coverage-tool defaults to xdebug (recommended)
+      # coverage-tool: 'pcov'  # opt in to pcov for faster runs
+```
 
-- name: Setup PHP with Xdebug (for debugging)
+**Standalone GitHub Actions setup:**
+```yaml
+- name: Setup PHP with Xdebug (recommended)
   uses: shivammathur/setup-php@v2
   with:
     php-version: ${{ matrix.php }}
     coverage: xdebug
+
+# Or opt into PCOV when CI runtime matters more than coverage fidelity:
+- name: Setup PHP with PCOV
+  uses: shivammathur/setup-php@v2
+  with:
+    php-version: ${{ matrix.php }}
+    coverage: pcov
 ```
 
-**Local development with runTests.sh:**
+**Local execution via `Build/Scripts/runTests.sh`:**
+
+The canonical TYPO3 core-testing pattern runs the suite inside the
+`ghcr.io/typo3/core-testing-*` Docker images, which already have
+xdebug available. Pass `XDEBUG_MODE=coverage` into the container so
+PHPUnit picks xdebug (not pcov, when both are installed):
+
 ```bash
-# Fast coverage with PCOV (if available in Docker image)
-php -d pcov.enabled=1 -d xdebug.mode=off \
-    vendor/bin/phpunit --coverage-clover coverage.xml
+# Recommended: xdebug coverage via runTests.sh
+XDEBUG_MODE=coverage Build/Scripts/runTests.sh -s unit -- \
+    --coverage-clover=coverage.xml
 
-# Coverage with Xdebug
-php -d xdebug.mode=coverage \
-    vendor/bin/phpunit --coverage-clover coverage.xml
+# Functional suite with coverage
+XDEBUG_MODE=coverage Build/Scripts/runTests.sh -s functional -- \
+    --coverage-clover=coverage-functional.xml
 ```
 
-> **Note:** PHPUnit auto-detects available coverage drivers and prefers PCOV
-> if both are present. The TYPO3 core-testing Docker images
-> (`ghcr.io/typo3/core-testing-php*`) include both PCOV and Xdebug.
+**Direct PHPUnit (when runTests.sh is not in use):**
+
+```bash
+# xdebug (matches CI default)
+php -d xdebug.mode=coverage vendor/bin/phpunit \
+    --coverage-clover coverage.xml
+
+# pcov (opt-in, speed over fidelity)
+php -d pcov.enabled=1 -d xdebug.mode=off vendor/bin/phpunit \
+    --coverage-clover coverage.xml
+```
+
+#### Strict coverage metadata
+
+If `Build/UnitTests.xml` / `Build/FunctionalTests.xml` sets `beStrictAboutCoverageMetadata="true"` together with `failOnRisky="true"`, every test must declare every class it executes via `#[CoversClass]` or `#[UsesClass]` — otherwise the coverage-driven check flags the test as risky and fails the run.
+
+- Unit tests: strict metadata is natural — a unit test touches exactly one class.
+- Functional / integration tests: expect to declare the full transitive dependency chain via `#[UsesClass]`. Example:
+
+```php
+#[CoversClass(ProcessingMiddleware::class)]
+#[UsesClass(Processor::class)]
+#[UsesClass(ImageManagerAdapter::class)]
+#[UsesClass(ImageManagerFactory::class)]
+#[UsesClass(VariantServedEvent::class)]
+final class ProcessingMiddlewareTest extends FunctionalTestCase
+```
+
+If maintaining those lists across DI refactorings costs too much, relax to `beStrictAboutCoverageMetadata="false"` *on functional tests only* — keep unit tests strict.
+
+> **Note:** PHPUnit auto-detects available coverage drivers. If both are
+> present (some Docker images install both), PHPUnit prefers PCOV — set
+> `XDEBUG_MODE=coverage` or pass `-d pcov.enabled=0` to force Xdebug.
 
 ## E2E Testing in CI
 

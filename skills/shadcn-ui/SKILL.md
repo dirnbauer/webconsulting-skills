@@ -1,7 +1,6 @@
 ---
-name: shadcn-ui
-description: Provides shadcn/ui component patterns, CLI workflows, presets, Tailwind CSS variables, and server-rendered adaptation guidance. Use when setting up shadcn/ui, switching presets from shadcn/create, customizing themes with Tailwind CSS, implementing buttons/cards/dialogs/tables/forms/charts, or translating shadcn/ui patterns into non-React templates such as TYPO3 Fluid, Content Blocks, Alpine-driven UI, or other server-rendered component systems.
-allowed-tools: Read, Write, Bash, Edit, Glob
+name: "shadcn-ui"
+description: "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
 ---
 
 # shadcn/ui Component Patterns
@@ -14,7 +13,6 @@ Build accessible, customizable UI components with shadcn/ui, Radix UI, and Tailw
 - Built on **Radix UI** primitives for full accessibility
 - Styled with **Tailwind CSS** and CSS variables for theming
 - CLI-based installation: `npx shadcn@latest add <component>`
-- For non-React projects, use shadcn/ui as the source for tokens, class strings, states, ARIA/data attributes, and interaction behavior; translate the output into the local component system instead of shipping React components.
 
 ## When to Use
 
@@ -26,8 +24,6 @@ Activate when user requests involve:
 - "shadcn button", "shadcn dialog", "shadcn sheet", "shadcn table"
 - "dark mode", "CSS variables", "custom theme"
 - "charts with Recharts", "bar chart", "line chart", "pie chart"
-- "shadcn/create", "preset", "apply preset", "switch to --preset"
-- "TYPO3 Fluid", "Content Blocks", "server-rendered shadcn", "Alpine shadcn"
 
 ## Quick Reference
 
@@ -51,49 +47,6 @@ Activate when user requests involve:
 | `label` | `npx shadcn@latest add label` | Accessible form label |
 
 ## Instructions
-
-### Start with Current Project Context
-
-If the project has a `components.json`, run the CLI before changing components:
-
-```bash
-npx shadcn@latest info --json
-```
-
-Use the result to understand Tailwind version, aliases, base library, icon library, installed components, CSS path, and preset assumptions. If there is no `components.json`, inspect the existing build setup first and add shadcn only in the smallest shape that matches the project.
-
-### Presets and shadcn/create
-
-For themes built at `https://ui.shadcn.com/create`, treat the preset id as an input to the project theme pipeline:
-
-```bash
-# New or empty supported app
-npx shadcn@latest init --preset b0
-
-# Existing shadcn project
-npx shadcn@latest apply --preset b3IWPgRwnI
-
-# Theme/font-only preset update when component files should not be rewritten
-npx shadcn@latest apply --preset b3IWPgRwnI --only theme
-```
-
-Keep preset ids in project configuration when the host framework supports it, for example TYPO3 Site Settings. Never fetch a preset dynamically at runtime in production; generate or commit the CSS variables and font choices.
-
-For Tailwind v4, prefer OKLCH CSS variables, `.dark` overrides, `@theme inline`, `@custom-variant dark (&:is(.dark *))`, and a base layer that applies `border-border`, `outline-ring/50`, `bg-background`, and `text-foreground`.
-
-### TYPO3 Fluid and Server-Rendered Adaptation
-
-When the target project is TYPO3, Fluid, Twig, Blade, or another server-rendered stack:
-
-- Do not install or ship shadcn React components as frontend runtime code.
-- Use `npx shadcn@latest view button card tabs accordion dialog sheet table` or a temporary scratch app to inspect upstream component markup, class strings, tokens, slots, states, and ARIA patterns.
-- Translate `className` to plain `class`, `data-slot` to stable `data-slot` attributes, and React state selectors to server-rendered `data-state`, ARIA, or Alpine-managed attributes.
-- Build atomic Fluid components for repeated primitives: Button, Badge, Card, CardHeader, CardContent, Input, Label, Tabs, Accordion, Dialog/Sheet, Table, Alert, Separator, Skeleton.
-- Keep component contracts typed with Fluid `<f:argument>` and use `<f:slot />` for child content.
-- For Radix-style interactions, recreate the behavior with small Alpine or vanilla controllers while preserving keyboard support, focus behavior, ARIA-expanded/selected, and `data-state`.
-- Prefer shared component templates and Tailwind utilities over per-content-element bespoke CSS.
-
-Read `references/typo3-fluid-adapter.md` when adapting shadcn/ui to TYPO3 Content Blocks or Fluid components.
 
 ### Initialize Project
 
@@ -335,9 +288,6 @@ toast({ variant: "destructive", title: "Error", description: "Failed to save." }
 - **Dark Mode**: Set up with CSS variables strategy and `next-themes`
 - **Forms**: Always use `Form`, `FormField`, `FormItem`, `FormLabel`, `FormMessage` together
 - **Toaster**: Add `<Toaster />` once to root layout
-- **Server Rendering**: For TYPO3/Fluid adaptation, port the semantic class recipes and state attributes, not the React component implementation.
-- **Preset Updates**: Commit before running `shadcn apply`, inspect the diff, then port token/class changes to owned components deliberately.
-- **Future Upgrades**: Use `shadcn view`, `shadcn diff`, `shadcn apply --only theme`, and a temporary scratch project to compare upstream changes without trampling local templates.
 
 ## Constraints and Warnings
 
@@ -358,7 +308,6 @@ Consult these files for detailed patterns and code examples:
 - **[references/charts-components.md](references/charts-components.md)** — Bar, Line, Area, Pie charts with ChartContainer and theming
 - **[references/nextjs-integration.md](references/nextjs-integration.md)** — App Router, Server/Client Components, dark mode, metadata
 - **[references/customization.md](references/customization.md)** — Custom variants, CSS variables, cn() utility, extending components
-- **[references/typo3-fluid-adapter.md](references/typo3-fluid-adapter.md)** — Port shadcn/ui patterns to TYPO3 Fluid, Content Blocks, Tailwind v4, Alpine, and site settings
 
 ---
 

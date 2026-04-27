@@ -351,7 +351,7 @@ mutation:
     - uses: shivammathur/setup-php@v2
       with:
         php-version: '8.2'
-        coverage: pcov
+        coverage: xdebug
 
     - run: composer install
 

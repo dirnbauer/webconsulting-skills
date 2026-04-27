@@ -1,19 +1,6 @@
 ---
-name: cli-tools
+name: "cli-tools"
 description: "Use when ANY command fails with 'command not found', when installing CLI tools (ripgrep, fd, jq, yq, bat, etc.), auditing project environments, or batch-updating tools. Triggers on: command not found, install tool, missing binary, environment audit, update tools, which, apt install, brew install."
-license: "(MIT AND CC-BY-SA-4.0)"
-compatibility: "Requires bash, common package managers."
-metadata:
-  version: "1.6.0"
-  repository: "https://github.com/netresearch/cli-tools-skill"
-  author: "Netresearch DTT GmbH"
-allowed-tools:
-  - "Bash(apt:*)"
-  - "Bash(brew:*)"
-  - "Bash(npm:*)"
-  - "Bash(pip:*)"
-  - "Read"
-  - "Write"
 ---
 
 # CLI Tools Skill

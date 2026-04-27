@@ -1,6 +1,6 @@
 ---
-name: typo3-core-contributions
-description: "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution."
+name: "typo3-core-contributions"
+description: "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Core `main` branch is v15-in-progress (PHP 8.4/8.5); v14.3 LTS bugfixes land on branch `14.3` and are backported via cherry-pick. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution."
 ---
 
 # TYPO3 Core Contributions

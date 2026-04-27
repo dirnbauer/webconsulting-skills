@@ -25,14 +25,17 @@ Every project README.md MUST display these badges at the top:
 
 ## CI/CD Workflows
 
-Every GitHub project MUST have these in `.github/workflows/`:
+Every GitHub project MUST cover these capabilities. Each can be supplied
+as a dedicated workflow file OR as a job in another workflow that delegates
+to the netresearch reusable workflow.
 
-| Workflow | File | Purpose |
-|----------|------|---------|
-| CI | `ci.yml` | Build, test, lint |
-| CodeQL | `codeql.yml` | Security scanning |
-| Scorecard | `scorecard.yml` | OpenSSF Scorecard |
-| Dependency Review | `dependency-review.yml` | PR CVE check |
+| Capability | Dedicated file | Reusable-workflow alternative |
+|------------|----------------|-------------------------------|
+| CI | `ci.yml` | `uses: netresearch/typo3-ci-workflows/.github/workflows/ci.yml@…` |
+| CodeQL | `codeql.yml` | `uses: netresearch/.github/.github/workflows/codeql.yml@…` (or `github/codeql-action`) |
+| Scorecard | `scorecard.yml` | `uses: netresearch/.github/.github/workflows/scorecard.yml@…` (or `ossf/scorecard-action`) |
+| Dependency Review | `dependency-review.yml` | `uses: netresearch/.github/.github/workflows/dependency-review.yml@…` (or `actions/dependency-review-action`) |
+| Security (composer audit + SBOM) | `security.yml` | `uses: netresearch/typo3-ci-workflows/.github/workflows/security.yml@…` |
 
 ## CI Must Include
 
