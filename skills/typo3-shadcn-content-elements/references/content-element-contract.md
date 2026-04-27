@@ -61,3 +61,6 @@ Seed scripts must fill:
 - Use shadcn semantic utilities and tokens.
 - Use bespoke CSS only for layout geometry, media aspect ratios, chart drawing, or unusual responsive behavior.
 - Avoid hardcoded color palettes when a token exists.
+- Do not add raw hex, RGB(A), HSL(A), or OKLCH values to live content-element templates/assets.
+- Keep raw shadcn preset values in the theme token file; consume them through `var(--*)` tokens or Tailwind/shadcn utilities.
+- Verify both light mode (`:root`) and dark mode (`.dark`) behavior when adding surfaces, borders, overlays, shadows, or chart colors.

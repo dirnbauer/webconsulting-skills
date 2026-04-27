@@ -7,7 +7,7 @@ Use this reference when creating or refreshing `assets/icon.svg` for Content Blo
 - Use `viewBox="0 0 16 16"`.
 - Keep a transparent background.
 - Primary geometry uses `currentColor`.
-- Accent geometry uses `var(--icon-color-accent,#ff8700)`.
+- Accent geometry uses `var(--icon-color-accent,currentColor)`.
 - Avoid hardcoded black, white, gray, or theme-specific fills.
 - Keep detail low; icons must work at 16px in the new content element wizard and page module.
 
@@ -15,7 +15,7 @@ Use this reference when creating or refreshing `assets/icon.svg` for Content Blo
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
-  <style>.accent{stroke:var(--icon-color-accent,#ff8700);fill:none}.accent-fill{stroke:none;fill:var(--icon-color-accent,#ff8700)}</style>
+  <style>.accent{stroke:var(--icon-color-accent,currentColor);fill:none}.accent-fill{stroke:none;fill:var(--icon-color-accent,currentColor)}</style>
   <!-- semantic shape -->
 </svg>
 ```

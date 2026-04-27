@@ -1,6 +1,6 @@
 ---
 name: typo3-shadcn-content-elements
-description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
+description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
   version: "1.0.0"
@@ -17,12 +17,15 @@ Use this skill to build TYPO3 Content Blocks content elements that behave like a
 
 This skill assumes Content Blocks are the source of truth for schema and TYPO3 owns rendering. shadcn/ui is the source for theme tokens, component class contracts, data attributes, states, spacing, borders, radius, and typography.
 
+The styling rule is strict: content elements should not hardcode colors or theme-specific visual values. Raw `oklch()`, `hsl()`, `rgb()`, hex colors, and fixed light/dark assumptions belong in the committed shadcn theme token source only. Templates, element CSS, backend preview CSS, generated icons, and chart scripts should consume semantic tokens or Tailwind/shadcn utility classes.
+
 ## Default Workflow
 
 1. **Establish the preset source.**
    - If a shadcn/create URL or preset id is given, extract the id, for example `b4hb38Fyj`.
    - Use a scratch app to inspect shadcn output; do not install React components as TYPO3 runtime code.
    - Commit the preset as local CSS variables and Site Settings, for example `body[data-shadcn-preset="b4hb38Fyj"]`; do not add a runtime preset downloader or binary switcher.
+   - Treat `:root` as the light-mode base and `.dark` as the dark-mode override, matching shadcn. Do not write content elements that only look correct in one mode.
    - Read `references/shadcn-preset-workflow.md` before changing theme tokens or primitive class strings.
 
 2. **Audit before editing.**
@@ -35,6 +38,7 @@ This skill assumes Content Blocks are the source of truth for schema and TYPO3 o
    - Update `Resources/Private/Components` atoms/molecules from generated shadcn class contracts before editing hundreds of individual templates.
    - Prefer shared Fluid components over bespoke content-element CSS.
    - Keep semantic shadcn tokens such as `bg-background`, `text-foreground`, `bg-card`, `border-border`, `ring-ring`, `text-muted-foreground`, `bg-primary`, and `text-primary-foreground`.
+   - Read `references/styling-token-contract.md` before adding or changing element CSS, SVG icon colors, chart colors, shadows, overlays, or backend preview styling.
 
 4. **Audit each content element against its contract.**
    - Read `references/content-element-contract.md`.
@@ -55,7 +59,7 @@ This skill assumes Content Blocks are the source of truth for schema and TYPO3 o
 6. **Create or refresh icons.**
    - Read `references/icon-pattern.md`.
    - Each element gets a semantic `assets/icon.svg`.
-   - Use TYPO3-style 16x16 SVGs: transparent background, `currentColor` primary, `var(--icon-color-accent,#ff8700)` accent, readable in light and dark.
+   - Use TYPO3-style 16x16 SVGs: transparent background, `currentColor` primary, `var(--icon-color-accent,currentColor)` accent, readable in light and dark.
 
 7. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
@@ -64,6 +68,7 @@ This skill assumes Content Blocks are the source of truth for schema and TYPO3 o
 
 8. **Verify and commit in reviewable slices.**
    - Run CSS build, PHP unit/static checks, and Content Blocks/TYPO3 cache validation.
+   - Scan content elements and shared generated preview code for raw color literals; allowed raw preset values should be confined to the shadcn theme token file and generated Tailwind output.
    - For large overhauls, commit by layer: preset/theme, primitives, generated previews, icons, per-element fixes, seed data.
    - Browser-check frontend pages and TYPO3 backend layout module previews.
 
@@ -71,6 +76,7 @@ This skill assumes Content Blocks are the source of truth for schema and TYPO3 o
 
 - Preset changes must visibly change design through committed tokens and shared component classes.
 - Content elements should look like shadcn/ui, not generic Bootstrap or one-off CSS.
+- Content elements must be light/dark capable because they consume semantic tokens rather than fixed color values.
 - Backend previews should help editors recognize content without opening the form.
 - Icons should form a coherent family, not random drawings.
 - Generated or bulk changes need deterministic scripts and tests where possible.
@@ -78,6 +84,7 @@ This skill assumes Content Blocks are the source of truth for schema and TYPO3 o
 ## References
 
 - `references/shadcn-preset-workflow.md`: scratch-app preset workflow and token expectations.
+- `references/styling-token-contract.md`: no-hardcoded-style rules, light/dark behavior, and verification scans.
 - `references/content-element-contract.md`: field/template/label/seed audit contract.
 - `references/backend-preview-pattern.md`: Content Blocks backend preview pattern.
 - `references/icon-pattern.md`: TYPO3 backend icon rules.
