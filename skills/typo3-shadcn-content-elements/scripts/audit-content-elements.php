@@ -7,10 +7,20 @@ use Symfony\Component\Yaml\Yaml;
 
 $root = $argv[1] ?? getcwd();
 $root = rtrim($root, DIRECTORY_SEPARATOR);
-$autoload = $root . '/vendor/autoload.php';
+$autoloadCandidates = [
+    $root . '/vendor/autoload.php',
+    getcwd() . '/vendor/autoload.php',
+];
+$autoload = null;
+foreach ($autoloadCandidates as $candidate) {
+    if (is_file($candidate)) {
+        $autoload = $candidate;
+        break;
+    }
+}
 
-if (!is_file($autoload)) {
-    fwrite(STDERR, "Missing vendor/autoload.php in {$root}\n");
+if ($autoload === null) {
+    fwrite(STDERR, "Missing vendor/autoload.php in {$root} or current working directory\n");
     exit(2);
 }
 
@@ -43,6 +53,7 @@ $summary = [
     'templatesWithUnusedTopFields' => 0,
     'templatesWithCollectionIssues' => 0,
     'fieldsMissingDefaults' => 0,
+    'linkModelIssues' => 0,
 ];
 
 $elements = [];
@@ -67,6 +78,7 @@ foreach (glob($elementsRoot . '/*', GLOB_ONLYDIR) ?: [] as $dir) {
         'unusedTopFields' => [],
         'fieldsMissingDefaults' => [],
         'collectionIssues' => [],
+        'linkModelIssues' => [],
     ];
 
     foreach ([
@@ -106,16 +118,36 @@ foreach (glob($elementsRoot . '/*', GLOB_ONLYDIR) ?: [] as $dir) {
         if (in_array($field['type'] ?? null, ['Select', 'Checkbox', 'Radio'], true) && !array_key_exists('default', $field)) {
             $entry['fieldsMissingDefaults'][] = $identifier;
         }
+        if (($field['type'] ?? null) === 'Textarea' && isLinkLikeListField($identifier)) {
+            $entry['linkModelIssues'][] = sprintf('Top-level field "%s" is a link-like Textarea; use type: Link plus a separate label field.', $identifier);
+        }
 
         foreach (($field['fields'] ?? []) as $child) {
             if (isset($child['identifier'])) {
-                $nestedFields[$identifier][(string)$child['identifier']] = $child;
+                $childIdentifier = (string)$child['identifier'];
+                $nestedFields[$identifier][$childIdentifier] = $child;
+                if (($child['type'] ?? null) === 'Textarea' && isLinkLikeListField($childIdentifier)) {
+                    $entry['linkModelIssues'][] = sprintf('Collection "%s" child field "%s" is a link-like Textarea; use Link fields with separate labels.', $identifier, $childIdentifier);
+                }
             }
         }
     }
 
     $template = file_get_contents($frontendFile) ?: '';
     $templateForFields = preg_replace('#<(script|style)\b[^>]*>.*?</\1>#is', '', $template) ?? $template;
+    if (
+        preg_match('/(?:linkLine|linkParts|\.links\s*->[^\\n]*f:split\s*\([^)]*separator:\s*[\'"]\|[\'"])/i', $templateForFields) === 1
+    ) {
+        $entry['linkModelIssues'][] = 'Frontend template splits pipe-delimited link values; use TYPO3 Link fields instead.';
+    }
+
+    $fixtureFile = $dir . '/fixture.json';
+    if (is_file($fixtureFile)) {
+        $fixture = file_get_contents($fixtureFile) ?: '';
+        if (preg_match('/\|https?:\/\//', $fixture) === 1) {
+            $entry['linkModelIssues'][] = 'fixture.json contains pipe-delimited Label|URL values; seed structured link objects or separate fields.';
+        }
+    }
 
     $usedTop = [];
     preg_match_all('/data\.([A-Za-z_][A-Za-z0-9_]*)/', $templateForFields, $matches);
@@ -184,6 +216,9 @@ foreach (glob($elementsRoot . '/*', GLOB_ONLYDIR) ?: [] as $dir) {
     if ($entry['fieldsMissingDefaults'] !== []) {
         $summary['fieldsMissingDefaults']++;
     }
+    if ($entry['linkModelIssues'] !== []) {
+        $summary['linkModelIssues']++;
+    }
 
     $elements[] = $entry;
 }
@@ -196,3 +231,10 @@ echo json_encode([
     'summary' => $summary,
     'elements' => $elements,
 ], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+
+function isLinkLikeListField(string $identifier): bool
+{
+    $normalized = strtolower(str_replace(['-', '_'], '', $identifier));
+
+    return in_array($normalized, ['links', 'children', 'pages', 'itemslinks', 'navlinks'], true);
+}

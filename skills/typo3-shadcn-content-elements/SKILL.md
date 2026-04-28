@@ -47,6 +47,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Every configured editor field should be rendered or intentionally marked backend-only.
    - Every rendered field should exist in `config.yaml`.
    - Every Collection child field should be rendered or intentionally omitted.
+   - Use TYPO3 `Link` fields for editor-managed URLs. Keep visible link text in a separate text field and never encode `Label|https://...` pairs in textareas.
    - File fields need alt text and copyright/source strategy in seed data and previews.
    - Date and time fields must be formatted to strings before they are passed to visual-editor text rendering or HTML attributes.
 
@@ -64,6 +65,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 7. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
    - Add real dummy images from Unsplash or committed demo assets, with alt text and copyright/source fields where available.
+   - Seed links as structured data or distinct fields, for example `{"label": "Docs", "link": "https://example.com/docs"}` or `link_1_label` plus `link_1`. Do not generate pipe-delimited link strings.
    - Seed chart/data elements with valid JSON that the frontend template actually parses.
 
 8. **Verify and commit in reviewable slices.**
