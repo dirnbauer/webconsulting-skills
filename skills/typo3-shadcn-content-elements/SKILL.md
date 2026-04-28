@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -32,6 +32,8 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Run `php <skill>/scripts/audit-content-elements.php <repo-root>` when working on a repo with `ContentBlocks/ContentElements`.
    - Use the output to prioritize missing previews, undeclared rendered fields, unused configured fields, missing labels, missing icons, and repeatable-field gaps.
    - Treat the audit as a starting point, then manually inspect high-risk templates.
+   - Search for structural workaround leftovers before declaring a pass complete: `f:split(`, pipe-delimited links such as `Label|https://...`, legacy list fields such as `features_list`, `specs_text`, `row_data`, comma-delimited `tier_values`, and monolithic `shadcn2fluid_*` fixture maps.
+   - Classify leftovers carefully: compatibility converters in a seed script can remain only when they convert old input into current structured fields; templates, fixtures, Content Blocks schema, tests, and docs should demonstrate the current structured model.
    - Apply the Fluid safety checks from `references/content-element-contract.md`, especially for date/time formatting, `typolink` attributes, resource paths, and string-only ViewHelpers.
 
 3. **Fix the shared component layer first.**
@@ -47,6 +49,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Every configured editor field should be rendered or intentionally marked backend-only.
    - Every rendered field should exist in `config.yaml`.
    - Every Collection child field should be rendered or intentionally omitted.
+   - Use nested `Collection` fields for second-level repeatables when the installed Content Blocks version supports nested Collections; keep seed scripts recursive so child rows are created after their parent IRRE rows.
    - Use TYPO3 `Link` fields for editor-managed URLs. Keep visible link text in a separate text field and never encode `Label|https://...` pairs in textareas.
    - File fields need alt text and copyright/source strategy in seed data and previews.
    - Date and time fields must be formatted to strings before they are passed to visual-editor text rendering or HTML attributes.
@@ -64,9 +67,12 @@ The styling rule is strict: content elements should not hardcode colors or theme
 
 7. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
+   - Fill nested repeatables as structured arrays; never collapse a second-level list into a newline-separated textarea when an IRRE Collection is available.
    - Add real dummy images from Unsplash or committed demo assets, with alt text and copyright/source fields where available.
    - Seed links as structured data or distinct fields, for example `{"label": "Docs", "link": "https://example.com/docs"}` or `link_1_label` plus `link_1`. Do not generate pipe-delimited link strings.
    - Seed chart/data elements with valid JSON that the frontend template actually parses.
+   - Keep Desiderio fixtures in each `ContentBlocks/ContentElements/<element>/fixture.json` file. Do not create or restore monolithic `shadcn2fluid_*` fixture mappings.
+   - If old fixture keys must be accepted for migration, convert them at seed time into current fields or nested Collections and keep those aliases out of new fixtures and examples.
 
 8. **Verify and commit in reviewable slices.**
    - Run CSS build, PHP unit/static checks, and Content Blocks/TYPO3 cache validation.
@@ -82,6 +88,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 - Backend previews should help editors recognize content without opening the form.
 - Icons should form a coherent family, not random drawings.
 - Generated or bulk changes need deterministic scripts and tests where possible.
+- Active content elements must not depend on `shadcn2fluid`; allowed mentions are limited to package conflicts, migration notes, and tests/docs that explicitly prevent the old package or fixture map from returning.
 
 ## References
 
