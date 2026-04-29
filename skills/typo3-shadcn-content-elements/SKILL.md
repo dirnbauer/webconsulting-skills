@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -51,6 +51,9 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Every configured editor field should be rendered or intentionally marked backend-only.
    - Every rendered field should exist in `config.yaml`.
    - Every Collection child field should be rendered or intentionally omitted.
+   - Treat editor `Style` / `variant` fields as contracts, not decorative metadata. Keep one only when the value is passed to an existing shadcn-backed Fluid component feature (for example Button/Badge/Alert variants or TabsList `default`/`line`) or when the template has a real layout/behavior branch. Do not keep `variant` fields that only append unused BEM modifier classes.
+   - Prefer removing unsupported style fields over inventing bespoke visual variants. If a style option cannot be expressed by the shared shadcn atoms/molecules or existing shadcn class contracts, remove the field from `config.yaml`, frontend templates, backend previews, and fixtures.
+   - If a repo-level test requires every content element to keep `assets/frontend.css`, use an empty/comment-only marker file when the shared component layer handles all styling. Do not re-add `f:asset.css` includes or style rules merely to satisfy the file-presence contract.
    - Use nested `Collection` fields for second-level repeatables when the installed Content Blocks version supports nested Collections; keep seed scripts recursive so child rows are created after their parent IRRE rows.
    - Use TYPO3 `Link` fields for editor-managed URLs. Keep visible link text in a separate text field and never encode `Label|https://...` pairs in textareas.
    - File fields need alt text and copyright/source strategy in seed data and previews.
@@ -76,6 +79,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Add real dummy images from Unsplash or committed demo assets, with alt text and copyright/source fields where available.
    - Seed links as structured data or distinct fields, for example `{"label": "Docs", "link": "https://example.com/docs"}` or `link_1_label` plus `link_1`. Do not generate pipe-delimited link strings.
    - Seed chart/data elements with valid JSON that the frontend template actually parses.
+   - Validate seeded `Select` values against the current `config.yaml` items before insertion. Stale fixture values from removed style variants should fall back to the configured default instead of seeding inert editor choices.
    - Keep Desiderio fixtures in each `ContentBlocks/ContentElements/<element>/fixture.json` file. Do not create or restore monolithic `shadcn2fluid_*` fixture mappings.
    - If old fixture keys must be accepted for migration, convert them at seed time into current fields or nested Collections and keep those aliases out of new fixtures and examples.
 

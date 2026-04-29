@@ -9,7 +9,7 @@ Use this checklist for every `ContentBlocks/ContentElements/<element>`.
 - `templates/backend-preview.fluid.html`
 - `language/labels.xlf`
 - `assets/icon.svg`
-- `assets/frontend.css` only when the shared Fluid component layer cannot express the layout
+- `assets/frontend.css` only when the shared Fluid component layer cannot express the layout, unless the repository has an explicit per-element asset-file invariant; then keep an empty/comment-only marker file and do not include it from the template until rules are actually needed
 - `assets/frontend.js` only when interaction or visualization requires it
 
 ## Schema And Template Checks
@@ -22,6 +22,8 @@ For each field in `config.yaml`:
 
 - If it is editor-facing, render it in `frontend.html` or document why it is backend-only.
 - If it is `Select`, `Checkbox`, variant, density, or layout related, set a default.
+- If it is named `variant` or labeled as `Style`, prove that every value changes output through an existing shared shadcn component feature or a real template branch. Good examples are Button/Badge/Alert variants and TabsList `data-variant="default|line"`. Bad examples are values that only produce unused classes such as `accordion--bordered`, `table--striped`, or `tabs--pills`.
+- Remove unsupported style fields instead of adding one-off CSS. A content element should not invent custom visual variants merely because a `variant` field exists.
 - If it is `Collection`, render meaningful child fields and handle empty states.
 - If it is a repeatable list inside another repeatable item, use a nested `Collection` when the installed Content Blocks version supports it. Do not model editor-managed feature lists as newline-separated textareas just because they are second-level data.
 - Do not model repeatable editor content as delimiter protocols. Fields such as `features_list`, `specs_text`, `row_data`, comma-separated `tier_values`, or newline/pipe encoded people/pages are legacy migration inputs, not the target schema.
@@ -188,6 +190,7 @@ Seed scripts must fill:
 - link fields as TYPO3 links, with labels in separate fields and no `Label|URL` syntax,
 - date and time fields as values that TYPO3 stores and Fluid formats predictably,
 - valid chart/data JSON matching the template parser.
+- Select values that still exist in the current `config.yaml`; seed commands should normalize or drop legacy style values before inserting rows.
 
 After seeding, run targeted checks for known regressions:
 
