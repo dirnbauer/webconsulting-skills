@@ -110,7 +110,7 @@
       "source": "https://github.com/mattpocock/skills.git",
       "branch": "main",
       "enabled": true,
-      "path": "grill-me",
+      "path": "skills/productivity/grill-me",
       "note": "Stress-test plans and designs with one-question-at-a-time interviews"
     },
     {
@@ -386,5 +386,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-04-20T18:21:20Z"
+  "lastSync": "2026-04-29T14:25:57Z"
 }

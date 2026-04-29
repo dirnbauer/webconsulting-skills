@@ -13,6 +13,7 @@ additional_hostnames:
     - v11.{{DDEV_SITENAME}}
     - v12.{{DDEV_SITENAME}}
     - v13.{{DDEV_SITENAME}}
+    - v14.{{DDEV_SITENAME}}
 additional_fqdns: []
 use_dns_when_possible: true
 webimage_extra_dockerfiles:

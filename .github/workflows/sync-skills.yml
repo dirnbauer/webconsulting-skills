@@ -43,106 +43,28 @@ jobs:
       - name: Sync Skills
         id: sync
         run: |
-          #!/bin/bash
-          set -e
-          
-          CHANGES_MADE=false
+          set -euo pipefail
+
           SKILL_FILTER="${{ github.event.inputs.skill_name }}"
-          
-          # Read skills from config
-          SKILLS=$(cat .sync-config.json | jq -r '.skills[] | select(.enabled == true) | @base64')
-          
-          for skill_b64 in $SKILLS; do
-            skill=$(echo "$skill_b64" | base64 --decode)
-            name=$(echo "$skill" | jq -r '.name')
-            source=$(echo "$skill" | jq -r '.source')
-            branch=$(echo "$skill" | jq -r '.branch')
-            path=$(echo "$skill" | jq -r '.path // "."')
-            
-            # Skip if filter specified and doesn't match
-            if [ -n "$SKILL_FILTER" ] && [ "$name" != "$SKILL_FILTER" ]; then
-              echo "Skipping $name (filter: $SKILL_FILTER)"
-              continue
-            fi
-            
-            echo "====================================="
-            echo "Syncing skill: $name"
-            echo "Source: $source"
-            echo "Branch: $branch"
-            echo "Path: $path"
-            echo "====================================="
-            
-            # Create temp directory for clone
-            TEMP_DIR=$(mktemp -d)
-            
-            # Clone the repository
-            if git clone --depth 1 --branch "$branch" "$source" "$TEMP_DIR" 2>/dev/null; then
-              # Determine source directory (support path parameter)
-              SOURCE_DIR="$TEMP_DIR/$path"
-              
-              # Check if SKILL.md exists
-              if [ -f "$SOURCE_DIR/SKILL.md" ]; then
-                # Ensure target directory exists
-                mkdir -p "skills/$name"
-                
-                # Copy SKILL.md
-                cp "$SOURCE_DIR/SKILL.md" "skills/$name/SKILL.md"
-                python3 scripts/normalize_skill_frontmatter.py "skills/$name/SKILL.md"
-                echo "✓ Updated skills/$name/SKILL.md"
-                
-                # Copy examples directory if exists
-                if [ -d "$SOURCE_DIR/examples" ]; then
-                  rm -rf "skills/$name/examples"
-                  cp -r "$SOURCE_DIR/examples" "skills/$name/"
-                  echo "✓ Updated skills/$name/examples/"
-                fi
-                
-                # Copy rules directory if exists
-                if [ -d "$SOURCE_DIR/rules" ]; then
-                  rm -rf "skills/$name/rules"
-                  cp -r "$SOURCE_DIR/rules" "skills/$name/"
-                  echo "✓ Updated skills/$name/rules/"
-                fi
-                
-                # Copy references directory if exists
-                if [ -d "$SOURCE_DIR/references" ]; then
-                  rm -rf "skills/$name/references"
-                  cp -r "$SOURCE_DIR/references" "skills/$name/"
-                  echo "✓ Updated skills/$name/references/"
-                fi
-                
-                # Copy scripts directory if exists
-                if [ -d "$SOURCE_DIR/scripts" ]; then
-                  rm -rf "skills/$name/scripts"
-                  cp -r "$SOURCE_DIR/scripts" "skills/$name/"
-                  echo "✓ Updated skills/$name/scripts/"
-                fi
-                
-                # Check for changes
-                if ! git diff --quiet "skills/$name/"; then
-                  CHANGES_MADE=true
-                  echo "Changes detected in $name"
-                fi
-              else
-                echo "⚠ No SKILL.md found in $source (path: $path)"
-              fi
-            else
-              echo "⚠ Failed to clone $source"
-            fi
-            
-            # Cleanup
-            rm -rf "$TEMP_DIR"
-          done
-          
-          echo "changes_made=$CHANGES_MADE" >> $GITHUB_OUTPUT
-      
-      - name: Update Sync Timestamp
-        if: steps.sync.outputs.changes_made == 'true'
-        run: |
-          # Update lastSync in config
-          TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          jq --arg ts "$TIMESTAMP" '.lastSync = $ts' .sync-config.json > .sync-config.tmp
-          mv .sync-config.tmp .sync-config.json
+
+          if [ -n "$SKILL_FILTER" ]; then
+            ./update.sh --sync-only --skill "$SKILL_FILTER"
+          else
+            ./update.sh --sync-only
+          fi
+
+          python3 scripts/audit_skills.py
+
+          # Avoid opening a timestamp-only PR when upstream content did not change.
+          if git diff --quiet -- skills README.md catalog gemini-extension.json CLAUDE.md GEMINI.md .windsurfrules .github/copilot-instructions.md; then
+            git checkout -- .sync-config.json || true
+          fi
+
+          if git diff --quiet -- skills .sync-config.json README.md catalog gemini-extension.json CLAUDE.md GEMINI.md .windsurfrules .github/copilot-instructions.md; then
+            echo "changes_made=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changes_made=true" >> "$GITHUB_OUTPUT"
+          fi
       
       - name: Check AGENTS.md for missing skills
         if: steps.sync.outputs.changes_made == 'true'
@@ -167,16 +89,6 @@ jobs:
             echo "✓ All skills are listed in AGENTS.md"
           fi
 
-      - name: Restore source notes
-        if: steps.sync.outputs.changes_made == 'true'
-        run: |
-          python3 scripts/sync_source_notes.py
-
-      - name: Validate attribution guardrails
-        if: steps.sync.outputs.changes_made == 'true'
-        run: |
-          python3 scripts/check_attribution_guardrails.py
-      
       - name: Commit and Push to Sync Branch
         if: steps.sync.outputs.changes_made == 'true'
         run: |
@@ -185,7 +97,7 @@ jobs:
           
           BRANCH="chore/sync-skills"
           git checkout -B "$BRANCH"
-          git add skills/ .sync-config.json
+          git add skills/ .sync-config.json README.md catalog/ gemini-extension.json CLAUDE.md GEMINI.md .windsurfrules .github/copilot-instructions.md
           git commit -m "chore: sync external skills"
           git push -f origin "$BRANCH"
 

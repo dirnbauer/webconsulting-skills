@@ -1,6 +1,6 @@
 {
     "name": "webconsulting/webconsulting-skills",
-    "description": "Curated Agent Skills for AI-augmented software development (Cursor, Claude Code)",
+    "description": "Curated Agent Skills for AI-augmented software development (Cursor, Claude Code, Gemini CLI, Codex, Windsurf)",
     "type": "composer-plugin",
     "license": ["MIT", "CC-BY-SA-4.0"],
     "keywords": [
@@ -38,9 +38,9 @@
         "skills:list": "ls -la skills/ | grep ^d | awk '{print $NF}' | tail -n +2"
     },
     "scripts-descriptions": {
-        "skills:install": "Install skills to ~/.claude/skills and .cursor/rules",
-        "skills:update": "Sync external skills and reinstall",
-        "skills:sync": "Only sync external skills without reinstalling",
+        "skills:install": "Install skills to the supported core AI client directories",
+        "skills:update": "Sync external skills, regenerate manifests, and reinstall",
+        "skills:sync": "Sync external skills and generated files without reinstalling",
         "skills:list": "List all available skills"
     },
     "extra": {

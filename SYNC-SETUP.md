@@ -3,7 +3,7 @@
 This repository uses one canonical skill layout:
 
 - each skill lives once at `skills/<slug>/SKILL.md`
-- optional `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
+- optional `agents/`, `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
 - upstream-managed skills are declared once in `.sync-config.json`
 - `./install.sh` and `./update.sh` fan skills out to the five core clients automatically
 
@@ -88,8 +88,10 @@ Common commands:
 ./install.sh --user-only    # only user-level paths
 ./install.sh --project-only # only project-level paths
 ./install.sh --no-sync      # skip upstream sync, only regenerate/install
+./install.sh --generate-only # regenerate cross-client files and manifests only
 ./update.sh                 # sync upstream skills, then reinstall
-./update.sh --sync-only     # sync upstream skills only
+./update.sh --sync-only     # sync upstream skills and generated files only
+./update.sh --skill NAME    # sync one enabled upstream-managed skill
 ```
 
 ## Skill Types
@@ -152,6 +154,11 @@ Configuration fields:
 | `target` | No | Target directory for `copyMode: "repo"` |
 | `note` | No | Human-readable maintenance note |
 
+For skill-mode imports, the updater copies `SKILL.md` plus any `agents/`, `assets/`,
+`examples/`, `references/`, `rules/`, and `scripts/` folders.
+Do not keep local-only reference files inside an upstream-managed skill's synced
+subfolders; put local overlays in a repo-owned skill so the next sync does not remove them.
+
 ## Automatic Synchronization
 
 The GitHub Action `.github/workflows/sync-skills.yml` can sync enabled upstream skills on schedule or by manual dispatch.
@@ -168,7 +175,8 @@ That command:
 2. refreshes local `skills/<name>/`
 3. restores source notes with `scripts/sync_source_notes.py`
 4. refreshes README source ownership with `scripts/sync_readme_sources.py`
-5. validates attribution with `scripts/check_attribution_guardrails.py`
+5. regenerates cross-client files and `gemini-extension.json`
+6. validates attribution with `scripts/check_attribution_guardrails.py`
 
 ## Best Practices
 

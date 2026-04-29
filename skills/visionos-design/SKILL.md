@@ -1,10 +1,6 @@
 ---
-name: visionos-design-guidelines
-description: Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+name: "visionos-design"
+description: "Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality."
 ---
 
 # visionOS Design Guidelines

@@ -30,11 +30,15 @@ install-v12: ## Install TYPO3 v12.4 LTS with extension
 	ddev install-v12
 
 .PHONY: install-v13
-install-v13: ## Install TYPO3 v13.0 LTS with extension
+install-v13: ## Install TYPO3 v13.4 LTS with extension
 	ddev install-v13
 
+.PHONY: install-v14
+install-v14: ## Install TYPO3 v14.3 LTS with extension (default / gold standard)
+	ddev install-v14
+
 .PHONY: install-all
-install-all: ## Install all TYPO3 versions
+install-all: ## Install all TYPO3 versions (v11 + v12 + v13 + v14)
 	ddev install-all
 
 .PHONY: ddev-restart
@@ -108,13 +112,17 @@ urls: ## Show all access URLs
 	@echo "{{EXTENSION_NAME}} - Access URLs"
 	@echo "==============================="
 	@echo ""
+	@echo "TYPO3 v14.3 LTS (default / gold standard):"
+	@echo "  Frontend: https://v14.{{DDEV_PROJECT}}.ddev.site/"
+	@echo "  Backend:  https://v14.{{DDEV_PROJECT}}.ddev.site/typo3/"
+	@echo ""
+	@echo "TYPO3 v13.4 LTS:"
+	@echo "  Frontend: https://v13.{{DDEV_PROJECT}}.ddev.site/"
+	@echo "  Backend:  https://v13.{{DDEV_PROJECT}}.ddev.site/typo3/"
+	@echo ""
 	@echo "TYPO3 v12.4 LTS:"
 	@echo "  Frontend: https://v12.{{DDEV_PROJECT}}.ddev.site/"
 	@echo "  Backend:  https://v12.{{DDEV_PROJECT}}.ddev.site/typo3/"
-	@echo ""
-	@echo "TYPO3 v13.0 LTS:"
-	@echo "  Frontend: https://v13.{{DDEV_PROJECT}}.ddev.site/"
-	@echo "  Backend:  https://v13.{{DDEV_PROJECT}}.ddev.site/typo3/"
 	@echo ""
 	@echo "Backend Credentials:"
 	@echo "  Username: admin"

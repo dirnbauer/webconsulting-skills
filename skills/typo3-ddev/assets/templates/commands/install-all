@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## Description: Install all TYPO3 versions (11, 12, 13) with your extension
+## Description: Install all TYPO3 versions (11, 12, 13, 14) with your extension
 ## Usage: install-all
 ## Example: ddev install-all
 
@@ -12,5 +12,8 @@ echo "Installing TYPO3 12.4 LTS..."
 
 echo "Installing TYPO3 13.4 LTS..."
 /mnt/ddev_config/commands/web/install-v13
+
+echo "Installing TYPO3 14.3 LTS (default / gold standard)..."
+/mnt/ddev_config/commands/web/install-v14
 
 echo "✅ All TYPO3 versions installed successfully!"

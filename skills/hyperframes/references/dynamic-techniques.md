@@ -69,7 +69,7 @@ Keep audio reactivity subtle — 3-6% scale variation and soft glow. Heavy pulsi
 To generate the audio data file:
 
 ```bash
-python3 skills/gsap/scripts/extract-audio-data.py audio.mp3 --fps 30 --bands 8 -o audio-data.json
+python3 skills/gsap-effects/scripts/extract-audio-data.py audio.mp3 --fps 30 --bands 8 -o audio-data.json
 ```
 
 ## Combining Techniques

@@ -1,9 +1,6 @@
 ---
-name: agent-readiness-report
-description: Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is.
-triggers:
-- agent-readiness-report
-- readiness report
+name: "readiness-report"
+description: "Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is."
 ---
 
 # Agent Readiness Report

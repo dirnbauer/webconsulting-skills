@@ -147,7 +147,7 @@ https://github.com/softaworks/agent-toolkit
 
 We also thank **[Matt Pocock](https://github.com/mattpocock)** for the excellent `grill-me` skill.
 The `grill-me` skill is adapted from their open-source repository:
-https://github.com/mattpocock/skills/tree/main/grill-me
+https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
 
 **Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
 
@@ -267,6 +267,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, Fluid atoms/molecules, backend previews, icons, and seed data for TYPO3 Content Blocks | 1.0.0 | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script |
+| `typo3-translations` | TYPO3 labels, XLIFF, localization, ICU strings, and LLL reference hygiene | 1.1.0 | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
@@ -482,6 +483,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 ### TYPO3 CMS
 - **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
 - **typo3-shadcn-content-elements**: Preset-driven shadcn/ui content element overhauls for Content Blocks, Fluid templates, backend previews, icons, and seed data
+- **typo3-translations**: TYPO3 labels, XLIFF 1.2/2.0, localization keys, ICU strings, and `LLL:` reference hygiene
 - **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing
@@ -1326,8 +1328,8 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
-Use case: Extension development, Content Blocks, database operations, forms, search, backend views, TYPO3 v14 code
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
+Use case: Extension development, Content Blocks, localization, database operations, forms, search, backend views, TYPO3 v14 code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -1415,6 +1417,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 |-------|-------------|---------|---------|---------|
 | typo3-content-blocks | ✓ | ✓ | ✓ | ✓ |
 | typo3-shadcn-content-elements | ✓ | ✓ | ✓ | ✓ |
+| typo3-translations | ✓ | ✓ | ✓ | ✓ |
 | typo3-idea-extension-blog | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ |

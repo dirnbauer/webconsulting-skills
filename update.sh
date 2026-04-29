@@ -6,13 +6,15 @@
 # Usage: ./update.sh [options]
 #
 # Options:
-#   --sync-only    Only sync external skills, don't reinstall
+#   --sync-only    Sync external skills and generated files, don't reinstall
+#   --skill NAME   Sync one enabled external skill by name
 #   --pull         Pull latest from git before updating
 #   --force        Force overwrite local changes
 #   --dry-run      Show what would be done without making changes
 #   --help         Show this help message
 #
-# This script updates Agent Skills from external sources and reinstalls the core client mirrors.
+# This script updates Agent Skills from external sources, refreshes generated files,
+# and optionally reinstalls the core client mirrors.
 #
 # License: MIT (code) / CC-BY-SA-4.0 (content)
 # Third-party skills retain their original licenses — see LICENSE for details.
@@ -26,12 +28,26 @@ SYNC_ONLY=false
 PULL=false
 FORCE=false
 DRY_RUN=false
+SKILL_FILTER=""
+SYNC_SUBDIRS=(agents assets examples references rules scripts)
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
         --sync-only)
             SYNC_ONLY=true
+            shift
+            ;;
+        --skill)
+            SKILL_FILTER="${2:-}"
+            if [ -z "$SKILL_FILTER" ]; then
+                echo "Missing value for --skill"
+                exit 1
+            fi
+            shift 2
+            ;;
+        --skill=*)
+            SKILL_FILTER="${1#*=}"
             shift
             ;;
         --pull)
@@ -47,7 +63,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --help|-h)
-            head -n 17 "$0" | tail -n 15
+            head -n 18 "$0" | tail -n 16
             exit 0
             ;;
         *)
@@ -78,6 +94,10 @@ if ! command -v jq &> /dev/null; then
     MISSING_TOOLS+=("jq")
 fi
 
+if ! command -v python3 &> /dev/null; then
+    MISSING_TOOLS+=("python3")
+fi
+
 if [ ${#MISSING_TOOLS[@]} -gt 0 ]; then
     echo "⚠ Missing required tools: ${MISSING_TOOLS[*]}"
     echo ""
@@ -103,7 +123,7 @@ if [ "$PULL" = true ]; then
         if [ "$FORCE" = true ]; then
             echo "  ⚠ Stashing local changes..."
             if [ "$DRY_RUN" = false ]; then
-                git stash
+                git stash push -u -m "webconsulting-skills update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             fi
         else
             echo "  ⚠ You have uncommitted changes."
@@ -117,9 +137,9 @@ if [ "$PULL" = true ]; then
     # Pull latest changes
     echo "→ Pulling latest changes from origin..."
     if [ "$DRY_RUN" = false ]; then
-        git pull origin main
+        git pull --ff-only origin main
     else
-        echo "  [DRY-RUN] Would run: git pull origin main"
+        echo "  [DRY-RUN] Would run: git pull --ff-only origin main"
     fi
     echo ""
 fi
@@ -132,12 +152,21 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
     echo "→ Syncing external skills from .sync-config.json..."
     
     # Get total count of enabled skills
-    ENABLED_COUNT=$(jq '[.skills[] | select(.enabled == true)] | length' "$SCRIPT_DIR/.sync-config.json")
-    echo "  Found $ENABLED_COUNT enabled external skill sources"
+    ENABLED_COUNT=$(jq --arg filter "$SKILL_FILTER" '[.skills[] | select(.enabled == true) | select($filter == "" or .name == $filter)] | length' "$SCRIPT_DIR/.sync-config.json")
+    if [ -n "$SKILL_FILTER" ]; then
+        echo "  Found $ENABLED_COUNT enabled external skill source matching: $SKILL_FILTER"
+    else
+        echo "  Found $ENABLED_COUNT enabled external skill sources"
+    fi
     echo ""
+
+    if [ "$ENABLED_COUNT" -eq 0 ]; then
+        echo "  ⚠ No enabled external skill source matched."
+        exit 1
+    fi
     
     # Read enabled skills
-    SKILLS=$(jq -r '.skills[] | select(.enabled == true) | @base64' "$SCRIPT_DIR/.sync-config.json" 2>/dev/null)
+    SKILLS=$(jq -r --arg filter "$SKILL_FILTER" '.skills[] | select(.enabled == true) | select($filter == "" or .name == $filter) | @base64' "$SCRIPT_DIR/.sync-config.json" 2>/dev/null)
     
     SYNCED=0
     FAILED=0
@@ -209,24 +238,24 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                 TARGET_DIR="$SCRIPT_DIR/skills/$name"
 
                 if [ -f "$SOURCE_DIR/SKILL.md" ]; then
-                mkdir -p "$TARGET_DIR"
-                cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
-                if command -v python3 &> /dev/null; then
-                    python3 "$NORMALIZE_SKILL_FRONTMATTER" "$TARGET_DIR/SKILL.md"
-                else
-                    echo "    ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
-                fi
-                
-                # Copy subdirectories if they exist
-                for subdir in examples rules references scripts assets; do
-                    if [ -d "$SOURCE_DIR/$subdir" ]; then
-                        rm -rf "$TARGET_DIR/$subdir"
-                        cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
+                    mkdir -p "$TARGET_DIR"
+                    cp "$SOURCE_DIR/SKILL.md" "$TARGET_DIR/SKILL.md"
+                    if command -v python3 &> /dev/null; then
+                        python3 "$NORMALIZE_SKILL_FRONTMATTER" "$TARGET_DIR/SKILL.md"
+                    else
+                        echo "    ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
                     fi
-                done
-                
-                echo "    ✓ Synced successfully"
-                SYNCED=$((SYNCED + 1))
+
+                    # Copy subdirectories if they exist
+                    for subdir in "${SYNC_SUBDIRS[@]}"; do
+                        if [ -d "$SOURCE_DIR/$subdir" ]; then
+                            rm -rf "$TARGET_DIR/$subdir"
+                            cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
+                        fi
+                    done
+
+                    echo "    ✓ Synced successfully"
+                    SYNCED=$((SYNCED + 1))
                 else
                     echo "    ⚠ No SKILL.md found at path: $path"
                     FAILED=$((FAILED + 1))
@@ -280,12 +309,17 @@ echo ""
 if [ "$SYNC_ONLY" = false ]; then
     echo "→ Reinstalling skills..."
     if [ "$DRY_RUN" = true ]; then
-        echo "  [DRY-RUN] Would run: ./install.sh"
+        echo "  [DRY-RUN] Would run: ./install.sh --no-sync"
     else
-        "$SCRIPT_DIR/install.sh"
+        "$SCRIPT_DIR/install.sh" --no-sync
     fi
 else
-    echo "→ Skipping reinstall (--sync-only mode)"
+    echo "→ Refreshing generated files without reinstalling (--sync-only mode)"
+    if [ "$DRY_RUN" = true ]; then
+        echo "  [DRY-RUN] Would run: ./install.sh --no-sync --generate-only"
+    else
+        "$SCRIPT_DIR/install.sh" --no-sync --generate-only
+    fi
 fi
 
 # =============================================================================

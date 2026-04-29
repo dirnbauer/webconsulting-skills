@@ -1,10 +1,6 @@
 ---
-name: tvos-design-guidelines
-description: Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+name: "tvos-design"
+description: "Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback."
 ---
 
 # tvOS Design Guidelines

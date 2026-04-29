@@ -69,7 +69,7 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     },
     "grill-me": {
         "owner": "Matt Pocock",
-        "url": "https://github.com/mattpocock/skills/tree/main/grill-me",
+        "url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
     },
     "gsap": {
         "owner": "HeyGen",
@@ -196,6 +196,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     },
     "typo3-fractor": {"owner": "webconsulting", "url": None},
     "typo3-icon14": {"owner": "webconsulting", "url": None},
+    "typo3-idea-extension-blog": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "typo3-powermail": {"owner": "webconsulting", "url": None},
     "typo3-records-list-types": {"owner": "webconsulting", "url": None},
     "typo3-rector": {"owner": "webconsulting", "url": None},

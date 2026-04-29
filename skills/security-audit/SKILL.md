@@ -1,39 +1,35 @@
 ---
-name: security-audit
-description: "Use when conducting security assessments, OWASP/CWE audits, CVSS scoring, auditing PHP/TYPO3 projects for vulnerabilities, scanning dependencies, or reviewing code for security concerns."
-license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
-compatibility: "Requires grep, jq, gh CLI."
-metadata:
-  author: Netresearch DTT GmbH
-  version: "2.6.0"
-  repository: https://github.com/netresearch/security-audit-skill
-allowed-tools: Bash(grep:*) Bash(jq:*) Bash(gh:*) Read Glob Grep
+name: "security-audit"
+description: "Use when conducting security assessments \u2014 OWASP Top 10 / API / LLM, CWE Top 25, CVSS scoring \u2014 auditing PHP/TYPO3 (v14.3 LTS: #109585, HashService removal, Authorize/RateLimit), APIs, frontend, Terraform/K8s/Docker IaC, AWS/Azure/GCP cloud, AI agent configs, or scanning dependencies."
 ---
 
 # Security Audit Skill
 
-Security audit patterns (OWASP Top 10, CWE Top 25 2025, CVSS v4.0) and GitHub project security checks. Deep PHP/TYPO3 code scanning with 80+ checkpoints and 19 reference guides.
+Security audit patterns (OWASP Top 10, LLM Top 10 2025, CWE Top 25 2025, CVSS v4.0), cloud/IaC checks, GitHub security. 80+ PHP/TYPO3 checkpoints (v14.3 LTS in `typo3-security.md`).
 
 ## Expertise Areas
 
-- **Vulnerabilities**: XXE, SQLi, XSS, CSRF, command injection, path traversal, file upload, deserialization, SSRF, type juggling, SSTI, JWT flaws, insecure randomness
-- **Risk Scoring**: CVSS v3.1 and v4.0
-- **Secure Coding**: Input validation, output encoding, cryptography, session management, authentication, error sanitization
-- **Standards**: OWASP Top 10, CWE Top 25, OWASP ASVS, Proactive Controls
-- **Container/Docker**: Root user detection, file permissions, image pinning, non-root users
+- **Vulnerabilities**: XXE, SQLi, XSS, CSRF, command injection, path traversal, file upload, deserialization, SSRF, SSTI, JWT, type juggling
+- **Standards**: OWASP Top 10 / API / LLM (2025), CWE Top 25, CVSS v3.1/v4.0, OWASP ASVS
+- **Cloud & IaC**: AWS, Azure, GCP; Terraform, Kubernetes, Docker, Helm
+- **API & Frontend**: REST/GraphQL authZ, rate limits, mass assignment, CSP, DOM-XSS
+- **AI Agents**: SKILL.md/AGENTS.md/CLAUDE.md/mcp.json/hooks.json audit; prompt injection; excessive agency
 
-## Reference Files
+## Reference Files (in `references/`, `.md` implied)
 
-- **Core**: `owasp-top10.md`, `cwe-top25.md`, `xxe-prevention.md`, `cvss-scoring.md`, `api-key-encryption.md`
-- **Vulnerability Prevention**: `deserialization-prevention.md`, `path-traversal-prevention.md`, `file-upload-security.md`, `input-validation.md`
-- **Error Handling**: `error-message-sanitization.md` (API key redaction, exception hierarchy)
-- **Architecture**: `authentication-patterns.md`, `security-headers.md`, `security-logging.md`, `cryptography-guide.md`
-- **Framework Security**: `framework-security.md` (TYPO3, Symfony, Laravel)
-- **Modern Threats**: `modern-attacks.md`, `cve-patterns.md`, `php-security-features.md`
-- **DevSecOps**: `ci-security-pipeline.md`, `supply-chain-security.md`, `automated-scanning.md`, `gha-security.md`
-- **Incident Response**: `supply-chain-incident-response.md`
-
-All files located in `references/`.
+- **Core**: owasp-top10, cwe-top25, xxe-prevention, cvss-scoring, api-key-encryption
+- **Prevention**: deserialization-prevention, path-traversal-prevention, file-upload-security, input-validation, error-message-sanitization
+- **Architecture**: authentication-patterns, security-headers, security-logging, cryptography-guide
+- **Language features** (`*-security-features`): php, python, javascript-typescript, nodejs, java, csharp, go, rust, ruby
+- **Frameworks** (`*-security`): typo3, typo3-fluid, typo3-typoscript, symfony, laravel, django, flask, fastapi, spring, dotnet, blazor, rails, gin, react, vue, angular, nextjs, nuxt, express, nestjs
+- **Mobile**: android-sdk-security, ios-sdk-security
+- **Cloud & IaC**: aws-security, azure-security, gcp-security, iac-security
+- **API & Frontend**: api-security, frontend-security
+- **AI Agent**: llm-security (OWASP LLM Top 10 2025)
+- **Shared**: framework-security
+- **Threats**: modern-attacks, cve-patterns, cve-database
+- **DevSecOps**: ci-security-pipeline, supply-chain-security, automated-scanning, gha-security
+- **Incident**: supply-chain-incident-response
 
 ## Quick Patterns
 
@@ -53,60 +49,45 @@ $stmt->execute([$id]);
 echo htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 ```
 
-**API keys (encrypt at rest):**
+**API keys, passwords, randomness:**
 ```php
-$nonce = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
-$encrypted = 'enc:' . base64_encode($nonce . sodium_crypto_secretbox($apiKey, $nonce, $key));
+$n = random_bytes(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);
+$enc = 'enc:' . base64_encode($n . sodium_crypto_secretbox($apiKey, $n, $key));
+password_hash($pw, PASSWORD_ARGON2ID);
+bin2hex(random_bytes(32));   // never mt_rand/rand
 ```
 
-**Password hashing:**
-```php
-$hash = password_hash($password, PASSWORD_ARGON2ID);
-```
-
-**Secure randomness (NOT mt_rand/rand):**
-```php
-$token = bin2hex(random_bytes(32));
-```
-
-For scanning tools (semgrep, trivy, gitleaks), see `references/automated-scanning.md`.
+Automated scanners: `references/automated-scanning.md`.
 
 ## Security Checklist
 
-- [ ] `semgrep --config auto` — no high-severity findings
-- [ ] `trivy fs --severity HIGH,CRITICAL` — no unpatched CVEs
-- [ ] `gitleaks detect` — no leaked secrets
-- [ ] bcrypt/Argon2 for passwords, CSRF tokens on state changes
-- [ ] All input validated server-side, parameterized SQL
-- [ ] XML external entities disabled (LIBXML_NONET only)
-- [ ] Context-appropriate output encoding, CSP configured
-- [ ] API keys encrypted at rest (sodium_crypto_secretbox)
-- [ ] Exception messages sanitized (no API keys, paths, or SQL in responses)
-- [ ] TLS 1.2+, secrets not in VCS, audit logging
-- [ ] No unserialize() with user input, use json_decode()
-- [ ] File uploads validated, renamed, stored outside web root
-- [ ] Security headers: HSTS, X-Content-Type-Options set
-- [ ] Dependencies scanned (composer audit), Dependabot enabled
+- [ ] `semgrep`/`opengrep`, `trivy fs --severity HIGH,CRITICAL`, `gitleaks` clean
+- [ ] bcrypt/Argon2 passwords, CSRF on state changes, TLS 1.2+
+- [ ] Server-side input validation; parameterized SQL; XML entities off
+- [ ] Output encoding + CSP; no unserialize() on user input
+- [ ] API keys encrypted; exception messages sanitized
+- [ ] Secrets out of VCS; audit logging on
+- [ ] Uploads validated, renamed, outside web root
+- [ ] Headers HSTS + X-Content-Type-Options; dependencies scanned
 
 ## GitHub Actions Security
 
-- **NEVER** interpolate `${{ inputs.* }}` or `${{ github.event.* }}` in `run:` blocks — use `env:` instead
-- Dependency triage: upgrade > override > dismiss with rationale
-- See `references/gha-security.md` for patterns and examples
+- **NEVER** interpolate `${{ inputs.* }}` / `${{ github.event.* }}` in `run:` — use `env:`
+- Dependency triage: upgrade > override > dismiss. Full patterns: `references/gha-security.md`.
 
 ## Verification
 
 ```bash
-# PHP project security audit
-./scripts/security-audit.sh /path/to/project
-
-# GitHub repository security audit
-./scripts/github-security-audit.sh owner/repo
+./scripts/security-audit-dispatcher.sh /path/to/project  # auto-detect stack
+./scripts/security-audit.sh /path/to/project             # PHP-only
+./scripts/github-security-audit.sh owner/repo            # GH repo
 ```
+
+Dispatcher detects the stack from indicator files and runs matching `scripts/scanners/*.sh` (17 ecosystems; see `references/` index).
 
 ---
 
-> **Contributing:** https://github.com/netresearch/security-audit-skill
+> Contributing: https://github.com/netresearch/security-audit-skill
 
 ---
 

@@ -17,6 +17,7 @@
 #   --user-only     Only install user-level skills (skip project-level)
 #   --project-only  Only install project-level skills (skip user-level)
 #   --no-sync       Skip external skill sync
+#   --generate-only Regenerate cross-client files and manifests, then exit
 #   --help          Show this help message
 #
 # Core scripted clients (user-level skills via symlinks):
@@ -60,13 +61,16 @@ NORMALIZE_SKILL_FRONTMATTER="$SCRIPT_DIR/scripts/normalize_skill_frontmatter.py"
 USER_ONLY=false
 PROJECT_ONLY=false
 NO_SYNC=false
+GENERATE_ONLY=false
+SYNC_SUBDIRS=(agents assets examples references rules scripts)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
         --user-only)   USER_ONLY=true; shift ;;
         --project-only) PROJECT_ONLY=true; shift ;;
         --no-sync)     NO_SYNC=true; shift ;;
-        --help|-h)     head -n 48 "$0" | tail -n 46; exit 0 ;;
+        --generate-only) GENERATE_ONLY=true; shift ;;
+        --help|-h)     head -n 54 "$0" | tail -n 52; exit 0 ;;
         *)             echo "Unknown option: $1"; exit 1 ;;
     esac
 done
@@ -174,7 +178,7 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
                         echo "  ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
                     fi
 
-                    for subdir in examples rules references scripts assets; do
+                    for subdir in "${SYNC_SUBDIRS[@]}"; do
                         if [ -d "$SOURCE_DIR/$subdir" ]; then
                             rm -rf "$TARGET_DIR/$subdir"
                             cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
@@ -224,12 +228,7 @@ echo ""
 echo "→ Generating cross-client instruction files..."
 
 # Count skills
-SKILL_COUNT=0
-for skill_path in "$SCRIPT_DIR/skills"/*; do
-    if [ -d "$skill_path" ] && [ -f "$skill_path/SKILL.md" ]; then
-        SKILL_COUNT=$((SKILL_COUNT + 1))
-    fi
-done
+SKILL_COUNT=$(find "$SCRIPT_DIR/skills" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')
 
 # ── Generate CLAUDE.md ────────────────────────────────────────────────────────
 cat > "$SCRIPT_DIR/CLAUDE.md" <<CLAUDE_EOF
@@ -357,111 +356,29 @@ COPILOT_EOF
 echo "  ✓ .github/copilot-instructions.md ($SKILL_COUNT skills)"
 
 # ── Generate gemini-extension.json ────────────────────────────────────────────
-# Parses the AGENTS.md Skills Overview table for descriptions and triggers.
-# Only includes top-level skills (skips sub-skills with / in the name).
+# The manifest is generated from `skills/*/SKILL.md`, with trigger metadata read
+# from README.md / AGENTS.md. That keeps new top-level skills from being missed.
+if command -v python3 &> /dev/null; then
+    python3 "$SCRIPT_DIR/scripts/generate_gemini_manifest.py"
 
-AGENTS_FILE="$SCRIPT_DIR/AGENTS.md"
-GEMINI_JSON="$SCRIPT_DIR/gemini-extension.json"
-
-if [ -f "$AGENTS_FILE" ]; then
-    # Start JSON
-    cat > "$GEMINI_JSON" <<'GEMINI_HDR'
-{
-  "name": "webconsulting-skills",
-  "version": "2.0.0",
-GEMINI_HDR
-
-    printf '  "description": "Curated Agent Skills for AI-augmented software development — core installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf",\n' >> "$GEMINI_JSON"
-    printf '  "license": "MIT AND CC-BY-SA-4.0",\n' >> "$GEMINI_JSON"
-    printf '  "contextFileName": "AGENTS.md",\n' >> "$GEMINI_JSON"
-    printf '  "excludeTools": [],\n' >> "$GEMINI_JSON"
-    printf '  "skills": {\n' >> "$GEMINI_JSON"
-
-    # Parse table rows: | `skill-name` | Description | Version | trigger1, trigger2 |
-    # Skip sub-skills (contain /), category headers (start with **), and table header
-    # Write entries to a temp file, then join with commas
-    ENTRIES_FILE=$(mktemp)
-
-    grep -E '^\| `[a-z]' "$AGENTS_FILE" | while IFS='|' read -r _ raw_name raw_desc _ raw_triggers _; do
-        skill_name=$(echo "$raw_name" | sed 's/`//g' | xargs)
-        description=$(echo "$raw_desc" | xargs)
-        triggers_raw=$(echo "$raw_triggers" | xargs)
-
-        # Skip sub-skills (name contains /) and duplicates
-        case "$skill_name" in */*) continue ;; esac
-        if [ ! -d "$SCRIPT_DIR/skills/$skill_name" ]; then
-            continue
-        fi
-        # Skip if already written (handles duplicate table rows)
-        if grep -q "\"$skill_name\":" "$ENTRIES_FILE" 2>/dev/null; then
-            continue
-        fi
-
-        # Escape double quotes in description
-        description=$(echo "$description" | sed 's/"/\\"/g')
-
-        # Build triggers JSON array
-        triggers_json="["
-        first_trigger=true
-        IFS=',' read -ra TRIGGER_ARRAY <<< "$triggers_raw"
-        for trigger in "${TRIGGER_ARRAY[@]}"; do
-            trigger=$(echo "$trigger" | xargs)
-            if [ -n "$trigger" ]; then
-                if [ "$first_trigger" = true ]; then
-                    first_trigger=false
-                else
-                    triggers_json+=", "
-                fi
-                triggers_json+="\"$trigger\""
-            fi
-        done
-        triggers_json+="]"
-
-        # Write skill entry to temp file (one JSON object per line marker)
-        {
-            printf '    "%s": {\n' "$skill_name"
-            printf '      "name": "%s",\n' "$skill_name"
-            printf '      "description": "%s",\n' "$description"
-            printf '      "triggers": %s,\n' "$triggers_json"
-            printf '      "path": "${extensionPath}/skills/%s"\n' "$skill_name"
-            printf '    }'
-        } >> "$ENTRIES_FILE"
-        printf '\n---ENTRY_SEP---\n' >> "$ENTRIES_FILE"
-    done
-
-    # Join entries with commas and write to JSON
-    if [ -s "$ENTRIES_FILE" ]; then
-        # Remove trailing separator, replace separators with commas
-        sed -i.bak '/^---ENTRY_SEP---$/d' "$ENTRIES_FILE" 2>/dev/null || sed -i '' '/^---ENTRY_SEP---$/d' "$ENTRIES_FILE"
-        rm -f "$ENTRIES_FILE.bak"
-
-        # Re-read entries and add commas between skill blocks
-        awk '
-            /^    "[a-z].*": \{$/ {
-                if (seen) printf ",\n"
-                seen=1
-            }
-            { print }
-        ' "$ENTRIES_FILE" >> "$GEMINI_JSON"
-    fi
-    rm -f "$ENTRIES_FILE"
-
-    printf '\n  }\n}\n' >> "$GEMINI_JSON"
-
-    # Count entries in generated JSON
-    gemini_skill_count=$(grep -c '"path":' "$GEMINI_JSON" 2>/dev/null || echo "0")
-    echo "  ✓ gemini-extension.json ($gemini_skill_count skills)"
-
-    # Validate JSON if jq is available
     if command -v jq &> /dev/null; then
-        if jq empty "$GEMINI_JSON" 2>/dev/null; then
+        if jq empty "$SCRIPT_DIR/gemini-extension.json" 2>/dev/null; then
             echo "  ✓ JSON validation passed"
         else
             echo "  ⚠ JSON validation failed — check gemini-extension.json manually"
         fi
     fi
 else
-    echo "  ⚠ AGENTS.md not found — skipping gemini-extension.json generation"
+    echo "  ⚠ python3 not installed — skipping gemini-extension.json generation"
+fi
+
+if [ "$GENERATE_ONLY" = true ]; then
+    echo ""
+    echo "═══════════════════════════════════════════════════════════════"
+    echo "Generation Complete!"
+    echo "Generated cross-client files for $SKILL_COUNT skills."
+    echo "═══════════════════════════════════════════════════════════════"
+    exit 0
 fi
 
 # =============================================================================

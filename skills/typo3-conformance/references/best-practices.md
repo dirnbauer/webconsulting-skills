@@ -86,7 +86,6 @@ my_extension/
 ├── .gitignore                      # Git ignore rules
 ├── .php-cs-fixer.dist.php          # PHP CS Fixer config
 ├── composer.json                   # Composer configuration
-├── composer.lock                   # Locked dependencies
 ├── ext_emconf.php                  # Extension metadata
 ├── ext_localconf.php               # Global configuration
 ├── LICENSE                         # License file
@@ -860,7 +859,7 @@ public/*
 | `.Build/` | Composer's vendor-dir and build artifacts when using `"vendor-dir": ".Build/vendor"` |
 | `.php-cs-fixer.cache` | PHP-CS-Fixer cache file (regenerated on each run) |
 | `.phpunit.result.cache` | PHPUnit result cache |
-| `composer.lock` | Often gitignored for libraries/extensions (include for projects) |
+| `composer.lock` | **DO NOT commit in TYPO3 extensions** — extensions are libraries. Without a lock file, `composer install` resolves versions appropriate to the consumer's PHP version. A committed lock generated on a different PHP version in your dev environment will fail CI on older matrix entries with cryptic "Your requirements could not be resolved" errors. Rule only inverts for application projects (site packages, deployable apps), where reproducibility demands the lock. |
 | `vendor/` | Composer dependencies |
 | `var/` | TYPO3 testing framework temporary files |
 
@@ -1447,6 +1446,33 @@ $errors = libxml_get_errors();
 ```
 
 ## Performance Patterns
+
+### TYPO3 Cache Configuration — No Hardcoded Backend
+
+When declaring a cache frontend in `ext_localconf.php`, **never specify a `'backend'` array key**. Only declare `frontend`, `options`, and `groups`. TYPO3 uses the instance's default backend.
+
+**Bad — hardcodes backend, defeats admin's Redis/Valkey/Memcached setup:**
+
+```php
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['myext_cache'] = [
+    'backend'  => \TYPO3\CMS\Core\Cache\Backend\SimpleFileBackend::class,   // ← no
+    'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class,
+    'options'  => ['defaultLifetime' => 3600],
+];
+```
+
+**Good — follows the instance default (Redis, DB, file, whatever the admin configured):**
+
+```php
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['myext_cache'] = [
+    'frontend' => \TYPO3\CMS\Core\Cache\Frontend\VariableFrontend::class,
+    'options'  => ['defaultLifetime' => 3600],
+    'groups'   => ['myext'],
+    // NO 'backend' key — TYPO3 uses the instance default.
+];
+```
+
+If you need a *specific* backend for correctness reasons (e.g., `TransientMemoryBackend` because the cache must be per-request), state that in a code comment so the choice is clear to reviewers.
 
 ### In-Memory Caching
 

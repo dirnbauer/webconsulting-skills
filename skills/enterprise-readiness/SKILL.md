@@ -1,25 +1,18 @@
 ---
-name: enterprise-readiness
-description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates, pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
-license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
-compatibility: "Requires gh CLI, python3, cosign, docker."
-metadata:
-  author: Netresearch DTT GmbH
-  version: "4.11.0"
-  repository: https://github.com/netresearch/enterprise-readiness-skill
-allowed-tools: Bash(gh:*) Bash(python3:*) Bash(cosign:*) Read Write Glob Grep
+name: "enterprise-readiness"
+description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
 ---
 
 # Enterprise Readiness Assessment
 
 ## When to Use
 
-- Evaluating projects for production/enterprise readiness
+- Production/enterprise readiness evaluations
 - Supply chain security: SLSA provenance, cosign signing, SBOMs
-- Hardening CI/CD pipelines and workflow permissions
-- OpenSSF Best Practices Badge (Passing/Silver/Gold), OSPS Baseline (Level 1/2/3)
-- Scorecard optimization (Token-Permissions, Branch-Protection, Pinned-Dependencies)
-- Code review, ADRs, changelogs, security policy (SECURITY.md)
+- CI/CD hardening, workflow permissions
+- OpenSSF Best Practices (Passing/Silver/Gold), OSPS Baseline (L1/2/3)
+- Scorecard optimization (Token-Permissions, Branch-Protection, Pinned-Deps)
+- Code review, ADRs, changelogs, SECURITY.md
 
 ## Assessment Workflow
 
@@ -31,9 +24,7 @@ allowed-tools: Bash(gh:*) Bash(python3:*) Bash(cosign:*) Read Write Glob Grep
 
 ## Mandatory Workflows & Badges
 
-Workflows: `ci.yml`, `codeql.yml`, `scorecard.yml`, `dependency-review.yml`.
-Badges: CI Status, Codecov (`codecov.io`), OpenSSF Scorecard, Best Practices, Baseline.
-See `references/badges-and-workflows.md` for URL patterns.
+Coverage required: CI, CodeQL, OpenSSF Scorecard, dependency review, security (composer audit + SBOM). Each may be a dedicated `.github/workflows/<name>.yml` OR a job that calls the netresearch reusable workflow. Badges: CI, Codecov, Scorecard, Best Practices, Baseline. See `references/badges-and-workflows.md`.
 
 ## Key Hardening Patterns
 

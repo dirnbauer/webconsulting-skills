@@ -61,3 +61,60 @@ When using `typo3-ci-workflows`, fractor, or infection, add their installers to 
     }
 }
 ```
+
+## 5. TYPO3 v14.3 LTS CI matrix
+
+TYPO3 v14.3 LTS (released 2026-04-21) is the current gold standard. Use
+`typo3/testing-framework:^9.5` — a single branch that supports **both v13
+and v14** cores. PHPUnit constraint: `^11.2.5 || ^12.1.2 || ^13.0.2`.
+
+### Matrix example (GitHub Actions)
+
+```yaml
+strategy:
+  matrix:
+    include:
+      # TYPO3 14.3 LTS (default)
+      - { php: '8.2', typo3: '^14.3' }
+      - { php: '8.3', typo3: '^14.3' }
+      - { php: '8.4', typo3: '^14.3' }
+      - { php: '8.5', typo3: '^14.3' }
+      # TYPO3 13.4 LTS
+      - { php: '8.2', typo3: '^13.4' }
+      - { php: '8.3', typo3: '^13.4' }
+      - { php: '8.4', typo3: '^13.4' }
+      - { php: '8.5', typo3: '^13.4' }
+      # TYPO3 12.4 LTS (ELTS window approaching 2026-04-30)
+      - { php: '8.2', typo3: '^12.4' }
+      - { php: '8.3', typo3: '^12.4' }
+```
+
+### composer.json (v13 + v14 dual support)
+
+```json
+{
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^13.4 || ^14.3"
+    },
+    "require-dev": {
+        "typo3/testing-framework": "^9.5",
+        "phpunit/phpunit": "^11.2.5 || ^12.1.2 || ^13.0.2"
+    }
+}
+```
+
+### v14-specific testing notes
+
+- **Fluid 5 strict-typing (#108148)**: ViewHelper test doubles now need
+  typed args + typed `render(): string` return. Untyped custom VHs
+  raise exceptions in v14 functional tests.
+- **Cache interface strict-typing (#107315)**: test doubles for
+  `BackendInterface`/`FrontendInterface` must match the new typed
+  signatures.
+- **FAL strict-typing (#106427)**: `AbstractFile::getIdentifier()` is
+  gone; test doubles for `File`/`Folder` must use concrete methods.
+- **Extbase argument strict-typing (#107777)**: `Argument` now enforces
+  strict types; replace `setValue(mixed)` mocks.
+- See `typo3-v14-final-classes.md` for the full list of v14 `final` classes
+  that cannot be mocked (use interface-based doubles instead).

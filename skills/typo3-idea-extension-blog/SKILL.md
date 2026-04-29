@@ -19,6 +19,8 @@ license: MIT / CC-BY-SA-4.0
 
 # Idea -> TYPO3 Extension -> Blog Post Pipeline
 
+> Source: https://github.com/dirnbauer/webconsulting-skills
+
 Turn an external idea into a complete TYPO3 outcome: research, honest assessment, build, Git push, and German MDX publication draft.
 
 ## Non-Negotiables

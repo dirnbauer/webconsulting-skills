@@ -35,6 +35,7 @@ services:
             - v11-data:/var/www/html/v11
             - v12-data:/var/www/html/v12
             - v13-data:/var/www/html/v13
+            - v14-data:/var/www/html/v14
 volumes:
     v11-data:
         name: "${DDEV_SITENAME}-v11-data"
@@ -42,3 +43,5 @@ volumes:
         name: "${DDEV_SITENAME}-v12-data"
     v13-data:
         name: "${DDEV_SITENAME}-v13-data"
+    v14-data:
+        name: "${DDEV_SITENAME}-v14-data"

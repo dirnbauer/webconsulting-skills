@@ -12,10 +12,10 @@ use Composer\Script\Event;
 use Composer\Script\ScriptEvents;
 
 /**
- * Composer plugin that installs Claude Agent Skills after package installation.
+ * Composer plugin that installs webconsulting Agent Skills after package installation.
  *
- * This plugin runs the install.sh script to deploy skills to ~/.claude/skills
- * and generate Cursor rules from SKILL.md files.
+ * This plugin runs the install.sh script to deploy skills to the supported
+ * core AI client directories and generate cross-client instruction files.
  */
 final class SkillInstallerPlugin implements PluginInterface, EventSubscriberInterface
 {
@@ -67,13 +67,13 @@ final class SkillInstallerPlugin implements PluginInterface, EventSubscriberInte
             return;
         }
 
-        $this->io->write('<info>Installing Claude Agent Skills...</info>');
+        $this->io->write('<info>Installing webconsulting Agent Skills...</info>');
 
         $exitCode = 0;
         passthru('bash ' . escapeshellarg($installScript), $exitCode);
 
         if ($exitCode === 0) {
-            $this->io->write('<info>Claude Agent Skills installed successfully.</info>');
+            $this->io->write('<info>webconsulting Agent Skills installed successfully.</info>');
         } else {
             $this->io->writeError('<error>Failed to install Claude Agent Skills (exit code: ' . $exitCode . ')</error>');
         }

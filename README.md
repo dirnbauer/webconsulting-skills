@@ -2290,7 +2290,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ### IDE Integration
 
 - **Cross-client skills**: Same `SKILL.md` files work across all supported AI coding assistants
-- **Gemini CLI manifest**: `gemini-extension.json` with triggers for every top-level skill listed in `AGENTS.md`
+- **Gemini CLI manifest**: `gemini-extension.json` with triggers for every top-level `skills/*/SKILL.md` directory
 - **MCP Configuration**: Placeholder for DDEV, Hetzner, and MySQL servers
 
 ## Architecture
@@ -2298,7 +2298,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │   62 SKILL.md     │
+                        │   72 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2377,7 +2377,8 @@ composer skills:install
 ```bash
 ./update.sh              # Sync external skills and reinstall
 ./update.sh --pull       # Pull git changes first, then update
-./update.sh --sync-only  # Only sync external skills, don't reinstall
+./update.sh --sync-only  # Sync external skills and generated files, don't reinstall
+./update.sh --skill NAME # Sync one enabled external skill by name
 ./update.sh --force      # Stash local changes if needed
 ./update.sh --dry-run    # Show what would be done without making changes
 ./update.sh --help       # Show all options
@@ -2422,6 +2423,10 @@ The `.sync-config.json` file defines external skill sources that are automatical
 ```
 
 To enable/disable external skill syncing, edit `.sync-config.json` and set `enabled: true/false`.
+The importer copies `SKILL.md` plus any `agents/`, `assets/`, `examples/`, `references/`,
+`rules/`, and `scripts/` folders from the upstream skill directory.
+Keep local-only overlays in repo-owned skills, not inside synced upstream subfolders,
+because those folders are replaced on the next import.
 
 The curated `skills/marketing-skills/` wrapper remains repo-owned and keeps its
 upstream thank-you/reference text, but it is not backed by a full mirrored copy
@@ -2497,7 +2502,7 @@ The following repositories are the source for skills in this collection:
 - `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`: https://github.com/heygen-com/hyperframes
 
 ### Matt Pocock (1 skill)
-- `grill-me`: https://github.com/mattpocock/skills/tree/main/grill-me
+- `grill-me`: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
 
 ### GitHub (1 skill)
 - `refactor`: https://github.com/github/awesome-copilot
@@ -2700,7 +2705,7 @@ The `grill-me` skill in this collection builds on that contribution.
 Adapted skill: `grill-me`
 
 Original repositories:
-- `grill-me`: https://github.com/mattpocock/skills/tree/main/grill-me
+- `grill-me`: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
 
 **Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
 

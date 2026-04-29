@@ -28,9 +28,10 @@ def normalize_file(path: Path) -> bool:
     if missing:
         raise ValueError(f"missing required frontmatter keys: {', '.join(missing)}")
 
+    skill_name = path.parent.name
     normalized = (
         "---\n"
-        f"name: {json.dumps(str(frontmatter['name']))}\n"
+        f"name: {json.dumps(skill_name)}\n"
         f"description: {json.dumps(str(frontmatter['description']))}\n"
         "---\n"
         f"{body}"
