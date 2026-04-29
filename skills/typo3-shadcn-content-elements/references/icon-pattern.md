@@ -8,6 +8,7 @@ Use this reference when creating or refreshing `assets/icon.svg` for Content Blo
 - Keep a transparent background.
 - Primary geometry uses `currentColor`.
 - Accent geometry uses `var(--icon-color-accent,currentColor)`.
+- Include a short `<title>` matching the content element, for example `Pricing Calculator icon`.
 - Avoid hardcoded black, white, gray, or theme-specific fills.
 - Keep detail low; icons must work at 16px in the new content element wizard and page module.
 
@@ -19,6 +20,8 @@ Use this reference when creating or refreshing `assets/icon.svg` for Content Blo
   <!-- semantic shape -->
 </svg>
 ```
+
+For batches of dozens or hundreds of icons, generate the SVGs deterministically from the content element slug, title, group, and schema. It is fine to use image models for metaphor exploration, but do not commit raster output or uneditable traced images as TYPO3 backend icons.
 
 ## Semantic Families
 

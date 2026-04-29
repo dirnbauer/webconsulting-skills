@@ -169,6 +169,13 @@ Allowed `shadcn2fluid` references are limited to package conflict metadata, hist
 - Keep global generic labels in `Resources/Private/Language/labels.xlf`.
 - Add element-specific labels in the element `language/labels.xlf` when the global label is too vague.
 - Collection item labels should describe editor intent, not implementation names.
+- For TYPO3 v14+, prefer XLIFF 2.0 for generated Content Block labels:
+  - English source: `<xliff version="2.0" ... srcLang="en">`
+  - German target: `<xliff version="2.0" ... srcLang="en" trgLang="de">`
+  - Approved German labels use `<segment state="final">`.
+- Static labels and ICU MessageFormat labels are both stored as regular XLIFF source/target strings. Do not introduce sprintf-style placeholders when named ICU placeholders would be needed.
+- Content element titles should be unique editor-facing names. Descriptions should explain the element's purpose and important editor controls; avoid repeated boilerplate such as "A shadcn/ui styled TYPO3 content element...".
+- Custom wizard group names must be registered through TCA with localized `LLL:` labels. Keep machine group ids stable, but make visible names descriptive, for example `Hero & Landing Intros` instead of `hero`.
 
 ## Seed Data
 

@@ -46,6 +46,9 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Read `references/content-element-contract.md`.
    - For every element, compare `config.yaml`, `templates/frontend.html`, `language/labels.xlf`, `assets/icon.svg`, CSS/JS assets, backend preview, and seed coverage.
    - Treat `config.yaml:title` as an editor-facing product name. Prefer names like `Text & Media`, `Image Call to Action`, and `Logo Cloud Hero` over raw slugs such as `textmedia`, `CTA With Image`, or `Hero Logo Cloud`.
+   - For TYPO3 v14 projects, write source and translated content element labels as XLIFF 2.0. Use `srcLang="en"` on English files, `trgLang="de"` and `state="final"` for approved German targets, and keep ICU MessageFormat strings as normal XLIFF sources/targets.
+   - Register custom new-content-element wizard groups with `ExtensionManagementUtility::addTcaSelectItemGroup()` and localized `LLL:` labels; do not rely on short raw group ids such as `hero`, `data`, or `team` as visible editor labels.
+   - Generate element descriptions from the element purpose and schema so each description explains what editors can build. Do not reuse a single generic sentence across the catalog.
    - Every configured editor field should be rendered or intentionally marked backend-only.
    - Every rendered field should exist in `config.yaml`.
    - Every Collection child field should be rendered or intentionally omitted.
@@ -64,6 +67,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Read `references/icon-pattern.md`.
    - Each element gets a semantic `assets/icon.svg`.
    - Use TYPO3-style 16x16 SVGs: transparent background, `currentColor` primary, `var(--icon-color-accent,currentColor)` accent, readable in light and dark.
+   - For large catalogs, prefer deterministic SVG generation over raster image output. Image models can help ideate metaphors, but the committed artifact should remain editable SVG that matches the TYPO3 backend icon constraints.
 
 7. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
