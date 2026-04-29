@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **71 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **72 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,12 +24,12 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **71 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **72 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 24 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **TYPO3 CMS** | 25 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Vite (Netresearch), Solr (webconsulting) |
 | **Video & Animation** | 7 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
@@ -42,7 +42,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **71 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **72 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -247,6 +247,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
 | `typo3-shadcn-content-elements` | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script | "Overhaul EXT:desiderio content elements for shadcn preset b4hb38Fyj" or "Audit Content Blocks field coverage and seed data" |
+| `typo3-translations` | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat | "Convert my Content Blocks labels to XLIFF 2.0 with German targets" or "Audit missing TYPO3 LLL labels" |
 | `typo3-idea-extension-blog` | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog | "Turn this product announcement into a TYPO3 extension and German blog post" or "Assess this article for TYPO3 and build the useful parts" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
@@ -2189,6 +2190,7 @@ grep -r "DataHandler" skills/
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, previews, icons, and seed coverage for TYPO3 Content Blocks | webconsulting |
+| `typo3-translations` | TYPO3 labels, XLIFF, localization, ICU strings, and LLL reference hygiene | webconsulting |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
 | `typo3-ddev` | Local DDEV development environment | Netresearch |

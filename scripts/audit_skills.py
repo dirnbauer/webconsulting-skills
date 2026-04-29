@@ -210,6 +210,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/typo3-testing-skill",
     },
+    "typo3-translations": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "typo3-vite": {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/typo3-vite-skill",

@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.0.1"
+  version: "1.1.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -46,8 +46,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Read `references/content-element-contract.md`.
    - For every element, compare `config.yaml`, `templates/frontend.html`, `language/labels.xlf`, `assets/icon.svg`, CSS/JS assets, backend preview, and seed coverage.
    - Treat `config.yaml:title` as an editor-facing product name. Prefer names like `Text & Media`, `Image Call to Action`, and `Logo Cloud Hero` over raw slugs such as `textmedia`, `CTA With Image`, or `Hero Logo Cloud`.
-   - For TYPO3 v14 projects, write source and translated content element labels as XLIFF 2.0. Use `srcLang="en"` on English files, `trgLang="de"` and `state="final"` for approved German targets, and keep ICU MessageFormat strings as normal XLIFF sources/targets.
-   - Register custom new-content-element wizard groups with `ExtensionManagementUtility::addTcaSelectItemGroup()` and localized `LLL:` labels; do not rely on short raw group ids such as `hero`, `data`, or `team` as visible editor labels.
+   - Use the `typo3-translations` skill for XLIFF format choices, English/German localization, ICU MessageFormat strings, `LLL:` references, and localized wizard group labels.
    - Generate element descriptions from the element purpose and schema so each description explains what editors can build. Do not reuse a single generic sentence across the catalog.
    - Every configured editor field should be rendered or intentionally marked backend-only.
    - Every rendered field should exist in `config.yaml`.
@@ -67,7 +66,9 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Read `references/icon-pattern.md`.
    - Each element gets a semantic `assets/icon.svg`.
    - Use TYPO3-style 16x16 SVGs: transparent background, `currentColor` primary, `var(--icon-color-accent,currentColor)` accent, readable in light and dark.
-   - For large catalogs, prefer deterministic SVG generation over raster image output. Image models can help ideate metaphors, but the committed artifact should remain editable SVG that matches the TYPO3 backend icon constraints.
+   - For large catalogs, actively prevent look-alike icons: audit normalized SVG bodies with titles removed, inspect same-family groups such as heroes/pricing/nav/footers/features, and add per-element geometry instead of relying on one family template.
+   - If the user asks for GPT Image / Image GPT / `gpt-image-*`, first verify the currently available OpenAI image model and API credentials. Use image generation for metaphor boards or visual direction; redraw the final asset as clean, editable SVG because TYPO3 backend icons need tiny, token-colored vectors.
+   - Treat Lucide, Tabler, and TYPO3 backend icons as metaphor references, not as a reason to reuse the same glyph across many content elements.
 
 7. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
@@ -90,7 +91,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 - Content elements should look like shadcn/ui, not generic Bootstrap or one-off CSS.
 - Content elements must be light/dark capable because they consume semantic tokens rather than fixed color values.
 - Backend previews should help editors recognize content without opening the form.
-- Icons should form a coherent family, not random drawings.
+- Icons should form a coherent family, not random drawings, and every content element should remain distinguishable in the new content element wizard at 16px.
 - Generated or bulk changes need deterministic scripts and tests where possible.
 - Active content elements must not depend on `shadcn2fluid`; allowed mentions are limited to package conflicts, migration notes, and tests/docs that explicitly prevent the old package or fixture map from returning.
 
@@ -101,6 +102,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 - `references/content-element-contract.md`: field/template/label/seed audit contract.
 - `references/backend-preview-pattern.md`: Content Blocks backend preview pattern.
 - `references/icon-pattern.md`: TYPO3 backend icon rules.
+- `../typo3-translations/SKILL.md`: XLIFF, localization, ICU MessageFormat, and `LLL:` label rules.
 
 ## Scripts
 

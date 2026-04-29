@@ -1082,11 +1082,11 @@
   {
     "directory": "typo3-shadcn-content-elements",
     "skill_name": "typo3-shadcn-content-elements",
-    "description": "Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.",
+    "description": "Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
-    "line_count": 88,
+    "line_count": 110,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1149,6 +1149,25 @@
     "frontmatter_keys": [
       "name",
       "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "typo3-translations",
+    "skill_name": "typo3-translations",
+    "description": "TYPO3 localization and translation-file guidance. Use this skill whenever the user asks to create, edit, audit, migrate, or validate TYPO3 labels, locallang.xlf, labels.xlf, XLIFF 1.2 or XLIFF 2.0 files, LLL references, Content Blocks labels, backend labels, English/German localizations, ICU MessageFormat strings, missing translation keys, duplicate labels, or translation cleanup.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-translations/SKILL.md",
+    "line_count": 479,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "compatibility",
+      "metadata",
+      "license"
     ],
     "pass_1": [],
     "pass_2": [],
