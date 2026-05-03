@@ -17,19 +17,41 @@ Use:
 
 <f:layout name="Preview"/>
 
-<f:section name="Header">
-    <cb:link.editRecord uid="{data.uid}" table="{data.mainType}">Element title</cb:link.editRecord>
-</f:section>
+<f:section name="Header"></f:section>
 
 <f:section name="Content">
-    <f:asset.css identifier="d-preview-shared" href="EXT:desiderio/Resources/Public/Css/content-preview.css"/>
-    <div class="d-preview-card">
-        <!-- concise editor-facing summary -->
+    <f:asset.css identifier="desiderio-content-preview" href="EXT:desiderio/Resources/Public/Css/content-preview.css"/>
+    <div class="d-ce-preview" data-slot="card">
+        <div class="d-ce-preview__meta">
+            <span class="d-ce-preview__type" data-slot="badge">Element title</span>
+            <f:if condition="{settings._content_block_name}"><span class="d-ce-preview__ctype">{settings._content_block_name}</span></f:if>
+            <span class="d-ce-preview__ctype"><f:translate key="LLL:EXT:desiderio/Resources/Private/Language/labels.xlf:preview.uid"/>: {data.uid}</span>
+            <span class="d-ce-preview__ctype"><f:translate key="LLL:EXT:desiderio/Resources/Private/Language/labels.xlf:preview.page"/>: {data.pid}</span>
+        </div>
+        <f:if condition="{data.header}">
+            <h3 class="d-ce-preview__title">{data.header}</h3>
+        </f:if>
+        <!-- concise editor-facing summary fields -->
     </div>
 </f:section>
 
 </html>
 ```
+
+## Header Section Stays Empty
+
+Leave `<f:section name="Header"></f:section>` empty. The page-module preview chrome already renders the language flag, content-type icon, and edit link above the card; emitting another headline above the formatted card duplicates the title (the formatted card already shows `{data.header}` inside `d-ce-preview__title`).
+
+The empty section is intentional and required: removing the section entirely throws `InvalidSectionException`, which TYPO3 catches and falls back to the standard renderer — re-introducing the duplicated header. An empty body returns `""` after `trim()`, which suppresses the slot cleanly without triggering the fallback.
+
+## Meta Pills (UID + Page)
+
+The first row inside the card uses `d-ce-preview__meta` to host small pills that help editors orient inside the page tree without opening the record:
+
+- `d-ce-preview__type` — uppercase info badge with the editor-facing element title (for example `Founder Quote`).
+- `d-ce-preview__ctype` — monospace pill for the Content Block name (`{settings._content_block_name}`), the record `uid`, and the record `pid`.
+
+The UID and page pills must use XLIFF labels via `<f:translate key="LLL:EXT:desiderio/Resources/Private/Language/labels.xlf:preview.uid"/>` and `:preview.page`. The keys live in the global desiderio `Resources/Private/Language/labels.xlf` file (and every translated companion `de.labels.xlf`, `es.labels.xlf`, `fr.labels.xlf`, `it.labels.xlf`, `hu.labels.xlf`). Do not hardcode `UID` / `Page` strings into the template.
 
 ## What To Show
 

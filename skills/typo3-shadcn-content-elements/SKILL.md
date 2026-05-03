@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.1.1"
+  version: "1.4.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -55,13 +55,16 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Prefer removing unsupported style fields over inventing bespoke visual variants. If a style option cannot be expressed by the shared shadcn atoms/molecules or existing shadcn class contracts, remove the field from `config.yaml`, frontend templates, backend previews, and fixtures.
    - If a repo-level test requires every content element to keep `assets/frontend.css`, use an empty/comment-only marker file when the shared component layer handles all styling. Do not re-add `f:asset.css` includes or style rules merely to satisfy the file-presence contract.
    - Use nested `Collection` fields for second-level repeatables when the installed Content Blocks version supports nested Collections; keep seed scripts recursive so child rows are created after their parent IRRE rows.
+   - Give every `Collection` field an explicit `table:` key. Without it, Content Blocks derives the table from the `identifier` alone, so unrelated elements that pick the same name (`rows`, `posts`, `column_items`, `cells`, `items`, `links`...) silently share one physical table — schema migrations break, `foreign_table_parent_uid` drifts to the wrong type, and renames lose data. Names like `<contentblock-slug>_<identifier>` are safe, for example `blog_teasers_posts` or `feature_matrix_rows`. See `references/content-element-contract.md` "Collection Table Naming".
    - Use TYPO3 `Link` fields for editor-managed URLs. Keep visible link text in a separate text field and never encode `Label|https://...` pairs in textareas.
    - File fields need alt text and copyright/source strategy in seed data and previews.
    - Date and time fields must be formatted to strings before they are passed to visual-editor text rendering or HTML attributes.
 
 5. **Add backend previews for the page/layout module.**
    - Read `references/backend-preview-pattern.md`.
-   - Add `templates/backend-preview.fluid.html` using Content Blocks `Preview` layout with `Header`, `Content`, and optionally `Footer`.
+   - Add `templates/backend-preview.fluid.html` using Content Blocks `Preview` layout with `Content` and optionally `Footer`.
+   - Keep `<f:section name="Header"></f:section>` **empty** — never render a duplicate headline above the formatted card. The card itself shows the title inside `d-ce-preview__title`. Removing the section instead of emptying it triggers TYPO3's `InvalidSectionException` fallback to the standard renderer, which re-adds the duplicate.
+   - Inside `d-ce-preview__meta`, surface the editor-facing element name, the Content Block identifier, the record `uid`, and the page `pid` as small pills. Use `<f:translate key="LLL:EXT:desiderio/Resources/Private/Language/labels.xlf:preview.uid"/>` and `:preview.page` — never hardcode the labels.
    - Show the most important data: title/headline, summary, bullets/repeatables, CTA/link, chart metrics, and thumbnails.
    - Never rely on TYPO3’s Core fallback preview for custom Content Blocks.
 
@@ -89,6 +92,49 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - For large overhauls, commit by layer: preset/theme, primitives, generated previews, icons, per-element fixes, seed data.
    - Browser-check frontend pages and TYPO3 backend layout module previews.
 
+## Critical Rules — Collection Table Naming
+
+**This is the single most damaging mistake when authoring Content Blocks. Read this before creating any `type: Collection` field.**
+
+Every `type: Collection` field generates a separate physical database table. Without an explicit `table:` key, Content Blocks falls back to using the bare `identifier` as the table name. That breaks production in three escalating ways:
+
+1. **Reserved-word collisions.** Identifiers like `rows`, `groups`, `order`, `range`, `system`, `values`, `user` are MySQL/MariaDB reserved words. Doctrine quotes at runtime so the table works inside TYPO3, but `mysqldump`, `mysqlcheck`, ad-hoc CLI queries, schema-diff tools, and IDE introspection all stumble on the unquoted name.
+2. **Cross-element table sharing.** When two Content Blocks both pick a common identifier (`posts`, `column_items`, `rows`, `cells`, `items`, `links`, `features`, `tabs`, `members`, `slides`, `stats`, `tiers`, `partners`, `clients`, `reviews`, `routes`, `metrics`, `specs`, `jobs`, `awards`...), Content Blocks merges their schemas into one shared table. The shared table becomes the union of every consuming element's columns, schema migrations get confused, and renaming one block later requires a parent-aware data migration to split records back apart.
+3. **`foreign_table_parent_uid` type drift.** Older Content Blocks versions created the parent reference column as `varchar(255) DEFAULT '' NOT NULL`. Newer TCA-driven schema migration wants `int unsigned DEFAULT 0 NOT NULL`. The migration fails with `Truncated incorrect INTEGER value: ''` because existing rows hold empty-string values that strict-mode MySQL refuses to coerce. Recovery requires `UPDATE <table> SET foreign_table_parent_uid = 0 WHERE foreign_table_parent_uid = ''` before the ALTER. Adding `table:` from the start avoids the legacy column path entirely on fresh tables.
+
+### Don't
+
+- Do not declare a `type: Collection` field without `table:`.
+- Do not use bare names like `rows`, `posts`, `column_items`, `cells`, `items`, `links`, `features`, `tabs`, `members`, `slides`, `stats`, `tiers`, `groups`, `users`, `range`, `order`, `system`, `values` as a `table:` value — they collide with other extensions or with reserved SQL keywords.
+- Do not assume "it works in TYPO3" means it is safe — Doctrine's identifier quoting hides the problem until a dump, restore, or schema migration uncovers it.
+- Do not rename a Collection's `table:` after editor data exists without a parent-aware data migration: dropping a shared table loses every block's content, and renaming without migration orphans the rows.
+
+### Do
+
+- Give every `type: Collection` field an explicit `table:` directive in the YAML.
+- Use the pattern `<contentblock-slug-as-snake_case>_<collection-identifier>`, for example `blog_teasers_posts`, `feature_matrix_rows`, `footer_mega_column_items`, `pricing_plan_features`, `data_table_cells`.
+- For nested Collections, fold the parent collection name into the child's table name (`pricing_plan_features` for a `features` Collection nested inside `plans`).
+- When auditing or porting an existing extension, add `table:` to every Collection in the same pass — schema migrations regress as soon as one block falls through.
+- Before declaring a Collection sweep complete, run the audit grep below.
+
+### Audit
+
+```bash
+# Every Collection field that lacks an explicit table: directive (should print nothing).
+rg -nP '^\s*type: Collection\s*$' --no-heading -A1 ContentBlocks/ContentElements \
+  | rg -B1 -v 'table:'
+
+# Bare table names that match MySQL/MariaDB reserved words.
+rg -n '^\s+table:\s+(rows|groups|range|order|system|values|user|cross|dense_rank|window)\s*$' \
+  ContentBlocks/ContentElements
+
+# Bare unprefixed names — risky for cross-extension collision even if not reserved.
+rg -nP '^\s+table:\s+[a-z][a-z0-9_]*\s*$' ContentBlocks/ContentElements \
+  | rg -v '_[a-z]'   # everything kept after this filter has no underscore — review by hand.
+```
+
+The full reasoning, migration playbook for an already-shared table, and additional examples live in `references/content-element-contract.md` "Collection Table Naming".
+
 ## Quality Bar
 
 - Preset changes must visibly change design through committed tokens and shared component classes.
@@ -98,6 +144,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 - Icons should form a coherent family, not random drawings, and every content element should remain distinguishable in the new content element wizard at 16px.
 - Generated or bulk changes need deterministic scripts and tests where possible.
 - Active content elements must not depend on `shadcn2fluid`; allowed mentions are limited to package conflicts, migration notes, and tests/docs that explicitly prevent the old package or fixture map from returning.
+- Every `type: Collection` field has an explicit `table:` key with a `<contentblock-slug>_<identifier>` value. No bare names, no reserved SQL words. Audit grep in "Critical Rules — Collection Table Naming" should print nothing.
 
 ## References
 
