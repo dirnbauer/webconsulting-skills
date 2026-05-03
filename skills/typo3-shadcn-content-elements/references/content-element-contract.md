@@ -25,6 +25,7 @@ For each field in `config.yaml`:
 - If it is named `variant` or labeled as `Style`, prove that every value changes output through an existing shared shadcn component feature or a real template branch. Good examples are Button/Badge/Alert variants and TabsList `data-variant="default|line"`. Bad examples are values that only produce unused classes such as `accordion--bordered`, `table--striped`, or `tabs--pills`.
 - Remove unsupported style fields instead of adding one-off CSS. A content element should not invent custom visual variants merely because a `variant` field exists.
 - If it is `Collection`, render meaningful child fields and handle empty states.
+- If it is `Collection`, give it an explicit `table:` key. Without one, Content Blocks derives the table name from the field `identifier` only, which silently shares a single physical table across every content element that uses the same identifier (`posts`, `rows`, `column_items`, `cells`, `items`, `links`...). The shared table accumulates the union of all those blocks' fields, schema migrations get confused (parent UIDs end up as the wrong type, see "Collection Table Naming" below), and a future rename loses or scrambles content. Pick a name like `<contentblock-slug>_<identifier>` (for example `blog_teasers_posts`, `feature_matrix_rows`, `footer_mega_column_items`).
 - If it is a repeatable list inside another repeatable item, use a nested `Collection` when the installed Content Blocks version supports it. Do not model editor-managed feature lists as newline-separated textareas just because they are second-level data.
 - Do not model repeatable editor content as delimiter protocols. Fields such as `features_list`, `specs_text`, `row_data`, comma-separated `tier_values`, or newline/pipe encoded people/pages are legacy migration inputs, not the target schema.
 - If it is `File`, render with TYPO3 file APIs and provide alt/caption/copyright strategy.
@@ -140,6 +141,91 @@ Seed fixtures should stay structured:
 ```
 
 If a project is pinned to a Content Blocks release that cannot nest Collections, use an explicit fallback such as fixed `feature_1`...`feature_6` fields and document that limitation in the element.
+
+## Collection Table Naming
+
+**Every `type: Collection` field must declare an explicit `table:`.** This is non-negotiable. The default behavior of deriving the table name from the field `identifier` is unsafe for three reasons.
+
+**Reserved SQL words.** MySQL 8.0+ reserves `ROWS` (used in window-function `ROWS BETWEEN`); MariaDB matches. Doctrine quotes identifiers at runtime, so the table works in TYPO3, but `mysqldump`, ad-hoc CLI queries, schema-diff tools, IDE introspection, and `mysqlcheck` all stumble on unquoted `rows`. Other risky bare names: `groups`, `order`, `range`, `system`. Prefix every Collection table to sidestep the reserved-word list permanently.
+
+**Cross-element collisions.** Several content elements naturally pick the same identifier (`posts`, `rows`, `column_items`, `cells`, `items`, `links`, `features`, `tabs`). Without `table:`, Content Blocks merges them into one shared physical table whose schema is the union of every consuming element's fields. This causes:
+
+- Bloated tables with link/file/select columns that only one of the sharing elements actually uses.
+- Schema-migration deadlocks when one of the elements is renamed or removed: TYPO3 wants to drop columns that another element still needs.
+- Type drift on `foreign_table_parent_uid`: because every old Content Blocks version generated different defaults for the parent reference, a shared `column_items` table can keep an old `varchar(255) DEFAULT '' NOT NULL` definition while TYPO3 wants `int unsigned DEFAULT 0 NOT NULL`. The migration then fails with `Truncated incorrect INTEGER value: ''` because existing rows hold empty strings.
+- Editor data loss on rename: splitting one shared table back into per-element tables requires a parent-aware data migration, and orphaned rows are common.
+
+**TYPO3 convention.** Extension-owned tables should be prefixed so dump files, schema diffs, and other extensions can attribute ownership. Bare names like `posts` collide with every other extension that ships a blog.
+
+### Don't
+
+- Do not declare `type: Collection` without `table:`. The bare-identifier fallback is a footgun, not a feature.
+- Do not use reserved SQL keywords as table names: `rows`, `groups`, `range`, `order`, `system`, `values`, `user`, `cross`, `dense_rank`, `window`. Doctrine quotes at runtime, but `mysqldump`, `mysqlcheck`, schema-diff tooling, and IDE introspection break.
+- Do not use generic single-word table names (`posts`, `items`, `cells`, `tabs`, `members`, `slides`, `stats`, `links`, `features`, `tiers`, `partners`, `clients`, `reviews`, `routes`, `metrics`, `specs`, `jobs`, `awards`, `events`, `mentions`, `counters`...). They collide with other extensions on the same TYPO3 instance and across the Content Blocks ecosystem.
+- Do not silently rename a Collection's `table:` after editor content exists. Renaming triggers a drop-and-create in TYPO3's schema migration unless you do a parent-aware data move first.
+- Do not paper over a `Truncated incorrect INTEGER value: ''` error by lowering MySQL's `sql_mode`. Fix the data (`UPDATE ... SET foreign_table_parent_uid = 0 WHERE foreign_table_parent_uid = ''`) and the column type properly.
+- Do not assume "the table works because TYPO3 boots fine" means safe — the failure surface is dump/restore, schema migration, and renames, not steady-state runtime.
+
+### Do
+
+- Always set `table:` on every `type: Collection` field, top-level and nested.
+- Name tables `<contentblock-slug-as-snake_case>_<collection-identifier>`. Examples: `blog_teasers_posts`, `feature_matrix_rows`, `footer_mega_column_items`, `pricing_plan_features`, `data_table_cells`, `team_department_members`.
+- For nested Collections, prefix with the parent collection so the relationship is readable (`pricing_plan_features` inside a `plans` Collection that has a `features` child Collection).
+- When porting or auditing an extension, fix every Collection in one pass — partial fixes leave broken schema transitions.
+- Run the audit grep below before declaring a Collection sweep complete.
+- Match an existing extension's prefix style if one already dominates (`<ext>_<slug>_<identifier>` for stricter projects, plain `<slug>_<identifier>` for desiderio-style).
+
+### Naming Pattern
+
+Use `<contentblock-slug-as-snake_case>_<collection-identifier>`:
+
+```yaml
+# ContentBlocks/ContentElements/blog-teasers/config.yaml
+- identifier: posts
+  type: Collection
+  table: blog_teasers_posts
+
+# ContentBlocks/ContentElements/table-content/config.yaml
+- identifier: column_items
+  type: Collection
+  table: table_content_column_items
+- identifier: rows
+  type: Collection
+  table: table_content_rows
+
+# ContentBlocks/ContentElements/feature-matrix/config.yaml
+- identifier: rows
+  type: Collection
+  table: feature_matrix_rows
+
+# ContentBlocks/ContentElements/footer-mega/config.yaml
+- identifier: column_items
+  type: Collection
+  table: footer_mega_column_items
+```
+
+For nested Collections, follow the same pattern with the parent collection in the name (`pricing_plan_features`, `data_table_cells`).
+
+### Audit Command
+
+```bash
+# Find Collection fields that lack an explicit table: key.
+rg -nP '^\s*type: Collection\s*$' --no-heading -A1 ContentBlocks/ContentElements \
+  | rg -B1 -v 'table:'
+
+# List bare table names that collide with MySQL/MariaDB reserved words.
+rg -n '^\s+table:\s+(rows|groups|range|order|system|values|user|cross|dense_rank)\s*$' \
+  ContentBlocks/ContentElements
+```
+
+### Migration From An Existing Shared Table
+
+If `column_items`, `rows`, `posts`, or similar already exist in production:
+
+1. Add `table:` to every Content Block that points at the shared name.
+2. Inspect the shared table's `foreign_table_parent_uid` and `pid` to map each row to its owning content element (usually by joining against `tt_content.CType` on the parent UID).
+3. Move rows into the new per-element tables before running TYPO3's schema migration; otherwise the schema migration drops the shared table and editor content is lost.
+4. If `foreign_table_parent_uid` is `varchar(255)` with empty-string rows, run `UPDATE <table> SET foreign_table_parent_uid = 0 WHERE foreign_table_parent_uid = ''` before the ALTER, or strict-mode MySQL will refuse the type change with `Truncated incorrect INTEGER value: ''`.
 
 ## Legacy Workaround Cleanup
 
