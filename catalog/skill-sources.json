@@ -5,7 +5,7 @@
     "description": "When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions \\\"A/B test,\\\" \\\"split test,\\\" \\\"experiment,\\\" \\\"test this change,\\\" \\\"variant copy,\\\" \\\"multivariate test,\\\" or \\\"hypothesis.\\\" For tracking implementation, see analytics-tracking.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ab-testing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ab-testing/SKILL.md",
     "line_count": 521,
     "frontmatter_keys": [
       "name",
@@ -23,7 +23,7 @@
     "description": "Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles. Splits monolithic files into organized, linked documentation.",
     "source_owner": "Softaworks",
     "source_url": "https://github.com/softaworks/agent-toolkit",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/agent-md-refactor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/agent-md-refactor/SKILL.md",
     "line_count": 299,
     "frontmatter_keys": [
       "name",
@@ -39,7 +39,7 @@
     "description": "Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI search platforms. Use when working with aeo, geo, ai search, chatgpt search, perplexity, ai overviews, generative search, llm visibility.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
     "line_count": 2224,
     "frontmatter_keys": [
       "name",
@@ -59,7 +59,7 @@
     "description": "Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/android-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/android-design/SKILL.md",
     "line_count": 1060,
     "frontmatter_keys": [
       "name",
@@ -77,7 +77,7 @@
     "description": "Use when ANY command fails with 'command not found', when installing CLI tools (ripgrep, fd, jq, yq, bat, etc.), auditing project environments, or batch-updating tools. Triggers on: command not found, install tool, missing binary, environment audit, update tools, which, apt install, brew install.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/cli-tools-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cli-tools/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cli-tools/SKILL.md",
     "line_count": 90,
     "frontmatter_keys": [
       "name",
@@ -93,7 +93,7 @@
     "description": "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.). Fetches current docs via Context7 REST API. Triggers on: how to use library, API docs, framework pattern, import usage, library example.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/context7-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/context7/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/context7/SKILL.md",
     "line_count": 102,
     "frontmatter_keys": [
       "name",
@@ -109,7 +109,7 @@
     "description": "Full-funnel Conversion Rate Optimization (CRO) for SaaS and web apps. Covers page CRO, form optimization, signup flow, onboarding activation, popup/modal design, and paywall/upgrade screens. Use when optimizing any part of the conversion funnel.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro-funnel/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cro-funnel/SKILL.md",
     "line_count": 360,
     "frontmatter_keys": [
       "name",
@@ -127,7 +127,7 @@
     "description": "Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era. Use when working with deepfake, media forensics, fake detection, synthetic media, prnu, image authentication, video verification, disinformation.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/deepfake-detection/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/deepfake-detection/SKILL.md",
     "line_count": 1113,
     "frontmatter_keys": [
       "name",
@@ -147,7 +147,7 @@
     "description": "Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text extraction, form filling, document creation, and data analysis.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/document-processing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/document-processing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/document-processing/SKILL.md",
     "line_count": 651,
     "frontmatter_keys": [
       "name",
@@ -167,7 +167,7 @@
     "description": "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/enterprise-readiness-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
     "line_count": 81,
     "frontmatter_keys": [
       "name",
@@ -183,7 +183,7 @@
     "description": "Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats.",
     "source_owner": "ooiyeefei",
     "source_url": "https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/excalidraw/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/excalidraw/SKILL.md",
     "line_count": 292,
     "frontmatter_keys": [
       "name",
@@ -199,7 +199,7 @@
     "description": "Helps users discover and install agent skills when they ask questions like \\\"how do I do X\\\", \\\"find a skill for X\\\", \\\"is there a skill that can...\\\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/find-skills/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/find-skills/SKILL.md",
     "line_count": 155,
     "frontmatter_keys": [
       "name",
@@ -215,7 +215,7 @@
     "description": "Search, scrape, and interact with the web via the Firecrawl CLI. Use this skill whenever the user wants to search the web, find articles, research a topic, look something up online, scrape a webpage, grab content from a URL, get data from a website, crawl documentation, download a site, or interact with pages that need clicks or logins. Also use when they say \\\"fetch this page\\\", \\\"pull the content from\\\", \\\"get the page at https://\\\", or reference external websites. This provides real-time web search with full page content and interact capabilities \\u2014 beyond what Claude can do natively with built-in tools. Do NOT trigger for local file operations, git commands, deployments, or code editing tasks.",
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/firecrawl/SKILL.md",
     "line_count": 159,
     "frontmatter_keys": [
       "name",
@@ -231,7 +231,7 @@
     "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/frontend-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/frontend-design/SKILL.md",
     "line_count": 54,
     "frontmatter_keys": [
       "name",
@@ -247,7 +247,7 @@
     "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \\\"grill me\\\".",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-me/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/grill-me/SKILL.md",
     "line_count": 25,
     "frontmatter_keys": [
       "name",
@@ -263,8 +263,8 @@
     "description": "GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use when writing GSAP animations in HyperFrames compositions.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/gsap/SKILL.md",
-    "line_count": 226,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/gsap/SKILL.md",
+    "line_count": 255,
     "frontmatter_keys": [
       "name",
       "description"
@@ -279,8 +279,8 @@
     "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For CLI commands (init, lint, preview, render, transcribe, tts) see the hyperframes-cli skill.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes/SKILL.md",
-    "line_count": 379,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes/SKILL.md",
+    "line_count": 430,
     "frontmatter_keys": [
       "name",
       "description"
@@ -295,8 +295,8 @@
     "description": "HyperFrames CLI tool \\u2014 hyperframes init, lint, inspect, preview, render, transcribe, tts, doctor, browser, info, upgrade, compositions, docs, benchmark. Use when scaffolding a project, linting, validating, inspecting visual layout in compositions, previewing in the studio, rendering to video, transcribing audio, generating TTS, or troubleshooting the HyperFrames environment.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
-    "line_count": 165,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
+    "line_count": 168,
     "frontmatter_keys": [
       "name",
       "description"
@@ -311,7 +311,7 @@
     "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
     "line_count": 119,
     "frontmatter_keys": [
       "name",
@@ -327,7 +327,7 @@
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ios-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ios-design/SKILL.md",
     "line_count": 1092,
     "frontmatter_keys": [
       "name",
@@ -345,7 +345,7 @@
     "description": "Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ipados-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ipados-design/SKILL.md",
     "line_count": 684,
     "frontmatter_keys": [
       "name",
@@ -363,7 +363,7 @@
     "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch-strategy/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/launch-strategy/SKILL.md",
     "line_count": 357,
     "frontmatter_keys": [
       "name",
@@ -379,7 +379,7 @@
     "description": "Austrian Impressum (legal notice) requirements for all company types. Covers ECG, UGB, GewO, MedienG, and Offenlegungspflicht for public media. Use when working with impressum, legal notice, imprint, austria, \u00f6sterreich, ECG, mediengesetz, offenlegung.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/legal-impressum/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/legal-impressum/SKILL.md",
     "line_count": 492,
     "frontmatter_keys": [
       "name",
@@ -397,7 +397,7 @@
     "description": "Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/macos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/macos-design/SKILL.md",
     "line_count": 1131,
     "frontmatter_keys": [
       "name",
@@ -415,7 +415,7 @@
     "description": "Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth engineering. From Corey Haines' Marketing Skills collection. Use when working with marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-skills/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/marketing-skills/SKILL.md",
     "line_count": 229,
     "frontmatter_keys": [
       "name",
@@ -433,7 +433,7 @@
     "description": "Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.",
     "source_owner": "Stevy Smith",
     "source_url": "https://github.com/stevysmith/og-image-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/og-image/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/og-image/SKILL.md",
     "line_count": 213,
     "frontmatter_keys": [
       "name",
@@ -449,7 +449,7 @@
     "description": "Use when working with ANY PHP modernization task: upgrading PHP 8.1+ (TYPO3 v14.3 LTS accepts 8.2-8.5), adding strict types, configuring PHPStan/Rector/PHP-CS-Fixer, refactoring to enums/DTOs/readonly/property hooks (PHP 8.4), improving type safety, reviewing PHP code quality. Triggers: PHP upgrade, modernize, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.5.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/php-modernization-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/php-modernization/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/php-modernization/SKILL.md",
     "line_count": 89,
     "frontmatter_keys": [
       "name",
@@ -465,7 +465,7 @@
     "description": "Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.",
     "source_owner": "Supabase",
     "source_url": "https://github.com/supabase/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
     "line_count": 70,
     "frontmatter_keys": [
       "name",
@@ -481,7 +481,7 @@
     "description": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \\\"programmatic SEO,\\\" \\\"template pages,\\\" \\\"pages at scale,\\\" \\\"directory pages,\\\" \\\"location pages,\\\" \\\"[keyword] + [city] pages,\\\" \\\"comparison pages,\\\" \\\"integration pages,\\\" or \\\"building many pages for SEO.\\\" For auditing existing SEO issues, see seo-audit.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/programmatic-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/programmatic-seo/SKILL.md",
     "line_count": 639,
     "frontmatter_keys": [
       "name",
@@ -499,7 +499,7 @@
     "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/react-best-practices/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/react-best-practices/SKILL.md",
     "line_count": 158,
     "frontmatter_keys": [
       "name",
@@ -515,7 +515,7 @@
     "description": "Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is.",
     "source_owner": "OpenHands",
     "source_url": "https://github.com/OpenHands/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/readiness-report/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/readiness-report/SKILL.md",
     "line_count": 132,
     "frontmatter_keys": [
       "name",
@@ -531,7 +531,7 @@
     "description": "'Surgical code refactoring to improve maintainability without changing behavior. Covers extracting functions, renaming variables, breaking down god functions, improving type safety, eliminating code smells, and applying design patterns. Less drastic than repo-rebuilder; use for gradual improvements.'",
     "source_owner": "GitHub",
     "source_url": "https://github.com/github/awesome-copilot",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/refactor/SKILL.md",
     "line_count": 657,
     "frontmatter_keys": [
       "name",
@@ -549,7 +549,7 @@
     "description": "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance.",
     "source_owner": "sickn33",
     "source_url": "https://github.com/sickn33/antigravity-awesome-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor-clean/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/refactor-clean/SKILL.md",
     "line_count": 69,
     "frontmatter_keys": [
       "name",
@@ -565,8 +565,8 @@
     "description": "Best practices for Remotion - Video creation in React",
     "source_owner": "remotion-dev",
     "source_url": "https://github.com/remotion-dev/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
-    "line_count": 106,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
+    "line_count": 351,
     "frontmatter_keys": [
       "name",
       "description"
@@ -581,7 +581,7 @@
     "description": "Use when conducting security assessments \\u2014 OWASP Top 10 / API / LLM, CWE Top 25, CVSS scoring \\u2014 auditing PHP/TYPO3 (v14.3 LTS: #109585, HashService removal, Authorize/RateLimit), APIs, frontend, Terraform/K8s/Docker IaC, AWS/Azure/GCP cloud, AI agent configs, or scanning dependencies.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/security-audit-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-audit/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/security-audit/SKILL.md",
     "line_count": 105,
     "frontmatter_keys": [
       "name",
@@ -597,7 +597,7 @@
     "description": "Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, and blameless root cause analysis. Use when working with incident report, post-mortem, sir, ddos analysis, security reporting, root cause analysis, cve correlation, nist 800-61.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
     "line_count": 378,
     "frontmatter_keys": [
       "name",
@@ -615,7 +615,7 @@
     "description": "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/shadcn-ui/SKILL.md",
     "line_count": 323,
     "frontmatter_keys": [
       "name",
@@ -631,7 +631,7 @@
     "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/skill-creator/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/skill-creator/SKILL.md",
     "line_count": 498,
     "frontmatter_keys": [
       "name",
@@ -647,7 +647,7 @@
     "description": "Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tvos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/tvos-design/SKILL.md",
     "line_count": 388,
     "frontmatter_keys": [
       "name",
@@ -663,7 +663,7 @@
     "description": "WCAG 2.2 AA accessibility audit and implementation for TYPO3 v14. Covers Fluid template patterns, PHP middleware, JavaScript enhancements, Content Element accessibility, form accessibility, and a full go-live checklist. Use when working with accessibility, a11y, wcag, aria, screen reader, keyboard navigation, focus management, color contrast, alt text, semantic html, skip link, or accessible forms in TYPO3.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
     "line_count": 981,
     "frontmatter_keys": [
       "name",
@@ -684,7 +684,7 @@
     "description": "Orchestrate large-scale TYPO3 code changes across multiple files in parallel. Migrations, bulk TCA modernization, Fluid template refactoring, hook-to-event conversions, namespace renames, and extension-wide upgrades. Decomposes work into independent units, executes them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor, convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-batch/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-batch/SKILL.md",
     "line_count": 355,
     "frontmatter_keys": [
       "name",
@@ -703,7 +703,7 @@
     "description": "Use when assessing TYPO3 extension quality, conformance checking, standards compliance, modernization to v12/v13/v14 (v14.3 LTS is the default/gold standard), TER readiness, or best practices review. Also triggers on: extension audit, quality score, full assessment, fix all findings, conformance audit, Fluid 5 strict ViewHelpers, ext_tables.php removal, Extbase attributes (Authorize/RateLimit), HashService removal, Bootstrap 5 migration, CSP compliance, ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-conformance-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-conformance/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-conformance/SKILL.md",
     "line_count": 95,
     "frontmatter_keys": [
       "name",
@@ -719,7 +719,7 @@
     "description": "Expert guidance on creating Content Elements, Record Types, Page Types, and File Types using TYPO3 Content Blocks extension - the single source of truth for content modeling. Use when working with content-blocks, content-element, record-type, page-type, file-type, make:content-block, friendsoftypo3/content-blocks, irre.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
     "line_count": 1334,
     "frontmatter_keys": [
       "name",
@@ -740,7 +740,7 @@
     "description": "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Core `main` branch is v15-in-progress (PHP 8.4/8.5); v14.3 LTS bugfixes land on branch `14.3` and are backported via cherry-pick. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-core-contributions-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-core-contributions/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-core-contributions/SKILL.md",
     "line_count": 98,
     "frontmatter_keys": [
       "name",
@@ -756,7 +756,7 @@
     "description": "Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring transactional safety, correct extension points (SC_OPTIONS hooks and documented PSR-14 events), and reference index integrity. Use when working with database, datahandler, tcemain, records, content, pages.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
     "line_count": 572,
     "frontmatter_keys": [
       "name",
@@ -777,7 +777,7 @@
     "description": "Use when providing DDEV URLs, accessing TYPO3 backend in browser, performing any ddev command (e.g. start, stop, restart, describe, exec), setting up DDEV for TYPO3 extension development, or testing across multiple TYPO3 versions. Triggers on: ddev URLs, backend URLs, local development, docker environment, PHP version management, multi-version testing.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-ddev-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-ddev/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-ddev/SKILL.md",
     "line_count": 109,
     "frontmatter_keys": [
       "name",
@@ -793,7 +793,7 @@
     "description": "Use when creating, editing, or reviewing TYPO3 extension documentation (Documentation/*.rst, guides.xml, README.md, XLF translations), rendering docs with Docker, using TYPO3 RST directives, adding screenshots, deploying to docs.typo3.org, improve docs, fix documentation, or XLIFF 2-space indentation (TYPO3 v14+).",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-docs-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-docs/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-docs/SKILL.md",
     "line_count": 93,
     "frontmatter_keys": [
       "name",
@@ -809,7 +809,7 @@
     "description": "Use when upgrading TYPO3 extensions to newer LTS versions (v11->v12, v12->v13, v13->v14 - v14.3 LTS is the current target), running Extension Scanner, Rector, Fractor, PHPStan, fixing deprecated APIs, or resolving compatibility issues. Also triggers on: migration, version upgrade, deprecated API, dual-version compatibility, Fluid 5 strict VHs, HashService removal, ext_tables.php split.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-extension-upgrade-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
     "line_count": 92,
     "frontmatter_keys": [
       "name",
@@ -825,7 +825,7 @@
     "description": "Automated non-PHP migrations for TYPO3 upgrades using Fractor. Handles FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when working with fractor, flexform, typoscript migration, fluid migration, non-php upgrade, yaml migration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-fractor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-fractor/SKILL.md",
     "line_count": 498,
     "frontmatter_keys": [
       "name",
@@ -844,7 +844,7 @@
     "description": "Design and migrate TYPO3 v14 extension icons with the Core Icon API and the current backend icon language. Use when working with module icons, plugin icons, record icons, action icons, Extension.svg, Configuration/Icons.php, iconIdentifier, pluginIcon, typeicon_classes, TYPO3.Icons, or styleguide icon references.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-icon14/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-icon14/SKILL.md",
     "line_count": 215,
     "frontmatter_keys": [
       "name",
@@ -863,7 +863,7 @@
     "description": "Assess whether an external idea, launch, article, paper, or product announcement should become a TYPO3 extension and companion German blog post. Use this whenever a user shares a link or concept and wants it analyzed for TYPO3, wants a GitHub-ready extension built from it, or wants a publication-ready webconsulting.at MDX article.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
     "line_count": 252,
     "frontmatter_keys": [
       "name",
@@ -882,7 +882,7 @@
     "description": "Expert guidance on the Powermail **extension** 13.x with TYPO3 **13.4+** (verify Packagist for newer Core constraints). Creating forms, custom finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email templates, backend modules, and extension development. Use when working with powermail forms, mail handling, form validation, or extending powermail functionality.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-powermail/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-powermail/SKILL.md",
     "line_count": 1209,
     "frontmatter_keys": [
       "name",
@@ -900,7 +900,7 @@
     "description": "Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
     "line_count": 634,
     "frontmatter_keys": [
       "name",
@@ -920,7 +920,7 @@
     "description": "TYPO3 v14 upgrade patterns using Rector: automated refactoring rules, level sets, and migration workflows. Use when working with rector, upgrade, migration, refactoring, deprecation.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-rector/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-rector/SKILL.md",
     "line_count": 536,
     "frontmatter_keys": [
       "name",
@@ -941,7 +941,7 @@
     "description": "Security hardening checklist and best practices for TYPO3 v14 installations, covering configuration, file permissions, and common vulnerabilities. Use when working with security, hardening, permissions, authentication, vulnerabilities.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-security/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-security/SKILL.md",
     "line_count": 475,
     "frontmatter_keys": [
       "name",
@@ -960,7 +960,7 @@
     "description": "SEO configuration and best practices for TYPO3 v14, including EXT:seo setup, sitemaps, meta tags, and structured data. Use when working with seo, sitemap, meta, robots, structured data, opengraph.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-seo/SKILL.md",
     "line_count": 507,
     "frontmatter_keys": [
       "name",
@@ -981,8 +981,8 @@
     "description": "Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
-    "line_count": 110,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
+    "line_count": 161,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1000,7 +1000,7 @@
     "description": "Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability while preserving functionality. Reviews PHP classes, Fluid templates, TCA, Services.yaml, and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature or before merging a PR. Use when working with simplify, clean up, refine, code quality, reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-simplify/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-simplify/SKILL.md",
     "line_count": 251,
     "frontmatter_keys": [
       "name",
@@ -1019,7 +1019,7 @@
     "description": "Expert guidance on Apache Solr search integration for TYPO3: installation, Index Queue, faceting, suggest, PSR-14 events, custom indexers, LLM/vector search (Solr native), DDEV/Docker/production setup, deep debugging & troubleshooting, and file indexing via solrfal. Use when working with solr, search, indexing, facets, suggest, autocomplete, vector search, solrfal, tika.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-solr/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-solr/SKILL.md",
     "line_count": 2184,
     "frontmatter_keys": [
       "name",
@@ -1040,7 +1040,7 @@
     "description": "Use when setting up TYPO3 extension test infrastructure, writing unit/functional/E2E tests, configuring PHPUnit 11/12/13, mutation testing, mocking final classes (v14), CI/CD matrix across TYPO3 12/13/14.3 LTS, dev-dependency consolidation via typo3-ci-workflows meta-package, or debugging CI failures. Also triggers on: testing-framework setup, ensure proper testing, test matrix, integration testing, e2e testing, coverage, test generation.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-testing-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-testing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-testing/SKILL.md",
     "line_count": 105,
     "frontmatter_keys": [
       "name",
@@ -1056,7 +1056,7 @@
     "description": "TYPO3 localization and translation-file guidance. Use this skill whenever the user asks to create, edit, audit, migrate, or validate TYPO3 labels, locallang.xlf, labels.xlf, XLIFF 1.2 or XLIFF 2.0 files, LLL references, Content Blocks labels, backend labels, English/German localizations, ICU MessageFormat strings, missing translation keys, duplicate labels, or translation cleanup.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-translations/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-translations/SKILL.md",
     "line_count": 479,
     "frontmatter_keys": [
       "name",
@@ -1075,7 +1075,7 @@
     "description": "TYPO3 v14 development guide: version constraints, core APIs, extension patterns, and upgrade workflows. Use when working with update, upgrade, v14, migration, lts, TYPO3 core.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-update/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-update/SKILL.md",
     "line_count": 865,
     "frontmatter_keys": [
       "name",
@@ -1096,7 +1096,7 @@
     "description": "Use when configuring Vite 7 for TYPO3 v13/v14 LTS projects, setting up SCSS architecture with Bootstrap 5.3 theming, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts, or customizing Bootstrap variables. v14 removed core asset concat/compression (#108055) \\u2014 external build tool is now mandatory. Also triggers for: vite-asset-collector, asset hashing, Gzip/Brotli compression, SCSS import chain, selective Bootstrap imports, CSP compliance, post-v14 frontend build pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-vite-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-vite/SKILL.md",
     "line_count": 61,
     "frontmatter_keys": [
       "name",
@@ -1112,7 +1112,7 @@
     "description": "Expert guidance on TYPO3 Workspaces: versioning, staging, publishing workflows, file limitations, file collection workspace safety, query migration, debugging, and testing. Use when working with workspace, versioning, staging, publishing, review, draft content, workflow, file collection.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
     "line_count": 1683,
     "frontmatter_keys": [
       "name",
@@ -1133,7 +1133,7 @@
     "description": "Practical UI design patterns and principles for creating polished, professional interfaces. Based on proven techniques from Refactoring UI and Practical UI. Use when working with ui, design, layout, spacing, typography, color, hierarchy, styling.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
     "line_count": 869,
     "frontmatter_keys": [
       "name",
@@ -1153,7 +1153,7 @@
     "description": "Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/visionos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/visionos-design/SKILL.md",
     "line_count": 384,
     "frontmatter_keys": [
       "name",
@@ -1169,7 +1169,7 @@
     "description": "Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/watchos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/watchos-design/SKILL.md",
     "line_count": 376,
     "frontmatter_keys": [
       "name",
@@ -1185,7 +1185,7 @@
     "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \\\"review my UI\\\", \\\"check accessibility\\\", \\\"audit design\\\", \\\"review UX\\\", or \\\"check my site against best practices\\\".",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-design-guidelines/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/web-design-guidelines/SKILL.md",
     "line_count": 48,
     "frontmatter_keys": [
       "name",
@@ -1201,7 +1201,7 @@
     "description": "Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-platform-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/web-platform-design/SKILL.md",
     "line_count": 1463,
     "frontmatter_keys": [
       "name",
@@ -1219,7 +1219,7 @@
     "description": "Enforces webconsulting.at design system, color palettes, typography, and MDX component structures for frontend development. Use when working with frontend, design, branding, ui, components, styling.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
     "line_count": 311,
     "frontmatter_keys": [
       "name",
@@ -1238,7 +1238,7 @@
     "description": "Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
     "line_count": 1101,
     "frontmatter_keys": [
       "name",
@@ -1257,7 +1257,7 @@
     "description": "Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says \\\"capture this site\\\", \\\"turn this into a video\\\", \\\"make a promo from my site\\\", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL \\u2014 this is the skill to use.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
     "line_count": 138,
     "frontmatter_keys": [
       "name",

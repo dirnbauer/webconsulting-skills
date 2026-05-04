@@ -264,7 +264,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: gsap
-- SKILL.md lines: 226
+- SKILL.md lines: 255
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -280,7 +280,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes
-- SKILL.md lines: 379
+- SKILL.md lines: 430
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -296,7 +296,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes-cli
-- SKILL.md lines: 165
+- SKILL.md lines: 168
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -552,7 +552,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: remotion-dev
 - Source URL: https://github.com/remotion-dev/skills
 - Frontmatter name: remotion-best-practices
-- SKILL.md lines: 106
+- SKILL.md lines: 351
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -920,7 +920,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-shadcn-content-elements
-- SKILL.md lines: 110
+- SKILL.md lines: 161
 
 **Pass 1: Structure**
 - No pass 1 issues found.
