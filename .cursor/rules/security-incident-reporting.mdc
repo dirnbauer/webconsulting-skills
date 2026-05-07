@@ -1,14 +1,14 @@
 ---
-name: security-incident-reporting
-description: >-
-  Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE
-  correlation, timeline documentation, and blameless root cause analysis. Use when working
-  with incident report, post-mortem, sir, ddos analysis, security reporting, root cause
-  analysis, cve correlation, nist 800-61.
-metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the security-incident-reporting Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# security-incident-reporting
+
+Canonical skill directory: `.cursor/skills/security-incident-reporting/`
+
+Read `.cursor/skills/security-incident-reporting/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Security Incident Reporting
 
@@ -373,4 +373,5 @@ incorporating elements of NIST SP 800-61, SANS frameworks, and industry best pra
 
 Developed by webconsulting.at for the Claude skill collection.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

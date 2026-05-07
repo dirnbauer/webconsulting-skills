@@ -1,14 +1,14 @@
 ---
-name: typo3-update
-description: >-
-  TYPO3 v14 development guide: version constraints, core APIs, extension patterns, and
-  upgrade workflows. Use when working with update, upgrade, v14, migration, lts,
-  TYPO3 core.
-compatibility: TYPO3 14.x
-metadata:
-  version: "2.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-update Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-update
+
+Canonical skill directory: `.cursor/skills/typo3-update/`
+
+Read `.cursor/skills/typo3-update/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 v14 development
 
@@ -185,7 +185,7 @@ final class BackendModuleController
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($request);
         $moduleTemplate->assign('items', []);
-        
+
         return $moduleTemplate->renderResponse('Backend/Index');
     }
 }
@@ -219,10 +219,10 @@ final class RenderingService
             layoutRootPaths: ['EXT:my_extension/Resources/Private/Layouts'],
             request: $request,
         );
-        
+
         $view = $this->viewFactory->create($viewFactoryData);
         $view->assignMultiple($data);
-        
+
         return $view->render('Notification');
     }
 }
@@ -241,10 +241,10 @@ final class RenderingService
     <div class="content">
         <!-- ✅ Auto-escaped output -->
         <h1>{item.title}</h1>
-        
+
         <!-- ✅ Explicit HTML (use with caution) -->
         <f:format.html>{item.bodytext}</f:format.html>
-        
+
         <!-- ✅ Conditional rendering -->
         <f:if condition="{items}">
             <f:then>
@@ -256,7 +256,7 @@ final class RenderingService
                 <p>No items found.</p>
             </f:else>
         </f:if>
-        
+
         <!-- ✅ Link building -->
         <f:link.action action="show" arguments="{item: item.uid}">
             View Details
@@ -387,7 +387,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,description',
+        // v14: ctrl `searchFields` removed (Breaking #106972) — mark searchable columns in `columns` instead.
         'iconIdentifier' => 'myextension-item',
     ],
     'palettes' => [
@@ -417,6 +417,7 @@ return [
                 'size' => 50,
                 'max' => 255,
                 'required' => true,
+                'searchable' => true,
             ],
         ],
         'description' => [
@@ -426,6 +427,7 @@ return [
                 'cols' => 40,
                 'rows' => 5,
                 'enableRichtext' => true,
+                'searchable' => true,
             ],
         ],
     ],
@@ -519,7 +521,7 @@ final class CustomRepository
     public function findByStatus(string $status): array
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_myext_items');
-        
+
         return $queryBuilder
             ->select('*')
             ->from('tx_myext_items')
@@ -537,7 +539,7 @@ final class CustomRepository
     public function countByPid(int $pid): int
     {
         $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_myext_items');
-        
+
         return (int)$queryBuilder
             ->count('uid')
             ->from('tx_myext_items')
@@ -583,7 +585,7 @@ final class ItemRepository extends Repository
                 )
             )
         );
-        
+
         return $query->execute()->toArray();
     }
 }
@@ -622,19 +624,19 @@ final class ProcessCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        
+
         // Initialize backend for DataHandler operations
         Bootstrap::initializeBackendAuthentication();
-        
+
         $type = $input->getArgument('type');
         $force = $input->getOption('force');
-        
+
         $io->title('Processing: ' . $type);
-        
+
         // Your logic here...
-        
+
         $io->success('Processing completed successfully');
-        
+
         return Command::SUCCESS;
     }
 }
@@ -689,21 +691,21 @@ jobs:
       matrix:
         typo3: ['^14.0']
         php: ['8.2', '8.3', '8.4']
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           extensions: intl, pdo_mysql
-      
+
       - name: Install dependencies
         run: |
           composer require typo3/cms-core:${{ matrix.typo3 }} --no-update
           composer install --prefer-dist --no-progress
-      
+
       - name: Run tests
         run: vendor/bin/phpunit
 ```
@@ -766,7 +768,7 @@ Not covered by Rector — context-dependent migration requiring manual analysis:
   ```php
   // ❌ Removed in v14
   $tsfe = $GLOBALS['TSFE'];
-  
+
   // ✅ TYPO3 v14 pattern
   $pageInformation = $request->getAttribute('frontend.page.information');
   $language = $request->getAttribute('language');
@@ -789,13 +791,13 @@ Not a PHP migration — requires manual update to `Configuration/Backend/Modules
 
 ### Plugin Subtypes Removed **[v14 only]**
 
-- **`switchableControllerActions`:** deprecated in **TYPO3 v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)) and removed later — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
+- **`switchableControllerActions`:** deprecated in **TYPO3 v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)) and removed later — not a v14-only topic, but legacy FlexForm/plugins may still reference it until you split plugins.
 - **`list_type` subtypes / plugin list types:** further tightened in **v14** (#105538) — each variant needs its own `configurePlugin()` / registration and TypoScript/FlexForm split.
 
 ### EXT:form Hooks → PSR-14 Events **[v14 only]**
 
 Hook-to-event migration requires manual rewrite of hook implementations:
-- All EXT:form hooks removed (incl. **`afterInitializeCurrentPage`**, Breaking #107566): `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`, `afterInitializeCurrentPage`.
+- EXT:form hooks removed across multiple breaking changes (e.g., #107566 for `afterInitializeCurrentPage`, #107518, #107528, #107568, #107569, #107343, #107380, #107382, #107388, #98239): `beforeRendering`, `afterSubmit`, `initializeFormElement`, `beforeFormSave`, `beforeFormDelete`, `beforeFormDuplicate`, `beforeFormCreate`, `afterBuildingFinished`, `beforeRemoveFromParentRenderable`, `afterInitializeCurrentPage`.
 - Replace with corresponding PSR-14 events (e.g., `BeforeFormIsSavedEvent`, `BeforeRenderableIsRenderedEvent`).
 
 ### Frontend Asset Pipeline **[v14 only]**
@@ -817,7 +819,7 @@ New features to adopt (not migrations):
 
 - `<f:page.meta>` — set page meta tags from Fluid templates.
 - `<f:page.title>` — set page title from Fluid templates.
-- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107056-FluidViewHelpersForHeaderAndFooterData.html)).
+- `<f:page.headerData>` / `<f:page.footerData>` — inject raw HTML into head/footer ([Feature #107056](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107056-IntroduceHeaderDataAndFooterDataViewHelpers.html)).
 
 ### Localization System **[v14 only]**
 
@@ -858,4 +860,5 @@ Verify each item in the [official v14.1 changelog](https://docs.typo3.org/c/typo
 
 ## Credits & Attribution
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

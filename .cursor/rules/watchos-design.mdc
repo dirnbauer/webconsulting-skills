@@ -1,11 +1,14 @@
 ---
-name: watchos-design-guidelines
-description: Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+description: Use the watchos-design Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# watchos-design
+
+Canonical skill directory: `.cursor/skills/watchos-design/`
+
+Read `.cursor/skills/watchos-design/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # watchOS Design Guidelines
 
@@ -55,6 +58,7 @@ The Digital Crown is the primary physical input for scrolling and precise value 
 - **W-DC-02**: For value pickers (time, quantity, sliders), bind the Crown to precise adjustments with haptic detents at each discrete value.
 - **W-DC-03**: Do not override or conflict with system Crown behaviors. The system uses the Crown for volume control during media playback, scrolling in system UI, and Time Travel in complications.
 - **W-DC-04**: Provide visual feedback synchronized with Crown rotation. The UI must respond frame-by-frame to Crown input with no perceptible lag.
+- **W-DC-05**: Update on each Crown increment. Values, selection, and highlight states should move with each detent. Do not debounce Crown input until the gesture ends.
 
 **Correct — Crown binding with haptic detents:**
 ```swift
@@ -365,4 +369,14 @@ Use this checklist when reviewing a watchOS design or implementation.
 - [ ] Bold Text preference is respected (SwiftUI handles automatically; custom text checks `@Environment(\.legibilityWeight)`)
 - [ ] Increase Contrast preference is respected (custom colors provide higher-contrast variants)
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

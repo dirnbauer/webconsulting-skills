@@ -1,14 +1,14 @@
 ---
-name: deepfake-detection
-description: >-
-  Multimodal media authentication and deepfake forensics. PRNU analysis, IGH
-  classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the
-  post-empirical era. Use when working with deepfake, media forensics, fake detection,
-  synthetic media, prnu, image authentication, video verification, disinformation.
-metadata:
-  version: "1.2.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the deepfake-detection Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# deepfake-detection
+
+Canonical skill directory: `.cursor/skills/deepfake-detection/`
+
+Read `.cursor/skills/deepfake-detection/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Deepfake Detection & Media Authentication
 
@@ -288,7 +288,7 @@ exiftool -json input.jpg | jq .
 exiftool -Software -CreatorTool -HistorySoftwareAgent input.jpg
 
 # Compare metadata between original and suspected fake
-exiftool -g1 -a -u original.jpg suspected.jpg | diff -y - 
+exiftool -g1 -a -u original.jpg suspected.jpg | diff -y -
 
 # Find GPS coordinates (if present)
 exiftool -gps:all -c "%.6f" input.jpg
@@ -354,7 +354,7 @@ Photo-Response Non-Uniformity (PRNU) is a sensor-specific noise pattern that act
 def calculate_pce(image: np.ndarray, reference_prnu: np.ndarray) -> float:
     """
     Calculate Peak-to-Correlation-Energy for PRNU matching.
-    
+
     Returns:
         PCE value > 60 indicates high confidence match
         PCE value 40-60 indicates moderate confidence
@@ -386,16 +386,16 @@ The Intensity Gradient Histogram (IGH) classifies the relationship between local
 def analyze_igh_profile(image: np.ndarray) -> dict:
     """
     Analyze Intensity Gradient Histogram for CRF consistency.
-    
+
     Synthetic blur (portrait mode) destroys the statistical harmony
     of the CRF model, detectable via IGH asymmetry analysis.
     """
     gradients = compute_intensity_gradients(image)
-    
+
     # Authentic optical blur: asymmetric gradient distribution
     # Synthetic blur: symmetric Gaussian distribution
     symmetry_score = measure_gradient_symmetry(gradients)
-    
+
     return {
         "gradient_histogram": gradients,
         "symmetry_score": symmetry_score,
@@ -422,17 +422,17 @@ Double Quantization (DQ) effects serve as primary evidence for multiple save ope
 def generate_dq_probability_map(image: np.ndarray) -> np.ndarray:
     """
     Generate Double Quantization probability map.
-    
+
     Spliced regions show different quantization histories,
     creating detectable statistical anomalies.
     """
     dct_blocks = compute_dct_blocks(image)
     q_estimates = estimate_quantization_tables(dct_blocks)
-    
+
     # Probability map highlights regions with different
     # compression histories (splicing indicators)
     prob_map = detect_quantization_inconsistencies(q_estimates)
-    
+
     return prob_map  # Heatmap: red = likely manipulation
 ```
 
@@ -463,14 +463,14 @@ Before algorithmic analysis, trained reviewers check for these telltale signs:
 def analyze_temporal_artifacts(video_path: str) -> dict:
     """
     Detect temporal inconsistencies in video deepfakes.
-    
+
     Face-swap deepfakes often show:
     - Flickering at face boundaries
     - Inconsistent lighting between frames
     - Unnatural head pose transitions
     """
     frames = extract_frames(video_path)
-    
+
     results = {
         "face_boundary_flickering": detect_boundary_flickering(frames),
         "lighting_consistency": analyze_lighting_consistency(frames),
@@ -478,7 +478,7 @@ def analyze_temporal_artifacts(video_path: str) -> dict:
         "blink_analysis": detect_blink_patterns(frames),  # Early deepfakes lacked blinking
         "audio_visual_sync": check_lip_sync_accuracy(video_path)
     }
-    
+
     return results
 ```
 
@@ -490,18 +490,18 @@ Modern detection must address both GAN-based and diffusion model-generated image
 def detect_gan_fingerprints(image: np.ndarray) -> dict:
     """
     Detect characteristic patterns left by generative architectures.
-    
+
     Different families (StyleGAN, Stable Diffusion, DALL-E, Midjourney)
     leave distinct frequency-domain artifacts.
     """
     fft = compute_fft_spectrum(image)
-    
+
     # GANs often produce checkerboard patterns in FFT
     checkerboard_score = detect_checkerboard_artifacts(fft)
-    
+
     # Spectral analysis for GAN-specific signatures
     gan_signatures = match_known_gan_spectra(fft)
-    
+
     return {
         "checkerboard_score": checkerboard_score,
         "suspected_generator": gan_signatures.get("best_match"),
@@ -531,21 +531,21 @@ When pixel-level artifacts are masked, focus on semantic inconsistencies. This a
 def analyze_shadow_consistency(image: np.ndarray) -> dict:
     """
     Detect physically impossible shadow configurations.
-    
+
     A single light source produces shadows in consistent directions.
     Composited images often have inconsistent shadow angles.
     """
     shadows = detect_shadows(image)
     objects = detect_objects(image)
-    
+
     shadow_vectors = []
     for obj, shadow in zip(objects, shadows):
         vector = compute_shadow_vector(obj, shadow)
         shadow_vectors.append(vector)
-    
+
     # All vectors should converge to consistent light source
     consistency_score = measure_vector_convergence(shadow_vectors)
-    
+
     return {
         "shadow_vectors": shadow_vectors,
         "consistency_score": consistency_score,
@@ -589,7 +589,7 @@ def calculate_authenticity_score(media_path: str) -> dict:
     Calculate composite authenticity score from multiple forensic signals.
     """
     image = load_media(media_path)
-    
+
     scores = {
         "prnu_pce": analyze_prnu(image),           # Weight: 0.25
         "igh_profile": analyze_igh_profile(image), # Weight: 0.20
@@ -597,10 +597,10 @@ def calculate_authenticity_score(media_path: str) -> dict:
         "gan_fingerprints": detect_gan_fingerprints(image), # Weight: 0.15
         "semantic_consistency": check_semantic_consistency(image), # Weight: 0.20
     }
-    
+
     weights = [0.25, 0.20, 0.20, 0.15, 0.20]
     composite = sum(s * w for s, w in zip(scores.values(), weights))
-    
+
     return {
         "authenticity_probability": composite,
         "grade": map_to_grade(composite),
@@ -693,30 +693,30 @@ C2PA is rapidly becoming the industry standard. Current adoption landscape:
 def verify_c2pa_provenance(media_path: str) -> dict:
     """
     Verify Content Authenticity Initiative (C2PA) manifests.
-    
+
     C2PA provides cryptographic proof of media origin and edit history.
     """
     manifest = extract_c2pa_manifest(media_path)
-    
+
     if not manifest:
         return {
             "has_provenance": False,
             "recommendation": "No cryptographic provenance available. Proceed with forensic analysis."
         }
-    
+
     # Verify certificate chain
     cert_valid = verify_certificate_chain(manifest["signature"]["cert"])
-    
+
     # Verify signature
     sig_valid = verify_signature(
         manifest["claim"],
         manifest["signature"]["sig"],
         manifest["signature"]["alg"]
     )
-    
+
     # Check assertion integrity
     assertions_valid = verify_assertions(manifest["assertions"])
-    
+
     return {
         "has_provenance": True,
         "certificate_valid": cert_valid,
@@ -846,7 +846,7 @@ class MediaAuthenticationPipeline:
     """
     Production pipeline for automated media authentication.
     """
-    
+
     def __init__(self, config: PipelineConfig):
         self.prnu_analyzer = PRNUAnalyzer(config.prnu_db)
         self.igh_classifier = IGHClassifier(config.igh_model)
@@ -854,7 +854,7 @@ class MediaAuthenticationPipeline:
         self.gan_detector = GANFingerprintDetector(config.gan_signatures)
         self.semantic_analyzer = SemanticAnalyzer(config.llm_endpoint)
         self.c2pa_validator = C2PAValidator(config.trusted_roots)
-    
+
     async def authenticate(self, media_path: str) -> AuthenticationResult:
         # Check provenance first (fast path)
         provenance = await self.c2pa_validator.verify(media_path)
@@ -864,7 +864,7 @@ class MediaAuthenticationPipeline:
                 confidence=0.99,
                 method="cryptographic_provenance"
             )
-        
+
         # Run forensic analysis in parallel
         results = await asyncio.gather(
             self.prnu_analyzer.analyze(media_path),
@@ -873,10 +873,10 @@ class MediaAuthenticationPipeline:
             self.gan_detector.detect(media_path),
             self.semantic_analyzer.analyze(media_path)
         )
-        
+
         # Fuse signals
         composite = self.fuse_signals(results)
-        
+
         return AuthenticationResult(
             authentic=composite.score > 0.75,
             confidence=composite.confidence,
@@ -1108,4 +1108,5 @@ All citations verified as of January 2026.
 
 Developed by webconsulting.at for the Claude skill collection.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

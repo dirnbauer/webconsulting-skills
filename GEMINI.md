@@ -4,7 +4,7 @@ This repository contains 72 Agent Skills for AI-augmented software development.
 
 ## Instructions
 
-Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, session profiles, and acknowledgements.
 
 ## Gemini CLI Integration
 
@@ -12,16 +12,17 @@ Skills are registered in `gemini-extension.json` with trigger-based activation. 
 
 ## Skills Location
 
-All skills live in `skills/*/SKILL.md`. Each skill has YAML frontmatter with `name`, `description`, `triggers`, and `compatibility`.
+All skills live in `skills/<skill-name>/SKILL.md`. Installers symlink the whole skill directory, not just `SKILL.md`, so optional `agents/`, `assets/`, `examples/`, `references/`, `rules/`, and `scripts/` folders remain available to clients that support them.
 
-To use a skill, read the `SKILL.md` file at `skills/<skill-name>/SKILL.md` and follow its instructions.
+To use a skill, read `skills/<skill-name>/SKILL.md` and follow its instructions. Load referenced files only when the skill asks for them.
 
 ## Key Conventions
 
-- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example `php-modernization`, `typo3-content-blocks`, `typo3-update`)
-- Always review AI-generated code before committing
-- When multiple skills are relevant, combine them (e.g., `typo3-rector` + `typo3-testing`)
+- TYPO3 skills primarily target TYPO3 v14.x; typo3-translations also covers TYPO3 13/14 translation compatibility.
+- Cross-cutting TYPO3/PHP guidance lives in the owning skills, for example `php-modernization`, `typo3-content-blocks`, and `typo3-update`.
+- Always review AI-generated code before committing.
+- When multiple skills are relevant, combine them, for example `typo3-rector` + `typo3-testing`.
+- Keep upstream credits and thank-you text intact, especially Netresearch acknowledgements.
 
 ## License
 

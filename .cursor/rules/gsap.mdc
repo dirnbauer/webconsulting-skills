@@ -1,7 +1,14 @@
 ---
-name: "gsap"
-description: "GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use when writing GSAP animations in HyperFrames compositions."
+description: Use the gsap Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# gsap
+
+Canonical skill directory: `.cursor/skills/gsap/`
+
+Read `.cursor/skills/gsap/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # GSAP
 

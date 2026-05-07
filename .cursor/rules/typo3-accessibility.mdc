@@ -1,16 +1,14 @@
 ---
-name: typo3-accessibility
-description: >-
-  WCAG 2.2 AA accessibility audit and implementation for TYPO3 v14.
-  Covers Fluid template patterns, PHP middleware, JavaScript enhancements, Content Element
-  accessibility, form accessibility, and a full go-live checklist. Use when working with
-  accessibility, a11y, wcag, aria, screen reader, keyboard navigation, focus management,
-  color contrast, alt text, semantic html, skip link, or accessible forms in TYPO3.
-compatibility: TYPO3 14.x
-metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-accessibility Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-accessibility
+
+Canonical skill directory: `.cursor/skills/typo3-accessibility/`
+
+Read `.cursor/skills/typo3-accessibility/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Accessibility (WCAG 2.2 AA)
 
@@ -43,7 +41,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 - [ ] No auto-playing media with sound
 
 ### Color & Contrast
-- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.66px bold)
+- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.5px bold)
 - [ ] UI components and graphical objects >= 3:1 contrast
 - [ ] Information not conveyed by color alone (add icon, text, or pattern)
 - [ ] Dark mode (if implemented) maintains contrast ratios
@@ -427,8 +425,9 @@ final class SrOnlyViewHelper extends AbstractTagBasedViewHelper
 {
     protected $tagName = 'span';
 
-    // Fluid 5.x / TYPO3 v14: do not call registerUniversalTagAttributes() — it was removed from
-    // AbstractTagBasedViewHelper; universal attributes are handled by the base class.
+    // Fluid 5.x / TYPO3 v14: `registerUniversalTagAttributes()` and `registerTagAttribute()` were
+    // removed from AbstractTagBasedViewHelper. Register explicit arguments via `registerArgument()`
+    // in `initializeArguments()`; unregistered attributes pass through via handleAdditionalArguments().
 
     public function render(): string
     {
@@ -938,11 +937,11 @@ npx pa11y https://mysite.ddev.site --standard WCAG2AA --reporter cli
 
 ### Accessible Combobox Pattern **[v14 only]**
 
-TYPO3 v14 introduces a new **accessible combobox pattern** (#106637) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
+TYPO3 v14 introduces a new **accessible combobox pattern** (Forge [#106637](https://forge.typo3.org/issues/106637); do not confuse with unrelated Gerrit change IDs) in the backend. When building custom backend UI widgets, use this pattern instead of custom autocomplete/dropdown implementations.
 
 ### Native `<dialog>` Element **[v14 only]**
 
-Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#107443). The native dialog provides better accessibility out of the box:
+Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (Forge [#107443](https://forge.typo3.org/issues/107443)). The native dialog provides better accessibility out of the box:
 - Built-in focus trapping
 - Proper `aria-modal` semantics
 - `Escape` key handling
@@ -951,7 +950,7 @@ Backend modals migrated from **Bootstrap Modal to native `<dialog>` element** (#
 
 Update custom backend JavaScript that listens to **Bootstrap modal events** such as `show.bs.modal` / `hidden.bs.modal` — TYPO3 v14 uses events like `typo3-modal-show`, `typo3-modal-shown`, `typo3-modal-hide`, and `typo3-modal-hidden`. Also replace Bootstrap modal triggers such as `data-bs-toggle="modal"` with TYPO3's `t3js-modal-trigger` class where appropriate.
 
-### Fluid 5.0 Accessibility Impact **[v14 only]**
+### Fluid 5.x Accessibility Impact **[v14 only]**
 
 Fluid 5.x is stricter about ViewHelper arguments in some setups. Prefer correct types for numeric and boolean attributes (`tabindex`, `aria-expanded`, etc.) and validate templates after upgrades.
 
@@ -975,4 +974,5 @@ Accessibility patterns adapted from:
 - [W3C WAI-ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/)
 - [WCAG 2.2 Specification](https://www.w3.org/TR/WCAG22/)
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

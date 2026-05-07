@@ -1,8 +1,14 @@
 ---
-name: find-skills
-description: Helps users discover and install agent skills when they ask questions like "how do I do X", "find a skill for X", "is there a skill that can...", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.
-license: MIT
+description: Use the find-skills Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# find-skills
+
+Canonical skill directory: `.cursor/skills/find-skills/`
+
+Read `.cursor/skills/find-skills/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Find Skills
 
@@ -142,4 +148,14 @@ If this is something you do often, you could create your own skill:
 npx skills init my-xyz-skill
 ```
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Vercel](https://github.com/vercel-labs/skills)**.
+
+Original repository: https://github.com/vercel-labs/skills
+
+Special thanks to [Vercel](https://github.com/vercel-labs/skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

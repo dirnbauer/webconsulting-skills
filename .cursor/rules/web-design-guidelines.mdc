@@ -1,12 +1,14 @@
 ---
-name: web-design-guidelines
-description: Review UI code for Web Interface Guidelines compliance. Use when asked to "review my UI", "check accessibility", "audit design", "review UX", or "check my site against best practices".
-metadata:
-  author: vercel
-  version: "1.0.0"
-  argument-hint: <file-or-pattern>
-license: MIT
+description: Use the web-design-guidelines Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# web-design-guidelines
+
+Canonical skill directory: `.cursor/skills/web-design-guidelines/`
+
+Read `.cursor/skills/web-design-guidelines/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Web Interface Guidelines
 
@@ -39,4 +41,14 @@ When a user provides a file or pattern argument:
 
 If no files specified, ask the user which files to review.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Vercel](https://github.com/vercel-labs/agent-skills)**.
+
+Original repository: https://github.com/vercel-labs/agent-skills
+
+Special thanks to [Vercel](https://github.com/vercel-labs/agent-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

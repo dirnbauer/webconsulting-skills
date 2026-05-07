@@ -1,7 +1,7 @@
 {
   "name": "webconsulting-skills",
   "version": "2.0.0",
-  "description": "Curated Agent Skills for AI-augmented software development — core installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf",
+  "description": "Curated Agent Skills for AI-augmented software development — core installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf; skills are linked as full directories with optional references, scripts, assets, and agent metadata",
   "license": "MIT AND CC-BY-SA-4.0",
   "contextFileName": "AGENTS.md",
   "excludeTools": [],
@@ -705,7 +705,7 @@
     },
     "typo3-translations": {
       "name": "typo3-translations",
-      "description": "TYPO3 labels, XLIFF, localization, ICU strings, and LLL reference hygiene",
+      "description": "TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists",
       "triggers": [
         "xliff",
         "translations",
@@ -713,7 +713,8 @@
         "labels.xlf",
         "locallang.xlf",
         "lll",
-        "icu messageformat"
+        "icu messageformat",
+        "translation domains"
       ],
       "path": "${extensionPath}/skills/typo3-translations"
     },

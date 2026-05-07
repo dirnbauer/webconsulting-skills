@@ -1,42 +1,14 @@
 ---
-name: launch-strategy
-version: "1.0.0"
-brand: AgentKits Marketing by AityTech
-category: seo-growth
-difficulty: intermediate
-description: "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum."
-triggers:
-  - launch
-  - Product Hunt
-  - feature release
-  - announcement
-  - go-to-market
-  - beta launch
-  - early access
-  - waitlist
-  - product update
-prerequisites:
-  - content-strategy
-  - social-media
-related_skills:
-  - content-strategy
-  - social-media
-  - email-sequence
-agents:
-  - planner
-  - project-manager
-  - copywriter
-mcp_integrations:
-  optional:
-    - slack
-    - twitter
-success_metrics:
-  - launch_signups
-  - media_coverage
-  - social_engagement
-output_schema: launch-plan
-license: MIT
+description: Use the launch-strategy Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# launch-strategy
+
+Canonical skill directory: `.cursor/skills/launch-strategy/`
+
+Read `.cursor/skills/launch-strategy/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Launch Strategy
 
@@ -378,4 +350,14 @@ If you need more context:
 - **marketing-psychology**: For psychology behind waitlists and exclusivity
 - **programmatic-seo**: For comparison pages mentioned in post-launch
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[AITYTech](https://github.com/aitytech/agentkits-marketing)**.
+
+Original repository: https://github.com/aitytech/agentkits-marketing
+
+Special thanks to [AITYTech](https://github.com/aitytech/agentkits-marketing) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

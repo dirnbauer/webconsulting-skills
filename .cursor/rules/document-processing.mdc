@@ -1,20 +1,21 @@
 ---
-name: document-processing
-description: >-
-  Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working
-  with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text
-  extraction, form filling, document creation, and data analysis.
-license: Source-available (see github.com/anthropics/skills)
-metadata:
-  version: "1.0.0"
+description: Use the document-processing Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# document-processing
+
+Canonical skill directory: `.cursor/skills/document-processing/`
+
+Read `.cursor/skills/document-processing/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Document Processing
 
-> **Source:** This skill is adapted from **[Anthropic's Skills](https://github.com/anthropics/skills)** 
+> **Source:** This skill is adapted from **[Anthropic's document-processing skill](https://github.com/anthropics/skills/tree/main/skills/document-processing)**
 > document processing skills (pdf, docx, pptx, xlsx) for Claude Code and AI agents.
 
-Create, edit, and analyze office documents including PDFs, Word documents, PowerPoint presentations, 
+Create, edit, and analyze office documents including PDFs, Word documents, PowerPoint presentations,
 and Excel spreadsheets.
 
 ---
@@ -641,12 +642,10 @@ sudo apt-get install poppler-utils qpdf libreoffice pandoc
 
 ## Credits & Attribution
 
-This skill is adapted from **[Anthropic's Skills](https://github.com/anthropics/skills)**.
+This skill is based on the excellent work by
+**[Anthropic](https://github.com/anthropics/skills/tree/main/skills/document-processing)**.
 
-Original repository: https://github.com/anthropics/skills
+Original repository: https://github.com/anthropics/skills/tree/main/skills/document-processing
 
-**Copyright (c) Anthropic** — The document processing skills (pdf, docx, pptx, xlsx) are
-**source-available** (not open source). See Anthropic's README for terms.
+Special thanks to [Anthropic](https://github.com/anthropics/skills/tree/main/skills/document-processing) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

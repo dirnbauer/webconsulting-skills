@@ -1,16 +1,14 @@
 ---
-name: typo3-batch
-description: >-
-  Orchestrate large-scale TYPO3 code changes across multiple files in parallel. Migrations,
-  bulk TCA modernization, Fluid template refactoring, hook-to-event conversions, namespace
-  renames, and extension-wide upgrades. Decomposes work into independent units, executes
-  them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor,
-  convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.
-compatibility: TYPO3 14.x
-metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-batch Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-batch
+
+Canonical skill directory: `.cursor/skills/typo3-batch/`
+
+Read `.cursor/skills/typo3-batch/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Batch Operations
 
@@ -70,7 +68,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `drawHeaderHook` | `ModifyButtonBarEvent` |
 | `drawFooterHook` | `ModifyButtonBarEvent` |
 | `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
-| `pageRendererRender` | `\TYPO3\CMS\Core\Page\Event\BeforeJavaScriptsRenderingEvent` (asset rendering) — confirm vs. your hook usage |
+| `PageRenderer` render hooks (`render-preProcess`, `render-postProcess`) | No 1:1 PSR-14 replacement; prefer PSR-15 middleware for render-pipeline manipulation |
 | `tslib_fe->contentPostProc` (cached) | `AfterCacheableContentIsGeneratedEvent` |
 | `tslib_fe->contentPostProc` (output) | `AfterCachedPageIsPersistedEvent` — verify name in Core for your TYPO3 version |
 | `tslib_fe->contentPostProc` (all) | No single PSR-14 replacement — split by what the hook actually does |
@@ -92,7 +90,7 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 
 ```
 1. Replace 'eval' => 'required' → 'required' => true
-2. Replace 'eval' => 'trim' → remove (default behavior)
+2. Replace 'eval' => 'trim' → keep where trimming is desired (trim is NOT applied by default)
 3. Replace 'eval' => 'null' → 'nullable' => true
 4. Replace 'eval' => 'int' → 'type' => 'number'
 5. Replace 'renderType' => 'inputDateTime' → 'type' => 'datetime'
@@ -153,18 +151,18 @@ PHP files:
   1. Replace namespace declarations
   2. Replace use statements
   3. Replace class references in strings (DI, TCA)
-  
+
 Fluid files:
   1. Replace {namespace} declarations
   2. Replace ViewHelper references
-  
+
 Configuration files:
   1. Update composer.json autoload
   2. Update ext_emconf.php
   3. Update Services.yaml service names
   4. Update TCA table prefixes
   5. Update TypoScript paths (EXT:old → EXT:new)
-  
+
 Database:
   1. Generate SQL rename migration
   2. Update ext_tables.sql
@@ -185,7 +183,7 @@ Page TSconfig:
   3. Remove from ext_localconf.php
 
 User TSconfig:
-  1. Extract addUserTSConfig() calls  
+  1. Extract addUserTSConfig() calls
   2. Create Configuration/user.tsconfig
   3. Remove from ext_localconf.php
 
@@ -213,7 +211,7 @@ Unit tests:
   1. Create Tests/Unit/ structure
   2. Generate test class per service/utility class
   3. Add phpunit.xml.dist configuration
-  
+
 Functional tests:
   1. Create Tests/Functional/ structure
   2. Add fixture files
@@ -339,7 +337,8 @@ Stop the batch and report if:
 | Fluid 5.0 types | All Fluid templates with incorrect ViewHelper argument types |
 | FlexForm pointer fields | All FlexForm XML with pointer configurations |
 | Asset `external` property | All TypoScript with `external = 1` |
-| Remove legacy `switchableControllerActions` / plugin subtypes | Removed in **v12** — not a v14-only migration |
+| Remove legacy `switchableControllerActions` | Removed in **v12** — not a v14-only migration |
+| Remove legacy plugin subtypes / `list_type` wiring | Removed in **v14** (Important [#105538](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Important-105538-ListTypeAndSubTypes.html)) |
 
 ---
 
@@ -349,4 +348,5 @@ Adapted from Boris Cherny's (Anthropic) Claude Code bundled `/batch` skill for T
 
 **Copyright (c) Anthropic** — Batch operation patterns (MIT License)
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

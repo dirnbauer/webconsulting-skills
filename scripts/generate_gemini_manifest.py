@@ -153,7 +153,9 @@ def build_manifest() -> dict[str, object]:
         "version": "2.0.0",
         "description": (
             "Curated Agent Skills for AI-augmented software development — core "
-            "installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf"
+            "installer for Cursor, Claude Code, Gemini CLI, Codex, and Windsurf; "
+            "skills are linked as full directories with optional references, "
+            "scripts, assets, and agent metadata"
         ),
         "license": "MIT AND CC-BY-SA-4.0",
         "contextFileName": "AGENTS.md",

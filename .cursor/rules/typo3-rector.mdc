@@ -1,14 +1,14 @@
 ---
-name: typo3-rector
-description: >-
-  TYPO3 v14 upgrade patterns using Rector: automated refactoring rules, level sets, and
-  migration workflows. Use when working with rector, upgrade, migration, refactoring,
-  deprecation.
-compatibility: TYPO3 14.x
-metadata:
-  version: "2.1.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-rector Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-rector
+
+Canonical skill directory: `.cursor/skills/typo3-rector/`
+
+Read `.cursor/skills/typo3-rector/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Rector Upgrade Patterns
 
@@ -181,14 +181,14 @@ final class RenderingService
             layoutRootPaths: ['EXT:my_extension/Resources/Private/Layouts'],
             request: $request,
         );
-        
+
         $view = $this->viewFactory->create($viewFactoryData);
         $view->assign('data', ['key' => 'value']);
         $view->assignMultiple([
             'items' => [],
             'settings' => [],
         ]);
-        
+
         return $view->render('MyTemplate');
     }
 }
@@ -510,20 +510,26 @@ public function __construct(
 | `AbstractTypolinkBuilder->build()` | Use `TypolinkBuilderInterface` |
 | `DataHandler->userid` / `->admin` / `->storeLogMessages` | Removed, no replacement |
 
+### v14.0 Deprecation Targets (prepare for v15 removal)
+
+| Deprecated | Migration |
+|------------|-----------|
+| `ButtonBar`/`Menu`/`MenuRegistry` `make*` methods (#107823) | Use `ComponentFactory` |
+| Scheduler task registration via `SC_OPTIONS` (#98453) | Use TCA-based registration |
+| `Localization parsers` (XliffParser, etc.) (#107436) | Symfony Translation Component |
+
 ### v14.2 Deprecation Targets (prepare for v15 removal)
 
 | Deprecated | Migration |
 |------------|-----------|
 | `PageDoktypeRegistry` config methods | Migrate to TCA `allowedRecordTypes` |
-| `PageRenderer->addInlineLanguageDomain()` | Use alternative API |
-| `ExtensionManagementUtility::addFieldsToUserSettings` | Use TCA for user settings |
-| `ButtonBar`/`Menu`/`MenuRegistry` `make*` methods | Use `ComponentFactory` |
-| Scheduler task registration via `SC_OPTIONS` | Use TCA-based registration |
-| `FormEngine "additionalHiddenFields"` key | Removed in v15 |
-| `Localization parsers` (XliffParser, etc.) | Symfony Translation Component |
+| `PageRenderer->addInlineLanguageDomain()` (#108963) | Use alternative API |
+| `ExtensionManagementUtility::addFieldsToUserSettings` (#108843) | Use TCA for user settings |
+| `FormEngine "additionalHiddenFields"` key (#109102) | Removed in v15 |
 
 ---
 
 ## Credits & Attribution
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

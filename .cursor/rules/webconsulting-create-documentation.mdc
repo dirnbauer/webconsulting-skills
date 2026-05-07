@@ -1,8 +1,14 @@
 ---
-name: webconsulting-create-documentation
-description: Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.
-license: MIT / CC-BY-SA-4.0
+description: Use the webconsulting-create-documentation Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# webconsulting-create-documentation
+
+Canonical skill directory: `.cursor/skills/webconsulting-create-documentation/`
+
+Read `.cursor/skills/webconsulting-create-documentation/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # webconsulting — Create Documentation
 
@@ -901,7 +907,7 @@ export const GsapSequence = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // 1. Create a strictly paused timeline
   const timeline = useMemo(() => gsap.timeline({ paused: true }), []);
 
@@ -910,13 +916,13 @@ export const GsapSequence = () => {
     let ctx = gsap.context(() => {
       timeline.to(".box", { x: 200, rotation: 360, duration: 2, stagger: 0.2 });
     }, containerRef);
-    
+
     return () => ctx.revert(); // React cleanup
   }, [timeline]);
 
   // 3. THE MAGIC: Sync GSAP playhead to Remotion frame
   useEffect(() => {
-    timeline.seek(frame / fps); 
+    timeline.seek(frame / fps);
   }, [frame, fps, timeline]);
 
   return (
@@ -987,9 +993,9 @@ export const ExplodedScreenshot = () => {
           duration: 1.5,
           ease: "back.out(1.2)",
           stagger: 0.2
-        }, "-=0.2"); 
+        }, "-=0.2");
     }, containerRef);
-    
+
     return () => ctx.revert(); // Crucial for React StrictMode cleanup
   }, [tl]);
 
@@ -1034,7 +1040,7 @@ export const ArchitectureFlow = () => {
       // 3. Pulse the receiving node to indicate data arrival
         .to(".node-db", { scale: 1.15, repeat: 1, yoyo: true, duration: 0.2, fill: "#10b981" });
     }, svgRef);
-    
+
     return () => ctx.revert();
   }, [tl]);
 
@@ -1064,12 +1070,12 @@ export const AnimatedNumber = ({ targetValue = 10000 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const [displayValue, setDisplayValue] = useState(0);
-  
+
   const tl = useMemo(() => gsap.timeline({ paused: true }), []);
 
   useEffect(() => {
     const counter = { val: 0 };
-    
+
     // gsap.context isn't strictly necessary for JS objects, but good for consistency
     let ctx = gsap.context(() => {
       tl.to(counter, {
@@ -1082,7 +1088,7 @@ export const AnimatedNumber = ({ targetValue = 10000 }) => {
         }
       });
     });
-    
+
     return () => ctx.revert();
   }, [tl, targetValue]);
 
@@ -1096,4 +1102,5 @@ export const AnimatedNumber = ({ targetValue = 10000 }) => {
 };
 ```
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

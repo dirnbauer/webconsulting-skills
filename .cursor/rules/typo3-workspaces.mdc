@@ -1,15 +1,14 @@
 ---
-name: typo3-workspaces
-description: >-
-  Expert guidance on TYPO3 Workspaces: versioning, staging, publishing workflows,
-  file limitations, file collection workspace safety, query migration, debugging,
-  and testing. Use when working with workspace, versioning, staging, publishing,
-  review, draft content, workflow, file collection.
-compatibility: TYPO3 14.x
-metadata:
-  version: "2.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-workspaces Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-workspaces
+
+Canonical skill directory: `.cursor/skills/typo3-workspaces/`
+
+Read `.cursor/skills/typo3-workspaces/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Workspaces
 
@@ -20,7 +19,7 @@ license: MIT / CC-BY-SA-4.0
 
 ## Sources
 
-This skill is based on 18 authoritative sources:
+This skill is based on 17 authoritative sources:
 
 1. [TYPO3 Workspaces Extension Docs](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Index.html)
 2. [Versioning (Workspaces Extension)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Versioning/Index.html)
@@ -28,17 +27,17 @@ This skill is based on 18 authoritative sources:
 4. [Configuration Options (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Configuration/Index.html)
 5. [PSR-14 Events (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Events/Index.html)
 6. [Versioning & Workspaces (TYPO3 Explained / Core API)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Workspaces/Index.html)
-7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Properties/VersioningWS.html)
+7. [TCA versioningWS Reference](https://docs.typo3.org/m/typo3/reference-tca/main/en-us/Ctrl/Index.html#confval-ctrl-versioningws)
 8. [Restriction Builder (TYPO3 Explained / Doctrine DBAL)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Database/DoctrineDbal/RestrictionBuilder/Index.html)
 9. [b13 Blog: The Elegant Efficiency of TYPO3 Overlays (Benni Mack)](https://b13.com/blog/mastering-localization-and-content-staging)
 10. [Scheduler Tasks (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/Administration/Scheduler/Index.html)
 11. [Users Guide (Workspaces)](https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/UsersGuide/Index.html)
 12. [TYPO3-CORE-SA-2025-022: Information Disclosure in Workspaces Module](https://typo3.org/security/advisory/typo3-core-sa-2025-022)
-14. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
-15. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
-16. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
-17. [Forge Bug #60343: sys_file_metadata does not recognize workspace](https://forge.typo3.org/issues/60343)
-18. [Forge Feature #97923: Combined folder_identifier field for sys_file_collection](https://forge.typo3.org/issues/97923)
+13. [Localized Content Guide](https://docs.typo3.org/m/typo3/guide-frontendlocalization/main/en-us/LocalizedContent/Index.html)
+14. [File Collections (TYPO3 Explained)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Collections/Index.html)
+15. [FAL Database Architecture](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Fal/Architecture/Database.html)
+16. [Forge Bug #60343: sys_file_metadata does not recognize workspace](https://forge.typo3.org/issues/60343)
+17. [Forge Feature #97923: Combined folder_identifier field for sys_file_collection](https://forge.typo3.org/issues/97923)
 
 ## 1. Core Concepts
 
@@ -322,6 +321,8 @@ Use this checklist to verify your workspace setup is complete:
 - [ ] Tables that must NOT be versioned have `'versioningWS' => false`
 - [ ] Tables requiring live-editing in workspace have `'versioningWS_alwaysAllowLiveEdit' => true`
 - [ ] `t3ver_*` database columns exist (auto-created when `versioningWS = true`)
+
+> **Inline / IRRE child tables (Deprecation [#106821](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-106821-WorkspaceAwareInlineChildTablesAreEnforced.html)):** If `versioningWS` is missing on a child table, Core **logs a deprecation** and may **auto-add** the flag at TCA build time — it does **not** throw a hard error. Set the flag explicitly in TCA; it will become a **hard requirement in v15**.
 
 #### Scheduler Tasks
 
@@ -805,10 +806,10 @@ use TYPO3\CMS\Core\Database\Query\Restriction\FrontendRestrictionContainer;
 
 // FrontendRestrictionContainer includes:
 // - DeletedRestriction
+// - WorkspaceRestriction  <-- automatically included!
 // - HiddenRestriction
 // - StartTimeRestriction
 // - EndTimeRestriction
-// - WorkspaceRestriction  <-- automatically included!
 // - FrontendGroupRestriction
 $queryBuilder = $this->connectionPool->getQueryBuilderForTable('tx_news_domain_model_news');
 $queryBuilder->setRestrictions(
@@ -1543,7 +1544,7 @@ Generate via Workspaces module: "Generate page preview links" button. The link w
 - **Document the review process** for editors (which stages, who approves)
 - **Monitor disk space** -- workspace versions accumulate in the database
 - **Clean up** old workspace data periodically (discard unused versions)
-- **Keep patch level current** -- workspace security issues exist (see TYPO3-CORE-SA-2025-022)
+- **Keep patch level current** -- workspace security advisories are published periodically (SA-2025-022 affected TYPO3 9.0–13.4.17; v14.0.0+ shipped with the fix)
 
 ## 11. PSR-14 Events Reference
 
@@ -1609,7 +1610,7 @@ final class CustomWorkspaceSortListener
 }
 ```
 
-### All Available Events
+### Key Events
 
 | Event | When Fired |
 |-------|------------|
@@ -1617,7 +1618,9 @@ final class CustomWorkspaceSortListener
 | `AfterDataGeneratedForWorkspaceEvent` | After generating all workspace version data |
 | `AfterRecordPublishedEvent` | After a record is published to live |
 | `GetVersionedDataEvent` | After preparing/cleaning workspace version data |
+| `IsReferenceConsideredForDependencyEvent` | When evaluating whether a reference is considered a workspace dependency |
 | `ModifyVersionDifferencesEvent` | When computing diffs between live and workspace version |
+| `RetrievedPreviewUrlEvent` | When adjusting the preview URL for a workspace record |
 | `SortVersionedDataEvent` | After sorting workspace version data in the module |
 
 All events are in the `\TYPO3\CMS\Workspaces\Event\` namespace.
@@ -1630,9 +1633,9 @@ All events are in the `\TYPO3\CMS\Workspaces\Event\` namespace.
 
 Workspace "Freeze Editing" feature has been removed (#107323). Workspaces can no longer be frozen to prevent editing. Remove any code that references `freezeEditingWorkspace` or relies on frozen workspace state.
 
-### Workspace-Aware Inline Child Tables Enforced **[v14 only]**
+### Workspace-Aware Inline Child Tables **[v14 only]**
 
-All inline (IRRE) child tables used in workspace-enabled parent tables **must** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14 this is **enforced**. Missing `versioningWS` on child tables will cause errors.
+All inline (IRRE) child tables used in workspace-enabled parent tables **should** have `'versioningWS' => true` in their TCA ctrl (#106821). On TYPO3 v14, a missing flag triggers a **deprecation** and Core may **auto-add** it at TCA compile time — set the flag explicitly in extensions now; it becomes a **hard requirement in v15**.
 
 ### Workspace Selector Moved to Sidebar **[v14.2+ only]**
 
@@ -1674,4 +1677,5 @@ This skill is based on the official TYPO3 CMS documentation and community resour
 Special thanks to the TYPO3 Core Team and **[b13 GmbH](https://b13.com/)** (Benni Mack) for
 their excellent explanation of the overlay mechanism.
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

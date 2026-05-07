@@ -1,16 +1,14 @@
 ---
-name: typo3-simplify
-description: >-
-  Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability
-  while preserving functionality. Reviews PHP classes, Fluid templates, TCA, Services.yaml,
-  and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature
-  or before merging a PR. Use when working with simplify, clean up, refine, code quality,
-  reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.
-compatibility: TYPO3 14.x
-metadata:
-  version: "1.0.0"
-license: Apache-2.0 / CC-BY-SA-4.0
+description: Use the typo3-simplify Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-simplify
+
+Canonical skill directory: `.cursor/skills/typo3-simplify/`
+
+Read `.cursor/skills/typo3-simplify/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Code Simplifier
 
@@ -60,7 +58,8 @@ Find custom implementations that duplicate what TYPO3 already provides.
 | `$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']` hooks | PSR-14 events |
 | `ext_tables.php` module registration | `Configuration/Backend/Modules.php` |
 | `XCLASS` | PSR-14 events or DI decoration |
-| TCA `eval` for `required`,`trim`,`null` | Dedicated TCA keys: `required`, `nullable` |
+| TCA `eval` for `required`, `null` | Dedicated TCA keys: `required`, `nullable` |
+| TCA `eval` for `trim` | Still valid in v14 — no dedicated TCA replacement; keep `trim` in `eval` when you need it |
 | `renderType => 'inputDateTime'` | `'type' => 'datetime'` |
 | `'type' => 'input', 'eval' => 'int'` | `'type' => 'number'` |
 | `items` with numeric array keys | `items` with `label`/`value` keys |
@@ -69,9 +68,9 @@ Find custom implementations that duplicate what TYPO3 already provides.
 
 | Removed / legacy | When | Modern approach |
 |---|---|---|
-| `switchableControllerActions` | Deprecated in **v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/12.4/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)), removed later | Separate plugin registrations |
+| `switchableControllerActions` | Deprecated in **v10.3** ([#89463](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/10.3/Deprecation-89463-SwitchableControllerActions.html)), removed in **v12.0** | Separate plugin registrations |
 | Signal/Slot `Dispatcher` | Removed in **v12** | PSR-14 events |
-| `AbstractPlugin` (pi_base) | Deprecated v12.4, removed **v13** | Extbase or middleware |
+| `AbstractPlugin` (pi_base) | Made `@internal` **v12.0** (#98281), deprecated **v12.4** (#100639), removed **v13.0** | Extbase or middleware |
 
 ### Code quality (not deprecations)
 
@@ -149,6 +148,7 @@ final class MyService
 - [ ] Use dedicated types: `'type' => 'email'`, `'type' => 'datetime'`, `'type' => 'number'`, `'type' => 'link'`, `'type' => 'color'`, `'type' => 'json'`
 - [ ] Use `'required' => true` instead of `'eval' => 'required'`
 - [ ] Use `'nullable' => true` instead of `'eval' => 'null'`
+- [ ] `eval` => `trim` remains supported — do not remove unless you replace trimming in another layer
 - [ ] Remove `'default' => ''` on string fields (already default)
 - [ ] Consolidate palette definitions (remove single-field palettes)
 - [ ] Remove boilerplate `columns` definitions auto-created from `ctrl` on TYPO3 v14: `hidden`, `starttime`, `endtime`, `fe_group`, `sys_language_uid`, `l10n_parent`, `l10n_diffsource`
@@ -161,7 +161,7 @@ final class MyService
 - [ ] Use autowiring (remove explicit argument definitions when type-hintable)
 - [ ] Use `_defaults: autowire: true, autoconfigure: true, public: false`
 - [ ] Remove manual service definitions for classes that autowiring handles
-- [ ] Replace unnecessary `factory:` blocks with autowiring or a dedicated factory **service** — `#[Autoconfigure]` (Symfony `Symfony\Component\DependencyInjection\Attribute\Autoconfigure`) tags/configures services; it does **not** replace `factory:` construction
+- [ ] Remove `factory:` blocks when autowiring handles construction; keep `factory:` for non-trivial construction that autowiring cannot resolve. `#[Autoconfigure]` tags/configures services but does **not** replace `factory:` construction
 - [ ] Remove `public: true` unless needed for `GeneralUtility::makeInstance()`
 
 ### ext_localconf.php / ext_tables.php
@@ -226,22 +226,23 @@ When the **same codebase** must run on **TYPO3 v13 and v14** (dual-version exten
 
 | Pattern | Simplification |
 |---------|---------------|
-| `$GLOBALS['TSFE']` access | Replace with `$request->getAttribute('frontend.page.information')` |
+| `$GLOBALS['TSFE']` access | **Fatal error in v14** (Breaking #107831) — replace with `$request->getAttribute('frontend.page.information')` |
 | Extbase annotations (`@validate`) | Replace with `#[\TYPO3\CMS\Extbase\Attribute\Validate]` |
 | `MailMessage->send()` | Inject `TYPO3\CMS\Core\Mail\MailerInterface` and call `$this->mailer->send($email)` |
 | `FlexFormService` usage | Prefer `FlexFormTools`; `FlexFormService` remains as a BC alias in v14 but should not be used in new code |
-| Bootstrap Modal JS | **Frontend:** native `<dialog>`. **Backend modules:** use `@typo3/backend/modal.js` — not raw Bootstrap |
-| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` where supported |
-| Custom localization parsers | Remove, use Symfony Translation Component |
-| `GeneralUtility::createVersionNumberedFilename()` | Replace with the appropriate FAL / public asset URL API for your use case; do not rely on versioned filename helpers |
+| Bootstrap Modal JS | **Frontend:** native `<dialog>` where appropriate. **Backend:** use `@typo3/backend/modal` — it wraps **native `<dialog>`** in v14 (Breaking #107443); do not use raw Bootstrap modal JS |
+| TCA `ctrl.searchFields` (removed in v14) | TYPO3 v14 derives backend search fields automatically; tune inclusion per column with `'searchable' => true/false` (supported field types: `input`, `text`, `email`, `link`, `slug`, `color`, `datetime` (without custom `dbType`), `flex`, `json`, `uuid`) where supported |
+| Custom localization parsers | Deprecated in v14 ([#107436](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Deprecation-107436-DeprecatedCustomLocalizationParsers.html)); migrate to Symfony Translation Component. Removed in v15 |
+| `GeneralUtility::createVersionNumberedFilename()` | Replace with `SystemResourceFactory` / `SystemResourcePublisherInterface` (System Resource API, [Feature #107537](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-107537-SystemResourcePublisherSupportForVersionedAssets.html)) |
 
 ---
 
 ## Credits & Attribution
 
-Adapted from Boris Cherny's (Anthropic) [code-simplifier](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)
-agent and Claude Code's bundled `/simplify` skill for TYPO3 contexts.
+This skill is based on the excellent work by
+**[Anthropic](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier)**.
 
-**Copyright (c) Anthropic** — Code simplification patterns (Apache-2.0 License)
+Original repository: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier
 
-Thanks to Netresearch DTT GmbH for their contributions to the TYPO3 community.
+Special thanks to [Anthropic](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

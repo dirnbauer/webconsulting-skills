@@ -1,7 +1,14 @@
 ---
-name: "website-to-hyperframes"
-description: "Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says \"capture this site\", \"turn this into a video\", \"make a promo from my site\", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL \u2014 this is the skill to use."
+description: Use the website-to-hyperframes Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# website-to-hyperframes
+
+Canonical skill directory: `.cursor/skills/website-to-hyperframes/`
+
+Read `.cursor/skills/website-to-hyperframes/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Website to HyperFrames
 
@@ -82,9 +89,12 @@ Build each composition following the storyboard. After each one: self-review for
 
 **Read:** [references/step-7-validate.md](references/step-7-validate.md)
 
-Lint, validate, snapshot, preview. Deliver the preview to the user first — only render to MP4 on explicit request.
+Lint, validate, snapshot, preview. Deliver the localhost Studio project URL
+(`http://localhost:<port>/#project/<project-name>`) to the user first — only
+render to MP4 on explicit request. Do not treat `index.html` as the project
+handoff link; it is source-code context only.
 
-**Gate:** `npx hyperframes lint` and `npx hyperframes validate` pass with zero errors.
+**Gate:** `npx hyperframes lint` and `npx hyperframes validate` pass with zero errors, and the final response includes the active Studio project URL.
 
 ---
 

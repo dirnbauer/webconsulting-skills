@@ -1,7 +1,14 @@
 ---
-name: "hyperframes"
-description: "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For CLI commands (init, lint, preview, render, transcribe, tts) see the hyperframes-cli skill."
+description: Use the hyperframes Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# hyperframes
+
+Canonical skill directory: `.cursor/skills/hyperframes/`
+
+Read `.cursor/skills/hyperframes/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # HyperFrames
 
@@ -277,10 +284,27 @@ When no `visual-style.md` or animation direction is provided, follow [house-styl
 ## Output Checklist
 
 - [ ] `npx hyperframes lint` and `npx hyperframes validate` both pass
+- [ ] `npx hyperframes inspect` passes, or every reported overflow is intentionally marked
 - [ ] Contrast warnings addressed (see Quality Checks below)
+- [ ] Layout issues addressed (see Quality Checks below)
 - [ ] Animation choreography verified (see Quality Checks below)
 
 ## Quality Checks
+
+### Visual Inspect
+
+`hyperframes inspect` runs the composition in headless Chrome, seeks through the timeline, and maps visual layout issues with timestamps, selectors, bounding boxes, and fix hints. Run it after `lint` and `validate`:
+
+```bash
+npx hyperframes inspect
+npx hyperframes inspect --json
+```
+
+Failures usually mean text is spilling out of a bubble/card, a fixed-size label is clipping dynamic copy, or text has moved off the canvas. Fix by increasing container size or padding, reducing font size or letter spacing, adding a real `max-width` so text wraps inside the container, or using `window.__hyperframes.fitTextFontSize(...)` for dynamic copy.
+
+Use `--samples 15` for dense videos and `--at 1.5,4,7.25` for specific hero frames. Repeated static issues are collapsed by default to avoid flooding agent context. If overflow is intentional for an entrance/exit animation, mark the element or ancestor with `data-layout-allow-overflow`. If a decorative element should never be audited, mark it with `data-layout-ignore`.
+
+`hyperframes layout` is the compatibility alias for the same check.
 
 ### Contrast
 

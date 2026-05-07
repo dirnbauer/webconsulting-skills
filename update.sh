@@ -13,8 +13,9 @@
 #   --dry-run      Show what would be done without making changes
 #   --help         Show this help message
 #
-# This script updates Agent Skills from external sources, refreshes generated files,
-# and optionally reinstalls the core client mirrors.
+# This script updates Agent Skills from external sources, refreshes generated
+# files, preserves upstream attribution blocks, and optionally reinstalls the
+# core client mirrors through install.sh.
 #
 # License: MIT (code) / CC-BY-SA-4.0 (content)
 # Third-party skills retain their original licenses — see LICENSE for details.
@@ -29,6 +30,9 @@ PULL=false
 FORCE=false
 DRY_RUN=false
 SKILL_FILTER=""
+# Keep this aligned with install.sh. These directories are copied from upstream
+# skills and then symlinked as part of the whole skill directory for clients that
+# support extra metadata, assets, references, or scripts.
 SYNC_SUBDIRS=(agents assets examples references rules scripts)
 
 # Parse arguments
@@ -307,14 +311,14 @@ echo ""
 # =============================================================================
 
 if [ "$SYNC_ONLY" = false ]; then
-    echo "→ Reinstalling skills..."
+    echo "→ Reinstalling full skill-directory mirrors..."
     if [ "$DRY_RUN" = true ]; then
         echo "  [DRY-RUN] Would run: ./install.sh --no-sync"
     else
         "$SCRIPT_DIR/install.sh" --no-sync
     fi
 else
-    echo "→ Refreshing generated files without reinstalling (--sync-only mode)"
+    echo "→ Refreshing generated cross-client files without reinstalling (--sync-only mode)"
     if [ "$DRY_RUN" = true ]; then
         echo "  [DRY-RUN] Would run: ./install.sh --no-sync --generate-only"
     else
@@ -340,4 +344,5 @@ echo ""
 echo "Next steps:"
 echo "  1. Restart your IDE / CLI to discover updated skills"
 echo "  2. Run './update.sh --help' for more options"
+echo "  3. Netresearch and other upstream thank-you blocks are guarded by CI"
 echo "═══════════════════════════════════════════════════════════════"

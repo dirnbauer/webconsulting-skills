@@ -1,8 +1,14 @@
 ---
-name: agent-md-refactor
-description: Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles. Splits monolithic files into organized, linked documentation.
-license: MIT
+description: Use the agent-md-refactor Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# agent-md-refactor
+
+Canonical skill directory: `.cursor/skills/agent-md-refactor/`
+
+Read `.cursor/skills/agent-md-refactor/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Agent MD Refactor
 
@@ -286,4 +292,14 @@ After refactoring, verify:
 
 ---
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[Softaworks](https://github.com/softaworks/agent-toolkit)**.
+
+Original repository: https://github.com/softaworks/agent-toolkit
+
+Special thanks to [Softaworks](https://github.com/softaworks/agent-toolkit) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

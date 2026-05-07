@@ -1,37 +1,14 @@
 ---
-name: ab-test-setup
-version: "1.0.0"
-brand: AgentKits Marketing by AityTech
-category: cro
-difficulty: intermediate
-description: When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions "A/B test," "split test," "experiment," "test this change," "variant copy," "multivariate test," or "hypothesis." For tracking implementation, see analytics-tracking.
-triggers:
-  - A/B test
-  - split test
-  - experiment
-  - test this change
-  - variant copy
-  - multivariate test
-  - hypothesis
-  - statistical significance
-prerequisites:
-  - page-cro
-  - analytics-attribution
-related_skills:
-  - page-cro
-  - analytics-attribution
-agents:
-  - conversion-optimizer
-  - researcher
-mcp_integrations:
-  optional:
-    - google-analytics
-success_metrics:
-  - test_velocity
-  - win_rate
-output_schema: ab-test-plan
-license: MIT
+description: Use the ab-testing Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# ab-testing
+
+Canonical skill directory: `.cursor/skills/ab-testing/`
+
+Read `.cursor/skills/ab-testing/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # A/B Test Setup
 
@@ -537,4 +514,14 @@ If you need more context:
 - **analytics-tracking**: For setting up test measurement
 - **copywriting**: For creating variant copy
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[AITYTech](https://github.com/aitytech/agentkits-marketing)**.
+
+Original repository: https://github.com/aitytech/agentkits-marketing
+
+Special thanks to [AITYTech](https://github.com/aitytech/agentkits-marketing) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

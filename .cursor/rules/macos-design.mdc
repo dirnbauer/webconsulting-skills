@@ -1,11 +1,14 @@
 ---
-name: macos-design-guidelines
-description: Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.
-license: MIT
-metadata:
-  author: platform-design-skills
-  version: "1.0.0"
+description: Use the macos-design Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# macos-design
+
+Canonical skill directory: `.cursor/skills/macos-design/`
+
+Read `.cursor/skills/macos-design/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # macOS Human Interface Guidelines
 
@@ -139,6 +142,10 @@ struct MyApp: App {
     }
 }
 ```
+
+### Rule 1.6 — Stable Command Names and Locations
+
+Treat the menu bar as the app's command memory. Keep common actions in consistent menus with stable names and shortcuts so users recognize them quickly instead of searching for context-specific variants.
 
 ---
 
@@ -656,6 +663,10 @@ Show a badge on the Dock icon for notification counts. Clear it promptly when th
 NSApp.dockTile.badgeLabel = unreadCount > 0 ? "\(unreadCount)" : nil
 ```
 
+### Rule 7.5 — Match Feedback to Cognitive Cost
+
+Routine actions should acknowledge completion with inline status, toolbar state, or a subtle animation. Use modal alerts only when the user must stop, evaluate consequences, and choose.
+
 ---
 
 ## 8. System Integration (MEDIUM)
@@ -1113,4 +1124,14 @@ Before shipping a Mac app, verify:
 
 15. **No drag and drop** — Mac is a drag-and-drop platform. If users can see content, they expect to drag it somewhere.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[ehmo](https://github.com/ehmo/platform-design-skills)**.
+
+Original repository: https://github.com/ehmo/platform-design-skills
+
+Special thanks to [ehmo](https://github.com/ehmo/platform-design-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

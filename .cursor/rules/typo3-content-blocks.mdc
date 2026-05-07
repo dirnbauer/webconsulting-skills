@@ -1,25 +1,24 @@
 ---
-name: typo3-content-blocks
-description: >-
-  Expert guidance on creating Content Elements, Record Types, Page Types, and File Types
-  using TYPO3 Content Blocks extension - the single source of truth for content modeling.
-  Use when working with content-blocks, content-element, record-type, page-type,
-  file-type, make:content-block, friendsoftypo3/content-blocks, irre.
-compatibility: TYPO3 14.x — `friendsoftypo3/content-blocks` 2.x (verify on [Packagist](https://packagist.org/packages/friendsoftypo3/content-blocks))
-metadata:
-  version: "1.4.0"
-  related_skills:
-    - typo3-content-blocks-migration
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-content-blocks Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-content-blocks
+
+Canonical skill directory: `.cursor/skills/typo3-content-blocks/`
+
+Read `.cursor/skills/typo3-content-blocks/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Content Blocks Development
 
 > **Compatibility:** This skill targets **TYPO3 v14.x** with **Content Blocks 2.x**. Always match the [Packagist `friendsoftypo3/content-blocks`](https://packagist.org/packages/friendsoftypo3/content-blocks) constraint to your Core version.
-> For **Content Blocks 1.x on TYPO3 v13**, upstream typically requires **TYPO3 ≥ 13.1** (not plain 13.0) — confirm on Packagist.
+> For **Content Blocks 1.x on TYPO3 v13**, upstream requires **TYPO3 ≥ 13.4** (`typo3/cms-core: ^13.4`) — confirm on Packagist.
 > Examples use TYPO3 v14 APIs and CB 2.x; adjust `composer.json` if upstream constraints differ.
 
 > **TYPO3 API First:** Always use TYPO3's built-in APIs, core features, and established conventions before creating custom implementations. Do not reinvent what TYPO3 already provides. Always verify that the APIs and methods you use exist and are not deprecated in TYPO3 v14 by checking the official TYPO3 documentation.
+
+> **Migration Coverage:** Content Blocks migration and cross-skill handoff guidance are documented directly in this skill and its local add-ons.
 
 ## 1. The Single Source of Truth Principle
 
@@ -50,6 +49,8 @@ ddev composer require friendsoftypo3/content-blocks
 # After installation, clear caches
 ddev typo3 cache:flush
 ```
+
+> **Version constraint:** Content Blocks **1.x** requires TYPO3 **≥ 13.4** (`typo3/cms-core: ^13.4` in the package). TYPO3 **13.1–13.3** do **not** satisfy that Composer constraint.
 
 ### Security Configuration (Classic Mode)
 
@@ -196,13 +197,13 @@ fields:
             <f:image image="{image}" alt="{data.header}" class="hero-image"/>
         </f:for>
     </f:if>
-    
+
     <div class="hero-content">
         <h1>{data.header}</h1>
         <f:if condition="{data.subheadline}">
             <p class="subheadline">{data.subheadline}</p>
         </f:if>
-        
+
         <f:if condition="{data.cta_link}">
             <f:link.typolink parameter="{data.cta_link}" class="btn btn-primary">
                 {data.cta_text -> f:or(default: 'Learn more')}
@@ -212,6 +213,40 @@ fields:
 </section>
 </html>
 ```
+
+### shadcn/ui Frontend Template Pattern
+
+When a Content Block should follow shadcn/ui styling, keep the Content Block YAML as the content model and move repeated visual structure into shared Fluid components. The `frontend.fluid.html` entrypoint should map `{data}` fields to typed atomic components rather than duplicating bespoke CSS in every block.
+
+```html
+<!-- templates/frontend.fluid.html -->
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:d="http://typo3.org/ns/Vendor/Sitepackage/Components/ComponentCollection"
+      data-namespace-typo3-fluid="true">
+
+<section class="py-12 md:py-16">
+    <d:molecule.card class="mx-auto max-w-2xl">
+        <d:molecule.cardHeader>
+            <d:molecule.cardTitle>{data.header}</d:molecule.cardTitle>
+            <f:if condition="{data.subheadline}">
+                <d:molecule.cardDescription>{data.subheadline}</d:molecule.cardDescription>
+            </f:if>
+        </d:molecule.cardHeader>
+        <d:molecule.cardContent>
+            <f:format.html>{data.bodytext}</f:format.html>
+        </d:molecule.cardContent>
+    </d:molecule.card>
+</section>
+</html>
+```
+
+Guidelines:
+- Preserve existing field identifiers, `fixture.json`, labels, and editor workflows unless the content model itself is changing.
+- Use shared Fluid components for shadcn primitives such as Button, Badge, Card, Form controls, Tabs, Accordion, Alert, Table, and Sheet/Dialog shells.
+- Put `<f:argument>` type contracts in reusable Fluid components and partials. Avoid adding required arguments to a Content Block entry template unless the render context is fully controlled.
+- Use `f:asset.css` / `f:asset.script` only for block-specific assets. Shared shadcn/Tailwind tokens and utility classes belong in the site CSS entrypoint.
+- For interactive shadcn patterns, use Alpine or small vanilla controllers with ARIA and `data-state` attributes instead of React/Radix runtime dependencies.
+- Create or update styleguide fixtures so every Content Block can be rendered with realistic content in light and dark mode.
 
 ### Backend Preview Template
 
@@ -325,6 +360,7 @@ fields:
     fields:
       - identifier: platform
         type: Select
+        renderType: selectSingle
         items:
           - label: LinkedIn
             value: linkedin
@@ -525,10 +561,10 @@ page {
     10 {
         templateName = Default
         templateRootPaths.10 = EXT:my_sitepackage/Resources/Private/Templates/
-        
+
         dataProcessing {
             # Process Content Blocks page data
-            1 = record-transformation
+            1 = content-blocks
         }
     }
 }
@@ -548,6 +584,22 @@ Then access fields in your Fluid template:
     </f:for>
 </f:if>
 ```
+
+### PAGEVIEW Content Areas and Columns **[v14.2+ only]**
+
+For TYPO3 v14.2+ PAGEVIEW templates, prefer rendering backend layout columns through Core content areas instead of manually querying `tt_content`. This keeps Content Blocks, Fluid Styled Content, workspace overlays, language handling, and per-column context intact.
+
+```html
+<main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <f:render.contentArea contentArea="{content.main}" />
+</main>
+
+<aside class="space-y-4">
+    <f:render.contentArea contentArea="{content.sidebar}" />
+</aside>
+```
+
+Use backend layout identifiers (`main`, `sidebar`, `footer`, etc.) as the page-template contract. Apply TYPO3 v14 content restrictions per column so wide hero/feature elements stay out of narrow sidebars, and pass the content area context to element templates when their rendering needs to change by column.
 
 ### Remove from Page Tree Drag Area
 
@@ -633,7 +685,7 @@ fields:
 | Option | Type | Required | Description |
 |--------|------|----------|-------------|
 | `typeName` | string | ✓ | One of: `text`, `image`, `audio`, `video`, `application` |
-| `prefixFields` | boolean | | Common root option inherited by File Types; not File-Type-specific (often `false` for shared field names) |
+| `prefixFields` | boolean | | Whether to prefix field identifiers with the Content Block name (often `false` for File Types to keep shared field names) |
 
 ### Use Cases for File Types
 
@@ -683,7 +735,7 @@ In Fluid templates, access custom metadata through FAL references:
 | `Password` | Password field | `type: Password` |
 | `Basic` | Shared “basic” field helper | `type: Basic` |
 | `Country` | Country selection (aligns with TCA `country` where supported) | `type: Country` |
-| `Pass` | Pass-through / display field | `type: Pass` |
+| `Pass` | Virtual field, not visible in the backend; used for storing data handled by extension logic | `type: Pass` |
 | `SelectNumber` | Select with numeric values | `type: SelectNumber` |
 | `Uuid` | UUID string | `type: Uuid` |
 
@@ -757,6 +809,8 @@ fields:
 ```
 
 ### Collection Field Example (Inline IRRE)
+
+**Important:** Collections cannot be nested — a Collection field must NOT contain another Collection as a sub-field. See "Common Pitfalls" section for details.
 
 ```yaml
 fields:
@@ -963,7 +1017,7 @@ config:
     group: default
     prefixFields: true
     prefixType: full
-  
+
   record-type:
     prefixFields: true
     prefixType: vendor
@@ -1015,7 +1069,7 @@ config:
    ```yaml
    # ❌ Wrong
    table: team_member
-   
+
    # ✅ Correct
    table: tx_mysitepackage_domain_model_teammember
    ```
@@ -1024,7 +1078,7 @@ config:
    ```yaml
    # ❌ Wrong
    identifier: hero-image
-   
+
    # ✅ Correct
    identifier: hero_image
    ```
@@ -1118,6 +1172,7 @@ Required private forks for webconsulting stack:
 - [Page Types API](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/API/PageTypes/Index.html)
 - [File Types YAML Reference](https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/YamlReference/ContentTypes/FileTypes/Index.html)
 - [Migration Skill](./SKILL-MIGRATION.md)
+- [TYPO3 shadcn content elements](../typo3-shadcn-content-elements/SKILL.md)
 - [Packagist: friendsoftypo3/content-blocks](https://packagist.org/packages/friendsoftypo3/content-blocks)
 
 ## v14-Only Changes
@@ -1137,16 +1192,127 @@ New `itemsProcessors` option (#107889) enables dynamic item generation for selec
 - **Type-specific `ctrl` properties** (#108027) — `title`, `label`, and other ctrl properties can now be overridden per record type in the `types` section.
 - **Type-specific TCA defaults** (#107281) — default values can differ per record type.
 
-### Fluid 5.0 Strict Types **[v14 only]**
+### Fluid 5.x / 5.3 Strict Types **[v14 only]**
 
-Content Block Fluid templates must comply with Fluid 5.0 strict typing:
+Content Block Fluid templates must comply with Fluid 5.x strict typing:
 - ViewHelper arguments are strictly typed. Ensure correct types (int vs string).
+- Reusable components and partials should define their public API with root-level `<f:argument>` declarations.
+- Union types are available for component arguments, but use them sparingly because each branch must be handled explicitly.
 - No underscore-prefixed variable names (`_myVar`).
 - CDATA sections are preserved (not stripped).
 
 ### Content Element Restrictions per Column **[v14.1+ only]**
 
 TYPO3 v14.1 integrates `content_defender` functionality into Core. Backend layouts can now restrict which Content Elements (including Content Blocks) are allowed per `colPos` without third-party extensions.
+
+---
+
+## Common Pitfalls & Hard-Won Lessons
+
+These rules come from real debugging sessions. Violating them causes errors that are difficult to trace.
+
+### 1. No Nested Collections (CRITICAL)
+
+Content Blocks does **NOT** support a Collection inside another Collection. This causes a fatal `Undefined array key "typeName"` error in `ProcessingInput.php` during TYPO3 bootstrap — preventing `composer install`, `cache:flush`, and all CLI commands.
+
+```yaml
+# BROKEN — nested Collection crashes content-blocks
+fields:
+  - identifier: groups
+    type: Collection
+    fields:
+      - identifier: title
+        type: Text
+      - identifier: items        # <-- Collection inside Collection = FATAL
+        type: Collection
+        fields:
+          - identifier: label
+            type: Text
+          - identifier: link
+            type: Link
+
+# FIXED — flatten the inner Collection to a Textarea
+fields:
+  - identifier: groups
+    type: Collection
+    fields:
+      - identifier: title
+        type: Text
+      - identifier: items         # <-- Textarea with one entry per line
+        type: Textarea
+        label: Items (one per line)
+        rows: 5
+```
+
+The error message (`Undefined array key "typeName"` on table `pages`, type `record-type`) is misleading — it does not point to the actual nested Collection that causes it. If you see this error, grep for nested Collections: `type: Collection` inside another `type: Collection`.
+
+### 2. Dashes in typeName Values
+
+When Content Blocks auto-generates `typeName` from the `name` field, it **strips all dashes**. If you set `typeName` explicitly, it must follow the same convention — no dashes.
+
+```yaml
+# WRONG — dash in typeName causes CType mismatch
+name: myvendor/my-block
+typeName: myvendor_my-block
+
+# CORRECT — no dashes, matches auto-generation
+name: myvendor/my-block
+typeName: myvendor_myblock
+```
+
+The auto-generation logic (`UniqueIdentifierCreator::removeDashes`) converts `myvendor/my-block` to `myvendor_myblock`. If your explicit `typeName` uses dashes, it won't match existing database records created by auto-generation.
+
+### 3. Reserved Field Identifier: `description`
+
+The identifier `description` is a **top-level config.yaml key** (the content block's description shown in the backend). Using it as a field identifier creates a type conflict — the config key is a string, but a Textarea field resolves to a different type.
+
+```yaml
+# WRONG — conflicts with the config.yaml root key
+description: My content block description
+fields:
+  - identifier: description      # <-- conflicts with root "description"
+    type: Textarea
+
+# CORRECT — use a distinct identifier
+description: My content block description
+fields:
+  - identifier: description_text  # <-- no conflict
+    type: Textarea
+```
+
+### 4. Template Field References Must Match config.yaml Identifiers
+
+Every `{data.fieldname}` in `frontend.html` must exactly match an `identifier` in `config.yaml`. There is no runtime error — the field simply renders empty, making this a silent bug.
+
+```yaml
+# config.yaml defines:
+- identifier: features_list
+  type: Textarea
+```
+
+```html
+<!-- WRONG — silent failure, renders empty -->
+{data.features -> f:split(separator: '\n')}
+
+<!-- CORRECT — matches the identifier -->
+{data.features_list -> f:split(separator: '\n')}
+```
+
+When renaming field identifiers (e.g., to resolve conflicts), always search templates for the old name.
+
+### 5. Collection Identifier Naming — Avoid Table Name Collisions
+
+Never name a Collection field with an identifier that matches an existing TYPO3 database table (e.g., `pages`, `tt_content`, `sys_file`). Content Blocks generates table names from Collection identifiers, and a collision with a core table causes unpredictable errors.
+
+```yaml
+# DANGEROUS — "pages" collides with TYPO3 core table
+- identifier: pages
+  type: Collection
+
+# SAFE — use a descriptive, unique identifier
+- identifier: page_items
+  type: Collection
+```
 
 ---
 
@@ -1158,4 +1324,5 @@ Original documentation: https://docs.typo3.org/p/friendsoftypo3/content-blocks/
 
 Adapted by webconsulting.at for this skill collection
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

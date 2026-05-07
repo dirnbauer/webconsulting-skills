@@ -57,6 +57,7 @@ set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NORMALIZE_SKILL_FRONTMATTER="$SCRIPT_DIR/scripts/normalize_skill_frontmatter.py"
+TYPO3_CONVENTION="TYPO3 skills primarily target TYPO3 v14.x; typo3-translations also covers TYPO3 13/14 translation compatibility."
 
 USER_ONLY=false
 PROJECT_ONLY=false
@@ -230,129 +231,66 @@ echo "→ Generating cross-client instruction files..."
 # Count skills
 SKILL_COUNT=$(find "$SCRIPT_DIR/skills" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')
 
-# ── Generate CLAUDE.md ────────────────────────────────────────────────────────
-cat > "$SCRIPT_DIR/CLAUDE.md" <<CLAUDE_EOF
+write_client_instructions() {
+    local target_file="$1"
+    local agents_link="$2"
+    local extra_section="$3"
+
+    cat > "$target_file" <<CLIENT_EOF
 # webconsulting Agent Skills
 
 This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
 
 ## Instructions
 
-Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
+Follow the instructions in $agents_link — it is the single source of truth for all skills, triggers, usage examples, session profiles, and acknowledgements.
 
+$extra_section
 ## Skills Location
 
-All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
+All skills live in \`skills/<skill-name>/SKILL.md\`. Installers symlink the whole skill directory, not just \`SKILL.md\`, so optional \`agents/\`, \`assets/\`, \`examples/\`, \`references/\`, \`rules/\`, and \`scripts/\` folders remain available to clients that support them.
 
-To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
+To use a skill, read \`skills/<skill-name>/SKILL.md\` and follow its instructions. Load referenced files only when the skill asks for them.
 
 ## Key Conventions
 
-- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example \`php-modernization\`, \`typo3-content-blocks\`, \`typo3-update\`)
-- Always review AI-generated code before committing
-- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
+- $TYPO3_CONVENTION
+- Cross-cutting TYPO3/PHP guidance lives in the owning skills, for example \`php-modernization\`, \`typo3-content-blocks\`, and \`typo3-update\`.
+- Always review AI-generated code before committing.
+- When multiple skills are relevant, combine them, for example \`typo3-rector\` + \`typo3-testing\`.
+- Keep upstream credits and thank-you text intact, especially Netresearch acknowledgements.
 
 ## License
 
 Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
 See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
-CLAUDE_EOF
+CLIENT_EOF
+}
+
+# ── Generate CLAUDE.md ────────────────────────────────────────────────────────
+write_client_instructions "$SCRIPT_DIR/CLAUDE.md" "[AGENTS.md](AGENTS.md)" ""
 echo "  ✓ CLAUDE.md ($SKILL_COUNT skills)"
 
 # ── Generate GEMINI.md ────────────────────────────────────────────────────────
-cat > "$SCRIPT_DIR/GEMINI.md" <<GEMINI_EOF
-# webconsulting Agent Skills
-
-This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
-
-## Instructions
-
-Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
-
+write_client_instructions "$SCRIPT_DIR/GEMINI.md" "[AGENTS.md](AGENTS.md)" "\
 ## Gemini CLI Integration
 
 Skills are registered in \`gemini-extension.json\` with trigger-based activation. The extension manifest maps each skill to its trigger keywords and \`skills/\` directory path.
-
-## Skills Location
-
-All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
-
-To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
-
-## Key Conventions
-
-- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example \`php-modernization\`, \`typo3-content-blocks\`, \`typo3-update\`)
-- Always review AI-generated code before committing
-- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
-
-## License
-
-Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
-See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
-GEMINI_EOF
+"
 echo "  ✓ GEMINI.md ($SKILL_COUNT skills)"
 
 # ── Generate .windsurfrules ───────────────────────────────────────────────────
-cat > "$SCRIPT_DIR/.windsurfrules" <<WINDSURF_EOF
-# webconsulting Agent Skills
+write_client_instructions "$SCRIPT_DIR/.windsurfrules" "AGENTS.md" "\
+## Windsurf Integration
 
-This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
+Windsurf can read this rule file and the symlinked skill directories under \`.windsurf/skills/\` or \`~/.codeium/windsurf/skills/\`.
 
-## Instructions
-
-Follow the instructions in AGENTS.md — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
-
-## Skills Location
-
-All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
-
-To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
-
-## Key Conventions
-
-- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example \`php-modernization\`, \`typo3-content-blocks\`, \`typo3-update\`)
-- Always review AI-generated code before committing
-- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
-
-## License
-
-Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
-See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
-WINDSURF_EOF
+"
 echo "  ✓ .windsurfrules ($SKILL_COUNT skills)"
 
 # ── Generate .github/copilot-instructions.md ──────────────────────────────────
 mkdir -p "$SCRIPT_DIR/.github"
-cat > "$SCRIPT_DIR/.github/copilot-instructions.md" <<COPILOT_EOF
-# webconsulting Agent Skills
-
-This repository contains $SKILL_COUNT Agent Skills for AI-augmented software development.
-
-## Instructions
-
-Follow the instructions in [AGENTS.md](../AGENTS.md) — it is the single source of truth for all skills, triggers, usage examples, and session profiles.
-
-## Skills Location
-
-All skills live in \`skills/*/SKILL.md\`. Each skill has YAML frontmatter with \`name\`, \`description\`, \`triggers\`, and \`compatibility\`.
-
-To use a skill, read the \`SKILL.md\` file at \`skills/<skill-name>/SKILL.md\` and follow its instructions.
-
-## Key Conventions
-
-- TYPO3 skills target **TYPO3 v14.x only** (verify third-party extensions on Packagist)
-- Cross-cutting TYPO3/PHP guidance lives in the owning skills (for example \`php-modernization\`, \`typo3-content-blocks\`, \`typo3-update\`)
-- Always review AI-generated code before committing
-- When multiple skills are relevant, combine them (e.g., \`typo3-rector\` + \`typo3-testing\`)
-
-## License
-
-Code: MIT | Content: CC-BY-SA-4.0 | Third-party skills retain their original licenses.
-See LICENSE, LICENSE-MIT, and LICENSE-CC-BY-SA-4.0 for full terms.
-COPILOT_EOF
+write_client_instructions "$SCRIPT_DIR/.github/copilot-instructions.md" "[AGENTS.md](../AGENTS.md)" ""
 echo "  ✓ .github/copilot-instructions.md ($SKILL_COUNT skills)"
 
 # ── Generate gemini-extension.json ────────────────────────────────────────────
@@ -434,7 +372,7 @@ if [ "$IS_CONTAINER" = "true" ] || [ "$PROJECT_ONLY" = true ]; then
 else
     echo ""
     echo "→ Installing user-level skills..."
-    echo "  (Symlinks from skills/ → each client's discovery directory)"
+    echo "  (Symlinks from full skills/ directories → each client's discovery directory)"
 
     # ── Core scripted clients ──────────────────────────────────────────────
 
@@ -503,7 +441,20 @@ if [ "$USER_ONLY" = false ]; then
                 rm -f "$target_rule"
             fi
 
-            cp "$skill_path/SKILL.md" "$target_rule"
+            {
+                echo "---"
+                echo "description: Use the $skill_name Agent Skill when relevant; read the full skill directory before acting."
+                echo "alwaysApply: false"
+                echo "---"
+                echo ""
+                echo "# $skill_name"
+                echo ""
+                echo "Canonical skill directory: \`.cursor/skills/$skill_name/\`"
+                echo ""
+                echo "Read \`.cursor/skills/$skill_name/SKILL.md\` and any referenced \`references/\`, \`scripts/\`, \`assets/\`, or \`agents/\` files before using this skill. Keep upstream credits and thank-you text intact."
+                echo ""
+                sed '1{/^---$/!q;};1,/^---$/d' "$skill_path/SKILL.md" | sed 's/[[:space:]]*$//'
+            } > "$target_rule"
             mdc_count=$((mdc_count + 1))
         fi
     done
@@ -610,8 +561,9 @@ echo "  1. Restart your IDE / CLI to discover skills"
 echo "  2. Cursor: type / in Agent chat"
 echo "  3. Gemini CLI: run 'gemini skills list'"
 echo "  4. Codex: skills appear automatically"
-echo "  5. Windsurf: @skill-name or auto-activation"
+    echo "  5. Windsurf: @skill-name or auto-activation"
+    echo "  6. Project rules point to full skill directories; keep symlinks intact"
 if [ "$IS_CONTAINER" = "true" ]; then
-    echo "  6. Run install.sh on LOCAL machine for user-level skills"
+    echo "  7. Run install.sh on LOCAL machine for user-level skills"
 fi
 echo "═══════════════════════════════════════════════════════════════"

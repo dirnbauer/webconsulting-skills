@@ -1,14 +1,14 @@
 ---
-name: ai-search-optimization
-description: >-
-  Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for
-  AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI
-  search platforms. Use when working with aeo, geo, ai search, chatgpt search, perplexity,
-  ai overviews, generative search, llm visibility.
-metadata:
-  version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the ai-search-optimization Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# ai-search-optimization
+
+Canonical skill directory: `.cursor/skills/ai-search-optimization/`
+
+Read `.cursor/skills/ai-search-optimization/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # AI Search Optimization (AEO & GEO)
 
@@ -70,12 +70,12 @@ AI systems extract information more effectively from well-structured content:
             <h1>Primary Topic as Question or Clear Statement</h1>
             <p class="summary">Direct 2-3 sentence answer to the main question.</p>
         </header>
-        
+
         <main>
             <section>
                 <h2>Subtopic Heading</h2>
                 <p>Detailed explanation with facts and data.</p>
-                
+
                 <ul>
                     <li>Key point 1 with specific information</li>
                     <li>Key point 2 with verifiable data</li>
@@ -83,7 +83,7 @@ AI systems extract information more effectively from well-structured content:
                 </ul>
             </section>
         </main>
-        
+
         <aside>
             <h3>Quick Facts</h3>
             <dl>
@@ -161,7 +161,7 @@ AI engines prefer structured data formats:
 <dl>
     <dt>AEO</dt>
     <dd>Answer Engine Optimization - optimizing content for direct answers</dd>
-    
+
     <dt>GEO</dt>
     <dd>Generative Engine Optimization - visibility in AI-generated results</dd>
 </dl>
@@ -312,14 +312,14 @@ AI systems prioritize content from credible sources. Implement these signals:
 ```html
 <article>
     <!-- Content -->
-    
+
     <footer class="author-bio">
         <img src="/authors/jane-doe.jpg" alt="Jane Doe" />
         <div class="author-info">
             <h4>About the Author</h4>
             <p class="author-name">Jane Doe, PhD</p>
             <p class="author-credentials">
-                15 years of experience in digital marketing. 
+                15 years of experience in digital marketing.
                 Former Head of SEO at Fortune 500 company.
                 Published in Search Engine Journal, Moz, and Ahrefs Blog.
             </p>
@@ -564,17 +564,17 @@ AI search favors natural language:
 ```html
 <section class="faq">
     <h2>Frequently Asked Questions</h2>
-    
+
     <details>
         <summary>What is Answer Engine Optimization?</summary>
         <p>Answer Engine Optimization (AEO) is the practice of...</p>
     </details>
-    
+
     <details>
         <summary>How is GEO different from traditional SEO?</summary>
         <p>While traditional SEO focuses on...</p>
     </details>
-    
+
     <details>
         <summary>Which AI search platforms should I optimize for?</summary>
         <p>The main platforms to consider are...</p>
@@ -590,8 +590,8 @@ Perplexity and other AI engines prefer visual content:
 
 ```html
 <figure>
-    <img 
-        src="/images/ai-search-diagram.webp" 
+    <img
+        src="/images/ai-search-diagram.webp"
         alt="Diagram showing how AI search engines process and cite content"
         width="800"
         height="450"
@@ -614,7 +614,7 @@ Perplexity and other AI engines prefer visual content:
 
 ```html
 <figure class="video-embed">
-    <iframe 
+    <iframe
         src="https://www.youtube.com/embed/VIDEO_ID"
         title="Detailed explanation of AI Search Optimization"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media"
@@ -924,47 +924,47 @@ routes:
       # Standard search engines
       User-agent: Googlebot
       Allow: /
-      
+
       User-agent: Bingbot
       Allow: /
-      
+
       # OpenAI (ChatGPT)
       User-agent: GPTBot
       Allow: /
-      
+
       User-agent: ChatGPT-User
       Allow: /
-      
+
       # Perplexity AI
       User-agent: PerplexityBot
       Allow: /
-      
+
       # Anthropic (Claude)
       User-agent: ClaudeBot
       Allow: /
-      
+
       User-agent: anthropic-ai
       Allow: /
-      
+
       # Google AI (Gemini)
       User-agent: Google-Extended
       Allow: /
-      
+
       # Meta AI
       User-agent: FacebookBot
       Allow: /
-      
+
       # Common Crawl (used by many AI systems)
       User-agent: CCBot
       Allow: /
-      
+
       # Default
       User-agent: *
       Allow: /
       Disallow: /typo3/
       Disallow: /typo3conf/
       Disallow: /typo3temp/
-      
+
       Sitemap: https://example.com/sitemap.xml
 ```
 
@@ -1012,7 +1012,7 @@ Include the static TypoScript template in your site package.
         <schema:property -as="sameAs" value="{article.author.linkedIn}" />
         <schema:property -as="sameAs" value="{article.author.twitter}" />
     </schema:type.person>
-    
+
     <schema:type.organization -as="publisher"
         name="{settings.siteName}"
         url="{settings.siteUrl}"
@@ -1177,7 +1177,7 @@ lib.lastModified {
             </time>
         </div>
     </header>
-    
+
     <!-- Content -->
 </article>
 ```
@@ -1316,7 +1316,7 @@ fields:
                     <schema:property -as="text" value="{item.answer -> f:format.stripTags()}" />
                 </schema:type.answer>
             </schema:type.question>
-            
+
             <details class="faq-item">
                 <summary class="faq-question">{item.question}</summary>
                 <div class="faq-answer">
@@ -1344,7 +1344,7 @@ fields:
             </schema:type.listItem>
         </f:for>
     </schema:type.breadcrumbList>
-    
+
     <ol class="breadcrumb">
         <f:for each="{breadcrumbs}" as="crumb" iteration="iter">
             <li class="breadcrumb-item{f:if(condition: iter.isLast, then: ' active')}">
@@ -1375,11 +1375,11 @@ fields:
     <header role="banner">
         <f:render partial="Header" />
     </header>
-    
+
     <nav role="navigation" aria-label="Main navigation">
         <f:render partial="Navigation/Main" />
     </nav>
-    
+
     <main role="main">
         <article>
             <header>
@@ -1388,17 +1388,17 @@ fields:
                     <p class="lead">{page.subtitle}</p>
                 </f:if>
             </header>
-            
+
             <section>
                 <f:render section="Content" />
             </section>
         </article>
     </main>
-    
+
     <aside role="complementary">
         <f:render partial="Sidebar" optional="true" />
     </aside>
-    
+
     <footer role="contentinfo">
         <f:render partial="Footer" />
     </footer>
@@ -1713,15 +1713,15 @@ import path from 'path';
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const filePath = searchParams.get('path');
-  
+
   if (!filePath) {
     return NextResponse.json({ error: 'Path required' }, { status: 400 });
   }
-  
+
   // Prevent directory traversal
   const safePath = filePath.replace(/\.\./g, '');
   const mdxPath = path.join(process.cwd(), 'content', `${safePath}.mdx`);
-  
+
   try {
     const content = fs.readFileSync(mdxPath, 'utf8');
     return new NextResponse(content, {
@@ -1753,7 +1753,7 @@ type Props = {
 export default async function Page({ params, searchParams }: Props) {
   const slug = params.slug.join('/');
   const mdxPath = path.join(process.cwd(), 'content', `${slug}.mdx`);
-  
+
   // Show raw MDX if ?raw=true
   if (searchParams.raw === 'true') {
     try {
@@ -1774,7 +1774,7 @@ export default async function Page({ params, searchParams }: Props) {
       notFound();
     }
   }
-  
+
   // Normal MDX rendering
   // ... your MDX processing
 }
@@ -1808,7 +1808,7 @@ type Frontmatter = {
 
 export function generateSchema(frontmatter: Frontmatter, url: string) {
   const schemaType = frontmatter.schema?.type || 'Article';
-  
+
   const baseSchema = {
     "@context": "https://schema.org",
     "@type": schemaType,
@@ -1818,13 +1818,13 @@ export function generateSchema(frontmatter: Frontmatter, url: string) {
     "datePublished": frontmatter.date,
     "dateModified": frontmatter.lastmod || frontmatter.date,
   };
-  
+
   if (frontmatter.author) {
     const sameAs = [
       frontmatter.author.linkedin,
       frontmatter.author.twitter,
     ].filter(Boolean);
-    
+
     baseSchema["author"] = {
       "@type": "Person",
       "name": frontmatter.author.name,
@@ -1832,15 +1832,15 @@ export function generateSchema(frontmatter: Frontmatter, url: string) {
       ...(sameAs.length > 0 && { "sameAs": sameAs }),
     };
   }
-  
+
   if (frontmatter.image) {
     baseSchema["image"] = frontmatter.image;
   }
-  
+
   if (frontmatter.schema?.wordCount) {
     baseSchema["wordCount"] = frontmatter.schema.wordCount;
   }
-  
+
   return baseSchema;
 }
 ```
@@ -1978,13 +1978,13 @@ plugin.tx_aillmstxt {
     settings {
         # Pages to include (comma-separated UIDs or "auto")
         includePages = auto
-        
+
         # Exclude specific pages
         excludePages = 1,2,3
-        
+
         # Include page types
         includeDoktypes = 1,4
-        
+
         # Maximum depth
         maxDepth = 3
     }
@@ -2002,18 +2002,18 @@ routes:
     type: staticText
     content: |
       # Your TYPO3 Site
-      
+
       > Enterprise content management and digital experience platform.
-      
+
       ## Main Sections
-      
+
       - [Home](https://example.com/): Main landing page
       - [Products](https://example.com/products): Our product catalog
       - [Documentation](https://example.com/docs): Technical documentation
       - [Blog](https://example.com/blog): Latest articles and news
-      
+
       ## Optional
-      
+
       - [About Us](https://example.com/about): Company information
       - [Contact](https://example.com/contact): Get in touch
 ```
@@ -2044,7 +2044,7 @@ import { getDocPages, getBlogPosts } from '@/lib/content';
 export async function GET() {
   const docs = await getDocPages();
   const posts = await getBlogPosts();
-  
+
   const content = `# Your Site Name
 
 > Brief description of your site.
@@ -2082,7 +2082,7 @@ import path from 'path';
 
 export async function GET() {
   const docs = await getDocPages();
-  
+
   let fullContent = `# Complete Documentation
 
 > Full documentation for Your Site.
@@ -2143,7 +2143,7 @@ import type { APIRoute } from 'astro';
 export const GET: APIRoute = async () => {
   const docs = await getCollection('docs');
   const blog = await getCollection('blog');
-  
+
   const content = `# Your Astro Site
 
 > Static site built with Astro.
@@ -2219,4 +2219,5 @@ Semrush, Ahrefs, and the broader SEO community's work on generative engine optim
 
 Created by webconsulting.at for the Claude Cursor Skills collection.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

@@ -1,20 +1,21 @@
 ---
-name: marketing-skills
-description: >-
-  Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth
-  engineering. From Corey Haines' Marketing Skills collection. Use when working with
-  marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.
-metadata:
-  version: "1.0.0"
-license: MIT
+description: Use the marketing-skills Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# marketing-skills
+
+Canonical skill directory: `.cursor/skills/marketing-skills/`
+
+Read `.cursor/skills/marketing-skills/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Marketing Skills for AI Agents
 
-> **Source:** This skill collection is adapted from [Corey Haines' Marketing Skills](https://github.com/coreyhaines31/marketingskills) 
+> **Source:** This skill collection is adapted from [Corey Haines' Marketing Skills](https://github.com/coreyhaines31/marketingskills)
 > for Claude Code and AI agents. See [marketing-skills.com](https://marketing-skills.com).
 
-A comprehensive collection of marketing skills covering conversion optimization, copywriting, SEO, 
+A comprehensive collection of marketing skills covering conversion optimization, copywriting, SEO,
 analytics, pricing strategy, and growth engineering.
 
 ## Available Skills
@@ -219,12 +220,10 @@ Use variety: stories, social proof, comparisons, use cases, FAQs.
 
 ## Credits & Attribution
 
-This skill collection is adapted from the excellent marketing skills by
-**[Corey Haines](https://coreyhaines.com/)**.
+This skill is based on the excellent work by
+**[Corey Haines](https://github.com/coreyhaines31/marketingskills)**.
 
 Original repository: https://github.com/coreyhaines31/marketingskills
 
-**Copyright (c) Corey Haines** - Marketing frameworks and best practices
-See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+Special thanks to [Corey Haines](https://github.com/coreyhaines31/marketingskills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

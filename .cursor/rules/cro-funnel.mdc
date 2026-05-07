@@ -1,17 +1,18 @@
 ---
-name: cro-funnel
-description: >-
-  Full-funnel Conversion Rate Optimization (CRO) for SaaS and web apps. Covers page CRO,
-  form optimization, signup flow, onboarding activation, popup/modal design, and
-  paywall/upgrade screens. Use when optimizing any part of the conversion funnel.
-license: MIT
-metadata:
-  version: "1.0.0"
+description: Use the cro-funnel Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# cro-funnel
+
+Canonical skill directory: `.cursor/skills/cro-funnel/`
+
+Read `.cursor/skills/cro-funnel/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # CRO Funnel Optimization
 
-> **Source:** This skill is adapted from **[AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)** 
+> **Source:** This skill is adapted from **[AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)**
 > by AITYTech. Enterprise-grade AI marketing automation (MIT License).
 
 Full-funnel Conversion Rate Optimization covering every stage from page visit to paid conversion:
@@ -350,9 +351,10 @@ What you've accomplished:
 
 ## Credits & Attribution
 
-This skill is adapted from **[AgentKits Marketing](https://github.com/aitytech/agentkits-marketing)** by AITYTech.
+This skill is based on the excellent work by
+**[AITYTech](https://github.com/aitytech/agentkits-marketing)**.
 
-**Copyright (c) AITYTech** - MIT License  
+Original repository: https://github.com/aitytech/agentkits-marketing
+
+Special thanks to [AITYTech](https://github.com/aitytech/agentkits-marketing) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection
-
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.

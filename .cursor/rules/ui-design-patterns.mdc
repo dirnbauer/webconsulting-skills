@@ -1,13 +1,14 @@
 ---
-name: ui-design-patterns
-description: >-
-  Practical UI design patterns and principles for creating polished, professional
-  interfaces. Based on proven techniques from Refactoring UI and Practical UI. Use when
-  working with ui, design, layout, spacing, typography, color, hierarchy, styling.
-metadata:
-  version: "1.1.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the ui-design-patterns Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# ui-design-patterns
+
+Canonical skill directory: `.cursor/skills/ui-design-patterns/`
+
+Read `.cursor/skills/ui-design-patterns/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # UI Design Patterns
 
@@ -474,7 +475,7 @@ Light comes from above. Apply this consistently:
 ```css
 /* Raised button */
 .button {
-  box-shadow: 
+  box-shadow:
     inset 0 1px 0 hsl(220, 80%, 70%), /* Light top edge */
     0 1px 3px hsla(0, 0%, 0%, 0.2);    /* Shadow below */
 }
@@ -500,7 +501,7 @@ Define 5 shadow levels and stick to them.
 Combine a large soft shadow (direct light) with a small tight shadow (ambient occlusion):
 
 ```css
-box-shadow: 
+box-shadow:
   0 4px 6px rgba(0, 0, 0, 0.07),   /* Large, soft */
   0 1px 3px rgba(0, 0, 0, 0.1);    /* Small, tight */
 ```
@@ -708,7 +709,7 @@ A 4px colored border adds polish without design skills:
 .alert { border-left: 4px solid var(--warning-500); }
 
 /* Under headlines */
-.headline::after { 
+.headline::after {
   content: '';
   display: block;
   width: 60px;
@@ -864,4 +865,5 @@ Every interactive element needs clear state feedback:
 
 *For deeper learning, study the source materials: [Refactoring UI](https://www.refactoringui.com/) and [Practical UI](https://www.practical-ui.com/)*
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

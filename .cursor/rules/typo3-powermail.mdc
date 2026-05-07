@@ -1,19 +1,14 @@
 ---
-name: typo3-powermail
-description: >-
-  Expert guidance on the Powermail **extension** 13.x with TYPO3 **13.4+** (verify Packagist for newer Core constraints). Creating forms, custom finishers,
-  validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email
-  templates, backend modules, and extension development. Use when working with powermail
-  forms, mail handling, form validation, or extending powermail functionality.
-compatibility: TYPO3 13.4+ (Powermail 13.x `composer.json` currently requires `typo3/cms-core: ^13.4` — check Packagist before assuming TYPO3 v14)
-metadata:
-  version: "1.0.0"
-  related_skills:
-    - typo3-datahandler
-    - typo3-content-blocks
-    - typo3-testing
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-powermail Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-powermail
+
+Canonical skill directory: `.cursor/skills/typo3-powermail/`
+
+Read `.cursor/skills/typo3-powermail/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Powermail Development
 
@@ -149,21 +144,76 @@ plugin.tx_powermail {
                 redirect = # Page UID for redirect after submit
             }
 
-            # Spam protection
+            # Spam protection — numeric `methods` keys (matches EXT:powermail `12_Spamshield.typoscript`)
             spamshield {
                 _enable = 1
-                indicator {
-                    honeypod = 5
-                    link = 3
-                    name = 3
-                    session = 5
-                    unique = 2
-                    blacklistString = 7
-                    blacklistIp = 7
-                    rateLimit = 100
-                }
-                # Factor threshold (0-100): reject if >=
                 factor = 75
+                methods {
+                    1 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\HoneyPodMethod
+                        indication = 5
+                        configuration { }
+                    }
+                    2 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\LinkMethod
+                        indication = 3
+                        configuration {
+                            linkLimit = 2
+                        }
+                    }
+                    3 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\NameMethod
+                        indication = 3
+                        configuration { }
+                    }
+                    # SessionMethod sets a cookie when enabled — shipping TypoScript uses _enable = 0
+                    4 {
+                        _enable = 0
+                        class = In2code\Powermail\Domain\Validator\SpamShield\SessionMethod
+                        indication = 5
+                        configuration { }
+                    }
+                    5 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\UniqueMethod
+                        indication = 2
+                        configuration { }
+                    }
+                    6 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\ValueBlacklistMethod
+                        indication = 7
+                        configuration {
+                            values = TEXT
+                            values.value = viagra,sex,porn
+                        }
+                    }
+                    7 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\IpBlacklistMethod
+                        indication = 7
+                        configuration {
+                            values = TEXT
+                            values.value = 203.0.113.1
+                        }
+                    }
+                    8 {
+                        _enable = 1
+                        class = In2code\Powermail\Domain\Validator\SpamShield\RateLimitMethod
+                        indication = 100
+                        configuration {
+                            interval = 5 minutes
+                            limit = 10
+                            restrictions {
+                                10 = __ipAddress
+                                20 = __formIdentifier
+                            }
+                        }
+                    }
+                }
             }
 
             # Validation
@@ -350,7 +400,7 @@ final class CustomValidatorListener
 | `UploadValidator` | File size, extension whitelist |
 | `PasswordValidator` | Password match and strength |
 | `CaptchaValidator` | Built-in CAPTCHA |
-| *(Spam shield)* | Uses `Domain\Service\SpamShield\AbstractMethod` subclasses (`HoneyPodMethod`, `LinkMethod`, …) — **not** a single `SpamShieldValidator` class |
+| *(Spam shield)* | Spam checking is distributed across multiple `Domain\Validator\SpamShield\AbstractMethod` subclasses (`HoneyPodMethod`, `LinkMethod`, …), orchestrated by `SpamShieldValidator` |
 | `UniqueValidator` | Unique field values |
 | `ForeignValidator` | Validate against foreign table |
 | `CustomValidator` | TypoScript-based custom rules |
@@ -362,7 +412,7 @@ final class CustomValidatorListener
 | `HoneyPodMethod` | 5 | Hidden honeypot field |
 | `LinkMethod` | 3 | Excessive links detection |
 | `NameMethod` | 3 | Suspicious name patterns |
-| `SessionMethod` | 5 | Session token validation |
+| `SessionMethod` | 5 | Session/cookie check (shipping TypoScript: **`_enable = 0`** — opt-in because it sets a cookie) |
 | `UniqueMethod` | 2 | Duplicate submission check |
 | `ValueBlacklistMethod` | 7 | Blacklisted content |
 | `IpBlacklistMethod` | 7 | Blacklisted IP addresses |
@@ -1157,4 +1207,5 @@ Powermail Fluid templates must comply with Fluid 5.0 strict typing:
 - No underscore-prefixed variables in Fluid templates.
 - Verify custom Fluid partials and templates for type mismatches.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

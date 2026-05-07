@@ -1,15 +1,14 @@
 ---
-name: typo3-datahandler
-description: >-
-  Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring
-  transactional safety, correct extension points (SC_OPTIONS hooks and documented
-  PSR-14 events), and reference index integrity. Use when working with database,
-  datahandler, tcemain, records, content, pages.
-compatibility: TYPO3 14.x
-metadata:
-  version: "2.1.0"
-license: MIT / CC-BY-SA-4.0
+description: Use the typo3-datahandler Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-datahandler
+
+Canonical skill directory: `.cursor/skills/typo3-datahandler/`
+
+Read `.cursor/skills/typo3-datahandler/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 DataHandler Operations
 
@@ -173,7 +172,7 @@ $cmd = [
 TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
 1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** or **constructor DI** — avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
-2. Call `start($data, $cmd[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
+2. Call `start($dataMap, $commandMap[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
 3. Call `process_datamap()` and / or `process_cmdmap()`
 4. Inspect **`$dataHandler->errorLog`**, verify expected keys in **`$dataHandler->substNEWwithIDs`** for new records, and (in workspaces) review **`$dataHandler->autoVersionIdMap`** when you expect version rows.
 
@@ -280,6 +279,13 @@ final class ImportService
         $dataHandler->start($data, $cmd, $backendUser);
         $dataHandler->process_datamap();
         $dataHandler->process_cmdmap();
+
+        if ($dataHandler->errorLog !== []) {
+            throw new \RuntimeException(
+                'DataHandler error: ' . implode(', ', $dataHandler->errorLog),
+                1700000001
+            );
+        }
     }
 }
 ```
@@ -412,11 +418,11 @@ $GLOBALS['BE_USER']->setWorkspace($previousWorkspace);
 
 ## 9. Extending DataHandler: Hooks and Real Core Events
 
-> **Facts for TYPO3 v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. To run code **after** datamap DB writes, use **`SC_OPTIONS` hook classes** (below). Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
+> **Facts for TYPO3 v14:** TYPO3 Core does **not** ship PSR-14 events named like `BeforeRecordOperationEvent`, `AfterDatabaseOperationsEvent`, or `ModifyRecordBeforeInsertEvent`. Those names are not part of Core. For datamap/cmdmap extension points beyond documented PSR-14 events, use **`SC_OPTIONS` hook classes** (below). Those hooks expose callbacks throughout the lifecycle (`*_beforeStart`, `*_preProcess`, `*_postProcess`, `*_afterDatabaseOperations`, `*_afterAllOperations` / `*_afterFinish`, etc.) — not a single “after everything” moment. Always confirm APIs in [TYPO3 Explained — Events (DataHandling)](https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Events/Events/Core/DataHandling/Index.html) and [`\TYPO3\CMS\Core\DataHandling\Event`](https://api.typo3.org/main/namespaces/typo3-cms-core-datahandling-event.html).
 
 ### 9.1 `SC_OPTIONS` hook classes (primary pattern for datamap/cmdmap)
 
-Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these on **TYPO3 v14**; they are the supported extension point for many DataHandler reactions.
+Register classes on `t3lib/class.t3lib_tcemain.php` — e.g. `processDatamapClass` / `processCmdmapClass`. Core still invokes these on **TYPO3 v14**. Each registration receives **multiple** hook methods over the datamap/cmdmap lifecycle (before start, pre/post process, after DB, after all) — see your hook class naming pattern in Core’s `DataHandler`.
 
 `ext_localconf.php`:
 
@@ -431,7 +437,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
     = \Vendor\Extension\Hooks\DataHandlerHook::class;
 ```
 
-Hook class (after database operations on the datamap — same signature Core calls):
+Hook class (example: `processDatamap_afterDatabaseOperations` — one of several methods Core may call on the same class):
 
 ```php
 <?php
@@ -560,4 +566,5 @@ The Reference Index check has been moved to the **Install Tool** (#107629). The 
 
 ## Credits & Attribution
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+
+Source: https://github.com/dirnbauer/webconsulting-skills

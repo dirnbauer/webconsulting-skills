@@ -1,7 +1,14 @@
 ---
-name: "hyperframes-registry"
-description: "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery."
+description: Use the hyperframes-registry Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# hyperframes-registry
+
+Canonical skill directory: `.cursor/skills/hyperframes-registry/`
+
+Read `.cursor/skills/hyperframes-registry/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # HyperFrames Registry
 

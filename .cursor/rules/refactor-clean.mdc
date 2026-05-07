@@ -1,11 +1,14 @@
 ---
-name: code-refactoring-refactor-clean
-description: "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its..."
-risk: unknown
-source: community
-date_added: "2026-02-27"
-license: MIT
+description: Use the refactor-clean Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# refactor-clean
+
+Canonical skill directory: `.cursor/skills/refactor-clean/`
+
+Read `.cursor/skills/refactor-clean/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Refactor and Clean Code
 
@@ -54,4 +57,19 @@ $ARGUMENTS
 
 - `resources/implementation-playbook.md` for detailed patterns and examples.
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[sickn33](https://github.com/sickn33/antigravity-awesome-skills)**.
+
+Original repository: https://github.com/sickn33/antigravity-awesome-skills
+
+Special thanks to [sickn33](https://github.com/sickn33/antigravity-awesome-skills) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

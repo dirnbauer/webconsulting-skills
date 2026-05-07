@@ -1,11 +1,20 @@
 ---
-name: typo3-vite
-description: "Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance. Use when configuring Vite for TYPO3 projects, setting up SCSS with Bootstrap, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts via font-face, setting up CSS units (rem/em), or customizing Bootstrap variables. Also triggers for: asset hashing, Gzip/Brotli compression, SCSS import chain, global-basics.scss, selective Bootstrap imports."
+description: Use the typo3-vite Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# typo3-vite
+
+Canonical skill directory: `.cursor/skills/typo3-vite/`
+
+Read `.cursor/skills/typo3-vite/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # TYPO3 Vite Skill
 
-Vite 7 build configuration for TYPO3 v13+ sitepackage development with `praetorius/vite-asset-collector`.
+Vite 7 build configuration for TYPO3 v13 and **v14 LTS** sitepackage development with `praetorius/vite-asset-collector`. Current gold standard: v14.3 LTS (released 2026-04-21).
+
+> **v14 context**: TYPO3 v14.0 **removed** the core's built-in frontend CSS/JS concatenation and compression ([Breaking #108055](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-108055-RemovedFrontendAssetConcatenationAndCompression.html)) and CSS comment/whitespace stripping ([Breaking #107944](https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Breaking-107944-FrontendCSSFileProcessingNoLongerRemovesCommentsAndWhitespaces.html)). `config.concatenateCss`/`compressCss`/`concatenateJs`/`compressJs` no longer have any effect. An external build tool (Vite / webpack / esbuild) is **required** for production-grade asset handling on v14.
 
 ## Key Concepts
 

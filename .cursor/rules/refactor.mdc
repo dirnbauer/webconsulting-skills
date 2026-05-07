@@ -1,8 +1,14 @@
 ---
-name: refactor
-description: 'Surgical code refactoring to improve maintainability without changing behavior. Covers extracting functions, renaming variables, breaking down god functions, improving type safety, eliminating code smells, and applying design patterns. Less drastic than repo-rebuilder; use for gradual improvements.'
-license: MIT
+description: Use the refactor Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# refactor
+
+Canonical skill directory: `.cursor/skills/refactor/`
+
+Read `.cursor/skills/refactor/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Refactor
 
@@ -644,4 +650,14 @@ Use this skill when:
 | Replace Type Code with Class/Enum             | Strong typing                         |
 | Replace Inheritance with Delegation           | Composition over inheritance          |
 
-Thanks to [Netresearch DTT GmbH](https://www.netresearch.de/) for their contributions to the TYPO3 community.
+---
+
+## Credits & Attribution
+
+This skill is based on the excellent work by
+**[GitHub](https://github.com/github/awesome-copilot)**.
+
+Original repository: https://github.com/github/awesome-copilot
+
+Special thanks to [GitHub](https://github.com/github/awesome-copilot) for their generous open-source contributions, which helped shape this skill collection.
+Adapted by webconsulting.at for this skill collection

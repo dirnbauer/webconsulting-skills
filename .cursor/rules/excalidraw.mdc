@@ -1,7 +1,14 @@
 ---
-name: excalidraw
-description: Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats.
+description: Use the excalidraw Agent Skill when relevant; read the full skill directory before acting.
+alwaysApply: false
 ---
+
+# excalidraw
+
+Canonical skill directory: `.cursor/skills/excalidraw/`
+
+Read `.cursor/skills/excalidraw/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
+
 
 # Excalidraw Diagram Generator
 
