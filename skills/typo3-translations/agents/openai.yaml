@@ -1,0 +1,7 @@
+interface:
+  display_name: "TYPO3 13/14 Translations"
+  short_description: "TYPO3 13/14 XLIFF, ICU, and labels"
+  default_prompt: "Use $typo3-translations to audit my TYPO3 13/14 translation files and plan safe TYPO3 14 XLIFF 2.0 or ICU upgrades."
+
+policy:
+  allow_implicit_invocation: true

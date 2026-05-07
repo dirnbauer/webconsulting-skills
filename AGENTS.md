@@ -13,7 +13,7 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 > taught me a lot about structuring effective agent skills and whose work forms the foundation
 > for many of the TYPO3 and PHP skills in this collection.
 
-> **TYPO3 Skills:** All TYPO3-related skills target **TYPO3 v14.x only**. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
+> **TYPO3 Skills:** TYPO3-related skills primarily target **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where XLIFF format choices affect upgrades. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
 
 ---
 
@@ -267,7 +267,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, Fluid atoms/molecules, backend previews, icons, and seed data for TYPO3 Content Blocks | 1.0.0 | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script |
-| `typo3-translations` | TYPO3 labels, XLIFF, localization, ICU strings, and LLL reference hygiene | 1.1.0 | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat |
+| `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | 2.1.0 | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
@@ -483,7 +483,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 ### TYPO3 CMS
 - **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
 - **typo3-shadcn-content-elements**: Preset-driven shadcn/ui content element overhauls for Content Blocks, Fluid templates, backend previews, icons, and seed data
-- **typo3-translations**: TYPO3 labels, XLIFF 1.2/2.0, localization keys, ICU strings, and `LLL:` reference hygiene
+- **typo3-translations**: TYPO3 13/14 labels, XLIFF 1.2 compatibility, XLIFF 2.0 migration, localization keys, ICU strings, paths, translation domains, and `LLL:` reference hygiene
 - **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing

@@ -1,12 +1,12 @@
 # webconsulting Agent Skills
 
-> **TYPO3 skills:** Guidance here targets **TYPO3 v14.x** only. Those skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
+> **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
 A curated collection of **72 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
-> **Install script status:** The installer has been tested with Cursor, Claude Desktop, and OpenAI Codex.
+> **Install script status:** The installer has been tested with Cursor, Claude Desktop, OpenAI Codex, and project-level mirrors for Gemini CLI and Windsurf.
 
 ### A Note from the Maintainer
 
@@ -61,14 +61,14 @@ Category-specific add-ons are not counted as top-level skills.
 
 ## 🚀 Universal Agent Skills (5 Core Clients + Optional Tools)
 
-Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths. One source of truth, many consumers.
+Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths. The installer links whole skill directories, so `agents/`, `assets/`, `examples/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
 To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific symlinks or duplicate per-client copies; `./install.sh` and `./update.sh` fan the canonical skill directory out automatically.
 
 ### Core Scripted Clients
 
 | Client | Installation | Discovery |
 |--------|-------------|-----------|
-| **Cursor** | Symlinks to `~/.cursor/skills/` + `.cursor/skills/` + `.mdc` rules | Auto-discovery, `/skill-name` invocation |
+| **Cursor** | Symlinks to `~/.cursor/skills/` + `.cursor/skills/` + generated `.mdc` rule wrappers | Auto-discovery, `/skill-name` invocation |
 | **Claude Code** | Symlinks to `~/.claude/skills/` | Auto-loaded from user skills |
 | **Gemini CLI** | Symlinks to `~/.gemini/skills/` + `.gemini/skills/` + `gemini-extension.json` | Native extension manifest |
 | **OpenAI Codex** | Symlinks to `~/.codex/skills/` + `.codex/skills/` | User and project-level discovery |
@@ -228,7 +228,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 - Source files: `skills/*/SKILL.md` (this repo)
 - User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.codex/skills/`, `~/.codeium/windsurf/skills/`
 - Project-level: `.cursor/skills/`, `.gemini/skills/`, `.codex/skills/`, `.windsurf/skills/`
-- Legacy rules: `.cursor/rules/*.mdc` (backwards compatibility)
+- Legacy rules: `.cursor/rules/*.mdc` wrappers point Cursor to the full skill directory (backwards compatibility)
 - Cross-client: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.windsurfrules`, `.github/copilot-instructions.md`, `gemini-extension.json`
 - Optional/manual clients: any tool-specific skills directory you wire to `skills/`
 - Adding a skill only touches `skills/` and, for upstream-managed skills, `.sync-config.json`
@@ -247,7 +247,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
 | `typo3-shadcn-content-elements` | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script | "Overhaul EXT:desiderio content elements for shadcn preset b4hb38Fyj" or "Audit Content Blocks field coverage and seed data" |
-| `typo3-translations` | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat | "Convert my Content Blocks labels to XLIFF 2.0 with German targets" or "Audit missing TYPO3 LLL labels" |
+| `typo3-translations` | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains | "Audit my TYPO3 13/14 labels before upgrading to XLIFF 2.0" or "Convert v14-only Content Blocks labels to XLIFF 2.0 with German targets" |
 | `typo3-idea-extension-blog` | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog | "Turn this product announcement into a TYPO3 extension and German blog post" or "Assess this article for TYPO3 and build the useful parts" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
@@ -2190,7 +2190,7 @@ grep -r "DataHandler" skills/
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, previews, icons, and seed coverage for TYPO3 Content Blocks | webconsulting |
-| `typo3-translations` | TYPO3 labels, XLIFF, localization, ICU strings, and LLL reference hygiene | webconsulting |
+| `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | webconsulting |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
 | `typo3-ddev` | Local DDEV development environment | Netresearch |
@@ -2451,7 +2451,7 @@ their original repositories explicitly.
 Skills in this collection cover:
 
 - **PHP 8.2+** with strict types and modernization guidance in `php-modernization`
-- **TYPO3 v14.x** for CMS projects (skills are v14-only)
+- **TYPO3 v14.x** for CMS projects, with `typo3-translations` covering TYPO3 13/14 translation compatibility
 - **React/Remotion** for video creation
 - **DDEV** for local development
 - **Next.js/Astro** for frontend (AI Search Optimization)
