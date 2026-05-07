@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -13,7 +13,7 @@ license: MIT / CC-BY-SA-4.0
 
 ## Purpose
 
-Use this skill to build TYPO3 Content Blocks content elements that behave like a coherent shadcn/ui system: preset-driven tokens, shared Fluid atoms/molecules, complete field coverage, useful backend previews, semantic icons, and seed data that fills every editor field.
+Use this skill to build TYPO3 Content Blocks content elements that behave like a coherent shadcn/ui system: preset-driven tokens, shared Fluid atoms/molecules, complete field coverage, useful backend previews, semantic icons, local shadcn registry items, and seed data that makes the styleguide pages credible.
 
 This skill assumes Content Blocks are the source of truth for schema and TYPO3 owns rendering. shadcn/ui is the source for theme tokens, component class contracts, data attributes, states, spacing, borders, radius, and typography.
 
@@ -23,7 +23,9 @@ The styling rule is strict: content elements should not hardcode colors or theme
 
 1. **Establish the preset source.**
    - If a shadcn/create URL or preset id is given, extract the id, for example `b4hb38Fyj`.
-   - Use a scratch app to inspect shadcn output; do not install React components as TYPO3 runtime code.
+   - Run `npx shadcn@latest info --json` in the project when `components.json` exists. If a TYPO3/non-TS repo fails path resolution, add a small `tsconfig.json` plus scratch aliases so `components`, `ui`, `lib`, `utils`, and `hooks` resolve without copying React runtime code into TYPO3.
+   - Use `shadcn create` or `https://ui.shadcn.com/create?item=preview` as a design-system source. Use an Astro scratch app when the user asks for Astro/include-file JavaScript patterns; use a Vite/React scratch app only to inspect primitive class contracts.
+   - Do not install React/Astro components as TYPO3 runtime code. TYPO3 owns rendering; shadcn owns tokens, component contracts, and registry metadata.
    - Commit the preset as local CSS variables and Site Settings, for example `body[data-shadcn-preset="b4hb38Fyj"]`; do not add a runtime preset downloader or binary switcher.
    - Treat `:root` as the light-mode base and `.dark` as the dark-mode override, matching shadcn. Do not write content elements that only look correct in one mode.
    - Read `references/shadcn-preset-workflow.md` before changing theme tokens or primitive class strings.
@@ -31,7 +33,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 2. **Audit before editing.**
    - Run `php <skill>/scripts/audit-content-elements.php <repo-root>` when working on a repo with `ContentBlocks/ContentElements`.
    - Use the output to prioritize missing previews, undeclared rendered fields, unused configured fields, missing labels, missing icons, and repeatable-field gaps.
-   - Treat the audit as a starting point, then manually inspect high-risk templates.
+   - Treat the audit as a starting point, then manually inspect high-risk templates. `fixture_missing_field` and `collection_child_seed_gap` can be soft signals when the project seeder auto-fills missing demo values, but the rendered seeded pages still need a visual pass.
    - Search for structural workaround leftovers before declaring a pass complete: `f:split(`, pipe-delimited links such as `Label|https://...`, legacy list fields such as `features_list`, `specs_text`, `row_data`, comma-delimited `tier_values`, and monolithic `shadcn2fluid_*` fixture maps.
    - Classify leftovers carefully: compatibility converters in a seed script can remain only when they convert old input into current structured fields; templates, fixtures, Content Blocks schema, tests, and docs should demonstrate the current structured model.
    - Apply the Fluid safety checks from `references/content-element-contract.md`, especially for date/time formatting, `typolink` attributes, resource paths, and string-only ViewHelpers.
@@ -40,9 +42,17 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Update `Resources/Private/Components` atoms/molecules from generated shadcn class contracts before editing hundreds of individual templates.
    - Prefer shared Fluid components over bespoke content-element CSS.
    - Keep semantic shadcn tokens such as `bg-background`, `text-foreground`, `bg-card`, `border-border`, `ring-ring`, `text-muted-foreground`, `bg-primary`, and `text-primary-foreground`.
+   - Put client-side behavior in shared include files registered through TypoScript, `f:asset.script`, or TYPO3's AssetCollector. Templates should emit data attributes and JSON payload attributes; they should not contain inline `<script>` renderers.
+   - For charts and interactive patterns, mirror the shadcn component contract: data attributes, CSS variables such as `--chart-1` through `--chart-5`, idempotent initialization, and no hardcoded color fallbacks.
    - Read `references/styling-token-contract.md` before adding or changing element CSS, SVG icon colors, chart colors, shadows, overlays, or backend preview styling.
 
-4. **Audit each content element against its contract.**
+4. **Keep the local shadcn registry valid.**
+   - If the project exposes Desiderio/shadcn patterns for reuse, keep a root `registry.json` and build output under a public registry endpoint such as `Resources/Public/ShadcnRegistry`.
+   - Add a `components.json` registry namespace such as `"@desiderio": "Resources/Public/ShadcnRegistry/{name}.json"`.
+   - Add scripts such as `shadcn:info` and `registry:build`, then run both after changing tokens, runtime assets, or registry item files.
+   - Registry items should package theme token sources, Tailwind source files, Site Settings, TypoScript asset includes, and shared runtime assets. Do not put generated Tailwind output or one-off page CSS into a registry item unless consumers actually need that build artifact.
+
+5. **Audit each content element against its contract.**
    - Read `references/content-element-contract.md`.
    - For every element, compare `config.yaml`, `templates/frontend.html`, `language/labels.xlf`, `assets/icon.svg`, CSS/JS assets, backend preview, and seed coverage.
    - Treat `config.yaml:title` as an editor-facing product name. Prefer names like `Text & Media`, `Image Call to Action`, and `Logo Cloud Hero` over raw slugs such as `textmedia`, `CTA With Image`, or `Hero Logo Cloud`.
@@ -60,7 +70,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - File fields need alt text and copyright/source strategy in seed data and previews.
    - Date and time fields must be formatted to strings before they are passed to visual-editor text rendering or HTML attributes.
 
-5. **Add backend previews for the page/layout module.**
+6. **Add backend previews for the page/layout module.**
    - Read `references/backend-preview-pattern.md`.
    - Add `templates/backend-preview.fluid.html` using Content Blocks `Preview` layout with `Content` and optionally `Footer`.
    - Keep `<f:section name="Header"></f:section>` **empty** — never render a duplicate headline above the formatted card. The card itself shows the title inside `d-ce-preview__title`. Removing the section instead of emptying it triggers TYPO3's `InvalidSectionException` fallback to the standard renderer, which re-adds the duplicate.
@@ -68,27 +78,30 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Show the most important data: title/headline, summary, bullets/repeatables, CTA/link, chart metrics, and thumbnails.
    - Never rely on TYPO3’s Core fallback preview for custom Content Blocks.
 
-6. **Create or refresh icons.**
+7. **Create or refresh icons.**
    - Read `references/icon-pattern.md`.
    - Each element gets a semantic `assets/icon.svg`.
-   - Use TYPO3-style 16x16 SVGs: transparent background, `currentColor` primary, `var(--icon-color-accent,currentColor)` accent, readable in light and dark.
+   - Use TYPO3-style 16x16 SVGs: transparent background, root color `var(--icon-color-primary,currentColor)`, `currentColor` primary paint, `var(--icon-color-accent,currentColor)` accent, readable in light and dark.
    - For large catalogs, actively prevent look-alike icons: audit normalized SVG bodies with titles removed, inspect same-family groups such as heroes/pricing/nav/footers/features, and add per-element geometry instead of relying on one family template.
    - If the user asks for GPT Image / Image GPT / `gpt-image-*`, first verify the currently available OpenAI image model and API credentials. Use image generation for metaphor boards or visual direction; redraw the final asset as clean, editable SVG because TYPO3 backend icons need tiny, token-colored vectors.
    - Treat Lucide, Tabler, and TYPO3 backend icons as metaphor references, not as a reason to reuse the same glyph across many content elements.
 
-7. **Update seed scripts.**
+8. **Update seed scripts.**
    - Fill all top-level and repeatable fields for every element.
    - Fill nested repeatables as structured arrays; never collapse a second-level list into a newline-separated textarea when an IRRE Collection is available.
    - Add real dummy images from Unsplash or committed demo assets, with alt text and copyright/source fields where available.
    - Seed links as structured data or distinct fields, for example `{"label": "Docs", "link": "https://example.com/docs"}` or `link_1_label` plus `link_1`. Do not generate pipe-delimited link strings.
    - Seed chart/data elements with valid JSON that the frontend template actually parses.
+   - When the seeder auto-fills omitted optional fields, inspect the generated pages anyway. Empty fixtures are acceptable only when the fallback content is specific enough for visual QA and editor demos.
    - Validate seeded `Select` values against the current `config.yaml` items before insertion. Stale fixture values from removed style variants should fall back to the configured default instead of seeding inert editor choices.
    - Keep Desiderio fixtures in each `ContentBlocks/ContentElements/<element>/fixture.json` file. Do not create or restore monolithic `shadcn2fluid_*` fixture mappings.
    - If old fixture keys must be accepted for migration, convert them at seed time into current fields or nested Collections and keep those aliases out of new fixtures and examples.
 
-8. **Verify and commit in reviewable slices.**
+9. **Verify and commit in reviewable slices.**
    - Run CSS build, PHP unit/static checks, and Content Blocks/TYPO3 cache validation.
+   - Run `npx shadcn@latest info --json` and `npx shadcn@latest build --output <public-registry-dir>` when `components.json` or `registry.json` changed.
    - Scan content elements and shared generated preview code for raw color literals; allowed raw preset values should be confined to the shadcn theme token file and generated Tailwind output.
+   - Scan templates for inline scripts when shared JavaScript was introduced: `rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.html`.
    - For large overhauls, commit by layer: preset/theme, primitives, generated previews, icons, per-element fixes, seed data.
    - Browser-check frontend pages and TYPO3 backend layout module previews.
 

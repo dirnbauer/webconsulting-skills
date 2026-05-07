@@ -10,7 +10,7 @@ Use this checklist for every `ContentBlocks/ContentElements/<element>`.
 - `language/labels.xlf`
 - `assets/icon.svg`
 - `assets/frontend.css` only when the shared Fluid component layer cannot express the layout, unless the repository has an explicit per-element asset-file invariant; then keep an empty/comment-only marker file and do not include it from the template until rules are actually needed
-- `assets/frontend.js` only when interaction or visualization requires it
+- `assets/frontend.js` only when interaction or visualization is genuinely element-local; prefer a shared include file for whole families such as charts, carousels, tabs, counters, and dashboards
 
 ## Schema And Template Checks
 
@@ -30,7 +30,7 @@ For each field in `config.yaml`:
 - Do not model repeatable editor content as delimiter protocols. Fields such as `features_list`, `specs_text`, `row_data`, comma-separated `tier_values`, or newline/pipe encoded people/pages are legacy migration inputs, not the target schema.
 - If it is `File`, render with TYPO3 file APIs and provide alt/caption/copyright strategy.
 - If it stores an editor-managed URL, use `type: Link`; keep the visible label in a separate text field such as `cta_text`, `link_1_label`, or `child_1_label`.
-- If it is JSON/data, validate that the template and JavaScript parse the declared structure.
+- If it is JSON/data, validate that the template emits a stable `data-*` attribute and the shared JavaScript parses the declared structure.
 
 For each field used in `frontend.html`:
 
@@ -45,6 +45,28 @@ For each field used in `frontend.html`:
 - Use package-qualified resource paths such as `EXT:desiderio/Resources/Public/...` for `f:uri.resource`; a bare relative path can be parsed as an empty package key.
 - Guard string-only ViewHelpers such as `f:split` with defaults or conditions when the editor field can be empty, an array, or parsed JSON.
 - Avoid undeclared Fluid arguments and unsupported ViewHelper arguments.
+
+## Client-Side Behavior Pattern
+
+Use this pattern for charts, dashboards, carousels, counters, and other browser behavior:
+
+- Register shared JavaScript through TypoScript `page.includeJSFooterlibs`, `f:asset.script`,
+  or TYPO3's AssetCollector.
+- Keep Fluid templates declarative: semantic markup, shadcn classes, `data-ce`,
+  `data-chart-data`, `data-chart-json`, `data-state`, and ARIA attributes.
+- Do not render inline `<script>` blocks inside `templates/frontend.html`.
+- Make initializers idempotent by marking enhanced nodes, for example
+  `data-chart-rendered="true"`.
+- Read colors from CSS variables such as `--chart-1`, `--chart-2`, `--primary`,
+  `--muted-foreground`, or `currentColor`; do not put raw color literals in JS.
+- If the user asks for Astro include files, use an Astro shadcn scratch app to model the
+  component behavior, then ship compiled/shared include assets in TYPO3.
+
+Run this scan after moving scripts:
+
+```bash
+rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.html
+```
 
 ## Link Field Pattern
 

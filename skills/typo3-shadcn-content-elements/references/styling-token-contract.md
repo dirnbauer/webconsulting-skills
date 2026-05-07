@@ -25,8 +25,9 @@ Prefer Tailwind/shadcn utility classes and semantic CSS variables:
 - Controls: `bg-primary`, `text-primary-foreground`, `border-border`, `border-input`,
   `ring-ring`
 - Charts: `var(--chart-1)` through `var(--chart-5)`
-- TYPO3 preview UI: TYPO3 component variables first, then shadcn tokens as fallback
-- Icons: `currentColor` and `var(--icon-color-accent,currentColor)`
+- TYPO3 preview UI: TYPO3 component variables first, then shadcn tokens; avoid fixed color fallbacks
+- Icons: root color `var(--icon-color-primary,currentColor)`, primary paint as
+  `currentColor`, and accent paint as `var(--icon-color-accent,currentColor)`
 - Overlays: `color-mix()` with semantic tokens, for example
   `color-mix(in oklch, var(--foreground) 60%, transparent)`
 
@@ -40,6 +41,8 @@ icons, or generator templates:
 - Fixed dark-only overlays such as `rgba(0,0,0,.7)`
 - Fixed white text for image/nav overlays when a semantic foreground token can express it
 - Shadow fallbacks with raw RGB values when `--shadow-*` or `--d-shadow-*` exists
+- CSS custom-property fallbacks that resolve to raw colors, for example
+  `var(--primary, #2563eb)`, outside the committed token source
 
 The practical exception is migration tooling that maps known legacy literals to tokens.
 Keep those mappings isolated and do not copy the legacy literals into live templates.
@@ -54,8 +57,15 @@ rg -n "#[0-9a-fA-F]{3,8}\b|rgba?\(|hsla?\(|hsl\(|oklch\(" \
   Resources/Public/Css/content-preview.css \
   Resources/Public/Css/components.css \
   Resources/Public/Css/desiderio.css \
+  Resources/Public/Js/charts.js \
   Build/Scripts/normalize-content-elements.php \
   -g '*.css' -g '*.html' -g '*.js' -g '*.svg' -g '*.php'
+```
+
+Run the icon-specific audit when available:
+
+```bash
+php Build/Scripts/audit-icon-contrast.php
 ```
 
 Expected source-level findings:
