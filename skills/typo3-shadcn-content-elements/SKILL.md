@@ -3,7 +3,7 @@ name: typo3-shadcn-content-elements
 description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
 compatibility: TYPO3 14.x
 metadata:
-  version: "1.5.0"
+  version: "1.6.0"
 license: MIT / CC-BY-SA-4.0
 ---
 
@@ -32,8 +32,11 @@ The styling rule is strict: content elements should not hardcode colors or theme
 
 2. **Audit before editing.**
    - Run `php <skill>/scripts/audit-content-elements.php <repo-root>` when working on a repo with `ContentBlocks/ContentElements`.
+   - For Desiderio, also run the project audit script (`php scripts/audit-content-elements.php`) because it contains repo-specific hard checks for inline styles, raw colors, variant branches, undeclared rendered fields, and seed gaps.
+   - If local PHP cannot load Composer because the extension requires PHP 8.3+, run the audit and PHPUnit through DDEV PHP 8.3. Copy the repo to a temporary path inside the DDEV project first so you do not mutate a dirty vendor checkout.
    - Use the output to prioritize missing previews, undeclared rendered fields, unused configured fields, missing labels, missing icons, and repeatable-field gaps.
    - Treat the audit as a starting point, then manually inspect high-risk templates. `fixture_missing_field` and `collection_child_seed_gap` can be soft signals when the project seeder auto-fills missing demo values, but the rendered seeded pages still need a visual pass.
+   - Do not stop after icon-like fields. Loop through every Content Block element in the catalog and classify each issue as schema, template, CSS/token, JavaScript/include, backend preview, fixture, or seed-fallback work.
    - Search for structural workaround leftovers before declaring a pass complete: `f:split(`, pipe-delimited links such as `Label|https://...`, legacy list fields such as `features_list`, `specs_text`, `row_data`, comma-delimited `tier_values`, and monolithic `shadcn2fluid_*` fixture maps.
    - Classify leftovers carefully: compatibility converters in a seed script can remain only when they convert old input into current structured fields; templates, fixtures, Content Blocks schema, tests, and docs should demonstrate the current structured model.
    - Apply the Fluid safety checks from `references/content-element-contract.md`, especially for date/time formatting, `typolink` attributes, resource paths, and string-only ViewHelpers.
@@ -50,6 +53,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - If the project exposes Desiderio/shadcn patterns for reuse, keep a root `registry.json` and build output under a public registry endpoint such as `Resources/Public/ShadcnRegistry`.
    - Add a `components.json` registry namespace such as `"@desiderio": "Resources/Public/ShadcnRegistry/{name}.json"`.
    - Add scripts such as `shadcn:info` and `registry:build`, then run both after changing tokens, runtime assets, or registry item files.
+   - Use current shadcn CLI commands as the source of truth: `shadcn info --json` for project configuration and `shadcn build --output <dir>` for registry output. The upstream registry is framework-agnostic, so a TYPO3 registry item may package Fluid, TypoScript, CSS token sources, JavaScript include files, and Site Settings when the item type describes that contract.
    - Registry items should package theme token sources, Tailwind source files, Site Settings, TypoScript asset includes, and shared runtime assets. Do not put generated Tailwind output or one-off page CSS into a registry item unless consumers actually need that build artifact.
 
 5. **Audit each content element against its contract.**
@@ -93,6 +97,8 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Seed links as structured data or distinct fields, for example `{"label": "Docs", "link": "https://example.com/docs"}` or `link_1_label` plus `link_1`. Do not generate pipe-delimited link strings.
    - Seed chart/data elements with valid JSON that the frontend template actually parses.
    - When the seeder auto-fills omitted optional fields, inspect the generated pages anyway. Empty fixtures are acceptable only when the fallback content is specific enough for visual QA and editor demos.
+   - If a full-catalog audit reports many `fixture_missing_field` or `collection_child_seed_gap` rows but hard template/style checks are clean, improve the project seeder first. Fallback copy should read like real pattern-library content (`Pattern Library`, realistic product/demo copy, useful CTA labels, valid links, valid icon keys, token names such as `primary`) and must not expose generic placeholder phrases such as `Complete demo content`.
+   - Prefer shadcn token `Select` fields over freeform `Color` fields for elements whose appearance should track theme changes. If an element needs editor color choice, render it through token-backed data attributes or CSS variables and keep raw color values out of fixtures and fallback seed data.
    - Validate seeded `Select` values against the current `config.yaml` items before insertion. Stale fixture values from removed style variants should fall back to the configured default instead of seeding inert editor choices.
    - Keep Desiderio fixtures in each `ContentBlocks/ContentElements/<element>/fixture.json` file. Do not create or restore monolithic `shadcn2fluid_*` fixture mappings.
    - If old fixture keys must be accepted for migration, convert them at seed time into current fields or nested Collections and keep those aliases out of new fixtures and examples.
@@ -102,6 +108,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
    - Run `npx shadcn@latest info --json` and `npx shadcn@latest build --output <public-registry-dir>` when `components.json` or `registry.json` changed.
    - Scan content elements and shared generated preview code for raw color literals; allowed raw preset values should be confined to the shadcn theme token file and generated Tailwind output.
    - Scan templates for inline scripts when shared JavaScript was introduced: `rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.html`.
+   - For a user-requested full pass, run the complete content-element audit loop repeatedly over all elements, not just changed files. Ten iterations are acceptable when the user explicitly asks to loop 10 times; report the stable summary and the element count.
    - For large overhauls, commit by layer: preset/theme, primitives, generated previews, icons, per-element fixes, seed data.
    - Browser-check frontend pages and TYPO3 backend layout module previews.
 
