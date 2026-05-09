@@ -160,6 +160,14 @@
       "enabled": true
     },
     {
+      "name": "impeccable",
+      "source": "https://github.com/pbakaus/impeccable.git",
+      "branch": "skill-v3.0.7",
+      "path": ".agents/skills/impeccable",
+      "enabled": true,
+      "note": "Pinned to release https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7"
+    },
+    {
       "name": "ios-design",
       "source": "https://github.com/ehmo/platform-design-skills.git",
       "branch": "main",
@@ -386,5 +394,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-04-29T14:25:57Z"
+  "lastSync": "2026-05-09T08:47:19Z"
 }

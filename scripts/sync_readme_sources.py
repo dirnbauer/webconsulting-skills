@@ -46,6 +46,7 @@ OWNER_LINKS = {
     "Firecrawl": "https://www.firecrawl.dev/",
     "remotion-dev": "https://remotion.dev/",
     "OpenHands": "https://github.com/OpenHands",
+    "pbakaus": "https://github.com/pbakaus",
 }
 
 OWNER_COPYRIGHT = {
@@ -131,6 +132,7 @@ OWNER_ORDER = [
     "Firecrawl",
     "remotion-dev",
     "OpenHands",
+    "pbakaus",
 ]
 
 

@@ -28,6 +28,7 @@ LINK_OVERRIDES = {
     "Netresearch": "https://www.netresearch.de/",
     "HeyGen": "https://www.heygen.com/",
     "Matt Pocock": "https://github.com/mattpocock",
+    "pbakaus": "https://github.com/pbakaus",
 }
 DISPLAY_NAME_OVERRIDES = {
     "Netresearch": "Netresearch DTT GmbH",

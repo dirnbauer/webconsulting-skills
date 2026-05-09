@@ -322,6 +322,22 @@
     "pass_3": []
   },
   {
+    "directory": "impeccable",
+    "skill_name": "impeccable",
+    "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks.",
+    "source_owner": "pbakaus",
+    "source_url": "https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/impeccable/SKILL.md",
+    "line_count": 189,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "ios-design",
     "skill_name": "ios-design",
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
@@ -612,14 +628,15 @@
   {
     "directory": "shadcn-ui",
     "skill_name": "shadcn-ui",
-    "description": "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
+    "description": "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
-    "line_count": 323,
+    "line_count": 371,
     "frontmatter_keys": [
       "name",
-      "description"
+      "description",
+      "metadata"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -982,7 +999,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
-    "line_count": 110,
+    "line_count": 181,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1053,11 +1070,11 @@
   {
     "directory": "typo3-translations",
     "skill_name": "typo3-translations",
-    "description": "TYPO3 localization and translation-file guidance. Use this skill whenever the user asks to create, edit, audit, migrate, or validate TYPO3 labels, locallang.xlf, labels.xlf, XLIFF 1.2 or XLIFF 2.0 files, LLL references, Content Blocks labels, backend labels, English/German localizations, ICU MessageFormat strings, missing translation keys, duplicate labels, or translation cleanup.",
+    "description": "TYPO3 13 and 14 localization guidance for creating, auditing, migrating, and debugging labels, locallang.xlf, labels.xlf, XLIFF 1.2, XLIFF 2.0, ICU MessageFormat, LLL references, TYPO3 14 translation domains, Content Blocks labels, backend/frontend labels, path and namespace conventions, missing keys, duplicate units, and TYPO3 13-to-14 translation upgrade checklists. Use whenever the user mentions TYPO3 translations, XLIFF, ICU, localization, labels, LLL, language files, or translation migration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-translations/SKILL.md",
-    "line_count": 479,
+    "line_count": 500,
     "frontmatter_keys": [
       "name",
       "description",

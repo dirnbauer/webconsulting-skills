@@ -92,6 +92,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "HeyGen",
         "url": "https://github.com/heygen-com/hyperframes",
     },
+    "impeccable": {
+        "owner": "pbakaus",
+        "url": "https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7",
+    },
     "ios-design": {
         "owner": "ehmo",
         "url": "https://github.com/ehmo/platform-design-skills",
@@ -262,6 +266,7 @@ GITHUB_OWNER_LABELS = {
     "netresearch": "Netresearch",
     "openhands": "OpenHands",
     "ooiyeefei": "ooiyeefei",
+    "pbakaus": "pbakaus",
     "remotion-dev": "remotion-dev",
     "sickn33": "sickn33",
     "softaworks": "Softaworks",

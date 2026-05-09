@@ -228,6 +228,22 @@
       ],
       "path": "${extensionPath}/skills/hyperframes-registry"
     },
+    "impeccable": {
+      "name": "impeccable",
+      "description": "Production-grade frontend design, critique, polish, shaping, and live UI iteration",
+      "triggers": [
+        "impeccable",
+        "design",
+        "redesign",
+        "shape",
+        "critique",
+        "audit",
+        "polish",
+        "craft",
+        "live UI"
+      ],
+      "path": "${extensionPath}/skills/impeccable"
+    },
     "ios-design": {
       "name": "ios-design",
       "description": "Apple HIG for iPhone, SwiftUI, Dynamic Type, Dark Mode",

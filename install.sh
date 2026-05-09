@@ -35,6 +35,7 @@
 #     • Other tools       (manual link to their skills directory; see README)
 #
 # Project-level skills (symlinks in project root):
+#     • .agents/skills/       (Generic agent skill path)
 #     • .cursor/skills/       (Cursor)
 #     • .cursor/rules/*.mdc   (Cursor legacy)
 #     • .gemini/skills/       (Gemini CLI / Antigravity)
@@ -63,7 +64,7 @@ USER_ONLY=false
 PROJECT_ONLY=false
 NO_SYNC=false
 GENERATE_ONLY=false
-SYNC_SUBDIRS=(agents assets examples references rules scripts)
+SYNC_SUBDIRS=(agents assets examples reference references rules scripts)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -407,6 +408,9 @@ else
     echo ""
     echo "→ Installing project-level skills..."
 
+    # Generic agent skill path used by several cross-client skill packages
+    install_skills_to "$PROJECT_ROOT/.agents/skills" "Generic agents (.agents/skills)"
+
     # Cursor (primary project-level location)
     install_skills_to "$PROJECT_ROOT/.cursor/skills" "Cursor (.cursor/skills)"
 
@@ -543,8 +547,8 @@ fi
 
 if [ "$USER_ONLY" != "true" ]; then
     echo "Project-level skills installed to:"
-    echo "  .cursor/skills/    .gemini/skills/    .codex/skills/"
-    echo "  .windsurf/skills/  .cursor/rules/*.mdc"
+    echo "  .agents/skills/    .cursor/skills/    .gemini/skills/"
+    echo "  .codex/skills/     .windsurf/skills/  .cursor/rules/*.mdc"
     echo ""
 fi
 

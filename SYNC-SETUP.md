@@ -3,9 +3,9 @@
 This repository uses one canonical skill layout:
 
 - each skill lives once at `skills/<slug>/SKILL.md`
-- optional `agents/`, `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
+- optional `agents/`, `reference/`, `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
 - upstream-managed skills are declared once in `.sync-config.json`
-- `./install.sh` and `./update.sh` fan skills out to the five core clients automatically
+- `./install.sh` and `./update.sh` fan skills out to the five core clients and the generic project `.agents/skills/` path automatically
 
 Do not add manual per-client symlinks or duplicate `SKILL.md` files for individual products.
 
@@ -27,6 +27,7 @@ Do not add manual per-client symlinks or duplicate `SKILL.md` files for individu
 |--------|--------------|-------|
 | Cursor | `.cursor/skills/` | Primary project-level Cursor skills |
 | Cursor legacy | `.cursor/rules/*.mdc` | Backwards compatibility copies |
+| Generic agents | `.agents/skills/` | Shared project-level skill path |
 | Gemini CLI | `.gemini/skills/` | Project-level Gemini/Antigravity |
 | OpenAI Codex | `.codex/skills/` | Project-level Codex skills |
 | Windsurf | `.windsurf/skills/` | Project-level Windsurf skills |
@@ -64,7 +65,7 @@ If a tool reads instruction files instead of a skills directory, point it at `AG
 
 ## How Installation Works
 
-`./install.sh` loops over every directory under `skills/` and installs it everywhere it belongs for the five core clients.
+`./install.sh` loops over every directory under `skills/` and installs it everywhere it belongs for the five core clients and generic project agents.
 
 ```text
 skills/typo3-update/SKILL.md          <- source of truth
@@ -75,6 +76,7 @@ skills/typo3-update/SKILL.md          <- source of truth
 ~/.codex/skills/typo3-update/         <- OpenAI Codex
 ~/.codeium/windsurf/skills/typo3-update/ <- Windsurf
 .cursor/skills/typo3-update/          <- Cursor project-level
+.agents/skills/typo3-update/          <- Generic project-level
 .gemini/skills/typo3-update/          <- Gemini project-level
 .codex/skills/typo3-update/           <- Codex project-level
 .windsurf/skills/typo3-update/        <- Windsurf project-level
@@ -114,7 +116,7 @@ Netresearch-derived skills are currently upstream-managed through `.sync-config.
 3. Update README / AGENTS if the skill changes the public catalog.
 4. Run `./install.sh`.
 
-No extra client-specific symlink work is required for the five core clients.
+No extra client-specific symlink work is required for the five core clients or the generic `.agents/skills/` project path.
 
 Example local skill layout:
 
@@ -155,7 +157,7 @@ Configuration fields:
 | `note` | No | Human-readable maintenance note |
 
 For skill-mode imports, the updater copies `SKILL.md` plus any `agents/`, `assets/`,
-`examples/`, `references/`, `rules/`, and `scripts/` folders.
+`examples/`, `reference/`, `references/`, `rules/`, and `scripts/` folders.
 Do not keep local-only reference files inside an upstream-managed skill's synced
 subfolders; put local overlays in a repo-owned skill so the next sync does not remove them.
 

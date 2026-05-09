@@ -33,7 +33,7 @@ SKILL_FILTER=""
 # Keep this aligned with install.sh. These directories are copied from upstream
 # skills and then symlinked as part of the whole skill directory for clients that
 # support extra metadata, assets, references, or scripts.
-SYNC_SUBDIRS=(agents assets examples references rules scripts)
+SYNC_SUBDIRS=(agents assets examples reference references rules scripts)
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do

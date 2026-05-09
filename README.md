@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **72 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **73 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,7 +24,7 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **72 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **73 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
@@ -37,12 +37,12 @@ Category-specific add-ons are not counted as top-level skills.
 | **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
 | **Code Quality & Refactoring** | 5 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me (Matt Pocock) |
 | **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
-| **Frontend & Design** | 8 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
+| **Frontend & Design** | 9 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Impeccable (pbakaus), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
 | **Platform Design** | 8 skills | Android Design (ehmo), iOS Design (ehmo), iPadOS Design (ehmo), macOS Design (ehmo), tvOS Design (ehmo), visionOS Design (ehmo), watchOS Design (ehmo), Web Platform Design (ehmo) |
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **72 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **73 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -61,7 +61,7 @@ Category-specific add-ons are not counted as top-level skills.
 
 ## 🚀 Universal Agent Skills (5 Core Clients + Optional Tools)
 
-Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths. The installer links whole skill directories, so `agents/`, `assets/`, `examples/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
+Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths, plus a project-level `.agents/skills/` mirror for generic agent packages. The installer links whole skill directories, so `agents/`, `assets/`, `examples/`, `reference/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
 To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific symlinks or duplicate per-client copies; `./install.sh` and `./update.sh` fan the canonical skill directory out automatically.
 
 ### Core Scripted Clients
@@ -73,6 +73,7 @@ To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific
 | **Gemini CLI** | Symlinks to `~/.gemini/skills/` + `.gemini/skills/` + `gemini-extension.json` | Native extension manifest |
 | **OpenAI Codex** | Symlinks to `~/.codex/skills/` + `.codex/skills/` | User and project-level discovery |
 | **Windsurf** | Symlinks to `~/.codeium/windsurf/skills/` + `.windsurf/skills/` | User and project-level discovery |
+| **Generic agents** | Symlinks to `.agents/skills/` | Project-level shared skill path |
 
 ### Native and Optional Clients
 
@@ -93,6 +94,7 @@ To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific
 .cursor/
   ├── skills/              ← Cursor (project-level)
   └── rules/               ← Legacy .mdc files (backwards compat)
+.agents/skills/            ← Generic agent skill path (project-level)
 .gemini/skills/            ← Gemini CLI (project-level)
 .codex/skills/             ← OpenAI Codex (project-level)
 .windsurf/skills/          ← Windsurf (project-level)
@@ -292,6 +294,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `marketing-skills` | marketing, cro, conversion, landing page, pricing | "Optimize this landing page" or "Write homepage copy" |
 | `og-image` | og-image, open graph, social preview, twitter card, meta tags | "Generate an OG image" or "Set up Twitter card meta tags" |
 | `frontend-design` | frontend, design, creative, beautiful, distinctive, aesthetics | "Create a distinctive landing page" or "Design a dark tech hero section" |
+| `impeccable` | impeccable, design, redesign, shape, critique, audit, polish, craft, live UI | "Use impeccable to polish this product UI" or "Run impeccable shape for this onboarding flow" |
 | `web-design-guidelines` | web design, accessibility, a11y, wcag, aria, semantic html | "Review this component for accessibility issues" or "Audit my form for WCAG" |
 | `document-processing` | pdf, docx, word, pptx, powerpoint, xlsx, excel | "Extract text from this PDF" or "Create an Excel model with formulas" |
 | `firecrawl` | scrape, crawl, search web, research, fetch url | "Search the web for..." or "Scrape this page" |
@@ -844,6 +847,36 @@ Create a hero section with a diagonal split layout, bold headline on the left, a
 
 ```
 Design a full-screen hero with animated gradient background, centered headline with letter-by-letter animation.
+```
+
+#### 🧭 Impeccable Frontend Craft (impeccable)
+
+The `impeccable` skill adds a structured frontend design workflow for shaping, critique, audits, polish passes, live iteration, and end-to-end craft work. It is pinned to `skill-v3.0.7` from `pbakaus/impeccable`.
+
+**Shape Before Build:**
+
+```
+Use impeccable shape for this onboarding flow before implementation. Resolve layout, tone, interaction states, and responsive behavior.
+```
+
+```
+Run impeccable craft for this landing page and wait for the shape brief before editing files.
+```
+
+**Critique And Polish:**
+
+```
+Use impeccable critique on this dashboard. Prioritize visual hierarchy, cognitive load, accessibility, and interaction clarity.
+```
+
+```
+Use impeccable polish on this settings UI before release. Tighten spacing, copy, empty states, errors, and mobile behavior.
+```
+
+**Live UI Iteration:**
+
+```
+Use impeccable live to inspect the current page in-browser and propose stronger variants for the selected UI elements.
 ```
 
 ```
@@ -2242,6 +2275,7 @@ grep -r "DataHandler" skills/
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns | Anthropic |
+| `impeccable` | Production-grade frontend design, critique, polish, and live iteration | pbakaus |
 | `web-design-guidelines` | Interface review, WCAG, ARIA, accessibility | Vercel |
 | `excalidraw` | Architecture diagrams as `.excalidraw` with optional PNG/SVG export | ooiyeefei |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | Stevy Smith |
@@ -2298,7 +2332,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │   72 SKILL.md     │
+                        │   73 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2530,6 +2564,9 @@ The following repositories are the source for skills in this collection:
 
 ### OpenHands (1 skill)
 - `readiness-report`: https://github.com/OpenHands/skills
+
+### pbakaus (1 skill)
+- `impeccable`: https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7
 <!-- EXTERNAL_REPOS:END -->
 
 ## Contributing
@@ -2809,6 +2846,17 @@ Adapted skill: `readiness-report`
 
 Original repositories:
 - `readiness-report`: https://github.com/OpenHands/skills
+
+
+---
+
+We also thank **[pbakaus](https://github.com/pbakaus)** for their excellent open-source work.
+The `impeccable` skill in this collection builds on that contribution.
+
+Adapted skill: `impeccable`
+
+Original repositories:
+- `impeccable`: https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7
 
 
 <!-- ACKNOWLEDGEMENTS:END -->

@@ -243,6 +243,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces | 1.0.0 | frontend, design, creative, beautiful, distinctive, aesthetics |
+| `impeccable` | Production-grade frontend design, critique, polish, shaping, and live UI iteration | 3.0.7 | impeccable, design, redesign, shape, critique, audit, polish, craft, live UI |
 | `web-design-guidelines` | Interface review, accessibility audit, WCAG, ARIA, semantic HTML | 1.0.0 | web design, accessibility, a11y, wcag, aria, semantic html |
 | `excalidraw` | Generate architecture diagrams as .excalidraw files with optional PNG/SVG export | 1.0.0 | excalidraw, architecture diagram, system diagram, visualize codebase, png export, svg export |
 | `og-image` | Social preview images (Open Graph), meta tags, Twitter cards | 1.0.0 | og-image, open graph, social preview, twitter card, meta tags |
@@ -397,6 +398,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - Color palettes with dominant + accent approach
   - Motion design for high-impact moments
   - Anti-patterns checklist
+- **impeccable**: Production-grade frontend design workflow for shaping, critique, polish, audits, craft passes, and live UI iteration
 - **web-design-guidelines**: Interface review for accessibility and usability
   - WCAG 2.1 AA compliance checking
   - Semantic HTML validation
@@ -1220,6 +1222,13 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Build a hero with parallax scrolling and floating elements"
 - "Design an asymmetric layout with intentional visual tension"
 - "Create a diagonal split layout for my hero section"
+
+**🧭 Impeccable Frontend Craft (impeccable)**
+- "Use impeccable shape for this onboarding flow before implementation"
+- "Run impeccable craft for this landing page and wait for the shape brief"
+- "Use impeccable critique on this dashboard"
+- "Use impeccable polish on this settings UI before release"
+- "Use impeccable live to inspect the current page and propose stronger UI variants"
 
 **✅ Accessibility & Interface Review (web-design-guidelines)**
 - "Review this component for accessibility issues"
