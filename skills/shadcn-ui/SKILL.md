@@ -2,7 +2,7 @@
 name: "shadcn-ui"
 description: "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # shadcn/ui Component Patterns
@@ -73,7 +73,8 @@ Activate when user requests involve:
 Use this sequence when the user wants a shadcn preset, preview, registry, or non-React implementation:
 
 1. **Identify the source.** Start from the user-provided `https://ui.shadcn.com/create` URL, `?item=preview`, preset code, registry item, or existing `components.json`.
-2. **Inspect with the CLI.** Run `npx shadcn@latest info --json` in the project when `components.json` exists. If the repo is not a normal React app, treat framework detection as advisory and focus on `tailwind.css`, `style`, `base`, `iconLibrary`, aliases, and registries.
+2. **Inspect with the CLI.** Run `npx shadcn@latest info --json` in the project when `components.json` exists. If the repo is not a normal React app, treat framework detection as advisory and focus on `tailwind.css`, `style`, `base`, `iconLibrary`, aliases, and registries. Do not assume `new-york`, `default`, or any other style: `components.json` may point at a preset such as `radix-lyra`, and the official `@shadcn` registry resolves component code through `https://ui.shadcn.com/r/styles/{style}/{name}.json`.
+   - For shadcn/create preset ids, decode the preset before touching component classes. Current v4 create styles decode as short names such as `nova`, `mira`, or `lyra`; registry style ids are the corresponding `radix-nova`, `radix-mira`, or `radix-lyra`. The icon library and base color also come from the preset, so sync `components.json` alongside generated primitives.
 3. **Use a scratch app when needed.** For non-React systems, scaffold or inspect in an Astro/Vite/React scratch project to learn shadcn token values, primitive class contracts, component states, and data attributes. Do not copy React runtime code into the target system unless the target actually uses React.
 4. **Commit tokens, not a downloader.** Store the selected preset/theme as local CSS variables, Tailwind v4 source, and project config. Keep `:root` as the light base and `.dark` as the dark override.
 5. **Port component contracts.** Recreate the shadcn behavior in the target framework with semantic tokens (`--background`, `--foreground`, `--card`, `--border`, `--ring`, `--primary`, `--chart-1`...) and shared primitives. Avoid one-off visual variants that are not represented by shadcn components or tokens.
@@ -84,6 +85,7 @@ Use this sequence when the user wants a shadcn preset, preview, registry, or non
 ### Token and Styling Rules
 
 - Treat shadcn/ui as the source for tokens, component class contracts, data attributes, states, spacing, borders, radius, focus rings, and typography.
+- When a project uses a style preset, compare local atoms/molecules against the registry output for that exact style before applying generic examples from docs. If changing the style is requested, update the preset/config first, then port the resulting registry classes.
 - Raw `oklch()`, `hsl()`, `rgb()`, and hex color values belong in the committed shadcn theme token source or generated build output. Feature code, templates, component CSS, charts, icons, and fixtures should consume semantic tokens.
 - Prefer token-backed option fields (`primary`, `secondary`, `accent`, `muted`, `destructive`) over arbitrary color pickers when the UI should follow theme changes.
 - Charts should use `--chart-1` through `--chart-5` or the component's generated `--color-*` variables, not hardcoded color fallbacks.
