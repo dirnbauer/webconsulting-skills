@@ -70,12 +70,12 @@ final class SkillInstallerPlugin implements PluginInterface, EventSubscriberInte
         $this->io->write('<info>Installing webconsulting Agent Skills...</info>');
 
         $exitCode = 0;
-        passthru('bash ' . escapeshellarg($installScript), $exitCode);
+        passthru('bash ' . escapeshellarg($installScript) . ' --no-sync', $exitCode);
 
         if ($exitCode === 0) {
             $this->io->write('<info>webconsulting Agent Skills installed successfully.</info>');
         } else {
-            $this->io->writeError('<error>Failed to install Claude Agent Skills (exit code: ' . $exitCode . ')</error>');
+            $this->io->writeError('<error>Failed to install webconsulting Agent Skills (exit code: ' . $exitCode . ')</error>');
         }
     }
 }

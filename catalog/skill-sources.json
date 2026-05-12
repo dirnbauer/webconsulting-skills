@@ -1108,6 +1108,22 @@
     "pass_3": []
   },
   {
+    "directory": "typo3-visual-editor",
+    "skill_name": "typo3-visual-editor",
+    "description": "TYPO3 Visual Editor integration and migration guide for friendsoftypo3/visual-editor. Use when installing, configuring, removing, troubleshooting, or upgrading templates for the new Visual Editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW content areas, record-transformation, Fluid templates, backend fields, colPos migrations, Container/VHS/Flux content rendering, or visual editing readiness in TYPO3 13/14 sitepackages.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-visual-editor/SKILL.md",
+    "line_count": 359,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "typo3-vite",
     "skill_name": "typo3-vite",
     "description": "Use when configuring Vite 7 for TYPO3 v13/v14 LTS projects, setting up SCSS architecture with Bootstrap 5.3 theming, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts, or customizing Bootstrap variables. v14 removed core asset concat/compression (#108055) \\u2014 external build tool is now mandatory. Also triggers for: vite-asset-collector, asset hashing, Gzip/Brotli compression, SCSS import chain, selective Bootstrap imports, CSP compliance, post-v14 frontend build pipelines.",

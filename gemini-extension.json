@@ -746,6 +746,20 @@
       ],
       "path": "${extensionPath}/skills/typo3-update"
     },
+    "typo3-visual-editor": {
+      "name": "typo3-visual-editor",
+      "description": "FriendsOfTYPO3 Visual Editor installation, configuration, removal, Fluid template migration, inline editing, content areas, FAQ, and troubleshooting",
+      "triggers": [
+        "visual editor",
+        "inline editing",
+        "f:render.text",
+        "f:render.contentArea",
+        "f:mark.contentArea",
+        "PAGEVIEW",
+        "colPos"
+      ],
+      "path": "${extensionPath}/skills/typo3-visual-editor"
+    },
     "typo3-vite": {
       "name": "typo3-vite",
       "description": "Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance",

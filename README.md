@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **73 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **74 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,12 +24,12 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **73 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **74 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 25 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **TYPO3 CMS** | 26 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
 | **Video & Animation** | 7 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
@@ -42,7 +42,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **73 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **74 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -267,6 +267,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
+| `typo3-visual-editor` | visual editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW, colPos | "Install and configure FriendsOfTYPO3 Visual Editor" or "Update my Fluid templates for f:render.contentArea and f:render.text" |
 | `typo3-vite` | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp | "Set up Vite for my TYPO3 sitepackage" or "Configure vite-asset-collector with Bootstrap theming" |
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
 | `typo3-solr` | solr, search, indexing, facets, suggest, autocomplete, vector search | "Set up EXT:solr with DDEV" or "Debug Solr indexing issues" |
@@ -445,6 +446,30 @@ Apply a new shadcn/create preset to the TYPO3 Fluid component layer. Preserve pr
 
 ```
 Regenerate layout module previews for all custom Content Blocks. Show the headline, important repeatable items, CTA, thumbnails, chart summary, and warnings for empty data.
+```
+
+---
+
+#### Visual Editor (Inline Editing)
+
+**Install and configure Visual Editor:**
+```
+Install friendsoftypo3/visual-editor in my TYPO3 project. Show the Composer commands, required cache/database steps, editor permissions to check, and a rollback/removal plan.
+```
+
+**Migrate page columns:**
+```
+Update my page Fluid template for the new Visual Editor. Replace <f:cObject typoscriptObjectPath="lib.dynamicContent" data="{colPos: '3'}"/> with the correct f:render.contentArea usage and explain how colPos maps to backend layout identifiers.
+```
+
+**Make backend fields editable:**
+```
+Audit my content element Fluid templates and replace editable backend text fields like {record.header}, {record.subheader}, and richtext bodytext output with f:render.text where appropriate.
+```
+
+**Troubleshoot visual editing:**
+```
+The Visual Editor opens, but inline editing and drag-and-drop do not work for my custom sitepackage. Check content areas, record-transformation, f:render.text, f:mark.contentArea fallbacks, frontend CSS, and workspace/language edge cases.
 ```
 
 ---
@@ -2246,6 +2271,7 @@ grep -r "DataHandler" skills/
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
+| `typo3-visual-editor` | FriendsOfTYPO3 Visual Editor installation, Fluid template migration, inline editing, content areas, FAQ, and troubleshooting | webconsulting |
 | `typo3-vite` | Vite build setup for TYPO3 with vite-asset-collector, SCSS, Bootstrap, SVG optimization, and CSP compliance | Netresearch |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |

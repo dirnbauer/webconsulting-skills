@@ -291,6 +291,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-records-list-types` | Grid, Compact, Teaser, custom view modes for TYPO3 v14 Records module | 1.0.0 | records list types, grid view backend, compact view, teaser view, custom view type, backend record cards |
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 2.0.0 | workspace, versioning, staging, publishing, review, draft content |
+| `typo3-visual-editor` | FriendsOfTYPO3 Visual Editor installation, configuration, removal, Fluid template migration, inline editing, content areas, FAQ, and troubleshooting | 1.0.0 | visual editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW, colPos |
 | `typo3-vite` | Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance | 1.0.0 | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
 | `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
@@ -510,6 +511,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-records-list-types**: Grid, Compact, Teaser, and custom view modes for TYPO3 v14 Records module
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
 - **typo3-workspaces**: Workspaces versioning, staging, publishing workflows, and debugging
+- **typo3-visual-editor**: FriendsOfTYPO3 Visual Editor install/config/remove workflow, Fluid template migration to `f:render.text` and `f:render.contentArea`, `f:mark.contentArea` fallbacks, FAQ, do/don'ts, and troubleshooting
 - **typo3-vite**: Vite build setup for TYPO3 sitepackages with `praetorius/vite-asset-collector`, SCSS architecture, Bootstrap theming, SVG optimization, and CSP-safe asset loading
 - **typo3-solr**: Apache Solr search integration (Index Queue, facets, suggest, vector search, debugging)
   - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
@@ -1337,16 +1339,16 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
-Use case: Extension development, Content Blocks, localization, database operations, forms, search, backend views, TYPO3 v14 code
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
+Use case: Extension development, Content Blocks, localization, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
 Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `php-modernization`
-Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, icon modernization, TYPO3 v14 upgrades, batch migrations
+Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `typo3-visual-editor`, `php-modernization`
+Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, Fluid template migrations, icon modernization, TYPO3 v14 upgrades, batch migrations
 
 ### Code Quality Session
 Active: `typo3-simplify`, `typo3-batch`, `refactor`, `refactor-clean`, `php-modernization`
@@ -1447,6 +1449,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ |
 | typo3-records-list-types | ✓ | ✓ | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ |
+| typo3-visual-editor | ✓ | ✓ | ✓ | ✓ |
 | typo3-vite | ✓ | ✓ | ✓ | ✓ |
 | typo3-solr | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ |
