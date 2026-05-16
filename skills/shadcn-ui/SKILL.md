@@ -91,6 +91,34 @@ Use this sequence when the user wants a shadcn preset, preview, registry, or non
 - Charts should use `--chart-1` through `--chart-5` or the component's generated `--color-*` variables, not hardcoded color fallbacks.
 - If a project has local atoms/molecules or framework-specific primitives, update those shared primitives before editing many individual feature templates.
 
+### TYPO3 / Fluid Generation Rules
+
+When porting shadcn/create presets into TYPO3, keep content data independent
+from the selected icon library:
+
+- Store editor icon fields as stable semantic keys owned by the project, for
+  example `shield-check`, `rocket`, `map-pin`, or `sparkles`; never store
+  library-specific React import names or raw SVG markup in `tt_content`,
+  Content Blocks collection rows, fixtures, or seed data.
+- Model every editor icon field as a TYPO3 `Select` / `selectSingle` field fed
+  by one shared registry or `itemsProcessors` class. Do not generate free-text
+  `Textarea` icon fields and do not duplicate per-element icon option lists.
+- Add a site setting for the active shadcn icon library, commonly
+  `desiderio.shadcn.iconLibrary`, with explicit values such as `lucide`,
+  `tabler`, and `phosphor`. The shadcn/create preset decode should initialize
+  this setting from `iconLibrary`, and editors/integrators must be able to
+  change it later without rewriting content records.
+- Render icons through a shared Fluid atom/ViewHelper that resolves
+  `semantic key + active icon library` to SVG output. Keep SVG paint token-based
+  with `currentColor`; templates should continue calling the shared atom, e.g.
+  `<d:atom.icon name="{item.icon}" />`.
+- Seed scripts and fixtures must use the same central registry for demo icon
+  values and validation. A seeded value that is not selectable in the backend is
+  a bug.
+- shadcn preset support is complete only when `components.json`, Site Settings,
+  body attributes, CSS token blocks, Fluid primitive recipes, registry output,
+  and icon-library defaults are synchronized.
+
 ### Initialize Project
 
 ```bash
