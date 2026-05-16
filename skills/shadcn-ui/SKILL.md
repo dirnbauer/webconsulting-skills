@@ -115,6 +115,10 @@ from the selected icon library:
 - Seed scripts and fixtures must use the same central registry for demo icon
   values and validation. A seeded value that is not selectable in the backend is
   a bug.
+- Seeded URL and iframe fields must contain working URLs, not human-readable
+  placeholder labels. For map fixtures use an embeddable URL such as
+  OpenStreetMap's `export/embed.html` form; for video fixtures use provider
+  embed URLs rather than public watch/share pages.
 - shadcn preset support is complete only when `components.json`, Site Settings,
   body attributes, CSS token blocks, Fluid primitive recipes, registry output,
   and icon-library defaults are synchronized.
