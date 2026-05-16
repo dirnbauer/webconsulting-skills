@@ -2,7 +2,7 @@
 name: "shadcn-ui"
 description: "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
 metadata:
-  version: "1.1.1"
+  version: "1.1.2"
 ---
 
 # shadcn/ui Component Patterns
@@ -115,10 +115,28 @@ from the selected icon library:
 - Seed scripts and fixtures must use the same central registry for demo icon
   values and validation. A seeded value that is not selectable in the backend is
   a bug.
+- Seeded metric, count, counter, total, quantity, and compact `CardAction` /
+  badge fields must contain short display values such as `128`, `2.4K`, or
+  `14 tools`, never generated prose such as `Count for ...`. Match these field
+  identifiers by separated words (`review_count`, `counterTarget`, `total`) so
+  unrelated names are not accidentally classified by substring.
+- Seeded pricing sliders and calculators need domain-specific scalar defaults:
+  `unit_label` should be a usable noun such as `requests` or `users`, and tier
+  `volume` fields should be compact values such as `1K`, `10K`, or `100K`
+  instead of generated fallback prose.
 - Seeded URL and iframe fields must contain working URLs, not human-readable
   placeholder labels. For map fixtures use an embeddable URL such as
   OpenStreetMap's `export/embed.html` form; for video fixtures use provider
   embed URLs rather than public watch/share pages.
+- Seeded interactive control data must be domain-specific enough for visual QA.
+  Pricing sliders need tier volumes such as `1K`, `10K`, and `100K`, unit labels
+  such as `requests` or `users`, prices, and feature lists; they must not fall
+  back to prose like `Volume for ...` or arbitrary badge labels.
+- Interactive Fluid templates should expose stable `data-*` hooks and ARIA
+  state in the markup, then initialize behavior from shared runtime assets such
+  as `Resources/Public/Js/desiderio.js`. When a shared runtime asset changes,
+  rebuild or refresh the shadcn registry output and add a structural test that
+  connects the template hooks to the runtime behavior.
 - shadcn preset support is complete only when `components.json`, Site Settings,
   body attributes, CSS token blocks, Fluid primitive recipes, registry output,
   and icon-library defaults are synchronized.
