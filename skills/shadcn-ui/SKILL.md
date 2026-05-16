@@ -123,15 +123,12 @@ from the selected icon library:
 - Seeded pricing sliders and calculators need domain-specific scalar defaults:
   `unit_label` should be a usable noun such as `requests` or `users`, and tier
   `volume` fields should be compact values such as `1K`, `10K`, or `100K`
-  instead of generated fallback prose.
+  instead of generated fallback prose. Include prices and feature lists so visual
+  QA exercises the full interactive control.
 - Seeded URL and iframe fields must contain working URLs, not human-readable
   placeholder labels. For map fixtures use an embeddable URL such as
   OpenStreetMap's `export/embed.html` form; for video fixtures use provider
   embed URLs rather than public watch/share pages.
-- Seeded interactive control data must be domain-specific enough for visual QA.
-  Pricing sliders need tier volumes such as `1K`, `10K`, and `100K`, unit labels
-  such as `requests` or `users`, prices, and feature lists; they must not fall
-  back to prose like `Volume for ...` or arbitrary badge labels.
 - Interactive Fluid templates should expose stable `data-*` hooks and ARIA
   state in the markup, then initialize behavior from shared runtime assets such
   as `Resources/Public/Js/desiderio.js`. When a shared runtime asset changes,
