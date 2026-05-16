@@ -2,7 +2,7 @@
 name: "shadcn-ui"
 description: "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
 metadata:
-  version: "1.1.2"
+  version: "1.1.3"
 ---
 
 # shadcn/ui Component Patterns
@@ -126,9 +126,12 @@ from the selected icon library:
   instead of generated fallback prose. Include prices and feature lists so visual
   QA exercises the full interactive control.
 - Seeded URL and iframe fields must contain working URLs, not human-readable
-  placeholder labels. For map fixtures use an embeddable URL such as
-  OpenStreetMap's `export/embed.html` form; for video fixtures use provider
-  embed URLs rather than public watch/share pages.
+  placeholder labels. Treat `https://ui.shadcn.com/docs/...` as a navigation
+  link only; it must never be used in iframe fields such as `embed_url` or
+  `video_url`. For map fixtures use an embeddable URL such as OpenStreetMap's
+  `export/embed.html` form; for video fixtures use provider embed URLs rather
+  than public watch/share pages. Add fixture or seed tests that fail when iframe
+  fields contain shadcn documentation URLs.
 - Interactive Fluid templates should expose stable `data-*` hooks and ARIA
   state in the markup, then initialize behavior from shared runtime assets such
   as `Resources/Public/Js/desiderio.js`. When a shared runtime asset changes,
