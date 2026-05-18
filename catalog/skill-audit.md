@@ -8,8 +8,8 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 3. Repository optimization gaps
 
 - Skills audited: 74
-- Total findings: 23
-- Skills with pass 1 findings: 23
+- Total findings: 24
+- Skills with pass 1 findings: 24
 - Skills with pass 2 findings: 0
 - Skills with pass 3 findings: 0
 
@@ -168,7 +168,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/enterprise-readiness-skill
 - Frontmatter name: enterprise-readiness
-- SKILL.md lines: 81
+- SKILL.md lines: 82
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -216,7 +216,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Firecrawl
 - Source URL: https://github.com/firecrawl/cli
 - Frontmatter name: firecrawl
-- SKILL.md lines: 159
+- SKILL.md lines: 269
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -264,7 +264,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: gsap
-- SKILL.md lines: 226
+- SKILL.md lines: 255
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -280,10 +280,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes
-- SKILL.md lines: 379
+- SKILL.md lines: 505
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- SKILL.md is 505 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -296,7 +296,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes-cli
-- SKILL.md lines: 165
+- SKILL.md lines: 159
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -456,7 +456,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/php-modernization-skill
 - Frontmatter name: php-modernization
-- SKILL.md lines: 89
+- SKILL.md lines: 80
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -568,7 +568,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: remotion-dev
 - Source URL: https://github.com/remotion-dev/skills
 - Frontmatter name: remotion-best-practices
-- SKILL.md lines: 106
+- SKILL.md lines: 351
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -616,7 +616,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Giuseppe Trisciuoglio
 - Source URL: https://github.com/giuseppe-trisciuoglio/developer-kit
 - Frontmatter name: shadcn-ui
-- SKILL.md lines: 371
+- SKILL.md lines: 323
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -696,7 +696,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-conformance-skill
 - Frontmatter name: typo3-conformance
-- SKILL.md lines: 95
+- SKILL.md lines: 96
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -776,7 +776,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-docs-skill
 - Frontmatter name: typo3-docs
-- SKILL.md lines: 93
+- SKILL.md lines: 97
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -792,7 +792,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-extension-upgrade-skill
 - Frontmatter name: typo3-extension-upgrade
-- SKILL.md lines: 92
+- SKILL.md lines: 93
 
 **Pass 1: Structure**
 - No pass 1 issues found.

@@ -469,6 +469,7 @@ $typo3Patterns = [
 ```
 
 ---
+
 ## TYPO3 v14.3 LTS security audit checklist
 
 v14.3 LTS (released 2026-04-21) brings several security-relevant changes that should appear on any v13→v14 audit:
@@ -545,3 +546,4 @@ Breaking #108054 requires explicit allow-listing via `$GLOBALS['TYPO3_CONF_VARS'
 **Audit:** if the project has an active CSP policy, verify migration from nonce-based allow-lists to hash-based.
 
 ---
+

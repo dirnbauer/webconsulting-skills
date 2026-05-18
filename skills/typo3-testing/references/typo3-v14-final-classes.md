@@ -376,6 +376,62 @@ $mock->method('buildUriFromRoute')
     ->willReturn(new \TYPO3\CMS\Core\Http\Uri('/typo3/module/path'));
 ```
 
+## Pattern 5: `dg/bypass-finals` for Your Own `final` Classes
+
+Patterns 1-4 cover **TYPO3 framework** classes you cannot change. They do not help when **your own** production classes are `final` (enforced via phpat / architecture tests) and are constructed by factories you would otherwise want to mock.
+
+For that case, use [`dg/bypass-finals`](https://github.com/dg/bypass-finals): it strips the `final` keyword **at PHPUnit runtime only**, leaving production bytecode untouched. Production code keeps the architectural guarantee; tests can `createMock()` your final classes.
+
+### Setup
+
+```bash
+composer require --dev dg/bypass-finals
+```
+
+In `Tests/bootstrap.php` -- **before** any test class is autoloaded:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../.Build/vendor/autoload.php';
+
+\DG\BypassFinals::enable();
+
+// ... your existing Environment::initialize(), LF, etc.
+```
+
+Wire the bootstrap into `phpunit.xml` (`bootstrap="Tests/bootstrap.php"`). Order matters: `BypassFinals::enable()` must run before any `final` class is loaded -- if PHPUnit autoloads a test that references `final class Foo` before the call, the rewrite is too late.
+
+### When to Reach for It
+
+- You have phpat finality rules enforcing `final` on production code (recommended, see `architecture-testing.md`).
+- You need to `createMock()` a class you authored (DTOs, services, event listeners) without writing an interface for every one.
+- The mocked class is **yours** -- bypassing finals on third-party classes (especially TYPO3 core) is brittle and re-introduces the upstream-change risk that `final` was meant to flag.
+
+### When Not to Reach for It
+
+- The class belongs to TYPO3 core or another vendor library -- use Patterns 1-4 instead. Bypassing finals on third-party code couples your tests to upstream internals.
+- The dependency cleanly fits an interface -- extracting the interface (Pattern 1) keeps coupling explicit and works without `bypass-finals`.
+
+### Verification
+
+A quick sanity check that the rewrite is active:
+
+```php
+#[Test]
+public function bypassFinalsIsEnabled(): void
+{
+    self::assertFalse(
+        (new \ReflectionClass(\Vendor\Extension\Domain\Dto\SomeFinalDto::class))->isFinal(),
+        'BypassFinals is not enabled - check Tests/bootstrap.php load order.',
+    );
+}
+```
+
+If this assertion fails, the bootstrap is not being loaded or `enable()` runs too late.
+
 ## Anti-Patterns to Avoid
 
 ### Don't Skip Tests
@@ -413,4 +469,5 @@ class SiteConfigurationLoadedEvent { } // Copy of TYPO3's class
 2. **Real Instances**: For simple value objects like events
 3. **Test Suite Separation**: Unit vs Functional based on requirements
 4. **Reflection for Controllers**: Use `newInstanceWithoutConstructor()` for final framework deps in controllers
-5. **Zero Skipped Tests**: Every test should run - reorganize if needed
+5. **`dg/bypass-finals`**: For your own `final` production classes that you want to mock without extracting an interface
+6. **Zero Skipped Tests**: Every test should run - reorganize if needed

@@ -1,8 +1,6 @@
 ---
 name: "shadcn-ui"
-description: "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
-metadata:
-  version: "1.1.3"
+description: "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts."
 ---
 
 # shadcn/ui Component Patterns
@@ -15,37 +13,19 @@ Build accessible, customizable UI components with shadcn/ui, Radix UI, and Tailw
 - Built on **Radix UI** primitives for full accessibility
 - Styled with **Tailwind CSS** and CSS variables for theming
 - CLI-based installation: `npx shadcn@latest add <component>`
-- The shadcn CLI is also the source of truth for project introspection, presets, and registry output: `info --json`, `preset`, `view`, `docs`, and `build --output`
-- Registries are framework-agnostic distribution bundles. They can package React components, theme files, hooks, pages, config, rules, or other project files when the registry item contract is explicit
 
 ## When to Use
 
 Activate when user requests involve:
 - "Set up shadcn/ui", "initialize shadcn", "add shadcn components"
-- "shadcn create", "create preview", "preset", "apply theme", "decode preset"
-- "custom registry", "registry.json", "registry item", "namespaced registry"
 - "Install button/input/form/dialog/card/select/toast/table/chart"
 - "React Hook Form", "Zod validation", "form with validation"
 - "accessible components", "Radix UI", "Tailwind theme"
 - "shadcn button", "shadcn dialog", "shadcn sheet", "shadcn table"
 - "dark mode", "CSS variables", "custom theme"
 - "charts with Recharts", "bar chart", "line chart", "pie chart"
-- "use shadcn styles in TYPO3/Astro/PHP/non-React", "port shadcn styles", "token-driven components"
 
 ## Quick Reference
-
-### CLI Workflow
-
-| Task | Command | Notes |
-|------|---------|-------|
-| Initialize or create | `npx shadcn@latest init` / `npx shadcn@latest create` | `create` is an alias for `init`; choose a template such as `next`, `vite`, `laravel`, or `astro` when scaffolding a scratch project |
-| Inspect project config | `npx shadcn@latest info --json` | Use before changing components, tokens, or registry setup; expect imperfect framework detection in nonstandard repos |
-| Inspect preset | `npx shadcn@latest preset decode <code> --json` | Decode shadcn/create preset ids before committing theme tokens |
-| Apply preset parts | `npx shadcn@latest apply <code> --only theme` | Use when only theme/font tokens should change |
-| View registry item | `npx shadcn@latest view <item>` | Works with namespaced registries such as `@acme/button` |
-| Search registry | `npx shadcn@latest search @shadcn -q button` | Use to find official or custom registry items |
-| Build registry | `npx shadcn@latest build --output <dir>` | Reads `registry.json` and writes consumable registry item JSON |
-| Fetch docs | `npx shadcn@latest docs <component> --json` | Prefer this or official docs when component APIs may have changed |
 
 ### Available Components
 
@@ -67,79 +47,6 @@ Activate when user requests involve:
 | `label` | `npx shadcn@latest add label` | Accessible form label |
 
 ## Instructions
-
-### Current Workflow From shadcn/create to Production
-
-Use this sequence when the user wants a shadcn preset, preview, registry, or non-React implementation:
-
-1. **Identify the source.** Start from the user-provided `https://ui.shadcn.com/create` URL, `?item=preview`, preset code, registry item, or existing `components.json`.
-2. **Inspect with the CLI.** Run `npx shadcn@latest info --json` in the project when `components.json` exists. If the repo is not a normal React app, treat framework detection as advisory and focus on `tailwind.css`, `style`, `base`, `iconLibrary`, aliases, and registries. Do not assume `new-york`, `default`, or any other style: `components.json` may point at a preset such as `radix-lyra`, and the official `@shadcn` registry resolves component code through `https://ui.shadcn.com/r/styles/{style}/{name}.json`.
-   - For shadcn/create preset ids, decode the preset before touching component classes. Current v4 create styles decode as short names such as `nova`, `mira`, or `lyra`; registry style ids are the corresponding `radix-nova`, `radix-mira`, or `radix-lyra`. The icon library and base color also come from the preset, so sync `components.json` alongside generated primitives.
-3. **Use a scratch app when needed.** For non-React systems, scaffold or inspect in an Astro/Vite/React scratch project to learn shadcn token values, primitive class contracts, component states, and data attributes. Do not copy React runtime code into the target system unless the target actually uses React.
-4. **Commit tokens, not a downloader.** Store the selected preset/theme as local CSS variables, Tailwind v4 source, and project config. Keep `:root` as the light base and `.dark` as the dark override.
-5. **Port component contracts.** Recreate the shadcn behavior in the target framework with semantic tokens (`--background`, `--foreground`, `--card`, `--border`, `--ring`, `--primary`, `--chart-1`...) and shared primitives. Avoid one-off visual variants that are not represented by shadcn components or tokens.
-6. **Use include files for JavaScript.** Keep interactive behavior in shared JS/TS/Astro include files or framework asset pipelines. Templates should emit data attributes and structured JSON payloads rather than inline script renderers.
-7. **Build and verify registries.** For custom distribution, add a root `registry.json`, a namespace in `components.json`, and a script such as `shadcn build --output public/registry`. Registry items may package theme sources, framework config, runtime assets, docs, and rules when that is the intended reusable artifact.
-8. **Audit the output.** Run the relevant build/test commands, scan for raw colors outside committed token files, and verify that generated CSS/registry artifacts are in sync.
-
-### Token and Styling Rules
-
-- Treat shadcn/ui as the source for tokens, component class contracts, data attributes, states, spacing, borders, radius, focus rings, and typography.
-- When a project uses a style preset, compare local atoms/molecules against the registry output for that exact style before applying generic examples from docs. If changing the style is requested, update the preset/config first, then port the resulting registry classes.
-- Raw `oklch()`, `hsl()`, `rgb()`, and hex color values belong in the committed shadcn theme token source or generated build output. Feature code, templates, component CSS, charts, icons, and fixtures should consume semantic tokens.
-- Prefer token-backed option fields (`primary`, `secondary`, `accent`, `muted`, `destructive`) over arbitrary color pickers when the UI should follow theme changes.
-- Charts should use `--chart-1` through `--chart-5` or the component's generated `--color-*` variables, not hardcoded color fallbacks.
-- If a project has local atoms/molecules or framework-specific primitives, update those shared primitives before editing many individual feature templates.
-
-### TYPO3 / Fluid Generation Rules
-
-When porting shadcn/create presets into TYPO3, keep content data independent
-from the selected icon library:
-
-- Store editor icon fields as stable semantic keys owned by the project, for
-  example `shield-check`, `rocket`, `map-pin`, or `sparkles`; never store
-  library-specific React import names or raw SVG markup in `tt_content`,
-  Content Blocks collection rows, fixtures, or seed data.
-- Model every editor icon field as a TYPO3 `Select` / `selectSingle` field fed
-  by one shared registry or `itemsProcessors` class. Do not generate free-text
-  `Textarea` icon fields and do not duplicate per-element icon option lists.
-- Add a site setting for the active shadcn icon library, commonly
-  `desiderio.shadcn.iconLibrary`, with explicit values such as `lucide`,
-  `tabler`, and `phosphor`. The shadcn/create preset decode should initialize
-  this setting from `iconLibrary`, and editors/integrators must be able to
-  change it later without rewriting content records.
-- Render icons through a shared Fluid atom/ViewHelper that resolves
-  `semantic key + active icon library` to SVG output. Keep SVG paint token-based
-  with `currentColor`; templates should continue calling the shared atom, e.g.
-  `<d:atom.icon name="{item.icon}" />`.
-- Seed scripts and fixtures must use the same central registry for demo icon
-  values and validation. A seeded value that is not selectable in the backend is
-  a bug.
-- Seeded metric, count, counter, total, quantity, and compact `CardAction` /
-  badge fields must contain short display values such as `128`, `2.4K`, or
-  `14 tools`, never generated prose such as `Count for ...`. Match these field
-  identifiers by separated words (`review_count`, `counterTarget`, `total`) so
-  unrelated names are not accidentally classified by substring.
-- Seeded pricing sliders and calculators need domain-specific scalar defaults:
-  `unit_label` should be a usable noun such as `requests` or `users`, and tier
-  `volume` fields should be compact values such as `1K`, `10K`, or `100K`
-  instead of generated fallback prose. Include prices and feature lists so visual
-  QA exercises the full interactive control.
-- Seeded URL and iframe fields must contain working URLs, not human-readable
-  placeholder labels. Treat `https://ui.shadcn.com/docs/...` as a navigation
-  link only; it must never be used in iframe fields such as `embed_url` or
-  `video_url`. For map fixtures use an embeddable URL such as OpenStreetMap's
-  `export/embed.html` form; for video fixtures use provider embed URLs rather
-  than public watch/share pages. Add fixture or seed tests that fail when iframe
-  fields contain shadcn documentation URLs.
-- Interactive Fluid templates should expose stable `data-*` hooks and ARIA
-  state in the markup, then initialize behavior from shared runtime assets such
-  as `Resources/Public/Js/desiderio.js`. When a shared runtime asset changes,
-  rebuild or refresh the shadcn registry output and add a structural test that
-  connects the template hooks to the runtime behavior.
-- shadcn preset support is complete only when `components.json`, Site Settings,
-  body attributes, CSS token blocks, Fluid primitive recipes, registry output,
-  and icon-library defaults are synchronized.
 
 ### Initialize Project
 
@@ -375,9 +282,6 @@ toast({ variant: "destructive", title: "Error", description: "Failed to save." }
 - **Client Components**: Add `"use client"` for interactive components (hooks, events)
 - **Type Safety**: Use TypeScript and Zod schemas for form validation
 - **Theming**: Configure CSS variables in `globals.css` for consistent design
-- **Token Ownership**: Keep raw preset colors inside the theme token source; consume semantic tokens everywhere else
-- **CLI Verification**: Run `npx shadcn@latest info --json` before and after config changes so aliases, Tailwind CSS path, style, base, icon library, and registries are visible
-- **Registry Builds**: Run `npx shadcn@latest build --output <dir>` whenever `registry.json` or registry item files change
 - **Customization**: Modify component files directly — you own the code
 - **Path Aliases**: Ensure `@` alias is configured in `tsconfig.json`
 - **Registry Security**: Only install components from trusted registries; review generated code before production use
@@ -393,8 +297,6 @@ toast({ variant: "destructive", title: "Error", description: "Failed to save." }
 - **Radix Dependencies**: Ensure all `@radix-ui` packages are installed
 - **Tailwind Required**: Components rely on Tailwind CSS utilities
 - **Path Aliases**: Configure `@` alias in `tsconfig.json` for imports
-- **Non-React Targets**: Do not install React components into TYPO3, Astro-only, PHP, or server-rendered systems as runtime code just to get the style. Use scratch apps for inspection and port the token/component contract into the target framework.
-- **Framework Detection**: `shadcn info --json` can misidentify unusual repos. Trust the resolved paths and shadcn config more than the framework label.
 
 ## References
 
