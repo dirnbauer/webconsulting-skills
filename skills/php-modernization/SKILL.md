@@ -1,77 +1,68 @@
 ---
 name: "php-modernization"
-description: "Use when working with ANY PHP modernization task: upgrading PHP 8.1+ (TYPO3 v14.3 LTS accepts 8.2-8.5), adding strict types, configuring PHPStan/Rector/PHP-CS-Fixer, refactoring to enums/DTOs/readonly/property hooks (PHP 8.4), improving type safety, reviewing PHP code quality. Triggers: PHP upgrade, modernize, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.5."
+description: "Use when modernizing PHP code: PHP 8.1-8.5 features, PSR/PHP-FIG/PER-CS compliance, PHPStan/Rector/PHP-CS-Fixer/PHPat tooling, DTOs/enums/readonly/property hooks, type safety. Triggers: PHP modernization, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.4, PHP 8.5."
 ---
 
-# PHP Modernization Skill
+# PHP Modernization
 
-Modernize PHP applications to PHP 8.x with type safety, PSR compliance, and static analysis.
+Modernize PHP to 8.1-8.5, PSR/PER-CS, PHPStan max, type safety.
 
-## Expertise Areas
+## Agent contract
 
-- **PHP 8.x**: Constructor promotion, readonly, enums, match, attributes, union/intersection types, `#[Override]`, typed constants, `#[SensitiveParameter]`, property hooks
-- **PSR/PER Compliance**: Active PHP-FIG standards (PSR-3/4/6/7/11/14/15/16/17/18/20, PER-CS)
-- **Static Analysis**: PHPStan (level 9+, `treatPhpDocTypesAsCertain: false`), PHPat, Rector, PHP-CS-Fixer
-- **Type Safety**: DTOs/VOs over arrays, generics via PHPDoc, copy-on-write awareness
-- **Pitfalls**: DOMDocument UTF-8 encoding, PHP-CS-Fixer deprecated aliases
+1. **Discover**: `uv run ${CLAUDE_SKILL_DIR}/scripts/introspect.py` (cheap), or `verify_php_project.py --summary` (full, with `agent_actions[]`).
+2. **Drill**: `... --check PM-XX` per finding. Full output when triaging >3.
+3. **Apply**: `uv run ${CLAUDE_SKILL_DIR}/scripts/modernize_loop.py --mode dry-run`. Review transcript before applying.
+4. **References**: load on demand; do not pre-load.
 
-## Reference Documentation
+## Reference routing
 
-| Topic | Reference File |
-|-------|---------------|
-| PHP 8.0-8.5 features | `references/php8-features.md` |
-| PSR/PER compliance | `references/psr-per-compliance.md` |
-| PHPStan levels | `references/phpstan-compliance.md` |
-| Static analysis tools | `references/static-analysis-tools.md` |
+| Need | Read |
+|---|---|
+| PHP 8.0-8.3 baseline | `references/php8-features.md` |
+| PHP 8.4 | `references/php-8.4.md` |
+| PHP 8.5 | `references/php-8.5.md` |
+| PSR / PER-CS | `references/psr-per-compliance.md` |
+| PHPStan config | `references/phpstan-compliance.md` |
+| Static analysis | `references/static-analysis-tools.md` |
 | PHP-CS-Fixer deprecations | `references/php-cs-fixer-deprecations.md` |
-| Type safety, DTOs | `references/type-safety.md` |
-| Request DTOs | `references/request-dtos.md` |
-| Adapter registry | `references/adapter-registry-pattern.md` |
-| Multi-version adapters | `references/multi-version-adapters.md` |
+| DTOs / VOs / inputs | `references/type-safety.md`, `references/request-dtos.md` |
+| Adapter / registry | `references/adapter-registry-pattern.md` |
+| Multi-version compat | `references/multi-version-adapters.md` |
 | Symfony patterns | `references/symfony-patterns.md` |
-| TYPO3 PSR patterns | `references/typo3-psr-patterns.md` |
+| PSR-15 middleware | `references/psr15-middleware-architecture.md` |
+| Doctrine edges | `references/doctrine-modernization-edges.md` |
+| API Platform | `references/api-platform-edges.md` |
+| Immutability | `references/immutability-boundaries.md` |
+| Mutation testing | `references/mutation-testing.md` |
 | Migration planning | `references/migration-strategies.md` |
+| PHPUnit 12→13, mock vs stub | `references/phpunit-modernization.md` |
+| Multi-agent dispatch hazards | `references/multi-agent-pitfalls.md` |
 
-Always run `vendor/bin/php-cs-fixer fix --dry-run 2>&1 | grep -A 20 "Detected deprecations"` to check for deprecated rules.
+## Hard guardrails
 
-## Running Scripts
+- Never apply `readonly` to Doctrine entities or mapped-superclasses (embeddables: see `references/doctrine-modernization-edges.md`).
+- Never run Rector without `--dry-run`. Invoke `vendor/bin/rector` directly — composer script aliases can drop `--`-forwarded flags depending on configuration.
+- Never raise PHPStan level without regenerating + committing the baseline. Shrink, never delete.
+- Never apply blanket `final` to mock targets or extension points without confirmation.
+- Never edit `@generated` files or files under `var/cache/`, `vendor/`, `node_modules/`, `.Build/`.
+- Never `git checkout --` files outside your scope in shared trees — use `git stash` / `git diff`.
+- Never trust a warm PHPStan cache after vendor change: `rm -rf /tmp/phpstan-* var/cache/phpstan` first.
+- Never mass-substitute `createMock` → `createStub` — promote to `expects(...)->method(...)->with(...)`.
 
-Verify a project: `scripts/verify-php-project.sh /path/to/project`
+## Migration checklist
 
-## Required Tools
-
-| Tool | Requirement |
-|------|-------------|
-| PHPStan | **Level 9 minimum**, level 10 recommended |
-| PHPat | Required for defined architectures |
-| Rector | Required for automated modernization |
-| PHP-CS-Fixer | Required with `@PER-CS` ruleset |
-
-## Core Rules
-
-- **DTOs required** over arrays for structured data
-- **Backed enums required** for fixed value sets (not constants)
-- **PSR interfaces** for type-hinting dependencies (PSR-3, PSR-6, PSR-7, PSR-11, PSR-14, PSR-18)
-
-See `references/core-rules.md` for code examples and scoring criteria.
-
-## Migration Checklist
-
-- [ ] `declare(strict_types=1)` in all files
-- [ ] PER Coding Style via PHP-CS-Fixer (`@PER-CS`) with no deprecated aliases
-- [ ] PHPStan level 9+ (`treatPhpDocTypesAsCertain: false`, level 10 for new projects)
-- [ ] PHPat architecture tests for layer boundaries
-- [ ] Return types and parameter types on all methods
-- [ ] DTOs for data transfer, no array params/returns
-- [ ] Backed enums for all status/type values
-- [ ] Type-hint against PSR interfaces, not implementations
-- [ ] `#[Override]` on overridden methods (PHP 8.3+)
-- [ ] `#[SensitiveParameter]` on password/secret params (PHP 8.2+)
-- [ ] Typed class constants (PHP 8.3+)
-
----
-
-> **Contributing:** https://github.com/netresearch/php-modernization-skill
+- [ ] `declare(strict_types=1)` everywhere
+- [ ] `@PER-CS`, no deprecated aliases
+- [ ] PHPStan ≥9 (`treatPhpDocTypesAsCertain: false`); 10 for new
+- [ ] PHPat for layer boundaries
+- [ ] Return + parameter types on all methods
+- [ ] DTOs over arrays; backed enums over constants
+- [ ] PSR interfaces in type-hints
+- [ ] `#[Override]` (8.3+), `#[SensitiveParameter]` (8.2+), typed constants (8.3+)
+- [ ] readonly on DTOs/VOs/events only
+- [ ] Property hooks (8.4); `array_find/any/all` (8.4); pipe `|>` (8.5)
+- [ ] PHPUnit 12+: stubs use `createStub`, mocks `createMock` + `expects` (no `self::any()` in 13)
+- [ ] Rector `withComposerBased(symfony: true)` (per-version `SymfonySetList::SYMFONY_*` are `@deprecated`)
 
 ---
 

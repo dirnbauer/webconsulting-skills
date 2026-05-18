@@ -1,6 +1,6 @@
 ---
 name: "enterprise-readiness"
-description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
+description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA, cosign, SBOMs, pnpm), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
 ---
 
 # Enterprise Readiness Assessment
@@ -62,6 +62,7 @@ Coverage required: CI, CodeQL, OpenSSF Scorecard, dependency review, security (c
 | `references/openssf-badge-baseline.md` | OSPS Baseline |
 | `references/harden-runner-guide.md` | Harden-Runner |
 | `references/solo-maintainer-guide.md` | N/A criteria |
+| `references/npm-pnpm-supply-chain.md` | pnpm |
 
 Related skills: `go-development`, `github-project`, `security-audit`, `git-workflow`.
 

@@ -335,6 +335,27 @@ final class BackendControllerTest extends UnitTestCase
 
 **Important:** Set `protected bool $resetSingletonInstances = true;` when tests interact with TYPO3 singletons to prevent test pollution.
 
+### `setSingletonInstance()` vs `addInstance()` for `SingletonInterface`
+
+`GeneralUtility::makeInstance()` honours two registries:
+
+| API | Lifetime | Use for |
+|-----|----------|---------|
+| `GeneralUtility::addInstance($class, $obj)` | **Drains** -- one `makeInstance($class)` consumes the entry, the next call returns a fresh instance | Non-singleton dependencies, one-shot replacements |
+| `GeneralUtility::setSingletonInstance($class, $obj)` | **Persists** -- every subsequent `makeInstance($class)` returns the same registered object until reset | Anything implementing `\TYPO3\CMS\Core\SingletonInterface` |
+
+`PageRenderer`, `BackendUserAuthentication` and `LanguageService` all implement `SingletonInterface`. Registering them with `addInstance()` works for the first call inside the subject under test and silently breaks on the second:
+
+```php
+// WRONG -- second makeInstance(PageRenderer::class) returns a real PageRenderer
+GeneralUtility::addInstance(PageRenderer::class, $pageRendererMock);
+
+// CORRECT -- mock persists for the whole test
+GeneralUtility::setSingletonInstance(PageRenderer::class, $pageRendererMock);
+```
+
+Pair this with `protected bool $resetSingletonInstances = true;` so the mock is cleared between tests.
+
 ## Mocking Dependencies
 
 Use PHPUnit's built-in mocking (PHPUnit 11/12):
@@ -995,6 +1016,16 @@ Add comments explaining the limitation:
 // Note: getMaxDimensions tests require functional test setup due to BackendUtility dependency
 // These are better tested in functional tests
 ```
+
+### Uninitialised `Environment` / `NormalizedParams::createFromServerParams`
+
+**Problem**: Code migrated from the deprecated `GeneralUtility::getIndpEnv()` to `NormalizedParams::createFromServerParams($_SERVER, $sysConf)` fails with a `TypeError` in unit tests:
+```
+TypeError: TYPO3\CMS\Core\Core\Environment::getCurrentScript():
+Return value must be of type string, null returned
+```
+
+**Solution**: Call `Environment::initialize()` once in `Tests/bootstrap.php`. See [Test Environment Guards](test-environment-guards.md#initialise-environment-in-testsbootstrapphp) for the full bootstrap snippet and the matching defensive read pattern needed when `phpunit.xml` has `backupGlobals="true"`.
 
 ### Singleton State Pollution
 

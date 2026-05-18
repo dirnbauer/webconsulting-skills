@@ -80,6 +80,8 @@ Set via environment or `FunctionalTests.xml`:
 
 ## Database Fixtures
 
+> **Migration note (`typo3/testing-framework` v9):** the legacy XML loader `importDataSet()` was removed and replaced by `importCSVDataSet()`. Convert XML fixtures to CSV: one row per record, a leading `,"uid","pid",...` header line per table, and a quoted table-name row above each table. The CSV loader is stricter about column order and quoting -- see the rules below. Extensions on `typo3/testing-framework: ^8.2 || ^9.0` should standardise on CSV so the same fixtures work on TYPO3 v12, v13 and v14.
+
 ### CSV Format
 
 Create fixtures in `Tests/Functional/Fixtures/`:

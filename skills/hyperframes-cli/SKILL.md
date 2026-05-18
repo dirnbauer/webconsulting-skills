@@ -1,6 +1,6 @@
 ---
 name: "hyperframes-cli"
-description: "HyperFrames CLI tool \u2014 hyperframes init, lint, inspect, preview, render, transcribe, tts, doctor, browser, info, upgrade, compositions, docs, benchmark. Use when scaffolding a project, linting, validating, inspecting visual layout in compositions, previewing in the studio, rendering to video, transcribing audio, generating TTS, or troubleshooting the HyperFrames environment."
+description: "HyperFrames CLI dev loop \u2014 `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead."
 ---
 
 # HyperFrames CLI
@@ -25,12 +25,15 @@ npx hyperframes init my-video                        # interactive wizard
 npx hyperframes init my-video --example warm-grain   # pick an example
 npx hyperframes init my-video --video clip.mp4        # with video file
 npx hyperframes init my-video --audio track.mp3       # with audio file
+npx hyperframes init my-video --example blank --tailwind # with Tailwind v4 browser runtime
 npx hyperframes init my-video --non-interactive       # skip prompts (CI/agents)
 ```
 
 Templates: `blank`, `warm-grain`, `play-mode`, `swiss-grid`, `vignelli`, `decision-tree`, `kinetic-type`, `product-promo`, `nyt-graph`.
 
 `init` creates the right file structure, copies media, transcribes audio with Whisper, and installs AI coding skills. Use it instead of creating files by hand.
+
+When using `--tailwind`, invoke the `tailwind` skill before editing classes or theme tokens. The scaffold uses Tailwind v4.2 via the browser runtime, not Studio's Tailwind v3 setup.
 
 ## Linting
 
@@ -98,37 +101,28 @@ npx hyperframes render --format webm                  # transparent WebM
 npx hyperframes render --docker                       # byte-identical
 ```
 
-| Flag           | Options               | Default                    | Notes                       |
-| -------------- | --------------------- | -------------------------- | --------------------------- |
-| `--output`     | path                  | renders/name_timestamp.mp4 | Output path                 |
-| `--fps`        | 24, 30, 60            | 30                         | 60fps doubles render time   |
-| `--quality`    | draft, standard, high | standard                   | draft for iterating         |
-| `--format`     | mp4, webm             | mp4                        | WebM supports transparency  |
-| `--workers`    | 1-8 or auto           | auto                       | Each spawns Chrome          |
-| `--docker`     | flag                  | off                        | Reproducible output         |
-| `--gpu`        | flag                  | off                        | GPU-accelerated encoding    |
-| `--strict`     | flag                  | off                        | Fail on lint errors         |
-| `--strict-all` | flag                  | off                        | Fail on errors AND warnings |
+| Flag                 | Options               | Default                    | Notes                                                              |
+| -------------------- | --------------------- | -------------------------- | ------------------------------------------------------------------ |
+| `--output`           | path                  | renders/name_timestamp.mp4 | Output path                                                        |
+| `--fps`              | 24, 30, 60            | 30                         | 60fps doubles render time                                          |
+| `--quality`          | draft, standard, high | standard                   | draft for iterating                                                |
+| `--format`           | mp4, webm             | mp4                        | WebM supports transparency                                         |
+| `--workers`          | 1-8 or auto           | auto                       | Each spawns Chrome                                                 |
+| `--docker`           | flag                  | off                        | Reproducible output                                                |
+| `--gpu`              | flag                  | off                        | GPU-accelerated encoding                                           |
+| `--strict`           | flag                  | off                        | Fail on lint errors                                                |
+| `--strict-all`       | flag                  | off                        | Fail on errors AND warnings                                        |
+| `--variables`        | JSON object           | —                          | Override variable values declared in `data-composition-variables`  |
+| `--variables-file`   | path                  | —                          | JSON file with variable values (alternative to `--variables`)      |
+| `--strict-variables` | flag                  | off                        | Fail render on undeclared keys or type mismatches in `--variables` |
 
 **Quality guidance:** `draft` while iterating, `standard` for review, `high` for final delivery.
 
-## Transcription
+**Parametrized renders:** the composition declares its variables on the `<html>` root with **`data-composition-variables`** — a JSON **array of declarations** (`{id, type, label, default}` per entry) that defines the schema. Scripts inside read the resolved values via `window.__hyperframes.getVariables()`. The CLI **`--variables '{"title":"Q4 Report"}'`** is a JSON **object keyed by id** that overrides those declared defaults for one render; missing keys fall through, so the same composition runs unchanged in dev preview and in production. (Sub-comp hosts can also override per-instance with **`data-variable-values`** — same object shape, scoped to one mount of the sub-composition. See the `hyperframes` skill for the full pattern.)
 
-```bash
-npx hyperframes transcribe audio.mp3
-npx hyperframes transcribe video.mp4 --model medium.en --language en
-npx hyperframes transcribe subtitles.srt   # import existing
-npx hyperframes transcribe subtitles.vtt
-npx hyperframes transcribe openai-response.json
-```
+## Asset Preprocessing
 
-## Text-to-Speech
-
-```bash
-npx hyperframes tts "Text here" --voice af_nova --output narration.wav
-npx hyperframes tts script.txt --voice bf_emma
-npx hyperframes tts --list  # show all voices
-```
+`npx hyperframes tts`, `transcribe`, and `remove-background` produce assets (narration audio, word-level transcripts, transparent video) that get dropped into a composition. Each downloads its own model on first run. For voice selection, whisper model rules (the `.en`-translates-non-English gotcha), output format choice (VP9 alpha WebM vs ProRes), and the TTS → transcribe → captions chain, invoke the `hyperframes-media` skill.
 
 ## Troubleshooting
 

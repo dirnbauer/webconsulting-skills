@@ -38,6 +38,38 @@ composer require --dev infection/infection:^0.27
 - Generates HTML and JSON reports
 - Supports incremental analysis
 
+## Preflight: Tests Must Pass Before Mutating
+
+Infection runs the configured PHPUnit suite **once, unmutated**, before applying any mutations. If that initial run reports failures or errors -- even a single one -- Infection aborts and reports nothing. In practice, two recurring causes blow up the preflight:
+
+1. **Flaky fuzz tests.** `random_int(0, $n)` legitimately returns `0`, and `random_bytes(0)` then throws `\ValueError("random_bytes(): Argument #1 ($length) must be greater than 0")` (PHP 8.0+ — was `\Error` before). The fuzz suite passes most of the time and randomly fails inside Infection's preflight. **Fix:** use `random_int(1, $n)` (or `max(1, $n)`) anywhere a randomly-chosen length feeds into `random_bytes()` / `openssl_random_pseudo_bytes()` / similar zero-rejecting APIs.
+2. **Functional tests included in the unit suite.** If `phpunit.xml` mixes unit and functional suites, Infection tries to boot a database it cannot reach during local mutation runs.
+
+**Rule of thumb:** before running `infection`, run the exact same command Infection will run (`testFrameworkOptions` from `infection.json5`) and confirm it is green. Fix flakes there, not in Infection's CI logs.
+
+## Suite Layout: Split Unit/Fuzz From Functional
+
+Keep two PHPUnit configs:
+
+- `phpunit.xml` (or `Build/phpunit/UnitTests.xml`) -- unit + fuzz suites only, no DB, fast.
+- `phpunit.functional.xml` (or `Build/phpunit/FunctionalTests.xml`) -- functional tests, requires MySQL/MariaDB.
+
+Point Infection's `testFrameworkOptions` at the unit/fuzz config so the preflight is fast and DB-free:
+
+```json5
+"testFrameworkOptions": "-c Build/phpunit/UnitTests.xml"
+```
+
+Infection also auto-discovers a `phpunit.xml` (or `phpunit.xml.dist`) in `phpUnit.configDir` (defaults to project root) when `testFrameworkOptions` is not used -- it expects the **standard file names**, so do not rename to `phpunit-unit.xml` or similar without setting `phpUnit.configDir` explicitly:
+
+```json5
+"phpUnit": {
+    "configDir": "Build/phpunit"
+}
+```
+
+Either pin the config explicitly (`testFrameworkOptions`) or keep the default name and use `phpUnit.configDir` -- never both implicit. This keeps `composer ci:test:php:unit` and `composer ci:test:mutation` running the same PHPUnit invocation, which is the point of the split.
+
 ## Configuration
 
 Create `infection.json5` in project root.
