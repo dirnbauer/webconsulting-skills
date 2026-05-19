@@ -4,12 +4,12 @@ Read only the section that matches the current task. These files continue the ma
 
 ## Sections
 
-- [12. PSR-14 Events](01-12-psr-14-events.md)
-- [13. Extending](02-13-extending.md)
-- [14. Architecture](03-14-architecture.md)
-- [15. Common Recipes](04-15-common-recipes.md)
-- [16. File Structure](05-16-file-structure.md)
-- [17. Accessibility](06-17-accessibility.md)
-- [18. Dark Mode](07-18-dark-mode.md)
-- [19. Security](08-19-security.md)
-- [20. Known Limitations](09-20-known-limitations.md)
+- [12. PSR-14 Events](12-psr-14-events.md)
+- [13. Extending](13-extending.md)
+- [14. Architecture](14-architecture.md)
+- [15. Common Recipes](15-common-recipes.md)
+- [16. File Structure](16-file-structure.md)
+- [17. Accessibility](17-accessibility.md)
+- [18. Dark Mode](18-dark-mode.md)
+- [19. Security](19-security.md)
+- [20. Known Limitations](20-known-limitations.md)

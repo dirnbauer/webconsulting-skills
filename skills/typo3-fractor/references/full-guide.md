@@ -4,9 +4,9 @@ Read only the section that matches the current task. These files continue the ma
 
 ## Sections
 
-- [6. Code Style Configuration](01-6-code-style-configuration.md)
-- [7. Writing Custom Rules](02-7-writing-custom-rules.md)
-- [8. Upgrade Workflow Integration](03-8-upgrade-workflow-integration.md)
-- [9. Troubleshooting](04-9-troubleshooting.md)
-- [Appendix](05-appendix.md)
-- [Credits & Attribution](06-credits-and-attribution.md)
+- [6. Code Style Configuration](06-code-style-configuration.md)
+- [7. Writing Custom Rules](07-writing-custom-rules.md)
+- [8. Upgrade Workflow Integration](08-upgrade-workflow-integration.md)
+- [9. Troubleshooting](09-troubleshooting.md)
+- [Appendix](appendix.md)
+- [Credits & Attribution](credits-and-attribution.md)

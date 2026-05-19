@@ -4,5 +4,5 @@ Read only the section that matches the current task. These files continue the ma
 
 ## Sections
 
-- [5. Öffentliches Medium - Full Offenlegungspflicht](01-5-oeffentliches-medium-full-offenlegungspflicht.md)
-- [Appendix](02-appendix.md)
+- [5. Öffentliches Medium - Full Offenlegungspflicht](05-oeffentliches-medium-full-offenlegungspflicht.md)
+- [Appendix](appendix.md)
