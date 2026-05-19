@@ -815,12 +815,13 @@ fields:
 
 ### Collection Field Example (Inline IRRE)
 
-**Important:** Collections cannot be nested — a Collection field must NOT contain another Collection as a sub-field. See "Common Pitfalls" section for details.
+Collections can contain normal child fields and, on current Content Blocks, another Collection field for multilevel IRRE structures. Keep each level explicit with its own `table`, `labelField`, and item limits.
 
 ```yaml
 fields:
   - identifier: accordion_items
     type: Collection
+    prefixField: true
     labelField: title
     minitems: 1
     maxitems: 20
@@ -838,6 +839,53 @@ fields:
         type: Checkbox
         label: Initially Open
 ```
+
+### Multilevel Collection Example
+
+Use a multilevel Collection when editors need repeatable groups where each group has its own repeatable children. This Desiderio pattern models pricing plans, and each plan owns a nested list of features:
+
+```yaml
+name: desiderio/pricing
+typeName: desiderio_pricing
+prefixFields: false
+fields:
+  - identifier: plans
+    type: Collection
+    table: pricing_plans
+    prefixField: true
+    label: Pricing Plans
+    labelField: name
+    minItems: 1
+    maxItems: 4
+    fields:
+      - identifier: name
+        type: Textarea
+        rows: 1
+        required: true
+      - identifier: price
+        type: Textarea
+        rows: 1
+        required: true
+      - identifier: features
+        type: Collection
+        table: pricing_plan_features
+        label: Features
+        labelField: text
+        minItems: 1
+        maxItems: 8
+        fields:
+          - identifier: text
+            type: Textarea
+            rows: 1
+```
+
+Guidelines for multilevel Collections:
+
+- Use `prefixField: true` on the top-level Collection when the root Content Block has `prefixFields: false` or when identifiers like `items`, `plans`, or `rows` are reused across `tt_content` types.
+- Give every Collection level a stable `table` name. In the example, `plans` writes to `pricing_plans`, and nested `features` writes to `pricing_plan_features`.
+- Keep nested levels shallow unless the editor workflow really needs them. Two levels is usually understandable; deeper structures become hard to seed, translate, preview, and migrate.
+- In import/seed code, recurse through nested `Collection` definitions and write child rows using the current parent row uid, not the original `tt_content` uid.
+- If you use `foreign_table`, do not also define local `fields` for that Collection; define the reusable structure as a Record Type and reference it instead.
 
 ## 10. Field Prefixing
 
@@ -875,6 +923,53 @@ fields:
     type: Text
     prefixField: false  # This field won't be prefixed
 ```
+
+### Prefix Collection Fields When Root Fields Are Shared
+
+If a `tt_content` Content Block uses `prefixFields: false`, still enable prefixing on every top-level `Collection` field that could share an identifier with another Content Block, such as `items`, `links`, `plans`, or `members`.
+
+```yaml
+name: vendor/accordion
+typeName: vendor_accordion
+prefixFields: false
+fields:
+  - identifier: items
+    type: Collection
+    table: accordion_items
+    prefixField: true
+    fields:
+      - identifier: title
+        type: Textarea
+      - identifier: content
+        type: Textarea
+        enableRichtext: true
+```
+
+Do not work around reused Collection identifiers by patching `columnsOverrides` or rewriting `foreign_table` per CType. In TYPO3 TCA there is one root column per field identifier; without `prefixField: true`, the last merged Collection configuration can win and point multiple content elements at the wrong child table.
+
+### Reusing Collection Tables to Reduce Schema Noise
+
+Default to one generated child table per Collection. The many-table setup is safer and clearer for generated Content Blocks because each content element owns its schema, labels, migrations, fixtures, and seed logic.
+
+Reuse a Collection table only as an explicit modeling decision, not automatically by shared identifiers like `items`, `links`, `plans`, or `members`.
+
+Use table reuse when all of these are true:
+
+- The child schema is intentionally identical, for example repeated `label` + `link`, `text`, `label` + `value`, or logo rows.
+- The shared table name describes a real reusable concept, not just a coincidental field identifier.
+- Every parent Collection that points to the table is configured consistently.
+- If the same parent record can have multiple fields using the same child table, use `foreign_table` with `shareAcrossFields: true` or another explicit match field so rows cannot leak between fields.
+- Import, seed, cleanup, and migration code can resolve the shared table and match fields correctly.
+
+Avoid table reuse when:
+
+- The field schemas differ or may evolve independently.
+- The only reason is to reduce a visually large table list.
+- Two fields on the same content element would point to the same child table without `shareAcrossFields`.
+- Editors need different labels, validation, record labels, or preview assumptions per content element.
+- You would need nullable catch-all columns to force unrelated structures into one table.
+
+Expected benefit: fewer tables and less schema noise. Do not expect a major physical database-size reduction unless table overhead is the actual bottleneck in the target database. Reuse tables for small, stable primitives; keep bespoke content structures isolated.
 
 ## 11. Templating Features
 
@@ -1216,40 +1311,31 @@ TYPO3 v14.1 integrates `content_defender` functionality into Core. Backend layou
 
 These rules come from real debugging sessions. Violating them causes errors that are difficult to trace.
 
-### 1. No Nested Collections (CRITICAL)
+### 1. Multilevel Collections Need Explicit Tables
 
-Content Blocks does **NOT** support a Collection inside another Collection. This causes a fatal `Undefined array key "typeName"` error in `ProcessingInput.php` during TYPO3 bootstrap — preventing `composer install`, `cache:flush`, and all CLI commands.
+Current Content Blocks supports a Collection inside another Collection. Use it intentionally for structures like pricing plans with feature rows, table rows with cells, or navigation groups with links.
 
 ```yaml
-# BROKEN — nested Collection crashes content-blocks
+# GOOD - each level has its own table and label field
 fields:
-  - identifier: groups
+  - identifier: rows
     type: Collection
+    table: data_table_rows
+    prefixField: true
+    labelField: row_label
     fields:
-      - identifier: title
-        type: Text
-      - identifier: items        # <-- Collection inside Collection = FATAL
-        type: Collection
-        fields:
-          - identifier: label
-            type: Text
-          - identifier: link
-            type: Link
-
-# FIXED — flatten the inner Collection to a Textarea
-fields:
-  - identifier: groups
-    type: Collection
-    fields:
-      - identifier: title
-        type: Text
-      - identifier: items         # <-- Textarea with one entry per line
+      - identifier: row_label
         type: Textarea
-        label: Items (one per line)
-        rows: 5
+      - identifier: cells
+        type: Collection
+        table: data_table_cells
+        labelField: value
+        fields:
+          - identifier: value
+            type: Textarea
 ```
 
-The error message (`Undefined array key "typeName"` on table `pages`, type `record-type`) is misleading — it does not point to the actual nested Collection that causes it. If you see this error, grep for nested Collections: `type: Collection` inside another `type: Collection`.
+Avoid anonymous or ambiguous multilevel structures. If a nested set is reused across multiple parent fields or parent tables, extract it to a Record Type and reference it with `foreign_table`, plus `shareAcrossTables` / `shareAcrossFields` where needed.
 
 ### 2. Dashes in typeName Values
 
@@ -1308,6 +1394,8 @@ When renaming field identifiers (e.g., to resolve conflicts), always search temp
 ### 5. Collection Identifier Naming — Avoid Table Name Collisions
 
 Never name a Collection field with an identifier that matches an existing TYPO3 database table (e.g., `pages`, `tt_content`, `sys_file`). Content Blocks generates table names from Collection identifiers, and a collision with a core table causes unpredictable errors.
+
+For `tt_content` Content Blocks with `prefixFields: false`, do not reuse an unprefixed top-level Collection identifier across multiple content elements. Either give each Collection a unique identifier or set `prefixField: true` on that Collection so Content Blocks generates a separate TCA column for each content element.
 
 ```yaml
 # DANGEROUS — "pages" collides with TYPO3 core table
