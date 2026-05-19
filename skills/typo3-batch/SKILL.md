@@ -1,18 +1,15 @@
 ---
-name: typo3-batch
-description: >-
-  Orchestrate large-scale TYPO3 code changes across multiple files in parallel. Migrations,
-  bulk TCA modernization, Fluid template refactoring, hook-to-event conversions, namespace
-  renames, and extension-wide upgrades. Decomposes work into independent units, executes
-  them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor,
-  convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.
-compatibility: TYPO3 14.x
+name: "typo3-batch"
+description: "Plans and executes batch TYPO3 migrations and large-scale refactors across hooks, PSR-14 events, TCA, dependency injection, Fluid, namespaces, ext_localconf, Content Blocks, localization, and PHP upgrades. Use when the user asks for bulk migration, mass refactor, codemod-style TYPO3 updates, repeated fixes across an extension, or coordinated v14 modernization."
+compatibility: "TYPO3 14.x"
 metadata:
   version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # TYPO3 Batch Operations
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > Adapted from Boris Cherny's (Anthropic) Claude Code `/batch` skill for TYPO3 contexts.
 > **Target:** TYPO3 v14.x only.

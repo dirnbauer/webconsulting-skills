@@ -36,20 +36,18 @@
   {
     "directory": "ai-search-optimization",
     "skill_name": "ai-search-optimization",
-    "description": "Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO) strategies for AI-powered search visibility in ChatGPT, Perplexity, Google AI Overviews, and other AI search platforms. Use when working with aeo, geo, ai search, chatgpt search, perplexity, ai overviews, generative search, llm visibility.",
+    "description": "Optimizes content for Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO), including schema, llms.txt, AI crawler rules, conversational query targeting, and visibility measurement. Use when the user asks about AI search visibility, ChatGPT Search, Perplexity, Google AI Overviews, AI crawlers, AEO, GEO, llms.txt, or making a site easier for answer engines to cite.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
-    "line_count": 2224,
+    "line_count": 306,
     "frontmatter_keys": [
       "name",
       "description",
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 2224 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -124,20 +122,18 @@
   {
     "directory": "deepfake-detection",
     "skill_name": "deepfake-detection",
-    "description": "Multimodal media authentication and deepfake forensics. PRNU analysis, IGH classification, DQ detection, semantic forensics, and LLM-augmented sensemaking for the post-empirical era. Use when working with deepfake, media forensics, fake detection, synthetic media, prnu, image authentication, video verification, disinformation.",
+    "description": "Guides multimodal media authentication and deepfake forensics using provenance checks, metadata review, PRNU/noise analysis, temporal consistency, semantic forensics, and evidence reporting. Use when the user asks to verify images, audio, or video, investigate synthetic media, assess fake or manipulated content, or prepare a media authenticity report.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/deepfake-detection/SKILL.md",
-    "line_count": 1113,
+    "line_count": 346,
     "frontmatter_keys": [
       "name",
       "description",
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 1113 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -392,11 +388,11 @@
   {
     "directory": "legal-impressum",
     "skill_name": "legal-impressum",
-    "description": "Austrian Impressum (legal notice) requirements for all company types. Covers ECG, UGB, GewO, MedienG, and Offenlegungspflicht for public media. Use when working with impressum, legal notice, imprint, austria, \u00f6sterreich, ECG, mediengesetz, offenlegung.",
+    "description": "Creates and reviews Austrian Impressum and disclosure content for websites, including ECG, UGB, GewO, MedienG, Offenlegung, and company-form-specific templates. Use when the user mentions Impressum, legal notice, imprint, Austria, Oesterreich, Mediengesetz, Offenlegung, or website operator disclosure.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/legal-impressum/SKILL.md",
-    "line_count": 492,
+    "line_count": 390,
     "frontmatter_keys": [
       "name",
       "description",
@@ -610,11 +606,11 @@
   {
     "directory": "security-incident-reporting",
     "skill_name": "security-incident-reporting",
-    "description": "Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE correlation, timeline documentation, and blameless root cause analysis. Use when working with incident report, post-mortem, sir, ddos analysis, security reporting, root cause analysis, cve correlation, nist 800-61.",
+    "description": "Builds security incident reports, DDoS post-mortems, timelines, IoC sections, CVE correlation, severity scoring, and blameless root cause analysis. Use when the user needs an incident report, post-mortem, forensics summary, security timeline, DDoS analysis, SIR, root cause analysis, or communication for a security event.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
-    "line_count": 378,
+    "line_count": 376,
     "frontmatter_keys": [
       "name",
       "description",
@@ -632,7 +628,7 @@
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
-    "line_count": 371,
+    "line_count": 421,
     "frontmatter_keys": [
       "name",
       "description",
@@ -677,11 +673,11 @@
   {
     "directory": "typo3-accessibility",
     "skill_name": "typo3-accessibility",
-    "description": "WCAG 2.2 AA accessibility audit and implementation for TYPO3 v14. Covers Fluid template patterns, PHP middleware, JavaScript enhancements, Content Element accessibility, form accessibility, and a full go-live checklist. Use when working with accessibility, a11y, wcag, aria, screen reader, keyboard navigation, focus management, color contrast, alt text, semantic html, skip link, or accessible forms in TYPO3.",
+    "description": "Audits and implements TYPO3 accessibility patterns for WCAG 2.2 AA, including Fluid templates, PHP helpers, JavaScript widgets, forms, focus states, ARIA, and go-live checks. Use when building or reviewing TYPO3 templates, content elements, extensions, or frontend code for accessibility, keyboard support, screen readers, WCAG, ARIA, or a11y readiness.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
-    "line_count": 981,
+    "line_count": 291,
     "frontmatter_keys": [
       "name",
       "description",
@@ -689,20 +685,18 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 981 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-batch",
     "skill_name": "typo3-batch",
-    "description": "Orchestrate large-scale TYPO3 code changes across multiple files in parallel. Migrations, bulk TCA modernization, Fluid template refactoring, hook-to-event conversions, namespace renames, and extension-wide upgrades. Decomposes work into independent units, executes them, and verifies with tests. Use when working with batch, migrate, bulk, mass refactor, convert all, upgrade all, rename across, find and replace, parallel, codemod, TYPO3 migration.",
+    "description": "Plans and executes batch TYPO3 migrations and large-scale refactors across hooks, PSR-14 events, TCA, dependency injection, Fluid, namespaces, ext_localconf, Content Blocks, localization, and PHP upgrades. Use when the user asks for bulk migration, mass refactor, codemod-style TYPO3 updates, repeated fixes across an extension, or coordinated v14 modernization.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-batch/SKILL.md",
-    "line_count": 355,
+    "line_count": 352,
     "frontmatter_keys": [
       "name",
       "description",
@@ -733,11 +727,11 @@
   {
     "directory": "typo3-content-blocks",
     "skill_name": "typo3-content-blocks",
-    "description": "Expert guidance on creating Content Elements, Record Types, Page Types, and File Types using TYPO3 Content Blocks extension - the single source of truth for content modeling. Use when working with content-blocks, content-element, record-type, page-type, file-type, make:content-block, friendsoftypo3/content-blocks, irre.",
+    "description": "Guides TYPO3 Content Blocks modeling for Content Elements, Record Types, Page Types, and File Types as the single source of truth. Use when creating, migrating, auditing, or debugging Content Blocks config.yaml files, make:content-block output, content elements, record types, page types, file types, collections, IRRE, labels, previews, or friendsoftypo3/content-blocks behavior.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
-    "line_count": 1334,
+    "line_count": 277,
     "frontmatter_keys": [
       "name",
       "description",
@@ -745,9 +739,7 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 1334 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -770,11 +762,11 @@
   {
     "directory": "typo3-datahandler",
     "skill_name": "typo3-datahandler",
-    "description": "Expert guidance on manipulating TYPO3 records via the DataHandler, ensuring transactional safety, correct extension points (SC_OPTIONS hooks and documented PSR-14 events), and reference index integrity. Use when working with database, datahandler, tcemain, records, content, pages.",
+    "description": "Guides transactional TYPO3 record manipulation with DataHandler, including datamaps, cmdmaps, backend user context, reference index handling, workspace-aware operations, hooks, and PSR-14 events. Use when creating, updating, moving, localizing, deleting, or extending TYPO3 records, pages, content, categories, IRRE children, or backend data operations.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
-    "line_count": 572,
+    "line_count": 326,
     "frontmatter_keys": [
       "name",
       "description",
@@ -782,9 +774,7 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 572 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -839,11 +829,11 @@
   {
     "directory": "typo3-fractor",
     "skill_name": "typo3-fractor",
-    "description": "Automated non-PHP migrations for TYPO3 upgrades using Fractor. Handles FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when working with fractor, flexform, typoscript migration, fluid migration, non-php upgrade, yaml migration.",
+    "description": "Automates non-PHP TYPO3 upgrade migrations with Fractor for FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when running or configuring Fractor, upgrading non-PHP TYPO3 files, migrating FlexForms or TypoScript, modernizing Fluid templates, or combining Rector and Fractor for v14 work.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-fractor/SKILL.md",
-    "line_count": 498,
+    "line_count": 280,
     "frontmatter_keys": [
       "name",
       "description",
@@ -858,11 +848,11 @@
   {
     "directory": "typo3-icon14",
     "skill_name": "typo3-icon14",
-    "description": "Design and migrate TYPO3 v14 extension icons with the Core Icon API and the current backend icon language. Use when working with module icons, plugin icons, record icons, action icons, Extension.svg, Configuration/Icons.php, iconIdentifier, pluginIcon, typeicon_classes, TYPO3.Icons, or styleguide icon references.",
+    "description": "Designs and migrates TYPO3 extension icons to the v14 line-art style, including source SVG cleanup, light/dark behavior, IconRegistry naming, backend module icons, and verification. Use when the user asks for TYPO3 v14 icons, backend module icon migration, extension icon modernization, SVG icon rules, or icon registration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-icon14/SKILL.md",
-    "line_count": 215,
+    "line_count": 212,
     "frontmatter_keys": [
       "name",
       "description",
@@ -877,11 +867,11 @@
   {
     "directory": "typo3-idea-extension-blog",
     "skill_name": "typo3-idea-extension-blog",
-    "description": "Assess whether an external idea, launch, article, paper, or product announcement should become a TYPO3 extension and companion German blog post. Use this whenever a user shares a link or concept and wants it analyzed for TYPO3, wants a GitHub-ready extension built from it, or wants a publication-ready webconsulting.at MDX article.",
+    "description": "Evaluates external ideas for TYPO3 extension potential, builds the extension, and drafts the companion German webconsulting.at MDX article. Use when the user shares a link, product, article, paper, or concept and asks whether it can become a TYPO3 extension, wants a GitHub-ready implementation, or needs a publication-ready TYPO3 blog post.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
-    "line_count": 252,
+    "line_count": 244,
     "frontmatter_keys": [
       "name",
       "description",
@@ -896,49 +886,47 @@
   {
     "directory": "typo3-powermail",
     "skill_name": "typo3-powermail",
-    "description": "Expert guidance on the Powermail **extension** 13.x with TYPO3 **13.4+** (verify Packagist for newer Core constraints). Creating forms, custom finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript configuration, email templates, backend modules, and extension development. Use when working with powermail forms, mail handling, form validation, or extending powermail functionality.",
+    "description": "Guides Powermail 13+ form development for TYPO3, including form setup, finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript, email templates, conditional visibility, and extension points. Use when creating, debugging, or extending powermail forms, mail handling, validation, finishers, powermail_cond behavior, or tx_powermail data.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-powermail/SKILL.md",
-    "line_count": 1209,
+    "line_count": 262,
     "frontmatter_keys": [
       "name",
-      "description"
+      "description",
+      "metadata",
+      "license"
     ],
-    "pass_1": [
-      "SKILL.md is 1209 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-records-list-types",
     "skill_name": "typo3-records-list-types",
-    "description": "Configure and extend the Records List Types extension for TYPO3 v14. Grid, Compact, Teaser, and custom view modes for the backend Records module with thumbnails, drag-and-drop, dark mode, workspace indicators, and zero-PHP extensibility via TSconfig + Fluid templates. Use when working with backend record listing, creating custom view types, or configuring per-table display fields.",
+    "description": "Configures TYPO3 v14 Records module list types and custom backend views, including grid, compact, teaser, kanban-style, timeline-style, TSconfig, Fluid templates, icons, and accessibility. Use when the user mentions records list types, backend record cards, custom Records module views, grid view, compact view, teaser view, or TSconfig-driven record presentation.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
-    "line_count": 634,
+    "line_count": 330,
     "frontmatter_keys": [
       "name",
       "description",
-      "license",
-      "metadata"
+      "metadata",
+      "license"
     ],
-    "pass_1": [
-      "SKILL.md is 634 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-rector",
     "skill_name": "typo3-rector",
-    "description": "TYPO3 v14 upgrade patterns using Rector: automated refactoring rules, level sets, and migration workflows. Use when working with rector, upgrade, migration, refactoring, deprecation.",
+    "description": "Applies TYPO3 Rector upgrade patterns for PHP migrations toward TYPO3 v14, including Rector configuration, dry runs, rule sets, ViewFactory, Extbase responses, PSR-14 events, backend modules, TCA, and manual follow-up checks. Use when running Rector, fixing deprecations, upgrading TYPO3 PHP code, or preparing extensions for v14.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-rector/SKILL.md",
-    "line_count": 536,
+    "line_count": 345,
     "frontmatter_keys": [
       "name",
       "description",
@@ -946,20 +934,18 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 536 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-security",
     "skill_name": "typo3-security",
-    "description": "Security hardening checklist and best practices for TYPO3 v14 installations, covering configuration, file permissions, and common vulnerabilities. Use when working with security, hardening, permissions, authentication, vulnerabilities.",
+    "description": "Hardens TYPO3 v14 installations and extensions with secure configuration, trusted hosts, file permissions, Install Tool protection, backend user security, MFA, CSP, QueryBuilder usage, XSS defenses, and CSRF checks. Use when the user asks about TYPO3 security, hardening, permissions, authentication, CSP, SQL injection, XSS, CSRF, or go-live security readiness.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-security/SKILL.md",
-    "line_count": 475,
+    "line_count": 474,
     "frontmatter_keys": [
       "name",
       "description",
@@ -974,11 +960,11 @@
   {
     "directory": "typo3-seo",
     "skill_name": "typo3-seo",
-    "description": "SEO configuration and best practices for TYPO3 v14, including EXT:seo setup, sitemaps, meta tags, and structured data. Use when working with seo, sitemap, meta, robots, structured data, opengraph.",
+    "description": "Configures TYPO3 SEO for EXT:seo, metadata, hreflang, XML sitemaps, robots.txt, canonical URLs, structured data, Core Web Vitals, SEO extensions, and monitoring. Use when working on TYPO3 SEO, sitemap setup, meta tags, robots rules, Open Graph, schema.org, canonical URLs, hreflang, or search visibility.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-seo/SKILL.md",
-    "line_count": 507,
+    "line_count": 312,
     "frontmatter_keys": [
       "name",
       "description",
@@ -986,20 +972,18 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 507 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-shadcn-content-elements",
     "skill_name": "typo3-shadcn-content-elements",
-    "description": "Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.",
+    "description": "Produces, audits, and overhauls TYPO3 Content Blocks content elements styled with shadcn/ui presets, semantic tokens, Fluid atoms, backend previews, icons, and seed data. Use when the user asks to create, restyle, review, seed, iconize, or preview TYPO3 Content Blocks with shadcn/ui, Tailwind v4 tokens, no-hardcoded-style rules, or local registry presets.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
-    "line_count": 181,
+    "line_count": 182,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1033,11 +1017,11 @@
   {
     "directory": "typo3-solr",
     "skill_name": "typo3-solr",
-    "description": "Expert guidance on Apache Solr search integration for TYPO3: installation, Index Queue, faceting, suggest, PSR-14 events, custom indexers, LLM/vector search (Solr native), DDEV/Docker/production setup, deep debugging & troubleshooting, and file indexing via solrfal. Use when working with solr, search, indexing, facets, suggest, autocomplete, vector search, solrfal, tika.",
+    "description": "Configures and debugs Apache Solr search for TYPO3, including EXT:solr, configsets, indexing queues, Tika/file indexing, facets, suggest, routing, PSR-14 events, custom indexers, vector search, and frontend search UI. Use when the user mentions Solr, EXT:solr, indexing, facets, autocomplete, suggest, Tika, solrfal, search debugging, or vector search in TYPO3.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-solr/SKILL.md",
-    "line_count": 2184,
+    "line_count": 333,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1045,9 +1029,7 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 2184 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -1070,11 +1052,11 @@
   {
     "directory": "typo3-translations",
     "skill_name": "typo3-translations",
-    "description": "TYPO3 13 and 14 localization guidance for creating, auditing, migrating, and debugging labels, locallang.xlf, labels.xlf, XLIFF 1.2, XLIFF 2.0, ICU MessageFormat, LLL references, TYPO3 14 translation domains, Content Blocks labels, backend/frontend labels, path and namespace conventions, missing keys, duplicate units, and TYPO3 13-to-14 translation upgrade checklists. Use whenever the user mentions TYPO3 translations, XLIFF, ICU, localization, labels, LLL, language files, or translation migration.",
+    "description": "Guides TYPO3 13/14 localization with locallang.xlf, labels.xlf, XLIFF 1.2 and 2.0, ICU MessageFormat, LLL references, translation domains, Content Blocks labels, paths, namespaces, and migration checks. Use when the user mentions TYPO3 translations, localization, labels, XLIFF, ICU, LLL, missing keys, duplicate units, or v13-to-v14 translation migration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-translations/SKILL.md",
-    "line_count": 500,
+    "line_count": 350,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1089,11 +1071,11 @@
   {
     "directory": "typo3-update",
     "skill_name": "typo3-update",
-    "description": "TYPO3 v14 development guide: version constraints, core APIs, extension patterns, and upgrade workflows. Use when working with update, upgrade, v14, migration, lts, TYPO3 core.",
+    "description": "Guides TYPO3 v14 extension development and upgrades, including version constraints, PHP requirements, controllers, ViewFactory, Fluid, events, backend modules, TCA, QueryBuilder, CLI commands, tests, and v14-only manual changes. Use when the user asks about TYPO3 v14, upgrades, migrations, extension modernization, LTS constraints, or current Core APIs.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-update/SKILL.md",
-    "line_count": 865,
+    "line_count": 332,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1101,23 +1083,23 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 865 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "typo3-visual-editor",
     "skill_name": "typo3-visual-editor",
-    "description": "TYPO3 Visual Editor integration and migration guide for friendsoftypo3/visual-editor. Use when installing, configuring, removing, troubleshooting, or upgrading templates for the new Visual Editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW content areas, record-transformation, Fluid templates, backend fields, colPos migrations, Container/VHS/Flux content rendering, or visual editing readiness in TYPO3 13/14 sitepackages.",
+    "description": "Installs, configures, removes, and migrates TYPO3 sitepackages for FriendsOfTYPO3 Visual Editor, including inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, record transformation, PAGEVIEW content areas, colPos migration, and template readiness. Use when the user mentions Visual Editor, inline editing, frontend editing, content areas, Fluid template migration, or visual editing readiness in TYPO3 13/14.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-visual-editor/SKILL.md",
-    "line_count": 359,
+    "line_count": 363,
     "frontmatter_keys": [
       "name",
-      "description"
+      "description",
+      "metadata",
+      "license"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -1142,11 +1124,11 @@
   {
     "directory": "typo3-workspaces",
     "skill_name": "typo3-workspaces",
-    "description": "Expert guidance on TYPO3 Workspaces: versioning, staging, publishing workflows, file limitations, file collection workspace safety, query migration, debugging, and testing. Use when working with workspace, versioning, staging, publishing, review, draft content, workflow, file collection.",
+    "description": "Guides TYPO3 Workspaces versioning, staging, publishing, overlays, workspace-aware queries, file limitations, permissions, frontend preview, diagnostics, repair, and tests. Use when the user works with TYPO3 workspaces, draft content, staged publishing, versioning, workspace overlays, review workflows, file collections, or workspace-specific bugs.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
-    "line_count": 1683,
+    "line_count": 343,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1154,29 +1136,25 @@
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 1683 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "ui-design-patterns",
     "skill_name": "ui-design-patterns",
-    "description": "Practical UI design patterns and principles for creating polished, professional interfaces. Based on proven techniques from Refactoring UI and Practical UI. Use when working with ui, design, layout, spacing, typography, color, hierarchy, styling.",
+    "description": "Provides practical UI design patterns for hierarchy, spacing, typography, color, depth, imagery, UI copy, forms, navigation, tables, empty states, loading states, accessibility, and responsive behavior. Use when designing, reviewing, polishing, or refactoring web interfaces, layouts, components, dashboards, forms, or visual systems.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
-    "line_count": 869,
+    "line_count": 293,
     "frontmatter_keys": [
       "name",
       "description",
       "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 869 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -1249,11 +1227,11 @@
   {
     "directory": "webconsulting-branding",
     "skill_name": "webconsulting-branding",
-    "description": "Enforces webconsulting.at design system, color palettes, typography, and MDX component structures for frontend development. Use when working with frontend, design, branding, ui, components, styling.",
+    "description": "Applies the webconsulting.at brand system, including voice, colors, typography, MDX components, Mermaid theming, accessibility, responsive breakpoints, spacing, buttons, dark mode, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, MDX content, frontend components, TYPO3 templates, brand tokens, or visual consistency.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
-    "line_count": 311,
+    "line_count": 310,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1268,19 +1246,18 @@
   {
     "directory": "webconsulting-create-documentation",
     "skill_name": "webconsulting-create-documentation",
-    "description": "Create product documentation with help pages, AI-generated screenshots, Remotion product videos with TTS narration and background music, and GitHub README visual documentation. Use when asked to create documentation, a help page, product tour video, generate screenshots, add user guides, or enrich a GitHub README.",
+    "description": "Creates product documentation systems with help pages, AI-generated screenshots, Remotion product tours, GSAP animation, narration scripts, TTS, background music, README visuals, and deployment steps. Use when the user asks for product docs, help pages, documentation videos, narrated tours, screenshots, README media, Remotion docs workflows, or webconsulting-style documentation assets.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
-    "line_count": 1101,
+    "line_count": 281,
     "frontmatter_keys": [
       "name",
       "description",
+      "metadata",
       "license"
     ],
-    "pass_1": [
-      "SKILL.md is 1101 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },

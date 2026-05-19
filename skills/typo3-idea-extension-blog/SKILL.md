@@ -1,20 +1,12 @@
 ---
-name: typo3-idea-extension-blog
-description: >-
-  Assess whether an external idea, launch, article, paper, or product announcement
-  should become a TYPO3 extension and companion German blog post. Use this whenever
-  a user shares a link or concept and wants it analyzed for TYPO3, wants a GitHub-ready
-  extension built from it, or wants a publication-ready webconsulting.at MDX article.
-compatibility: TYPO3 14.x preferred with TYPO3 13.4 fallback; PHP 8.2+; Git; network access for verification and push
+name: "typo3-idea-extension-blog"
+description: "Evaluates external ideas for TYPO3 extension potential, builds the extension, and drafts the companion German webconsulting.at MDX article. Use when the user shares a link, product, article, paper, or concept and asks whether it can become a TYPO3 extension, wants a GitHub-ready implementation, or needs a publication-ready TYPO3 blog post."
+compatibility: "TYPO3 14.x preferred with TYPO3 13.4 fallback; PHP 8.2+; Git; network access for verification and push"
 metadata:
   version: "1.0.0"
-  related_skills:
-    - grill-me
-    - firecrawl
-    - typo3-update
-    - typo3-testing
-    - webconsulting-create-documentation
-license: MIT / CC-BY-SA-4.0
+  related_skills: "grill-me, firecrawl, typo3-update, typo3-testing, webconsulting-create-documentation"
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
 
 # Idea -> TYPO3 Extension -> Blog Post Pipeline

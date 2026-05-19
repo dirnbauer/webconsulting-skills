@@ -1,15 +1,12 @@
 ---
-name: typo3-translations
-description: TYPO3 13 and 14 localization guidance for creating, auditing, migrating, and debugging labels, locallang.xlf, labels.xlf, XLIFF 1.2, XLIFF 2.0, ICU MessageFormat, LLL references, TYPO3 14 translation domains, Content Blocks labels, backend/frontend labels, path and namespace conventions, missing keys, duplicate units, and TYPO3 13-to-14 translation upgrade checklists. Use whenever the user mentions TYPO3 translations, XLIFF, ICU, localization, labels, LLL, language files, or translation migration.
-compatibility: TYPO3 13.4 and TYPO3 14.x; TYPO3 14 preferred
+name: "typo3-translations"
+description: "Guides TYPO3 13/14 localization with locallang.xlf, labels.xlf, XLIFF 1.2 and 2.0, ICU MessageFormat, LLL references, translation domains, Content Blocks labels, paths, namespaces, and migration checks. Use when the user mentions TYPO3 translations, localization, labels, XLIFF, ICU, LLL, missing keys, duplicate units, or v13-to-v14 translation migration."
+compatibility: "TYPO3 13.4 and TYPO3 14.x; TYPO3 14 preferred"
 metadata:
   version: "2.1.0"
-  related_skills:
-    - typo3-content-blocks
-    - typo3-shadcn-content-elements
-    - typo3-conformance
-    - typo3-update
-license: MIT / CC-BY-SA-4.0
+  related_skills: "typo3-content-blocks, typo3-shadcn-content-elements, typo3-conformance, typo3-update"
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
 
 # TYPO3 13/14 Translations
@@ -346,154 +343,7 @@ Content Blocks labels commonly live beside the block in
 4. Remember that `labels.xlf` overrides inline labels from `config.yaml`.
 5. Convert generated v14-only catalogs to XLIFF 2.0 after the key list is known.
 
-## Updating TYPO3 13 To TYPO3 14
 
-Use this translation-specific checklist during a TYPO3 13-to-14 upgrade:
+## Detailed Reference
 
-1. Keep XLIFF 1.2 and `LLL:EXT:` references while the same branch must support
-   both TYPO3 13 and 14.
-2. Run Rector/Fractor and the project upgrade checklist from `typo3-update`.
-3. Inventory all `.xlf` files and note their versions, language prefixes, and
-   consumers.
-4. Fix invalid XML and duplicate IDs before format conversion.
-5. Replace hardcoded labels with `LLL:EXT:` or domain references.
-6. Convert label families from XLIFF 1.2 to XLIFF 2.0 only in a v14-only branch.
-7. Keep `LLL:EXT:` references unless a domain migration is explicitly
-   part of the task.
-8. Add ICU only in v14-only runtime code; do not rewrite plain labels into ICU
-   strings.
-9. Validate source/target parity for every locale.
-10. Flush caches, run backend smoke tests, and verify frontend locale rendering.
-
-## What To Do If Something Fails
-
-Use this checklist before changing code paths:
-
-1. Parse every changed `.xlf` file as XML.
-2. Confirm the source file is unprefixed English and the target file is prefixed.
-3. Confirm version-specific language attributes:
-   `source-language` / `target-language` for XLIFF 1.2,
-   `srcLang` / `trgLang` for XLIFF 2.0.
-4. Confirm every referenced unit ID exists exactly once.
-5. Confirm target files contain matching unit IDs and approved target segments.
-6. Confirm the `LLL:EXT:` path uses the extension key, not the Composer package.
-7. Clear TYPO3 caches, including localization/domain mapping caches.
-8. If domains are used, verify the project is v14-only, run
-   `language:domain:list`, and check filename conflicts.
-9. If ICU does not interpolate, verify the project is v14.2+, named arguments
-   are passed, and `translate()` is used.
-10. If Content Blocks labels differ from YAML, inspect `labels.xlf` first.
-11. Reproduce in the correct language context; backend user language and site
-    language can differ.
-12. Revert only the smallest recent translation change when isolating a failure.
-
-## Common Pitfalls
-
-| Symptom | Likely Cause | First Fix |
-|---------|--------------|-----------|
-| Raw `LLL:EXT:` appears | Wrong path, filename, extension key, or unit ID | Copy the exact installed path, parse XML, flush caches |
-| English fallback appears | Missing or wrongly named target file | Place `de.*.xlf` beside the source and set `trgLang="de"` |
-| German target is ignored | Target segment is unapproved | Use `state="reviewed"` or `state="final"` |
-| ICU plural stays literal | Fetched with `sL()` or positional arguments | Use `translate()` or Fluid named arguments |
-| Domain resolves wrong file | Filename conflict or stale cache | Rename conflicting files and clear `cache.l10n` |
-| Content Blocks inline label is ignored | `labels.xlf` takes precedence | Edit or regenerate the block language file |
-| XLIFF 2.0 breaks TYPO3 13 | XLIFF 2.0 is a TYPO3 14 feature | Keep shared branches on XLIFF 1.2 |
-| Translation domain breaks | Domain syntax used in TYPO3 13-compatible code | Use full `LLL:EXT:` until v14-only |
-
-## Verification Commands
-
-```bash
-# XML well-formedness
-find Resources ContentBlocks -name '*.xlf' -print0 2>/dev/null | xargs -0 -n1 xmllint --noout
-
-# XLIFF versions
-rg -n '<xliff version=' Resources ContentBlocks -S
-
-# Translation consumers
-rg -n 'LLL:|f:translate|translate\\(|sL\\(' Classes Configuration ContentBlocks Resources -S
-
-# TYPO3 14 translation domains, when EXT:lowlevel is installed
-php bin/typo3 language:domain:list
-```
-
-If `xmllint` is unavailable, use the project PHP runtime with `DOMDocument` to
-parse changed files.
-
-## Quality Bar
-
-- The skill starts with TYPO3 13-compatible output unless the task is clearly
-  v14-only.
-- TYPO3 14 output is preferred when compatibility constraints allow it.
-- Shared TYPO3 13+14 branches stay on XLIFF 1.2 and `LLL:EXT:`.
-- New or converted v14-only label files use the XLIFF 2.0 structure
-  intentionally.
-- Source and target files stay structurally aligned.
-- Keys are stable, namespaced, and readable.
-- ICU strings keep placeholder names intact and use named runtime arguments.
-- TYPO3 APIs resolve labels; no custom XML label loader is introduced.
-- All changed files parse as XML and labels are smoke-tested after cache flush.
-
-## FAQ
-
-**Should I start with TYPO3 13 or TYPO3 14?**
-
-Start with the TYPO3 13-compatible baseline when the extension must support both
-13 and 14. Move selected label families to TYPO3 14 patterns only when the code
-or branch is v14-only.
-
-**Should I use XLIFF 2.0 or 1.2?**
-
-Use XLIFF 1.2 for TYPO3 13+14 compatibility. Use XLIFF 2.0 for new v14-only
-work.
-
-**What is the latest XLIFF format to use here?**
-
-For TYPO3 13 compatibility, use XLIFF 1.2. For TYPO3 14-only catalogs, use the
-documented XLIFF 2.0 structure.
-
-**Should I create `en.locallang.xlf`?**
-
-No. The unprefixed file is the English source. Use prefixes only for target
-languages.
-
-**Are `LLL:EXT:` references deprecated?**
-
-No. TYPO3 14 adds translation domains as a shorter option, but full file-based
-references remain valid and useful.
-
-**When should I use translation domains?**
-
-Use them in PHP when shorter references improve readability. Use explicit
-`LLL:EXT:` paths where configuration benefits from showing the exact file.
-
-**Can I use ICU MessageFormat in XLIFF 2.0?**
-
-Yes, in TYPO3 14.2+ only. For TYPO3 13-compatible code, keep classic
-placeholders and runtime formatting.
-
-**Why does `state="translated"` not show?**
-
-TYPO3 loads approved localizations by default. Use `state="reviewed"` or
-`state="final"` for reviewed target strings.
-
-**Can one XLIFF file contain multiple target languages?**
-
-No. Keep one target language per file.
-
-**Are translation files for editorial content?**
-
-No. XLIFF files are for UI labels and short runtime messages. Editorial content
-belongs in TYPO3 records and site localization.
-
-## Official Sources
-
-- TYPO3 Explained: XLIFF format
-  https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/ApiOverview/Localization/XliffFormat.html
-- TYPO3 Core changelog: ICU MessageFormat support
-  https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.2/Feature-104546-SupportICUMessageFormatForPluralForms.html
-- TYPO3 Core changelog: Translation domain mapping
-  https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/14.0/Feature-93334-TranslationDomainMapping.html
-- TYPO3 Fluid Translate ViewHelper
-  https://docs.typo3.org/other/typo3/view-helper-reference/main/en-us/Global/Translate.html
-- TYPO3 Content Blocks language files
-  https://docs.typo3.org/p/friendsoftypo3/content-blocks/main/en-us/Definition/Language/Index.html
+Read [the full guide](references/full-guide.md) when the task needs detailed examples, long templates, troubleshooting matrices, appendices, or sections not included above. Keep this file unloaded for narrow tasks so the skill follows progressive disclosure.

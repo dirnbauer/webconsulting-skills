@@ -1,9 +1,13 @@
 ---
 name: "typo3-visual-editor"
-description: "TYPO3 Visual Editor integration and migration guide for friendsoftypo3/visual-editor. Use when installing, configuring, removing, troubleshooting, or upgrading templates for the new Visual Editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW content areas, record-transformation, Fluid templates, backend fields, colPos migrations, Container/VHS/Flux content rendering, or visual editing readiness in TYPO3 13/14 sitepackages."
+description: "Installs, configures, removes, and migrates TYPO3 sitepackages for FriendsOfTYPO3 Visual Editor, including inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, record transformation, PAGEVIEW content areas, colPos migration, and template readiness. Use when the user mentions Visual Editor, inline editing, frontend editing, content areas, Fluid template migration, or visual editing readiness in TYPO3 13/14."
+metadata:
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # TYPO3 Visual Editor
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 Use this skill to make a TYPO3 project ready for `friendsoftypo3/visual-editor`, especially when upgrading Fluid templates so editors can edit fields and content areas in context.
 

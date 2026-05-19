@@ -11,7 +11,7 @@ Follow the instructions in [AGENTS.md](AGENTS.md) — it is the single source of
 
 All skills live in `skills/<skill-name>/SKILL.md`. Installers symlink the whole skill directory, not just `SKILL.md`, so optional `agents/`, `assets/`, `examples/`, `references/`, `rules/`, and `scripts/` folders remain available to clients that support them.
 
-To use a skill, read `skills/<skill-name>/SKILL.md` and follow its instructions. Load referenced files only when the skill asks for them.
+To use a skill, read `skills/<skill-name>/SKILL.md` as the entry point and follow its instructions. Load referenced files only when the skill asks for them; long examples and appendices normally live in `references/` for progressive disclosure.
 
 ## Key Conventions
 

@@ -1,18 +1,15 @@
 ---
-name: typo3-icon14
-description: >-
-  Design and migrate TYPO3 v14 extension icons with the Core Icon API and the
-  current backend icon language. Use when working with module icons, plugin
-  icons, record icons, action icons, Extension.svg, Configuration/Icons.php,
-  iconIdentifier, pluginIcon, typeicon_classes, TYPO3.Icons, or styleguide icon
-  references.
-compatibility: TYPO3 14.x
+name: "typo3-icon14"
+description: "Designs and migrates TYPO3 extension icons to the v14 line-art style, including source SVG cleanup, light/dark behavior, IconRegistry naming, backend module icons, and verification. Use when the user asks for TYPO3 v14 icons, backend module icon migration, extension icon modernization, SVG icon rules, or icon registration."
+compatibility: "TYPO3 14.x"
 metadata:
   version: "1.3.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # TYPO3 v14 Icon Modernizer
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > Prefer live TYPO3 v14 references over bundled snapshots. Use the official Icon API
 > docs for registration rules and the TYPO3.Icons catalog for the current Core SVG

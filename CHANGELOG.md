@@ -39,6 +39,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- **webconsulting skill structure**: Updated in-house skills to current Agent Skills rules
+  - Normalized routing metadata and explicit source notes for webconsulting-owned skills
+  - Kept `SKILL.md` files lightweight and moved long guidance into `references/`
+  - Added focused reference indexes for detailed examples, troubleshooting, and appendices
+  - Validated the updated webconsulting skills with `skills-ref`
+
 - **composer.json**: Added composer scripts for skill management
   - `composer skills:install` - Install skills to ~/.claude/skills
   - `composer skills:update` - Sync external skills and reinstall
@@ -207,4 +213,3 @@ Thanks to Netresearch DTT GmbH for their contributions.
 [3.0.0]: https://github.com/dirnbauer/webconsulting-skills/compare/v2.0.0...v3.0.0
 [2.0.0]: https://github.com/dirnbauer/webconsulting-skills/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/dirnbauer/webconsulting-skills/releases/tag/v1.0.0
-

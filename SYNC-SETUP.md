@@ -4,6 +4,7 @@ This repository uses one canonical skill layout:
 
 - each skill lives once at `skills/<slug>/SKILL.md`
 - optional `agents/`, `reference/`, `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
+- `SKILL.md` is the entry point; long examples, templates, troubleshooting, and appendices should be linked from `references/` instead of kept in the main file
 - upstream-managed skills are declared once in `.sync-config.json`
 - `./install.sh` and `./update.sh` fan skills out to the five core clients and the generic project `.agents/skills/` path automatically
 
@@ -112,9 +113,10 @@ Netresearch-derived skills are currently upstream-managed through `.sync-config.
 ## Adding a Local Skill
 
 1. Create `skills/<slug>/SKILL.md`.
-2. Add supporting folders only if needed.
-3. Update README / AGENTS if the skill changes the public catalog.
-4. Run `./install.sh`.
+2. Add `name` and `description` frontmatter; the description is the main routing signal.
+3. Keep the main file concise and add supporting folders only if needed.
+4. Update README / AGENTS if the skill changes the public catalog.
+5. Run `npx -y skills-ref validate skills/<slug>` and `./install.sh`.
 
 No extra client-specific symlink work is required for the five core clients or the generic `.agents/skills/` project path.
 

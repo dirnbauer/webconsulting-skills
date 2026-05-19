@@ -1,16 +1,15 @@
 ---
-name: webconsulting-branding
-description: >-
-  Enforces webconsulting.at design system, color palettes, typography, and MDX component
-  structures for frontend development. Use when working with frontend, design, branding,
-  ui, components, styling.
-compatibility: TYPO3 14.x
+name: "webconsulting-branding"
+description: "Applies the webconsulting.at brand system, including voice, colors, typography, MDX components, Mermaid theming, accessibility, responsive breakpoints, spacing, buttons, dark mode, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, MDX content, frontend components, TYPO3 templates, brand tokens, or visual consistency."
+compatibility: "TYPO3 14.x"
 metadata:
   version: "2.0.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # webconsulting Design System
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 ## 1. Brand Identity & Voice
 

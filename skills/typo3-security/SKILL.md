@@ -1,16 +1,15 @@
 ---
-name: typo3-security
-description: >-
-  Security hardening checklist and best practices for TYPO3 v14 installations,
-  covering configuration, file permissions, and common vulnerabilities. Use when working
-  with security, hardening, permissions, authentication, vulnerabilities.
-compatibility: TYPO3 14.x
+name: "typo3-security"
+description: "Hardens TYPO3 v14 installations and extensions with secure configuration, trusted hosts, file permissions, Install Tool protection, backend user security, MFA, CSP, QueryBuilder usage, XSS defenses, and CSRF checks. Use when the user asks about TYPO3 security, hardening, permissions, authentication, CSP, SQL injection, XSS, CSRF, or go-live security readiness."
+compatibility: "TYPO3 14.x"
 metadata:
   version: "2.0.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # TYPO3 Security Hardening
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > **Compatibility:** TYPO3 v14.x
 > All security configurations in this skill work on TYPO3 v14.

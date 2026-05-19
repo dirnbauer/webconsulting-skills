@@ -1,16 +1,14 @@
 ---
-name: security-incident-reporting
-description: >-
-  Security Incident Report templates drawing from NIST/SANS. DDoS post-mortem, CVE
-  correlation, timeline documentation, and blameless root cause analysis. Use when working
-  with incident report, post-mortem, sir, ddos analysis, security reporting, root cause
-  analysis, cve correlation, nist 800-61.
+name: "security-incident-reporting"
+description: "Builds security incident reports, DDoS post-mortems, timelines, IoC sections, CVE correlation, severity scoring, and blameless root cause analysis. Use when the user needs an incident report, post-mortem, forensics summary, security timeline, DDoS analysis, SIR, root cause analysis, or communication for a security event."
 metadata:
   version: "1.0.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
-
 # Security Incident Reporting
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 Comprehensive framework for documenting and analyzing security incidents, drawing from NIST SP 800-61 and SANS methodologies.
 

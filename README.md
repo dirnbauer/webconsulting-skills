@@ -64,6 +64,8 @@ Category-specific add-ons are not counted as top-level skills.
 Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths, plus a project-level `.agents/skills/` mirror for generic agent packages. The installer links whole skill directories, so `agents/`, `assets/`, `examples/`, `reference/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
 To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific symlinks or duplicate per-client copies; `./install.sh` and `./update.sh` fan the canonical skill directory out automatically.
 
+`SKILL.md` is the lightweight entry point. Keep routing metadata and the default workflow there, then move long examples, templates, troubleshooting matrices, and appendices into `references/` and link them from the skill body. This keeps skills compatible with Anthropic's current Agent Skills guidance while preserving full detail for clients that load bundled resources.
+
 ### Core Scripted Clients
 
 | Client | Installation | Discovery |
@@ -110,9 +112,10 @@ GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
 ### Adding a Skill
 
 1. Create `skills/<slug>/SKILL.md`.
-2. Add `references/`, `examples/`, `scripts/`, or `assets/` only if the skill needs them.
-3. If the skill is upstream-managed, add one entry to `.sync-config.json`.
-4. Run `./install.sh`.
+2. Use YAML frontmatter with at least `name` and `description`; `description` should say what the skill does and when to use it.
+3. Keep the main `SKILL.md` concise. Put optional deep guidance in `references/`, deterministic helpers in `scripts/`, reusable input/output material in `assets/`, and runnable examples in `examples/`.
+4. If the skill is upstream-managed, add one entry to `.sync-config.json`.
+5. Run `npx -y skills-ref validate skills/<slug>` and `./install.sh`.
 
 Do not create manual per-client symlinks, duplicate `SKILL.md` files, or client-specific install rules for an individual skill. The installer loops over `skills/*` and populates every core client location automatically.
 
@@ -219,7 +222,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 ### Skills for Dummies
 
-**What are Agent Skills?** They're Markdown files (`SKILL.md`) containing expert knowledge that your AI coding assistant reads to become a specialist. After running `./install.sh`, skills are symlinked to the supported core AI client directories and automatically discovered.
+**What are Agent Skills?** They're Markdown entry points (`SKILL.md`) plus optional bundled resources (`references/`, `scripts/`, `assets/`, `examples/`, and similar folders). Your AI coding assistant reads the entry point first and loads referenced material only when the task needs it. After running `./install.sh`, whole skill directories are symlinked to the supported core AI client directories and automatically discovered.
 
 **How do they work?** 
 - **Auto-applied**: Cursor's Agent decides when a skill is relevant based on your query
@@ -227,7 +230,9 @@ The Composer plugin will automatically run `install.sh` after installation to de
 - **Trigger keywords**: Mentioning keywords like "video", "animation", "security audit", or "content-blocks" activates relevant skills
 
 **Where do skills live?**
-- Source files: `skills/*/SKILL.md` (this repo)
+- Source directories: `skills/*/` (this repo)
+- Entry points: `skills/*/SKILL.md`
+- Bundled detail: `skills/*/references/`, `skills/*/scripts/`, `skills/*/assets/`, `skills/*/examples/`, and other local support folders
 - User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.codex/skills/`, `~/.codeium/windsurf/skills/`
 - Project-level: `.cursor/skills/`, `.gemini/skills/`, `.codex/skills/`, `.windsurf/skills/`
 - Legacy rules: `.cursor/rules/*.mdc` wrappers point Cursor to the full skill directory (backwards compatibility)
@@ -2236,7 +2241,7 @@ grep -r "DataHandler" skills/
 2. **Use trigger keywords naturally** - Just mention "ddev" or "datahandler" in your prompt
 3. **Be explicit for complex tasks** - Start with "Using the security-audit skill..."
 4. **Combine skills** - "Using typo3-rector and typo3-testing, upgrade my extension and add tests"
-5. **Check the skill source** - Read `~/.claude/skills/*/SKILL.md` for full documentation
+5. **Check the skill source** - Read `~/.claude/skills/*/SKILL.md` first, then follow links into `references/` only when the skill asks for more detail
 6. **View in settings** - Go to `Cursor Settings → Rules` to see all discovered skills
 
 ## What's Included
@@ -2358,7 +2363,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │   73 SKILL.md     │
+                        │   74 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2598,13 +2603,14 @@ The following repositories are the source for skills in this collection:
 ## Contributing
 
 1. Create a skill in `skills/your-skill-name/SKILL.md`
-2. Follow the SKILL.md format (see existing skills)
-3. If the skill is adapted from an upstream source, add a full `Credits & Attribution`
+2. Follow the Agent Skills format: `name` and `description` frontmatter are required; optional top-level fields should stay within the current validator-supported schema.
+3. Keep `SKILL.md` as a concise entry point and move long detail into `references/` files with clear links.
+4. If the skill is adapted from an upstream source, add a full `Credits & Attribution`
    block in `SKILL.md` with the upstream owner, original repository, thank-you message,
    and `Adapted by webconsulting.at for this skill collection`
-4. Keep the Netresearch-specific thank-you wording for Netresearch-derived skills
-5. Run `python3 scripts/check_attribution_guardrails.py` and `./install.sh` to test
-6. Submit a pull request
+5. Keep the Netresearch-specific thank-you wording for Netresearch-derived skills
+6. Run `npx -y skills-ref validate skills/your-skill-name`, `python3 scripts/check_attribution_guardrails.py`, and `./install.sh` to test
+7. Submit a pull request
 
 Most upstream-derived skills are auto-discovered from their `SKILL.md` attribution, so you do not
 need to register every new upstream skill in `scripts/audit_skills.py`. Only add a manual override

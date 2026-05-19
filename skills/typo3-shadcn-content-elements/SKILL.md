@@ -1,10 +1,11 @@
 ---
-name: typo3-shadcn-content-elements
-description: Produce, audit, or overhaul TYPO3 Content Blocks content elements styled with shadcn/ui presets. Use this skill whenever the user asks to create, update, review, seed, restyle, iconize, or add backend previews for TYPO3 content elements, especially in EXT:desiderio, Fluid templates, ContentBlocks/ContentElements, shadcn/create preset ids, Tailwind v4 tokens, light/dark mode token behavior, no-hardcoded-style audits, Fluid atoms/molecules, TYPO3 layout module previews, or content element seed scripts.
-compatibility: TYPO3 14.x
+name: "typo3-shadcn-content-elements"
+description: "Produces, audits, and overhauls TYPO3 Content Blocks content elements styled with shadcn/ui presets, semantic tokens, Fluid atoms, backend previews, icons, and seed data. Use when the user asks to create, restyle, review, seed, iconize, or preview TYPO3 Content Blocks with shadcn/ui, Tailwind v4 tokens, no-hardcoded-style rules, or local registry presets."
+compatibility: "TYPO3 14.x"
 metadata:
   version: "1.6.0"
-license: MIT / CC-BY-SA-4.0
+  origin: "webconsulting"
+license: "MIT / CC-BY-SA-4.0"
 ---
 
 # TYPO3 shadcn Content Elements
