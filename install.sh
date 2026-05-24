@@ -17,7 +17,7 @@
 #   --user-only     Only install user-level skills (skip project-level)
 #   --project-only  Only install project-level skills (skip user-level)
 #   --no-sync       Skip external skill sync
-#   --generate-only Regenerate cross-client files and manifests, then exit
+#   --generate-only Regenerate catalog, cross-client files, and manifests, then exit
 #   --help          Show this help message
 #
 # Core scripted clients (user-level skills via symlinks):
@@ -42,7 +42,9 @@
 #     • .codex/skills/        (OpenAI Codex)
 #     • .windsurf/skills/     (Windsurf)
 #
-# Cross-client files (read natively by multiple clients):
+# Generated files:
+#     • catalog/skill-sources.json      → Skill source/provenance catalog
+#     • catalog/skill-audit.md          → Skill structure/source audit
 #     • AGENTS.md                       → Copilot, Codex, Windsurf, Cline, Aider
 #     • CLAUDE.md                       → Claude Code
 #     • GEMINI.md                       → Gemini CLI, Antigravity
@@ -72,7 +74,7 @@ while [[ $# -gt 0 ]]; do
         --project-only) PROJECT_ONLY=true; shift ;;
         --no-sync)     NO_SYNC=true; shift ;;
         --generate-only) GENERATE_ONLY=true; shift ;;
-        --help|-h)     head -n 54 "$0" | tail -n 52; exit 0 ;;
+        --help|-h)     head -n 57 "$0" | tail -n 55; exit 0 ;;
         *)             echo "Unknown option: $1"; exit 1 ;;
     esac
 done
@@ -223,14 +225,24 @@ else
 fi
 
 # =============================================================================
-# 3. Generate Cross-Client Instruction Files
+# 3. Generate Catalog and Cross-Client Instruction Files
 # =============================================================================
 
 echo ""
-echo "→ Generating cross-client instruction files..."
+echo "→ Generating catalog and cross-client files..."
 
 # Count skills
 SKILL_COUNT=$(find "$SCRIPT_DIR/skills" -mindepth 2 -maxdepth 2 -name SKILL.md -type f | wc -l | tr -d ' ')
+
+# ── Generate skill source catalog and audit files ─────────────────────────────
+# This keeps README/source-owner tables, audit output, and extension metadata in
+# sync when a new top-level skill is added under skills/.
+if command -v python3 &> /dev/null; then
+    python3 "$SCRIPT_DIR/scripts/audit_skills.py"
+    echo "  ✓ catalog/skill-sources.json + catalog/skill-audit.md ($SKILL_COUNT skills)"
+else
+    echo "  ⚠ python3 not installed — skipping catalog/skill audit generation"
+fi
 
 write_client_instructions() {
     local target_file="$1"
@@ -315,7 +327,7 @@ if [ "$GENERATE_ONLY" = true ]; then
     echo ""
     echo "═══════════════════════════════════════════════════════════════"
     echo "Generation Complete!"
-    echo "Generated cross-client files for $SKILL_COUNT skills."
+    echo "Generated catalog and cross-client files for $SKILL_COUNT skills."
     echo "═══════════════════════════════════════════════════════════════"
     exit 0
 fi
@@ -522,6 +534,7 @@ if [ "$SCRIPT_DIR" != "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
 elif [ "$SCRIPT_DIR" = "$PROJECT_ROOT" ] && [ "$USER_ONLY" = false ]; then
     echo ""
     echo "→ Cross-client files already in place (standalone install)"
+    echo "  catalog/skill-sources.json, catalog/skill-audit.md,"
     echo "  AGENTS.md, CLAUDE.md, GEMINI.md, .windsurfrules,"
     echo "  .github/copilot-instructions.md, gemini-extension.json"
 fi
@@ -552,7 +565,9 @@ if [ "$USER_ONLY" != "true" ]; then
     echo ""
 fi
 
-echo "Cross-client instruction files:"
+echo "Generated catalog and cross-client files:"
+echo "  catalog/skill-sources.json       → Skill source/provenance catalog"
+echo "  catalog/skill-audit.md           → Skill structure/source audit"
 echo "  AGENTS.md                        → Copilot, Codex, Windsurf, Cline, Aider"
 echo "  CLAUDE.md                        → Claude Code"
 echo "  GEMINI.md                        → Gemini CLI, Antigravity"
@@ -565,8 +580,8 @@ echo "  1. Restart your IDE / CLI to discover skills"
 echo "  2. Cursor: type / in Agent chat"
 echo "  3. Gemini CLI: run 'gemini skills list'"
 echo "  4. Codex: skills appear automatically"
-    echo "  5. Windsurf: @skill-name or auto-activation"
-    echo "  6. Project rules point to full skill directories; keep symlinks intact"
+echo "  5. Windsurf: @skill-name or auto-activation"
+echo "  6. Project rules point to full skill directories; keep symlinks intact"
 if [ "$IS_CONTAINER" = "true" ]; then
     echo "  7. Run install.sh on LOCAL machine for user-level skills"
 fi

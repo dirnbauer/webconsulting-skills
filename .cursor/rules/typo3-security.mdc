@@ -9,8 +9,9 @@ Canonical skill directory: `.cursor/skills/typo3-security/`
 
 Read `.cursor/skills/typo3-security/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
 
-
 # TYPO3 Security Hardening
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > **Compatibility:** TYPO3 v14.x
 > All security configurations in this skill work on TYPO3 v14.

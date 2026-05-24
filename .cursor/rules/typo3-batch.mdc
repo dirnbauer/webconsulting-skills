@@ -9,8 +9,9 @@ Canonical skill directory: `.cursor/skills/typo3-batch/`
 
 Read `.cursor/skills/typo3-batch/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
 
-
 # TYPO3 Batch Operations
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > Adapted from Boris Cherny's (Anthropic) Claude Code `/batch` skill for TYPO3 contexts.
 > **Target:** TYPO3 v14.x only.

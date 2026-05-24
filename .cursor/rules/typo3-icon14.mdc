@@ -9,8 +9,9 @@ Canonical skill directory: `.cursor/skills/typo3-icon14/`
 
 Read `.cursor/skills/typo3-icon14/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
 
-
 # TYPO3 v14 Icon Modernizer
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 > Prefer live TYPO3 v14 references over bundled snapshots. Use the official Icon API
 > docs for registration rules and the TYPO3.Icons catalog for the current Core SVG

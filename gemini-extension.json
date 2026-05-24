@@ -17,6 +17,30 @@
       ],
       "path": "${extensionPath}/skills/ab-testing"
     },
+    "ad-creative": {
+      "name": "ad-creative",
+      "description": "Ad creative generation and iteration for paid platforms",
+      "triggers": [
+        "ad creative",
+        "ad copy variations",
+        "rsa headlines",
+        "creative testing"
+      ],
+      "path": "${extensionPath}/skills/ad-creative"
+    },
+    "ads": {
+      "name": "ads",
+      "description": "Paid ads campaign strategy, targeting, bidding, and optimization",
+      "triggers": [
+        "ads",
+        "ppc",
+        "paid media",
+        "roas",
+        "cpa",
+        "retargeting"
+      ],
+      "path": "${extensionPath}/skills/ads"
+    },
     "agent-md-refactor": {
       "name": "agent-md-refactor",
       "description": "Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure",
@@ -39,6 +63,31 @@
       ],
       "path": "${extensionPath}/skills/ai-search-optimization"
     },
+    "ai-seo": {
+      "name": "ai-seo",
+      "description": "AI search visibility and LLM citation optimization",
+      "triggers": [
+        "ai seo",
+        "aeo",
+        "geo",
+        "llmo",
+        "ai overviews",
+        "perplexity"
+      ],
+      "path": "${extensionPath}/skills/ai-seo"
+    },
+    "analytics": {
+      "name": "analytics",
+      "description": "Analytics tracking, measurement plans, events, and attribution",
+      "triggers": [
+        "analytics",
+        "ga4",
+        "gtm",
+        "event tracking",
+        "attribution"
+      ],
+      "path": "${extensionPath}/skills/analytics"
+    },
     "android-design": {
       "name": "android-design",
       "description": "Material Design 3, Jetpack Compose, dynamic color, navigation",
@@ -50,6 +99,29 @@
       ],
       "path": "${extensionPath}/skills/android-design"
     },
+    "aso": {
+      "name": "aso",
+      "description": "App Store and Google Play listing optimization",
+      "triggers": [
+        "aso",
+        "app store optimization",
+        "app listing",
+        "google play"
+      ],
+      "path": "${extensionPath}/skills/aso"
+    },
+    "churn-prevention": {
+      "name": "churn-prevention",
+      "description": "Churn reduction, cancel flows, dunning, and win-back strategy",
+      "triggers": [
+        "churn",
+        "cancel flow",
+        "dunning",
+        "retention",
+        "win-back"
+      ],
+      "path": "${extensionPath}/skills/churn-prevention"
+    },
     "cli-tools": {
       "name": "cli-tools",
       "description": "CLI tool management and auto-installation",
@@ -60,6 +132,71 @@
       ],
       "path": "${extensionPath}/skills/cli-tools"
     },
+    "co-marketing": {
+      "name": "co-marketing",
+      "description": "Partner identification and joint campaign planning",
+      "triggers": [
+        "co-marketing",
+        "partner marketing",
+        "joint campaign",
+        "partnership ideas"
+      ],
+      "path": "${extensionPath}/skills/co-marketing"
+    },
+    "cold-email": {
+      "name": "cold-email",
+      "description": "B2B cold outreach emails and follow-up sequences",
+      "triggers": [
+        "cold email",
+        "cold outreach",
+        "prospecting email",
+        "sales email"
+      ],
+      "path": "${extensionPath}/skills/cold-email"
+    },
+    "community-marketing": {
+      "name": "community-marketing",
+      "description": "Community strategy, engagement, and community-led growth",
+      "triggers": [
+        "community marketing",
+        "discord community",
+        "slack community",
+        "community-led growth"
+      ],
+      "path": "${extensionPath}/skills/community-marketing"
+    },
+    "competitor-profiling": {
+      "name": "competitor-profiling",
+      "description": "Competitor research and profile generation from URLs",
+      "triggers": [
+        "competitor profile",
+        "competitor research",
+        "competitive intelligence"
+      ],
+      "path": "${extensionPath}/skills/competitor-profiling"
+    },
+    "competitors": {
+      "name": "competitors",
+      "description": "Competitor comparison and alternative pages for SEO and sales",
+      "triggers": [
+        "alternative page",
+        "vs page",
+        "competitor comparison",
+        "battlecard"
+      ],
+      "path": "${extensionPath}/skills/competitors"
+    },
+    "content-strategy": {
+      "name": "content-strategy",
+      "description": "Content strategy, topic planning, and editorial roadmaps",
+      "triggers": [
+        "content strategy",
+        "content plan",
+        "editorial calendar",
+        "topics"
+      ],
+      "path": "${extensionPath}/skills/content-strategy"
+    },
     "context7": {
       "name": "context7",
       "description": "Library documentation lookup via REST API",
@@ -69,6 +206,61 @@
         "libraries"
       ],
       "path": "${extensionPath}/skills/context7"
+    },
+    "copy-editing": {
+      "name": "copy-editing",
+      "description": "Marketing copy review, editing, and refresh guidance",
+      "triggers": [
+        "copy editing",
+        "edit copy",
+        "review copy",
+        "copy feedback"
+      ],
+      "path": "${extensionPath}/skills/copy-editing"
+    },
+    "copywriting": {
+      "name": "copywriting",
+      "description": "Marketing copywriting for pages, CTAs, and positioning",
+      "triggers": [
+        "copywriting",
+        "homepage copy",
+        "landing page copy",
+        "cta copy"
+      ],
+      "path": "${extensionPath}/skills/copywriting"
+    },
+    "corey-ab-testing": {
+      "name": "corey-ab-testing",
+      "description": "Corey Haines A/B testing and experimentation program guidance",
+      "triggers": [
+        "corey ab testing",
+        "growth experiments",
+        "ice score",
+        "statistical significance"
+      ],
+      "path": "${extensionPath}/skills/corey-ab-testing"
+    },
+    "corey-programmatic-seo": {
+      "name": "corey-programmatic-seo",
+      "description": "Corey Haines programmatic SEO pages at scale",
+      "triggers": [
+        "corey programmatic seo",
+        "pseo",
+        "template pages",
+        "data-driven pages"
+      ],
+      "path": "${extensionPath}/skills/corey-programmatic-seo"
+    },
+    "cro": {
+      "name": "cro",
+      "description": "Page and form conversion rate optimization",
+      "triggers": [
+        "cro",
+        "conversion optimization",
+        "landing page optimization",
+        "form cro"
+      ],
+      "path": "${extensionPath}/skills/cro"
     },
     "cro-funnel": {
       "name": "cro-funnel",
@@ -82,6 +274,17 @@
       ],
       "path": "${extensionPath}/skills/cro-funnel"
     },
+    "customer-research": {
+      "name": "customer-research",
+      "description": "Customer research interviews, synthesis, and voice-of-customer analysis",
+      "triggers": [
+        "customer research",
+        "icp research",
+        "user interviews",
+        "voice of customer"
+      ],
+      "path": "${extensionPath}/skills/customer-research"
+    },
     "deepfake-detection": {
       "name": "deepfake-detection",
       "description": "Multimodal media authentication, PRNU/IGH/DQ forensics, GAN detection",
@@ -93,6 +296,17 @@
         "prnu"
       ],
       "path": "${extensionPath}/skills/deepfake-detection"
+    },
+    "directory-submissions": {
+      "name": "directory-submissions",
+      "description": "Directory submission strategy for discovery and backlinks",
+      "triggers": [
+        "directory submissions",
+        "submit startup",
+        "saas directories",
+        "backlinks"
+      ],
+      "path": "${extensionPath}/skills/directory-submissions"
     },
     "document-processing": {
       "name": "document-processing",
@@ -107,6 +321,17 @@
         "excel"
       ],
       "path": "${extensionPath}/skills/document-processing"
+    },
+    "emails": {
+      "name": "emails",
+      "description": "Lifecycle email sequences, drip campaigns, and automated flows",
+      "triggers": [
+        "email sequence",
+        "drip campaign",
+        "lifecycle email",
+        "onboarding email"
+      ],
+      "path": "${extensionPath}/skills/emails"
     },
     "enterprise-readiness": {
       "name": "enterprise-readiness",
@@ -152,6 +377,16 @@
         "fetch url"
       ],
       "path": "${extensionPath}/skills/firecrawl"
+    },
+    "free-tools": {
+      "name": "free-tools",
+      "description": "Free tool strategy for SEO, leads, and brand awareness",
+      "triggers": [
+        "free tool",
+        "engineering as marketing",
+        "lead generation tool"
+      ],
+      "path": "${extensionPath}/skills/free-tools"
     },
     "frontend-design": {
       "name": "frontend-design",
@@ -228,6 +463,17 @@
       ],
       "path": "${extensionPath}/skills/hyperframes-registry"
     },
+    "image": {
+      "name": "image",
+      "description": "Marketing image generation and optimization workflows",
+      "triggers": [
+        "marketing image",
+        "social graphic",
+        "product mockup",
+        "blog hero"
+      ],
+      "path": "${extensionPath}/skills/image"
+    },
     "impeccable": {
       "name": "impeccable",
       "description": "Production-grade frontend design, critique, polish, shaping, and live UI iteration",
@@ -268,6 +514,17 @@
       ],
       "path": "${extensionPath}/skills/ipados-design"
     },
+    "launch": {
+      "name": "launch",
+      "description": "Product launch, feature announcement, and release strategy",
+      "triggers": [
+        "launch",
+        "product hunt",
+        "feature release",
+        "announcement"
+      ],
+      "path": "${extensionPath}/skills/launch"
+    },
     "launch-strategy": {
       "name": "launch-strategy",
       "description": "Product launches, Product Hunt, go-to-market",
@@ -278,6 +535,18 @@
         "beta launch"
       ],
       "path": "${extensionPath}/skills/launch-strategy"
+    },
+    "lead-magnets": {
+      "name": "lead-magnets",
+      "description": "Lead magnet planning, gated content, and capture optimization",
+      "triggers": [
+        "lead magnet",
+        "gated content",
+        "checklist",
+        "ebook",
+        "template"
+      ],
+      "path": "${extensionPath}/skills/lead-magnets"
     },
     "legal-impressum": {
       "name": "legal-impressum",
@@ -304,6 +573,28 @@
       ],
       "path": "${extensionPath}/skills/macos-design"
     },
+    "marketing-ideas": {
+      "name": "marketing-ideas",
+      "description": "Marketing ideas, growth inspiration, and channel brainstorming",
+      "triggers": [
+        "marketing ideas",
+        "growth ideas",
+        "how to market",
+        "acquisition ideas"
+      ],
+      "path": "${extensionPath}/skills/marketing-ideas"
+    },
+    "marketing-psychology": {
+      "name": "marketing-psychology",
+      "description": "Behavioral science and mental models for marketing",
+      "triggers": [
+        "marketing psychology",
+        "mental models",
+        "cognitive bias",
+        "persuasion"
+      ],
+      "path": "${extensionPath}/skills/marketing-psychology"
+    },
     "marketing-skills": {
       "name": "marketing-skills",
       "description": "CRO, copywriting, SEO, pricing, psychology (Corey Haines)",
@@ -315,6 +606,33 @@
         "pricing"
       ],
       "path": "${extensionPath}/skills/marketing-skills"
+    },
+    "micro-interactions": {
+      "name": "micro-interactions",
+      "description": "Disney's 12 animation principles applied to UI feedback moments (hover, press, toggles, ripples, badges)",
+      "triggers": [
+        "micro-interaction",
+        "hover state",
+        "button press",
+        "toggle",
+        "ripple",
+        "focus ring",
+        "badge update"
+      ],
+      "path": "${extensionPath}/skills/micro-interactions"
+    },
+    "microinteractions": {
+      "name": "microinteractions",
+      "description": "Dan Saffer's Microinteractions framework: triggers, rules, feedback, loops & modes, signature moments",
+      "triggers": [
+        "microinteraction",
+        "trigger design",
+        "feedback pattern",
+        "loops and modes",
+        "signature moment",
+        "form validation feedback"
+      ],
+      "path": "${extensionPath}/skills/microinteractions"
     },
     "og-image": {
       "name": "og-image",
@@ -328,6 +646,28 @@
       ],
       "path": "${extensionPath}/skills/og-image"
     },
+    "onboarding": {
+      "name": "onboarding",
+      "description": "Post-signup onboarding, activation, and time-to-value optimization",
+      "triggers": [
+        "onboarding",
+        "activation",
+        "first-run experience",
+        "time to value"
+      ],
+      "path": "${extensionPath}/skills/onboarding"
+    },
+    "paywalls": {
+      "name": "paywalls",
+      "description": "Paywall, upgrade screen, upsell, and feature gate optimization",
+      "triggers": [
+        "paywall",
+        "upgrade screen",
+        "upsell",
+        "feature gate"
+      ],
+      "path": "${extensionPath}/skills/paywalls"
+    },
     "php-modernization": {
       "name": "php-modernization",
       "description": "PHP 8.x patterns, PHPStan level 10, DTOs, enums",
@@ -338,6 +678,18 @@
         "enum"
       ],
       "path": "${extensionPath}/skills/php-modernization"
+    },
+    "popups": {
+      "name": "popups",
+      "description": "Popup, modal, overlay, slide-in, and banner conversion optimization",
+      "triggers": [
+        "popup",
+        "modal",
+        "exit intent",
+        "slide-in",
+        "banner"
+      ],
+      "path": "${extensionPath}/skills/popups"
     },
     "postgres-best-practices": {
       "name": "postgres-best-practices",
@@ -352,6 +704,29 @@
         "supabase"
       ],
       "path": "${extensionPath}/skills/postgres-best-practices"
+    },
+    "pricing": {
+      "name": "pricing",
+      "description": "Pricing, packaging, value metrics, and monetization strategy",
+      "triggers": [
+        "pricing",
+        "pricing tiers",
+        "freemium",
+        "packaging",
+        "monetization"
+      ],
+      "path": "${extensionPath}/skills/pricing"
+    },
+    "product-marketing": {
+      "name": "product-marketing",
+      "description": "Product marketing context, positioning, and messaging foundation",
+      "triggers": [
+        "product marketing",
+        "positioning",
+        "messaging",
+        "marketing context"
+      ],
+      "path": "${extensionPath}/skills/product-marketing"
     },
     "programmatic-seo": {
       "name": "programmatic-seo",
@@ -410,6 +785,18 @@
       ],
       "path": "${extensionPath}/skills/refactor-clean"
     },
+    "referrals": {
+      "name": "referrals",
+      "description": "Referral, affiliate, ambassador, and word-of-mouth programs",
+      "triggers": [
+        "referral",
+        "affiliate",
+        "ambassador",
+        "word of mouth",
+        "viral loop"
+      ],
+      "path": "${extensionPath}/skills/referrals"
+    },
     "remotion-best-practices": {
       "name": "remotion-best-practices",
       "description": "Video creation in React with Remotion",
@@ -421,6 +808,43 @@
         "composition"
       ],
       "path": "${extensionPath}/skills/remotion-best-practices"
+    },
+    "revops": {
+      "name": "revops",
+      "description": "Revenue operations, lead lifecycle, scoring, and handoff processes",
+      "triggers": [
+        "revops",
+        "lead scoring",
+        "lead routing",
+        "mql",
+        "sql",
+        "crm automation"
+      ],
+      "path": "${extensionPath}/skills/revops"
+    },
+    "sales-enablement": {
+      "name": "sales-enablement",
+      "description": "Sales collateral, pitch decks, one-pagers, and demo scripts",
+      "triggers": [
+        "sales enablement",
+        "sales deck",
+        "pitch deck",
+        "one-pager",
+        "demo script"
+      ],
+      "path": "${extensionPath}/skills/sales-enablement"
+    },
+    "schema": {
+      "name": "schema",
+      "description": "Schema markup and structured data for rich results",
+      "triggers": [
+        "schema",
+        "structured data",
+        "json-ld",
+        "rich snippets",
+        "schema.org"
+      ],
+      "path": "${extensionPath}/skills/schema"
     },
     "security-audit": {
       "name": "security-audit",
@@ -443,6 +867,17 @@
       ],
       "path": "${extensionPath}/skills/security-incident-reporting"
     },
+    "seo-audit": {
+      "name": "seo-audit",
+      "description": "Technical SEO, on-page SEO, and content quality audits",
+      "triggers": [
+        "seo audit",
+        "technical seo",
+        "indexing issues",
+        "core web vitals"
+      ],
+      "path": "${extensionPath}/skills/seo-audit"
+    },
     "shadcn-ui": {
       "name": "shadcn-ui",
       "description": "shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms",
@@ -457,6 +892,29 @@
       ],
       "path": "${extensionPath}/skills/shadcn-ui"
     },
+    "signup": {
+      "name": "signup",
+      "description": "Signup, registration, account creation, and trial activation optimization",
+      "triggers": [
+        "signup",
+        "registration",
+        "trial activation",
+        "signup abandonment"
+      ],
+      "path": "${extensionPath}/skills/signup"
+    },
+    "site-architecture": {
+      "name": "site-architecture",
+      "description": "Website hierarchy, navigation, URL structure, and internal linking",
+      "triggers": [
+        "site architecture",
+        "sitemap",
+        "site structure",
+        "navigation",
+        "internal linking"
+      ],
+      "path": "${extensionPath}/skills/site-architecture"
+    },
     "skill-creator": {
       "name": "skill-creator",
       "description": "Guide for creating and packaging effective Agent Skills (Anthropic)",
@@ -468,6 +926,18 @@
         "SKILL.md"
       ],
       "path": "${extensionPath}/skills/skill-creator"
+    },
+    "social": {
+      "name": "social",
+      "description": "Social media content, calendars, repurposing, and short-form scripts",
+      "triggers": [
+        "social media",
+        "linkedin post",
+        "twitter thread",
+        "content calendar",
+        "reels"
+      ],
+      "path": "${extensionPath}/skills/social"
     },
     "tvos-design": {
       "name": "tvos-design",
@@ -614,6 +1084,32 @@
         "MDX blog"
       ],
       "path": "${extensionPath}/skills/typo3-idea-extension-blog"
+    },
+    "typo3-initial-release": {
+      "name": "typo3-initial-release",
+      "description": "First official TYPO3 14.3+ extension release workflow, final review, CI/tooling verification, and tagging",
+      "triggers": [
+        "initial release",
+        "1.0.0",
+        "release readiness",
+        "release tag",
+        "TER",
+        "Packagist"
+      ],
+      "path": "${extensionPath}/skills/typo3-initial-release"
+    },
+    "typo3-news-tags": {
+      "name": "typo3-news-tags",
+      "description": "Bulk-generate and assign thematic tags for georgringer/news (EXT:news)",
+      "triggers": [
+        "news tags",
+        "EXT:news",
+        "thematic tags",
+        "bulk tagging",
+        "tx_news_domain_model_tag",
+        "b13/tag"
+      ],
+      "path": "${extensionPath}/skills/typo3-news-tags"
     },
     "typo3-powermail": {
       "name": "typo3-powermail",
@@ -796,6 +1292,19 @@
         "typography"
       ],
       "path": "${extensionPath}/skills/ui-design-patterns"
+    },
+    "video": {
+      "name": "video",
+      "description": "Marketing video production with AI and programmatic video tools",
+      "triggers": [
+        "video",
+        "ai video",
+        "remotion",
+        "hyperframes",
+        "heygen",
+        "product demo video"
+      ],
+      "path": "${extensionPath}/skills/video"
     },
     "visionos-design": {
       "name": "visionos-design",

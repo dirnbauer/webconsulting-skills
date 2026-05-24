@@ -196,12 +196,310 @@
       "path": "skills/macos"
     },
     {
+      "name": "micro-interactions",
+      "source": "https://github.com/dylantarre/animation-principles.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/01-by-domain/micro-interactions",
+      "note": "Disney's 12 animation principles applied to UI micro-interactions"
+    },
+    {
+      "name": "microinteractions",
+      "source": "https://github.com/wondelai/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "microinteractions",
+      "note": "Dan Saffer microinteractions framework (Trigger / Rules / Feedback / Loops & Modes)"
+    },
+    {
       "name": "marketing-skills",
       "source": "https://github.com/coreyhaines31/marketingskills.git",
       "branch": "main",
       "path": "skills",
       "enabled": false,
       "note": "Local curated wrapper preferred (upstream is split into many separate skills)"
+    },
+    {
+      "name": "corey-ab-testing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/ab-testing",
+      "enabled": true,
+      "note": "Collision-safe import of Corey Haines `ab-testing`; local `ab-testing` is kept from its existing upstream source."
+    },
+    {
+      "name": "ad-creative",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/ad-creative",
+      "enabled": true
+    },
+    {
+      "name": "ads",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/ads",
+      "enabled": true
+    },
+    {
+      "name": "ai-seo",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/ai-seo",
+      "enabled": true
+    },
+    {
+      "name": "analytics",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/analytics",
+      "enabled": true
+    },
+    {
+      "name": "aso",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/aso",
+      "enabled": true
+    },
+    {
+      "name": "churn-prevention",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/churn-prevention",
+      "enabled": true
+    },
+    {
+      "name": "co-marketing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/co-marketing",
+      "enabled": true
+    },
+    {
+      "name": "cold-email",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/cold-email",
+      "enabled": true
+    },
+    {
+      "name": "community-marketing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/community-marketing",
+      "enabled": true
+    },
+    {
+      "name": "competitor-profiling",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/competitor-profiling",
+      "enabled": true
+    },
+    {
+      "name": "competitors",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/competitors",
+      "enabled": true
+    },
+    {
+      "name": "content-strategy",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/content-strategy",
+      "enabled": true
+    },
+    {
+      "name": "copy-editing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/copy-editing",
+      "enabled": true
+    },
+    {
+      "name": "copywriting",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/copywriting",
+      "enabled": true
+    },
+    {
+      "name": "cro",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/cro",
+      "enabled": true
+    },
+    {
+      "name": "customer-research",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/customer-research",
+      "enabled": true
+    },
+    {
+      "name": "directory-submissions",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/directory-submissions",
+      "enabled": true
+    },
+    {
+      "name": "emails",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/emails",
+      "enabled": true
+    },
+    {
+      "name": "free-tools",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/free-tools",
+      "enabled": true
+    },
+    {
+      "name": "image",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/image",
+      "enabled": true
+    },
+    {
+      "name": "launch",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/launch",
+      "enabled": true
+    },
+    {
+      "name": "lead-magnets",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/lead-magnets",
+      "enabled": true
+    },
+    {
+      "name": "marketing-ideas",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/marketing-ideas",
+      "enabled": true
+    },
+    {
+      "name": "marketing-psychology",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/marketing-psychology",
+      "enabled": true
+    },
+    {
+      "name": "onboarding",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/onboarding",
+      "enabled": true
+    },
+    {
+      "name": "paywalls",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/paywalls",
+      "enabled": true
+    },
+    {
+      "name": "popups",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/popups",
+      "enabled": true
+    },
+    {
+      "name": "pricing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/pricing",
+      "enabled": true
+    },
+    {
+      "name": "product-marketing",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/product-marketing",
+      "enabled": true
+    },
+    {
+      "name": "corey-programmatic-seo",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/programmatic-seo",
+      "enabled": true,
+      "note": "Collision-safe import of Corey Haines `programmatic-seo`; local `programmatic-seo` is kept from its existing upstream source."
+    },
+    {
+      "name": "referrals",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/referrals",
+      "enabled": true
+    },
+    {
+      "name": "revops",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/revops",
+      "enabled": true
+    },
+    {
+      "name": "sales-enablement",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/sales-enablement",
+      "enabled": true
+    },
+    {
+      "name": "schema",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/schema",
+      "enabled": true
+    },
+    {
+      "name": "seo-audit",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/seo-audit",
+      "enabled": true
+    },
+    {
+      "name": "signup",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/signup",
+      "enabled": true
+    },
+    {
+      "name": "site-architecture",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/site-architecture",
+      "enabled": true
+    },
+    {
+      "name": "social",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/social",
+      "enabled": true
+    },
+    {
+      "name": "video",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/video",
+      "enabled": true
     },
     {
       "name": "og-image",

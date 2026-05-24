@@ -48,7 +48,7 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
 ---
 
 We also thank **[Corey Haines](https://coreyhaines.com/)** for his excellent marketing skills
-collection. The `marketing-skills` skill is adapted from his open-source repository:
+collection. The `marketing-skills` wrapper and the split marketing skills are adapted from his open-source repository:
 https://github.com/coreyhaines31/marketingskills
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices  
@@ -177,6 +177,22 @@ https://github.com/vercel-labs/skills
 
 ---
 
+We also thank **[Dylan Tarre](https://github.com/dylantarre)** for the excellent `micro-interactions` skill.
+The `micro-interactions` skill is adapted from their open-source repository:
+https://github.com/dylantarre/animation-principles
+
+**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)
+
+---
+
+We also thank **[wondelai](https://github.com/wondelai)** for the excellent `microinteractions` framework skill.
+The `microinteractions` skill is adapted from their open-source repository:
+https://github.com/wondelai/skills
+
+**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)
+
+---
+
 We also thank **[Volker Kemeter](https://github.com/vkemeter)** for his contribution of the
 Gemini CLI extension manifest (`gemini-extension.json`), which enables native skill discovery
 and trigger-based activation across all webconsulting skills within Gemini CLI and Google
@@ -203,6 +219,8 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `hyperframes-registry` | Install registry blocks/components and wire them into HyperFrames | 1.0.0 | hyperframes add, hyperframes.json, block, component, registry |
 | `website-to-hyperframes` | Capture a website and turn it into a HyperFrames video | 1.0.0 | website to video, capture this site, turn this into a video, social ad, product tour |
 | `gsap` | GSAP animation reference for HyperFrames compositions | 1.0.0 | gsap, animation, timeline, easing, stagger, quickTo |
+| `micro-interactions` | Disney's 12 animation principles applied to UI feedback moments (hover, press, toggles, ripples, badges) | 1.0.0 | micro-interaction, hover state, button press, toggle, ripple, focus ring, badge update |
+| `microinteractions` | Dan Saffer's Microinteractions framework: triggers, rules, feedback, loops & modes, signature moments | 1.1.0 | microinteraction, trigger design, feedback pattern, loops and modes, signature moment, form validation feedback |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | 1.1.0 | documentation, help page, product video, screenshots, tts, gsap |
 | **Security & Enterprise** | | | |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS, CVSS) | 1.0.0 | security, audit, owasp, vulnerabilities |
@@ -222,6 +240,46 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `marketing-skills/SEO` | Technical SEO, on-page SEO, content quality audit | 1.0.0 | seo audit, not ranking, technical seo |
 | `marketing-skills/PSYCHOLOGY` | 70+ mental models for marketing and persuasion | 1.0.0 | psychology, mental model, persuasion, bias |
 | `marketing-skills/PRICING` | Pricing tiers, value metrics, freemium vs trial | 1.0.0 | pricing, tiers, freemium, monetization |
+| `ad-creative` | Ad creative generation and iteration for paid platforms | 2.0.0 | ad creative, ad copy variations, rsa headlines, creative testing |
+| `ads` | Paid ads campaign strategy, targeting, bidding, and optimization | 2.0.0 | ads, ppc, paid media, roas, cpa, retargeting |
+| `ai-seo` | AI search visibility and LLM citation optimization | 2.0.1 | ai seo, aeo, geo, llmo, ai overviews, perplexity |
+| `analytics` | Analytics tracking, measurement plans, events, and attribution | 2.0.0 | analytics, ga4, gtm, event tracking, attribution |
+| `aso` | App Store and Google Play listing optimization | 2.0.0 | aso, app store optimization, app listing, google play |
+| `churn-prevention` | Churn reduction, cancel flows, dunning, and win-back strategy | 2.0.0 | churn, cancel flow, dunning, retention, win-back |
+| `co-marketing` | Partner identification and joint campaign planning | 2.0.0 | co-marketing, partner marketing, joint campaign, partnership ideas |
+| `cold-email` | B2B cold outreach emails and follow-up sequences | 2.0.0 | cold email, cold outreach, prospecting email, sales email |
+| `community-marketing` | Community strategy, engagement, and community-led growth | 2.0.0 | community marketing, discord community, slack community, community-led growth |
+| `competitor-profiling` | Competitor research and profile generation from URLs | 2.0.0 | competitor profile, competitor research, competitive intelligence |
+| `competitors` | Competitor comparison and alternative pages for SEO and sales | 2.0.0 | alternative page, vs page, competitor comparison, battlecard |
+| `content-strategy` | Content strategy, topic planning, and editorial roadmaps | 2.0.0 | content strategy, content plan, editorial calendar, topics |
+| `copy-editing` | Marketing copy review, editing, and refresh guidance | 2.0.0 | copy editing, edit copy, review copy, copy feedback |
+| `copywriting` | Marketing copywriting for pages, CTAs, and positioning | 2.0.0 | copywriting, homepage copy, landing page copy, cta copy |
+| `corey-ab-testing` | Corey Haines A/B testing and experimentation program guidance | 2.0.0 | corey ab testing, growth experiments, ice score, statistical significance |
+| `corey-programmatic-seo` | Corey Haines programmatic SEO pages at scale | 2.0.0 | corey programmatic seo, pseo, template pages, data-driven pages |
+| `cro` | Page and form conversion rate optimization | 2.0.0 | cro, conversion optimization, landing page optimization, form cro |
+| `customer-research` | Customer research interviews, synthesis, and voice-of-customer analysis | 2.0.0 | customer research, icp research, user interviews, voice of customer |
+| `directory-submissions` | Directory submission strategy for discovery and backlinks | 2.0.0 | directory submissions, submit startup, saas directories, backlinks |
+| `emails` | Lifecycle email sequences, drip campaigns, and automated flows | 2.0.0 | email sequence, drip campaign, lifecycle email, onboarding email |
+| `free-tools` | Free tool strategy for SEO, leads, and brand awareness | 2.0.0 | free tool, engineering as marketing, lead generation tool |
+| `image` | Marketing image generation and optimization workflows | 2.0.0 | marketing image, social graphic, product mockup, blog hero |
+| `launch` | Product launch, feature announcement, and release strategy | 2.0.0 | launch, product hunt, feature release, announcement |
+| `lead-magnets` | Lead magnet planning, gated content, and capture optimization | 2.0.0 | lead magnet, gated content, checklist, ebook, template |
+| `marketing-ideas` | Marketing ideas, growth inspiration, and channel brainstorming | 2.0.0 | marketing ideas, growth ideas, how to market, acquisition ideas |
+| `marketing-psychology` | Behavioral science and mental models for marketing | 2.0.0 | marketing psychology, mental models, cognitive bias, persuasion |
+| `onboarding` | Post-signup onboarding, activation, and time-to-value optimization | 2.0.0 | onboarding, activation, first-run experience, time to value |
+| `paywalls` | Paywall, upgrade screen, upsell, and feature gate optimization | 2.0.0 | paywall, upgrade screen, upsell, feature gate |
+| `popups` | Popup, modal, overlay, slide-in, and banner conversion optimization | 2.0.0 | popup, modal, exit intent, slide-in, banner |
+| `pricing` | Pricing, packaging, value metrics, and monetization strategy | 2.0.0 | pricing, pricing tiers, freemium, packaging, monetization |
+| `product-marketing` | Product marketing context, positioning, and messaging foundation | 2.0.0 | product marketing, positioning, messaging, marketing context |
+| `referrals` | Referral, affiliate, ambassador, and word-of-mouth programs | 2.0.0 | referral, affiliate, ambassador, word of mouth, viral loop |
+| `revops` | Revenue operations, lead lifecycle, scoring, and handoff processes | 2.0.0 | revops, lead scoring, lead routing, mql, sql, crm automation |
+| `sales-enablement` | Sales collateral, pitch decks, one-pagers, and demo scripts | 2.0.0 | sales enablement, sales deck, pitch deck, one-pager, demo script |
+| `schema` | Schema markup and structured data for rich results | 2.0.0 | schema, structured data, json-ld, rich snippets, schema.org |
+| `seo-audit` | Technical SEO, on-page SEO, and content quality audits | 2.0.0 | seo audit, technical seo, indexing issues, core web vitals |
+| `signup` | Signup, registration, account creation, and trial activation optimization | 2.0.0 | signup, registration, trial activation, signup abandonment |
+| `site-architecture` | Website hierarchy, navigation, URL structure, and internal linking | 2.0.0 | site architecture, sitemap, site structure, navigation, internal linking |
+| `social` | Social media content, calendars, repurposing, and short-form scripts | 2.0.0 | social media, linkedin post, twitter thread, content calendar, reels |
+| `video` | Marketing video production with AI and programmatic video tools | 2.0.1 | video, ai video, remotion, hyperframes, heygen, product demo video |
 | **CRO & Growth (AgentKits)** | | | |
 | `cro-funnel` | Full-funnel CRO: form, signup, onboarding, popup, paywall | 1.0.0 | cro funnel, form cro, signup flow, onboarding, paywall |
 | `programmatic-seo` | SEO pages at scale with templates and data | 1.0.0 | programmatic seo, template pages, directory, location pages |
@@ -270,12 +328,14 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, Fluid atoms/molecules, backend previews, icons, and seed data for TYPO3 Content Blocks | 1.0.0 | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script |
 | `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | 2.1.0 | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
+| `typo3-news-tags` | Bulk-generate and assign thematic tags for georgringer/news (EXT:news) | 1.0.0 | news tags, EXT:news, thematic tags, bulk tagging, tx_news_domain_model_tag, b13/tag |
 | `typo3-datahandler` | Expert guidance on DataHandler for transactional database operations | 2.0.0 | database, datahandler, tcemain, records |
 | `typo3-ddev` | TYPO3 local development with DDEV, multi-version testing | 2.0.0 | ddev, local, development, docker |
 | `typo3-testing` | Unit, functional, E2E, architecture, mutation testing | 1.0.0 | testing, phpunit, playwright, phpat |
 | `typo3-conformance` | Extension standards compliance checker | 1.0.0 | conformance, standards, quality |
 | `typo3-docs` | Documentation using docs.typo3.org standards | 1.0.0 | documentation, rst, docs |
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | 1.0.0 | core, contributions, gerrit, forge |
+| `typo3-initial-release` | First official TYPO3 14.3+ extension release workflow, final review, CI/tooling verification, and tagging | 1.0.0 | initial release, 1.0.0, release readiness, release tag, TER, Packagist |
 | `typo3-rector` | TYPO3 v14 upgrade patterns using Rector | 2.0.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v14 development guide (constraints, APIs, upgrades) | 2.0.0 | update, upgrade, v14, migration |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
@@ -306,6 +366,8 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **hyperframes-registry**: Install and wire reusable registry blocks and components into HyperFrames compositions
 - **website-to-hyperframes**: Capture a website, derive design/story/script artifacts, and turn it into a promo, tour, or social video
 - **gsap**: GSAP tween, timeline, easing, and performance reference used inside HyperFrames compositions
+- **micro-interactions**: Disney's 12 animation principles applied to UI feedback (button states, toggles, focus rings, ripples, badges) with timing and easing guidance
+- **microinteractions**: Dan Saffer's Microinteractions framework — triggers, rules, feedback, loops & modes, signature moments — with case studies and 0-10 scoring rubric
 - **webconsulting-create-documentation**: Product documentation with help pages, AI screenshots, narrated video tours (Remotion + GSAP + ElevenLabs TTS + Suno AI music), GitHub README visual docs
 
 ### Security & Enterprise
@@ -332,6 +394,13 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - `SKILL-SEO.md`: Technical and on-page SEO audit
   - `SKILL-PSYCHOLOGY.md`: 70+ mental models for marketing
   - `SKILL-PRICING.md`: Pricing strategy, tiers, value metrics
+
+- **Corey Haines split skills**: Ads, lifecycle, SEO, research, social, sales enablement, and growth execution
+  - `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`
+  - `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `cro`, `customer-research`, `directory-submissions`
+  - `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `onboarding`, `paywalls`, `popups`
+  - `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, `video`
+  - Collision-safe imports: `corey-ab-testing` and `corey-programmatic-seo` preserve existing AITYTech `ab-testing` and `programmatic-seo`
 
 ### CRO & Growth (AgentKits Marketing)
 - **cro-funnel**: Full-funnel Conversion Rate Optimization from AgentKits
@@ -488,12 +557,14 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 - **typo3-shadcn-content-elements**: Preset-driven shadcn/ui content element overhauls for Content Blocks, Fluid templates, backend previews, icons, and seed data
 - **typo3-translations**: TYPO3 13/14 labels, XLIFF 1.2 compatibility, XLIFF 2.0 migration, localization keys, ICU strings, paths, translation domains, and `LLL:` reference hygiene
 - **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
+- **typo3-news-tags**: Bulk-generate thematic tags for EXT:news and assign them to existing news records by corpus analysis and keyword matching
 - **typo3-datahandler**: Safe database operations via DataHandler API with PSR-14 events
 - **typo3-ddev**: Local development environment setup with multi-version testing
 - **typo3-testing**: Comprehensive testing (unit, functional, E2E, architecture, mutation)
 - **typo3-conformance**: Extension quality assessment and standards compliance
 - **typo3-docs**: Official documentation standards with RST and TYPO3 directives
 - **typo3-core-contributions**: Contributing to TYPO3 Core via Gerrit and Forge
+- **typo3-initial-release**: First official TYPO3 14.3+ extension release workflow with Composer metadata, CI/tooling, final review, and tagging gates
 - **typo3-rector**: Automated code refactoring with Rector for TYPO3 v14
 - **typo3-update**: Version migration and compatibility strategies for TYPO3 v14
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
@@ -867,6 +938,14 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Disable extension for specific page trees"
 - "Create a custom view with no pagination (itemsPerPage = 0)"
 - "Install the companion records-list-examples extension"
+
+**Initial Release (typo3-initial-release)**
+- "Prepare this TYPO3 14.3+ extension for the first official v1.0.0 release"
+- "Run final release readiness review against origin/main before tagging"
+- "Align composer.json, README, docs, and changelog for v1.0.0"
+- "Remove legacy ext_emconf.php and move release metadata into composer.json"
+- "Verify PHP 8.4/8.5 CI matrix, PHPStan, PHPUnit, PHP-CS-Fixer, and coverage guards before release"
+- "Create the annotated v1.0.0 tag only after final TYPO3 conformance, testing, security, and docs checks"
 
 **🤖 AI Search (ai-search-optimization)**
 - "Optimize content for ChatGPT and Perplexity citations"
@@ -1339,8 +1418,12 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
-Use case: Extension development, Content Blocks, localization, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-news-tags`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
+Use case: Extension development, Content Blocks, localization, news tagging, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
+
+### Release Session
+Active: `typo3-initial-release`, `typo3-conformance`, `typo3-testing`, `typo3-security`, `typo3-docs`, `typo3-ddev`
+Use case: First official TYPO3 14.3+ extension releases, release readiness reviews, CI/tooling verification, Composer metadata alignment, changelog/docs checks, and safe tagging
 
 ### Ops Session
 Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `enterprise-readiness`, `typo3-ddev`  
@@ -1430,12 +1513,14 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-shadcn-content-elements | ✓ | ✓ | ✓ | ✓ |
 | typo3-translations | ✓ | ✓ | ✓ | ✓ |
 | typo3-idea-extension-blog | ✓ | ✓ | ✓ | ✓ |
+| typo3-news-tags | ✓ | ✓ | ✓ | ✓ |
 | typo3-datahandler | ✓ | ✓ | ✓ | ✓ |
 | typo3-ddev | ✓ | ✓ | ✓ | ✓ |
 | typo3-testing | ✓ | ✓ | ✓ | ✓ |
 | typo3-conformance | ✓ | ✓ | ✓ | ✓ |
 | typo3-docs | ✓ | ✓ | ✓ | ✓ |
 | typo3-core-contributions | ✓ | ✓ | ✓ | ✓ |
+| typo3-initial-release | ✓ | ✓ | ✓ | ✓ |
 | typo3-rector | ✓ | ✓ | ✓ | ✓ |
 | typo3-update | ✓ | ✓ | ✓ | ✓ |
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ |
@@ -1498,8 +1583,8 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 3. Write the description as routing metadata: what the skill does and when to use it
 4. Keep `SKILL.md` concise; move long examples, appendices, and troubleshooting into linked `references/` files
 5. For TYPO3 skills, describe compatibility in prose or the supported `compatibility` field; do not invent unsupported frontmatter keys
-6. Run `npx -y skills-ref validate skills/my-new-skill` and `./install.sh` to deploy
-7. This index updates automatically via GitHub Actions
+6. Run `npx -y skills-ref validate skills/my-new-skill` and `./install.sh --generate-only` to refresh catalogs, manifests, and client files
+7. Run `./install.sh` when you also want to deploy symlinks
 
 ---
 *Generated by webconsulting Agent Skills*

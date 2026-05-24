@@ -117,6 +117,174 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Corey Haines",
         "url": "https://github.com/coreyhaines31/marketingskills",
     },
+    "micro-interactions": {
+        "owner": "Dylan Tarre",
+        "url": "https://github.com/dylantarre/animation-principles",
+    },
+    "microinteractions": {
+        "owner": "wondelai",
+        "url": "https://github.com/wondelai/skills",
+    },
+    "corey-ab-testing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "ad-creative": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "ads": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "ai-seo": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "analytics": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "aso": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "churn-prevention": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "co-marketing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "cold-email": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "community-marketing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "competitor-profiling": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "competitors": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "content-strategy": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "copy-editing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "copywriting": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "cro": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "customer-research": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "directory-submissions": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "emails": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "free-tools": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "image": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "launch": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "lead-magnets": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "marketing-ideas": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "marketing-psychology": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "onboarding": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "paywalls": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "popups": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "pricing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "product-marketing": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "corey-programmatic-seo": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "referrals": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "revops": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "sales-enablement": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "schema": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "seo-audit": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "signup": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "site-architecture": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "social": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
+    "video": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
     "og-image": {
         "owner": "Stevy Smith",
         "url": "https://github.com/stevysmith/og-image-skill",
@@ -208,6 +376,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "webconsulting",
         "url": "https://github.com/dirnbauer/webconsulting-skills",
     },
+    "typo3-news-tags": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "typo3-powermail": {"owner": "webconsulting", "url": None},
     "typo3-records-list-types": {"owner": "webconsulting", "url": None},
     "typo3-rector": {"owner": "webconsulting", "url": None},
@@ -265,6 +437,7 @@ GITHUB_OWNER_LABELS = {
     "aitytech": "AITYTech",
     "anthropics": "Anthropic",
     "coreyhaines31": "Corey Haines",
+    "dylantarre": "Dylan Tarre",
     "ehmo": "ehmo",
     "firecrawl": "Firecrawl",
     "github": "GitHub",
@@ -281,6 +454,7 @@ GITHUB_OWNER_LABELS = {
     "stevysmith": "Stevy Smith",
     "supabase": "Supabase",
     "vercel-labs": "Vercel",
+    "wondelai": "wondelai",
 }
 
 ALLOWED_FRONTMATTER_KEYS = {

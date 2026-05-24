@@ -6,7 +6,7 @@
 # Usage: ./update.sh [options]
 #
 # Options:
-#   --sync-only    Sync external skills and generated files, don't reinstall
+#   --sync-only    Sync external skills and generated catalog/files, don't reinstall
 #   --skill NAME   Sync one enabled external skill by name
 #   --pull         Pull latest from git before updating
 #   --force        Force overwrite local changes
@@ -14,8 +14,9 @@
 #   --help         Show this help message
 #
 # This script updates Agent Skills from external sources, refreshes generated
-# files, preserves upstream attribution blocks, and optionally reinstalls the
-# core client mirrors through install.sh.
+# catalog files, client instructions, and manifests, preserves upstream
+# attribution blocks, and optionally reinstalls the core client mirrors through
+# install.sh.
 #
 # License: MIT (code) / CC-BY-SA-4.0 (content)
 # Third-party skills retain their original licenses — see LICENSE for details.
@@ -67,7 +68,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --help|-h)
-            head -n 18 "$0" | tail -n 16
+            head -n 23 "$0" | tail -n 21
             exit 0
             ;;
         *)
@@ -299,6 +300,7 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
         echo "  [DRY-RUN] Would run: python3 scripts/sync_source_notes.py"
         echo "  [DRY-RUN] Would run: python3 scripts/sync_readme_sources.py"
         echo "  [DRY-RUN] Would run: python3 scripts/check_attribution_guardrails.py"
+        echo "  [DRY-RUN] Would run: python3 scripts/audit_skills.py via install.sh"
     fi
 else
     echo "→ No .sync-config.json found, skipping external sync"
@@ -318,7 +320,7 @@ if [ "$SYNC_ONLY" = false ]; then
         "$SCRIPT_DIR/install.sh" --no-sync
     fi
 else
-    echo "→ Refreshing generated cross-client files without reinstalling (--sync-only mode)"
+    echo "→ Refreshing generated catalog and cross-client files without reinstalling (--sync-only mode)"
     if [ "$DRY_RUN" = true ]; then
         echo "  [DRY-RUN] Would run: ./install.sh --no-sync --generate-only"
     else

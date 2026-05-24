@@ -9,8 +9,9 @@ Canonical skill directory: `.cursor/skills/security-incident-reporting/`
 
 Read `.cursor/skills/security-incident-reporting/SKILL.md` and any referenced `references/`, `scripts/`, `assets/`, or `agents/` files before using this skill. Keep upstream credits and thank-you text intact.
 
-
 # Security Incident Reporting
+
+> Source: https://github.com/dirnbauer/webconsulting-skills
 
 Comprehensive framework for documenting and analyzing security incidents, drawing from NIST SP 800-61 and SANS methodologies.
 

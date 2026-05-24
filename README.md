@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **74 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **118 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,16 +24,16 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **74 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **118 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 26 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
-| **Video & Animation** | 7 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting) |
+| **TYPO3 CMS** | 28 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **Video & Animation** | 9 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting), Micro-interactions (Dylan Tarre), Microinteractions (wondelai) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
-| **Marketing** | 1 skill | Marketing Skills (Corey Haines) |
+| **Marketing** | 41 skills | Marketing Skills plus split growth, SEO, ads, lifecycle, research, and sales enablement skills (Corey Haines) |
 | **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
 | **Code Quality & Refactoring** | 5 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me (Matt Pocock) |
 | **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
@@ -42,7 +42,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **74 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **118 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -102,6 +102,8 @@ To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific
 .windsurf/skills/          ← Windsurf (project-level)
 
 gemini-extension.json      ← Gemini CLI extension manifest
+catalog/skill-sources.json ← Skill source/provenance catalog
+catalog/skill-audit.md     ← Skill structure/source audit
 AGENTS.md                  ← Read natively by Copilot, Codex, Windsurf, Cline, Aider
 CLAUDE.md                  ← Claude Code primary instructions (→ AGENTS.md)
 GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
@@ -115,7 +117,7 @@ GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
 2. Use YAML frontmatter with at least `name` and `description`; `description` should say what the skill does and when to use it.
 3. Keep the main `SKILL.md` concise. Put optional deep guidance in `references/`, deterministic helpers in `scripts/`, reusable input/output material in `assets/`, and runnable examples in `examples/`.
 4. If the skill is upstream-managed, add one entry to `.sync-config.json`.
-5. Run `npx -y skills-ref validate skills/<slug>` and `./install.sh`.
+5. Run `npx -y skills-ref validate skills/<slug>` and `./install.sh --generate-only` to refresh the catalog, README-derived manifest data, and client files. Run `./install.sh` when you also want to deploy symlinks.
 
 Do not create manual per-client symlinks, duplicate `SKILL.md` files, or client-specific install rules for an individual skill. The installer loops over `skills/*` and populates every core client location automatically.
 
@@ -256,12 +258,14 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-shadcn-content-elements` | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script | "Overhaul EXT:desiderio content elements for shadcn preset b4hb38Fyj" or "Audit Content Blocks field coverage and seed data" |
 | `typo3-translations` | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains | "Audit my TYPO3 13/14 labels before upgrading to XLIFF 2.0" or "Convert v14-only Content Blocks labels to XLIFF 2.0 with German targets" |
 | `typo3-idea-extension-blog` | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog | "Turn this product announcement into a TYPO3 extension and German blog post" or "Assess this article for TYPO3 and build the useful parts" |
+| `typo3-news-tags` | news tags, EXT:news, thematic tags, bulk tagging, tx_news_domain_model_tag, b13/tag | "Generate thematic EXT:news tags for this corpus" or "Build a command to assign news tags in bulk" |
 | `typo3-datahandler` | database, datahandler, records, tcemain | "Create a tt_content record using DataHandler" |
 | `typo3-ddev` | ddev, local, docker, environment | "Set up DDEV for TYPO3 v14" |
 | `typo3-testing` | testing, phpunit, e2e, coverage | "Write unit tests for my repository" |
 | `typo3-conformance` | conformance, standards, quality | "Check if my extension meets TYPO3 standards" |
 | `typo3-docs` | documentation, rst, docs | "Create RST documentation for my extension" |
 | `typo3-core-contributions` | core, gerrit, forge, patch | "Submit a patch to TYPO3 Core" |
+| `typo3-initial-release` | initial release, 1.0.0, release readiness, release tag, TER, Packagist | "Prepare this TYPO3 14.3+ extension for v1.0.0" or "Run final release readiness review before tagging" |
 | `typo3-rector` | rector, refactoring, deprecation | "Use Rector to fix deprecations" |
 | `typo3-update` | update, upgrade, v14, migration, TYPO3 core | "Follow TYPO3 v14 patterns for my extension" |
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
@@ -291,6 +295,8 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `hyperframes-registry` | hyperframes add, hyperframes.json, block, component, registry | "Install the data-chart block with hyperframes add and wire it into index.html" |
 | `website-to-hyperframes` | website to video, capture this site, turn this into a video, social ad, product tour | "Capture this marketing site and turn it into a 20-second launch video" |
 | `gsap` | gsap, animation, timeline, easing, stagger, quickTo | "Write a GSAP timeline for a HyperFrames scene with staggered text" |
+| `micro-interactions` | micro-interaction, hover state, button press, toggle, ripple, focus ring, badge update | "Design the press and hover animation for these buttons" or "Add a tasteful ripple to this toggle" |
+| `microinteractions` | microinteraction, trigger design, feedback pattern, loops and modes, signature moment, form validation feedback | "Audit this toggle against Dan Saffer's microinteractions framework" or "Score this loading state 0-10 on triggers / rules / feedback / loops" |
 | `webconsulting-create-documentation` | documentation, help page, product video, screenshots, tts, gsap | "Create product documentation with video tour" or "Build a help page" |
 | `excalidraw` | excalidraw, architecture diagram, system diagram, png export, svg export | "Generate an architecture diagram for this project as an .excalidraw file" or "Create a system diagram and export it as SVG" |
 | `react-best-practices` | react, next.js, performance, optimization, bundle size, waterfalls | "Optimize this React component" or "Eliminate request waterfalls" |
@@ -298,6 +304,46 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `readiness-report` | /readiness-report, agent readiness, codebase maturity | "Run /readiness-report to evaluate this repository" |
 | `postgres-best-practices` | postgres, sql, database, query, index, rls, supabase | "Optimize this slow Postgres query" or "Set up RLS for multi-tenant" |
 | `marketing-skills` | marketing, cro, conversion, landing page, pricing | "Optimize this landing page" or "Write homepage copy" |
+| `ad-creative` | ad creative, ad copy variations, rsa headlines, creative testing | "Generate 20 Google RSA headlines for this offer" |
+| `ads` | ads, ppc, paid media, roas, cpa, retargeting | "Plan a LinkedIn ads campaign for this SaaS" |
+| `ai-seo` | ai seo, aeo, geo, llmo, ai overviews, perplexity | "Optimize this article for AI Overviews and Perplexity" |
+| `analytics` | analytics, ga4, gtm, event tracking, attribution | "Create a GA4 event tracking plan for signup" |
+| `aso` | aso, app store optimization, app listing, google play | "Audit this App Store listing for ASO" |
+| `churn-prevention` | churn, cancel flow, dunning, retention, win-back | "Improve this SaaS cancel flow" |
+| `co-marketing` | co-marketing, partner marketing, joint campaign, partnership ideas | "Find co-marketing partners for this product" |
+| `cold-email` | cold email, cold outreach, prospecting email, sales email | "Write a 4-step cold email sequence" |
+| `community-marketing` | community marketing, discord community, slack community, community-led growth | "Design a community launch plan" |
+| `competitor-profiling` | competitor profile, competitor research, competitive intelligence | "Profile these three competitors" |
+| `competitors` | alternative page, vs page, competitor comparison, battlecard | "Create an alternative page outline" |
+| `content-strategy` | content strategy, content plan, editorial calendar, topics | "Build a 90-day content strategy" |
+| `copy-editing` | copy editing, edit copy, review copy, copy feedback | "Edit this landing page copy" |
+| `copywriting` | copywriting, homepage copy, landing page copy, cta copy | "Write homepage copy for this SaaS" |
+| `corey-ab-testing` | corey ab testing, growth experiments, ice score, statistical significance | "Build an experiment backlog for this funnel" |
+| `corey-programmatic-seo` | corey programmatic seo, pseo, template pages, data-driven pages | "Plan 100 comparison pages using product data" |
+| `cro` | cro, conversion optimization, landing page optimization, form cro | "Audit this landing page for conversion issues" |
+| `customer-research` | customer research, icp research, user interviews, voice of customer | "Synthesize these customer interview notes" |
+| `directory-submissions` | directory submissions, submit startup, saas directories, backlinks | "Find directories to submit this AI tool" |
+| `emails` | email sequence, drip campaign, lifecycle email, onboarding email | "Write a trial onboarding email sequence" |
+| `free-tools` | free tool, engineering as marketing, lead generation tool | "Brainstorm free tools for this SaaS" |
+| `image` | marketing image, social graphic, product mockup, blog hero | "Create prompts for product launch images" |
+| `launch` | launch, product hunt, feature release, announcement | "Plan this feature launch" |
+| `lead-magnets` | lead magnet, gated content, checklist, ebook, template | "Create a lead magnet for this audience" |
+| `marketing-ideas` | marketing ideas, growth ideas, how to market, acquisition ideas | "Give me marketing ideas for this product" |
+| `marketing-psychology` | marketing psychology, mental models, cognitive bias, persuasion | "Apply psychology to improve this page" |
+| `onboarding` | onboarding, activation, first-run experience, time to value | "Optimize this onboarding flow" |
+| `paywalls` | paywall, upgrade screen, upsell, feature gate | "Improve this upgrade paywall" |
+| `popups` | popup, modal, exit intent, slide-in, banner | "Design an exit-intent popup" |
+| `pricing` | pricing, pricing tiers, freemium, packaging, monetization | "Review these pricing tiers" |
+| `product-marketing` | product marketing, positioning, messaging, marketing context | "Create a product marketing context file" |
+| `referrals` | referral, affiliate, ambassador, word of mouth, viral loop | "Design a referral program" |
+| `revops` | revops, lead scoring, lead routing, mql, sql, crm automation | "Design a lead scoring model" |
+| `sales-enablement` | sales enablement, sales deck, pitch deck, one-pager, demo script | "Create a sales one-pager outline" |
+| `schema` | schema, structured data, json-ld, rich snippets, schema.org | "Add FAQ schema to this page" |
+| `seo-audit` | seo audit, technical seo, indexing issues, core web vitals | "Audit this site for SEO issues" |
+| `signup` | signup, registration, trial activation, signup abandonment | "Optimize this signup flow" |
+| `site-architecture` | site architecture, sitemap, site structure, navigation, internal linking | "Plan the sitemap for this SaaS site" |
+| `social` | social media, linkedin post, twitter thread, content calendar, reels | "Create a LinkedIn content calendar" |
+| `video` | video, ai video, remotion, hyperframes, heygen, product demo video | "Plan a product demo video" |
 | `og-image` | og-image, open graph, social preview, twitter card, meta tags | "Generate an OG image" or "Set up Twitter card meta tags" |
 | `frontend-design` | frontend, design, creative, beautiful, distinctive, aesthetics | "Create a distinctive landing page" or "Design a dark tech hero section" |
 | `impeccable` | impeccable, design, redesign, shape, critique, audit, polish, craft, live UI | "Use impeccable to polish this product UI" or "Run impeccable shape for this onboarding flow" |
@@ -2255,12 +2301,14 @@ grep -r "DataHandler" skills/
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, previews, icons, and seed coverage for TYPO3 Content Blocks | webconsulting |
 | `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | webconsulting |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | webconsulting |
+| `typo3-news-tags` | Bulk-generate and assign thematic tags for georgringer/news | webconsulting |
 | `typo3-datahandler` | Transactional database operations via DataHandler | webconsulting |
 | `typo3-ddev` | Local DDEV development environment | Netresearch |
 | `typo3-testing` | Unit, functional, E2E, architecture testing | Netresearch |
 | `typo3-conformance` | Extension standards compliance checker | Netresearch |
 | `typo3-docs` | Documentation using docs.typo3.org standards | Netresearch |
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | Netresearch |
+| `typo3-initial-release` | First official TYPO3 14.3+ extension release workflow, final review, and tagging | webconsulting |
 | **Upgrade & Migration** | | |
 | `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
 | `typo3-update` | TYPO3 TYPO3 v14 migration guide (prefers v14) | webconsulting |
@@ -2302,6 +2350,46 @@ grep -r "DataHandler" skills/
 | `postgres-best-practices` | Postgres performance, RLS, indexes, pooling | Supabase |
 | **Marketing** | | |
 | `marketing-skills` | CRO, copywriting, SEO, pricing, psychology | Corey Haines |
+| `ad-creative` | Ad creative generation and iteration for paid platforms | Corey Haines |
+| `ads` | Paid ads campaign strategy, targeting, bidding, and optimization | Corey Haines |
+| `ai-seo` | AI search visibility and LLM citation optimization | Corey Haines |
+| `analytics` | Analytics tracking, measurement plans, events, and attribution | Corey Haines |
+| `aso` | App Store and Google Play listing optimization | Corey Haines |
+| `churn-prevention` | Churn reduction, cancel flows, dunning, and win-back strategy | Corey Haines |
+| `co-marketing` | Partner identification and joint campaign planning | Corey Haines |
+| `cold-email` | B2B cold outreach emails and follow-up sequences | Corey Haines |
+| `community-marketing` | Community strategy, engagement, and community-led growth | Corey Haines |
+| `competitor-profiling` | Competitor research and profile generation from URLs | Corey Haines |
+| `competitors` | Competitor comparison and alternative pages for SEO and sales | Corey Haines |
+| `content-strategy` | Content strategy, topic planning, and editorial roadmaps | Corey Haines |
+| `copy-editing` | Marketing copy review, editing, and refresh guidance | Corey Haines |
+| `copywriting` | Marketing copywriting for pages, CTAs, and positioning | Corey Haines |
+| `corey-ab-testing` | Corey Haines A/B testing and experimentation program guidance | Corey Haines |
+| `corey-programmatic-seo` | Corey Haines programmatic SEO pages at scale | Corey Haines |
+| `cro` | Page and form conversion rate optimization | Corey Haines |
+| `customer-research` | Customer research interviews, synthesis, and voice-of-customer analysis | Corey Haines |
+| `directory-submissions` | Directory submission strategy for discovery and backlinks | Corey Haines |
+| `emails` | Lifecycle email sequences, drip campaigns, and automated flows | Corey Haines |
+| `free-tools` | Free tool strategy for SEO, leads, and brand awareness | Corey Haines |
+| `image` | Marketing image generation and optimization workflows | Corey Haines |
+| `launch` | Product launch, feature announcement, and release strategy | Corey Haines |
+| `lead-magnets` | Lead magnet planning, gated content, and capture optimization | Corey Haines |
+| `marketing-ideas` | Marketing ideas, growth inspiration, and channel brainstorming | Corey Haines |
+| `marketing-psychology` | Behavioral science and mental models for marketing | Corey Haines |
+| `onboarding` | Post-signup onboarding, activation, and time-to-value optimization | Corey Haines |
+| `paywalls` | Paywall, upgrade screen, upsell, and feature gate optimization | Corey Haines |
+| `popups` | Popup, modal, overlay, slide-in, and banner conversion optimization | Corey Haines |
+| `pricing` | Pricing, packaging, value metrics, and monetization strategy | Corey Haines |
+| `product-marketing` | Product marketing context, positioning, and messaging foundation | Corey Haines |
+| `referrals` | Referral, affiliate, ambassador, and word-of-mouth programs | Corey Haines |
+| `revops` | Revenue operations, lead lifecycle, scoring, and handoff processes | Corey Haines |
+| `sales-enablement` | Sales collateral, pitch decks, one-pagers, and demo scripts | Corey Haines |
+| `schema` | Schema markup and structured data for rich results | Corey Haines |
+| `seo-audit` | Technical SEO, on-page SEO, and content quality audits | Corey Haines |
+| `signup` | Signup, registration, account creation, and trial activation optimization | Corey Haines |
+| `site-architecture` | Website hierarchy, navigation, URL structure, and internal linking | Corey Haines |
+| `social` | Social media content, calendars, repurposing, and short-form scripts | Corey Haines |
+| `video` | Marketing video production with AI and programmatic video tools | Corey Haines |
 | **Frontend & Design** | | |
 | `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
@@ -2322,6 +2410,8 @@ grep -r "DataHandler" skills/
 | `gsap` | GSAP animation reference for HyperFrames compositions | HeyGen |
 | `remotion-best-practices` | Video creation in React with Remotion | remotion-dev |
 | `webconsulting-create-documentation` | Product docs, help pages, video tours (Remotion + GSAP + TTS) | webconsulting |
+| `micro-interactions` | Disney's 12 animation principles applied to UI feedback moments | Dylan Tarre |
+| `microinteractions` | Dan Saffer's Microinteractions framework for triggers, rules, feedback, and loops | wondelai |
 | **Legal & Compliance** | | |
 | `legal-impressum` | Austrian Impressum base skill with `GERMANY`, `EU`, and `WORLD` supplements | webconsulting |
 | **Platform Design** | | |
@@ -2363,7 +2453,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │   74 SKILL.md     │
+                        │  118 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2442,7 +2532,7 @@ composer skills:install
 ```bash
 ./update.sh              # Sync external skills and reinstall
 ./update.sh --pull       # Pull git changes first, then update
-./update.sh --sync-only  # Sync external skills and generated files, don't reinstall
+./update.sh --sync-only  # Sync external skills and generated catalog/files, don't reinstall
 ./update.sh --skill NAME # Sync one enabled external skill by name
 ./update.sh --force      # Stash local changes if needed
 ./update.sh --dry-run    # Show what would be done without making changes
@@ -2457,7 +2547,7 @@ Use this simple flow to keep publication deterministic:
 # 1) Push skill changes
 git push origin main
 
-# 2) Refresh imported skills if needed
+# 2) Refresh imported skills, catalogs, and extension manifests if needed
 ./update.sh --sync-only
 
 # 3) Regenerate local mirrors
@@ -2544,8 +2634,8 @@ The following repositories are the source for skills in this collection:
 ### Supabase (1 skill)
 - `postgres-best-practices`: https://github.com/supabase/agent-skills
 
-### Corey Haines (1 skill)
-- `marketing-skills`: https://github.com/coreyhaines31/marketingskills
+### Corey Haines (41 skills)
+- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
 
 ### ooiyeefei (1 skill)
 - `excalidraw`: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
@@ -2598,6 +2688,12 @@ The following repositories are the source for skills in this collection:
 
 ### pbakaus (1 skill)
 - `impeccable`: https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7
+
+### Dylan Tarre (1 skill)
+- `micro-interactions`: https://github.com/dylantarre/animation-principles
+
+### wondelai (1 skill)
+- `microinteractions`: https://github.com/wondelai/skills
 <!-- EXTERNAL_REPOS:END -->
 
 ## Contributing
@@ -2609,7 +2705,7 @@ The following repositories are the source for skills in this collection:
    block in `SKILL.md` with the upstream owner, original repository, thank-you message,
    and `Adapted by webconsulting.at for this skill collection`
 5. Keep the Netresearch-specific thank-you wording for Netresearch-derived skills
-6. Run `npx -y skills-ref validate skills/your-skill-name`, `python3 scripts/check_attribution_guardrails.py`, and `./install.sh` to test
+6. Run `npx -y skills-ref validate skills/your-skill-name`, `python3 scripts/check_attribution_guardrails.py`, and `./install.sh --generate-only` to test generated catalogs/manifests
 7. Submit a pull request
 
 Most upstream-derived skills are auto-discovered from their `SKILL.md` attribution, so you do not
@@ -2636,6 +2732,8 @@ Each retains its original copyright and license terms:
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
 - **AITYTech** — AgentKits Marketing automation (MIT)
 - **Matt Pocock** — `grill-me` planning and design stress-test workflow (MIT)
+- **Dylan Tarre** — `micro-interactions` Disney animation principles for UI feedback (MIT)
+- **wondelai** — `microinteractions` Dan Saffer framework (Trigger / Rules / Feedback / Loops & Modes) (MIT)
 
 See individual SKILL.md files for per-skill attribution and license details.
 
@@ -2683,12 +2781,12 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
 ---
 
 We also thank **[Corey Haines](https://corey.co/)** for their excellent open-source work.
-The `marketing-skills` skill in this collection builds on that contribution.
+The `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video` skills in this collection build on that contribution.
 
-Adapted skill: `marketing-skills`
+Adapted skills: `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`
 
 Original repositories:
-- `marketing-skills`: https://github.com/coreyhaines31/marketingskills
+- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
@@ -2890,6 +2988,30 @@ Adapted skill: `impeccable`
 Original repositories:
 - `impeccable`: https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7
 
+
+---
+
+We also thank **[Dylan Tarre](https://github.com/dylantarre)** for their excellent open-source work.
+The `micro-interactions` skill in this collection builds on that contribution.
+
+Adapted skill: `micro-interactions`
+
+Original repositories:
+- `micro-interactions`: https://github.com/dylantarre/animation-principles
+
+**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)
+
+---
+
+We also thank **[wondelai](https://github.com/wondelai)** for their excellent open-source work.
+The `microinteractions` skill in this collection builds on that contribution.
+
+Adapted skill: `microinteractions`
+
+Original repositories:
+- `microinteractions`: https://github.com/wondelai/skills
+
+**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)
 
 <!-- ACKNOWLEDGEMENTS:END -->
 

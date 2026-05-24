@@ -1,0 +1,20 @@
+# Minimal Services.yaml snippet to register AssignNewsTagsCommand.
+#
+# Place this in your extension's Configuration/Services.yaml.
+# Keep your existing _defaults / autowiring block; only the command tag
+# registration and the autoload resource matter for this skill.
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Vendor\YourExt\:
+    resource: '../Classes/*'
+
+  Vendor\YourExt\Command\AssignNewsTagsCommand:
+    tags:
+      - name: console.command
+        command: 'yourext:news:assign-tags'
+        description: 'Assign thematic tags to EXT:news records via keyword matching'

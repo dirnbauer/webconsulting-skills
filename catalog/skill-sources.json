@@ -18,6 +18,38 @@
     "pass_3": []
   },
   {
+    "directory": "ad-creative",
+    "skill_name": "ad-creative",
+    "description": "When the user wants to generate, iterate, or scale ad creative \\u2014 headlines, descriptions, primary text, or full ad variations \\u2014 for any paid advertising platform. Also use when the user mentions 'ad copy variations,' 'ad creative,' 'generate headlines,' 'RSA headlines,' 'bulk ad copy,' 'ad iterations,' 'creative testing,' 'ad performance optimization,' 'write me some ads,' 'Facebook ad copy,' 'Google ad headlines,' 'LinkedIn ad text,' or 'I need more ad variations.' Use this whenever someone needs to produce ad copy at scale or iterate on existing ads. For campaign strategy and targeting, see ads. For landing page copy, see copywriting.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ad-creative/SKILL.md",
+    "line_count": 373,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "ads",
+    "skill_name": "ads",
+    "description": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' or 'should I run ads.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ads/SKILL.md",
+    "line_count": 328,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "agent-md-refactor",
     "skill_name": "agent-md-refactor",
     "description": "Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles. Splits monolithic files into organized, linked documentation.",
@@ -52,6 +84,38 @@
     "pass_3": []
   },
   {
+    "directory": "ai-seo",
+    "skill_name": "ai-seo",
+    "description": "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' or 'optimize for Claude/Gemini.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-seo/SKILL.md",
+    "line_count": 496,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "analytics",
+    "skill_name": "analytics",
+    "description": "When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions \\\"set up tracking,\\\" \\\"GA4,\\\" \\\"Google Analytics,\\\" \\\"conversion tracking,\\\" \\\"event tracking,\\\" \\\"UTM parameters,\\\" \\\"tag manager,\\\" \\\"GTM,\\\" \\\"analytics implementation,\\\" \\\"tracking plan,\\\" \\\"how do I measure this,\\\" \\\"track conversions,\\\" \\\"attribution,\\\" \\\"Mixpanel,\\\" \\\"Segment,\\\" \\\"are my events firing,\\\" or \\\"analytics isn't working.\\\" Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/analytics/SKILL.md",
+    "line_count": 320,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "android-design",
     "skill_name": "android-design",
     "description": "Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.",
@@ -66,6 +130,38 @@
     "pass_1": [
       "SKILL.md is 1060 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "aso",
+    "skill_name": "aso",
+    "description": "When the user wants to audit or optimize an App Store or Google Play listing. Also use when the user mentions 'ASO audit,' 'app store optimization,' 'optimize my app listing,' 'improve app visibility,' 'app store ranking,' 'audit my listing,' 'why aren't people downloading my app,' 'improve my app conversion,' 'keyword optimization for app,' or 'compare my app to competitors.' Use when the user shares an App Store or Google Play URL and wants to improve it.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/aso/SKILL.md",
+    "line_count": 323,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "churn-prevention",
+    "skill_name": "churn-prevention",
+    "description": "When the user wants to reduce churn, build cancellation flows, set up save offers, recover failed payments, or implement retention strategies. Also use when the user mentions 'churn,' 'cancel flow,' 'offboarding,' 'save offer,' 'dunning,' 'failed payment recovery,' 'win-back,' 'retention,' 'exit survey,' 'pause subscription,' 'involuntary churn,' 'people keep canceling,' 'churn rate is too high,' 'how do I keep users,' or 'customers are leaving.' Use this whenever someone is losing subscribers or wants to build systems to prevent it. For post-cancel win-back email sequences, see emails. For in-app upgrade paywalls, see paywalls.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/churn-prevention/SKILL.md",
+    "line_count": 435,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -86,6 +182,102 @@
     "pass_3": []
   },
   {
+    "directory": "co-marketing",
+    "skill_name": "co-marketing",
+    "description": "When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. Use when the user says 'co-marketing,' 'partner marketing,' 'joint campaign,' 'who should we partner with,' 'integration marketing,' 'cross-promotion,' 'collaborate with another company,' 'partnership ideas,' or 'co-brand.' For customer referral programs, see referrals. For launch-specific partnerships, see launch.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/co-marketing/SKILL.md",
+    "line_count": 301,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "cold-email",
+    "skill_name": "cold-email",
+    "description": "Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development emails, or SDR emails. Also use when the user mentions \\\"cold outreach,\\\" \\\"prospecting email,\\\" \\\"outbound email,\\\" \\\"email to leads,\\\" \\\"reach out to prospects,\\\" \\\"sales email,\\\" \\\"follow-up email sequence,\\\" \\\"nobody's replying to my emails,\\\" or \\\"how do I write a cold email.\\\" Covers subject lines, opening lines, body copy, CTAs, personalization, and multi-touch follow-up sequences. For warm/lifecycle email sequences, see emails. For sales collateral beyond emails, see sales-enablement.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cold-email/SKILL.md",
+    "line_count": 169,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "community-marketing",
+    "skill_name": "community-marketing",
+    "description": "Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: \\\\\\\"build a community,\\\\\\\" \\\\\\\"community strategy,\\\\\\\" \\\\\\\"Discord community,\\\\\\\" \\\\\\\"Slack community,\\\\\\\" \\\\\\\"community-led growth,\\\\\\\" \\\\\\\"brand advocates,\\\\\\\" \\\\\\\"user community,\\\\\\\" \\\\\\\"forum strategy,\\\\\\\" \\\\\\\"community engagement,\\\\\\\" \\\\\\\"grow our community,\\\\\\\" \\\\\\\"ambassador program,\\\\\\\" \\\\\\\"community flywheel.\\\\",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/community-marketing/SKILL.md",
+    "line_count": 174,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "competitor-profiling",
+    "skill_name": "competitor-profiling",
+    "description": "When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this competitor,' 'analyze competitor,' 'competitive intelligence,' 'competitor deep dive,' 'who are my competitors,' 'competitor landscape,' 'competitor dossier,' 'competitive audit,' or 'research these competitors.' Input is a list of competitor URLs. Output is structured competitor profile markdown files. For creating comparison/alternative pages from profiles, see competitors. For sales-specific battle cards, see sales-enablement.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitor-profiling/SKILL.md",
+    "line_count": 422,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "competitors",
+    "skill_name": "competitors",
+    "description": "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitors/SKILL.md",
+    "line_count": 267,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "content-strategy",
+    "skill_name": "content-strategy",
+    "description": "When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions \\\"content strategy,\\\" \\\"what should I write about,\\\" \\\"content ideas,\\\" \\\"blog strategy,\\\" \\\"topic clusters,\\\" \\\"content planning,\\\" \\\"editorial calendar,\\\" \\\"content marketing,\\\" \\\"content roadmap,\\\" \\\"what content should I create,\\\" \\\"blog topics,\\\" \\\"content pillars,\\\" or \\\"I don't know what to write.\\\" Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/content-strategy/SKILL.md",
+    "line_count": 376,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "context7",
     "skill_name": "context7",
     "description": "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.). Fetches current docs via Context7 REST API. Triggers on: how to use library, API docs, framework pattern, import usage, library example.",
@@ -93,6 +285,86 @@
     "source_url": "https://github.com/netresearch/context7-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/context7/SKILL.md",
     "line_count": 102,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "copy-editing",
+    "skill_name": "copy-editing",
+    "description": "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. For writing new copy, see copywriting.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copy-editing/SKILL.md",
+    "line_count": 468,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "copywriting",
+    "skill_name": "copywriting",
+    "description": "When the user wants to write, rewrite, or improve marketing copy for any page \\u2014 including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \\\"write copy for,\\\" \\\"improve this copy,\\\" \\\"rewrite this page,\\\" \\\"marketing copy,\\\" \\\"headline help,\\\" \\\"CTA copy,\\\" \\\"value proposition,\\\" \\\"tagline,\\\" \\\"subheadline,\\\" \\\"hero section copy,\\\" \\\"above the fold,\\\" \\\"this copy is weak,\\\" \\\"make this more compelling,\\\" or \\\"help me describe my product.\\\" Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copywriting/SKILL.md",
+    "line_count": 263,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "corey-ab-testing",
+    "skill_name": "corey-ab-testing",
+    "description": "When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. Also use when the user mentions \\\"A/B test,\\\" \\\"split test,\\\" \\\"experiment,\\\" \\\"test this change,\\\" \\\"variant copy,\\\" \\\"multivariate test,\\\" \\\"hypothesis,\\\" \\\"should I test this,\\\" \\\"which version is better,\\\" \\\"test two versions,\\\" \\\"statistical significance,\\\" \\\"how long should I run this test,\\\" \\\"growth experiments,\\\" \\\"experiment velocity,\\\" \\\"experiment backlog,\\\" \\\"ICE score,\\\" \\\"experimentation program,\\\" or \\\"experiment playbook.\\\" Use this whenever someone is comparing two approaches and wants to measure which performs better, or when they want to build a systematic experimentation practice. For tracking implementation, see analytics. For page-level conversion optimization, see cro.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-ab-testing/SKILL.md",
+    "line_count": 364,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "corey-programmatic-seo",
+    "skill_name": "corey-programmatic-seo",
+    "description": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \\\"programmatic SEO,\\\" \\\"template pages,\\\" \\\"pages at scale,\\\" \\\"directory pages,\\\" \\\"location pages,\\\" \\\"[keyword] + [city] pages,\\\" \\\"comparison pages,\\\" \\\"integration pages,\\\" \\\"building many pages for SEO,\\\" \\\"pSEO,\\\" \\\"generate 100 pages,\\\" \\\"data-driven pages,\\\" or \\\"templated landing pages.\\\" Use this whenever someone wants to create many similar pages targeting different keywords or locations. For auditing existing SEO issues, see seo-audit. For content strategy planning, see content-strategy.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-programmatic-seo/SKILL.md",
+    "line_count": 249,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "cro",
+    "skill_name": "cro",
+    "description": "When the user wants to optimize, improve, or increase conversions on any marketing page or form \\u2014 including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't converting,' 'improve conversions,' 'why isn't this page working,' 'my landing page sucks,' 'form abandonment,' 'nobody's converting,' 'low conversion rate,' or 'this page needs work.' Use this even if the user just shares a URL and asks for feedback. For signup/registration flows, see signup. For post-signup activation, see onboarding. For popups/modals, see popups.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro/SKILL.md",
+    "line_count": 198,
     "frontmatter_keys": [
       "name",
       "description"
@@ -120,6 +392,22 @@
     "pass_3": []
   },
   {
+    "directory": "customer-research",
+    "skill_name": "customer-research",
+    "description": "When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \\\"customer research,\\\" \\\"ICP research,\\\" \\\"talk to customers,\\\" \\\"analyze transcripts,\\\" \\\"customer interviews,\\\" \\\"survey analysis,\\\" \\\"support ticket analysis,\\\" \\\"voice of customer,\\\" \\\"VOC,\\\" \\\"build personas,\\\" \\\"customer personas,\\\" \\\"jobs to be done,\\\" \\\"JTBD,\\\" \\\"what do customers say,\\\" \\\"what are customers struggling with,\\\" \\\"Reddit mining,\\\" \\\"G2 reviews,\\\" \\\"review mining,\\\" \\\"digital watering holes,\\\" \\\"community research,\\\" \\\"forum research,\\\" \\\"competitor reviews,\\\" \\\"customer sentiment,\\\" or \\\"find out why customers churn/convert/buy.\\\" Use for both analyzing existing research assets AND gathering new research from online sources. For writing copy informed by research, see copywriting. For acting on research to improve pages, see cro.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/customer-research/SKILL.md",
+    "line_count": 281,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "deepfake-detection",
     "skill_name": "deepfake-detection",
     "description": "Guides multimodal media authentication and deepfake forensics using provenance checks, metadata review, PRNU/noise analysis, temporal consistency, semantic forensics, and evidence reporting. Use when the user asks to verify images, audio, or video, investigate synthetic media, assess fake or manipulated content, or prepare a media authenticity report.",
@@ -132,6 +420,22 @@
       "description",
       "metadata",
       "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "directory-submissions",
+    "skill_name": "directory-submissions",
+    "description": "When the user wants to submit their product to startup, SaaS, AI, agent, MCP, no-code, or review directories for backlinks, domain rating, and discovery. Also use when the user mentions \\\"directory submissions,\\\" \\\"submit to directories,\\\" \\\"backlinks from directories,\\\" \\\"list my product,\\\" \\\"submit to Product Hunt,\\\" \\\"BetaList,\\\" \\\"TAAFT,\\\" \\\"Futurepedia,\\\" \\\"G2 listing,\\\" \\\"Capterra listing,\\\" \\\"AlternativeTo,\\\" \\\"SaaSHub,\\\" \\\"AI directories,\\\" \\\"MCP registry,\\\" \\\"agent directory,\\\" \\\"dofollow backlinks,\\\" \\\"launch directories,\\\" or \\\"directory tracker.\\\" Use this whenever someone is planning the directory layer of a product launch or an ongoing backlink campaign. For the broader launch moment, see launch. For programmatic SEO pages that should live behind these backlinks, see programmatic-seo. For AI citation optimization, see ai-seo.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/directory-submissions/SKILL.md",
+    "line_count": 392,
+    "frontmatter_keys": [
+      "name",
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -154,6 +458,22 @@
     "pass_1": [
       "SKILL.md is 651 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "emails",
+    "skill_name": "emails",
+    "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \\\"email sequence,\\\" \\\"drip campaign,\\\" \\\"nurture sequence,\\\" \\\"onboarding emails,\\\" \\\"welcome sequence,\\\" \\\"re-engagement emails,\\\" \\\"email automation,\\\" \\\"lifecycle emails,\\\" \\\"trigger-based emails,\\\" \\\"email funnel,\\\" \\\"email workflow,\\\" \\\"what emails should I send,\\\" \\\"welcome series,\\\" or \\\"email cadence.\\\" Use this for any multi-email automated flow. For cold outreach emails, see cold-email. For in-app onboarding, see onboarding.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/emails/SKILL.md",
+    "line_count": 322,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -213,6 +533,22 @@
     "source_url": "https://github.com/firecrawl/cli",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
     "line_count": 159,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "free-tools",
+    "skill_name": "free-tools",
+    "description": "When the user wants to plan, evaluate, or build a free tool for marketing purposes \\u2014 lead generation, SEO value, or brand awareness. Also use when the user mentions \\\"engineering as marketing,\\\" \\\"free tool,\\\" \\\"marketing tool,\\\" \\\"calculator,\\\" \\\"generator,\\\" \\\"interactive tool,\\\" \\\"lead gen tool,\\\" \\\"build a tool for leads,\\\" \\\"free resource,\\\" \\\"ROI calculator,\\\" \\\"grader tool,\\\" \\\"audit tool,\\\" \\\"should I build a free tool,\\\" or \\\"tools for lead gen.\\\" Use this whenever someone wants to build something useful and give it away to attract leads or earn links. For downloadable content lead magnets (ebooks, checklists, templates), see lead-magnets.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/free-tools/SKILL.md",
+    "line_count": 190,
     "frontmatter_keys": [
       "name",
       "description"
@@ -318,6 +654,22 @@
     "pass_3": []
   },
   {
+    "directory": "image",
+    "skill_name": "image",
+    "description": "When the user wants to create, generate, edit, or optimize images for marketing \\u2014 blog heroes, social graphics, product mockups, profile banners, listing visuals, or brand assets. Also use when the user mentions 'AI image generation,' 'generate an image,' 'create a graphic,' 'product mockup,' 'hero image,' 'social media graphic,' 'banner image,' 'cover photo,' 'profile banner,' 'listing screenshot,' 'Flux,' 'Flux Kontext,' 'Midjourney,' 'DALL-E,' 'GPT Image,' 'ChatGPT Images,' 'Ideogram,' 'Gemini image,' 'Nano Banana,' 'Recraft,' 'Stable Diffusion,' 'Canva,' 'Figma,' 'image optimization,' 'compress images,' 'WebP,' or 'OG image.' Use this for general-purpose marketing image creation and optimization. For paid ad image creative and platform-specific ad specs, see ad-creative. For video production, see video.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/image/SKILL.md",
+    "line_count": 351,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "impeccable",
     "skill_name": "impeccable",
     "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks.",
@@ -370,6 +722,22 @@
     "pass_3": []
   },
   {
+    "directory": "launch",
+    "skill_name": "launch",
+    "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch/SKILL.md",
+    "line_count": 364,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "launch-strategy",
     "skill_name": "launch-strategy",
     "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum.",
@@ -377,6 +745,22 @@
     "source_url": "https://github.com/aitytech/agentkits-marketing",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch-strategy/SKILL.md",
     "line_count": 357,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "lead-magnets",
+    "skill_name": "lead-magnets",
+    "description": "When the user wants to create, plan, or optimize a lead magnet for email capture or lead generation. Also use when the user mentions \\\"lead magnet,\\\" \\\"gated content,\\\" \\\"content upgrade,\\\" \\\"downloadable,\\\" \\\"ebook,\\\" \\\"cheat sheet,\\\" \\\"checklist,\\\" \\\"template download,\\\" \\\"opt-in,\\\" \\\"freebie,\\\" \\\"PDF download,\\\" \\\"resource library,\\\" \\\"content offer,\\\" \\\"email capture content,\\\" \\\"Notion template,\\\" \\\"spreadsheet template,\\\" or \\\"what should I give away for emails.\\\" Use this for planning what to create and how to distribute it. For interactive tools as lead magnets, see free-tools. For writing the actual content, see copywriting. For the email sequence after capture, see emails.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/lead-magnets/SKILL.md",
+    "line_count": 321,
     "frontmatter_keys": [
       "name",
       "description"
@@ -422,6 +806,38 @@
     "pass_3": []
   },
   {
+    "directory": "marketing-ideas",
+    "skill_name": "marketing-ideas",
+    "description": "When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' 'ideas to grow,' 'what else can I try,' 'I don't know how to market this,' 'brainstorm marketing,' or 'what marketing should I do.' Use this as a starting point whenever someone is stuck or looking for inspiration on how to grow. For specific channel execution, see the relevant skill (ads, social, emails, etc.).",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-ideas/SKILL.md",
+    "line_count": 178,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "marketing-psychology",
+    "skill_name": "marketing-psychology",
+    "description": "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-psychology/SKILL.md",
+    "line_count": 466,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "marketing-skills",
     "skill_name": "marketing-skills",
     "description": "Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth engineering. From Corey Haines' Marketing Skills collection. Use when working with marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.",
@@ -440,6 +856,40 @@
     "pass_3": []
   },
   {
+    "directory": "micro-interactions",
+    "skill_name": "micro-interactions",
+    "description": "Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges. Applies Disney's 12 animation principles to interface details such as hover, press, focus, ripple, and badge updates.",
+    "source_owner": "Dylan Tarre",
+    "source_url": "https://github.com/dylantarre/animation-principles",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/micro-interactions/SKILL.md",
+    "line_count": 130,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "microinteractions",
+    "skill_name": "microinteractions",
+    "description": "'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions \"microinteraction\", \"button feedback\", \"loading state\", \"toggle design\", \"animation detail\", \"interaction polish\", \"state transitions\", or \"input feedback\". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For Disney-12-principles micro-interaction motion, see micro-interactions. For overall UI polish, see refactoring-ui.'",
+    "source_owner": "wondelai",
+    "source_url": "https://github.com/wondelai/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/microinteractions/SKILL.md",
+    "line_count": 255,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "license",
+      "metadata"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "og-image",
     "skill_name": "og-image",
     "description": "Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.",
@@ -447,6 +897,38 @@
     "source_url": "https://github.com/stevysmith/og-image-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/og-image/SKILL.md",
     "line_count": 213,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "onboarding",
+    "skill_name": "onboarding",
+    "description": "When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions \\\"onboarding flow,\\\" \\\"activation rate,\\\" \\\"user activation,\\\" \\\"first-run experience,\\\" \\\"empty states,\\\" \\\"onboarding checklist,\\\" \\\"aha moment,\\\" \\\"new user experience,\\\" \\\"users aren't activating,\\\" \\\"nobody completes setup,\\\" \\\"low activation rate,\\\" \\\"users sign up but don't use the product,\\\" \\\"time to value,\\\" or \\\"first session experience.\\\" Use this whenever users are signing up but not sticking around. For signup/registration optimization, see signup. For ongoing email sequences, see emails.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/onboarding/SKILL.md",
+    "line_count": 231,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "paywalls",
+    "skill_name": "paywalls",
+    "description": "When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions \\\"paywall,\\\" \\\"upgrade screen,\\\" \\\"upgrade modal,\\\" \\\"upsell,\\\" \\\"feature gate,\\\" \\\"convert free to paid,\\\" \\\"freemium conversion,\\\" \\\"trial expiration screen,\\\" \\\"limit reached screen,\\\" \\\"plan upgrade prompt,\\\" \\\"in-app pricing,\\\" \\\"free users won't upgrade,\\\" \\\"trial to paid conversion,\\\" or \\\"how do I get users to pay.\\\" Use this for any in-product moment where you're asking users to upgrade. Distinct from public pricing pages (see cro) \\u2014 this focuses on in-product upgrade moments where the user has already experienced value. For pricing decisions, see pricing.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/paywalls/SKILL.md",
+    "line_count": 238,
     "frontmatter_keys": [
       "name",
       "description"
@@ -472,6 +954,22 @@
     "pass_3": []
   },
   {
+    "directory": "popups",
+    "skill_name": "popups",
+    "description": "When the user wants to create or optimize popups, modals, overlays, slide-ins, or banners for conversion purposes. Also use when the user mentions \\\"exit intent,\\\" \\\"popup conversions,\\\" \\\"modal optimization,\\\" \\\"lead capture popup,\\\" \\\"email popup,\\\" \\\"announcement banner,\\\" \\\"overlay,\\\" \\\"collect emails with a popup,\\\" \\\"exit popup,\\\" \\\"scroll trigger,\\\" \\\"sticky bar,\\\" or \\\"notification bar.\\\" Use this for any overlay or interrupt-style conversion element. For forms outside of popups, see cro. For general page conversion optimization, see cro.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/popups/SKILL.md",
+    "line_count": 465,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "postgres-best-practices",
     "skill_name": "postgres-best-practices",
     "description": "Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.",
@@ -479,6 +977,38 @@
     "source_url": "https://github.com/supabase/agent-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
     "line_count": 70,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "pricing",
+    "skill_name": "pricing",
+    "description": "When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' or 'should I offer a free plan.' Use this whenever someone is figuring out what to charge or how to structure their plans. For in-app upgrade screens, see paywalls.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/pricing/SKILL.md",
+    "line_count": 242,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "product-marketing",
+    "skill_name": "product-marketing",
+    "description": "When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' 'who is my target audience,' 'describe my product,' 'ICP,' 'ideal customer profile,' or wants to avoid repeating foundational information across marketing tasks. Use this at the start of any new project before using other marketing skills \\u2014 it creates `.agents/product-marketing.md` that all other skills reference for product, audience, and positioning context.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/product-marketing/SKILL.md",
+    "line_count": 252,
     "frontmatter_keys": [
       "name",
       "description"
@@ -572,6 +1102,22 @@
     "pass_3": []
   },
   {
+    "directory": "referrals",
+    "skill_name": "referrals",
+    "description": "When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' 'partner program,' 'referral incentive,' 'how to get referrals,' 'customers referring customers,' or 'affiliate payout.' Use this whenever someone wants existing users or partners to bring in new customers. For launch-specific virality, see launch.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/referrals/SKILL.md",
+    "line_count": 268,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "remotion-best-practices",
     "skill_name": "remotion-best-practices",
     "description": "Best practices for Remotion - Video creation in React",
@@ -579,6 +1125,54 @@
     "source_url": "https://github.com/remotion-dev/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
     "line_count": 106,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "revops",
+    "skill_name": "revops",
+    "description": "When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes. Also use when the user mentions 'RevOps,' 'revenue operations,' 'lead scoring,' 'lead routing,' 'MQL,' 'SQL,' 'pipeline stages,' 'deal desk,' 'CRM automation,' 'marketing-to-sales handoff,' 'data hygiene,' 'leads aren't getting to sales,' 'pipeline management,' 'lead qualification,' or 'when should marketing hand off to sales.' Use this for anything involving the systems and processes that connect marketing to revenue. For cold outreach emails, see cold-email. For email drip campaigns, see emails. For pricing decisions, see pricing.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/revops/SKILL.md",
+    "line_count": 356,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "sales-enablement",
+    "skill_name": "sales-enablement",
+    "description": "When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sales-enablement/SKILL.md",
+    "line_count": 370,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "schema",
+    "skill_name": "schema",
+    "description": "When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions \\\"schema markup,\\\" \\\"structured data,\\\" \\\"JSON-LD,\\\" \\\"rich snippets,\\\" \\\"schema.org,\\\" \\\"FAQ schema,\\\" \\\"product schema,\\\" \\\"review schema,\\\" \\\"breadcrumb schema,\\\" \\\"Google rich results,\\\" \\\"knowledge panel,\\\" \\\"star ratings in search,\\\" or \\\"add structured data.\\\" Use this whenever someone wants their pages to show enhanced results in Google. For broader SEO issues, see seo-audit. For AI search optimization, see ai-seo.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/schema/SKILL.md",
+    "line_count": 190,
     "frontmatter_keys": [
       "name",
       "description"
@@ -622,6 +1216,24 @@
     "pass_3": []
   },
   {
+    "directory": "seo-audit",
+    "skill_name": "seo-audit",
+    "description": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \\\"SEO audit,\\\" \\\"technical SEO,\\\" \\\"why am I not ranking,\\\" \\\"SEO issues,\\\" \\\"on-page SEO,\\\" \\\"meta tags review,\\\" \\\"SEO health check,\\\" \\\"my traffic dropped,\\\" \\\"lost rankings,\\\" \\\"not showing up in Google,\\\" \\\"site isn't ranking,\\\" \\\"Google update hit me,\\\" \\\"page speed,\\\" \\\"core web vitals,\\\" \\\"crawl errors,\\\" or \\\"indexing issues.\\\" Use this even if the user just says something vague like \\\"my SEO is bad\\\" or \\\"help with SEO\\\" \\u2014 start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/seo-audit/SKILL.md",
+    "line_count": 508,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [
+      "SKILL.md is 508 lines; skill-creator recommends keeping it under 500"
+    ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "shadcn-ui",
     "skill_name": "shadcn-ui",
     "description": "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
@@ -639,6 +1251,38 @@
     "pass_3": []
   },
   {
+    "directory": "signup",
+    "skill_name": "signup",
+    "description": "When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions \\\"signup conversions,\\\" \\\"registration friction,\\\" \\\"signup form optimization,\\\" \\\"free trial signup,\\\" \\\"reduce signup dropoff,\\\" \\\"account creation flow,\\\" \\\"people aren't signing up,\\\" \\\"signup abandonment,\\\" \\\"trial conversion rate,\\\" \\\"nobody completes registration,\\\" \\\"too many steps to sign up,\\\" or \\\"simplify our signup.\\\" Use this whenever the user has a signup or registration flow that isn't performing. For post-signup onboarding, see onboarding. For lead capture forms (not account creation), see cro.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/signup/SKILL.md",
+    "line_count": 370,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "site-architecture",
+    "skill_name": "site-architecture",
+    "description": "When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal linking. Also use when the user mentions \\\"sitemap,\\\" \\\"site map,\\\" \\\"visual sitemap,\\\" \\\"site structure,\\\" \\\"page hierarchy,\\\" \\\"information architecture,\\\" \\\"IA,\\\" \\\"navigation design,\\\" \\\"URL structure,\\\" \\\"breadcrumbs,\\\" \\\"internal linking strategy,\\\" \\\"website planning,\\\" \\\"what pages do I need,\\\" \\\"how should I organize my site,\\\" or \\\"site navigation.\\\" Use this whenever someone is planning what pages a website should have and how they connect. NOT for XML sitemaps (that's technical SEO \\u2014 see seo-audit). For SEO audits, see seo-audit. For structured data, see schema.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/site-architecture/SKILL.md",
+    "line_count": 368,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "skill-creator",
     "skill_name": "skill-creator",
     "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
@@ -646,6 +1290,22 @@
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/skill-creator/SKILL.md",
     "line_count": 498,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "social",
+    "skill_name": "social",
+    "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' or 'create a reel.' Use this for social media content creation, repurposing, scheduling, and short-form video scripting. For broader content strategy, see content-strategy. For paid video ads, see ad-creative.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/social/SKILL.md",
+    "line_count": 420,
     "frontmatter_keys": [
       "name",
       "description"
@@ -872,6 +1532,43 @@
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
     "line_count": 244,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "compatibility",
+      "metadata",
+      "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "typo3-initial-release",
+    "skill_name": "typo3-initial-release",
+    "description": "Prepare, verify, review, tag, and document the first official release of a TYPO3 14.3+ extension. Use when the user asks for an initial release, version 1.0.0, release readiness, final release review, TER/Packagist/GitHub release preparation, release tagging, PHP/TYPO3 CI matrix hardening, composer.json release metadata, or pre-release checks for a TYPO3 14.3+ extension.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-initial-release/SKILL.md",
+    "line_count": 375,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "metadata",
+      "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "typo3-news-tags",
+    "skill_name": "typo3-news-tags",
+    "description": "Bulk-generates thematic tags for georgringer/news (EXT:news) and assigns them to existing news records via keyword matching. Use when tagging large news corpora, defining a generic tag catalogue, building a Symfony console command for tag assignment, working with tx_news_domain_model_tag / tx_news_domain_model_news_tag_mm, or installing b13/tag as a generic site-wide tagging capability alongside news tags.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-news-tags/SKILL.md",
+    "line_count": 360,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1153,6 +1850,22 @@
       "description",
       "metadata",
       "license"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "video",
+    "skill_name": "video",
+    "description": "When the user wants to create, generate, or produce video content using AI tools or programmatic frameworks. Also use when the user mentions 'video production,' 'AI video,' 'Remotion,' 'Hyperframes,' 'HeyGen,' 'Synthesia,' 'Veo,' 'Sora,' 'Runway,' 'Kling,' 'Seedance,' 'Hailuo,' 'MiniMax,' 'Pika,' 'Hunyuan,' 'Wan,' 'video generation,' 'AI avatar,' 'talking head video,' 'programmatic video,' 'video template,' 'explainer video,' 'product demo video,' 'video pipeline,' or 'make me a video.' Use this for video creation, generation, and production workflows. For video content strategy and what to post, see social. For paid video ad creative, see ad-creative.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/video/SKILL.md",
+    "line_count": 353,
+    "frontmatter_keys": [
+      "name",
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
