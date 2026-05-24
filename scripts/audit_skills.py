@@ -204,6 +204,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "webconsulting",
         "url": "https://github.com/dirnbauer/webconsulting-skills",
     },
+    "typo3-initial-release": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "typo3-powermail": {"owner": "webconsulting", "url": None},
     "typo3-records-list-types": {"owner": "webconsulting", "url": None},
     "typo3-rector": {"owner": "webconsulting", "url": None},
