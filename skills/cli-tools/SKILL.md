@@ -5,7 +5,7 @@ description: "Use when ANY command fails with 'command not found', when installi
 
 # CLI Tools Skill
 
-Install, audit, update, and recommend CLI tools across 74 cataloged entries.
+Install, audit, update, and recommend CLI tools across 77 cataloged entries.
 
 ## Triggers
 

@@ -1,0 +1,369 @@
+# Checkpoints for typo3-docs skill
+# Validates TYPO3 extension documentation following docs.typo3.org standards
+
+version: 1
+skill_id: typo3-docs
+
+mechanical:
+  # === DIRECTORY STRUCTURE ===
+  - id: TD-01
+    type: file_exists
+    target: Documentation/
+    severity: error
+    desc: "Documentation/ directory must exist"
+
+  - id: TD-02
+    type: file_exists
+    target: Documentation/Index.rst
+    severity: error
+    desc: "Documentation/Index.rst must exist as main entry point"
+
+  - id: TD-03
+    type: file_exists
+    target: Documentation/guides.xml
+    severity: error
+    desc: "Documentation/guides.xml must exist for rendering configuration"
+
+  # === EDITORCONFIG ===
+  - id: TD-04
+    type: file_exists
+    target: Documentation/.editorconfig
+    severity: warning
+    desc: "Documentation/.editorconfig should exist for consistent formatting"
+
+  # === GUIDES.XML CONTENT ===
+  - id: TD-05
+    type: contains
+    target: Documentation/guides.xml
+    pattern: "<project"
+    severity: error
+    desc: "guides.xml must contain project element"
+
+  - id: TD-06
+    type: contains
+    target: Documentation/guides.xml
+    pattern: "version="
+    severity: warning
+    desc: "guides.xml should specify documentation version"
+
+  # guides.xml extension identification — any of these per-line tokens
+  # satisfies the check. The previous regex required `<extension` and
+  # `class=` on the same line (rare in real guides.xml — TYPO3 docs
+  # convention puts each attribute on its own line). It also rejected
+  # the slash form `vendor/key` for interlink-shortcode (the real
+  # canonical form).
+  - id: TD-07
+    type: regex
+    target: Documentation/guides.xml
+    pattern: 'extension-key="[a-z_-]+"|<extension(>|[[:space:]]|$)|interlink-shortcode="[a-z_/-]+"'
+    severity: warning
+    desc: "guides.xml should identify the extension via extension-key=, <extension …>, or interlink-shortcode=vendor/key"
+
+  # === INDEX.RST CONTENT ===
+  - id: TD-08
+    type: regex
+    target: Documentation/Index.rst
+    pattern: "^={3,}$"
+    severity: error
+    desc: "Index.rst must have proper RST title underline"
+
+  - id: TD-09
+    type: contains
+    target: Documentation/Index.rst
+    pattern: ".. toctree::"
+    severity: warning
+    desc: "Index.rst should have toctree directive"
+
+  # === FILE NAMING (CamelCase) ===
+  - id: TD-10
+    type: command
+    pattern: "find Documentation/ -name '*.rst' | grep -E '/[a-z]' | grep -v Index.rst | head -1 && exit 1 || exit 0"
+    severity: warning
+    desc: "RST files should use CamelCase naming (e.g., Configuration.rst not configuration.rst)"
+
+  # === IMAGE FORMAT ===
+  - id: TD-11
+    type: command
+    pattern: "find Documentation/ -type f \\( -name '*.jpg' -o -name '*.jpeg' -o -name '*.gif' -o -name '*.bmp' \\) | head -1 && exit 1 || exit 0"
+    severity: warning
+    desc: "Images should be in PNG format, not JPG/GIF/BMP"
+
+  - id: TD-12
+    type: file_exists
+    target: Documentation/Images/
+    severity: info
+    desc: "Documentation/Images/ directory should exist for screenshots"
+
+  # === README CONSISTENCY ===
+  - id: TD-13
+    type: file_exists
+    target: README.md
+    severity: warning
+    desc: "README.md should exist at repository root"
+
+  - id: TD-14
+    type: contains
+    target: README.md
+    pattern: "Documentation"
+    severity: info
+    desc: "README.md should reference the Documentation folder"
+
+  # === NO MAILTO LINKS ===
+  - id: TD-18
+    type: command
+    pattern: "grep -rn 'mailto:' Documentation/ 2>/dev/null | head -1 && exit 1 || exit 0"
+    severity: warning
+    desc: "Documentation must not contain mailto: links; use GitHub Issues/Discussions URLs"
+
+  # === INDEX.RST IN SUBDIRECTORIES ===
+  - id: TD-19
+    type: command
+    pattern: "find Documentation/ -mindepth 1 -type d ! -name Images ! -name '_*' 2>/dev/null | while read dir; do [ ! -f \"$dir/Index.rst\" ] && echo \"Missing: $dir/Index.rst\" && exit 1; done; exit 0"
+    severity: warning
+    desc: "Every Documentation/ subdirectory must contain an Index.rst file"
+
+  # === GUIDES.XML THEME ===
+  - id: TD-25
+    type: contains
+    target: Documentation/guides.xml
+    pattern: 'theme="typo3docs"'
+    severity: warning
+    desc: "guides.xml should use theme=\"typo3docs\" for proper TYPO3 documentation rendering"
+
+  # === MAX RST PAGE LENGTH ===
+  - id: TD-26
+    type: command
+    pattern: "find Documentation/ -name '*.rst' -exec sh -c 'wc -l < \"$1\"' _ {} \\; 2>/dev/null | awk '$1 > 250 {found=1} END {exit found ? 1 : 0}'"
+    severity: info
+    desc: "RST pages should not exceed 250 lines; split into sub-pages with toctree"
+
+  # === NO TABS IN RST ===
+  - id: TD-27
+    type: command
+    pattern: "grep -rPn '\\t' Documentation/*.rst Documentation/**/*.rst 2>/dev/null | head -1 && exit 1 || exit 0"
+    severity: warning
+    desc: "RST files must use spaces only (4 spaces), never tabs"
+
+  # === COMMON DOCUMENTATION SECTIONS ===
+  - id: TD-15
+    type: file_exists
+    target: Documentation/Configuration/
+    severity: info
+    desc: "Documentation/Configuration/ directory should exist"
+
+  - id: TD-16
+    type: file_exists
+    target: Documentation/Installation/
+    severity: info
+    desc: "Documentation/Installation/ directory should exist"
+
+  - id: TD-17
+    type: file_exists
+    target: Documentation/Introduction/
+    severity: info
+    desc: "Documentation/Introduction/ directory should exist"
+
+  # === DOCUMENTATION ACCURACY ===
+  - id: TD-30
+    type: command
+    pattern: "bash scripts/check-guides-xml-version-sync.sh"
+    severity: error
+    desc: "guides.xml version and release attributes must both match ext_emconf.php version"
+
+  - id: TD-31
+    type: command
+    pattern: "grep -rn 'getTranslation\\|importXliffFile\\|findByIdentifier\\|findByComponent' Documentation/ 2>/dev/null | head -1 && echo 'Found common wrong method names in documentation' && exit 1 || exit 0"
+    severity: error
+    desc: "Documentation must not reference common wrong method names (getTranslation, importXliffFile, findByIdentifier, findByComponent)"
+
+  # === DOCUMENTATION COMPLETENESS ===
+  - id: TD-41
+    type: command
+    pattern: "bash scripts/check-unreleased-versions.sh"
+    severity: warning
+    desc: "versionadded/versionchanged directives should reference released versions only"
+
+  # Note: TD-43 (guides.xml version+release sync) removed — consolidated into TD-30
+  # which now uses check-guides-xml-version-sync.sh (checks both version and release attributes)
+
+  # === REQUIRED DOCUMENTATION SECTIONS ===
+  - id: TD-44
+    type: command
+    pattern: "bash scripts/check-required-doc-sections.sh"
+    severity: warning
+    desc: "Documentation should include Introduction, Installation, Configuration, Usage, Developer, and Troubleshooting/FAQ sections"
+
+  # === UNTRANSLATED FLUID STRINGS ===
+  - id: TD-45
+    type: command
+    pattern: "bash scripts/check-untranslated-fluid-strings.sh"
+    severity: warning
+    desc: "Fluid templates should use f:translate for user-facing text; flag hardcoded English strings (>3 words in title/aria-label/alt)"
+
+  # === RST SUBSTITUTIONS USAGE ===
+  - id: TD-46
+    type: command
+    pattern: "bash scripts/check-rst-substitutions-used.sh"
+    severity: info
+    desc: "If Includes.rst.txt defines substitutions, they should be used in Introduction/Index.rst and Installation/Index.rst instead of hardcoded values"
+
+  # === PLANTUML RENDERING ===
+  - id: TD-47
+    type: command
+    pattern: "grep -rnP '\\.\\.\\s*uml::' Documentation/ 2>/dev/null | head -1 && echo 'Found .. uml:: directive(s) — TYPO3 docs toolchain may not support PlantUML. Use .. code-block:: text or .. figure:: instead.' && exit 1 || exit 0"
+    severity: warning
+    desc: ".. uml:: directives require PlantUML support which TYPO3 docs toolchain may not provide; use .. code-block:: text or .. figure:: alternatives"
+
+  # === CHANGELOG VERSION COVERAGE ===
+  - id: TD-48
+    type: command
+    pattern: "bash scripts/check-changelog-version-coverage.sh"
+    severity: warning
+    desc: "CHANGELOG.md should have entries for all git tags between initial and current version"
+
+  # === ADR COVERAGE ===
+  - id: TD-49
+    type: command
+    pattern: "bash scripts/check-adr-coverage.sh"
+    severity: info
+    desc: "Extensions with >10 classes should have Documentation/Developer/Adr/ for significant architectural decisions"
+
+llm_reviews:
+  # === CONTENT QUALITY ===
+  - id: TD-20
+    domain: documentation
+    prompt: |
+      Review the Documentation/Index.rst file for:
+      - Proper RST formatting with correct heading levels
+      - Clear project description in the introduction
+      - Logical toctree ordering (Introduction, Installation, Configuration, etc.)
+      - Appropriate maxdepth setting in toctree
+
+      Report any formatting issues or missing standard sections.
+    severity: warning
+    desc: "Index.rst should have proper structure and formatting"
+
+  - id: TD-21
+    domain: documentation
+    prompt: |
+      Compare README.md with Documentation/Index.rst:
+      - Extension name should be consistent
+      - Version references should match
+      - Feature descriptions should align
+      - Installation instructions should not contradict
+
+      Report any inconsistencies between these files.
+    severity: warning
+    desc: "README.md and Documentation should be consistent"
+
+  - id: TD-22
+    domain: documentation
+    prompt: |
+      Review the guides.xml configuration for:
+      - Correct project name matching extension key
+      - Appropriate release/version values
+      - Valid copyright statement
+      - Proper vendor and extension settings
+
+      Check against TYPO3 documentation rendering requirements.
+    severity: warning
+    desc: "guides.xml should be properly configured for docs.typo3.org"
+
+  - id: TD-23
+    domain: documentation
+    prompt: |
+      Check documentation completeness:
+      - Installation instructions with composer and TER options
+      - Configuration reference for TypoScript/FlexForm settings
+      - Usage examples with code snippets
+      - Changelog or version history
+
+      Report missing critical sections for an extension user.
+    severity: info
+    desc: "Documentation should cover installation, configuration, and usage"
+
+  - id: TD-24
+    domain: documentation
+    prompt: |
+      Review RST file naming conventions:
+      - Files should use CamelCase (Configuration.rst, not configuration.rst)
+      - Index.rst is the exception (lowercase allowed)
+      - Directory names should also follow CamelCase
+
+      List any files not following the convention.
+    severity: info
+    desc: "RST files should follow TYPO3 CamelCase naming convention"
+
+  # === DOCUMENTATION ACCURACY ===
+  - id: TD-32
+    domain: documentation
+    prompt: |
+      Review Documentation/Configuration/Index.rst (and any TypoScript configuration docs) for backend module TypoScript usage.
+      Backend modules MUST use the `module.` prefix in TypoScript, NOT `plugin.`.
+
+      Check for patterns like:
+      - `plugin.tx_extensionname` used for backend module configuration (WRONG)
+      - Should be `module.tx_extensionname` for backend modules
+
+      Report any instances where `plugin.` prefix is used for backend module TypoScript configuration.
+    severity: warning
+    desc: "TypoScript docs must use module. prefix (not plugin.) for backend modules"
+
+  - id: TD-33
+    domain: documentation
+    prompt: |
+      Compare CLI command documentation against the actual ImportCommand (or other Command classes) configure() method.
+
+      For each documented CLI command:
+      1. Find the corresponding Command class in Classes/Command/
+      2. Read its configure() method to get actual arguments and options
+      3. Compare documented arguments/options against actual configure() definitions
+      4. Check that argument names, option names, descriptions, and required/optional status match
+
+      Report any mismatches between documented CLI arguments and actual Command::configure() definitions.
+    severity: error
+    desc: "CLI command documentation must match actual Command::configure() arguments"
+
+  - id: TD-40
+    domain: documentation
+    prompt: |
+      Check Documentation/ChangeLog/Index.rst (or similar changelog file) against git tags.
+
+      1. List all git tags with `git tag -l`
+      2. For each tag that represents a release version, verify it appears in the changelog
+      3. Check that changelog entries are in reverse chronological order
+
+      Report any git tags (release versions) missing from the changelog documentation.
+    severity: warning
+    desc: "ChangeLog should include entries for all git tags (release versions)"
+
+  - id: TD-42
+    domain: documentation
+    prompt: |
+      Check all Documentation sections that should contain screenshots (especially for backend modules, configuration screens, and UI workflows).
+
+      Look for:
+      - Sections with TODO placeholders instead of actual content
+      - Screenshot references (.. figure::) pointing to non-existent images
+      - Sections titled "Screenshots" or similar that are empty or contain only placeholder text
+      - Backend module documentation lacking any screenshots
+
+      Report any sections with missing or placeholder screenshot content.
+    severity: medium
+    desc: "Screenshots sections should have actual content, not TODO placeholders"
+
+  # === API EXAMPLE ACCURACY ===
+  - id: TD-50
+    domain: documentation
+    prompt: |
+      Compare code examples in README.md and Documentation/ RST files against the actual codebase.
+
+      For each code example that references PHP classes, methods, or functions:
+      1. Find the actual class in Classes/ directory
+      2. Verify the method signatures match (method name, parameters, return types)
+      3. Check that convenience methods shown in examples actually exist
+      4. Verify namespace and use statements are correct
+
+      Report any code examples that reference methods or signatures that don't exist in the codebase.
+    severity: error
+    desc: "Code examples in README.md and docs must use actual method signatures from the codebase"

@@ -66,7 +66,7 @@ USER_ONLY=false
 PROJECT_ONLY=false
 NO_SYNC=false
 GENERATE_ONLY=false
-SYNC_SUBDIRS=(agents assets examples reference references rules scripts)
+SYNC_SUBDIRS=(agents assets evals examples reference references rules scripts)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -182,6 +182,13 @@ if [ "$NO_SYNC" = false ] && [ -f "$SCRIPT_DIR/.sync-config.json" ] && command -
                         echo "  ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
                     fi
 
+                    find "$TARGET_DIR" -maxdepth 1 -type f ! -name "SKILL.md" -delete
+                    for support_file in "$SOURCE_DIR"/*; do
+                        [ -f "$support_file" ] || continue
+                        [ "$(basename "$support_file")" = "SKILL.md" ] && continue
+                        cp "$support_file" "$TARGET_DIR/"
+                    done
+
                     for subdir in "${SYNC_SUBDIRS[@]}"; do
                         if [ -d "$SOURCE_DIR/$subdir" ]; then
                             rm -rf "$TARGET_DIR/$subdir"
@@ -261,7 +268,7 @@ Follow the instructions in $agents_link — it is the single source of truth for
 $extra_section
 ## Skills Location
 
-All skills live in \`skills/<skill-name>/SKILL.md\`. Installers symlink the whole skill directory, not just \`SKILL.md\`, so optional \`agents/\`, \`assets/\`, \`examples/\`, \`references/\`, \`rules/\`, and \`scripts/\` folders remain available to clients that support them.
+All skills live in \`skills/<skill-name>/SKILL.md\`. Installers symlink the whole skill directory, not just \`SKILL.md\`, so optional \`agents/\`, \`assets/\`, \`evals/\`, \`examples/\`, \`reference/\`, \`references/\`, \`rules/\`, and \`scripts/\` folders remain available to clients that support them.
 
 To use a skill, read \`skills/<skill-name>/SKILL.md\` and follow its instructions. Load referenced files only when the skill asks for them.
 

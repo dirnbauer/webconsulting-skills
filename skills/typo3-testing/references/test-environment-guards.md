@@ -2,6 +2,100 @@
 
 Patterns for writing robust tests that handle different runtime environments gracefully (CI containers running as root, missing PHP extensions, filesystem permissions).
 
+## Initialise `Environment` in `Tests/bootstrap.php`
+
+Production code that uses `TYPO3\CMS\Core\Http\NormalizedParams::createFromServerParams()` (typically as a CLI / non-request fallback for the deprecated `GeneralUtility::getIndpEnv()` -- deprecated in TYPO3 v14.3, removed in v15.0) will TypeError under PHPUnit unless `Environment` has been initialised:
+
+```
+TypeError: TYPO3\CMS\Core\Core\Environment::getCurrentScript():
+Return value must be of type string, null returned
+```
+
+`createFromServerParams()` calls `Environment::getCurrentScript()` and `Environment::getPublicPath()` to populate the path-related fields of `NormalizedParams`. In unit tests TYPO3's `SystemEnvironmentBuilder` does not run, so `Environment` is uninitialised and those getters return `null`.
+
+**Fix:** initialise `Environment` once in `Tests/bootstrap.php`:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+require_once dirname(__DIR__) . '/.Build/vendor/autoload.php';
+
+$projectPath = \dirname(__DIR__);
+
+\TYPO3\CMS\Core\Core\Environment::initialize(
+    new \TYPO3\CMS\Core\Core\ApplicationContext('Testing'),
+    true,                       // cli
+    true,                       // composerMode
+    $projectPath,               // projectPath
+    $projectPath,               // publicPath
+    $projectPath . '/var',      // varPath
+    $projectPath . '/config',   // configPath
+    __FILE__,                   // currentScript (this Tests/bootstrap.php file)
+    'UNIX',                     // os
+);
+```
+
+Reference the bootstrap from `phpunit.xml` at the project root, or from `Build/phpunit/UnitTests.xml` (note the relative path differs by config location):
+
+```xml
+<!-- phpunit.xml at project root -->
+<phpunit bootstrap="Tests/bootstrap.php" ...>
+
+<!-- Build/phpunit/UnitTests.xml (two levels deep) -->
+<phpunit bootstrap="../../Tests/bootstrap.php" ...>
+```
+
+**Where this matters:**
+- Code paths that call `NormalizedParams::createFromServerParams($_SERVER, $sysConf)` from CLI / non-request contexts
+- Migrations away from `GeneralUtility::getIndpEnv()` (deprecated v14.3, removed v15.0)
+- Any unit test that exercises code touching `Environment::getCurrentScript()` / `Environment::getPublicPath()`
+
+### Define the `LF` constant for TYPO3 v12 unit tests
+
+TYPO3 v12's `PageRenderer` (and a few other v12-only code paths) reference the `LF` global constant that `SystemEnvironmentBuilder::defineBaseConstants()` defines during a normal request bootstrap. Unit tests do not run that bootstrap, so any test that exercises v12 PageRenderer code dies with `Undefined constant "LF"` (PHP 8.x: a fatal `Error`).
+
+Add this guard early in `Tests/bootstrap.php`, next to the `Environment::initialize()` call:
+
+```php
+if (!\defined('LF')) {
+    \define('LF', "\n");
+}
+```
+
+The constant was effectively retired in v13+ (replaced by `PHP_EOL` / explicit `"\n"` at call sites), but the guard is harmless on v13/v14 and is required while the extension still supports v12.
+
+## PHPUnit `backupGlobals="true"` Resets `$GLOBALS` Between Tests
+
+Many TYPO3 extension `phpunit.xml` files set `backupGlobals="true"`. PHPUnit runs the suite bootstrap once, then snapshots `$GLOBALS` per test (before `setUp()`) and restores the snapshot after the test finishes. Globals set by the suite bootstrap survive that cycle, but globals introduced inside `setUp()` or mutated by a previous test do not -- they are reset to whatever was captured in the snapshot. Combined with CLI / non-request contexts where `$GLOBALS['TYPO3_CONF_VARS']` may simply never have been populated, production code that reads it at runtime can see `null` -- typically resulting in:
+
+```
+TypeError: ... must be of type array, null given
+```
+
+or PHPStan level 10 `offsetAccess.nonOffsetAccessible` errors when statically analysing array access on `$GLOBALS['TYPO3_CONF_VARS']`.
+
+**Fix:** never assume bootstrap-set globals are present at runtime. Read them defensively with explicit narrowing and a safe default:
+
+```php
+use TYPO3\CMS\Core\Http\NormalizedParams;
+
+$confVars = $GLOBALS['TYPO3_CONF_VARS'] ?? null;
+$sysConf  = \is_array($confVars) && isset($confVars['SYS']) && \is_array($confVars['SYS'])
+    ? $confVars['SYS']
+    : [];
+
+return NormalizedParams::createFromServerParams($_SERVER, $sysConf);
+```
+
+This pattern:
+- Survives `backupGlobals="true"` snapshot/restore cycles
+- Handles CLI / non-request contexts where `$GLOBALS['TYPO3_CONF_VARS']` may not be populated
+- Satisfies PHPStan level 10 strict-mode rules on `$GLOBALS['TYPO3_CONF_VARS']` access
+
+**Alternative:** set `backupGlobals="false"` in `phpunit.xml` if no test relies on global isolation -- but the defensive read pattern above is preferred because it also hardens production code for genuinely uninitialised CLI contexts.
+
 ## GD/Imagick Extension Guard
 
 Tests involving image processing (thumbnails, resizing, format conversion) must check for the GD or Imagick extension. CI environments may not have image libraries installed.

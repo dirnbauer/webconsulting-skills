@@ -27,7 +27,7 @@ jobs:
         run: |
           # Strip 'v' prefix for TER (expects "3.0.1" not "v3.0.1")
           VERSION="${GITHUB_REF_NAME#v}"
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "Extracted version: ${VERSION}"
 
       - name: Prepare release comment
@@ -55,7 +55,7 @@ jobs:
           fi
 
           # Strip characters not supported in TER XML export
-          COMMENT=$(echo "${COMMENT}" | sed 's/[#*+=~^|\\<>]//g')
+          COMMENT="${COMMENT//[#*+=~^|\\<>]/}"
 
           # Append release link on new line
           COMMENT="${COMMENT}"$'\n\n'"Details: ${RELEASE_URL}"
@@ -65,10 +65,10 @@ jobs:
             echo "comment<<EOF"
             echo "${COMMENT}"
             echo "EOF"
-          } >> $GITHUB_OUTPUT
+          } >> "$GITHUB_OUTPUT"
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@7c071dfe9dc99bdf297fa79cb49ea005b9fcadbc # v2.37.1
         with:
           php-version: '8.3'
           extensions: intl, mbstring, json, zip, curl

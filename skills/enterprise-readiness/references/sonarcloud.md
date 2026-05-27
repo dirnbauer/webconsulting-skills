@@ -196,6 +196,169 @@ Security-sensitive code requiring manual review:
 3. Mark as **Safe**, **Fixed**, or **To Review**
 4. Document rationale for **Safe** decisions
 
+## Operational Patterns
+
+Day-to-day workflows for triaging issues, wiring CI, and keeping the project list clean. Token lives in env (`$SONAR_TOKEN`), passed as `Authorization: Bearer $SONAR_TOKEN` (Basic-auth `-u "$SONAR_TOKEN:"` also works, but Bearer keeps secrets out of the URL credential slot and avoids tripping secret-scanners on `-u` patterns).
+
+### Quality Gate vs Annotations vs Required Check
+
+These three concepts are independent — confusing them leads to wrong merge decisions:
+
+- **Quality Gate** (e.g. *0% Coverage on New Code*) — contributes to the `SonarCloud Code Analysis` check status (pass/fail)
+- **Annotations** — individual issues flagged on PR-touched lines, shown inline; do **not** affect the QG by themselves
+- **Required check** — repository ruleset entry (`gh api repos/OWNER/REPO/rulesets/$ID`); only required checks block merge
+
+A PR can sit at `mergeStateStatus: UNSTABLE` (advisory checks failing, still mergeable) versus `BLOCKED` (a required check failing, not mergeable). Verify which checks actually gate merges:
+
+```bash
+# Which checks are required to merge?
+gh api repos/OWNER/REPO/rulesets --jq '.[] | select(.name == "default") | .id' \
+  | xargs -I{} gh api repos/OWNER/REPO/rulesets/{} \
+      --jq '.rules[] | select(.type=="required_status_checks") | .parameters.required_status_checks[].context'
+# Is "SonarCloud Code Analysis" in the output? Usually NOT — it is advisory.
+```
+
+Refactor-PR gotcha: *0% Coverage on New Code* is **structurally unfixable** when the refactored file cannot be loaded by the test runner (e.g. a JS module with CKEditor top-level imports under vitest). Treat the QG fail as advisory rather than chasing coverage on untestable code.
+
+### Bulk Issue Transitions via API
+
+Single transition (issues):
+
+```bash
+curl -s -H "Authorization: Bearer $SONAR_TOKEN" -X POST \
+  "https://sonarcloud.io/api/issues/do_transition" \
+  --data-urlencode "issue=$KEY" \
+  --data-urlencode "transition=wontfix"   # or: falsepositive
+```
+
+Add a comment (separate call — `do_transition` does not accept `comment`):
+
+```bash
+curl -s -H "Authorization: Bearer $SONAR_TOKEN" -X POST \
+  "https://sonarcloud.io/api/issues/add_comment" \
+  --data-urlencode "issue=$KEY" \
+  --data-urlencode "text=Reason: ..."
+```
+
+Available issue transitions: `falsepositive`, `wontfix`, `confirm`, `unconfirm`, `resolve`, `reopen`. Hotspots use a different endpoint:
+
+```bash
+curl -s -H "Authorization: Bearer $SONAR_TOKEN" -X POST \
+  "https://sonarcloud.io/api/hotspots/change_status" \
+  --data-urlencode "hotspot=$KEY" \
+  --data-urlencode "status=REVIEWED" \
+  --data-urlencode "resolution=SAFE"      # or: FIXED, ACKNOWLEDGED
+```
+
+Bulk fetch issue keys for a rule:
+
+```bash
+curl -s "https://sonarcloud.io/api/issues/search?componentKeys=$PROJECT&rules=$RULE&issueStatuses=OPEN,CONFIRMED&ps=500" \
+  | jq -r '.issues[].key'
+```
+
+Sequential loops (one transition + one comment per issue) handle ~120 calls without rate-limit pushback — no client-side throttling needed for typical batch sizes.
+
+### Hotspot Triage — Common False-Positive Classes
+
+Patterns that appear repeatedly and can be marked Safe / False Positive without code changes:
+
+| Rule | Pattern | Decision |
+|------|---------|----------|
+| `php:S4790` "weak hash" | `substr(md5($url), 0, N)` for cache keys / temp filenames | **Safe** — not crypto, just an identifier |
+| `php:S1313` "hardcoded IP" | `'169.254.169.254'` (AWS IMDS) in an SSRF deny-list | **False Positive** — the literal IS the security control |
+| `javascript:S3516` "always returns same value" | Returning the same `Promise` object across error and success paths | **False Positive** — Sonar does not model Promise resolution as state change |
+
+Triage flow: read the use-site once, decide, apply via API with an explanatory comment so future reviewers see the rationale.
+
+### Domain-Specific False-Positive Classes
+
+**CKEditor 5 view elements (`javascript:S7761`)** — `getAttribute('data-*')` inside CKE5 upcast/downcast converter callbacks operates on **view elements**, not DOM elements. View elements expose `getAttribute(key)` mirroring the DOM API by name only — they read from an internal attribute map and have **no `.dataset` property**. Refactoring to `.dataset.foo` silently returns `undefined` and drops every `data-*` attribute on upcast. Identify via sibling calls in the same callback: `consumable.consume(viewElement, ...)`, `child.is('element', 'img')`, `figureElement.getChildren()`. Mark all such instances won't-fix in bulk.
+
+**TYPO3 framework signatures (`php:S1172` "unused parameter")** — required by TYPO3 contracts even when params are unused; mark won't-fix, do **not** drop:
+
+- `#[AsAllowedCallable]` methods: `(?string $content, array $conf, ServerRequestInterface $request)` — TypoScript USER callback contract
+- DataHandler hooks, e.g. `processDatamap_postProcessFieldArray(string $status, string $table, string $id, array &$fieldArray, DataHandler &$dataHandler)`
+- Other documented hook signatures from TYPO3 core
+
+Private methods with unused params are real cleanup — drop the params and update callers (in-file only since they are private).
+
+### Project Hygiene — Archived Repositories
+
+SonarCloud does not auto-prune projects when their GitHub repo is archived. Cross-reference and bulk-delete:
+
+```bash
+# All Sonar projects in the org
+curl -s "https://sonarcloud.io/api/components/search_projects?organization=$ORG&ps=500" \
+  | jq -r '.components[].name' | sort > /tmp/sonar.txt
+
+# All archived GitHub repos (paginate as needed)
+gh api "orgs/$ORG/repos?type=all&per_page=100&page=1" \
+  --jq '.[] | select(.archived) | .name' \
+  | sort > /tmp/archived.txt
+
+# Delete each archived-but-still-in-Sonar project; expect HTTP 204 per delete
+comm -12 /tmp/sonar.txt /tmp/archived.txt \
+  | while read -r repo; do
+      curl -s -H "Authorization: Bearer $SONAR_TOKEN" -X POST \
+        "https://sonarcloud.io/api/projects/delete?project=${ORG}_${repo}" \
+        -w "$repo: %{http_code}\n"
+    done
+```
+
+Real-world result on the `netresearch` org (2026-05): 270 → 198 projects after pruning 72 archived entries.
+
+### CI Wiring Gotchas
+
+**Language-agnostic shared workflows cannot carry coverage.** A reusable workflow such as `org/.github/.github/workflows/sonarqube.yml` is intentionally generic — checkout + scan only, no test step. Repos that want coverage must inline the scan in their own workflow:
+
+```yaml
+sonarqube:
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup runtime + run tests with coverage
+      run: |
+        # PHP example
+        vendor/bin/phpunit --coverage-clover .Build/logs/clover-unit.xml
+        # JS example
+        npm ci && npm run test:coverage
+    - uses: SonarSource/sonarqube-scan-action@59db25f34e16620e48ab4bb9e4a5dce155cb5432  # v8.0.0 — pin to 40-char SHA, comment with version; or use sonarcloud-github-action
+```
+
+Wire the resulting reports in `sonar-project.properties`:
+
+```properties
+sonar.php.coverage.reportPaths=.Build/logs/clover-unit.xml
+sonar.javascript.lcov.reportPaths=Tests/JavaScript/coverage/lcov.info
+```
+
+**Vitest cross-directory coverage requires `allowExternal`.** Production code at `../../Resources/...` from `Tests/JavaScript/` produces an empty `lcov.info` despite tests passing, because v8 silently drops files outside the workspace boundary regardless of include globs:
+
+```js
+// vitest.config.js
+export default {
+  test: {
+    coverage: {
+      provider: 'v8',
+      allowExternal: true,            // required for cross-dir source under test
+      include: ['../../Resources/Public/JavaScript/**'],
+      reportsDirectory: './coverage',
+      reporter: ['lcov', 'text'],
+    },
+  },
+}
+```
+
+**Test fixtures duplicating production trigger CPD false positives.** When test files mirror inline production callbacks (e.g. CKE5 upcast/downcast lambdas that cannot be imported in isolation), Sonar's CPD flags the mirrors as duplication. Mitigate with a targeted exclusion:
+
+```properties
+sonar.cpd.exclusions=Tests/JavaScript/tests/**
+```
+
+This is a legitimate exclusion — the duplication is a testing-pattern necessity, not maintenance debt.
+
 ## Integration with Existing Tools
 
 ### PHPStan Integration

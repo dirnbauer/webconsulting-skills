@@ -91,9 +91,25 @@ export default defineConfig({
         port: 5173,
         strictPort: true,
         origin: 'http://localhost:5173',
+        // Required for Vite 7.3+ / 8.x when accessed via reverse proxy (Traefik etc.)
+        // Without these, the dev server returns HTTP 403 "Blocked request" for any
+        // host header other than 'localhost' — even if the host appears to be
+        // routed correctly. true = allow all hosts (use array for narrower scope).
+        allowedHosts: true,
+        cors: true,
     },
 });
 ```
+
+> **Anti-pattern: duplicate `server:` blocks.** Define `server:` exactly once in
+> `defineConfig({ ... })`. JavaScript object literals **silently overwrite**
+> earlier keys with later ones, so two `server: { ... }` blocks lose the first
+> one's options without warning. If you add `allowedHosts`, put it inside the
+> existing `server` block — do not create a second one.
+
+> **Vite 7.1.x quirk.** Versions before 7.3 do not enforce host-header checks
+> by default, so a missing `allowedHosts` works "by accident". Upgrading to
+> 7.3+ or 8.x will break HMR behind a proxy unless `allowedHosts` is set.
 
 ## Entrypoints
 
@@ -155,9 +171,55 @@ The custom `SvgCopyOptimizePlugin` processes SVGs from `Resources/Private/Svg/` 
 - Writes optimized files to `Resources/Public/Svg/`
 - Watches for changes in dev mode (add/change/delete)
 - Tracks processed files to avoid redundant work
+- Skips re-optimization when the output file is newer than its source (see below)
 - Logs optimization stats (original size vs optimized)
 
 The plugin source lives in `vite.helpers.ts` and is imported in `vite.config.ts`.
+
+### Skipping unchanged sources between builds
+
+The in-memory `processedFiles` map only protects against duplicate work
+*within* a single Vite process. Between builds (`vite build` re-runs, fresh
+container starts, CI), the map is empty, so without an additional check every
+SVG would be re-optimized on every build.
+
+Compute the output path **before** reading the source, then short-circuit when
+`output.mtime >= source.mtime`:
+
+```js
+const parsed = resolve(rel).split('/').pop().replace('.svg', '');
+const outName = slugify(parsed) + '.svg';
+const outPath = resolve(outDir, outName);
+
+// Skip re-optimization if the existing output is newer than the source.
+// Saves the read + SVGO call entirely on subsequent builds.
+if (!changedFile && existsSync(outPath)) {
+    const outStats = statSync(outPath);
+    if (outStats.mtime.getTime() >= lastModified) {
+        processedFiles.set(srcPath, Date.now());
+        skippedFiles.push(`Public/Svg/${outName}`);
+        continue;
+    }
+}
+
+// only reached when the output is missing or older than the source:
+const raw = await fs.readFile(srcPath, 'utf8');
+const result = optimize(raw, { path: srcPath, ...svgoConfig });
+await fs.writeFile(outPath, result.data, 'utf8');
+```
+
+Two important orderings:
+
+1. `outPath` must be computed **before** the `existsSync` check (and therefore
+   before `fs.readFile`/`optimize()`). Otherwise the skip block has nothing to
+   compare against and the savings disappear.
+2. The `!changedFile` guard ensures explicit dev-server `change`/`add` events
+   always re-optimize. The skip only triggers in full-build runs.
+
+Caveat: this relies on filesystem mtimes. On CI runners that wipe
+`Resources/Public/Svg/` between jobs, the skip cannot fire — either commit the
+optimized output, cache the directory between pipeline runs, or layer a
+content-hash manifest on top.
 
 ### svgo.config.js
 

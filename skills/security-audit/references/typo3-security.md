@@ -469,6 +469,7 @@ $typo3Patterns = [
 ```
 
 ---
+
 ## TYPO3 v14.3 LTS security audit checklist
 
 v14.3 LTS (released 2026-04-21) brings several security-relevant changes that should appear on any v13→v14 audit:

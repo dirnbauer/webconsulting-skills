@@ -1,0 +1,919 @@
+# Checkpoints for typo3-testing skill
+# Focuses on PHPUnit, test structure, CI, PHPStan, and code coverage
+#
+# Supports two CI patterns:
+#   1. Traditional: local Build/UnitTests.xml + runTests.sh + direct action usage
+#   2. Shared workflow: netresearch/typo3-ci-workflows (reusable CI, handles
+#      PHPUnit config naming, SHA pinning, coverage, and PHPStan internally)
+
+version: 1
+skill_id: typo3-testing
+
+mechanical:
+  # === SHARED CI WORKFLOW DETECTION ===
+  # Check first — many later checks can be relaxed when a shared CI workflow
+  # handles PHPUnit config, SHA pinning, coverage, and PHPStan.
+
+  - id: TT-00
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'uses:\s*netresearch/typo3-ci-workflows'
+    severity: info
+    desc: "Detects netresearch/typo3-ci-workflows reusable workflow (relaxes TT-01..05, TT-21, TT-24)"
+
+  # === PHPUNIT CONFIGURATION ===
+  # TYPO3 testing-framework convention: Build/UnitTests.xml + Build/FunctionalTests.xml
+  # netresearch/typo3-ci-workflows also accepts: Build/phpunit.xml + Build/phpunit.functional.xml
+  # When TT-00 passes, either naming convention is valid.
+
+  - id: TT-01
+    type: file_exists
+    target: "{Build/UnitTests.xml,Build/phpunit.xml}"
+    severity: error
+    desc: "PHPUnit unit test config must exist (Build/UnitTests.xml or Build/phpunit.xml)"
+
+  - id: TT-02
+    type: file_exists
+    target: Build/FunctionalTests.xml
+    severity: error
+    desc: "PHPUnit functional test config must exist (Build/FunctionalTests.xml or Build/phpunit.functional.xml)"
+
+  - id: TT-03
+    type: file_not_exists
+    target: phpunit.xml
+    severity: warning
+    desc: "phpunit.xml in project root is discouraged; use Build/ directory instead"
+
+  - id: TT-04
+    type: regex
+    target: "{Build/UnitTests.xml,Build/phpunit.xml}"
+    pattern: '<testsuite.*name="unit"'
+    severity: error
+    desc: "PHPUnit config must define unit test suite"
+
+  - id: TT-05
+    type: regex
+    target: Build/FunctionalTests.xml
+    pattern: '<testsuite.*name="functional"'
+    severity: error
+    desc: "PHPUnit config must define functional test suite"
+
+  # === PHPUNIT DEPRECATED ATTRIBUTES ===
+  - id: TT-06
+    type: regex_not
+    target: "{Build/FunctionalTests.xml,Build/phpunit.xml,Build/UnitTests.xml,Build/phpunit.functional.xml}"
+    pattern: 'displayDetailsOnIncompleteTests|displayDetailsOnSkippedTests'
+    severity: warning
+    desc: "PHPUnit configs must not use displayDetailsOnIncompleteTests or displayDetailsOnSkippedTests (removed in PHPUnit 12)"
+
+  # === TEST DIRECTORY STRUCTURE ===
+  - id: TT-10
+    type: file_exists
+    target: Tests/Unit/
+    severity: error
+    desc: "Tests/Unit/ directory must exist"
+
+  - id: TT-11
+    type: file_exists
+    target: Tests/Functional/
+    severity: warning
+    desc: "Tests/Functional/ directory should exist"
+
+  - id: TT-12
+    type: regex
+    target: Tests/Unit/**/*Test.php
+    pattern: 'class.*Test.*extends.*TestCase'
+    severity: error
+    desc: "Unit tests must extend TestCase"
+
+  - id: TT-13
+    type: regex
+    target: Tests/Functional/**/*Test.php
+    pattern: 'class.*Test.*extends.*FunctionalTestCase'
+    severity: warning
+    desc: "Functional tests should extend FunctionalTestCase"
+
+  # === CI WORKFLOW WITH TEST EXECUTION ===
+  - id: TT-20
+    type: file_exists
+    target: .github/workflows/ci.yml
+    severity: warning
+    desc: "CI workflow should exist (ci.yml, ci.yaml, or tests.yml)"
+
+  - id: TT-21
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'phpunit|composer.*test|runTests|typo3-ci-workflows'
+    severity: error
+    desc: "CI workflow must execute tests (directly or via reusable workflow)"
+
+  - id: TT-22
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'php-version.*\[.*8\.[2-9]|php-versions'
+    severity: warning
+    desc: "CI should test multiple PHP versions (directly or via php-versions input)"
+
+  - id: TT-23
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'typo3.*\[.*1[3-4]|typo3-versions'
+    severity: warning
+    desc: "CI should test multiple TYPO3 versions"
+
+  - id: TT-24
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'uses:.*@[a-f0-9]{40}|uses:\s*netresearch/typo3-ci-workflows'
+    severity: error
+    desc: "GitHub Actions must be pinned to SHA (or use trusted reusable workflow)"
+
+  # === PHPSTAN CONFIGURATION ===
+  - id: TT-30
+    type: file_exists
+    target: "{phpstan.neon,Build/phpstan.neon,Build/phpstan/phpstan.neon}"
+    severity: warning
+    desc: "phpstan.neon configuration should exist"
+
+  - id: TT-31
+    type: file_exists
+    target: "{phpstan-baseline.neon,Build/phpstan-baseline.neon,Build/phpstan/phpstan-baseline.neon}"
+    severity: info
+    desc: "phpstan-baseline.neon for gradual adoption (root or Build/ subdir)"
+
+  - id: TT-32
+    type: regex
+    target: "{phpstan.neon,Build/phpstan.neon,Build/phpstan/phpstan.neon}"
+    pattern: 'level:\s*(10|max)'
+    severity: warning
+    desc: "PHPStan must use level 10 (max) — this is the strict check for projects using typo3-ci-workflows"
+
+  - id: TT-33
+    type: regex
+    target: "{phpstan.neon,Build/phpstan.neon,Build/phpstan/phpstan.neon}"
+    pattern: "typo3|TYPO3"
+    severity: info
+    desc: "PHPStan should include TYPO3-specific configuration"
+
+  - id: TT-34
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'phpstan|composer.*stan|composer.*analyze|typo3-ci-workflows'
+    severity: warning
+    desc: "CI should run PHPStan analysis (directly or via reusable workflow)"
+
+  - id: TT-35
+    type: command
+    command: "grep -oP 'level:\\s*\\K[0-9]+|level:\\s*\\Kmax' Build/phpstan.neon 2>/dev/null || grep -oP 'level:\\s*\\K[0-9]+|level:\\s*\\Kmax' Build/phpstan/phpstan.neon 2>/dev/null || grep -oP 'level:\\s*\\K[0-9]+|level:\\s*\\Kmax' phpstan.neon 2>/dev/null || echo 0"
+    expected: "^(10|max)$"
+    severity: warning
+    desc: "PHPStan must use level 10 (max) — this is the strict check for projects using typo3-ci-workflows"
+
+  # === CODE COVERAGE ===
+  - id: TT-40
+    type: file_exists
+    target: codecov.yml
+    severity: info
+    desc: "codecov.yml configuration for coverage settings"
+
+  - id: TT-41
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'codecov|upload-coverage|typo3-ci-workflows'
+    severity: warning
+    desc: "CI should upload coverage (directly or via reusable workflow with upload-coverage: true)"
+
+  - id: TT-42
+    type: regex
+    target: .github/workflows/{ci,tests}.{yml,yaml}
+    pattern: 'coverage.*clover|XDEBUG_MODE.*coverage|--coverage|upload-coverage:\s*true'
+    severity: warning
+    desc: "CI should generate code coverage"
+
+  - id: TT-43
+    type: contains
+    target: README.md
+    pattern: "codecov.io"
+    severity: info
+    desc: "README should display Codecov badge"
+
+  # === RUNTESTS.SH SCRIPT (mandatory for all Netresearch TYPO3 extensions) ===
+  - id: TT-50
+    type: file_exists
+    target: Build/Scripts/runTests.sh
+    severity: error
+    desc: "Build/Scripts/runTests.sh must exist as the unified test runner for all TYPO3 extensions"
+
+  - id: TT-51
+    type: regex
+    target: Build/Scripts/runTests.sh
+    pattern: 'TYPO3_VERSION|typo3/core'
+    severity: warning
+    desc: "runTests.sh should support TYPO3 version selection"
+
+  - id: TT-52
+    type: regex
+    target: Build/Scripts/runTests.sh
+    pattern: 'PHP_VERSION|php.*version'
+    severity: warning
+    desc: "runTests.sh should support PHP version selection (-p flag)"
+
+  - id: TT-53
+    type: regex
+    target: Build/Scripts/runTests.sh
+    pattern: 'suite|SUITE'
+    severity: warning
+    desc: "runTests.sh should support test suite selection (-s flag)"
+
+  - id: TT-54
+    type: command
+    command: 'test -x Build/Scripts/runTests.sh'
+    severity: error
+    desc: "Build/Scripts/runTests.sh must be executable"
+
+  - id: TT-55
+    type: regex
+    target: composer.json
+    pattern: 'Build/Scripts/runTests\.sh'
+    severity: warning
+    desc: "Composer scripts should invoke Build/Scripts/runTests.sh directly"
+
+  - id: TT-56
+    type: regex
+    target: Makefile
+    pattern: 'typo3-ci-workflows/Makefile.include'
+    severity: info
+    desc: "Makefile should include shared targets from typo3-ci-workflows"
+
+  # === RUNTESTS.SH QUALITY ===
+  - id: TT-57
+    type: regex
+    target: Build/Scripts/runTests.sh
+    pattern: 'ghcr\.io/typo3/core-testing|CONTAINER_BIN|docker\s+run'
+    severity: warning
+    desc: "runTests.sh should use Docker containers (TYPO3 core-testing images) for consistent test environments"
+
+  - id: TT-58
+    type: regex
+    target: Makefile
+    pattern: '\$\(RUNTESTS\)\s+-s\s+'
+    severity: error
+    desc: "Makefile targets must pass -s flag to runTests.sh (e.g., $(RUNTESTS) -s unit, not $(RUNTESTS) unit)"
+
+  - id: TT-59
+    type: regex
+    target: Build/Scripts/runTests.sh
+    pattern: 'NETWORK=.*\$\{?SUFFIX'
+    severity: warning
+    desc: "Docker network name should include per-run suffix to avoid conflicts with concurrent runs"
+
+  # === COMPOSER.JSON TEST DEPENDENCIES ===
+  # TT-60 removed: phpunit/phpunit is pulled transitively via typo3/testing-framework.
+  # Requiring it directly breaks the PHP-8.2 matrix cell because phpunit 12.5.8+
+  # requires PHP ≥ 8.3. Do NOT add a direct phpunit/phpunit require-dev entry.
+
+  - id: TT-61
+    type: command
+    command: "test -f .Build/bin/phpstan || grep -q phpstan composer.json || grep -rq phpstan .Build/vendor/composer/installed.json 2>/dev/null"
+    severity: warning
+    desc: "PHPStan should be available (directly or transitively via a shared CI package)"
+
+  - id: TT-62
+    type: json_path
+    target: composer.json
+    pattern: '.scripts.test // .scripts["ci:test"] // .scripts["test:unit"] // .scripts["ci:test:php:unit"]'
+    severity: warning
+    desc: "composer.json should define test script (test, ci:test, test:unit, or ci:test:php:unit)"
+
+# === ARCHITECTURE TESTING ===
+  - id: TT-14
+    type: file_exists
+    target: Tests/Architecture/
+    severity: info
+    desc: "Tests/Architecture/ directory should exist for phpat architecture tests"
+
+  - id: TT-15
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["phpat/phpat"] // .["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: warning
+    desc: "composer.json should require phpat/phpat for architecture testing (package was renamed from carlosas/phpat in 2023; also satisfied when netresearch/typo3-ci-workflows meta-package is present, as phpat is transitive)"
+
+  # === E2E TESTING (Playwright) ===
+  - id: TT-16
+    type: file_exists
+    target: "{playwright.config.ts,playwright.config.js,Build/playwright.config.ts,Tests/E2E/playwright.config.ts}"
+    severity: info
+    desc: "Playwright config should exist for E2E testing (root, Build/, or Tests/E2E/)"
+
+  - id: TT-17
+    type: file_exists
+    target: "{package.json,Build/package.json,Tests/E2E/package.json,Tests/E2E/Playwright/package.json}"
+    severity: info
+    desc: "package.json should exist for Playwright/JS test dependencies (root or Build/ or Tests/E2E/ subpath)"
+
+  - id: TT-17a
+    type: command
+    command: |
+      cfg=""
+      for f in Build/playwright.config.ts playwright.config.ts; do
+        [ -f "$f" ] && cfg="$f" && break
+      done
+      [ -z "$cfg" ] && exit 0
+      grep -q 'chromium' "$cfg" && grep -q 'firefox' "$cfg" && exit 0
+      echo "FAIL: $cfg should define at least Chromium and Firefox projects"
+      exit 1
+    severity: warning
+    desc: "If playwright.config.ts exists, it should define at least Chromium and Firefox projects for cross-browser E2E coverage"
+
+  # === MUTATION TESTING ===
+  - id: TT-18
+    type: file_exists
+    target: "{infection.json5,infection.json.dist,infection.json,Build/infection.json5,Build/infection.json.dist}"
+    severity: info
+    desc: "Infection config should exist for mutation testing (accepts .json5, .json.dist, .json)"
+
+  - id: TT-18a
+    type: command
+    command: |
+      test -f infection.json5 || exit 0
+      grep -rql 'infection\|mutation\|ci:test:php:mutation' .github/workflows/*.yml 2>/dev/null && exit 0
+      echo "FAIL: infection.json5 exists but mutation testing is not configured in CI"
+      exit 1
+    severity: warning
+    desc: "If infection.json5 exists, mutation testing should be configured in CI (at least as a scheduled job)"
+
+  # === ADDITIONAL DEV DEPENDENCIES ===
+  # Accept either a direct require-dev declaration OR transitive availability
+  # via the netresearch/typo3-ci-workflows meta-package, which bundles
+  # php-cs-fixer, typo3/coding-standards, rector, phpstan, infection, etc.
+  # Same pattern as TT-15 (phpat) — see references/ci-workflows-meta-package.md
+  - id: TT-63
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["friendsofphp/php-cs-fixer"] // .["require-dev"]["typo3/coding-standards"] // .["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: warning
+    desc: "composer.json should require php-cs-fixer or typo3/coding-standards in require-dev (also satisfied transitively via netresearch/typo3-ci-workflows)"
+
+  - id: TT-64
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["rector/rector"] // .["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: info
+    desc: "composer.json should require rector/rector in require-dev (also satisfied transitively via netresearch/typo3-ci-workflows)"
+
+  # === CI MATRIX BEST PRACTICES ===
+  - id: TT-25
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'fail-fast:\s*false'
+    severity: info
+    desc: "CI matrix should use fail-fast: false to run all combinations"
+
+  # === TEST ENVIRONMENT GUARDS ===
+  - id: TT-75
+    type: regex
+    target: Tests/**/*Test.php
+    pattern: 'tearDown\s*\(\s*\)\s*:\s*void'
+    severity: warning
+    desc: "Test classes creating filesystem artifacts (tempDir, tempFile) must implement tearDown() for cleanup"
+    note: "Check manually: only flag when setUp() creates files/dirs but tearDown() is missing"
+
+  - id: TT-76
+    type: regex
+    target: Tests/**/*Test.php
+    pattern: 'AllowMockObjectsWithoutExpectations'
+    severity: error
+    desc: "#[AllowMockObjectsWithoutExpectations] is PHPUnit 12 only — causes fatal error on PHPUnit 11 (PHP 8.2 CI). Use createStub() instead."
+
+  # === NEGATIVE CHECKS (should NOT exist) ===
+
+  - id: TT-90
+    type: regex_not
+    target: .github/workflows/*.yml
+    pattern: 'ddev start|ddev exec|ddev-github-action|setup-ddev'
+    severity: error
+    desc: "DDEV must not be used in CI/CD. Use PHP built-in server or Docker containers."
+    tags: [ci, ddev, e2e]
+
+  # === GIT HOOKS ===
+  # Netresearch convention: keep testing/CI config under Build/ so the repo
+  # root stays focused on end-user files (README, LICENSE, composer.json,
+  # ext_emconf.php). captainhook/hook-installer reads the config path from
+  # composer.json "extra.captainhook.config", so Build/captainhook.json is
+  # the enforced default.
+  - id: TT-71
+    type: file_exists
+    target: "{Build/captainhook.json,captainhook.json,.captainhook/captainhook.json}"
+    severity: error
+    desc: >-
+      captainhook config must exist for local git hook automation (pre-commit,
+      commit-msg, pre-push) — mandatory for Netresearch extensions.
+      Netresearch default: Build/captainhook.json (declared in composer.json
+      "extra.captainhook.config"). Root captainhook.json or
+      .captainhook/captainhook.json are accepted for backward compatibility
+      but root location is flagged by TT-71a.
+
+  - id: TT-71a
+    type: file_not_exists
+    target: captainhook.json
+    severity: warning
+    desc: >-
+      captainhook.json should live under Build/captainhook.json (Netresearch
+      convention — keeps repo root clean). Move to Build/ and declare
+      "extra": {"captainhook": {"config": "Build/captainhook.json"}} in
+      composer.json so captainhook/hook-installer picks it up.
+
+  - id: TT-71b
+    type: json_path
+    target: composer.json
+    pattern: '.extra.captainhook.config == "Build/captainhook.json"'
+    severity: warning
+    desc: >-
+      composer.json should declare extra.captainhook.config:
+      "Build/captainhook.json" so the captainhook/hook-installer plugin
+      installs hooks using the Build/ subdir config on every composer install.
+
+  # === GITIGNORE CHECKS ===
+  - id: TT-70
+    type: contains
+    target: .gitignore
+    pattern: "composer.lock"
+    severity: error
+    desc: "composer.lock should be in .gitignore (TYPO3 extensions should not commit it)"
+
+  # === ADDITIONAL TEST INFRASTRUCTURE ===
+  - id: TT-103
+    type: json_path
+    target: composer.json
+    pattern: '.scripts["ci:test:php:functional"]'
+    severity: warning
+    desc: "composer.json should define ci:test:php:functional script for running functional tests via composer"
+
+  - id: TT-104
+    type: json_path
+    target: composer.json
+    pattern: '.scripts["ci:test:php:mutation"]'
+    severity: info
+    desc: "composer.json should define ci:test:php:mutation script for running mutation tests via composer"
+
+  # === MUTATION TESTING QUALITY ===
+  - id: TT-105
+    type: command
+    command: "grep -oP '\"minMsi\":\\s*\\K[0-9]+' infection.json5 2>/dev/null || echo 0"
+    expected: "^(9[0-9]|100)$"
+    severity: warning
+    desc: "Infection minMsi should be >= 90% for mature test suites"
+
+  - id: TT-106
+    type: command
+    command: |
+      MSI1=$(grep -oP '"minMsi":\s*\K[0-9]+' infection.json5 2>/dev/null || echo 0)
+      MSI2=$(grep -oP '"minMsi":\s*\K[0-9]+' infection-full.json5 2>/dev/null || echo $MSI1)
+      [ "$MSI1" = "$MSI2" ] && echo "consistent" || echo "mismatch: $MSI1 vs $MSI2"
+    expected: "^consistent$"
+    severity: warning
+    desc: "All infection config files must use consistent MSI thresholds"
+
+  # === TEST QUALITY PATTERNS ===
+  - id: TT-110
+    type: regex_not
+    target: Tests/**/*Test.php
+    pattern: 'assertEquals\s*\(\s*null\s*,'
+    severity: warning
+    desc: "Use assertNull() instead of assertEquals(null, ...) for clearer intent and better failure messages"
+
+  - id: TT-111
+    type: file_exists
+    target: Tests/Functional/Fixtures/
+    severity: info
+    desc: "Tests/Functional/Fixtures/ directory should exist for CSV fixture data used by functional tests"
+
+  # === TEST ANTI-PATTERNS ===
+  - id: TT-130
+    type: regex_not
+    target: Tests/**/*Test.php
+    pattern: "markTestSkipped\\(['\"].*(?:GD|gd|Imagick|imagick).*extension"
+    severity: error
+    desc: "Tests must not skip for missing image extensions — run tests in Docker via runTests.sh where GD/Imagick are available"
+
+  - id: TT-131
+    type: regex_not
+    target: Tests/**/*Test.php
+    pattern: 'createMock\(.*ImageManager::class\)'
+    severity: warning
+    desc: "Do not mock final classes (e.g., Intervention ImageManager) — use real instances or interface mocks"
+
+  # === TEST COVERAGE COMPLETENESS ===
+  - id: TT-120
+    type: command
+    command: |
+      missing=0
+      find Classes/Service -name '*.php' -print0 2>/dev/null | while IFS= read -r -d '' f; do
+        base=$(basename "$f" .php)
+        rel=${f#Classes/}
+        dir=$(dirname "$rel")
+        if [ ! -f "Tests/Unit/${dir}/${base}Test.php" ] && [ ! -f "Tests/Functional/${dir}/${base}Test.php" ]; then
+          echo "Missing test for $f"; missing=$((missing+1))
+        fi
+      done
+      [ "$missing" -eq 0 ]
+    severity: warning
+    desc: "Every class in Classes/Service/ (including subdirectories) should have a corresponding test"
+
+  - id: TT-121
+    type: command
+    command: |
+      missing=0
+      find Classes/ViewHelpers -name '*ViewHelper.php' -print0 2>/dev/null | while IFS= read -r -d '' f; do
+        base=$(basename "$f" .php)
+        rel=${f#Classes/}
+        dir=$(dirname "$rel")
+        if [ ! -f "Tests/Unit/${dir}/${base}Test.php" ] && [ ! -f "Tests/Functional/${dir}/${base}Test.php" ]; then
+          echo "Missing test for $f"; missing=$((missing+1))
+        fi
+      done
+      [ "$missing" -eq 0 ]
+    severity: warning
+    desc: "Every ViewHelper in Classes/ViewHelpers/ (including subdirectories) should have a corresponding test"
+
+  # === ADDITIONAL CHECKPOINTS (t3x-nr-vault v0.5.0 session) ===
+
+  - id: TT-132
+    type: regex_not
+    target: Tests/E2E/**/*.spec.ts
+    pattern: "(['\"])\\s*/(?:home|Users)/[^'\"/]+/[^'\"]*\\1|(['\"])C:\\\\\\\\"
+    severity: error
+    desc: "E2E specs must not contain hardcoded absolute local paths (/home/username/..., /Users/username/..., C:\\...) — breaks CI and every other developer's machine. Use process.cwd() or paths relative to the test file instead."
+    note: "Real bug caught in t3x-nr-vault review: hardcoded /home/cybot/projects/.../main in an execFileSync cwd."
+
+  - id: TT-133
+    type: llm_review
+    target: "Tests/Unit/**/*Test.php"
+    severity: warning
+    desc: "#[CoversClass] target must not appear in phpunit.xml <source><exclude>. PHPUnit 12 emits 'not a valid target for code coverage' when a class is both covered and excluded; failOnWarning=true promotes this to a failure. Use #[CoversNothing] for tests of excluded classes, or remove the class from the exclude list."
+
+  - id: TT-134
+    type: llm_review
+    target: "Tests/**/*.php"
+    severity: error
+    desc: "Tests that call vfsStream::url() must call vfsStream::setup() for the same root in setUp(). On a fresh CI run the virtual-filesystem root does not exist; file_put_contents('vfs://keys/...') fails with 'No such file or directory'. Works locally only when a previous test in the same process already registered the root."
+
+  - id: TT-135
+    type: regex_not
+    target: Tests/Functional/**/*Test.php
+    pattern: 'function setUp\(\)[^}]*(?:(?:self|static)::markTestSkipped|\$this->markTestSkipped)[^}]*parent::setUp\(\)'
+    multiline: true
+    severity: error
+    desc: >-
+      markTestSkipped() must not be called before parent::setUp() in a FunctionalTestCase::setUp().
+      Typed properties like $this->instancePath are uninitialised until parent::setUp() runs;
+      tearDown() then crashes with "accessed before initialization".
+      Correct order: parent::setUp() first, then check the skip condition.
+
+  - id: TT-136
+    type: llm_review
+    target: "phpstan.neon"
+    severity: error
+    desc: "phpstan.neon must not combine phpstan/extension-installer auto-registration with explicit includes: of the same extension .neon files. When extension-installer is active (via netresearch/typo3-ci-workflows), phpstan-phpunit, phpstan-strict-rules, phpstan-deprecation-rules, phpat, and saschaegerer/phpstan-typo3 are already registered — adding explicit includes: causes 'These files are included multiple times' and PHPStan exits 1. Remove duplicate includes or use Build/phpstan.no-plugins.neon for local runs without extension-installer."
+
+llm_reviews:
+  # === DEPENDENCY FRESHNESS ===
+  - id: TT-19
+    type: llm_review
+    severity: info
+    domain: dependencies
+    prompt: |
+      If package.json exists, check that test framework dependencies
+      (vitest, playwright, jest, jsdom) are not more than 2 major
+      versions behind the latest release. Outdated test tools can
+      cause false positives/negatives and miss new testing features.
+    desc: "npm test dependencies not excessively outdated"
+    tags: [npm, dependencies, testing]
+
+  # === TEST QUALITY REVIEWS ===
+  - id: TT-85
+    domain: code-quality
+    prompt: |
+      Review test files for incorrect #[CoversClass] attribute usage:
+      - Each #[CoversClass(Foo::class)] must reference a class that the test
+        actually exercises (creates, calls methods on, or asserts behavior of).
+      - Flag any test that declares #[CoversClass] on a class it does not
+        instantiate, mock, or invoke methods on within any test method.
+      - Common mistake: copy-pasting CoversClass from another test file.
+
+      Examine Tests/Unit/**/*Test.php and Tests/Functional/**/*Test.php.
+    severity: warning
+    desc: "Verify #[CoversClass] attributes reference classes the test actually exercises"
+
+  - id: TT-80
+    domain: code-quality
+    prompt: |
+      Review the test directory structure and naming conventions:
+      - Tests should be in Tests/Unit/ and Tests/Functional/
+      - Test class names should end with "Test"
+      - Test methods should start with "test" or use #[Test] attribute
+      - Namespace should mirror Classes/ structure
+
+      Check Tests/ directory and report compliance.
+    severity: warning
+    desc: "Verify test structure follows TYPO3 conventions"
+
+  - id: TT-81
+    domain: code-quality
+    prompt: |
+      Review PHPUnit configuration for best practices:
+      - Bootstrap file should be configured
+      - Test suites should be properly defined
+      - Code coverage filter should exclude Tests/ and vendor/
+      - Fail on warnings/risky should be enabled
+
+      Examine phpunit.xml, Build/UnitTests.xml, or Build/phpunit.xml and report findings.
+    severity: info
+    desc: "Verify PHPUnit configuration follows best practices"
+
+  - id: TT-82
+    domain: code-quality
+    prompt: |
+      Review CI test matrix configuration:
+      - Should test against supported PHP versions (8.2, 8.3, 8.4, 8.5)
+      - Should test against supported TYPO3 versions (v13, v14)
+      - If using netresearch/typo3-ci-workflows, check that php-versions
+        and typo3-versions inputs are properly configured
+      - Should have reasonable timeout limits
+
+      Examine .github/workflows/*.yml and report matrix coverage.
+    severity: warning
+    desc: "Verify CI matrix covers required PHP and TYPO3 versions"
+
+  - id: TT-83
+    domain: code-quality
+    prompt: |
+      Review PHPStan configuration for TYPO3 extension development:
+      - Should include saschaegerer/phpstan-typo3 extension
+      - Level should be 6 or higher (ideally 9/max, or 10 with PHPStan 2.x)
+      - Should scan Classes/ directory
+      - Baseline file is acceptable for legacy code
+
+      Examine phpstan.neon (root or Build/ directory) and report quality.
+    severity: info
+    desc: "Verify PHPStan is properly configured for TYPO3"
+
+  - id: TT-84
+    domain: code-quality
+    prompt: |
+      Review test coverage and quality indicators:
+      - Are there tests for core functionality?
+      - Do tests cover edge cases and error conditions?
+      - Are mocks used appropriately?
+      - Is test isolation maintained?
+
+      Sample Tests/Unit/ and Tests/Functional/ directories and assess quality.
+    severity: info
+    desc: "Assess overall test coverage and quality"
+
+  # === TEST INFRASTRUCTURE ANTI-PATTERNS ===
+  - id: TT-91
+    domain: test-quality
+    prompt: |
+      Review test code for markTestSkipped guards that hide missing Docker infrastructure:
+      1. Find all uses of markTestSkipped() or $this->markTestSkipped() in test files
+      2. Check if any skip guards test for PHP extensions (GD, Imagick, etc.) or
+         external tools that should be available in the Docker test environment
+      3. Tests for image/file/network operations should always run in containerized
+         environments via runTests.sh, not be skipped on bare-metal
+      4. Flag any markTestSkipped() that tests for extensions or binaries that the
+         Docker container should provide
+    severity: warning
+    desc: "Review test code for markTestSkipped guards that hide missing Docker infrastructure — tests for image/file/network operations should always run in containerized environments"
+
+  - id: TT-92
+    domain: test-quality
+    prompt: |
+      Review test code for mocking of final or readonly classes:
+      1. Find all createMock() and getMockBuilder() calls in test files
+      2. Resolve the target class and check if it is declared final or readonly
+         (e.g., Intervention\Image\ImageManager is final in v3+)
+      3. Mocking a final class causes a runtime error in PHPUnit
+      4. Suggest alternatives: use real instances, mock interfaces instead,
+         or use adapter patterns that wrap the final class
+      5. Flag any createMock(FinalClass::class) usage
+    severity: warning
+    desc: "Review for mocking of final or readonly classes — use real instances, interface mocks, or adapter patterns instead of createMock() on final classes"
+
+  # === TEST COVERAGE COMPLETENESS ===
+  - id: TT-87
+    domain: code-quality
+    prompt: |
+      Check every class in Classes/Service/ has a corresponding test in Tests/Unit/Service/ or Tests/Functional/Service/:
+      1. List all PHP classes in Classes/Service/
+      2. For each class, check if a matching test file exists in Tests/Unit/Service/ or Tests/Functional/Service/
+      3. Flag any service class without a corresponding test
+    severity: warning
+    desc: "Every service class in Classes/Service/ should have a test in Tests/Unit/Service/ or Tests/Functional/Service/"
+
+  - id: TT-88
+    domain: code-quality
+    prompt: |
+      Check every ViewHelper in Classes/ViewHelpers/ has a corresponding test:
+      1. List all ViewHelper classes in Classes/ViewHelpers/ (recursively)
+      2. For each ViewHelper, check if a matching test file exists in Tests/Unit/ViewHelpers/ or Tests/Functional/ViewHelpers/
+      3. Flag any ViewHelper without a corresponding test
+    severity: warning
+    desc: "Every ViewHelper in Classes/ViewHelpers/ should have a corresponding test"
+
+  # === EVENT DISPATCH AND ERROR HANDLING ===
+  - id: TT-77
+    domain: testing
+    prompt: |
+      Review test coverage for event dispatch error handling:
+      1. Find all try/catch blocks that wrap EventDispatcherInterface::dispatch() calls
+      2. Verify each catch block has a dedicated test that triggers the exception path
+      3. Check that tests mock the EventDispatcher to throw exceptions and verify the catch behavior
+      4. Flag any event dispatch catch block without corresponding test coverage
+    severity: warning
+    desc: "Event dispatch catch blocks must have dedicated tests that verify exception handling behavior"
+
+  - id: TT-78
+    domain: testing
+    prompt: |
+      Review test coverage for PHP error suppression and trigger_error:
+      1. Find all uses of @ error suppression operator in production code
+      2. Verify each @-suppressed call has tests covering both success and failure paths
+      3. Find functions that are known to trigger PHP warnings on failure (e.g., getimagesize, file_get_contents, mkdir, unlink, fopen)
+      4. Verify tests exist that trigger the warning path (e.g., invalid file input)
+      5. Check that tests don't just suppress warnings but explicitly test error handling
+      6. Find all trigger_error() calls in production code and the code paths that rely on them
+      7. Verify tests assert how each triggered error is handled or propagated (e.g., custom error handlers, exceptions, logging)
+    severity: warning
+    desc: "Functions with @ suppression, trigger_error(), or that trigger PHP warnings must have tests covering error paths"
+
+  # === CONTROLLER FUNCTIONAL TEST COVERAGE ===
+  - id: TT-86
+    domain: testing
+    prompt: |
+      Review backend controller test coverage:
+      1. Find all classes in Classes/Controller/ (especially AJAX controllers returning JsonResponse)
+      2. For each controller, check that functional tests exist in Tests/Functional/Controller/
+      3. Verify that functional tests check:
+         a. HTTP status codes (200 for success, 403 for unauthorized, etc.)
+         b. Access control (calling without proper BE user session returns 403/401)
+         c. CSRF token validation (requests without valid token are rejected)
+      4. Flag any backend controller without functional tests covering these three aspects
+    severity: warning
+    desc: "Every backend controller (especially AJAX controllers returning JSON) should have functional tests verifying HTTP status codes, access control, and CSRF"
+
+  # === CI TEST MATRIX COMPLETENESS ===
+  - id: TT-27
+    domain: ci
+    prompt: |
+      Verify that the CI test matrix covers all supported version combinations:
+      1. Read the PHP version constraint from composer.json require.php (e.g., "^8.2")
+      2. Read the TYPO3 core constraint from composer.json require["typo3/cms-core"] (e.g., "^13.4 || ^14.0")
+      3. Determine which PHP minor versions fall in the constraint range (e.g., 8.2, 8.3, 8.4)
+      4. Determine which TYPO3 major versions fall in the constraint range (e.g., 13, 14)
+      5. Check the CI workflow (.github/workflows/*.yml) matrix or reusable workflow inputs
+      6. Flag any PHP version in the supported range that is missing from the CI matrix
+      7. Flag any TYPO3 version in the supported range that is missing from the CI matrix
+      8. If using netresearch/typo3-ci-workflows, check php-versions and typo3-versions inputs
+    severity: warning
+    desc: "CI should test all PHP versions in composer.json require.php range x all TYPO3 versions in require[\"typo3/cms-core\"] range"
+
+  # === E2E MULTI-BROWSER COVERAGE ===
+  - id: TT-17b
+    domain: testing
+    prompt: |
+      If a Playwright config exists (Build/playwright.config.ts or playwright.config.ts):
+      1. Read the projects array in the Playwright config
+      2. Verify it defines at least two browser projects: Chromium and Firefox
+      3. Optionally check for WebKit as a third browser
+      4. Flag if only a single browser is configured, as cross-browser testing catches
+         rendering and API differences that single-browser testing misses
+    severity: warning
+    desc: "If playwright.config.ts exists, it should define at least Chromium and Firefox projects for cross-browser E2E coverage"
+
+  # === PATCH COVERAGE ===
+  - id: TT-89
+    domain: testing
+    prompt: |
+      Review whether new code paths introduced in recent changes have corresponding tests:
+      1. Identify new public methods in Classes/ that were added or significantly changed
+      2. For each new public method, check whether a test exists that calls or exercises it
+      3. Focus on Classes/Service/, Classes/Controller/, and Classes/ViewHelpers/ directories
+      4. Flag any new public method that has no corresponding test coverage
+      5. Ignore getters/setters, constructors, and simple delegation methods
+    severity: warning
+    desc: "New code paths (especially new public methods) should have corresponding unit or functional tests"
+
+  # === TEST UID SETUP ===
+  - id: TT-112
+    domain: testing
+    prompt: |
+      Review test helpers and factories that create entity or model mocks:
+      1. Find helper methods that create domain model instances for testing
+         (e.g., createSecretEntity, createMockRecord, buildFixture)
+      2. For each helper, check whether the production code that consumes
+         these entities guards on UID being set (e.g., `if ($uid !== null)`,
+         `if ($entity->getUid() > 0)`, `$uid ?? throw`)
+      3. If the production code has a UID null-check, verify the test helper
+         sets a UID via `_setProperty('uid', ...)` or `setUid(...)` or reflection
+      4. Flag any test helper that creates entities without setting UID when
+         the consuming production code guards on UID presence
+    severity: warning
+    desc: "Test helpers creating entity mocks must set UID when production code guards with null/zero UID checks"
+
+  # === MOCK CONSTRUCTOR SYNC ===
+  - id: TT-113
+    domain: testing
+    prompt: |
+      Review whether test mocks stay in sync with class constructors:
+      1. Find classes in Classes/ whose constructors have changed recently
+         or have 3+ parameters (likely to drift)
+      2. For each class, find all tests that instantiate it directly
+         (new ClassName(...)) or via createMock/getMockBuilder
+      3. Check that direct instantiations pass the correct number and types
+         of constructor arguments
+      4. For createMock/getMockBuilder, check if disableOriginalConstructor()
+         is used — if not, the mock will call the real constructor and must
+         match its signature
+      5. Flag any test where constructor argument count or types are mismatched
+         with the current class constructor
+    severity: warning
+    desc: "When a class constructor gains new parameters, all tests that instantiate it must be updated to match"
+
+  # === MOCK VALIDITY FOR MULTI-VERSION DEPENDENCIES ===
+  - id: TT-114
+    domain: testing
+    prompt: |
+      Review test mocks for multi-version dependency compatibility:
+      1. Read composer.json require and require-dev for dependencies with
+         multi-major-version constraints (e.g., "^3 || ^4", "^2 || ^3")
+      2. For each such dependency, find all test files that mock its interfaces
+         (grep for createMock/createStub with the dependency's namespace)
+      3. For each mocked method, verify the method exists on the **interface**
+         (not just the concrete class) in ALL supported major versions
+      4. Flag any mock that calls ->method('foo') where foo only exists on
+         a concrete implementation or only in one major version
+      5. Suggest using an adapter interface pattern when version-specific
+         mocking is detected
+    severity: warning
+    desc: "Test mocks on dependency interfaces must reference methods that exist in ALL supported versions of the dependency"
+
+  # === MOCK CALLBACK SIGNATURE VERIFICATION ===
+  - id: TT-115
+    domain: testing
+    prompt: |
+      Review willReturnCallback() usages for signature mismatches:
+      1. Find all willReturnCallback() calls in test files
+      2. For each callback, identify the method being mocked
+      3. Compare the callback's parameter list with the actual method signature
+         in the production class or interface
+      4. Flag callbacks whose parameter count or types do not match the
+         actual method signature
+      5. Flag callbacks that are missing parameters that the production code
+         now passes (e.g., production added a $quality parameter but the
+         callback only accepts $path)
+      6. Suggest using variadic signatures (mixed ...$options) when the
+         method signature may evolve across dependency versions
+    severity: warning
+    desc: "willReturnCallback() signatures must match the actual method signature; stale callbacks silently drop arguments"
+
+  # === TEST ASSERTION SPECIFICITY AFTER REFACTORING ===
+  - id: TT-116
+    domain: testing
+    prompt: |
+      Review whether test assertions maintain equivalent specificity after
+      production code refactoring:
+      1. Find test methods that assert on method calls (expects/method/with)
+      2. Compare these assertions with the current production code paths
+      3. Flag tests where a refactoring changed the production API surface
+         but the test assertion lost specificity. Examples:
+         - Old: expects(never())->method('toWebp') → New: expects(once())->method('save')
+           (lost the "not WebP" assertion)
+         - Old: expects(once())->method('resize')->with(800, 600) → New: just expects(once())->method('process')
+           (lost dimension verification)
+      4. Verify that expects(exactly(N)) with callback assertions include
+         argument-level checks (e.g., asserting path extensions, dimensions)
+      5. Flag generic willReturnCallback() that only provides return values
+         without asserting anything about the arguments
+    severity: warning
+    desc: "After refactoring, test assertions must maintain equivalent specificity — don't trade specific method assertions for generic ones"
+
+  # === ADAPTER PATTERN TESTING ===
+  - id: TT-117
+    domain: testing
+    prompt: |
+      Review whether tests mock third-party library internals directly
+      when an adapter pattern would be more appropriate:
+      1. Find test files that create mocks of third-party library interfaces
+         or classes (namespaces outside the extension's own namespace)
+      2. Check if the mocked third-party class has version-specific APIs
+         (compare composer.json constraints for multi-major-version support)
+      3. Flag tests that create complex mock setups for third-party internals
+         (e.g., mocking DriverInterface + constructing real ImageManager)
+      4. Suggest introducing an adapter interface owned by the extension
+         and mocking that instead, which eliminates version-specific mock setup
+      5. Exception: simple, stable interfaces (like PSR interfaces) are fine
+         to mock directly
+    severity: warning
+    desc: "Prefer mocking your own adapter interfaces over third-party library internals to avoid version-specific mock breakage"

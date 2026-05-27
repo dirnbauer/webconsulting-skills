@@ -1,0 +1,370 @@
+[
+  {
+    "name": "assess_enterprise_readiness",
+    "prompt": "Assess this project for enterprise readiness and identify gaps",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(OpenSSF|Scorecard|SLSA|SBOM|supply chain)"
+      },
+      {
+        "type": "content",
+        "pattern": "(ci\\.yml|codeql\\.yml|scorecard\\.yml|dependency-review)"
+      }
+    ]
+  },
+  {
+    "name": "setup_slsa_provenance",
+    "prompt": "Set up SLSA provenance for this GitHub repository",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(attest-build-provenance|slsa-github-generator|SLSA Level)"
+      },
+      {
+        "type": "content",
+        "pattern": "(id-token:\\s*write|attestations:\\s*write|permissions)"
+      },
+      {
+        "type": "content",
+        "pattern": "(gh attestation verify|slsa-verifier)"
+      }
+    ]
+  },
+  {
+    "name": "openssf_badge_assessment",
+    "prompt": "Check this project's OpenSSF Best Practices Badge status and what criteria are missing",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(bestpractices\\.dev|bestpractices\\.coreinfrastructure|OpenSSF)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Passing|Silver|Gold|criteria)"
+      },
+      {
+        "type": "content",
+        "pattern": "(https://|URL)"
+      }
+    ]
+  },
+  {
+    "name": "sha_pin_actions",
+    "prompt": "Review and fix GitHub Actions pinning in our workflow files",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(SHA|sha|commit hash|@[a-f0-9]{40})"
+      },
+      {
+        "type": "content",
+        "pattern": "(version comment|# v\\d)"
+      },
+      {
+        "type": "content",
+        "pattern": "(third-party|org-internal|reusable workflow)"
+      }
+    ]
+  },
+  {
+    "name": "script_injection_prevention",
+    "prompt": "Check our GitHub Actions workflows for script injection vulnerabilities",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(github\\.event|\\$\\{\\{|interpolat)"
+      },
+      {
+        "type": "content",
+        "pattern": "(inputs\\.|run:|env:)"
+      },
+      {
+        "type": "content",
+        "pattern": "(injection|NEVER|environment variable)"
+      }
+    ]
+  },
+  {
+    "name": "scorecard_optimization",
+    "prompt": "Our OpenSSF Scorecard is at 6.8. Help us get it above 9.0",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(Token-Permissions|permissions|contents:\\s*read)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Branch-Protection|branch protection)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Security-Policy|SECURITY\\.md)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Pinned-Dependencies|SHA-pin)"
+      }
+    ]
+  },
+  {
+    "name": "setup_mandatory_workflows",
+    "prompt": "Set up all required CI/CD workflows for an enterprise-ready GitHub project",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "ci\\.yml"
+      },
+      {
+        "type": "content",
+        "pattern": "codeql\\.yml"
+      },
+      {
+        "type": "content",
+        "pattern": "scorecard\\.yml"
+      },
+      {
+        "type": "content",
+        "pattern": "dependency-review\\.yml"
+      }
+    ]
+  },
+  {
+    "name": "setup_mandatory_badges",
+    "prompt": "Add all required enterprise readiness badges to the project README",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(CI Status|actions/workflows)"
+      },
+      {
+        "type": "content",
+        "pattern": "(codecov\\.io|Codecov)"
+      },
+      {
+        "type": "content",
+        "pattern": "(securityscorecards\\.dev|Scorecard)"
+      },
+      {
+        "type": "content",
+        "pattern": "(bestpractices\\.dev|Best Practices)"
+      }
+    ]
+  },
+  {
+    "name": "workflow_permissions_hardening",
+    "prompt": "Harden GitHub Actions workflow permissions using least-privilege principle",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(permissions:|contents:\\s*read)"
+      },
+      {
+        "type": "content",
+        "pattern": "(workflow-level|job-level)"
+      },
+      {
+        "type": "content",
+        "pattern": "(write|least.privilege|minimal)"
+      }
+    ]
+  },
+  {
+    "name": "harden_runner_setup",
+    "prompt": "Add step-security/harden-runner to our CI workflows",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(harden-runner|step-security)"
+      },
+      {
+        "type": "content",
+        "pattern": "(egress|audit|block)"
+      },
+      {
+        "type": "content",
+        "pattern": "(first step|SHA-pin)"
+      }
+    ]
+  },
+  {
+    "name": "dependabot_configuration",
+    "prompt": "Configure Dependabot for comprehensive dependency monitoring in a PHP project with GitHub Actions",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(dependabot\\.yml|dependabot)"
+      },
+      {
+        "type": "content",
+        "pattern": "(composer|github-actions)"
+      },
+      {
+        "type": "content",
+        "pattern": "(package-ecosystem|auto-merge)"
+      }
+    ]
+  },
+  {
+    "name": "code_review_quality",
+    "prompt": "Review this pull request for enterprise-quality code patterns",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(test|resource|instance)"
+      },
+      {
+        "type": "content",
+        "pattern": "(error handling|edge case|boundary)"
+      },
+      {
+        "type": "content",
+        "pattern": "(review|pattern|quality)"
+      }
+    ]
+  },
+  {
+    "name": "write_adr",
+    "prompt": "Write an Architecture Decision Record for choosing JWT authentication over session-based auth",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(ADR|Architecture Decision Record)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Status|Context|Decision|Consequences)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Accepted|Proposed|Superseded)"
+      }
+    ]
+  },
+  {
+    "name": "duplicate_ci_runs",
+    "prompt": "Our CI runs twice on every PR push. Diagnose and fix the duplicate runs",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(push:|pull_request:)"
+      },
+      {
+        "type": "content",
+        "pattern": "(branches:|branch.restrict|scope)"
+      },
+      {
+        "type": "content",
+        "pattern": "(duplicate|twice|double)"
+      }
+    ]
+  },
+  {
+    "name": "coverage_setup",
+    "prompt": "Set up code coverage reporting with Codecov for a PHP project",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(codecov|coverage)"
+      },
+      {
+        "type": "content",
+        "pattern": "(upload|codecov-action)"
+      },
+      {
+        "type": "content",
+        "pattern": "(patch|threshold|codecov\\.yml)"
+      }
+    ]
+  },
+  {
+    "name": "security_policy",
+    "prompt": "Create a SECURITY.md with vulnerability disclosure process for this project",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(SECURITY\\.md|security policy)"
+      },
+      {
+        "type": "content",
+        "pattern": "(vulnerabilit|disclosure|reporting)"
+      },
+      {
+        "type": "content",
+        "pattern": "(SLA|response|timeline|days)"
+      }
+    ]
+  },
+  {
+    "name": "signed_releases_setup",
+    "prompt": "Set up signed releases with cosign for our container images",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(cosign|GPG|signing)"
+      },
+      {
+        "type": "content",
+        "pattern": "(verif|attest|signature)"
+      },
+      {
+        "type": "content",
+        "pattern": "(tag|release|artifact)"
+      }
+    ]
+  },
+  {
+    "name": "osps_baseline_assessment",
+    "prompt": "Evaluate this project against OpenSSF OSPS Baseline levels 1, 2, and 3",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(OSPS|Baseline|openssf)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Level 1|Level 2|Level 3|level)"
+      },
+      {
+        "type": "content",
+        "pattern": "(criteria|requirement|check)"
+      }
+    ]
+  },
+  {
+    "name": "auto_merge_setup",
+    "prompt": "Set up auto-merge for Dependabot and Renovate PRs in our repository",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(auto.merge|auto-merge)"
+      },
+      {
+        "type": "content",
+        "pattern": "(Dependabot|Renovate|dependency)"
+      },
+      {
+        "type": "content",
+        "pattern": "(pull_request_target|allow_auto_merge|workflow)"
+      }
+    ]
+  },
+  {
+    "name": "changelog_compliance",
+    "prompt": "Verify our CHANGELOG.md matches git tags and follows best practices",
+    "assertions": [
+      {
+        "type": "content",
+        "pattern": "(CHANGELOG|changelog)"
+      },
+      {
+        "type": "content",
+        "pattern": "(tag|version|release)"
+      },
+      {
+        "type": "content",
+        "pattern": "(chronological|Unreleased|heading)"
+      }
+    ]
+  }
+]

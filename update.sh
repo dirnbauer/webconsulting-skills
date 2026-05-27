@@ -34,7 +34,7 @@ SKILL_FILTER=""
 # Keep this aligned with install.sh. These directories are copied from upstream
 # skills and then symlinked as part of the whole skill directory for clients that
 # support extra metadata, assets, references, or scripts.
-SYNC_SUBDIRS=(agents assets examples reference references rules scripts)
+SYNC_SUBDIRS=(agents assets evals examples reference references rules scripts)
 
 # Parse arguments
 while [[ $# -gt 0 ]]; do
@@ -250,6 +250,13 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                     else
                         echo "    ⚠ python3 not installed, skipping SKILL.md frontmatter normalization for $name"
                     fi
+
+                    find "$TARGET_DIR" -maxdepth 1 -type f ! -name "SKILL.md" -delete
+                    for support_file in "$SOURCE_DIR"/*; do
+                        [ -f "$support_file" ] || continue
+                        [ "$(basename "$support_file")" = "SKILL.md" ] && continue
+                        cp "$support_file" "$TARGET_DIR/"
+                    done
 
                     # Copy subdirectories if they exist
                     for subdir in "${SYNC_SUBDIRS[@]}"; do

@@ -265,6 +265,7 @@ Don't ask all five at once — lead with #1 and #2, then follow up as needed.
 | Creating a churn prevention strategy from churn research | `churn-prevention` |
 | Planning paid ads informed by research | `ads` |
 | Writing cold email using research on pain/trigger | `cold-email` |
+| Translating customer research into an ICP for outbound | `prospecting` |
 | Planning content based on discovered topics | `content-strategy` |
 
 ---
@@ -272,9 +273,11 @@ Don't ask all five at once — lead with #1 and #2, then follow up as needed.
 ## Credits & Attribution
 
 This skill is based on the excellent work by
-**[Corey Haines](https://github.com/coreyhaines31/marketingskills)**.
+**[Corey Haines](https://coreyhaines.com/)**.
 
 Original repository: https://github.com/coreyhaines31/marketingskills
 
-Special thanks to [Corey Haines](https://github.com/coreyhaines31/marketingskills) for their generous open-source contributions, which helped shape this skill collection.
+**Copyright (c) Corey Haines** - Marketing frameworks and best practices (MIT License)
+
+Special thanks to [Corey Haines](https://coreyhaines.com/) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

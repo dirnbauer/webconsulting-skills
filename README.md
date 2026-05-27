@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **118 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **133 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,7 +24,7 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **118 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **133 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
@@ -33,16 +33,16 @@ Category-specific add-ons are not counted as top-level skills.
 | **Video & Animation** | 9 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting), Micro-interactions (Dylan Tarre), Microinteractions (wondelai) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
-| **Marketing** | 41 skills | Marketing Skills plus split growth, SEO, ads, lifecycle, research, and sales enablement skills (Corey Haines) |
+| **Marketing** | 43 skills | Marketing Skills plus split growth, SEO, ads, lifecycle, research, prospecting, SMS, and sales enablement skills (Corey Haines) |
 | **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
-| **Code Quality & Refactoring** | 5 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me (Matt Pocock) |
+| **Code Quality & Refactoring** | 18 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me and engineering/productivity workflow skills (Matt Pocock) |
 | **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
 | **Frontend & Design** | 9 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Impeccable (pbakaus), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
 | **Platform Design** | 8 skills | Android Design (ehmo), iOS Design (ehmo), iPadOS Design (ehmo), macOS Design (ehmo), tvOS Design (ehmo), visionOS Design (ehmo), watchOS Design (ehmo), Web Platform Design (ehmo) |
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **118 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **133 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -61,7 +61,7 @@ Category-specific add-ons are not counted as top-level skills.
 
 ## 🚀 Universal Agent Skills (5 Core Clients + Optional Tools)
 
-Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths, plus a project-level `.agents/skills/` mirror for generic agent packages. The installer links whole skill directories, so `agents/`, `assets/`, `examples/`, `reference/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
+Skills are installed as **symlinks** from the central `skills/` directory to the five core clients' discovery paths, plus a project-level `.agents/skills/` mirror for generic agent packages. The installer links whole skill directories, so `agents/`, `assets/`, `evals/`, `examples/`, `reference/`, `references/`, `rules/`, and `scripts/` stay available to clients that support them. One source of truth, many consumers.
 To add a skill, create `skills/<slug>/SKILL.md` once. Do not add client-specific symlinks or duplicate per-client copies; `./install.sh` and `./update.sh` fan the canonical skill directory out automatically.
 
 `SKILL.md` is the lightweight entry point. Keep routing metadata and the default workflow there, then move long examples, templates, troubleshooting matrices, and appendices into `references/` and link them from the skill body. This keeps skills compatible with Anthropic's current Agent Skills guidance while preserving full detail for clients that load bundled resources.
@@ -234,7 +234,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 **Where do skills live?**
 - Source directories: `skills/*/` (this repo)
 - Entry points: `skills/*/SKILL.md`
-- Bundled detail: `skills/*/references/`, `skills/*/scripts/`, `skills/*/assets/`, `skills/*/examples/`, and other local support folders
+- Bundled detail: `skills/*/references/`, `skills/*/scripts/`, `skills/*/assets/`, `skills/*/evals/`, `skills/*/examples/`, and other local support folders
 - User-level: `~/.cursor/skills/`, `~/.claude/skills/`, `~/.gemini/skills/`, `~/.codex/skills/`, `~/.codeium/windsurf/skills/`
 - Project-level: `.cursor/skills/`, `.gemini/skills/`, `.codex/skills/`, `.windsurf/skills/`
 - Legacy rules: `.cursor/rules/*.mdc` wrappers point Cursor to the full skill directory (backwards compatibility)
@@ -250,7 +250,20 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `refactor` | refactor, clean up, code smell, improve code, extract method | "Refactor this function" or "Clean up this code and remove duplication" |
 | `refactor-clean` | refactor, clean code, solid, maintainability | "Apply SOLID principles to this module" or "Find code smells and fix them" |
 | `find-skills` | find skill, install skill, npx skills, skills.sh | "Find a skill for React performance" or "Search skills.sh for testing tools" |
+| `caveman` | caveman mode, talk like caveman, use caveman, less tokens, be brief | "Use caveman mode for the rest of this debugging session" |
 | `grill-me` | grill me, stress-test plan, stress-test design, challenge my plan | "Grill me on this implementation plan" or "Stress-test this architecture one question at a time" |
+| `diagnose` | diagnose this, debug this, bug, broken, failing, performance regression | "Diagnose this failing checkout flow" or "Debug this performance regression" |
+| `grill-with-docs` | grill with docs, stress-test with docs, context.md, adr, domain model | "Grill this plan against the codebase docs" or "Challenge this design and update ADRs" |
+| `handoff` | handoff, hand off, continue later, another agent, summarize context | "Write a handoff for the next agent to continue this work" |
+| `improve-codebase-architecture` | improve architecture, refactoring opportunities, testable codebase, deep modules | "Find architecture deepening opportunities in this codebase" |
+| `prototype` | prototype, sanity-check, data model, state machine, mock up ui, try a few designs | "Prototype this state machine" or "Try a few UI designs before implementation" |
+| `setup-matt-pocock-skills` | setup matt pocock skills, issue tracker, triage labels, domain docs, agent skills block | "Set up Matt Pocock's skills for this repository" |
+| `tdd` | tdd, red-green-refactor, test-first, integration tests, failing test | "Build this feature using TDD" or "Write the failing test first" |
+| `to-issues` | to issues, create issues, implementation tickets, break down work, vertical slices | "Turn this PRD into independently grabbable issues" |
+| `to-prd` | to prd, create prd, product requirements, current context | "Turn this conversation into a PRD issue" |
+| `triage` | triage, issue workflow, incoming bugs, feature requests, ready for agent | "Triage the open issues and prepare agent-ready tickets" |
+| `write-a-skill` | write a skill, create skill, build a new skill, agent skill, bundled resources | "Write a new skill for our release workflow" |
+| `zoom-out` | zoom out, broader context, high-level perspective, unfamiliar code | "Zoom out and map how this area fits into the system" |
 | `shadcn-ui` | shadcn, radix, tailwind, components, form, dialog, button | "Set up shadcn/ui in my Next.js project" or "Build a form with Zod validation" |
 | `typo3-accessibility` | accessibility, a11y, wcag, aria, screen reader, keyboard navigation | "Run WCAG 2.2 AA audit on my TYPO3 site" or "Add skip-to-content link" |
 | `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
@@ -335,6 +348,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `popups` | popup, modal, exit intent, slide-in, banner | "Design an exit-intent popup" |
 | `pricing` | pricing, pricing tiers, freemium, packaging, monetization | "Review these pricing tiers" |
 | `product-marketing` | product marketing, positioning, messaging, marketing context | "Create a product marketing context file" |
+| `prospecting` | prospecting, build a prospect list, find prospects, find leads, lead gen list, target account list, qualified leads | "Build a qualified prospect list for this ICP" |
 | `referrals` | referral, affiliate, ambassador, word of mouth, viral loop | "Design a referral program" |
 | `revops` | revops, lead scoring, lead routing, mql, sql, crm automation | "Design a lead scoring model" |
 | `sales-enablement` | sales enablement, sales deck, pitch deck, one-pager, demo script | "Create a sales one-pager outline" |
@@ -342,6 +356,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `seo-audit` | seo audit, technical seo, indexing issues, core web vitals | "Audit this site for SEO issues" |
 | `signup` | signup, registration, trial activation, signup abandonment | "Optimize this signup flow" |
 | `site-architecture` | site architecture, sitemap, site structure, navigation, internal linking | "Plan the sitemap for this SaaS site" |
+| `sms` | sms marketing, text message campaigns, sms sequence, sms automation, abandoned cart text, tcpa, a2p 10dlc, twilio | "Plan an abandoned cart SMS sequence with compliance notes" |
 | `social` | social media, linkedin post, twitter thread, content calendar, reels | "Create a LinkedIn content calendar" |
 | `video` | video, ai video, remotion, hyperframes, heygen, product demo video | "Plan a product demo video" |
 | `og-image` | og-image, open graph, social preview, twitter card, meta tags | "Generate an OG image" or "Set up Twitter card meta tags" |
@@ -2339,7 +2354,20 @@ grep -r "DataHandler" skills/
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | sickn33 |
 | `find-skills` | Discover and install skills from skills.sh ecosystem | Vercel |
+| `caveman` | Ultra-compressed communication mode for lower-token technical conversation | Matt Pocock |
 | `grill-me` | Stress-test a plan or design through one-at-a-time interview questions | Matt Pocock |
+| `diagnose` | Disciplined diagnosis loop for bugs and performance regressions | Matt Pocock |
+| `grill-with-docs` | Stress-test plans against domain docs, `CONTEXT.md`, and ADRs | Matt Pocock |
+| `handoff` | Compact the current conversation into a handoff document | Matt Pocock |
+| `improve-codebase-architecture` | Find architecture deepening opportunities in a codebase | Matt Pocock |
+| `prototype` | Build throwaway prototypes to explore logic, state, or UI choices | Matt Pocock |
+| `setup-matt-pocock-skills` | Scaffold issue tracker, triage labels, and domain doc config | Matt Pocock |
+| `tdd` | Test-driven development with a red-green-refactor loop | Matt Pocock |
+| `to-issues` | Break plans and PRDs into independently grabbable issues | Matt Pocock |
+| `to-prd` | Turn current context into a PRD issue | Matt Pocock |
+| `triage` | Triage issues through a role-driven state machine | Matt Pocock |
+| `write-a-skill` | Create new skills with progressive disclosure and bundled resources | Matt Pocock |
+| `zoom-out` | Ask for broader system context around unfamiliar code | Matt Pocock |
 | **PHP & Tools** | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan, DTOs, enums | Netresearch |
 | `cli-tools` | CLI tool management and auto-installation | Netresearch |
@@ -2381,6 +2409,7 @@ grep -r "DataHandler" skills/
 | `popups` | Popup, modal, overlay, slide-in, and banner conversion optimization | Corey Haines |
 | `pricing` | Pricing, packaging, value metrics, and monetization strategy | Corey Haines |
 | `product-marketing` | Product marketing context, positioning, and messaging foundation | Corey Haines |
+| `prospecting` | Prospect list building, qualification, and outbound lead research | Corey Haines |
 | `referrals` | Referral, affiliate, ambassador, and word-of-mouth programs | Corey Haines |
 | `revops` | Revenue operations, lead lifecycle, scoring, and handoff processes | Corey Haines |
 | `sales-enablement` | Sales collateral, pitch decks, one-pagers, and demo scripts | Corey Haines |
@@ -2388,6 +2417,7 @@ grep -r "DataHandler" skills/
 | `seo-audit` | Technical SEO, on-page SEO, and content quality audits | Corey Haines |
 | `signup` | Signup, registration, account creation, and trial activation optimization | Corey Haines |
 | `site-architecture` | Website hierarchy, navigation, URL structure, and internal linking | Corey Haines |
+| `sms` | SMS and MMS marketing flows, campaigns, compliance, and optimization | Corey Haines |
 | `social` | Social media content, calendars, repurposing, and short-form scripts | Corey Haines |
 | `video` | Marketing video production with AI and programmatic video tools | Corey Haines |
 | **Frontend & Design** | | |
@@ -2453,7 +2483,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │  118 SKILL.md     │
+                        │  133 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2634,8 +2664,8 @@ The following repositories are the source for skills in this collection:
 ### Supabase (1 skill)
 - `postgres-best-practices`: https://github.com/supabase/agent-skills
 
-### Corey Haines (41 skills)
-- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
+### Corey Haines (43 skills)
+- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `prospecting`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `sms`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
 
 ### ooiyeefei (1 skill)
 - `excalidraw`: https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw
@@ -2656,8 +2686,8 @@ The following repositories are the source for skills in this collection:
 ### HeyGen (5 skills)
 - `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`: https://github.com/heygen-com/hyperframes
 
-### Matt Pocock (1 skill)
-- `grill-me`: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
+### Matt Pocock (14 skills)
+- `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
 ### GitHub (1 skill)
 - `refactor`: https://github.com/github/awesome-copilot
@@ -2731,7 +2761,7 @@ Each retains its original copyright and license terms:
 - **Remotion** — `remotion-best-practices` (custom license, see remotion.dev/license)
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
 - **AITYTech** — AgentKits Marketing automation (MIT)
-- **Matt Pocock** — `grill-me` planning and design stress-test workflow (MIT)
+- **Matt Pocock** — Agent skills for real engineering workflows (MIT)
 - **Dylan Tarre** — `micro-interactions` Disney animation principles for UI feedback (MIT)
 - **wondelai** — `microinteractions` Dan Saffer framework (Trigger / Rules / Feedback / Loops & Modes) (MIT)
 
@@ -2781,12 +2811,12 @@ See: [Postgres Best Practices for AI Agents](https://supabase.com/blog/postgres-
 ---
 
 We also thank **[Corey Haines](https://corey.co/)** for their excellent open-source work.
-The `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video` skills in this collection build on that contribution.
+The `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `prospecting`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `sms`, `social`, and `video` skills in this collection build on that contribution.
 
-Adapted skills: `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`
+Adapted skills: `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `prospecting`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `sms`, `social`, and `video`
 
 Original repositories:
-- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
+- `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`, `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `corey-ab-testing`, `corey-programmatic-seo`, `cro`, `customer-research`, `directory-submissions`, `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `marketing-skills`, `onboarding`, `paywalls`, `popups`, `pricing`, `product-marketing`, `prospecting`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `sms`, `social`, and `video`: https://github.com/coreyhaines31/marketingskills
 
 **Copyright (c) Corey Haines** - Marketing frameworks and best practices
 See: [Conversion Factory](https://conversionfactory.co/) | [Swipe Files](https://swipefiles.com/)
@@ -2867,14 +2897,14 @@ Original repositories:
 ---
 
 We also thank **[Matt Pocock](https://github.com/mattpocock)** for their excellent open-source work.
-The `grill-me` skill in this collection builds on that contribution.
+The `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out` skills in this collection build on that contribution.
 
-Adapted skill: `grill-me`
+Adapted skills: `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`
 
 Original repositories:
-- `grill-me`: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
+- `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
-**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
+**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)
 
 ---
 
@@ -2991,7 +3021,7 @@ Original repositories:
 
 ---
 
-We also thank **[Dylan Tarre](https://github.com/dylantarre)** for their excellent open-source work.
+We also thank **[Dylan Tarre](https://github.com/dylantarre/animation-principles)** for their excellent open-source work.
 The `micro-interactions` skill in this collection builds on that contribution.
 
 Adapted skill: `micro-interactions`
@@ -2999,11 +3029,10 @@ Adapted skill: `micro-interactions`
 Original repositories:
 - `micro-interactions`: https://github.com/dylantarre/animation-principles
 
-**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)
 
 ---
 
-We also thank **[wondelai](https://github.com/wondelai)** for their excellent open-source work.
+We also thank **[wondelai](https://github.com/wondelai/skills)** for their excellent open-source work.
 The `microinteractions` skill in this collection builds on that contribution.
 
 Adapted skill: `microinteractions`
@@ -3011,7 +3040,6 @@ Adapted skill: `microinteractions`
 Original repositories:
 - `microinteractions`: https://github.com/wondelai/skills
 
-**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)
 
 <!-- ACKNOWLEDGEMENTS:END -->
 

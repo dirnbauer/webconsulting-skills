@@ -1,0 +1,819 @@
+# Example checkpoints.yaml for enterprise-readiness skill
+# Copy this to your skill repo root as checkpoints.yaml
+
+version: 1
+skill_id: enterprise-readiness
+
+mechanical:
+  # === SECURITY WORKFLOW CHECKS ===
+  # Security coverage is satisfied by either:
+  #   (a) a dedicated .github/workflows/security.yml file (the historical
+  #       layout that the previous checkpoints required); or
+  #   (b) a job in any workflow that delegates to the netresearch reusable
+  #       workflow (uses: netresearch/{typo3-ci-workflows,.github}/.github/
+  #       workflows/security.yml). Quoting after `uses:` is optional in YAML.
+  # `command` is used so we can express the OR cleanly across file existence
+  # and content patterns. Empty stderr is suppressed; exit 0 = pass.
+  # Patterns use POSIX char classes ([[:space:]]) and `[.]` instead of \. to
+  # avoid YAML+shell+regex escape stacking. The runner's YAML line parser
+  # strips outer quotes but doesn't decode YAML escape sequences, so we use
+  # double-quoted YAML scalars and single-quoted shell args (which don't need
+  # YAML escaping).
+  #
+  # ER-01: pure-pipeline rewrite for the runner allowlist (no ; && || $() `).
+  # Two evidence streams concatenated via `cat` + process substitution:
+  #   1. find emits .github/workflows/security.yml if it exists
+  #   2. grep -RlE emits paths of any workflow delegating to the netresearch
+  #      reusable security workflow
+  # If either stream produces a path, the final `grep -q .` succeeds (pass).
+  # Process substitution `<(...)` is allowlist-safe: it doesn't contain `$(`
+  # or any rejected metachar; the pipeline's first token is `cat` (allowed).
+  - id: ER-01
+    type: command
+    pattern: "cat <(find .github/workflows/security.yml -type f -print 2>/dev/null) <(grep -RlE 'uses:[[:space:]]+\"?netresearch/(typo3-ci-workflows|[.]github)/[.]github/workflows/security[.]yml' .github/workflows/ 2>/dev/null) | grep -q ."
+    severity: error
+    desc: "A security workflow must exist — either as .github/workflows/security.yml or as a reusable-workflow job"
+
+  - id: ER-02
+    type: command
+    pattern: "grep -RqE '(composer[[:space:]]+audit|uses:[[:space:]]+\"?netresearch/(typo3-ci-workflows|[.]github)/[.]github/workflows/security[.]yml)' .github/workflows/ 2>/dev/null"
+    severity: error
+    desc: "A workflow should run composer audit (directly or by delegating to a security reusable workflow)"
+
+  - id: ER-03
+    type: command
+    pattern: "grep -RqE '(sbom|cyclonedx|syft|uses:[[:space:]]+\"?netresearch/(typo3-ci-workflows|[.]github)/[.]github/workflows/security[.]yml)' .github/workflows/ 2>/dev/null"
+    severity: warning
+    desc: "A workflow should generate SBOM (directly via cyclonedx/syft or by delegating to a security reusable workflow)"
+
+  # === BADGE CHECKS ===
+  - id: ER-04
+    type: regex
+    target: README.md
+    pattern: 'scorecard\.dev|securityscorecards\.dev|api\.scorecard\.dev'
+    severity: warning
+    desc: "README should have OpenSSF Scorecard badge"
+
+  - id: ER-05
+    type: contains
+    target: README.md
+    pattern: "bestpractices.dev"
+    severity: warning
+    desc: "README should have OpenSSF Best Practices badge"
+
+  - id: ER-06
+    type: regex
+    target: README.md
+    pattern: 'slsa\.dev|slsa-github-generator|attestation'
+    severity: info
+    desc: "README should have SLSA badge or mention attestation (if provenance enabled)"
+
+  # === DEPENDENCY MANAGEMENT ===
+  - id: ER-07
+    type: file_exists
+    target: .github/dependabot.yml
+    severity: warning
+    desc: "Dependabot should be configured"
+
+  - id: ER-08
+    type: regex
+    target: .github/dependabot.yml
+    pattern: 'package-ecosystem:\s*"?(composer|gomod|npm|pip)"?'
+    severity: warning
+    desc: "Dependabot should monitor language-specific dependencies (composer, gomod, npm, pip)"
+
+  - id: ER-09
+    type: regex
+    target: .github/dependabot.yml
+    pattern: 'package-ecosystem:\s*"?github-actions"?'
+    severity: warning
+    desc: "Dependabot should monitor GitHub Actions"
+
+  # === ACTION PINNING ===
+  # IMPORTANT: Only THIRD-PARTY actions need SHA-pinning.
+  # Org-internal reusable workflows (org/repo/.github/workflows/*.yml@main)
+  # MUST use @main or @tag — SHA-pinning them degrades security by breaking
+  # centralized update propagation. A pinned org-internal reusable workflow
+  # is itself a finding (anti-pattern).
+  #
+  # Pure-delegation repos (only org reusable workflows, no direct third-party
+  # action uses) trivially satisfy the SHA-pinning rule because the reusable
+  # workflows pin their own deps. Accept that pattern.
+  - id: ER-10
+    type: regex
+    target: .github/workflows/*.yml
+    pattern: 'uses:[[:space:]]+[^@]+@[a-f0-9]{40}|uses:[[:space:]]+netresearch/(typo3-ci-workflows|[.]github)/[.]github/workflows/'
+    severity: warning
+    desc: "Third-party GitHub Actions must be pinned to SHA, OR all CI delegated to netresearch reusable workflows (which pin their own deps centrally)"
+
+  # === WORKFLOW PERMISSIONS ===
+  - id: ER-11
+    type: contains
+    target: .github/workflows/ci.yml
+    pattern: "permissions:"
+    severity: warning
+    desc: "CI workflow should declare explicit permissions"
+
+  - id: ER-12
+    type: regex
+    target: .github/workflows/ci.yml
+    pattern: 'contents:\s*read'
+    severity: warning
+    desc: "CI workflow should use minimal permissions (contents: read)"
+
+  # === COVERAGE ===
+  - id: ER-13
+    type: regex
+    target: .github/workflows/ci.yml
+    pattern: '\b(codecov|upload-coverage)\b'
+    severity: warning
+    desc: "CI should upload coverage to Codecov (or use upload-coverage input for typo3-ci-workflows)"
+
+  - id: ER-14
+    type: file_exists
+    target: codecov.yml
+    severity: info
+    desc: "Codecov config should exist for coverage thresholds"
+
+  # === SLSA PROVENANCE ===
+  # follow_uses: also inspect any reusable workflow referenced via `uses:` so
+  # delegation to netresearch/typo3-ci-workflows (release.yml,
+  # release-typo3-extension.yml) or skill-repo-skill release.yml that
+  # internally calls attest-build-provenance counts as a pass.
+  - id: ER-15
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'attest-build-provenance|attest@|build-go-attest|slsa-github-generator|uses:[[:space:]]+netresearch/typo3-ci-workflows/[.]github/workflows/(release|release-typo3-extension)[.]yml|uses:[[:space:]]+netresearch/skill-repo-skill/[.]github/workflows/release[.]yml'
+    severity: info
+    desc: "Provenance attestation: actions/attest-build-provenance (preferred), build-go-attest, slsa-github-generator, OR delegation to a netresearch reusable release workflow (typo3-ci-workflows, skill-repo-skill)"
+
+  # === REQUIRED WORKFLOWS ===
+  - id: ER-18
+    type: file_exists
+    target: .github/workflows/ci.yml
+    severity: error
+    desc: "CI workflow (ci.yml) must exist"
+
+  # CodeQL / Scorecard / dependency-review may be a dedicated workflow file OR
+  # a job in another workflow that delegates to the netresearch reusable
+  # workflow (netresearch/.github/.github/workflows/{codeql,scorecard,dependency-review}.yml).
+  # follow_uses: walks one hop into any reusable workflow referenced via
+  # `uses: owner/repo/.github/workflows/file.yml@ref` so an indirect chain
+  # (e.g. typo3-ci-workflows/security.yml → netresearch/.github/codeql.yml)
+  # still satisfies the inline-action pattern.
+  - id: ER-19
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'uses:[[:space:]]*github/codeql-action|uses:[[:space:]]+netresearch/[.]github/[.]github/workflows/codeql[.]yml|uses:[[:space:]]+[^[:space:]]*/[.]github/workflows/codeql[.]yml@'
+    severity: warning
+    desc: "CodeQL must be wired up (dedicated workflow, reusable-workflow job, or transitive delegation via netresearch/.github)"
+
+  - id: ER-20
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'uses:[[:space:]]*ossf/scorecard-action|uses:[[:space:]]+netresearch/[.]github/[.]github/workflows/scorecard[.]yml|uses:[[:space:]]+[^[:space:]]*/[.]github/workflows/scorecard[.]yml@'
+    severity: warning
+    desc: "OpenSSF Scorecard must be wired up (dedicated workflow, reusable-workflow job, or transitive delegation via netresearch/.github)"
+
+  - id: ER-21
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'uses:[[:space:]]*actions/dependency-review-action|uses:[[:space:]]+netresearch/[.]github/[.]github/workflows/dependency-review[.]yml|uses:[[:space:]]+[^[:space:]]*/[.]github/workflows/dependency-review[.]yml@'
+    severity: warning
+    desc: "Dependency review must be wired up (dedicated workflow, reusable-workflow job, or transitive delegation via netresearch/.github)"
+
+  # === REQUIRED BADGES ===
+  - id: ER-22
+    type: regex
+    target: README.md
+    pattern: "github.com/.*/actions/workflows"
+    severity: error
+    desc: "README must have CI status badge"
+
+  - id: ER-23
+    type: contains
+    target: README.md
+    pattern: "codecov.io"
+    severity: warning
+    desc: "README must have Codecov badge"
+
+  - id: ER-24
+    type: regex
+    target: README.md
+    pattern: "baseline\\.openssf\\.org|openssf\\.org.*baseline"
+    severity: info
+    desc: "README should have OpenSSF Baseline badge"
+
+  # === SCRIPT INJECTION PREVENTION ===
+  - id: ER-25
+    type: regex_not
+    target: .github/workflows/*.yml
+    pattern: 'run:.*\$\{\{\s*github\.event\.'
+    severity: error
+    desc: "Workflows must not interpolate github.event.* in run: blocks (script injection)"
+
+  # === WORKFLOW INPUT INJECTION PREVENTION ===
+  - id: ER-49
+    type: regex_not
+    target: .github/workflows/*.yml
+    pattern: 'run:.*\$\{\{\s*inputs\.'
+    severity: error
+    desc: "Workflow run: blocks must not interpolate ${{ inputs.* }} directly (code injection). Pass through env: block instead"
+
+  # === GITHUB ATTESTATION ===
+  # follow_uses: also inspect upstream content of any reusable workflow
+  # referenced via `uses:` so a release workflow that delegates entirely to
+  # an org reusable workflow (which itself runs attest-build-provenance) is
+  # detected.
+  - id: ER-26
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'attest-build-provenance|attest@|slsa-github-generator|uses:[[:space:]]+netresearch/typo3-ci-workflows/[.]github/workflows/(release|release-typo3-extension)[.]yml|uses:[[:space:]]+netresearch/skill-repo-skill/[.]github/workflows/release[.]yml|uses:[[:space:]]+[^[:space:]]*/[.]github/workflows/release[a-z0-9-]*[.]yml@'
+    severity: info
+    desc: "Release workflow should generate provenance attestation: actions/attest-build-provenance (preferred), slsa-github-generator, OR delegation to a netresearch reusable release workflow (typo3-ci-workflows, skill-repo-skill)"
+
+  # === SLSA-GENERATOR DEPRECATION CHECK ===
+  - id: ER-29
+    type: regex_not
+    target: .github/workflows/*.yml
+    pattern: 'slsa-framework/slsa-github-generator'
+    severity: warning
+    desc: "Should migrate from slsa-github-generator to actions/attest-build-provenance (slsa-github-generator internal actions use tag refs that conflict with SHA-pinning rulesets, see slsa-framework/slsa-github-generator#4440)"
+
+  # === SUPPLY CHAIN SECURITY ===
+  # harden-runner can live in caller workflows OR be added by the org
+  # reusable workflow (which standardises egress policy). Accept either.
+  - id: ER-27
+    type: regex
+    target: .github/workflows/*.yml
+    follow_uses: true
+    pattern: 'uses:[[:space:]]*step-security/harden-runner@[a-f0-9]{40}|uses:[[:space:]]+netresearch/(typo3-ci-workflows|[.]github)/[.]github/workflows/'
+    severity: warning
+    desc: "Workflows should include step-security/harden-runner for egress monitoring (pinned to SHA), OR delegate to a netresearch reusable workflow (which applies harden-runner centrally — detected transitively via follow_uses)"
+
+  # === SHA-PINNING VIOLATION DETECTION ===
+  - id: ER-28
+    type: regex_not
+    target: .github/workflows/*.yml
+    pattern: 'uses:\s+[^#\n]+@v\d+(?!\S*[a-f0-9]{40})\s'
+    severity: warning
+    desc: "GitHub Actions must not use tag-only references (@v4, @v6); pin to SHA with version comment (uses: owner/action@<sha> # vX.Y.Z) for supply chain security"
+
+  # === CI DUPLICATE RUN PREVENTION ===
+  # ER-30 moved to llm_reviews — mechanical regex cannot reliably detect duplicate CI triggers
+
+  # === PHPSTAN BASELINE ===
+  # A PHPStan baseline file is a *liability*, not a requirement: it
+  # suppresses known errors so they no longer fail the build (technical
+  # debt). The healthy state is to have NO baseline OR an EMPTY one
+  # (project passes PHPStan cleanly at its declared level).
+  #
+  # Pass when:
+  #  - no baseline file exists, OR
+  #  - baseline exists but contains zero `message:` entries (empty
+  #    placeholder for tooling compatibility)
+  # Fail when baseline exists and has any `message:` entries — surface
+  # the technical debt for active reduction.
+  #
+  # Pure-pipeline form for the runner allowlist (no ; && || $() `):
+  # `cat` reads every candidate path silently (missing files vanish via
+  # 2>/dev/null), grep tests for `message:`, and the leading `!` inverts
+  # the exit so "no message: found" becomes pass. Checking all candidates
+  # at once is stricter than the original (which stopped at the first
+  # existing file), but functionally equivalent — any baseline with
+  # suppressed errors fails regardless of which path it lives at.
+  - id: ER-31
+    type: command
+    pattern: "! cat phpstan-baseline.neon Build/phpstan-baseline.neon Build/phpstan/phpstan-baseline.neon 2>/dev/null | grep -qF 'message:'"
+    severity: info
+    desc: "PHPStan baseline should be absent or empty (no suppressed errors). Non-empty baselines are tech debt — actively shrink them."
+
+  # === CODECOV CONFIG ===
+  - id: ER-32
+    type: regex
+    target: codecov.yml
+    pattern: 'patch:'
+    severity: info
+    desc: "Codecov config should define patch coverage target for realistic new-code coverage thresholds"
+
+  # === LABELER CONFIG ===
+  # Pass when no workflow references "labeler" OR .github/labeler.yml exists.
+  # Implementation: list workflows that mention "labeler"; for each, assert
+  # .github/labeler.yml exists. xargs -r skips when grep finds nothing
+  # (vacuous pass); xargs propagates non-zero when test -f fails.
+  # Avoids ; && || $() to satisfy the assessment runner allowlist.
+  - id: ER-43
+    type: command
+    pattern: "grep -rlF 'labeler' .github/workflows/ 2>/dev/null | xargs -r -I {} test -f .github/labeler.yml"
+    severity: warning
+    desc: "If CI workflows use a labeler job, .github/labeler.yml must exist to define label rules"
+
+  # === CHANGELOG COMPLETENESS ===
+  - id: ER-44
+    type: file_exists
+    target: CHANGELOG.md
+    severity: warning
+    desc: "CHANGELOG.md must exist to document release history"
+
+  # === RELEASE WORKFLOW PERMISSIONS ===
+  - id: ER-54
+    type: contains
+    target: .github/workflows/release.yml
+    pattern: "permissions:"
+    severity: warning
+    desc: "Release workflow should declare explicit permissions (principle of least privilege)"
+
+  # === REUSABLE WORKFLOW SHA-PINNING ===
+  # ER-33 moved to llm_reviews — mechanical regex cannot distinguish org-internal vs third-party workflows
+
+  # === MUTATION TESTING QUALITY ===
+  - id: ER-70
+    type: command
+    command: "test -f infection.json5 -o -f infection.json"
+    severity: warning
+    desc: "Infection config should exist for mutation testing"
+
+  # ER-71/ER-72: extract numeric value from infection config and assert >=90.
+  # Pure-pipeline form (no ; && || $()) so the assessment-runner allowlist
+  # accepts it. Pattern semantics:
+  #   1. cat both candidate files (only one usually exists)
+  #   2. grep for the key:value occurrence with a numeric value
+  #   3. extract the trailing integer
+  #   4. grep -qE matches when the integer is 90-99 or 100+ (i.e. >=90)
+  # Missing file or missing key => empty pipeline => grep -q fails => fail.
+  # Note: the previous `expected:` field was silently ignored by the runner
+  # for type=command checkpoints; the threshold is now enforced inline.
+  - id: ER-71
+    type: command
+    pattern: "cat infection.json5 infection.json 2>/dev/null | grep -oE '\"minMsi\"[[:space:]]*:[[:space:]]*[0-9]+' | grep -oE '[0-9]+$' | grep -qE '^(9[0-9]|100)$'"
+    severity: warning
+    desc: "Enterprise projects should have minMsi >= 90% for mutation testing"
+
+  - id: ER-72
+    type: command
+    pattern: "cat infection.json5 infection.json 2>/dev/null | grep -oE '\"minCoveredMsi\"[[:space:]]*:[[:space:]]*[0-9]+' | grep -oE '[0-9]+$' | grep -qE '^(9[0-9]|100)$'"
+    severity: warning
+    desc: "Enterprise projects should have minCoveredMsi >= 90%"
+
+  # === COVERAGE CONFIGURATION ===
+  # ER-73: pass unless codecov.yml exists AND its patch.target is exactly 100%.
+  # Pure-pipeline form (no ; && || $()) for the allowlist. Pattern semantics:
+  #   1. cat codecov.yml (silent if absent)
+  #   2. sed extracts the value(s) following `target:` inside the patch block
+  #   3. head -1 keeps the first occurrence
+  #   4. ! grep -qF '100%' negates: pass when 100% is NOT present
+  # No file => empty pipeline => grep finds nothing => ! makes it pass.
+  - id: ER-73
+    type: command
+    pattern: "! cat codecov.yml 2>/dev/null | sed -n '/patch:/,/target:/{ s/.*target:[[:space:]]*//p }' | head -1 | grep -qF '100%'"
+    severity: warning
+    desc: "codecov patch target should not be 100% — achievable only with full functional test coverage upload"
+
+llm_reviews:
+  # === ACTION PINNING (companion to ER-10) ===
+  - id: ER-10b
+    domain: security
+    prompt: |
+      Check GitHub Actions pinning in workflow files:
+      1. Third-party actions (e.g., actions/checkout, codecov/codecov-action) MUST be pinned to SHA
+      2. Org-internal reusable workflows (uses: org/repo/.github/workflows/*.yml@ref) MUST use @main or @tag — this is CORRECT and REQUIRED, NOT a finding
+      3. Flag any third-party action using a tag (e.g., @v4) or branch instead of SHA
+      4. Do NOT flag org-internal reusable workflows using @main — SHA-pinning them is an ANTI-PATTERN that breaks centralized security update propagation
+      5. If an org-internal reusable workflow IS SHA-pinned, flag THAT as a warning (defeats the purpose of centralized workflow management)
+    severity: warning
+    desc: "Verify third-party actions are SHA-pinned. Org-internal reusable workflows MUST use @main or @tag (pinning them is an anti-pattern)."
+
+  # === SIGNED COMMITS ===
+  - id: ER-16
+    domain: security
+    prompt: |
+      Check if the repository requires signed commits:
+      1. Look for branch protection settings mentioning signatures
+      2. Check if .github/workflows mention commit signing
+      3. Check CONTRIBUTING.md for signing requirements. CONTRIBUTING.md is
+         a community-health file that GitHub auto-inherits from the org-wide
+         <owner>/.github repo ONLY when the project has NO local
+         CONTRIBUTING.md. The fallback does NOT supplement a present-but-
+         incomplete local file. Apply this rule:
+         - If the project has NO local CONTRIBUTING.md and the org-wide
+           <owner>/.github/CONTRIBUTING.md (e.g., netresearch/.github)
+           documents the required signing/commit conventions, treat the
+           requirement as satisfied. Do NOT flag absence of a project-local
+           CONTRIBUTING.md on its own in this case.
+         - If the project HAS a local CONTRIBUTING.md, evaluate it on its
+           own merits. The org-wide file is NOT consulted by GitHub in this
+           case and MUST NOT be used to suppress a finding. If the local
+           CONTRIBUTING.md does not document signing requirements, flag it
+           regardless of org-wide content.
+         - Only flag absence outright when neither the project nor (when
+           applicable per the fallback rule above) the org-wide repo
+           addresses signing requirements.
+         Note: CODEOWNERS does NOT inherit from org-wide .github — it must
+         live in the repo itself if needed.
+    severity: warning
+    desc: "Repository should require signed commits"
+
+  # === HARDEN-RUNNER REVIEW ===
+  - id: ER-27b
+    domain: security
+    prompt: |
+      Verify Harden-Runner configuration in workflow files:
+      1. Every job should have step-security/harden-runner as its FIRST step
+      2. Check egress-policy: prefer 'block' with allowed-endpoints over 'audit'
+      3. Verify harden-runner is SHA-pinned (not tag-referenced)
+      4. If block mode: verify allowed-endpoints are appropriate for the job type
+    severity: warning
+    desc: "Verify Harden-Runner is correctly configured in all workflow jobs with appropriate egress policy"
+
+  # === PHPUNIT VERSION COMPATIBILITY ===
+  - id: ER-34
+    domain: testing
+    prompt: |
+      Check for PHPUnit version compatibility issues:
+      1. Review composer.json for PHPUnit version constraints — broad ranges like "^11.0 || ^12.0" risk cross-version attribute failures
+      2. Check test files for PHPUnit 12-only attributes (e.g., #[AllowMockObjectsWithoutExpectations]) that break on PHPUnit 11
+      3. Verify CI matrix includes the lowest supported PHP version, which may pull an older PHPUnit
+      4. Flag any PHPUnit attribute not available in the minimum supported PHPUnit version
+    severity: warning
+    desc: "PHPUnit attributes and features must be compatible with all PHPUnit versions resolved across the CI PHP version matrix"
+
+  # === SLSA PROVENANCE REVIEW ===
+  - id: ER-17
+    domain: security
+    prompt: |
+      Verify SLSA provenance setup if present:
+      1. Preferred: actions/attest-build-provenance in a reusable workflow
+         hosted in the org .github repo (SLSA Build Level 3)
+      2. Legacy: slsa-github-generator — should be migrated away due to
+         SHA-pinning incompatibility (slsa-framework/slsa-github-generator#4440)
+      3. If using actions/attest: verify it's SHA-pinned and has
+         id-token: write + attestations: write permissions
+      4. Verification should use `gh attestation verify` (not slsa-verifier)
+    severity: info
+    desc: "SLSA provenance should use actions/attest-build-provenance (preferred) or slsa-github-generator"
+
+  # === PHPSTAN BASELINE CONTENT QUALITY ===
+  - id: ER-35
+    domain: quality
+    prompt: |
+      If PHPStan is not configured in the project (no phpstan.neon, no phpstan in composer.json require-dev), report N/A and skip this check.
+      Review PHPStan baseline file for quality:
+      1. Check if phpstan-baseline.neon exists and contains ignoreErrors entries
+      2. An empty baseline (ignoreErrors: []) is the ideal state — all issues fixed
+      3. Flag any baseline with >0 entries as needing review
+      4. Check if baseline entries are legitimate (complex generics, third-party types) vs. suppressions of real bugs
+      5. Flag any entry that suppresses error-level issues (should be fixed, not suppressed)
+      6. Verify the project is not adding NEW baseline entries (baseline should only shrink over time)
+    severity: warning
+    desc: "PHPStan baseline should be empty (ignoreErrors: []). All static analysis issues should be fixed, not suppressed. Review entries and plan to eliminate them"
+
+  # === REUSABLE WORKFLOW SHA PINNING (complements ER-10b for reusable workflows) ===
+  - id: ER-36
+    domain: security
+    prompt: |
+      Review reusable workflow references (pattern: uses: org/repo/.github/workflows/file.yml@ref) in .github/workflows/:
+      This checkpoint complements ER-10b (which covers GitHub Actions) by specifically targeting reusable workflow references.
+      1. Third-party reusable workflows (external organizations) MUST be SHA-pinned for supply chain security
+      2. Org-internal reusable workflows (same GitHub org) MUST use @main or @tag, NOT SHA-pinned
+      3. SHA-pinning org-internal workflows is an anti-pattern — it breaks centralized security update propagation
+      4. Flag: third-party workflow using @v tag without SHA (e.g., uses: external/repo/.github/workflows/ci.yml@v2)
+      5. Flag: org-internal workflow using SHA pin (e.g., uses: myorg/workflows/.github/workflows/ci.yml@abc123)
+      6. Correct patterns:
+         - Third-party: uses: external/repo/.github/workflows/ci.yml@abc123def456 # v2.1.0
+         - Org-internal: uses: myorg/workflows/.github/workflows/ci.yml@main
+    severity: warning
+    desc: "Third-party reusable workflows MUST use SHA pins. Org-internal reusable workflows MUST use @main/@tag for centralized security updates"
+
+  # === CI DUPLICATE RUN PREVENTION ===
+  - id: ER-30
+    domain: ci
+    prompt: |
+      Check GitHub Actions workflow files for duplicate CI run issues:
+      1. Find workflows that trigger on BOTH push: and pull_request:
+      2. If push: is present WITHOUT branch restrictions (e.g., branches: [main]),
+         pushing to a PR branch causes every job to run TWICE
+      3. Flag workflows where push: is unrestricted while pull_request: is also present
+      4. Do NOT flag workflows where push: is scoped to specific branches (e.g., push: branches: [main])
+      5. Do NOT flag workflows that only have one trigger
+    severity: warning
+    desc: "Workflows with both push and pull_request triggers must scope push to specific branches to prevent duplicate CI runs"
+
+  # === REUSABLE WORKFLOW SHA-PINNING ===
+  - id: ER-33
+    domain: security
+    prompt: |
+      Check reusable workflow references (uses: org/repo/.github/workflows/file.yml@ref):
+      1. Third-party reusable workflows (external organizations) MUST be SHA-pinned
+      2. Org-internal reusable workflows MUST use @main or @tag (NOT SHA-pinned)
+      3. A mechanical regex cannot distinguish org-internal from third-party — use context
+      4. Flag: third-party workflow using @v tag without SHA
+      5. Flag: org-internal workflow using SHA pin (anti-pattern)
+    severity: warning
+    desc: "Third-party reusable workflows must be pinned to commit SHAs, not tags, for supply chain security"
+
+  # === NPM DEPENDENCY MONITORING ===
+  - id: ER-37
+    name: npm audit runs in CI when package.json exists
+    type: llm_review
+    severity: warning
+    domain: supply-chain
+    prompt: |
+      If package.json exists in the project root or Build/ directory:
+      1. Check that CI workflow runs `npm audit` or equivalent
+      2. Check that .github/dependabot.yml includes npm ecosystem
+      3. Check that npm dependencies are not excessively outdated (>2 major versions)
+    tags: [npm, supply-chain, dependencies, ci]
+
+  - id: ER-38
+    name: Dependabot configured for all dependency ecosystems
+    type: llm_review
+    severity: info
+    domain: supply-chain
+    prompt: |
+      Check .github/dependabot.yml covers ALL dependency ecosystems in use:
+      - composer (if composer.json exists)
+      - npm (if package.json exists)
+      - github-actions (if .github/workflows/ exists)
+      - docker (if Dockerfile exists)
+      Report any missing ecosystem configurations.
+    tags: [dependabot, supply-chain, dependencies]
+
+  # === CI ROBUSTNESS: DOCKER / WORKTREE ===
+
+  - id: ER-39
+    name: CaptainHook disabled in Docker/CI Composer commands
+    type: llm_review
+    severity: warning
+    domain: ci
+    prompt: |
+      If the project uses CaptainHook (check composer.json for captainhook/captainhook
+      or captainhook/plugin-composer):
+      1. Check Build/Scripts/runTests.sh and any CI scripts for `composer install`
+         or `composer update` commands run inside Docker containers
+      2. Verify each such command passes CAPTAINHOOK_DISABLE=true as an env variable
+      3. Without this, CaptainHook's hook-installer fails when .git is a file (Docker,
+         worktrees), aborting all subsequent post-install-cmd plugins
+      4. Also check docker-compose*.yml / docker-compose*.yaml and compose.yml / compose.yaml
+         for Composer commands missing the env var
+      If CaptainHook is not in use, report N/A.
+    tags: [captainhook, docker, worktree, ci, composer]
+
+  - id: ER-40
+    name: PHPStan extension-installer generates non-empty config
+    type: llm_review
+    severity: warning
+    domain: quality
+    prompt: |
+      If the project uses phpstan/extension-installer (check composer.json):
+      1. Check composer.lock / installed packages for PHPStan extension packages
+         (e.g., phpstan-doctrine, phpstan-phpunit, phpstan-strict-rules, etc.).
+      2. If such extension packages are installed, GeneratedConfig.php (typically
+         vendor/phpstan/extension-installer/src/GeneratedConfig.php) should list
+         these registered extensions in the EXTENSIONS constant after composer install.
+      3. If extension packages are present but GeneratedConfig.php shows
+         EXTENSIONS = [], the installer likely did not run -- usually because a
+         prior Composer plugin (such as CaptainHook) failed and aborted
+         post-install-cmd scripts.
+      4. In that case, check that CI scripts include verification of the generated
+         config or that CaptainHook is disabled (ER-39) to prevent this failure chain.
+      If phpstan/extension-installer is not in use, or no supported extension
+      packages are installed, report N/A.
+    tags: [phpstan, extension-installer, composer, ci]
+
+  - id: ER-41
+    name: PHP lint scope excludes vendor and build directories
+    type: llm_review
+    severity: warning
+    domain: ci
+    prompt: |
+      If the project has a lint test suite or lint CI step:
+      1. Check that PHP lint (php -l) commands scan only source directories
+         (e.g., Classes/, Configuration/, Tests/), NOT the entire project tree
+      2. Flag PHP lint commands that traverse third-party or build directories
+         (e.g., vendor/, .Build/, var/, node_modules/). A plain `find . -name '*.php'`
+         is a finding unless it explicitly excludes those directories (via -prune or ! -path).
+      3. Correct patterns include limiting the start paths to source dirs, e.g.
+         `find Classes Configuration Tests -name '*.php'`, or using `find .` with
+         appropriate -prune/! -path exclusions for vendor/, .Build/, var/, etc.
+      4. Check Build/Scripts/runTests.sh, Makefile, and CI workflow files
+      If no PHP lint step exists, report N/A.
+    tags: [lint, php, ci, scope]
+
+  - id: ER-42
+    name: Merge queue thread resolution awareness
+    type: llm_review
+    severity: info
+    domain: ci
+    prompt: |
+      If the repository uses GitHub merge queues (check branch protection rules):
+      1. Verify CONTRIBUTING.md or PR templates mention that all review threads
+         must be resolved before merge. Both CONTRIBUTING.md and PR templates
+         (.github/PULL_REQUEST_TEMPLATE.md) are community-health files that
+         GitHub auto-inherits from the org-wide <owner>/.github repo ONLY
+         when the project has NO local copy of that specific file. The
+         fallback does NOT supplement a present-but-incomplete local file.
+         Apply per-file:
+         - If the project has NO local CONTRIBUTING.md and the org-wide
+           <owner>/.github/CONTRIBUTING.md (e.g., netresearch/.github)
+           covers the thread-resolution requirement, treat that requirement
+           as satisfied via CONTRIBUTING.md. If the project HAS a local
+           CONTRIBUTING.md, evaluate it on its own merits — the org-wide
+           file is NOT consulted by GitHub in that case and MUST NOT be
+           used to suppress a finding.
+         - The same rule applies independently to PR templates. GitHub
+           performs a case-insensitive lookup (the filename's actual
+           case on disk doesn't matter — GitHub finds it regardless),
+           and recognises any of these local paths:
+             * .github/PULL_REQUEST_TEMPLATE.md (or .txt form)
+             * .github/pull_request_template.md
+             * pull_request_template.md (repo root)
+             * docs/pull_request_template.md
+             * .github/PULL_REQUEST_TEMPLATE/ (directory containing
+               multiple templates — ANY file here counts as a local
+               template for the purposes of this fallback rule)
+           The org-wide template only applies when NONE of these local
+           paths exist; if any local template exists, evaluate it
+           directly without consulting the org-wide file.
+         - Only flag absence outright when neither the project nor (per the
+           fallback rule above, where applicable) the org-wide repo
+           addresses the thread-resolution requirement via either file.
+         CODEOWNERS does NOT inherit from org-wide .github and remains a
+         project-local concern if needed.
+      2. Check if auto-merge workflows account for the constraint that commits
+         cannot be pushed while a branch is in the merge queue
+      3. Flag if required_review_thread_resolution is enabled but not documented
+      If merge queues are not in use, report N/A.
+    tags: [merge-queue, github, branch-protection, ci]
+
+  # === ADR COVERAGE ===
+  - id: ER-45
+    name: Architecture Decision Records for significant decisions
+    type: llm_review
+    severity: warning
+    domain: documentation
+    prompt: |
+      Evaluate whether the project should have Architecture Decision Records (ADRs):
+      1. Count the number of PHP classes in Classes/ — if >10 classes, the extension
+         is complex enough to warrant a Documentation/Developer/Adr/ directory
+      2. Scan for significant architectural decisions that should each have an ADR:
+         - Encryption or cryptography choices (sodium, openssl, key management)
+         - Access control mechanisms (RBAC, permission checks, policy enforcement)
+         - Audit logging or compliance-relevant data handling
+         - External service integrations or protocol choices
+         - Caching strategies or performance-critical design decisions
+         - Data model changes with migration implications
+      3. Check if Documentation/Developer/Adr/ directory exists
+      4. If ADRs exist, verify they follow a consistent format (title, status,
+         context, decision, consequences)
+      Report missing ADRs for identified significant decisions.
+    tags: [adr, documentation, architecture, decisions]
+
+  # === CHANGELOG COMPLETENESS ===
+  - id: ER-46
+    name: Every git tag has a corresponding CHANGELOG entry
+    type: llm_review
+    severity: warning
+    domain: documentation
+    prompt: |
+      Compare git tags with CHANGELOG.md entries:
+      1. Run `git tag -l` to list all version tags, normalizing format by stripping any `v` prefix (e.g., v1.2.0 → 1.2.0)
+      2. Parse CHANGELOG.md headings (## [x.y.z] or ## x.y.z patterns)
+      3. Flag any git tag that does not have a corresponding CHANGELOG heading (compare using normalized version without `v` prefix)
+      4. Flag any CHANGELOG heading that does not correspond to a git tag
+         (may indicate an unreleased section — acceptable if labeled [Unreleased])
+      5. Verify CHANGELOG entries are in reverse chronological order
+      If CHANGELOG.md does not exist, flag that as the primary finding.
+    tags: [changelog, releases, documentation, tags]
+
+  # === UPGRADE WIZARD FOR NEW COLUMNS ===
+  - id: ER-47
+    name: UpgradeWizard for new database columns on existing tables
+    type: llm_review
+    severity: warning
+    domain: migration
+    prompt: |
+      Check ext_tables.sql for columns added to existing tables and verify
+      that appropriate data migration exists:
+      1. Parse ext_tables.sql for CREATE TABLE statements — identify columns
+         that are additions to core or existing tables (not entirely new tables)
+      2. For each new column on an existing table, check if an
+         UpgradeWizardInterface implementation exists in Classes/Updates/ or
+         Classes/Upgrade/ that handles data migration for that column
+      3. New columns with sensible defaults (e.g., NOT NULL DEFAULT '') may
+         not need a wizard — focus on columns that require data transformation
+         or population from existing data
+      4. Also check for ext_localconf.php registration of upgrade wizards
+      Report columns that likely need migration wizards but lack them.
+    tags: [upgrade-wizard, database, migration, ext-tables, typo3]
+
+  # === REUSABLE WORKFLOWS ONLY ===
+  - id: ER-48
+    name: CI uses org reusable workflows instead of standalone third-party actions
+    type: llm_review
+    severity: warning
+    domain: ci
+    prompt: |
+      Review CI workflow files for use of standalone third-party actions where
+      org-provided reusable workflows should be used instead:
+      1. Check if workflows directly use third-party actions with unpinned tags
+         (e.g., uses: shivammathur/setup-php@v2) instead of calling an org
+         reusable workflow that wraps and standardizes these
+      2. Flag workflows that duplicate CI logic already available in org
+         reusable workflows (e.g., separate PHPStan, PHP-CS-Fixer, PHPUnit
+         steps instead of a single reusable CI workflow call)
+      3. Acceptable: using third-party actions that are SHA-pinned AND not
+         available through org reusable workflows
+      4. Preferred pattern: uses: org/.github/.github/workflows/ci.yml@main
+         with inputs, rather than reimplementing CI steps locally
+      Report specific workflow files and actions that should be replaced
+      with org reusable workflow calls.
+    tags: [reusable-workflows, ci, github-actions, standardization]
+
+  # === BUILD HEALTH ===
+  - id: ER-50
+    domain: ci
+    prompt: |
+      Check if the project build produces deprecation warnings or errors:
+      1. Review CI logs or run the build locally to check for deprecation
+         warnings that will become errors in future versions
+      2. For TypeScript projects: check tsconfig.json for deprecated options
+         (e.g., deprecated tsconfig options that produce TS5101 errors). If found, verify
+         the option is actually needed — remove if unused, add
+         ignoreDeprecations if required
+      3. For Go projects: check for deprecated function usage flagged by
+         go vet or staticcheck
+      4. For PHP projects: check for PHP deprecation notices in CI output
+      5. Build-breaking deprecations in CI indicate the project will fail
+         on the next major version upgrade
+      Report specific deprecations found and whether they block CI.
+    severity: warning
+    desc: "Build should produce no deprecation warnings — these become errors in future versions and block CI"
+
+  # === AUTO-MERGE WORKFLOW PRESENCE ===
+  - id: ER-51
+    domain: ci
+    prompt: |
+      Check if the repository has auto-merge configured for dependency PRs:
+      1. Verify .github/workflows/ contains an auto-merge workflow
+         (auto-merge-deps.yml or auto-merge.yml)
+      2. If present, verify it uses pull_request_target trigger (not
+         pull_request) for correct bot PR permissions
+      3. Verify repo has allow_auto_merge enabled: check via
+         gh api repos/OWNER/REPO --jq .allow_auto_merge
+      4. If Dependabot or Renovate is configured but no auto-merge workflow
+         exists, bot PRs will accumulate without being merged
+      Report missing or misconfigured auto-merge setup.
+    severity: warning
+    desc: "Repos with Dependabot/Renovate should have auto-merge workflow to prevent PR accumulation"
+
+  # === REUSABLE WORKFLOW PERMISSION COMPATIBILITY ===
+  - id: ER-52
+    name: Caller workflows grant all permissions required by called reusable workflows
+    type: llm_review
+    severity: error
+    domain: ci
+    prompt: |
+      For each workflow in .github/workflows/ calling a reusable workflow at
+      `jobs.<job>.uses` (not step-level `uses`), covering both remote calls
+      (`uses: <org>/<repo>/.github/workflows/<file>@<ref>`) and local calls
+      (`uses: ./.github/workflows/<file>.yml`):
+      1. Identify permissions declared in the caller workflow (top-level and job-level)
+      2. GitHub validates ALL job-level permissions at startup, even for skipped jobs
+      3. If the shared workflow declares job-level permissions (e.g., pull-requests: write)
+         that are not granted by the caller, the entire workflow fails with startup_failure
+      4. Check: does the caller grant every permission the shared workflow's jobs declare?
+      5. Common miss: caller grants only `contents: write` but shared workflow also needs
+         `pull-requests: write` for a bump or changelog job
+      6. Flag missing permissions as error — this causes startup_failure across all repos
+         using the shared workflow
+    tags: [permissions, reusable-workflows, ci, startup-failure]
+
+  # === DUPLICATE RELEASE NOTES DETECTION ===
+  - id: ER-53
+    name: Release workflow must not produce duplicate content in release notes
+    type: llm_review
+    severity: warning
+    domain: ci
+    prompt: |
+      Check for duplicate release note issues.
+
+      A common cause is a misconfiguration in softprops/action-gh-release.
+
+      Static check (primary):
+      1. Read .github/workflows/release.yml or any shared release workflow
+      2. Look for softprops/action-gh-release used with both `body:` (or
+         `body_path:`) and `generate_release_notes: true` — this is a known
+         misconfiguration where the explicit body is prepended to
+         auto-generated notes, producing duplicate content. Flag as warning.
+
+      Dynamic confirmation (secondary):
+      3. Check the 3 most recent releases for actual duplication:
+         `gh release view <tag> --json body -q .body`
+      4. Look for repeated sections, duplicate changelog entries, or
+         duplicated commit lists in release bodies
+    tags: [release-notes, duplicate-content, ci, softprops]

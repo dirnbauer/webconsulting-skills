@@ -1,6 +1,6 @@
 ---
-name: micro-interactions
-description: Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges. Applies Disney's 12 animation principles to interface details such as hover, press, focus, ripple, and badge updates.
+name: "micro-interactions"
+description: "Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges."
 ---
 
 # Micro-interaction Animation
@@ -118,12 +118,11 @@ Apply Disney's 12 animation principles to small UI feedback moments and interfac
 ## Credits & Attribution
 
 This skill is based on the excellent work by
-**[Dylan Tarre](https://github.com/dylantarre/animation-principles)**.
+**[Dylan Tarre](https://github.com/dylantarre)**.
 
 Original repository: https://github.com/dylantarre/animation-principles
-Original path: `skills/01-by-domain/micro-interactions/SKILL.md`
 
-**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles - Claude Code Skill Marketplace (MIT License)
+**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)
 
 Special thanks to [Dylan Tarre](https://github.com/dylantarre) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

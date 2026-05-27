@@ -106,12 +106,116 @@
       "note": "Skill discovery and installation via Skills CLI"
     },
     {
+      "name": "caveman",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/productivity/caveman",
+      "note": "Ultra-compressed communication mode for lower-token technical conversation"
+    },
+    {
+      "name": "diagnose",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/diagnose",
+      "note": "Disciplined diagnosis loop for bugs and performance regressions"
+    },
+    {
+      "name": "grill-with-docs",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/grill-with-docs",
+      "note": "Stress-test plans against domain docs and ADRs"
+    },
+    {
       "name": "grill-me",
       "source": "https://github.com/mattpocock/skills.git",
       "branch": "main",
       "enabled": true,
       "path": "skills/productivity/grill-me",
       "note": "Stress-test plans and designs with one-question-at-a-time interviews"
+    },
+    {
+      "name": "handoff",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/productivity/handoff",
+      "note": "Compress current context into a handoff document for another agent"
+    },
+    {
+      "name": "improve-codebase-architecture",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/improve-codebase-architecture",
+      "note": "Find codebase architecture deepening opportunities"
+    },
+    {
+      "name": "prototype",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/prototype",
+      "note": "Build throwaway prototypes to clarify logic or UI design"
+    },
+    {
+      "name": "setup-matt-pocock-skills",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/setup-matt-pocock-skills",
+      "note": "Scaffold issue tracker, triage labels, and domain doc config"
+    },
+    {
+      "name": "tdd",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/tdd",
+      "note": "Test-driven development with a red-green-refactor loop"
+    },
+    {
+      "name": "to-issues",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/to-issues",
+      "note": "Break plans and PRDs into independently grabbable issues"
+    },
+    {
+      "name": "to-prd",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/to-prd",
+      "note": "Turn conversation context into a PRD issue"
+    },
+    {
+      "name": "triage",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/triage",
+      "note": "Triage issues through a role-driven state machine"
+    },
+    {
+      "name": "zoom-out",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/engineering/zoom-out",
+      "note": "Ask for broader context on unfamiliar code"
+    },
+    {
+      "name": "write-a-skill",
+      "source": "https://github.com/mattpocock/skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/productivity/write-a-skill",
+      "note": "Create new skills with progressive disclosure and bundled resources"
     },
     {
       "name": "gsap",
@@ -431,6 +535,13 @@
       "enabled": true
     },
     {
+      "name": "prospecting",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/prospecting",
+      "enabled": true
+    },
+    {
       "name": "corey-programmatic-seo",
       "source": "https://github.com/coreyhaines31/marketingskills.git",
       "branch": "main",
@@ -485,6 +596,13 @@
       "source": "https://github.com/coreyhaines31/marketingskills.git",
       "branch": "main",
       "path": "skills/site-architecture",
+      "enabled": true
+    },
+    {
+      "name": "sms",
+      "source": "https://github.com/coreyhaines31/marketingskills.git",
+      "branch": "main",
+      "path": "skills/sms",
       "enabled": true
     },
     {
@@ -692,5 +810,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-05-09T08:47:19Z"
+  "lastSync": "2026-05-27T11:09:20Z"
 }

@@ -267,6 +267,120 @@ describe('TYPO3 Image Plugin', function() {
 });
 ```
 
+### Vitest: Cross-directory Coverage (production at `../../../Resources/...`)
+
+TYPO3 extensions place JS tests under `Tests/JavaScript/` while
+production code lives in `Resources/Public/JavaScript/`. Tests grouped
+into subdirectories (e.g. `Tests/JavaScript/Plugins/foo.test.ts`)
+import production via relative paths such as
+`../../../Resources/Public/JavaScript/Plugins/foo.js`.
+
+By default, **Vitest's v8 coverage provider silently drops files
+outside the test workspace** — `lcov.info` ends up empty even though
+all tests pass. Symptom: SonarCloud (or any lcov consumer) reports 0%
+JS coverage despite imports working and tests asserting against the
+production code.
+
+This recipe assumes `vitest.config.ts` lives in `Tests/JavaScript/`
+and Vitest runs from that directory (so `reportsDirectory: './coverage'`
+resolves to `Tests/JavaScript/coverage/`, matching the Sonar path
+below). The fix is `coverage.allowExternal: true`:
+
+```ts
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        include: ['**/*.test.ts', '**/*.test.js'],
+        coverage: {
+            provider: 'v8',
+            reporter: ['text', 'json', 'html', 'lcov'],
+            reportsDirectory: './coverage',
+            // Production code lives outside this workspace
+            // (../../../Resources/Public/JavaScript/), so v8 needs
+            // allowExternal to instrument it — without this,
+            // lcov.info is empty.
+            allowExternal: true,
+            include: ['**/Resources/Public/JavaScript/**/*.js'],
+            exclude: ['**/node_modules/**', '**/Tests/**', '**/mocks/**'],
+        },
+    },
+});
+```
+
+Note that the `coverage.include` glob uses a suffix pattern
+(`**/Resources/...`) rather than the relative-path form
+(`../../../Resources/...`). v8 matches file paths anywhere in the
+project tree, not relative to Vitest's working directory; the relative
+form silently produces 0/0 even with `allowExternal` enabled.
+
+Coverage is opt-in: Vitest only writes `lcov.info` when invoked with
+`--coverage` (or with `coverage.enabled: true` in the config). Wire it
+into a script so CI and local runs match:
+
+```json
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  }
+}
+```
+
+For SonarCloud upload (paths are repository-root-relative), point at
+the resulting lcov:
+
+```properties
+sonar.javascript.lcov.reportPaths=Tests/JavaScript/coverage/lcov.info
+```
+
+## Unit Tests Do Not Prove UI Works
+
+Vitest/Jest unit tests around DOM helpers, event handlers, or "controller" JS classes verify **logic in isolation**. They do **not** exercise:
+
+- TYPO3's real `Modal` component (lives in `@typo3/backend/modal.js`, ships its own shadow DOM in v13+)
+- Real browser event dispatch / bubbling
+- Backend page chrome (iframes, top frame, module router in v14)
+- Network round-trips against actual TYPO3 endpoints
+
+**Rule:** never claim a UI/JS change "works" on the basis of green unit tests alone. For any change that touches the rendered backend UI, do one of:
+
+1. Write a Playwright E2E spec under `Tests/E2E/` and run it against DDEV.
+2. Push the branch and ask the human to verify in a real browser.
+
+A passing unit test is evidence that the function under test does what its tests assert -- not that the feature works for a backend user. Skipping this distinction is the single most common cause of "you said it worked, but it doesn't" feedback on PRs.
+
+## TYPO3 Modal API: `button.clicked` Does Not Cross Shadow DOM
+
+TYPO3 v13+ wraps the backend `Modal` in a shadow DOM. The internal `button.clicked` event is dispatched **inside** the shadow root and does not bubble out to the modal host element. Code that does this:
+
+```javascript
+// BROKEN: event never fires the listener -- the shadow root swallows it
+const modal = Modal.show({ /* ... */ });
+modal.addEventListener('button.clicked', (e) => { /* ... */ });
+```
+
+silently does nothing on v13+ even though it appeared to work on v12 with the legacy modal. The supported, cross-version API is the per-button `trigger` callback supplied at `Modal.show()` time:
+
+```javascript
+import Modal from '@typo3/backend/modal.js';
+import Severity from '@typo3/backend/severity.js';
+
+Modal.show({
+    title: 'Confirm',
+    content: 'Delete this passkey?',
+    severity: Severity.warning,
+    buttons: [
+        { text: 'Cancel', btnClass: 'btn-default', trigger: () => { /* dismissed */ } },
+        { text: 'Delete', btnClass: 'btn-warning', trigger: () => { performDelete(); } },
+    ],
+});
+```
+
+`trigger` callbacks are invoked the same way on TYPO3 v12, v13 and v14, regardless of whether the modal is rendered into the light DOM or a shadow root. Use them as the only event hook for modal buttons. (Page Object Models in `references/e2e-testing.md` test the rendered modal from the outside via `.modal` selectors -- they do not rely on `button.clicked` either.)
+
 ## Testing Best Practices
 
 ### 1. Isolate Editor Instance

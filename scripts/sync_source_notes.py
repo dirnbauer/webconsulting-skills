@@ -27,8 +27,11 @@ REPO_SOURCE_URL = "https://github.com/dirnbauer/webconsulting-skills"
 LINK_OVERRIDES = {
     "Netresearch": "https://www.netresearch.de/",
     "HeyGen": "https://www.heygen.com/",
+    "Corey Haines": "https://coreyhaines.com/",
+    "Dylan Tarre": "https://github.com/dylantarre",
     "Matt Pocock": "https://github.com/mattpocock",
     "pbakaus": "https://github.com/pbakaus",
+    "wondelai": "https://github.com/wondelai",
 }
 DISPLAY_NAME_OVERRIDES = {
     "Netresearch": "Netresearch DTT GmbH",
@@ -36,7 +39,10 @@ DISPLAY_NAME_OVERRIDES = {
 COPYRIGHT_LINES = {
     "Netresearch": "**Copyright (c) Netresearch DTT GmbH** — Methodology and best practices (MIT / CC-BY-SA-4.0)",
     "HeyGen": "**Copyright (c) HeyGen** - HyperFrames HTML-to-video composition and workflow guidance (Apache 2.0)",
-    "Matt Pocock": "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)",
+    "Corey Haines": "**Copyright (c) Corey Haines** - Marketing frameworks and best practices (MIT License)",
+    "Dylan Tarre": "**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)",
+    "Matt Pocock": "**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)",
+    "wondelai": "**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)",
 }
 FOOTER_LINE_PATTERNS = (
     r"^## Credits & Attribution$",

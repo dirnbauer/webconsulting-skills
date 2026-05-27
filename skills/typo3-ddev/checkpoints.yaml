@@ -1,0 +1,249 @@
+# Checkpoints for typo3-ddev skill
+# Validates DDEV configuration for TYPO3 projects
+
+version: 1
+skill_id: typo3-ddev
+
+mechanical:
+  # === DDEV CONFIGURATION EXISTENCE ===
+  - id: DD-01
+    type: file_exists
+    target: .ddev/config.yaml
+    severity: error
+    desc: "DDEV config.yaml must exist"
+
+  - id: DD-02
+    type: file_exists
+    target: .ddev/.gitignore
+    severity: warning
+    desc: ".ddev/.gitignore should exist"
+
+  # === TYPO3 PROJECT TYPE ===
+  - id: DD-03
+    type: command
+    target: "grep -qE 'type:\\s*(typo3|php)' .ddev/config.yaml"
+    severity: warning
+    desc: "Project type should be typo3 or php. Use type: php for no_project_mount setups with custom docroots."
+
+  # === PHP VERSION CONFIGURATION ===
+  - id: DD-04
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'php_version:\s*"?[0-9]+\.[0-9]+"?'
+    severity: error
+    desc: "PHP version must be explicitly configured"
+
+  - id: DD-05
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'php_version:\s*"?8\.[1-9]"?'
+    severity: warning
+    desc: "PHP version should be 8.1 or higher for modern TYPO3"
+
+  # === DATABASE CONFIGURATION ===
+  # DDEV uses nested database config:
+  # database:
+  #     type: mariadb
+  #     version: "10.11"
+  - id: DD-06
+    type: command
+    pattern: "grep -A2 '^database:' .ddev/config.yaml 2>/dev/null | grep -E 'type:\\s*(mariadb|mysql)' || echo 'NOT_FOUND'"
+    severity: warning
+    desc: "Database type should be explicitly set (mariadb or mysql)"
+
+  - id: DD-07
+    type: command
+    pattern: "grep -A3 '^database:' .ddev/config.yaml 2>/dev/null | grep -E 'version:\\s*' || echo 'NOT_FOUND'"
+    severity: info
+    desc: "Database version should be explicitly configured (MariaDB 10.4+ or MySQL 8.0+)"
+
+  # === WEBSERVER CONFIGURATION ===
+  - id: DD-08
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'webserver_type:\s*(nginx-fpm|apache-fpm)'
+    severity: info
+    desc: "Webserver type should be explicitly configured"
+
+  # === DOCROOT CONFIGURATION ===
+  - id: DD-09
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'docroot:\s*(public|web|typo3|""|'')|no_project_mount:\s*true'
+    severity: warning
+    desc: "Docroot should be set to public, web, or typo3 for TYPO3 projects; empty docroot or no_project_mount: true is valid for custom multi-version extension setups with Apache vhosts"
+
+  # === ADDITIONAL SERVICES ===
+  - id: DD-10
+    type: not_contains
+    target: .ddev/config.yaml
+    pattern: 'no_mailpit: true'
+    severity: warning
+    desc: "Mailpit is enabled by default in DDEV v1.22+; if no_mailpit: true is set, email testing via Mailpit is disabled"
+
+  - id: DD-11
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'additional_hostnames:|additional_fqdns:'
+    severity: info
+    desc: "Additional hostnames may be configured for multisite setups"
+
+  # === GITIGNORE PATTERNS ===
+  - id: DD-12
+    type: contains
+    target: .ddev/.gitignore
+    pattern: "db_snapshots"
+    severity: warning
+    desc: ".ddev/.gitignore should exclude db_snapshots directory"
+
+  - id: DD-13
+    type: contains
+    target: .ddev/.gitignore
+    pattern: "import.yaml"
+    severity: info
+    desc: ".ddev/.gitignore should exclude import.yaml"
+
+  - id: DD-14
+    type: contains
+    target: .ddev/.gitignore
+    pattern: "import-db"
+    severity: info
+    desc: ".ddev/.gitignore should exclude import-db directory"
+
+  - id: DD-15
+    type: contains
+    target: .ddev/.gitignore
+    pattern: "sequelace.yaml"
+    severity: info
+    desc: ".ddev/.gitignore should exclude sequelace.yaml (Sequel Ace config)"
+
+  # === COMPOSER CONFIGURATION ===
+  - id: DD-16
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'composer_version:\s*"?2"?'
+    severity: warning
+    desc: "Composer version should be set to 2"
+
+  # === HOOKS CONFIGURATION ===
+  # `.ddev/commands/web/setup` is the Netresearch standard one-shot install
+  # entry point — runs inside the web container, performs `composer install`,
+  # database creation, docs render, asset preparation, etc. Single source of
+  # truth across all Netresearch TYPO3 projects. Makefile / shell aliases
+  # (e.g. `make up`) should delegate to `ddev setup`.
+  - id: DD-17
+    type: file_exists
+    target: .ddev/commands/web/setup
+    severity: warning
+    desc: ".ddev/commands/web/setup is the canonical one-shot install entry point (Netresearch convention — Makefile / aliases delegate to it)"
+
+  - id: DD-18
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'hooks:|post-start:'
+    severity: info
+    desc: "DDEV hooks may be configured for automated setup"
+
+  # === XDEBUG CONFIGURATION ===
+  - id: DD-19
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'xdebug_enabled:\s*(true|false)'
+    severity: info
+    desc: "Xdebug setting should be explicitly configured"
+
+  # === TIMEZONE CONFIGURATION ===
+  - id: DD-20
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'timezone:'
+    severity: info
+    desc: "Timezone may be explicitly configured"
+
+  # === CUSTOM DDEV COMMANDS ===
+  - id: DD-25
+    type: file_exists
+    target: .ddev/commands/
+    severity: info
+    desc: "Custom DDEV commands directory should exist for project automation"
+
+  - id: DD-26
+    type: file_exists
+    target: .ddev/commands/web/
+    severity: info
+    desc: ".ddev/commands/web/ should exist for custom web container commands"
+
+  # === TYPO3 CONTEXT ENVIRONMENT ===
+  - id: DD-27
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'TYPO3_CONTEXT|web_environment'
+    severity: info
+    desc: "DDEV should configure TYPO3_CONTEXT via web_environment"
+
+  # === NODEJS FOR FRONTEND TOOLING ===
+  - id: DD-28
+    type: regex
+    target: .ddev/config.yaml
+    pattern: 'nodejs_version:'
+    severity: info
+    desc: "DDEV nodejs_version may be configured for frontend build tools"
+
+  # === MULTI-VERSION TESTING SETUP ===
+  - id: DD-29
+    type: command
+    pattern: "ls .ddev/commands/web/install-* 2>/dev/null | head -1 || echo 'NOT_FOUND'"
+    severity: info
+    desc: "DDEV install commands should exist for multi-version TYPO3 testing"
+
+llm_reviews:
+  # === PHP VERSION ALIGNMENT ===
+  - id: DD-21
+    domain: ddev-config
+    prompt: |
+      Verify PHP version consistency across the project:
+      1. Check .ddev/config.yaml php_version
+      2. Check composer.json require.php constraint
+      3. Check GitHub Actions CI matrix PHP versions
+      4. Ensure the DDEV PHP version is within the composer.json PHP constraint range
+      Report any version mismatches or inconsistencies.
+    severity: warning
+    desc: "PHP version should be consistent across DDEV, composer.json, and CI"
+
+  # === DATABASE VERSION ALIGNMENT ===
+  - id: DD-22
+    domain: ddev-config
+    prompt: |
+      Verify database configuration is appropriate for TYPO3:
+      1. Check if using MariaDB 10.4+ or MySQL 8.0+
+      2. For TYPO3 v12+, ensure MariaDB 10.4+ or MySQL 8.0+
+      3. For TYPO3 v13+, ensure MariaDB 10.5+ or MySQL 8.0+
+      Report if database version may not be compatible with TYPO3 version.
+    severity: info
+    desc: "Database version should be compatible with TYPO3 requirements"
+
+  # === ADDITIONAL SERVICES REVIEW ===
+  - id: DD-23
+    domain: ddev-config
+    prompt: |
+      Review additional DDEV services configuration:
+      1. Check if mailpit is configured for email testing (recommended)
+      2. Check for Redis/Memcached if caching extensions are used
+      3. Check for Elasticsearch/Solr if search extensions are used
+      4. Verify docker-compose.*.yaml files follow DDEV naming conventions
+      Report recommended services that may be missing based on project needs.
+    severity: info
+    desc: "Additional services should be configured based on project requirements"
+
+  # === TYPO3 SPECIFIC CONFIGURATION ===
+  - id: DD-24
+    domain: ddev-config
+    prompt: |
+      Review TYPO3-specific DDEV configuration:
+      1. Check if docroot points to the correct TYPO3 public directory
+      2. Verify web_environment settings for TYPO3 context
+      3. Check for TYPO3_CONTEXT environment variable configuration
+      4. Verify upload file size limits are adequate (upload_max_filesize, post_max_size)
+      Report any TYPO3-specific configuration improvements.
+    severity: info
+    desc: "DDEV should be properly configured for TYPO3 specifics"

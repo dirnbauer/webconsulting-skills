@@ -1,0 +1,595 @@
+# Checkpoints for typo3-extension-upgrade skill
+# Validates extension readiness for TYPO3 version upgrades
+
+# RELOCATED FROM php-modernization-skill (v1.16.0 refocus):
+#   PM-35 -> TU-54 (mechanical: SingletonInterface in Classes/src)
+#   PM-36 -> TU-55 (LLM: SingletonInterface migration to DI scoping)
+
+version: 1
+skill_id: typo3-extension-upgrade
+
+mechanical:
+  # === RECTOR CONFIGURATION ===
+  # Accept both root and Build/ subdirectory layouts (common in extensions that
+  # keep testing/CI tooling under Build/). Build/rector/rector.php is the
+  # Netresearch default when using a split Build/ structure.
+  #
+  # All checks here use `command` checkpoints that loop over candidate paths
+  # and only `grep` files that actually exist — `grep -l a b c` exits with
+  # status 2 when any listed file is missing, which would otherwise mask real
+  # matches in other candidates. The runner's brace-expansion in `file_exists`
+  # is used for TU-01/TU-04 since those are pure existence checks.
+  - id: TU-01
+    type: file_exists
+    target: "{rector.php,Build/rector.php,Build/rector/rector.php}"
+    severity: warning
+    desc: "rector.php should exist for automated code migration (root or Build/ subdir)"
+
+  - id: TU-02
+    type: command
+    pattern: 'for f in rector.php Build/rector.php Build/rector/rector.php; do [ -f "$f" ] && grep -q "Typo3LevelSetList" "$f" && exit 0; done; exit 1'
+    severity: warning
+    desc: "Rector config should use TYPO3 level sets for version upgrades"
+
+  - id: TU-03
+    type: command
+    pattern: 'for f in rector.php Build/rector.php Build/rector/rector.php; do [ -f "$f" ] && grep -q "RectorConfig" "$f" && exit 0; done; exit 1'
+    severity: warning
+    desc: "Rector config should use modern RectorConfig format"
+
+  # === FRACTOR CONFIGURATION (TypoScript/Fluid) ===
+  - id: TU-04
+    type: file_exists
+    target: "{fractor.php,Build/fractor.php,Build/fractor/fractor.php}"
+    severity: info
+    desc: "fractor.php should exist for TypoScript/Fluid migration (root or Build/ subdir)"
+
+  - id: TU-05
+    type: command
+    pattern: 'for f in fractor.php Build/fractor.php Build/fractor/fractor.php; do [ -f "$f" ] && grep -q "Typo3LevelSetList" "$f" && exit 0; done; exit 1'
+    severity: info
+    desc: "Fractor config should use TYPO3 level sets"
+
+  # === COMPOSER.JSON VERSION CONSTRAINTS ===
+  - id: TU-06
+    type: json_path
+    target: composer.json
+    pattern: '.require["php"]'
+    severity: error
+    desc: "composer.json must declare PHP version constraint"
+
+  - id: TU-07
+    type: json_path
+    target: composer.json
+    pattern: '.require["typo3/cms-core"]'
+    severity: error
+    desc: "composer.json must declare typo3/cms-core constraint"
+
+  - id: TU-08
+    type: regex
+    target: composer.json
+    pattern: '"php"\s*:\s*"[^"]*8\.[0-9]'
+    severity: warning
+    desc: "PHP constraint should include PHP 8.x versions"
+
+  - id: TU-09
+    type: regex
+    target: composer.json
+    pattern: '"typo3/cms-core"\s*:\s*"[^"]*1[23]\.'
+    severity: warning
+    desc: "TYPO3 constraint should include v12 or v13"
+
+  # === DEPRECATED API DETECTION ===
+  - id: TU-10
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "GeneralUtility::devLog"
+    severity: error
+    desc: "Must not use deprecated GeneralUtility::devLog (removed in v10)"
+
+  - id: TU-11
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "$GLOBALS['TYPO3_DB']"
+    severity: error
+    desc: "Must not use deprecated $GLOBALS['TYPO3_DB'] (removed in v9)"
+
+  - id: TU-12
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "piVars"
+    severity: warning
+    desc: "Should not use deprecated piVars (pi_base pattern)"
+
+  - id: TU-13
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "AbstractPlugin"
+    severity: warning
+    desc: "Should not use deprecated AbstractPlugin (pi_base)"
+
+  - id: TU-14
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "TYPO3_MODE"
+    severity: error
+    desc: "Must not use deprecated TYPO3_MODE constant (removed in v11)"
+
+  - id: TU-15
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "ObjectManager::getInstance"
+    severity: warning
+    desc: "Should not use ObjectManager::getInstance (use DI)"
+
+  - id: TU-16
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "extRelPath"
+    severity: error
+    desc: "Must not use deprecated extRelPath (removed in v9)"
+
+  - id: TU-17
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "PATH_site"
+    severity: error
+    desc: "Must not use deprecated PATH_site constant (use Environment API)"
+
+  - id: TU-18
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "PATH_typo3conf"
+    severity: error
+    desc: "Must not use deprecated PATH_typo3conf constant"
+
+  # === EXT_TABLES.PHP / EXT_LOCALCONF.PHP ===
+  - id: TU-19
+    type: not_contains
+    target: ext_tables.php
+    pattern: "ExtensionManagementUtility::addModule"
+    severity: warning
+    desc: "Should use Configuration/Backend/Modules.php instead of addModule"
+
+  - id: TU-20
+    type: not_contains
+    target: ext_tables.php
+    pattern: "registerPlugin"
+    severity: warning
+    desc: "Plugins should be registered via Configuration/TCA/Overrides/"
+
+  # === TYPOSCRIPT CHECKS ===
+  - id: TU-21
+    type: not_contains
+    target: "**/*.typoscript"
+    pattern: "CONTENT"
+    severity: info
+    desc: "Consider migrating CONTENT objects to Fluid"
+
+  - id: TU-22
+    type: not_contains
+    target: "**/*.typoscript"
+    pattern: "USER_INT"
+    severity: info
+    desc: "Review USER_INT usage for caching implications"
+
+  # === FLUID TEMPLATE CHECKS ===
+  - id: TU-23
+    type: not_contains
+    target: "**/*.html"
+    pattern: "f:widget"
+    severity: error
+    desc: "Must not use deprecated f:widget (removed in v12)"
+
+  - id: TU-24
+    type: not_contains
+    target: "**/*.html"
+    pattern: "f:be.container"
+    severity: warning
+    desc: "Should migrate f:be.container to module template"
+
+  # === EXTENSION SCANNER INDICATORS ===
+  - id: TU-25
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "@extensionScannerIgnoreLine"
+    severity: info
+    desc: "Review extensionScannerIgnoreLine annotations"
+
+  # === SERVICES.YAML FOR DI ===
+  - id: TU-26
+    type: file_exists
+    target: Configuration/Services.yaml
+    severity: warning
+    desc: "Services.yaml should exist for dependency injection"
+
+  - id: TU-27
+    type: contains
+    target: Configuration/Services.yaml
+    pattern: "autowire: true"
+    severity: info
+    desc: "Services.yaml should enable autowiring"
+
+  # === MODERN BACKEND MODULE REGISTRATION ===
+  - id: TU-28
+    type: file_exists
+    target: Configuration/Backend/Modules.php
+    severity: info
+    scope: backend
+    desc: "Backend modules should use Configuration/Backend/Modules.php (v12+)"
+
+  # === TCA MIGRATION ===
+  - id: TU-29
+    type: not_contains
+    target: "Configuration/TCA/**/*.php"
+    pattern: "'type' => 'input'"
+    severity: info
+    desc: "Review TCA type=input for migration to specific types (email, link, etc.)"
+
+  - id: TU-30
+    type: not_contains
+    target: "Configuration/TCA/**/*.php"
+    pattern: "'renderType' => 'inputLink'"
+    severity: warning
+    desc: "Should migrate inputLink to TCA type=link (v12+)"
+
+  # === DEPRECATED REQUEST ACCESSORS ===
+  - id: TU-31
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "GeneralUtility::_GP("
+    severity: warning
+    desc: "Should not use deprecated GeneralUtility::_GP(); use PSR-7 request instead"
+
+  - id: TU-32
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "GeneralUtility::_GET("
+    severity: warning
+    desc: "Should not use deprecated GeneralUtility::_GET(); use PSR-7 request instead"
+
+  - id: TU-33
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "GeneralUtility::_POST("
+    severity: warning
+    desc: "Should not use deprecated GeneralUtility::_POST(); use PSR-7 request instead"
+
+  - id: TU-34
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "$GLOBALS['TSFE']"
+    severity: warning
+    desc: "Should not access TSFE via $GLOBALS; use PSR-7 request attributes or Context API"
+
+  # === DEPRECATED DI PATTERNS ===
+  - id: TU-35
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "@inject"
+    severity: warning
+    desc: "Should not use deprecated @inject annotation; use constructor injection"
+
+  # === DEPRECATED HOOK REGISTRATIONS ===
+  - id: TU-36
+    type: not_contains
+    target: ext_localconf.php
+    pattern: "SignalSlot"
+    severity: warning
+    desc: "Should not use deprecated Signal/Slot; migrate to PSR-14 events"
+
+  # === THIRD-PARTY DEPENDENCY VERSION COMPATIBILITY ===
+  - id: TU-60
+    type: command
+    pattern: "php -r \"\\$c=json_decode(file_get_contents('composer.json'),true);foreach(\\$c['require']??[] as \\$p=>\\$v){if(preg_match('/\\|\\|/',\\$v)&&\\$p!=='php'&&!str_starts_with(\\$p,'typo3/')&&!str_starts_with(\\$p,'ext-')&&!str_starts_with(\\$p,'lib-'))echo \\$p.': '.\\$v.PHP_EOL;}\" 2>/dev/null"
+    severity: info
+    desc: "Identify non-TYPO3 dependencies with multi-major-version constraints (|| operator)"
+
+  - id: TU-61
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "@phpstan-ignore method.notFound"
+    severity: warning
+    desc: "Should not suppress method.notFound via @phpstan-ignore — use adapter pattern for version-conditional code"
+
+  - id: TU-62
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "@phpstan-ignore-next-line"
+    severity: info
+    desc: "Review @phpstan-ignore-next-line annotations — may mask version-specific runtime errors"
+
+  # === PHP-CS-FIXER CONFIGURATION ===
+  - id: TU-37
+    type: command
+    pattern: "ls Build/php-cs-fixer/php-cs-fixer.php .php-cs-fixer.php .php-cs-fixer.dist.php 2>/dev/null | head -1 || echo 'NOT_FOUND'"
+    severity: info
+    desc: "PHP-CS-Fixer configuration should exist for code style enforcement"
+
+  # === CHANGELOG ===
+  - id: TU-38
+    type: file_exists
+    target: CHANGELOG.md
+    severity: info
+    desc: "CHANGELOG.md should exist to document version changes"
+
+  # === DEPRECATED CONSTANTS ===
+  - id: TU-39
+    type: not_contains
+    target: "Classes/**/*.php"
+    pattern: "TYPO3_REQUESTTYPE"
+    severity: warning
+    desc: "Should not use deprecated TYPO3_REQUESTTYPE constant (use ApplicationType)"
+
+  # === SINGLETONINTERFACE DEPRECATION (TYPO3 v14) ===
+  - id: TU-54
+    type: command
+    pattern: 'for d in Classes src; do [ -d "$d" ] && grep -rql "SingletonInterface" "$d" 2>/dev/null && exit 1; done; exit 0'
+    severity: warning
+    desc: "SingletonInterface is deprecated in TYPO3 v14. Migrate to proper DI scoping (Services.yaml shared: true) unless the class must be used with GeneralUtility::setSingletonInstance in tests."
+
+llm_reviews:
+  # === COMPREHENSIVE RECTOR REVIEW ===
+  - id: TU-40
+    domain: code-migration
+    prompt: |
+      Review the rector.php configuration for TYPO3 extension upgrade readiness:
+
+      1. Check if appropriate TYPO3 LevelSetLists are configured (e.g., Typo3LevelSetList::UP_TO_TYPO3_12)
+      2. Verify PHP upgrade sets are included if needed (e.g., PHP 8.1, 8.2, 8.3, 8.4)
+      3. Check if paths are correctly configured to scan Classes/, Configuration/, etc.
+      4. Look for any custom rectors that might conflict with TYPO3 upgrades
+      5. Verify skip patterns don't exclude important directories
+
+      Report any missing configurations or improvements needed.
+    severity: warning
+    desc: "Comprehensive Rector configuration review"
+
+  # === FRACTOR REVIEW ===
+  - id: TU-41
+    domain: code-migration
+    prompt: |
+      Review the fractor.php configuration if present:
+
+      1. Check if TYPO3 TypoScript migration rules are enabled
+      2. Verify Fluid template migration rules are configured
+      3. Check if paths include all TypoScript and Fluid directories
+      4. Review any skip patterns
+
+      If fractor.php doesn't exist, recommend creating one for TypoScript/Fluid migrations.
+    severity: info
+    desc: "Fractor configuration for TypoScript/Fluid migration"
+
+  # === COMPOSER VERSION STRATEGY ===
+  - id: TU-42
+    domain: version-compatibility
+    prompt: |
+      Analyze composer.json version constraints:
+
+      1. Check PHP version range - should support current PHP versions (8.2-8.4)
+      2. Check TYPO3 version range - should specify clear major version constraints
+      3. Verify the PHP and TYPO3 constraints are compatible with each other
+      4. Check require-dev for testing tools (phpunit, phpstan) version compatibility
+      5. Look for any packages that might block upgrades (abandoned, unmaintained)
+
+      Report version constraint issues and recommendations.
+    severity: error
+    desc: "Version constraint compatibility analysis"
+
+  # === DEPRECATED API DEEP SCAN ===
+  - id: TU-43
+    domain: api-compatibility
+    prompt: |
+      Scan PHP code for deprecated TYPO3 API usage beyond simple pattern matching:
+
+      1. Look for deprecated hook registrations (TYPO3_CONF_VARS hooks removed in recent versions)
+      2. Check for deprecated class inheritance (AbstractPlugin, AbstractController patterns)
+      3. Identify deprecated service instantiation patterns (makeInstance vs DI)
+      4. Look for deprecated exception classes
+      5. Check for deprecated annotation usage (@inject vs constructor injection)
+      6. Identify XCLASSing that might break with upgrades
+
+      Provide specific file:line references for each issue found.
+    severity: error
+    desc: "Deep scan for deprecated TYPO3 API usage"
+
+  # === TCA MIGRATION ANALYSIS ===
+  - id: TU-44
+    domain: configuration
+    prompt: |
+      Analyze TCA configuration for upgrade compatibility:
+
+      1. Check for deprecated TCA type configurations
+      2. Identify renderType deprecations (inputLink -> type=link, etc.)
+      3. Look for deprecated eval configurations
+      4. Check for wizard configurations that need migration
+      5. Verify ctrl section has required fields for target version
+      6. Check for deprecated palettes or showitem syntax
+
+      Report specific migration needs with before/after examples.
+    severity: warning
+    desc: "TCA configuration migration analysis"
+
+  # === EXTENSION SCANNER SIMULATION ===
+  - id: TU-45
+    domain: api-compatibility
+    prompt: |
+      Simulate Extension Scanner checks:
+
+      1. List all @extensionScannerIgnoreLine annotations and verify they're still needed
+      2. Check for strong deprecation patterns that Extension Scanner would flag
+      3. Identify breaking changes between current TYPO3 version and target version
+      4. Look for calls to internal TYPO3 APIs that might change
+      5. Check for database schema changes that need migration
+
+      Categorize findings by severity (breaking, deprecated, needs-review).
+    severity: error
+    desc: "Extension Scanner compatibility simulation"
+
+  # === TYPOSCRIPT MODERNIZATION ===
+  - id: TU-46
+    domain: configuration
+    prompt: |
+      Review TypoScript configuration for modernization:
+
+      1. Check for deprecated TypoScript objects and properties
+      2. Identify CONTENT objects that should migrate to DataProcessors
+      3. Look for deprecated stdWrap properties
+      4. Check conditions syntax (old vs Symfony expression language)
+      5. Review plugin configurations for deprecated settings
+      6. Check for file references using deprecated paths
+
+      Provide migration guidance for each issue.
+    severity: warning
+    desc: "TypoScript modernization review"
+
+  # === FLUID TEMPLATE UPGRADE ===
+  - id: TU-47
+    domain: templates
+    prompt: |
+      Review Fluid templates for upgrade compatibility:
+
+      1. Check for deprecated ViewHelpers (f:widget.*, f:be.*)
+      2. Identify custom ViewHelpers that might need updates
+      3. Look for deprecated layout/partial references
+      4. Check for inline JavaScript that should be modernized
+      5. Verify namespace declarations are current
+      6. Check for deprecated format ViewHelpers
+
+      List each template needing updates with specific changes required.
+    severity: warning
+    desc: "Fluid template upgrade compatibility"
+
+  # === BACKEND MODULE MIGRATION ===
+  - id: TU-48
+    domain: backend
+    prompt: |
+      Check backend module configuration:
+
+      1. If ext_tables.php contains module registration, recommend Configuration/Backend/Modules.php
+      2. Check backend controller classes for deprecated parent classes
+      3. Verify backend module templates use modern structure
+      4. Check for deprecated JavaScript module loading
+      5. Review backend route configurations
+      6. Check for deprecated backend user permission checks
+
+      Provide migration path for each issue.
+    severity: warning
+    desc: "Backend module migration readiness"
+
+  # === DEPENDENCY INJECTION READINESS ===
+  - id: TU-49
+    domain: architecture
+    prompt: |
+      Evaluate dependency injection implementation:
+
+      1. Check if Services.yaml properly configures all service classes
+      2. Look for makeInstance calls that should use DI
+      3. Identify singleton patterns that could use DI
+      4. Check for @inject annotations that should be constructor injection
+      5. Verify interfaces are properly configured for DI
+      6. Check for ObjectManager::getInstance usage
+
+      Rate DI adoption and list classes needing refactoring.
+    severity: warning
+    desc: "Dependency injection adoption assessment"
+
+  # === UPGRADE PATH SUMMARY ===
+  - id: TU-50
+    domain: upgrade-planning
+    prompt: |
+      Provide an overall upgrade readiness assessment:
+
+      1. Summarize all blocking issues that must be fixed before upgrade
+      2. List deprecated patterns that should be addressed
+      3. Estimate effort level (low/medium/high) for the upgrade
+      4. Recommend upgrade sequence if multiple TYPO3 versions are being skipped
+      5. Identify any third-party dependencies that might block upgrade
+      6. Suggest testing strategy for the upgrade
+
+      Create a prioritized action list for the upgrade process.
+    severity: info
+    desc: "Overall upgrade readiness and planning summary"
+
+  # === THIRD-PARTY DEPENDENCY API COMPATIBILITY ===
+  - id: TU-51
+    domain: dependency-compatibility
+    prompt: |
+      Analyze composer.json for third-party dependencies (non-TYPO3, non-PHP) that use
+      multi-version constraints (e.g., "^3.0 || ^4.0"):
+
+      1. For each such dependency, enumerate ALL usages of its API in Classes/ and Tests/
+      2. Cross-reference method calls against the dependency's interface definitions
+      3. Flag any method called on an interface-typed variable that only exists on the
+         concrete class or was removed/renamed in a newer major version
+      4. Check for @phpstan-ignore tags that mask version-conditional method calls —
+         these indicate a runtime error in one of the supported versions
+      5. Verify adapter pattern is used where method signatures differ between versions
+
+      Report each incompatibility with file:line reference and recommended fix.
+    severity: error
+    desc: "Third-party dependency API compatibility across all supported major versions"
+
+  # === PHPSTAN MULTI-VERSION VALIDATION ===
+  - id: TU-52
+    domain: static-analysis
+    prompt: |
+      Check PHPStan configuration and CI setup for multi-version dependency support:
+
+      1. If composer.json has any dependency with "||" constraints spanning major versions,
+         verify that PHPStan is configured to run against EACH major version
+      2. Check CI workflow (GitHub Actions / GitLab CI) for a test matrix that includes
+         each supported major version of multi-version dependencies
+      3. Look for @phpstan-ignore or @phpstan-ignore-next-line annotations in Classes/ —
+         each one should be reviewed to ensure it doesn't mask a real runtime error
+         in one of the supported versions
+      4. Check if method_exists() is used for version detection — if called on an instance
+         variable, PHPStan type narrowing can cause issues; recommend checking on the
+         class/interface name instead, or using the adapter pattern
+      5. Verify phpstan.neon does not pin a specific dependency version that would skip
+         validation of other supported versions
+
+      Report PHPStan gaps and recommend CI matrix additions.
+    severity: warning
+    desc: "PHPStan must validate against each supported major version of multi-version dependencies"
+
+  # === TEST MOCK COMPATIBILITY ===
+  - id: TU-53
+    domain: testing
+    prompt: |
+      Review test files for compatibility with multi-version dependencies:
+
+      1. Find all createMock() or getMockBuilder() calls that mock third-party interfaces
+      2. For each mock, verify that every ->method('name') call references a method
+         that exists on the interface in ALL supported major versions
+      3. Check willReturnCallback() closures — their parameter signatures must match
+         the mocked method's signature in each supported version
+      4. Look for test specificity loss: if production code was refactored from a
+         version-specific API (e.g., ->toWebp()->save()) to a version-agnostic API
+         (e.g., ->save()), verify that test assertions remain equally specific
+         (e.g., asserting output format, file extension, or quality parameters)
+      5. Check that test suites are configured to run against each supported dependency
+         version in CI
+
+      Report each incompatible mock with file:line and recommended fix.
+    severity: error
+    desc: "Test mocks must reference methods valid on interfaces in all supported dependency versions"
+
+  # === SINGLETONINTERFACE DEPRECATION (TYPO3 v14) ===
+  - id: TU-55
+    domain: code-quality
+    prompt: |
+      Review the codebase for uses of TYPO3\CMS\Core\SingletonInterface.
+
+      Check for:
+      1. Classes implementing SingletonInterface — this is deprecated in TYPO3 v14
+      2. Suggest migration to proper DI container scoping (shared: true in Services.yaml)
+      3. EXCEPTION: Classes that must be used with GeneralUtility::setSingletonInstance()
+         in test fixtures. These may need to keep the interface temporarily until
+         the test setup is refactored to use proper DI container overrides.
+      4. Check if the singleton behavior is actually needed or if the class can
+         simply be a regular shared service (which is the DI container default).
+
+      Report specific files implementing SingletonInterface and migration path.
+    severity: warning
+    desc: "SingletonInterface is deprecated in TYPO3 v14 — migrate to DI container scoping"

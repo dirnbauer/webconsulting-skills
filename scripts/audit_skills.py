@@ -67,9 +67,25 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Vercel",
         "url": "https://github.com/vercel-labs/skills",
     },
+    "caveman": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "diagnose": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
     "grill-me": {
         "owner": "Matt Pocock",
-        "url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "grill-with-docs": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "handoff": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
     },
     "gsap": {
         "owner": "HeyGen",
@@ -95,6 +111,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     "impeccable": {
         "owner": "pbakaus",
         "url": "https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7",
+    },
+    "improve-codebase-architecture": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
     },
     "ios-design": {
         "owner": "ehmo",
@@ -245,6 +265,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Corey Haines",
         "url": "https://github.com/coreyhaines31/marketingskills",
     },
+    "prospecting": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
     "corey-programmatic-seo": {
         "owner": "Corey Haines",
         "url": "https://github.com/coreyhaines31/marketingskills",
@@ -277,6 +301,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Corey Haines",
         "url": "https://github.com/coreyhaines31/marketingskills",
     },
+    "sms": {
+        "owner": "Corey Haines",
+        "url": "https://github.com/coreyhaines31/marketingskills",
+    },
     "social": {
         "owner": "Corey Haines",
         "url": "https://github.com/coreyhaines31/marketingskills",
@@ -300,6 +328,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     "programmatic-seo": {
         "owner": "AITYTech",
         "url": "https://github.com/aitytech/agentkits-marketing",
+    },
+    "prototype": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
     },
     "react-best-practices": {
         "owner": "Vercel",
@@ -330,9 +362,29 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "Giuseppe Trisciuoglio",
         "url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     },
+    "setup-matt-pocock-skills": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
     "skill-creator": {
         "owner": "Anthropic",
         "url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
+    },
+    "tdd": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "to-issues": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "to-prd": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "triage": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
     },
     "tvos-design": {
         "owner": "ehmo",
@@ -430,6 +482,14 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
     "website-to-hyperframes": {
         "owner": "HeyGen",
         "url": "https://github.com/heygen-com/hyperframes",
+    },
+    "write-a-skill": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
+    },
+    "zoom-out": {
+        "owner": "Matt Pocock",
+        "url": "https://github.com/mattpocock/skills",
     },
 }
 

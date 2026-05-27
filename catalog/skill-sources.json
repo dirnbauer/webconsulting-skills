@@ -24,7 +24,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ad-creative/SKILL.md",
-    "line_count": 373,
+    "line_count": 375,
     "frontmatter_keys": [
       "name",
       "description"
@@ -40,7 +40,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ads/SKILL.md",
-    "line_count": 328,
+    "line_count": 421,
     "frontmatter_keys": [
       "name",
       "description"
@@ -90,7 +90,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-seo/SKILL.md",
-    "line_count": 496,
+    "line_count": 498,
     "frontmatter_keys": [
       "name",
       "description"
@@ -106,7 +106,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/analytics/SKILL.md",
-    "line_count": 320,
+    "line_count": 322,
     "frontmatter_keys": [
       "name",
       "description"
@@ -140,7 +140,23 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/aso/SKILL.md",
-    "line_count": 323,
+    "line_count": 325,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "caveman",
+    "skill_name": "caveman",
+    "description": "Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user says \\\"caveman mode\\\", \\\"talk like caveman\\\", \\\"use caveman\\\", \\\"less tokens\\\", \\\"be brief\\\", or invokes /caveman.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/caveman/SKILL.md",
+    "line_count": 60,
     "frontmatter_keys": [
       "name",
       "description"
@@ -156,7 +172,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/churn-prevention/SKILL.md",
-    "line_count": 435,
+    "line_count": 437,
     "frontmatter_keys": [
       "name",
       "description"
@@ -188,7 +204,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/co-marketing/SKILL.md",
-    "line_count": 301,
+    "line_count": 303,
     "frontmatter_keys": [
       "name",
       "description"
@@ -204,7 +220,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cold-email/SKILL.md",
-    "line_count": 169,
+    "line_count": 172,
     "frontmatter_keys": [
       "name",
       "description"
@@ -220,7 +236,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/community-marketing/SKILL.md",
-    "line_count": 174,
+    "line_count": 176,
     "frontmatter_keys": [
       "name",
       "description"
@@ -236,7 +252,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitor-profiling/SKILL.md",
-    "line_count": 422,
+    "line_count": 425,
     "frontmatter_keys": [
       "name",
       "description"
@@ -252,7 +268,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitors/SKILL.md",
-    "line_count": 267,
+    "line_count": 269,
     "frontmatter_keys": [
       "name",
       "description"
@@ -268,7 +284,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/content-strategy/SKILL.md",
-    "line_count": 376,
+    "line_count": 378,
     "frontmatter_keys": [
       "name",
       "description"
@@ -300,7 +316,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copy-editing/SKILL.md",
-    "line_count": 468,
+    "line_count": 470,
     "frontmatter_keys": [
       "name",
       "description"
@@ -316,7 +332,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copywriting/SKILL.md",
-    "line_count": 263,
+    "line_count": 265,
     "frontmatter_keys": [
       "name",
       "description"
@@ -332,7 +348,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-ab-testing/SKILL.md",
-    "line_count": 364,
+    "line_count": 366,
     "frontmatter_keys": [
       "name",
       "description"
@@ -348,7 +364,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-programmatic-seo/SKILL.md",
-    "line_count": 249,
+    "line_count": 251,
     "frontmatter_keys": [
       "name",
       "description"
@@ -364,7 +380,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro/SKILL.md",
-    "line_count": 198,
+    "line_count": 200,
     "frontmatter_keys": [
       "name",
       "description"
@@ -398,7 +414,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/customer-research/SKILL.md",
-    "line_count": 281,
+    "line_count": 284,
     "frontmatter_keys": [
       "name",
       "description"
@@ -426,13 +442,29 @@
     "pass_3": []
   },
   {
+    "directory": "diagnose",
+    "skill_name": "diagnose",
+    "description": "Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce \\u2192 minimise \\u2192 hypothesise \\u2192 instrument \\u2192 fix \\u2192 regression-test. Use when user says \\\"diagnose this\\\" / \\\"debug this\\\", reports a bug, says something is broken/throwing/failing, or describes a performance regression.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/diagnose/SKILL.md",
+    "line_count": 132,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "directory-submissions",
     "skill_name": "directory-submissions",
     "description": "When the user wants to submit their product to startup, SaaS, AI, agent, MCP, no-code, or review directories for backlinks, domain rating, and discovery. Also use when the user mentions \\\"directory submissions,\\\" \\\"submit to directories,\\\" \\\"backlinks from directories,\\\" \\\"list my product,\\\" \\\"submit to Product Hunt,\\\" \\\"BetaList,\\\" \\\"TAAFT,\\\" \\\"Futurepedia,\\\" \\\"G2 listing,\\\" \\\"Capterra listing,\\\" \\\"AlternativeTo,\\\" \\\"SaaSHub,\\\" \\\"AI directories,\\\" \\\"MCP registry,\\\" \\\"agent directory,\\\" \\\"dofollow backlinks,\\\" \\\"launch directories,\\\" or \\\"directory tracker.\\\" Use this whenever someone is planning the directory layer of a product launch or an ongoing backlink campaign. For the broader launch moment, see launch. For programmatic SEO pages that should live behind these backlinks, see programmatic-seo. For AI citation optimization, see ai-seo.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/directory-submissions/SKILL.md",
-    "line_count": 392,
+    "line_count": 394,
     "frontmatter_keys": [
       "name",
       "description"
@@ -468,7 +500,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/emails/SKILL.md",
-    "line_count": 322,
+    "line_count": 324,
     "frontmatter_keys": [
       "name",
       "description"
@@ -480,11 +512,11 @@
   {
     "directory": "enterprise-readiness",
     "skill_name": "enterprise-readiness",
-    "description": "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines.",
+    "description": "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA, cosign, SBOMs, pnpm), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/enterprise-readiness-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
-    "line_count": 81,
+    "line_count": 84,
     "frontmatter_keys": [
       "name",
       "description"
@@ -532,7 +564,7 @@
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
-    "line_count": 159,
+    "line_count": 277,
     "frontmatter_keys": [
       "name",
       "description"
@@ -548,7 +580,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/free-tools/SKILL.md",
-    "line_count": 190,
+    "line_count": 192,
     "frontmatter_keys": [
       "name",
       "description"
@@ -578,9 +610,25 @@
     "skill_name": "grill-me",
     "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \\\"grill me\\\".",
     "source_owner": "Matt Pocock",
-    "source_url": "https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me",
+    "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-me/SKILL.md",
     "line_count": 25,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "grill-with-docs",
+    "skill_name": "grill-with-docs",
+    "description": "Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-with-docs/SKILL.md",
+    "line_count": 103,
     "frontmatter_keys": [
       "name",
       "description"
@@ -596,7 +644,23 @@
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/gsap/SKILL.md",
-    "line_count": 226,
+    "line_count": 255,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "handoff",
+    "skill_name": "handoff",
+    "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/handoff/SKILL.md",
+    "line_count": 29,
     "frontmatter_keys": [
       "name",
       "description"
@@ -608,27 +672,29 @@
   {
     "directory": "hyperframes",
     "skill_name": "hyperframes",
-    "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For CLI commands (init, lint, preview, render, transcribe, tts) see the hyperframes-cli skill.",
+    "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For dev-loop CLI commands (init, lint, inspect, preview, render) see the hyperframes-cli skill; for asset preprocessing commands (tts, transcribe, remove-background) see the hyperframes-media skill.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes/SKILL.md",
-    "line_count": 379,
+    "line_count": 506,
     "frontmatter_keys": [
       "name",
       "description"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "SKILL.md is 506 lines; skill-creator recommends keeping it under 500"
+    ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "hyperframes-cli",
     "skill_name": "hyperframes-cli",
-    "description": "HyperFrames CLI tool \\u2014 hyperframes init, lint, inspect, preview, render, transcribe, tts, doctor, browser, info, upgrade, compositions, docs, benchmark. Use when scaffolding a project, linting, validating, inspecting visual layout in compositions, previewing in the studio, rendering to video, transcribing audio, generating TTS, or troubleshooting the HyperFrames environment.",
+    "description": "HyperFrames CLI dev loop \\u2014 `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
-    "line_count": 165,
+    "line_count": 159,
     "frontmatter_keys": [
       "name",
       "description"
@@ -660,7 +726,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/image/SKILL.md",
-    "line_count": 351,
+    "line_count": 353,
     "frontmatter_keys": [
       "name",
       "description"
@@ -677,6 +743,22 @@
     "source_url": "https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/impeccable/SKILL.md",
     "line_count": 189,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "improve-codebase-architecture",
+    "skill_name": "improve-codebase-architecture",
+    "description": "Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/improve-codebase-architecture/SKILL.md",
+    "line_count": 96,
     "frontmatter_keys": [
       "name",
       "description"
@@ -728,7 +810,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch/SKILL.md",
-    "line_count": 364,
+    "line_count": 366,
     "frontmatter_keys": [
       "name",
       "description"
@@ -760,7 +842,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/lead-magnets/SKILL.md",
-    "line_count": 321,
+    "line_count": 323,
     "frontmatter_keys": [
       "name",
       "description"
@@ -812,7 +894,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-ideas/SKILL.md",
-    "line_count": 178,
+    "line_count": 180,
     "frontmatter_keys": [
       "name",
       "description"
@@ -828,7 +910,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-psychology/SKILL.md",
-    "line_count": 466,
+    "line_count": 468,
     "frontmatter_keys": [
       "name",
       "description"
@@ -844,7 +926,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-skills/SKILL.md",
-    "line_count": 229,
+    "line_count": 231,
     "frontmatter_keys": [
       "name",
       "description",
@@ -858,11 +940,11 @@
   {
     "directory": "micro-interactions",
     "skill_name": "micro-interactions",
-    "description": "Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges. Applies Disney's 12 animation principles to interface details such as hover, press, focus, ripple, and badge updates.",
+    "description": "Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges.",
     "source_owner": "Dylan Tarre",
     "source_url": "https://github.com/dylantarre/animation-principles",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/micro-interactions/SKILL.md",
-    "line_count": 130,
+    "line_count": 129,
     "frontmatter_keys": [
       "name",
       "description"
@@ -874,16 +956,14 @@
   {
     "directory": "microinteractions",
     "skill_name": "microinteractions",
-    "description": "'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions \"microinteraction\", \"button feedback\", \"loading state\", \"toggle design\", \"animation detail\", \"interaction polish\", \"state transitions\", or \"input feedback\". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For Disney-12-principles micro-interaction motion, see micro-interactions. For overall UI polish, see refactoring-ui.'",
+    "description": "'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions \\\"microinteraction\\\", \\\"button feedback\\\", \\\"loading state\\\", \\\"toggle design\\\", \\\"animation detail\\\", \\\"interaction polish\\\", \\\"state transitions\\\", or \\\"input feedback\\\". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For overall UI polish, see refactoring-ui. For affordance design, see design-everyday-things.'",
     "source_owner": "wondelai",
     "source_url": "https://github.com/wondelai/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/microinteractions/SKILL.md",
-    "line_count": 255,
+    "line_count": 250,
     "frontmatter_keys": [
       "name",
-      "description",
-      "license",
-      "metadata"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -912,7 +992,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/onboarding/SKILL.md",
-    "line_count": 231,
+    "line_count": 233,
     "frontmatter_keys": [
       "name",
       "description"
@@ -928,7 +1008,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/paywalls/SKILL.md",
-    "line_count": 238,
+    "line_count": 240,
     "frontmatter_keys": [
       "name",
       "description"
@@ -940,11 +1020,11 @@
   {
     "directory": "php-modernization",
     "skill_name": "php-modernization",
-    "description": "Use when working with ANY PHP modernization task: upgrading PHP 8.1+ (TYPO3 v14.3 LTS accepts 8.2-8.5), adding strict types, configuring PHPStan/Rector/PHP-CS-Fixer, refactoring to enums/DTOs/readonly/property hooks (PHP 8.4), improving type safety, reviewing PHP code quality. Triggers: PHP upgrade, modernize, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.5.",
+    "description": "Use when modernizing PHP code: PHP 8.1-8.5 features, PSR/PHP-FIG/PER-CS compliance, PHPStan/Rector/PHP-CS-Fixer/PHPat tooling, DTOs/enums/readonly/property hooks, type safety. Triggers: PHP modernization, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.4, PHP 8.5.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/php-modernization-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/php-modernization/SKILL.md",
-    "line_count": 89,
+    "line_count": 79,
     "frontmatter_keys": [
       "name",
       "description"
@@ -960,7 +1040,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/popups/SKILL.md",
-    "line_count": 465,
+    "line_count": 467,
     "frontmatter_keys": [
       "name",
       "description"
@@ -992,7 +1072,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/pricing/SKILL.md",
-    "line_count": 242,
+    "line_count": 244,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1008,7 +1088,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/product-marketing/SKILL.md",
-    "line_count": 252,
+    "line_count": 254,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1032,6 +1112,38 @@
     "pass_1": [
       "SKILL.md is 639 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "prospecting",
+    "skill_name": "prospecting",
+    "description": "When the user wants to find, qualify, and build a list of prospects to reach out to \\u2014 across B2B SaaS, general B2B, or local small businesses. Also use when the user mentions \\\"prospecting,\\\" \\\"build a prospect list,\\\" \\\"find prospects,\\\" \\\"find leads,\\\" \\\"lead gen list,\\\" \\\"find SaaS companies that,\\\" \\\"find B2B companies,\\\" \\\"find local businesses,\\\" \\\"ICP-fit accounts,\\\" \\\"who should we go after,\\\" \\\"outbound list,\\\" \\\"target account list,\\\" \\\"find clients near me,\\\" \\\"businesses without websites,\\\" \\\"prospect research,\\\" or \\\"qualified leads.\\\" Use this for the list-building and qualification phase. For writing the outbound copy after the list is built, see cold-email. For deep competitive research on specific accounts, see competitor-profiling.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/prospecting/SKILL.md",
+    "line_count": 269,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "prototype",
+    "skill_name": "prototype",
+    "description": "Build a throwaway prototype to flesh out a design before committing to it. Routes between two branches \\u2014 a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route. Use when the user wants to prototype, sanity-check a data model or state machine, mock up a UI, explore design options, or says \\\"prototype this\\\", \\\"let me play with it\\\", \\\"try a few designs\\\".",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/prototype/SKILL.md",
+    "line_count": 45,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -1108,7 +1220,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/referrals/SKILL.md",
-    "line_count": 268,
+    "line_count": 270,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1124,7 +1236,7 @@
     "source_owner": "remotion-dev",
     "source_url": "https://github.com/remotion-dev/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
-    "line_count": 106,
+    "line_count": 351,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1140,7 +1252,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/revops/SKILL.md",
-    "line_count": 356,
+    "line_count": 358,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1156,7 +1268,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sales-enablement/SKILL.md",
-    "line_count": 370,
+    "line_count": 372,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1172,7 +1284,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/schema/SKILL.md",
-    "line_count": 190,
+    "line_count": 192,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1222,29 +1334,44 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/seo-audit/SKILL.md",
-    "line_count": 508,
+    "line_count": 510,
     "frontmatter_keys": [
       "name",
       "description"
     ],
     "pass_1": [
-      "SKILL.md is 508 lines; skill-creator recommends keeping it under 500"
+      "SKILL.md is 510 lines; skill-creator recommends keeping it under 500"
     ],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "setup-matt-pocock-skills",
+    "skill_name": "setup-matt-pocock-skills",
+    "description": "Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label vocabulary, and domain doc layout. Run before first use of `to-issues`, `to-prd`, `triage`, `diagnose`, `tdd`, `improve-codebase-architecture`, or `zoom-out` \\u2014 or if those skills appear to be missing context about the issue tracker, triage labels, or domain docs.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/setup-matt-pocock-skills/SKILL.md",
+    "line_count": 135,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "shadcn-ui",
     "skill_name": "shadcn-ui",
-    "description": "Provides complete shadcn/ui component library patterns including installation, configuration, registry workflows, theme-token extraction, and implementation of accessible UI components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, creating or consuming shadcn registries, using shadcn/create presets or previews, porting shadcn styles into non-React systems, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
+    "description": "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
-    "line_count": 421,
+    "line_count": 323,
     "frontmatter_keys": [
       "name",
-      "description",
-      "metadata"
+      "description"
     ],
     "pass_1": [],
     "pass_2": [],
@@ -1257,7 +1384,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/signup/SKILL.md",
-    "line_count": 370,
+    "line_count": 372,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1273,7 +1400,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/site-architecture/SKILL.md",
-    "line_count": 368,
+    "line_count": 370,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1299,13 +1426,93 @@
     "pass_3": []
   },
   {
+    "directory": "sms",
+    "skill_name": "sms",
+    "description": "When the user wants to plan, build, or optimize SMS or MMS marketing \\u2014 including welcome flows, abandoned cart texts, post-purchase, win-back, promotional sends, or transactional/auth SMS. Also use when the user mentions \\\"SMS marketing,\\\" \\\"text message campaigns,\\\" \\\"SMS sequence,\\\" \\\"SMS automation,\\\" \\\"abandoned cart text,\\\" \\\"post-purchase SMS,\\\" \\\"Klaviyo SMS,\\\" \\\"Postscript,\\\" \\\"Attentive,\\\" \\\"Twilio,\\\" \\\"A2P 10DLC,\\\" \\\"TCPA,\\\" \\\"SMS compliance,\\\" \\\"short code,\\\" \\\"toll-free SMS,\\\" \\\"MMS campaign,\\\" \\\"should I do SMS,\\\" or \\\"SMS vs email.\\\" For email sequences, see emails. For SMS copy framing, see copywriting. For opt-in popups that capture phone numbers, see popups.",
+    "source_owner": "Corey Haines",
+    "source_url": "https://github.com/coreyhaines31/marketingskills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sms/SKILL.md",
+    "line_count": 351,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "social",
     "skill_name": "social",
     "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' or 'create a reel.' Use this for social media content creation, repurposing, scheduling, and short-form video scripting. For broader content strategy, see content-strategy. For paid video ads, see ad-creative.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/social/SKILL.md",
-    "line_count": 420,
+    "line_count": 422,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "tdd",
+    "skill_name": "tdd",
+    "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \\\"red-green-refactor\\\", wants integration tests, or asks for test-first development.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tdd/SKILL.md",
+    "line_count": 124,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "to-issues",
+    "skill_name": "to-issues",
+    "description": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-issues/SKILL.md",
+    "line_count": 98,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "to-prd",
+    "skill_name": "to-prd",
+    "description": "Turn the current conversation context into a PRD and publish it to the project issue tracker. Use when user wants to create a PRD from the current context.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-prd/SKILL.md",
+    "line_count": 91,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "triage",
+    "skill_name": "triage",
+    "description": "Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/triage/SKILL.md",
+    "line_count": 118,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1375,7 +1582,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-conformance-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-conformance/SKILL.md",
-    "line_count": 95,
+    "line_count": 96,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1461,7 +1668,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-docs-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-docs/SKILL.md",
-    "line_count": 93,
+    "line_count": 97,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1477,7 +1684,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-extension-upgrade-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
-    "line_count": 92,
+    "line_count": 93,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1862,7 +2069,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/video/SKILL.md",
-    "line_count": 353,
+    "line_count": 355,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1981,7 +2188,39 @@
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
-    "line_count": 138,
+    "line_count": 154,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "write-a-skill",
+    "skill_name": "write-a-skill",
+    "description": "Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/write-a-skill/SKILL.md",
+    "line_count": 132,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "zoom-out",
+    "skill_name": "zoom-out",
+    "description": "Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the bigger picture.",
+    "source_owner": "Matt Pocock",
+    "source_url": "https://github.com/mattpocock/skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/zoom-out/SKILL.md",
+    "line_count": 21,
     "frontmatter_keys": [
       "name",
       "description"

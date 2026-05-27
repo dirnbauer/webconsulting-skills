@@ -347,9 +347,11 @@ For implementation, see the [tools registry](../../tools/REGISTRY.md). Key RevOp
 ## Credits & Attribution
 
 This skill is based on the excellent work by
-**[Corey Haines](https://github.com/coreyhaines31/marketingskills)**.
+**[Corey Haines](https://coreyhaines.com/)**.
 
 Original repository: https://github.com/coreyhaines31/marketingskills
 
-Special thanks to [Corey Haines](https://github.com/coreyhaines31/marketingskills) for their generous open-source contributions, which helped shape this skill collection.
+**Copyright (c) Corey Haines** - Marketing frameworks and best practices (MIT License)
+
+Special thanks to [Corey Haines](https://coreyhaines.com/) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

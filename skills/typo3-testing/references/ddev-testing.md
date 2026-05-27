@@ -22,6 +22,31 @@ DDEV provides a consistent, containerized environment for testing TYPO3 extensio
 - Automated testing in cloud environments
 - Production deployments
 
+## DDEV Is Not a Test Runner
+
+DDEV is a **manual browser-testing environment**. Unit, functional, fuzz and mutation tests must be invoked directly against the same binaries CI uses, not wrapped in `ddev exec`.
+
+**Always:**
+
+```bash
+.Build/bin/phpunit -c Build/phpunit/UnitTests.xml
+.Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml
+.Build/bin/phpstan analyse -c Build/phpstan.neon
+.Build/bin/php-cs-fixer fix --config Build/.php-cs-fixer.php --dry-run
+.Build/bin/infection --threads=4
+composer ci:test:php:unit       # or any other ci:* alias
+npx vitest run                  # JS unit tests
+```
+
+**Never (for automated tests):**
+
+```bash
+ddev exec vendor/bin/phpunit ...   # different PHP binary, different env, hides CI-only failures
+ddev exec composer ci:test:*       # same problem
+```
+
+When tests behave differently in `ddev exec` than in `.Build/bin/phpunit`, the bug is masked, not fixed. Reserve DDEV for what it is good at -- clicking around the backend in a real browser to verify a UI/JS change.
+
 ## Why NOT DDEV in CI?
 
 | Issue | Impact |

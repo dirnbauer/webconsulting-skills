@@ -124,6 +124,18 @@ All 98 breakers landed in v14.0. **If your extension compiles against v14.0, it'
 | Frontend HTTP compression removed | #107943 | check TypoScript `config.compressionLevel` | Delegate to web server (nginx/Apache) |
 | Extbase `ActionController->view` typed | #105377 | — | Type-check any custom controller overrides |
 
+### v14.x deprecations (still callable, removed in v15.0)
+
+These are **not** v14.0 breakers — code keeps working — but you should migrate to silence deprecation notices and prepare for v15.
+
+| Change | Forge / Source | Search | Fix |
+|---|---|---|---|
+| `GeneralUtility::getIndpEnv()` deprecated (v14.3) | `cms-core` v14.3 — `Classes/Utility/GeneralUtility.php` `@deprecated` annotation | `grep -rn "GeneralUtility::getIndpEnv\|::getIndpEnv(" Classes/ Configuration/` | `$request->getAttribute('normalizedParams')->getRemoteAddress()` etc. — see `api-changes.md` |
+
+> ⚠️ **AI-assistant warning**: Don't trust Gemini Code Assist on `getIndpEnv()` deprecation timing. It has hallucinated v13.0 deprecation / v14.0 removal, and falsely claimed `NormalizedParams::createFromServerParams()` was removed in v14.0 in favour of a non-existent `NormalizedParamsFactory`. All three claims are wrong — verified false against `typo3/cms-core` v14.3.0 vendor source. Always grep the `@deprecated` annotation in `vendor/typo3/cms-core/` to confirm.
+
+The migration is safe across **v12.4 + v13.4 + v14.3** without compatibility shims — `NormalizedParams` is in core since v9.4, `normalizedParams` request attribute since v10. Reference migration: [netresearch/t3x-nr-passkeys-be commit b2cfd8e](https://github.com/netresearch/t3x-nr-passkeys-be/commit/b2cfd8e) (v14.3 upgrade [PR #57](https://github.com/netresearch/t3x-nr-passkeys-be/pull/57)).
+
 ### FAL / File handling
 
 | Change | Forge | Fix |
@@ -167,6 +179,99 @@ All 98 breakers landed in v14.0. **If your extension compiles against v14.0, it'
 | `Environment::getComposerRootPath()` removed | #107482 | Inject composer root via DI |
 | Extension title from `composer.json` | #108304 | Ensure `"description"` in `composer.json` |
 | Install Tool now in backend routing | #107536 | Bookmarks/URLs may change |
+
+---
+
+## Expanded gotchas (v13 → v14)
+
+The table above is the index. The sections below expand the entries that have surprised real upgrades.
+
+### `LoginProviderInterface::modifyView()` — added in v14, two pitfalls
+
+v14 added `modifyView(ViewInterface $view, ServerRequestInterface $request): void` alongside `render()`. Two things bite:
+
+**1. The implementation must exist on v14, even if unused on v13.** Implementations conditional on a `class_exists()` check are too late — the interface contract is checked at class-load time. Just add the method and accept that v13 ignores it.
+
+**2. `modifyView()` returns the template name as a RELATIVE path, not an `EXT:` path.** Returning `'EXT:my_ext/Resources/Private/Templates/Login/PasskeyLogin.html'` results in Fluid trying to resolve it as a template **name** (no file found). Return `'Login/PasskeyLogin'` and register the extension's template root path on the view:
+
+```php
+public function modifyView(ServerRequestInterface $request, ViewInterface $view): string
+{
+    if ($view instanceof FluidViewAdapter) {
+        $view->getRenderingContext()->getTemplatePaths()->setTemplateRootPaths([
+            'EXT:my_ext/Resources/Private/Templates/',
+        ]);
+    }
+    return 'Login/PasskeyLogin'; // relative, no .html, no EXT: prefix
+}
+```
+
+### `StandaloneView` removed — guard the test mocks too
+
+> **Breaking #105377** — already in the table above.
+
+The table covers production code. The hidden hit is in **tests**: `createMock(StandaloneView::class)` raises `Cannot use undefined class` when `StandaloneView` is missing under v14. Tests that need to run on the v12/v13/v14 matrix must guard:
+
+```php
+public function testRendersLoginScreen(): void
+{
+    if (!class_exists(\TYPO3\CMS\Fluid\View\StandaloneView::class)) {
+        self::markTestSkipped('StandaloneView removed in TYPO3 v14');
+    }
+    $view = $this->createMock(\TYPO3\CMS\Fluid\View\StandaloneView::class);
+    // ...
+}
+```
+
+This is also why `dg/bypass-finals` alone doesn't help — bypass-finals strips `final`, but it cannot conjure a class that no longer exists.
+
+### `ModifyPageLayoutOnLoginProviderSelectionEvent` — view parameter type drifts across versions
+
+The event's view parameter type changes per major:
+
+| TYPO3 | Type of `$view` |
+|---|---|
+| v12 | `StandaloneView` (concrete) |
+| v13 | `StandaloneView \| ViewInterface` (union) |
+| v14 | `ViewInterface` (StandaloneView removed) |
+
+Cross-version event-listener tests cannot just `createMock(ViewInterface::class)` — on v12 the constructor type-hint rejects it. Detect the parameter type via reflection and mock the right one:
+
+```php
+$rc = new \ReflectionClass(ModifyPageLayoutOnLoginProviderSelectionEvent::class);
+$paramType = $rc->getConstructor()->getParameters()[0]->getType();
+
+$mockTarget = match (true) {
+    $paramType instanceof \ReflectionUnionType,
+    $paramType?->getName() === StandaloneView::class
+        => StandaloneView::class,
+    default => ViewInterface::class,
+};
+$view = $this->createMock($mockTarget);
+```
+
+### PHPStan v14 without `saschaegerer/phpstan-typo3`
+
+`saschaegerer/phpstan-typo3` v2 supports v13 only — drop it on v12 **and** v14 CI runs. Without the extension, two ergonomic issues appear on the v14 build:
+
+1. `GeneralUtility::getIndpEnv()` returns a union type rather than the narrow `string` the extension would have inferred — assignments to `string` properties trigger `assign.propertyType` errors. Migrate to `NormalizedParams` (see "v14.x deprecations" above) or annotate the call site.
+2. Ignores written for v12 issues (e.g. `StandaloneView`, `Connection::PARAM_*` int-vs-enum) match nothing on v14 and trigger PHPStan's "ignored error not matched" warning.
+
+**Fix** in `Build/phpstan.neon`:
+
+```neon
+parameters:
+    # Don't fail on v12-only ignores when running against v14
+    reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        # v12-only — Connection::PARAM_* is int there, ParameterType enum on v13/v14
+        - '~Parameter \\#2 \\$type of method .* expects .*, int given~'
+        # v14-only — getIndpEnv() returns union; remove once migrated to NormalizedParams
+        - '~Parameter .* of method .*::setRemoteAddress\(\) expects string, .* given~'
+```
+
+`phpstan/extension-installer` auto-loads any installed PHPStan extensions — once you remove `saschaegerer/phpstan-typo3` from the v12/v14 dev branches' `composer.json`, no manual `includes:` cleanup is needed.
 
 ---
 
@@ -305,3 +410,12 @@ See also:
 - `third-party-dependency-upgrades.md` — Symfony 7.3 / Doctrine DBAL 4 / Fluid 5 / CKE 47 bump notes
 - `verification.md` — success criteria
 - TYPO3 Core Changelog 14.0–14.3: https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog-14.html
+
+## SingletonInterface deprecation (TYPO3 v14)
+
+`TYPO3\CMS\Core\SingletonInterface` is deprecated in v14. Code keeps working in v14.x, but every implementer needs a migration plan before v15. The replacement is the Symfony DI container's default behaviour: services declared in `Configuration/Services.yaml` are shared by default, so `shared: true` (or simply omitting `shared: false`) gives you the same one-instance-per-request semantics without the marker interface. Drop `implements SingletonInterface`, configure the service explicitly when its scope is non-trivial, and let the container manage the lifetime.
+
+The one common exception is classes registered through `GeneralUtility::setSingletonInstance()` in test fixtures — those rely on the static singleton registry, not the DI container, so the interface may need to stay until the test setup is refactored to use container overrides (`$this->getContainer()->set(...)` in functional tests, or proper service mocks in unit tests). The checkpoints surface this:
+
+- **TU-54** (mechanical) — flags any `SingletonInterface` reference under `Classes/` or `src/`.
+- **TU-55** (LLM review) — reviews each occurrence and proposes the DI-scoping migration, accounting for the test-fixture exception.

@@ -1,0 +1,479 @@
+# Checkpoints for php-modernization skill
+# Verifies PHP code quality tools and modern PHP patterns
+
+# DEPRECATED CHECKPOINT IDs (relocated to typo3-conformance / typo3-extension-upgrade skills):
+#   PM-26, PM-27, PM-28, PM-33, PM-35, PM-36
+# These IDs MUST NOT be reused. They were TYPO3-specific and have been moved
+# to the TYPO3 skill set as part of the v2.x agent-harness refocus.
+
+version: 1
+skill_id: php-modernization
+
+mechanical:
+  # === PHPSTAN CONFIGURATION ===
+  - id: PM-01
+    type: command
+    command: "test -f phpstan.neon || test -f Build/phpstan.neon || test -f Build/phpstan/phpstan.neon || test -f phpstan.neon.dist"
+    severity: error
+    desc: "PHPStan configuration must exist (phpstan.neon, Build/phpstan.neon, Build/phpstan/phpstan.neon, or phpstan.neon.dist)"
+
+  - id: PM-02
+    type: command
+    command: 'for f in phpstan.neon Build/phpstan.neon Build/phpstan/phpstan.neon phpstan.neon.dist; do [ -f "$f" ] && grep -qE "^[[:space:]]*level:[[:space:]]*(9|1[0-9]|max)([[:space:]]|$)" "$f" && exit 0; done; exit 1'
+    severity: error
+    desc: "PHPStan level must be 9 or higher (or max)"
+
+  - id: PM-03
+    type: contains
+    target: "{phpstan.neon,Build/phpstan.neon,Build/phpstan/phpstan.neon,phpstan.neon.dist}"
+    pattern: "treatPhpDocTypesAsCertain: false"
+    severity: warning
+    desc: "PHPStan should not trust PHPDoc types over runtime"
+
+  # === PHP-CS-FIXER CONFIGURATION ===
+  - id: PM-04
+    type: file_exists
+    target: "{.php-cs-fixer.php,.php-cs-fixer.dist.php}"
+    severity: error
+    desc: "PHP-CS-Fixer configuration must exist"
+
+  - id: PM-05
+    type: contains
+    target: "{.php-cs-fixer.php,.php-cs-fixer.dist.php}"
+    pattern: "@PER-CS"
+    severity: error
+    desc: "PHP-CS-Fixer must use @PER-CS ruleset"
+
+  - id: PM-06
+    type: contains
+    target: "{.php-cs-fixer.php,.php-cs-fixer.dist.php}"
+    pattern: "strict_types"
+    severity: warning
+    desc: "PHP-CS-Fixer should enforce strict_types declaration"
+
+  # === STRICT TYPES DECLARATION ===
+  - id: PM-07
+    type: contains
+    target: "{src,Classes}/**/*.php"
+    pattern: "declare(strict_types=1)"
+    severity: error
+    desc: "PHP files must declare strict_types=1"
+
+  - id: PM-08
+    type: contains
+    target: "{tests,Tests}/**/*.php"
+    pattern: "declare(strict_types=1)"
+    severity: error
+    desc: "Test files must declare strict_types=1"
+
+  # === RECTOR CONFIGURATION ===
+  - id: PM-09
+    type: file_exists
+    target: "{rector.php,Build/rector.php,Build/rector/rector.php}"
+    severity: warning
+    desc: "Rector configuration should exist for automated refactoring"
+
+  - id: PM-10
+    type: contains
+    target: "{rector.php,Build/rector.php,Build/rector/rector.php}"
+    pattern: "LevelSetList"
+    severity: warning
+    desc: "Rector should use LevelSetList for PHP version upgrades"
+
+  - id: PM-11
+    type: contains
+    target: "{rector.php,Build/rector.php,Build/rector/rector.php}"
+    pattern: "SetList::DEAD_CODE"
+    severity: info
+    desc: "Rector should include DeadCodeSet rules"
+
+  - id: PM-12
+    type: contains
+    target: "{rector.php,Build/rector.php,Build/rector/rector.php}"
+    pattern: "SetList::CODE_QUALITY"
+    severity: info
+    desc: "Rector should include CodeQualitySetList rules"
+
+  # === COMPOSER CONFIGURATION ===
+  - id: PM-13
+    type: json_path
+    target: composer.json
+    pattern: '.scripts["cs:fix"] or .scripts["fix:cs"] or .scripts["php:cs:fix"]'
+    severity: warning
+    desc: "Composer should have a coding standards fix script"
+
+  - id: PM-14
+    type: json_path
+    target: composer.json
+    pattern: '.scripts["phpstan"] or .scripts["analyse"] or .scripts["analyze"]'
+    severity: warning
+    desc: "Composer should have a PHPStan script"
+
+  - id: PM-15
+    type: json_path
+    target: composer.json
+    pattern: '.scripts["rector"] or .scripts["refactor"]'
+    severity: info
+    desc: "Composer should have a Rector script"
+
+  # === DEV DEPENDENCIES ===
+  # Note: command type checks both direct and transitive dependencies
+  # (e.g., via shared CI packages like netresearch/composer-patches-plugin)
+  - id: PM-16
+    type: command
+    command: "test -f .Build/bin/phpstan || grep -q phpstan composer.json || grep -q phpstan composer.lock"
+    severity: warning
+    desc: "PHPStan should be available (directly or transitively via a CI package)"
+
+  - id: PM-17
+    type: command
+    command: "test -f .Build/bin/php-cs-fixer || grep -q php-cs-fixer composer.json || grep -q php-cs-fixer composer.lock"
+    severity: warning
+    desc: "PHP-CS-Fixer should be available (directly or transitively via a CI package)"
+
+  # Rector can be a direct require-dev OR pulled transitively via the
+  # netresearch/typo3-ci-workflows meta-package. Same pattern as TT-64
+  # in typo3-testing-skill PR #63.
+  - id: PM-18
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["rector/rector"] // .["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: warning
+    desc: "Rector should be in require-dev (also satisfied transitively via netresearch/typo3-ci-workflows)"
+
+  # === PSR-4 AUTOLOADING ===
+  - id: PM-19
+    type: json_path
+    target: composer.json
+    pattern: '.autoload["psr-4"]'
+    severity: error
+    desc: "composer.json must have PSR-4 autoloading configured"
+
+  # === PHP-CS-FIXER COPYRIGHT HEADER ===
+  # Schema fix: previous definition used unrecognised `name`/`path`/`message`
+  # keys instead of the standard `desc`/`target`. The runner saw an empty
+  # `target` and emitted "Target file not found:" with no path.
+  - id: PM-30
+    type: regex
+    target: "{.php-cs-fixer.php,.php-cs-fixer.dist.php,Build/.php-cs-fixer.php}"
+    pattern: "header_comment"
+    severity: info
+    desc: "PHP-CS-Fixer should configure the header_comment rule for consistent copyright headers across all PHP files"
+
+  # === PHP-CS-FIXER RISKY RULES ===
+  - id: PM-24
+    type: contains
+    target: "{.php-cs-fixer.php,.php-cs-fixer.dist.php}"
+    pattern: "risky"
+    severity: info
+    desc: "PHP-CS-Fixer should enable @PER-CS:risky for comprehensive enforcement"
+
+  # === PHPAT ARCHITECTURE TESTS ===
+  - id: PM-25
+    type: command
+    command: "grep -rq 'phpat' composer.json 2>/dev/null || grep -rq 'phpat' composer.lock 2>/dev/null"
+    severity: info
+    desc: "PHPat should be configured for architecture testing in defined architectures"
+
+  # === MULTI-VERSION LIBRARY ADAPTERS ===
+  - id: PM-37
+    type: command
+    command: "! find src Classes -type f -name '*.php' 2>/dev/null -exec sh -c 'grep -Eq \"(method_exists|function_exists)\" \"$1\" && ! grep -Eq \"@phpstan-ignore method\\.dynamicName\" \"$1\"' sh {} \\; -print -quit | grep -q ."
+    severity: info
+    desc: "Classes using method_exists() for version detection should use adapter pattern with dynamic dispatch (@phpstan-ignore method.dynamicName)"
+
+  # === DOCBLOCK QUALITY ===
+  - id: PM-50
+    type: regex_not
+    target: "{src,Classes}/**/*.php"
+    pattern: '\*/\n\s{4}/\*\*'
+    severity: warning
+    desc: "Avoid duplicate consecutive docblocks between methods — merge @return/@param into the main docblock"
+
+  # === PHPSTAN BEST PRACTICES ===
+  - id: PM-51
+    type: regex_not
+    target: "{src,Classes,tests,Tests}/**/*.php"
+    pattern: '@phpstan-ignore-next-line'
+    severity: warning
+    desc: "Use @phpstan-ignore with specific identifier (e.g., // @phpstan-ignore argument.type) instead of @phpstan-ignore-next-line"
+
+  - id: PM-52
+    type: regex_not
+    target: "{src,Classes}/**/*.php"
+    pattern: '\(string\)\s*\$(?:this->arguments|GLOBALS)\b'
+    severity: warning
+    desc: "Avoid (string) cast on mixed — use assert(is_string()) or is_string() guard for proper type narrowing"
+
+  - id: PM-53
+    type: command
+    command: "for f in phpstan.neon phpstan.neon.dist Build/phpstan.neon; do if [ -f \"$f\" ]; then level=$(sed -n 's/^[[:space:]]*level:[[:space:]]*//p' \"$f\" 2>/dev/null); case \"$level\" in 10|max) exit 0 ;; esac; echo \"WARN: $f uses PHPStan level '$level' — level 10 (max) recommended\" && exit 1; fi; done; exit 0"
+    severity: warning
+    desc: "Projects should target PHPStan level 10 (max) for full strict typing (not gated on PHP version — verify applicability)"
+
+  # === IMMUTABILITY BOUNDARIES (guardrail) ===
+  - id: PM-39
+    type: command
+    command: "! grep -rlE '^(final\\s+)?readonly\\s+class' src/ Classes/ 2>/dev/null | xargs -r grep -lE '#\\[(ORM\\\\)?Entity|#\\[(ORM\\\\)?MappedSuperclass' 2>/dev/null | grep -q ."
+    severity: error
+    desc: "readonly must not be applied to Doctrine entities or mapped-superclasses (Doctrine hydrates them via reflection-bypassing the constructor). Embeddables are a nuanced case — see references/doctrine-modernization-edges.md"
+
+llm_reviews:
+  # === READONLY CLASS STATIC PROPERTY CHECK ===
+  - id: PM-32
+    type: llm_review
+    severity: error
+    domain: code-quality
+    prompt: |
+      Review all PHP classes in Classes/ marked as `readonly class`:
+      1. Check if any readonly class contains static properties (private static, protected static, public static)
+      2. PHP 8.2+ readonly classes cannot have static properties
+      3. Report each file and class where a readonly class declares a static property
+      Only flag cases where the static property is inside the readonly class body, not in unrelated classes in the same file.
+    desc: "PHP 8.2+ readonly classes cannot declare static properties. Remove static properties or remove the readonly class modifier."
+
+  # === CODE QUALITY PATTERNS ===
+  - id: PM-20
+    domain: code-quality
+    prompt: |
+      Review the PHP codebase for methods that use array parameters or return arrays
+      where structured data (DTOs, Value Objects) would be more appropriate.
+
+      Look for patterns like:
+      - Methods with @param array<string, mixed> that represent structured data
+      - Methods returning associative arrays that could be typed objects
+      - Array-heavy constructors that should use named parameters or DTOs
+
+      Examine files in Classes/ directory. Report specific files and methods
+      that should be refactored to use typed objects instead of arrays.
+
+      This is important for:
+      - IDE autocompletion
+      - Static analysis accuracy
+      - Self-documenting code
+      - Type safety at runtime with strict_types
+    severity: warning
+    desc: "Identify array params/returns that should be DTOs or Value Objects"
+
+  - id: PM-21
+    domain: code-quality
+    prompt: |
+      Review the PHP codebase for class constants that should be converted
+      to backed enums (available since PHP 8.1).
+
+      Look for patterns like:
+      - Classes with multiple related STATUS_*, TYPE_*, or STATE_* constants
+      - Constants used in switch statements or match expressions
+      - Constants that represent a finite set of valid values
+      - Method parameters typed as int|string that accept constant values
+
+      Examine files in Classes/ directory. Report specific files and constant
+      groups that would benefit from enum conversion.
+
+      Good candidates for enums:
+      - Status constants (PENDING, ACTIVE, COMPLETED)
+      - Type constants (TYPE_A, TYPE_B, TYPE_C)
+      - State machine states
+      - Configuration option values
+    severity: warning
+    desc: "Identify class constants that should be backed enums"
+
+  - id: PM-22
+    domain: code-quality
+    prompt: |
+      Review the codebase for proper use of PHP 8+ features:
+
+      1. Constructor property promotion - are properties declared the old way
+         when they could use promotion?
+
+      2. Named arguments - are there function calls with many positional
+         parameters that would benefit from named arguments?
+
+      3. Match expressions - are there complex switch statements that
+         could be simplified to match expressions?
+
+      4. Nullsafe operator - are there verbose null checks that could use ?->?
+
+      5. Union/intersection types - are there PHPDoc types that could be
+         native union types?
+
+      Report specific files and line numbers where modernization is needed.
+    severity: info
+    desc: "Verify modern PHP 8+ features are used where appropriate"
+
+  - id: PM-23
+    domain: code-quality
+    prompt: |
+      Review the PHPStan configuration for completeness:
+
+      1. Is level 9 or max used?
+      2. Are all relevant paths included in paths/scanDirectories?
+      3. Are extension-specific extensions configured (e.g., phpstan-typo3)?
+      4. Is treatPhpDocTypesAsCertain set to false?
+      5. Are there excessive baseline entries that should be fixed?
+      6. Is checkMissingIterableValueType enabled?
+      7. Is checkGenericClassInNonGenericObjectType enabled?
+
+      Suggest specific configuration improvements.
+    severity: warning
+    desc: "Verify PHPStan configuration follows best practices"
+
+  # === DRY / CODE DUPLICATION ===
+  - id: PM-29
+    name: No duplicated utility methods across classes
+    type: llm_review
+    severity: warning
+    domain: dry
+    prompt: |
+      Scan for duplicated utility methods across PHP classes:
+      1. Type coercion helpers (intVal, stringVal, intFrom) in multiple classes
+      2. Translation helpers (translate, getTranslation) in multiple classes
+      3. Encryption/key access methods duplicated across services
+      4. User extraction from $GLOBALS duplicated across controllers
+      If found, suggest extracting into shared traits in a Utility/ namespace.
+    tags: [dry, duplication, traits, refactoring]
+
+  # === TRAIT NAMESPACE ARCHITECTURE ===
+  - id: PM-31
+    name: Shared traits in Utility or dedicated namespace
+    type: llm_review
+    severity: warning
+    domain: architecture
+    prompt: |
+      Check that shared traits (used by classes in multiple namespaces)
+      are placed in a neutral namespace like Utility/ or Traits/.
+      A trait in Controller/ should not be used by Middleware/ or UserSettings/.
+      This prevents architecture layer violations detected by tools like PHPat.
+    tags: [traits, namespace, architecture, phpat]
+
+  # === COPY-ON-WRITE AWARENESS FOR DESTRUCTIVE OPERATIONS ===
+  - id: PM-34
+    name: Copy-on-write safety for destructive memory operations
+    type: llm_review
+    severity: error
+    domain: code-quality
+    prompt: |
+      Review the codebase for destructive in-place memory operations that may
+      be affected by PHP's copy-on-write (COW) semantics.
+
+      Check for patterns like:
+      1. sodium_memzero($var) where $var was assigned from another variable
+         (e.g., $key = $this->masterKey; sodium_memzero($key) — only zeroes
+         the copy, not the original)
+      2. Any destructive function on string or buffer data (for example,
+         sodium_memzero or similar zeroization routines) applied to a variable
+         that is a COW reference to another value
+      3. Variables assigned via simple assignment ($a = $b) then modified
+         destructively — the original $b is unaffected due to COW
+      4. Suggest using references (&$var) or operating directly on the source
+         variable when the intent is to destroy the original data
+
+      This is critical for security-sensitive code handling encryption keys,
+      passwords, or other secrets where memory cleanup matters.
+    tags: [cow, copy-on-write, sodium, security, memory]
+
+  # === MULTI-VERSION LIBRARY ADAPTER PATTERN ===
+  - id: PM-38
+    name: Multi-version library compatibility via adapter pattern
+    type: llm_review
+    severity: warning
+    domain: code-quality
+    prompt: |
+      Review the codebase for direct usage of libraries that support multiple
+      major versions (check composer.json for "^X || ^Y" constraints).
+
+      Check for:
+      1. Direct library class usage in service classes instead of through an adapter interface
+      2. method_exists() or function_exists() checks on typed library parameters
+         (PHPStan narrows these, making the check ineffective for static analysis)
+      3. Version-specific @phpstan-ignore tags (method.notFound, argument.type) that
+         would fail on the other supported version
+      4. Missing adapter interface — consumer classes should depend on a project-owned
+         interface, not the library class directly
+
+      Correct pattern:
+      - Define an interface with unified method signatures
+      - Create adapter class accepting `object` (not typed library class)
+      - Use dynamic dispatch ($obj->{$method}()) with @phpstan-ignore method.dynamicName
+      - Wire interface to adapter in Services.yaml
+      - Consumer classes depend only on the interface
+
+      Report specific files where library classes are used directly and suggest
+      adapter extraction.
+    tags: [adapter, multi-version, phpstan, compatibility, di]
+
+  # === TYPE NARROWING PATTERNS ===
+  - id: PM-80
+    type: llm_review
+    severity: warning
+    domain: code-quality
+    prompt: |
+      Review the PHP codebase for type narrowing patterns that bypass static analysis:
+
+      1. (string) or (int) casts on mixed-type variables instead of assert(is_string())
+         or is_string() guards — casts silence PHPStan without proving the type
+      2. @var annotations used to override inferred types instead of proper instanceof
+         checks or is_array() guards
+      3. @phpstan-ignore-next-line used to suppress errors that could be resolved with
+         proper type narrowing (assert, instanceof, is_*() guards)
+      4. Broad exception catches (catch (\Throwable)) where specific exception types
+         would provide better type information in the catch block
+
+      Correct patterns:
+      - assert(is_string($value)) narrows type for both runtime and static analysis
+      - if (!$obj instanceof Foo) { throw ... } narrows type in subsequent code
+      - is_array($data) in if-guard narrows type in the branch
+      - Specific catch types provide typed exception properties
+
+      Report specific files and patterns where type narrowing should replace
+      casts, annotations, or ignore directives.
+    tags: [type-narrowing, phpstan, assert, instanceof, casts]
+
+  # === IMMUTABILITY BOUNDARIES (LLM companion to PM-39) ===
+  - id: PM-40
+    type: llm_review
+    domain: code-quality
+    severity: error
+    prompt: |
+      Review the codebase for `readonly class` or `final readonly class` declarations.
+      Flag any class that is ALSO one of:
+      1. Annotated with #[ORM\Entity], #[ORM\Embeddable], or #[ORM\MappedSuperclass]
+      2. Implements a Form-bound interface (e.g., extends Symfony AbstractType bound model)
+      3. Implements __unserialize / Serializable / is restored via session/cache
+      4. Used as a hydration target by a deserializer (Symfony Serializer, JMS, Symfony ObjectMapper)
+      readonly is correct for DTOs, value objects, events, and command/query objects.
+      readonly is INCORRECT for entities, hydration targets, and any class needing post-construct property assignment.
+      Report specific files violating this boundary.
+    desc: "readonly is incorrect on entities, form-bound models, and deserialization targets"
+
+  # === MUTATION-SCORE GUARDRAIL ===
+  - id: PM-41
+    type: llm_review
+    domain: testing
+    severity: warning
+    prompt: |
+      If `infection.json` or `infection.json5` exists, evaluate whether the project follows
+      the recommended Infection strategy (see references/mutation-testing.md):
+      1. Diff-mode (--git-diff-base) configured for PR runs
+      2. --min-msi threshold set (>= 70 baseline, >= 80 for new code)
+      3. Excluded paths cover legitimate non-test surface (logging, debug-only, generated code)
+      4. CI invokes Infection on PR diff, not full codebase per push
+      Report deviations and suggest configuration improvements.
+    desc: "Infection should run in diff-mode for PRs with explicit MSI threshold"
+
+  # === API PLATFORM RESOURCE/ENTITY SEPARATION ===
+  - id: PM-42
+    type: llm_review
+    domain: code-quality
+    severity: warning
+    prompt: |
+      If composer.json depends on `api-platform/core` or `api-platform/symfony`,
+      review the codebase for proper separation of API resources and Doctrine entities:
+      1. Classes annotated `#[ApiResource]` that ALSO have Doctrine mapping
+         attributes (`#[ORM\Entity]`) — flag as a tight coupling that prevents
+         making the API resource `readonly` and complicates evolution.
+      2. State providers/processors that are not constructor-injected — flag.
+      3. Input/Output DTOs that are arrays instead of typed classes — flag.
+      4. API resources that are mutable when they could be `final readonly` — flag.
+      Reference `references/api-platform-edges.md` for the recommended split.
+    desc: "API resources should be readonly DTOs, separate from Doctrine entities"

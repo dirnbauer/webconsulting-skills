@@ -1,0 +1,343 @@
+{
+  "skill_name": "typo3-docs",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "create-docs-from-scratch",
+      "prompt": "Create documentation for this TYPO3 extension from scratch. It has PHP classes, TCA configuration, and a backend module but no Documentation/ directory yet.",
+      "expected_output": "A complete Documentation/ directory with guides.xml, Index.rst, subdirectories for Configuration, Installation, and Editor sections. Each subdirectory has its own Index.rst. An .editorconfig is present. guides.xml has correct project, version, and interlink attributes.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Documentation/Index.rst exists with correct RST heading hierarchy",
+        "Documentation/guides.xml exists with project attribute matching extension key",
+        "guides.xml contains typo3/cms interlink entry",
+        "Documentation/.editorconfig exists with indent_size = 4",
+        "Every subdirectory under Documentation/ contains an Index.rst",
+        "RST files use 4-space indentation, not tabs",
+        "Headings use sentence case, not Title Case",
+        "File and directory names use CamelCase convention",
+        "No RST file exceeds 250 lines",
+        "Index.rst contains a toctree directive linking to sub-pages"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "add-configuration-section",
+      "prompt": "Add a Configuration section to the existing TYPO3 extension documentation. The extension has TypoScript setup, FlexForm XML, and ext_conf_template.txt settings that need documenting.",
+      "expected_output": "A new Documentation/Configuration/Index.rst file with confval directives for each setting, organized by source (TypoScript, FlexForm, Extension Configuration). The parent toctree is updated to include the new section.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Documentation/Configuration/Index.rst exists",
+        "Uses confval directive with :type: and :default: options for settings",
+        "Parent Index.rst toctree includes Configuration/Index",
+        "TypoScript settings documented with code-block:: typoscript",
+        "FlexForm options documented with their actual field names",
+        "RST file uses 4-space indentation throughout",
+        "Line length does not exceed 80 characters",
+        "Section heading uses correct RST underline character for its level"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "validate-and-fix-docs",
+      "prompt": "Check if the documentation follows TYPO3 standards and fix any issues. Run the validation script and correct all problems found.",
+      "expected_output": "A validation report identifying RST issues (indentation, missing alt text, incorrect heading levels, missing .editorconfig). Each issue is fixed in place. The validation script passes cleanly after fixes.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Runs scripts/validate_docs.sh against the extension path",
+        "Identifies specific RST issues with file paths and line numbers",
+        "Fixes indentation to 4-space standard",
+        "Ensures all figure/image directives have :alt: option",
+        "Ensures .editorconfig exists in Documentation/",
+        "Every subdirectory has an Index.rst after fixes",
+        "No mailto: links remain after fixes",
+        "Re-runs validation to confirm all issues resolved"
+      ]
+    },
+    {
+      "id": 4,
+      "eval_name": "add-screenshots-backend-module",
+      "prompt": "Add screenshots to the documentation for the backend module. The extension has a TYPO3 backend module that needs visual documentation with annotated screenshots.",
+      "expected_output": "Screenshot placeholders or captured images in Documentation/Images/ with figure directives in the relevant RST files. Each figure uses :alt:, :zoom: lightbox, and :class: with-border with-shadow options.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Documentation/Images/ directory exists for screenshot storage",
+        "RST files use figure directive, not raw image directive",
+        "Every figure has :alt: text describing the screenshot content",
+        "Every figure has :zoom: lightbox option",
+        "Every figure has :class: with-border with-shadow",
+        "Screenshot filenames use CamelCase convention",
+        "Screenshots are PNG format",
+        "Figure captions describe what the user sees in the screenshot"
+      ]
+    },
+    {
+      "id": 5,
+      "eval_name": "generate-guides-xml",
+      "prompt": "Create a guides.xml file for this TYPO3 extension. The extension is hosted on GitHub at netresearch/my-extension with composer name netresearch/my-extension. It supports TYPO3 12 and 13.",
+      "expected_output": "A Documentation/guides.xml with correct XML structure, theme attribute on <guides>, extension class, project metadata extracted from composer.json and GitHub, and appropriate inventory elements.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "guides.xml has theme='typo3docs' as attribute on <guides> element, not as child element",
+        "Extension element has class attribute with T3Docs Typo3DocsTheme extension class",
+        "edit-on-github uses owner/repo format, not full URL",
+        "edit-on-github-branch is set to the default branch",
+        "edit-on-github-directory is set to Documentation",
+        "project-contact does NOT use mailto: link",
+        "interlink-shortcode uses composer package name format",
+        "All inventory URLs end with trailing slash",
+        "project-home, project-repository, and project-issues attributes are present"
+      ]
+    },
+    {
+      "id": 6,
+      "eval_name": "render-docs-docker",
+      "prompt": "Render the documentation for this TYPO3 extension locally using Docker and show me the result.",
+      "expected_output": "Executes the Docker render command with correct image and mount. Reports output location at Documentation-GENERATED-temp/Index.html. If errors occur, diagnoses and fixes RST issues before re-rendering.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses ghcr.io/typo3-documentation/render-guides:latest Docker image",
+        "Mounts project root as /project volume",
+        "Uses --config=Documentation flag",
+        "Reports output location as Documentation-GENERATED-temp/Index.html",
+        "Does not suggest obsolete Sphinx-based rendering tools",
+        "If render fails, diagnoses RST errors and fixes them"
+      ]
+    },
+    {
+      "id": 7,
+      "eval_name": "confval-directive-usage",
+      "prompt": "Document these three extension configuration settings using proper TYPO3 directives: enableCache (boolean, default true), maxItems (integer, default 50), apiEndpoint (string, no default, required).",
+      "expected_output": "RST content using confval directive for each setting with :type:, :Default:, :name:, and description. Required setting has :required: true. Settings are organized under a configuration heading.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. confval:: directive for each setting",
+        "Each confval has :type: option with correct data type",
+        "Each confval has :name: option for cross-referencing",
+        "Boolean and integer settings have :Default: values",
+        "Required setting has :required: true or documents it as required",
+        "Uses 4-space indentation for directive content",
+        "Descriptive text explains what each setting does"
+      ]
+    },
+    {
+      "id": 8,
+      "eval_name": "version-directives",
+      "prompt": "Add version information to the documentation: a new feature added in 2.0.0, a changed behavior in 2.1.0, and a deprecated option in 2.2.0 that will be removed in 3.0.0.",
+      "expected_output": "RST content using versionadded, versionchanged, and deprecated directives with version numbers and descriptive text explaining each change.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. versionadded:: 2.0.0 directive with description",
+        "Uses .. versionchanged:: 2.1.0 directive with description",
+        "Uses .. deprecated:: 2.2.0 directive with removal version mentioned",
+        "Each directive has indented description text",
+        "Directives are placed near the relevant content they describe",
+        "No plain text used where version directives should be"
+      ]
+    },
+    {
+      "id": 9,
+      "eval_name": "rst-heading-hierarchy",
+      "prompt": "Create a documentation page with a title, two sections, and each section has a subsection. The topic is 'Extension configuration' covering TypoScript setup and site set configuration.",
+      "expected_output": "An RST file with correct heading hierarchy: = above and below for title, = below for sections, - below for subsections. Each heading has a permalink anchor label.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Page title uses = above and below the text",
+        "Section headings use = below only",
+        "Subsection headings use - below only",
+        "Underlines are exactly the same length as heading text",
+        "Every heading has a .. _label: anchor immediately before it",
+        "Labels use lowercase-with-hyphens format",
+        "Headings use sentence case, not Title Case"
+      ]
+    },
+    {
+      "id": 10,
+      "eval_name": "text-roles-inline-code",
+      "prompt": "Write a paragraph in RST describing how to navigate to the TYPO3 backend module at Admin Tools > Settings, edit the file Configuration/TypoScript/setup.typoscript, use the keyboard shortcut Ctrl+S to save, and reference the TYPO3 Core API documentation for dependency injection.",
+      "expected_output": "RST content using :guilabel: for UI elements, :file: for file paths, :kbd: for keyboard shortcuts, and :ref: with intersphinx for cross-documentation references.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses :guilabel:`Admin Tools > Settings` for UI navigation",
+        "Uses :file: role for file path references",
+        "Uses :kbd:`Ctrl+S` for keyboard shortcuts",
+        "Uses :ref:`t3coreapi:dependency-injection` for cross-doc reference",
+        "Does not use plain text or backticks for UI elements",
+        "Does not use inline code for file paths where :file: should be used"
+      ]
+    },
+    {
+      "id": 11,
+      "eval_name": "content-tabs-directive",
+      "prompt": "Create installation instructions for a TYPO3 extension that can be installed via Composer or via the Extension Manager. Show both methods using tabs.",
+      "expected_output": "RST content using the tabs directive with a Composer tab containing a code-block for the composer command and an Extension Manager tab with step-by-step instructions.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. tabs:: directive as container",
+        "Has .. tab:: Composer with code-block:: bash",
+        "Has .. tab:: Extension Manager with numbered steps",
+        "Proper indentation: tab content indented under tab directive",
+        "Code block has :caption: option",
+        "Tabs content is complete and actionable"
+      ]
+    },
+    {
+      "id": 12,
+      "eval_name": "php-domain-documentation",
+      "prompt": "Document the PHP class ImageController in namespace Vendor\\Extension\\Controller. It has a method processImage(ServerRequestInterface $request): ResponseInterface that can return null on error.",
+      "expected_output": "RST content using php:namespace, php:class, and php:method directives. The nullable return type is handled via :returntype: annotation, not in the method signature.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. php:namespace:: directive for namespace",
+        "Uses .. php:class:: directive for the class",
+        "Uses .. php:method:: directive for processImage",
+        "Nullable return type uses :returntype: string|null, NOT ?ResponseInterface in signature",
+        "Method has :param: with type and description",
+        "Method has :returns: with description",
+        "Does not use ?Type or Type|null in method signature line"
+      ]
+    },
+    {
+      "id": 13,
+      "eval_name": "intercept-webhook-setup",
+      "prompt": "Set up automatic documentation deployment to docs.typo3.org for a TYPO3 extension hosted on GitHub.",
+      "expected_output": "Step-by-step instructions for configuring the TYPO3 Intercept webhook on GitHub, including the correct payload URL, content type, and event selection. Mentions the first-build approval requirement.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Webhook payload URL is https://docs-hook.typo3.org",
+        "Content type is application/json",
+        "SSL verification is enabled",
+        "Push event is selected",
+        "Mentions that first build requires TYPO3 Documentation Team approval",
+        "Mentions that extension must be registered in TER",
+        "Does not reference obsolete docs rendering infrastructure"
+      ]
+    },
+    {
+      "id": 14,
+      "eval_name": "code-example-validation",
+      "prompt": "The documentation references a method called generateReport() in the Developer section, but I'm not sure if it exists in the actual extension code. Validate the code examples in the documentation against the real source.",
+      "expected_output": "Cross-references code examples from Documentation/ RST files against actual PHP classes in Classes/. Identifies methods, class names, or CLI arguments that don't match the real code and suggests corrections.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Searches Classes/ directory for the referenced method name",
+        "Compares documented method signatures against actual PHP code",
+        "Reports mismatches between docs and source code",
+        "Checks CLI arguments against configure() methods in Command classes",
+        "Suggests corrections for any discrepancies found",
+        "Uses grep or search tools to find method definitions"
+      ]
+    },
+    {
+      "id": 15,
+      "eval_name": "card-grid-navigation",
+      "prompt": "Create a card grid for the documentation Index.rst with cards for Introduction, Installation, Configuration, and Usage sections. Each card should have an emoji, description, and link.",
+      "expected_output": "RST content with card-grid directive containing four cards with emoji titles, descriptive text, and card-footer with stretched-link buttons linking to the respective sections.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. card-grid:: directive with :columns: and :columns-md: options",
+        "Each card uses .. card:: with emoji in title",
+        "Each card has .. card-footer:: with :ref: link",
+        "Card footer uses :button-style: with stretched-link class",
+        "Cards have descriptive text between title and footer",
+        "Grid has :gap: and :card-height: options set"
+      ]
+    },
+    {
+      "id": 16,
+      "eval_name": "intersphinx-cross-references",
+      "prompt": "Add cross-references to the TYPO3 Core API documentation for dependency injection, TCA column types, and TypoScript stdWrap in the extension documentation.",
+      "expected_output": "RST content with :ref: roles using intersphinx prefixes (t3coreapi:, t3tca:, t3tsref:) and corresponding inventory entries in guides.xml.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses :ref:`t3coreapi:dependency-injection` syntax for Core API",
+        "Uses :ref:`t3tca:columns-types` syntax for TCA reference",
+        "Uses :ref:`t3tsref:stdwrap` syntax for TypoScript reference",
+        "Corresponding <inventory> elements exist in guides.xml",
+        "Inventory URLs end with trailing slash",
+        "Does not add unused inventory entries"
+      ]
+    },
+    {
+      "id": 17,
+      "eval_name": "watch-mode-live-preview",
+      "prompt": "Set up live documentation preview with auto-reload for editing TYPO3 extension documentation.",
+      "expected_output": "Docker command for watch mode with separate volume mounts, port mapping, and the --watch flag. Mentions accessing http://localhost:1337 and limitations of watch mode.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses ghcr.io/typo3-documentation/render-guides:latest image",
+        "Includes --watch flag in docker command",
+        "Maps port 1337 with -p 1337:1337",
+        "Uses separate volume mounts for Documentation and GENERATED-temp",
+        "Mentions URL http://localhost:1337/Index.html for preview",
+        "Notes that guides.xml changes or new files require container restart"
+      ]
+    },
+    {
+      "id": 18,
+      "eval_name": "extraction-and-analysis",
+      "prompt": "Analyze the documentation coverage for this TYPO3 extension. Identify what PHP classes, configuration options, and commands are documented vs undocumented.",
+      "expected_output": "Runs extraction scripts to discover documentable items in the extension, then analyzes coverage gaps. Reports which classes, settings, and CLI commands lack documentation.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Runs or references scripts/extract-all.sh for discovery",
+        "Runs or references scripts/analyze-docs.sh for coverage analysis",
+        "Identifies undocumented PHP classes from Classes/ directory",
+        "Identifies undocumented configuration settings",
+        "Identifies undocumented CLI commands if any exist",
+        "Provides actionable list of documentation gaps to fill"
+      ]
+    },
+    {
+      "id": 19,
+      "eval_name": "editorconfig-and-formatting",
+      "prompt": "Ensure the documentation follows TYPO3 coding guidelines. Check that .editorconfig exists, indentation is 4 spaces, line endings are LF, and line length is max 80 chars.",
+      "expected_output": "Creates or verifies .editorconfig in Documentation/ with correct settings. Checks RST files for indentation and line length compliance. Fixes any violations.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Documentation/.editorconfig exists or is created",
+        ".editorconfig has indent_style = space and indent_size = 4",
+        ".editorconfig has end_of_line = lf",
+        ".editorconfig has charset = utf-8",
+        "RST files use 4-space indentation, not tabs",
+        "Lines do not exceed 80 characters",
+        "Files end with a newline"
+      ]
+    },
+    {
+      "id": 20,
+      "eval_name": "plantuml-diagram",
+      "prompt": "Add an architecture diagram to the Developer documentation showing the extension's service pipeline: Parser -> Resolver -> Renderer with descriptions.",
+      "expected_output": "RST content using the .. uml:: directive with inline PlantUML syntax showing a component diagram. Includes :caption: option and proper indentation.",
+      "files": [],
+      "project_path": "/home/cybot/projects/t3x-cowriter/main",
+      "assertions": [
+        "Uses .. uml:: directive for the diagram",
+        "Has :caption: option describing the diagram",
+        "Contains valid PlantUML syntax with component definitions",
+        "Shows relationships between Parser, Resolver, and Renderer",
+        "Proper 4-space indentation for directive content",
+        "Uses skinparam for clean styling"
+      ]
+    }
+  ]
+}

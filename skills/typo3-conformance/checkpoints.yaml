@@ -1,0 +1,1358 @@
+# Checkpoints for typo3-conformance skill
+# Validates TYPO3 extension structure, configuration, and coding standards
+
+# RELOCATED FROM php-modernization-skill (v1.16.0 refocus):
+#   PM-26 -> TC-180 (PSR-3 logging compliance)
+#   PM-27 -> TC-181 (PSR-14 event dispatch safety)
+#   PM-28 -> TC-182 (factory pattern + baseline)
+#   PM-33 -> TC-183 (GeneralUtility::makeInstance -> DI)
+
+version: 1
+skill_id: typo3-conformance
+
+mechanical:
+  # === ext_emconf.php CHECKS ===
+  - id: TC-01
+    type: file_exists
+    target: ext_emconf.php
+    severity: error
+    desc: "ext_emconf.php must exist for TYPO3 extension registration"
+
+  - id: TC-02
+    type: contains
+    target: ext_emconf.php
+    pattern: "'title'"
+    severity: error
+    desc: "ext_emconf.php must define 'title' field"
+
+  - id: TC-03
+    type: contains
+    target: ext_emconf.php
+    pattern: "'description'"
+    severity: error
+    desc: "ext_emconf.php must define 'description' field"
+
+  - id: TC-04
+    type: contains
+    target: ext_emconf.php
+    pattern: "'version'"
+    severity: error
+    desc: "ext_emconf.php must define 'version' field"
+
+  - id: TC-05
+    type: contains
+    target: ext_emconf.php
+    pattern: "'constraints'"
+    severity: error
+    desc: "ext_emconf.php must define 'constraints' with TYPO3 core dependency"
+
+  - id: TC-06
+    type: regex
+    target: ext_emconf.php
+    pattern: "['\"]state['\"][[:space:]]*=>[[:space:]]*['\"](stable|beta|alpha|experimental|test|obsolete|excludeFromUpdates)['\"]"
+    severity: warning
+    desc: "ext_emconf.php should define valid 'state' field"
+
+  # === composer.json CHECKS ===
+  - id: TC-10
+    type: file_exists
+    target: composer.json
+    severity: error
+    desc: "composer.json must exist for Composer-based installation"
+
+  - id: TC-11
+    type: contains
+    target: composer.json
+    pattern: '"typo3-cms-extension"'
+    severity: error
+    desc: "composer.json type must be 'typo3-cms-extension'"
+
+  - id: TC-12
+    type: json_path
+    target: composer.json
+    pattern: '.require["typo3/cms-core"]'
+    severity: error
+    desc: "composer.json must require typo3/cms-core"
+
+  - id: TC-13
+    type: json_path
+    target: composer.json
+    pattern: '.autoload["psr-4"]'
+    severity: error
+    desc: "composer.json must define PSR-4 autoloading"
+
+  - id: TC-14
+    type: regex
+    target: composer.json
+    pattern: '"[A-Z][a-zA-Z0-9_]*\\\\[A-Z][a-zA-Z0-9_]*\\\\": "Classes/?"'
+    severity: error
+    desc: "PSR-4 autoload must map vendor namespace to Classes/ directory"
+
+  - id: TC-15
+    type: json_path
+    target: composer.json
+    pattern: '.extra["typo3/cms"]["extension-key"]'
+    severity: warning
+    desc: "composer.json should define extension-key in extra.typo3/cms"
+
+  - id: TC-16
+    type: command
+    pattern: "composer validate --strict 2>&1 || true"
+    severity: warning
+    desc: "composer.json should pass strict validation"
+
+  # === DIRECTORY STRUCTURE CHECKS ===
+  - id: TC-20
+    type: file_exists
+    target: Classes/
+    severity: error
+    desc: "Classes/ directory must exist for PHP classes"
+
+  - id: TC-21
+    type: file_exists
+    target: Configuration/
+    severity: warning
+    desc: "Configuration/ directory should exist for TCA, TypoScript, etc."
+
+  - id: TC-22
+    type: file_exists
+    target: Resources/
+    severity: warning
+    desc: "Resources/ directory should exist for templates, assets, translations"
+
+  - id: TC-23
+    type: file_exists
+    target: Resources/Private/
+    severity: warning
+    desc: "Resources/Private/ should exist for templates and partials"
+
+  - id: TC-24
+    type: file_exists
+    target: Resources/Public/
+    severity: info
+    desc: "Resources/Public/ should exist for CSS, JS, and images"
+
+  # === DEPENDENCY INJECTION CHECKS ===
+  - id: TC-30
+    type: file_exists
+    target: Configuration/Services.yaml
+    severity: warning
+    desc: "Services.yaml should exist for dependency injection configuration"
+
+  - id: TC-31
+    type: contains
+    target: Configuration/Services.yaml
+    pattern: "autowire: true"
+    severity: info
+    desc: "Services.yaml should enable autowiring"
+
+  - id: TC-32
+    type: contains
+    target: Configuration/Services.yaml
+    pattern: "autoconfigure: true"
+    severity: info
+    desc: "Services.yaml should enable autoconfiguration"
+
+  # === TCA CONFIGURATION CHECKS ===
+  - id: TC-35
+    type: file_exists
+    target: Configuration/TCA/
+    severity: info
+    desc: "Configuration/TCA/ should exist if extension defines database tables"
+
+  # === DEPRECATED API PATTERNS ===
+  - id: TC-40
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['TYPO3_DB']"
+    severity: error
+    desc: "Must not use deprecated TYPO3_DB global (removed in TYPO3 v10)"
+
+  - id: TC-41
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "GeneralUtility::makeInstance(ObjectManager"
+    severity: warning
+    desc: "Should not instantiate ObjectManager directly; use dependency injection"
+
+  - id: TC-42
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "ObjectManager::get("
+    severity: warning
+    desc: "Should not use ObjectManager::get(); use dependency injection"
+
+  - id: TC-43
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "GeneralUtility::_GP("
+    severity: warning
+    desc: "Should not use deprecated _GP(); use request object instead"
+
+  - id: TC-44
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "GeneralUtility::_GET("
+    severity: warning
+    desc: "Should not use deprecated _GET(); use request object instead"
+
+  - id: TC-45
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "GeneralUtility::_POST("
+    severity: warning
+    desc: "Should not use deprecated _POST(); use request object instead"
+
+  - id: TC-46
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['TSFE']->fe_user"
+    severity: warning
+    desc: "Should not access fe_user via TSFE global; use Context API"
+
+  - id: TC-47
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "extRelPath("
+    severity: error
+    desc: "Must not use deprecated extRelPath() (removed in TYPO3 v10)"
+
+  - id: TC-48
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "BackendUtility::getModuleUrl("
+    severity: error
+    desc: "Must not use deprecated getModuleUrl(); use UriBuilder"
+
+  # === EXTENSION REGISTRATION ===
+  - id: TC-50
+    type: file_exists
+    target: ext_localconf.php
+    severity: info
+    desc: "ext_localconf.php should exist for frontend/backend registration"
+
+  # ext_tables.php is OPTIONAL in TYPO3 v13+ — backend modules / AJAX routes
+  # are registered via Configuration/Backend/{Modules,AjaxRoutes,Routes}.php.
+  # Accept any of the registration entry-points (or pure-service extensions
+  # with no backend surface at all).
+  - id: TC-51
+    type: file_exists
+    target: "{ext_tables.php,Configuration/Backend/Modules.php,Configuration/Backend/AjaxRoutes.php,Configuration/Backend/Routes.php}"
+    severity: info
+    desc: "Backend modules / AJAX routes registered via either ext_tables.php (legacy) or Configuration/Backend/*.php (TYPO3 v13+ recommended). Pure-service extensions may have neither."
+
+  # === STRICT TYPES DECLARATION ===
+  - id: TC-07
+    type: regex_not
+    target: ext_emconf.php
+    pattern: '^[[:space:]]*(<\?php[[:space:]]+)?declare[[:space:]]*\([[:space:]]*strict_types'
+    severity: error
+    desc: "ext_emconf.php MUST NOT contain declare(strict_types=1) - TER upload will fail"
+
+  - id: TC-08
+    type: regex
+    target: ext_emconf.php
+    pattern: '\$EM_CONF\[\$_EXTKEY\]'
+    severity: error
+    desc: "ext_emconf.php must use $EM_CONF[$_EXTKEY], not a hardcoded extension key"
+
+  - id: TC-09
+    type: contains
+    target: ext_emconf.php
+    pattern: "'category'"
+    severity: warning
+    desc: "ext_emconf.php should define valid 'category' field"
+
+  # === CODING STANDARDS: STRICT TYPES ===
+  - id: TC-17
+    type: regex
+    target: Classes/**/*.php
+    pattern: 'declare\(strict_types=1\)'
+    severity: warning
+    desc: "All PHP files in Classes/ should declare strict_types=1"
+
+  # === COMPOSER.JSON ADDITIONAL CHECKS ===
+  - id: TC-18
+    type: json_path
+    target: composer.json
+    pattern: '.require["php"]'
+    severity: error
+    desc: "composer.json must declare PHP version constraint"
+
+  - id: TC-19
+    type: json_path
+    target: composer.json
+    pattern: '.license'
+    severity: warning
+    desc: "composer.json should declare license (GPL-2.0-or-later recommended)"
+
+  - id: TC-25
+    type: json_path
+    target: composer.json
+    pattern: '.description'
+    severity: warning
+    desc: "composer.json should have a meaningful description"
+
+  - id: TC-26
+    type: regex
+    target: composer.json
+    pattern: '"name"\s*:\s*"[a-z0-9-]+/[a-z0-9-]+"'
+    severity: error
+    desc: "composer.json name must follow vendor/package-name format"
+
+  - id: TC-27
+    type: not_contains
+    target: composer.json
+    pattern: '"typo3-ter/'
+    severity: warning
+    desc: "composer.json should not contain deprecated typo3-ter replace entries"
+
+  # === ADDITIONAL PROHIBITED PATTERNS ===
+  - id: TC-36
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['TYPO3_CONF_VARS']"
+    severity: warning
+    desc: "Should not access TYPO3_CONF_VARS via $GLOBALS; use ExtensionConfiguration"
+
+  - id: TC-37
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['BE_USER']"
+    severity: warning
+    desc: "Should not access BE_USER via $GLOBALS; use Context API"
+
+  - id: TC-38
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['LANG']"
+    severity: warning
+    desc: "Should not access LANG via $GLOBALS; use LanguageServiceFactory"
+
+  - id: TC-39
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "$GLOBALS['TCA']"
+    severity: warning
+    desc: "Should not access TCA via $GLOBALS; use TcaSchemaFactory (v14+) or inject TCA via DI"
+
+  # === BACKEND MODULE MODERNIZATION (v13+) ===
+  - id: TC-52
+    type: command
+    pattern: "! test -d Resources/Private/Templates/ || ! grep -rq '<script' Resources/Private/Templates/ 2>/dev/null"
+    severity: warning
+    desc: "Templates should not contain inline <script> tags; use ES6 modules"
+
+  - id: TC-53
+    type: file_exists
+    target: Configuration/Icons.php
+    severity: info
+    scope: backend
+    desc: "Configuration/Icons.php should exist for icon registration (v12+)"
+
+  # Configuration/Sets/ is REQUIRED for sitepackage extensions in TYPO3 v13+
+  # (Site Sets) but is N/A for service/provider/library extensions. Detect
+  # sitepackage by the presence of typical sitepackage markers (page
+  # templates, page.tsconfig, Yaml/Site/). If none of those exist → skip;
+  # otherwise require Configuration/Sets/.
+  - id: TC-54
+    type: command
+    pattern: 'if [ -e Configuration/page.tsconfig ] || [ -d Configuration/Yaml/Site ] || [ -d Resources/Private/Templates/Page ] || [ -d Resources/Private/Layouts/Page ]; then [ -d Configuration/Sets ]; else exit 0; fi'
+    severity: info
+    desc: "Configuration/Sets/ required for sitepackage extensions in TYPO3 v13+ (detected via page templates / page.tsconfig / Yaml/Site/). Skipped for service/provider extensions."
+
+  # === CI TOOLING CENTRALIZATION ===
+  - id: TC-90
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: warning
+    desc: "require-dev should use netresearch/typo3-ci-workflows for centralized CI tooling"
+
+  - id: TC-91
+    type: not_contains
+    target: composer.json
+    pattern: '"friendsofphp/php-cs-fixer"'
+    severity: info
+    desc: "require-dev should not individually list php-cs-fixer (provided by typo3-ci-workflows)"
+
+  - id: TC-92
+    type: file_exists
+    target: Build/Scripts/runTests.sh
+    severity: warning
+    desc: "Build/Scripts/runTests.sh should exist for local test execution"
+
+  - id: TC-93
+    type: regex
+    target: "{phpstan.neon,Build/phpstan.neon,Build/phpstan/phpstan.neon,phpstan.neon.dist}"
+    pattern: 'typo3-ci-workflows'
+    severity: info
+    desc: "PHPStan config should include shared config from typo3-ci-workflows"
+
+  # === TCA v13 PATTERN CHECKS ===
+  - id: TC-100
+    type: regex_not
+    target: Configuration/TCA/**/*.php
+    pattern: "eval.*trim"
+    severity: warning
+    desc: "TCA files should not contain eval=trim; use trim option in fieldControl instead (v13+)"
+
+  - id: TC-101
+    type: regex_not
+    target: Configuration/TCA/**/*.php
+    pattern: "l10n_parent.*type.*group"
+    severity: error
+    desc: "TCA translation l10n_parent must not use type=group; use type=select with renderType=selectSingle"
+
+  - id: TC-102
+    type: regex_not
+    target: Configuration/TCA/**/*.php
+    pattern: "(prependAtCopy|hideAtCopy)"
+    severity: warning
+    desc: "TCA should not contain prependAtCopy or hideAtCopy; removed in TYPO3 v13"
+
+  - id: TC-103
+    type: command
+    command: |
+      found=$(find Configuration/TCA/ -name '*.php' -exec grep -lP 'foreign_table' {} + 2>/dev/null)
+      [ -z "$found" ] && exit 0
+      missing=$(echo "$found" | while IFS= read -r f; do
+        grep -LP 'default' "$f" 2>/dev/null
+      done)
+      if [ -n "$missing" ]; then
+        echo "TCA files with foreign_table but no default value: $missing"
+        exit 1
+      fi
+      exit 0
+    severity: warning
+    desc: "TCA select fields with foreign_table should define a default value to avoid NULL issues"
+
+  # === DI / ARCHITECTURE CHECKS ===
+  - id: TC-110
+    type: command
+    pattern: "set -o pipefail; ! grep -rn 'GeneralUtility::makeInstance' Classes/ 2>/dev/null | grep -v 'Classes/Task/' | grep -v 'Classes/Scheduler/' | grep -v 'Typo3QuerySettings' | grep -v 'ConnectionPool' | grep -v 'QueryBuilder' | grep -v 'FlashMessage' | grep -q ."
+    severity: warning
+    desc: "Classes/ should use dependency injection instead of GeneralUtility::makeInstance for services (excludes Scheduler tasks, ConnectionPool, QueryBuilder, FlashMessage)"
+
+  - id: TC-111
+    type: regex_not
+    target: Classes/**/*.php
+    pattern: "PersistenceManager[^I]"
+    severity: warning
+    desc: "Should use PersistenceManagerInterface in type hints, not concrete PersistenceManager class"
+
+  - id: TC-112
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "GeneralUtility::makeInstance(ExtensionConfiguration"
+    severity: warning
+    desc: "Should inject ExtensionConfiguration via constructor DI instead of using GeneralUtility::makeInstance"
+
+  # === SECURITY PATTERN CHECKS ===
+  - id: TC-120
+    type: command
+    command: |
+      found=$(find Classes/ -name '*.php' -exec grep -lP '(shell_exec|\bexec\s*\(|\bsystem\s*\(|passthru\s*\()' {} + 2>/dev/null)
+      if [ -n "$found" ]; then
+        echo "Prohibited function usage found in: $found"
+        exit 1
+      fi
+      exit 0
+    severity: error
+    desc: "Must not use shell_exec, exec, system, or passthru; use CommandUtility or Symfony Process"
+
+  - id: TC-121
+    type: not_contains
+    target: Classes/**/*.php
+    pattern: "md5(uniqid"
+    severity: error
+    desc: "Must not use md5(uniqid()); use random_bytes() or GeneralUtility::makeInstance(Random::class) — md5(uniqid()) is cryptographically weak and a security vulnerability"
+
+  - id: TC-122
+    type: regex_not
+    target: Classes/**/*.php
+    pattern: "\\bserialize\\s*\\("
+    severity: error
+    desc: "Must not use serialize(); prefer json_encode/json_decode — serialize() enables object injection attacks"
+
+  - id: TC-122b
+    type: regex_not
+    target: Classes/**/*.php
+    pattern: "\\bunserialize\\s*\\("
+    severity: error
+    desc: "Must not use unserialize(); use json_decode instead — unserialize() without allowed_classes is an object injection vulnerability"
+
+  - id: TC-123
+    type: command
+    pattern: "grep -rn '{[a-zA-Z]\\+}\\|{[a-zA-Z]\\+\\.' Resources/Private/Templates/ 2>/dev/null | grep -v 'f:format.raw\\|f:format.html\\|f:uri\\|f:link\\|f:translate\\|f:image\\|f:if\\|f:for\\|f:render\\|f:section\\|f:layout\\|f:comment\\|f:count\\|f:format.htmlspecialchars\\|f:security\\|f:be\\.' | head -5 && echo 'INFO: Check that dynamic Fluid output uses f:format.htmlspecialchars where appropriate' || true"
+    severity: warning
+    desc: "Fluid templates should use f:format.htmlspecialchars on dynamic output to prevent XSS"
+
+  # === TEMPLATE / BOOTSTRAP 5 CHECKS ===
+  - id: TC-130
+    type: regex_not
+    target: Resources/Private/**/*.html
+    pattern: "(form-inline|form-row|btn-default|form-group)"
+    severity: warning
+    desc: "Templates should not use Bootstrap 4 classes (form-inline, form-row, btn-default); migrate to Bootstrap 5"
+
+  # === CI CONFIGURATION CHECKS ===
+  - id: TC-140
+    type: command
+    command: |
+      # Only fail if push trigger exists WITHOUT branch restrictions
+      grep -A2 '^on:' .github/workflows/ci.yml 2>/dev/null | grep -q 'push:' || exit 0
+      grep -A5 'push:' .github/workflows/ci.yml 2>/dev/null | grep -q 'branches' && exit 0
+      echo 'ci.yml has unrestricted push trigger — should restrict to specific branches'
+      exit 1
+    severity: warning
+    desc: "CI workflow push trigger should be restricted to specific branches, not bare push:"
+
+  - id: TC-141
+    type: json_path
+    target: composer.json
+    pattern: '.["require-dev"]["netresearch/typo3-ci-workflows"]'
+    severity: info
+    desc: "require-dev should reference netresearch/typo3-ci-workflows for centralized CI tooling"
+
+  # === PHPSTAN BASELINE CHECKS ===
+  - id: TC-150
+    type: command
+    pattern: "if [ -f phpstan-baseline.neon ]; then count=$(grep -c 'message:' phpstan-baseline.neon 2>/dev/null || echo 0); if [ \"$count\" -gt 10 ]; then echo \"WARN: PHPStan baseline has $count suppressed errors (should trend toward 0)\" && exit 1; fi; elif [ -f Build/phpstan-baseline.neon ]; then count=$(grep -c 'message:' Build/phpstan-baseline.neon 2>/dev/null || echo 0); if [ \"$count\" -gt 10 ]; then echo \"WARN: PHPStan baseline has $count suppressed errors (should trend toward 0)\" && exit 1; fi; fi; exit 0"
+    severity: warning
+    desc: "PHPStan baseline should trend toward zero suppressed errors (>10 indicates significant technical debt)"
+
+  # === TCA SEARCHFIELDS AND SORTBY CHECKS ===
+  - id: TC-151
+    type: command
+    pattern: "find Configuration/TCA/ -name '*.php' 2>/dev/null | xargs grep -lP \"'ctrl'\" 2>/dev/null | while read f; do if ! grep -qP \"'searchFields'\" \"$f\" 2>/dev/null; then echo \"FAIL: $f missing searchFields in ctrl\" && exit 1; fi; done || exit 1"
+    severity: error
+    desc: "All TCA ctrl arrays must define searchFields for backend search functionality"
+
+  - id: TC-152
+    type: command
+    pattern: "find Configuration/TCA/ -name '*.php' 2>/dev/null | xargs grep -lP \"['\\\"]sortby['\\\"]\" 2>/dev/null | while read f; do if ! grep -qP \"['\\\"]default_sortby['\\\"]\" \"$f\" 2>/dev/null; then echo \"WARN: $f has sortby but no default_sortby\" && exit 1; fi; done"
+    severity: warning
+    desc: "TCA tables with sortby should also define default_sortby for consistent ordering"
+
+  # === DI INTERFACE ALIAS CHECKS ===
+  - id: TC-153
+    type: command
+    pattern: "interfaces=$(grep -rhoP '[A-Z][a-zA-Z0-9_]*Interface' Classes/ 2>/dev/null | sort -u); if [ -n \"$interfaces\" ] && [ -f Configuration/Services.yaml ]; then missing=0; for iface in $interfaces; do case $iface in ServerRequestInterface|ResponseInterface|ContainerInterface|LoggerInterface|EventDispatcherInterface|CacheInterface|RequestFactoryInterface|UriFactoryInterface|StreamFactoryInterface) continue ;; esac; if ! grep -q \"$iface\" Configuration/Services.yaml 2>/dev/null; then echo \"WARN: Interface $iface used in Classes/ but not aliased in Services.yaml\"; missing=1; fi; done; if [ \"$missing\" -eq 1 ]; then exit 1; fi; fi; exit 0"
+    severity: warning
+    desc: "Interfaces used for constructor injection should have explicit aliases in Services.yaml"
+
+  # === CACHE DOUBLE-LOOKUP ANTI-PATTERN ===
+  - id: TC-154
+    type: command
+    pattern: "[ -d Classes/ ] || exit 0; set -o pipefail; ! grep -rnP '->has\\(' Classes/ 2>/dev/null | sed -E 's/^[^:]+:[0-9]+://' | grep -iq cache"
+    severity: warning
+    desc: "Cache get should not be preceded by has() -- use get() directly and check for false (path-prefix stripped to avoid false-positives from Cache/ directory names)"
+
+  # === REPOSITORY QUERY PROPERTY NAME CHECK ===
+  # Test PHP source under Classes/Domain/Repository/ for snake_case names
+  # passed to ->equals() / ->like() / ->contains(). Filenames are stripped
+  # before the snake_case check (sed) so directory names like Cache_Foo/
+  # don't generate false positives.
+  - id: TC-155
+    type: command
+    pattern: "[ -d Classes/Domain/Repository/ ] || exit 0; set -o pipefail; ! grep -rn '\\->equals(' Classes/Domain/Repository/ 2>/dev/null | sed -E 's/^[^:]+:[0-9]+://' | grep -Eq '_[a-z]'"
+    severity: error
+    desc: "Extbase repository queries should use model property names (camelCase), not database column names (snake_case)"
+
+  # === XLIFF COMPLETENESS CHECK ===
+  - id: TC-156
+    type: command
+    pattern: "lll_refs=$(grep -rhoP 'LLL:EXT:[^/]+/Resources/Private/Language/[^:]+:[a-zA-Z0-9_.]+' Configuration/ Classes/ Resources/Private/Templates/ 2>/dev/null | sed 's/.*://' | sort -u); if [ -n \"$lll_refs\" ]; then missing=0; for key in $lll_refs; do if ! grep -rq \"id=\\\"$key\\\"\" Resources/Private/Language/ 2>/dev/null; then echo \"MISSING XLIFF key: $key\"; missing=$((missing+1)); fi; done; if [ $missing -gt 0 ]; then echo \"FAIL: $missing LLL references have no XLIFF trans-unit\" && exit 1; fi; fi; exit 0"
+    severity: error
+    desc: "All LLL: references in TCA, classes, and templates must have corresponding XLIFF trans-unit entries"
+
+  # === DEPRECATED CONSTANTS WITH ENUM REPLACEMENTS ===
+  # Walk PHP files: detect @deprecated docblocks followed by a `const`
+  # declaration (typical pattern — @deprecated lives in the docblock above
+  # the const, not on the same line). Single-line greps would miss this.
+  - id: TC-157
+    type: command
+    pattern: "[ -d Classes/ ] || exit 0; set -o pipefail; if find Classes/ -type f -name '*.php' 2>/dev/null | xargs awk 'BEGIN{in_doc=0; doc_deprecated=0; pending_deprecated=0} /^[[:space:]]*\\/\\*\\*/{in_doc=1; doc_deprecated=0} {if (in_doc && /@deprecated/) doc_deprecated=1} in_doc && /\\*\\//{in_doc=0; if (doc_deprecated) pending_deprecated=1; next} pending_deprecated && /^[[:space:]]*(public|protected|private)?[[:space:]]*const[[:space:]]+/ {found=1; exit} pending_deprecated && /^[[:space:]]*(\\/\\*\\*|#|\\/\\/|$)/ {next} pending_deprecated {pending_deprecated=0} END{exit found ? 0 : 1}' 2>/dev/null && grep -rlqP '\\benum\\b' Classes/ 2>/dev/null; then exit 1; else exit 0; fi"
+    severity: warning
+    desc: "Deprecated string constants (in @deprecated docblock) should not coexist with enum replacements in active code paths"
+
+  # === EXCELLENCE INDICATORS (bonus) ===
+  - id: TC-58
+    type: file_exists
+    target: .gitattributes
+    severity: info
+    desc: ".gitattributes should exist with export-ignore for smaller TER packages"
+
+  - id: TC-59
+    type: file_exists
+    target: Makefile
+    severity: info
+    desc: "Makefile should exist for task automation"
+
+  # === TER PUBLISHING CHECKS ===
+  - id: TC-55
+    type: json_path
+    target: composer.json
+    pattern: '.support.issues'
+    severity: warning
+    desc: "composer.json should define support.issues URL for bug tracker link"
+
+  - id: TC-56
+    type: json_path
+    target: composer.json
+    pattern: '.support.source'
+    severity: warning
+    desc: "composer.json should define support.source URL for repository link"
+
+  - id: TC-57
+    type: json_path
+    target: composer.json
+    pattern: '.homepage'
+    severity: warning
+    desc: "composer.json should define homepage URL"
+
+  # === BOOTSTRAP 5 MIGRATION CHECKS ===
+  - id: TC-65
+    type: regex_not
+    target: "Resources/Private/**/*.html"
+    pattern: 'data-dismiss=|data-toggle="(collapse|modal|tab|dropdown|tooltip|popover)"|data-target=|data-ride=|data-slide='
+    severity: warning
+    desc: "Legacy Bootstrap 4 data attributes detected. Migrate to Bootstrap 5: data-dismiss→data-bs-dismiss, data-toggle→data-bs-toggle, data-target→data-bs-target, data-ride→data-bs-ride, data-slide→data-bs-slide"
+
+  - id: TC-66
+    type: regex_not
+    target: "Resources/Private/**/*.html"
+    pattern: '\bclass="[^"]*\b(btn-default|ml-(\d+|auto)|mr-(\d+|auto)|pl-(\d+|auto)|pr-(\d+|auto)|float-left|float-right|font-weight-bold|font-weight-normal|font-italic)\b'
+    severity: warning
+    desc: "Legacy Bootstrap 4 CSS classes detected. Migrate: btn-default→btn-secondary, ml-*→ms-*, mr-*→me-*, pl-*→ps-*, pr-*→pe-*, float-left→float-start, float-right→float-end"
+
+  # === TEMPLATE QUALITY CHECKS ===
+  - id: TC-67
+    type: regex_not
+    target: "Resources/Private/**/*.html"
+    pattern: 'includeJavaScriptFiles|includeCssFiles'
+    severity: error
+    desc: "Wrong f:be.pageRenderer attribute name. Use includeJsFiles (NOT includeJavaScriptFiles) and includeCssLibs (NOT includeCssFiles). Wrong names silently fail to load assets"
+
+  - id: TC-68
+    type: regex_not
+    target: "Resources/Private/**/*.html"
+    pattern: '<script(?![^>]*\bsrc=)[^>]*>'
+    severity: error
+    desc: "Inline <script> tags violate CSP. Move JavaScript to external files loaded via f:be.pageRenderer includeJsFiles or AssetCollector"
+
+  # === CODECOV PATCH TARGET CHECK ===
+  - id: TC-160
+    type: command
+    command: "if [ ! -f codecov.yml ]; then exit 0; fi; target=$(sed -n '/patch:/,/target:/{ s/.*target:\\s*//p; }' codecov.yml 2>/dev/null | head -1 || echo auto); case \"$target\" in auto|'') exit 0 ;; 100%) echo \"WARN: codecov patch target is 100% — use 80% or auto when only unit test coverage is uploaded\" && exit 1 ;; *) exit 0 ;; esac"
+    severity: warning
+    desc: "codecov patch target should not be 100% — use 80% or auto when only unit test coverage is uploaded"
+    tags: [ci, codecov, coverage]
+
+  # === PHPSTAN LEVEL 10 CHECK ===
+  - id: TC-176
+    type: command
+    command: "if ! grep -q 'typo3-ci-workflows' composer.json 2>/dev/null; then exit 0; fi; for f in Build/phpstan.neon phpstan.neon; do if [ -f \"$f\" ] && grep -qP 'level:\\s*(10|max)' \"$f\" 2>/dev/null; then exit 0; fi; done; echo 'WARN: PHPStan should use level 10 (max) for extensions using typo3-ci-workflows shared config' && exit 1"
+    severity: warning
+    desc: "PHPStan should use level 10 (max) for extensions using typo3-ci-workflows shared config"
+    tags: [phpstan, ci, static-analysis]
+
+  # === PHPSTAN EMPTY BASELINE (ASPIRATIONAL) ===
+  - id: TC-177
+    type: regex_not
+    target: "{Build/phpstan-baseline.neon,phpstan-baseline.neon}"
+    pattern: '^\s+-\s*$\n\s+message:'
+    severity: info
+    desc: "PHPStan baseline should be empty — zero suppressed errors is the target"
+    tags: [phpstan, baseline, aspirational]
+    # Note: TC-177 is aspirational; TC-150 catches excessive baselines
+
+llm_reviews:
+  # === CODE QUALITY REVIEWS ===
+  - id: TC-60
+    domain: code-quality
+    prompt: |
+      Review the Classes/ directory for TYPO3 coding standards compliance:
+      1. Check for proper namespace declarations matching PSR-4 autoload
+      2. Verify constructor injection is used for dependencies
+      3. Check that controllers extend ActionController or appropriate base class
+      4. Verify services are stateless and do not hold mutable state
+      5. Check for proper use of TYPO3 attributes (#[AsController], etc.)
+    severity: warning
+    desc: "Classes should follow TYPO3 coding standards"
+
+  - id: TC-61
+    domain: code-quality
+    prompt: |
+      Check for modern TYPO3 API usage:
+      1. Verify PSR-7 Request/Response is used in controllers
+      2. Check for proper use of Site and SiteLanguage objects
+      3. Verify TypoScriptFrontendController is not accessed directly
+      4. Check that Context API is used for user/workspace info
+      5. Verify FlexForm handling uses modern approaches
+    severity: warning
+    desc: "Extension should use modern TYPO3 APIs"
+
+  - id: TC-62
+    domain: code-quality
+    prompt: |
+      Review TCA configuration in Configuration/TCA/:
+      1. Check for proper ctrl configuration
+      2. Verify columns use modern renderType instead of deprecated types
+      3. Check showitem syntax is correct
+      4. Verify locallang references exist
+      5. Check for proper icon registration
+    severity: info
+    desc: "TCA configuration should follow current standards"
+
+  # === TRANSLATION REVIEWS ===
+  - id: TC-63
+    name: Translation keys complete for all features
+    type: llm_review
+    severity: info
+    domain: i18n
+    prompt: |
+      Verify that all user-visible strings in the extension have
+      corresponding XLIFF translation keys. Check:
+      - Controller error messages (should use LLL references or trait)
+      - Template labels and buttons
+      - TCA column labels
+      - Module labels
+      - Configuration labels in ext_conf_template.txt
+    tags: [xliff, translation, i18n, completeness]
+
+  # === DOCUMENTATION REVIEWS ===
+  - id: TC-64
+    domain: documentation
+    prompt: |
+      Check extension documentation completeness:
+      1. Verify README.md or Documentation/ exists
+      2. Check for installation instructions specific to TYPO3
+      3. Verify configuration options are documented
+      4. Check if TypoScript/FlexForm options are explained
+      5. Verify version compatibility is clearly stated
+    severity: info
+    desc: "Extension documentation should be complete"
+
+  # === PUBLIC LISTING VERIFICATION ===
+  - id: TC-80
+    domain: publishing
+    prompt: |
+      Verify public listing presence and completeness for the extension.
+      Extract the composer package name from composer.json and the extension
+      key from ext_emconf.php, then check:
+
+      1. TER Listing (extensions.typo3.org/extension/{extension_key}):
+         - Extension page exists and is accessible
+         - Sidebar links are populated (Extension Manual, Found an Issue,
+           Code Insights, Packagist.org)
+         - If links are missing, they must be set via:
+           TYPO3_API_TOKEN=... tailor ter:update \
+             --composer="vendor/package-name" \
+             --manual="https://github.com/..." \
+             --issues="https://github.com/.../issues" \
+             --repository="https://github.com/..." \
+             {extension_key}
+         - Version shown matches latest release
+
+      2. Packagist Listing (packagist.org/packages/{vendor/name}):
+         - Package exists and is findable
+         - Description is meaningful (not empty)
+         - License is set
+         - Latest version is published
+
+      3. Documentation (docs.typo3.org):
+         - If Documentation/ directory with guides.xml exists, check if
+           rendered documentation is available at docs.typo3.org
+         - Alternatively, README or external docs linked from TER
+
+      Report missing or incomplete listings as actionable items.
+    severity: warning
+    desc: "Extension should have complete TER, Packagist, and documentation listings"
+
+  - id: TC-81
+    domain: publishing
+    prompt: |
+      Check the TER publishing workflow for metadata setup completeness:
+
+      1. Verify .github/workflows/ contains a TER publish workflow
+      2. Check if the workflow includes a tailor ter:update step that sets:
+         - --composer (package name for Packagist link)
+         - --manual (documentation/repository link)
+         - --issues (issue tracker link)
+         - --repository (source code link)
+      3. If ter:update is missing from the workflow, recommend adding it
+         as a post-publish step or as a separate one-time setup step
+
+      The ter:update command sets the sidebar links on extensions.typo3.org.
+      Without it, the TER page shows no links to documentation, issues,
+      source code, or Packagist - making the extension appear incomplete.
+
+      This is a MANDATORY step for initial TER setup. The links persist
+      across releases, so it only needs to run once (or when URLs change).
+    severity: warning
+    desc: "TER publish workflow should include metadata setup via tailor ter:update"
+
+  # === CONFIGURATION SYNC REVIEWS ===
+  - id: TC-69
+    domain: configuration
+    prompt: |
+      Compare TYPO3 version constraints between ext_emconf.php and composer.json:
+      1. Check that 'typo3' constraint in ext_emconf.php constraints.depends matches composer.json require.typo3/cms-core version range
+      2. Check that PHP version constraint matches between both files
+      3. Flag any mismatch that would cause installation failures
+    severity: error
+    desc: "ext_emconf.php and composer.json version constraints must be synchronized to prevent installation failures"
+
+  # === DEPENDENCY INJECTION REVIEWS ===
+  - id: TC-70
+    domain: architecture
+    prompt: |
+      Review Services.yaml for proper dependency injection patterns:
+      1. Check factory wiring uses correct syntax: factory: ['@ServiceClass', 'methodName'] with arguments
+      2. Check interface alias bindings map interfaces to concrete implementations
+      3. Check EventDispatcherInterface is properly autowired for event-dispatching services
+      4. Flag any manual service definition that could use autowiring instead
+    severity: warning
+    desc: "Services.yaml should use proper factory wiring, interface bindings, and EventDispatcher autowiring patterns"
+
+  # === SECURITY REVIEWS ===
+  - id: TC-71
+    domain: security
+    prompt: |
+      Review custom ViewHelper classes for XSS prevention:
+      1. Check that ALL dynamic attribute values in tag() or manual HTML construction use htmlspecialchars() with ENT_QUOTES
+      2. Check that render() methods don't concatenate user input into HTML without escaping
+      3. Check that TagBuilder is used instead of manual string concatenation where possible
+      4. Flag any unescaped attribute value as critical XSS risk
+    severity: error
+    desc: "Custom ViewHelper tag attributes must use htmlspecialchars(value, ENT_QUOTES) to prevent XSS"
+
+  # === TRANSLATION HYGIENE REVIEWS ===
+  - id: TC-72
+    domain: quality
+    prompt: |
+      Check for unused XLIFF translation keys:
+      1. List all trans-unit id values in Resources/Private/Language/*.xlf files
+      2. Search for each key in Classes/**/*.php (LLL: references) and Resources/Private/Templates/**/*.html (f:translate references)
+      3. Flag keys that appear in XLIFF but are never referenced in code or templates
+      4. Also flag translation keys referenced in code but missing from XLIFF
+    severity: info
+    desc: "Unused XLIFF translation keys should be removed to maintain translation hygiene"
+
+  # === ASSESSMENT AUDIT REVIEWS (from comprehensive audit session) ===
+  - id: TC-73
+    domain: architecture
+    prompt: |
+      Review dependency injection completeness:
+      1. List all constructor parameters with interface type-hints in Classes/
+      2. Check Configuration/Services.yaml for explicit alias bindings for each interface
+      3. PSR interfaces (Psr\*) and core TYPO3 interfaces (LoggerInterface, EventDispatcherInterface)
+         are autowired and don't need aliases -- skip these
+      4. Custom or extension-specific interfaces MUST have explicit aliases in Services.yaml
+      5. Flag any interface used in constructor injection that lacks a Services.yaml alias
+    severity: error
+    desc: "All custom interfaces used for constructor injection must have explicit aliases in Services.yaml"
+
+  - id: TC-74
+    domain: i18n
+    prompt: |
+      Cross-reference all LLL: translation key usage with XLIFF definitions:
+      1. Collect all LLL:EXT:*/Resources/Private/Language/*:key references from TCA files,
+         PHP classes, and Fluid templates
+      2. Parse all .xlf files in Resources/Private/Language/ for trans-unit id values
+      3. Report keys referenced in code but missing from XLIFF (broken translations)
+      4. Report keys defined in XLIFF but never referenced (dead translations)
+      5. Check that default language XLIFF has all keys used in the extension
+    severity: error
+    desc: "All LLL: references must have corresponding XLIFF entries; orphaned XLIFF keys should be removed"
+
+  - id: TC-75
+    domain: code-quality
+    prompt: |
+      Check for deprecated constants that coexist with enum replacements:
+      1. Find all class constants marked @deprecated in Classes/
+      2. Check if enum classes exist that provide replacement values
+      3. Search for references to the deprecated constants in active (non-deprecated) code paths
+      4. Flag any active code that still uses deprecated constants when enum equivalents exist
+      5. Recommend migration path from constants to enums
+    severity: warning
+    desc: "Deprecated constants should not be referenced in active code when enum replacements exist"
+
+  - id: TC-76
+    domain: performance
+    prompt: |
+      Check for cache double-lookup anti-pattern:
+      1. Find all cache interaction code in Classes/ (FrontendInterface, CacheManager)
+      2. Identify patterns where cache->has() is called before cache->get() in the same method
+      3. This is an anti-pattern because it requires two cache lookups instead of one
+      4. The correct pattern is: $result = $cache->get($key); if ($result === false) { ... }
+      5. Flag all instances of has()-then-get() pattern with suggested fix
+    severity: warning
+    desc: "Cache has()+get() double-lookup should be replaced with get() and false check"
+
+  # === CODING STANDARDS REVIEWS ===
+  - id: TC-95
+    domain: coding-standards
+    prompt: |
+      Check that ALL PHP files have a copyright/license header comment block.
+      This includes ext_localconf.php, ext_tables.php, Configuration/**/*.php,
+      and Build/*.php. Exception: ext_emconf.php (TER cannot parse strict_types).
+    severity: warning
+    desc: "Copyright headers on all PHP files including configuration"
+
+  # === ASSESSMENT-DERIVED CHECKPOINTS (quality audit findings) ===
+
+  # --- Mechanical checks from assessment findings ---
+  # Note: TC-160 (makeInstance) removed — covered by existing TC-110
+
+  - id: TC-161
+    name: datahandler-hook-completeness
+    type: command
+    pattern: "if grep -qP 'processDatamapClass' ext_localconf.php 2>/dev/null; then if ! grep -qP 'processCmdmapClass' ext_localconf.php 2>/dev/null; then echo 'WARNING: processDatamapClass registered but processCmdmapClass missing -- delete/copy operations will not be handled'; exit 1; fi; fi; exit 0"
+    severity: warning
+    desc: "If processDatamapClass is registered, processCmdmapClass should also be registered for delete/copy handling"
+    tags: [hooks, datahandler, completeness, assessment]
+
+  - id: TC-162
+    name: changelog-completeness
+    type: command
+    command: |
+      [ ! -f CHANGELOG.md ] && exit 0
+      missing=0
+      for tag in $(git tag --sort=-v:refname 2>/dev/null | head -20); do
+        version=$(echo "$tag" | sed 's/^v//')
+        if ! grep -qF "## [${version}]" CHANGELOG.md 2>/dev/null; then
+          echo "WARNING: No CHANGELOG.md entry for tag $tag"
+          missing=$((missing+1))
+        fi
+      done
+      if [ "$missing" -gt 0 ]; then
+        echo "WARNING: $missing tagged versions missing from CHANGELOG.md"
+        exit 1
+      fi
+      exit 0
+    severity: warning
+    desc: "CHANGELOG.md should have entries for all tagged versions (compare git tags vs changelog headings)"
+    tags: [documentation, changelog, completeness, assessment]
+
+  # --- LLM review checks from assessment findings ---
+
+  - id: TC-96
+    name: version-consistency
+    domain: configuration
+    prompt: |
+      Compare the version declared in guides.xml (if it exists in Documentation/)
+      with the version in ext_emconf.php:
+      1. Extract the <release> or <version> value from Documentation/guides.xml
+      2. Extract the 'version' value from ext_emconf.php
+      3. These MUST match exactly
+      4. Also check composer.json version field if present
+      5. Flag any mismatch as it causes documentation rendering to show wrong version
+    severity: error
+    desc: "guides.xml version must match ext_emconf.php version to avoid documentation version mismatch"
+    tags: [documentation, version, sync, assessment]
+
+  - id: TC-97
+    name: n-plus-one-queries
+    domain: performance
+    prompt: |
+      Detect N+1 query patterns in Classes/:
+      1. Look for loop constructs (foreach, for, while) that contain calls to
+         repository methods (findBy*, findAll, findOneBy*) or adapter/client
+         methods (retrieve, fetch, get, list, query) inside the loop body
+      2. The classic pattern is: list items in outer call, then retrieve details
+         for each item inside a loop (list-then-retrieve anti-pattern)
+      3. Flag any repository or service method called inside a loop that could
+         be batched into a single query with an IN-clause or bulk fetch
+      4. Check for DataMapper/QueryBuilder calls inside foreach loops
+      5. Suggest batching strategy for each finding
+    severity: warning
+    desc: "Detect loop-inside-loop patterns where inner loop calls repository/adapter methods (N+1 query anti-pattern)"
+    tags: [performance, queries, n-plus-one, assessment]
+
+  - id: TC-98
+    name: interface-implementation-sync
+    domain: architecture
+    prompt: |
+      Check that interface and implementation classes are synchronized:
+      1. Find all interfaces defined in Classes/ (files ending in Interface.php)
+      2. For each interface, find the implementing class(es)
+      3. Compare public methods: all public methods on the implementation that
+         are part of the domain contract should be declared in the interface
+      4. Flag public methods on implementations that are missing from their interface
+         (excluding __construct, framework-required methods, and getter/setter pairs
+         for internal state)
+      5. This ensures the interface remains the complete contract for DI consumers
+    severity: warning
+    desc: "All public domain methods on implementation classes should be declared in their interface"
+    tags: [architecture, interfaces, di, assessment]
+
+  - id: TC-99
+    name: hardcoded-template-strings
+    domain: i18n
+    prompt: |
+      Check Fluid templates (.html) in Resources/Private/ for hardcoded English strings:
+      1. Scan all .html files for quoted string attributes containing 3+ English words
+         (e.g. title="Click here to submit", placeholder="Enter your name")
+      2. Check for bare text content between HTML tags that is clearly English prose
+         (not Fluid expressions, not HTML entities, not CSS class names)
+      3. These should use f:translate viewhelper or LLL: references instead
+      4. Exclude: Fluid namespace declarations, xmlns attributes, CSS class names,
+         JavaScript code, and technical identifiers
+      5. Flag each finding with the file, line, and suggested f:translate replacement
+    severity: warning
+    desc: "Fluid templates should use f:translate instead of hardcoded English strings (check quoted strings >3 words in attributes)"
+    tags: [i18n, templates, hardcoded-strings, assessment]
+
+  - id: TC-100b
+    name: makefile-agents-consistency
+    domain: documentation
+    prompt: |
+      Cross-reference AGENTS.md and Makefile for consistency:
+      1. Parse AGENTS.md for any documented make targets or commands referencing
+         'make <target>' patterns
+      2. Parse Makefile for actually defined targets
+      3. Flag targets mentioned in AGENTS.md that do not exist in Makefile
+      4. Flag important Makefile targets that are not documented in AGENTS.md
+      5. This ensures agent instructions match available automation
+    severity: info
+    desc: "Targets documented in AGENTS.md should exist in Makefile and vice versa"
+    tags: [documentation, consistency, makefile, agents, assessment]
+
+  - id: TC-100c
+    name: upgrade-wizard-for-schema
+    domain: architecture
+    prompt: |
+      Check if database schema changes have corresponding upgrade wizards:
+      1. Parse ext_tables.sql for column definitions
+      2. Check git history or compare with previous tagged versions for NEW columns
+         (columns not present in earlier versions)
+      3. If new columns are added that require data migration (not just nullable
+         additions), verify an UpgradeWizardInterface implementation exists in
+         Classes/Updates/ or Classes/Upgrade/
+      4. New required columns (NOT NULL without DEFAULT), renamed columns, or
+         type changes especially need upgrade wizards
+      5. Flag schema changes that likely need migration but lack an upgrade wizard
+    severity: warning
+    desc: "New ext_tables.sql columns requiring data migration should have an UpgradeWizardInterface implementation"
+    tags: [architecture, upgrade, schema, assessment]
+
+  - id: TC-100d
+    name: ext-conf-template-alignment
+    domain: configuration
+    prompt: |
+      Verify ext_conf_template.txt options match implemented functionality:
+      1. Parse all option keys from ext_conf_template.txt (or system.yaml
+         extension configuration)
+      2. Search Classes/ for references to each configuration option via
+         ExtensionConfiguration->get() or $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']
+      3. Flag options defined in ext_conf_template.txt but never read in code
+         (phantom options for unimplemented features)
+      4. Flag options read in code but not defined in ext_conf_template.txt
+         (missing configuration UI)
+      5. Check that option descriptions match actual behavior
+    severity: warning
+    desc: "Options in ext_conf_template.txt should match implemented functionality (no phantom options)"
+    tags: [configuration, alignment, assessment]
+
+  # === MULTI-VERSION DEPENDENCY COMPATIBILITY CHECKS ===
+  - id: TC-170
+    name: multi-version-direct-api-usage
+    type: command
+    command: |
+      # Check if composer.json has multi-major-version constraints (^X || ^Y)
+      multi_deps=$(grep -oP '"[^"]+"\s*:\s*"[^"]*\|\|[^"]*"' composer.json 2>/dev/null | grep -vP '^"php"\s*:|^"typo3/cms-[^"]*"\s*:')
+      [ -z "$multi_deps" ] && exit 0
+      # For each multi-version dep, check if version-specific classes are used outside Adapter/
+      violations=0
+      while IFS= read -r dep; do
+        pkg=$(echo "$dep" | grep -oP '"[^"]+"' | head -1 | tr -d '"')
+        # Use the vendor segment (before the first /) as a namespace prefix and search case-insensitively
+        vendor=$(echo "$pkg" | cut -d'/' -f1)
+        vendor_ns_prefix=$(echo "$vendor" | sed 's|/|\\\\|g')
+        if grep -rinP "use\s+${vendor_ns_prefix}\\\\\\\\" Classes/ 2>/dev/null | grep -vP 'Adapter/|Factory/' | head -3; then
+          echo "WARN: Direct use of multi-version dependency $pkg outside Adapter/ classes"
+          violations=1
+        fi
+      done <<<"$multi_deps"
+      [ "$violations" -gt 0 ] && exit 1
+      exit 0
+    severity: warning
+    desc: "Multi-version dependencies (^X || ^Y) should be accessed through adapter interfaces, not used directly in business logic"
+    tags: [architecture, multi-version, adapter, dependency]
+
+  - id: TC-171
+    name: multi-version-adapter-interface-exists
+    type: command
+    command: |
+      multi_deps=$(grep -oP '"[^"]+"\s*:\s*"[^"]*\|\|[^"]*"' composer.json 2>/dev/null | grep -vP '^"php"\s*:|^"typo3/cms-[^"]*"\s*:')
+      [ -z "$multi_deps" ] && exit 0
+      # Only require adapters when TC-170 detected direct API usage (version-specific code)
+      # Without direct API usage evidence, the dependency APIs may be identical across versions
+      if [ -d Classes/Adapter ] || [ -d Classes/Service ]; then
+        ifaces=$(find Classes/Adapter Classes/Service -name '*Interface.php' 2>/dev/null)
+        if [ -z "$ifaces" ]; then
+          echo "HINT: Multi-version dependencies found but no adapter interfaces in Classes/Adapter/ or Classes/Service/ — consider adding adapters if APIs differ between versions"
+        fi
+      else
+        echo "HINT: Multi-version dependencies found but no Classes/Adapter/ directory — consider adding adapters if APIs differ between versions"
+      fi
+      exit 0
+    severity: info
+    desc: "Extensions with multi-version dependencies may benefit from adapter interfaces when APIs differ between major versions"
+    tags: [architecture, multi-version, adapter, interface]
+
+  - id: TC-172
+    name: adapter-interface-wired-in-services-yaml
+    type: command
+    command: |
+      # Find adapter interfaces in Classes/
+      ifaces=$(find Classes/Adapter Classes/Service -name '*Interface.php' 2>/dev/null | sed 's|^Classes/||')
+      [ -z "$ifaces" ] && exit 0
+      [ ! -f Configuration/Services.yaml ] && echo "FAIL: Adapter interfaces exist but no Services.yaml" && exit 1
+      missing=0
+      # Iterate safely over newline-delimited interfaces and search by short interface name
+      while IFS= read -r iface; do
+        # Normalise any backslashes to forward slashes, then extract the short class name without extension
+        iface_path=$(printf '%s\n' "$iface" | sed 's|\\|/|g')
+        classname=${iface_path##*/}
+        classname=${classname%.php}
+        if ! grep -q "$classname" Configuration/Services.yaml 2>/dev/null; then
+          echo "FAIL: Interface $iface not wired in Services.yaml"
+          missing=1
+        fi
+      done <<<"$ifaces"
+      [ "$missing" -eq 1 ] && exit 1
+      exit 0
+    severity: error
+    desc: "Adapter interfaces must be wired in Services.yaml (alias or factory) for dependency injection to resolve them"
+    tags: [architecture, di, services-yaml, adapter]
+
+  - id: TC-173
+    name: concrete-adapter-typehint
+    type: command
+    command: |
+      # Find concrete adapter implementations (non-interface PHP files in Adapter/)
+      adapters=$(find Classes/Adapter -name '*.php' ! -name '*Interface.php' ! -name '*Factory.php' 2>/dev/null | sed 's|Classes/||;s|\.php||;s|/|\\\\|g')
+      [ -z "$adapters" ] && exit 0
+      violations=0
+      for adapter in $adapters; do
+        shortname=$(echo "$adapter" | grep -oP '[^\\]+$')
+        # Check if concrete adapter class is type-hinted in constructors outside Adapter/
+        if grep -rnP "(private|protected|public)\s+(readonly\s+)?${shortname}\s+" Classes/ 2>/dev/null | grep -vP 'Adapter/|Factory/' | head -3; then
+          echo "WARN: Concrete adapter class $shortname type-hinted in constructor — use interface instead"
+          violations=1
+        fi
+      done
+      [ "$violations" -gt 0 ] && exit 1
+      exit 0
+    severity: warning
+    desc: "Constructors should type-hint adapter interfaces, not concrete adapter implementations"
+    tags: [architecture, di, adapter, type-hint]
+
+  # === PHPSTAN MULTI-VERSION COMPATIBILITY CHECKS ===
+  - id: TC-174
+    name: phpstan-version-specific-ignore
+    type: command
+    command: |
+      # Check for @phpstan-ignore tags in PHP files that reference version-specific issues
+      found=$(grep -rnP '@phpstan-ignore\s+(method\.notFound|call\.notFound|argument\.type)' Classes/ 2>/dev/null | head -5)
+      if [ -n "$found" ]; then
+        # Only flag if multi-version deps exist
+        multi_deps=$(grep -oP '"[^"]+"\s*:\s*"[^"]*\|\|[^"]*"' composer.json 2>/dev/null | grep -vP '^"php"\s*:|^"typo3/cms-[^"]*"\s*:')
+        if [ -n "$multi_deps" ]; then
+          echo "$found"
+          echo "WARN: @phpstan-ignore tags for method/call/argument issues may be version-specific — use adapter pattern instead"
+          exit 1
+        fi
+      fi
+      exit 0
+    severity: warning
+    desc: "PHPStan ignore tags for method.notFound/call.notFound/argument.type suggest version-specific code — use adapter pattern instead"
+    tags: [phpstan, multi-version, ignore-tags]
+
+  - id: TC-175
+    name: method-exists-typed-parameter
+    type: command
+    command: |
+      # Check for method_exists() calls with typed (non-object) first argument
+      # This causes PHPStan type narrowing issues across versions
+      found=$(grep -rnP 'method_exists\s*\(\s*\$' Classes/ 2>/dev/null | head -10)
+      [ -z "$found" ] && exit 0
+      # Check if any of these are inside methods with typed parameters (not object type)
+      violations=0
+      while IFS= read -r line; do
+        file=$(echo "$line" | cut -d: -f1)
+        varname=$(echo "$line" | grep -oP 'method_exists\s*\(\s*\$\K[a-zA-Z_]+')
+        # Check if the variable has a concrete type hint (not object) in the method signature
+        if grep -P "(${varname})\s*[,)]" "$file" 2>/dev/null | grep -vP 'object\s+\$' | grep -P '[A-Z][a-zA-Z]+\s+\$'"${varname}" | head -1; then
+          echo "WARN: method_exists() used with typed parameter \$$varname — use 'object' type to avoid PHPStan narrowing issues"
+          violations=1
+        fi
+      done <<<"$found"
+      [ "$violations" -gt 0 ] && exit 1
+      exit 0
+    severity: warning
+    desc: "method_exists() for version detection should use 'object' type parameter to avoid PHPStan type narrowing across versions"
+    tags: [phpstan, multi-version, method-exists, type-narrowing]
+
+  # === MULTI-VERSION DEPENDENCY LLM REVIEWS ===
+  - id: TC-100f
+    name: multi-version-api-divergence
+    domain: architecture
+    prompt: |
+      Check for multi-version dependency compatibility:
+      1. Parse composer.json for dependencies with multi-major-version constraints
+         (e.g., "^3 || ^4", "^1.0 || ^2.0") — exclude php and typo3/cms-* packages
+      2. For each such dependency, identify API differences between the major versions
+         that could cause runtime errors (changed method signatures, removed classes,
+         renamed methods, changed constructor arguments)
+      3. Check if the extension uses an adapter/interface pattern to abstract these
+         differences, or if version-specific APIs are called directly in business logic
+      4. Verify that adapter implementations exist for EACH supported major version
+      5. Flag any direct usage of version-specific APIs outside of adapter classes
+    severity: error
+    desc: "Multi-version dependencies must use adapter pattern when APIs differ between major versions"
+    tags: [architecture, multi-version, adapter, dependency, assessment]
+
+  - id: TC-100g
+    name: phpstan-multi-version-analysis
+    domain: code-quality
+    prompt: |
+      Check PHPStan configuration and ignore tags for multi-version compatibility:
+      1. Check if PHPStan config includes analysis for all supported dependency versions
+      2. Find all @phpstan-ignore and @phpstan-ignore-next-line tags in Classes/
+      3. Determine if any ignore tags exist BECAUSE of version-specific API differences
+         (e.g., ignoring method.notFound for a method that only exists in one version)
+      4. These version-specific ignores will cause PHPStan errors when analyzed against
+         the other version — they must be replaced with adapter pattern
+      5. Check that PHPStan baseline does not contain version-specific suppressions
+    severity: warning
+    desc: "PHPStan ignore tags must not be version-specific — replace with adapter pattern for multi-version deps"
+    tags: [phpstan, multi-version, static-analysis, assessment]
+
+  - id: TC-100h
+    name: services-yaml-adapter-wiring
+    domain: architecture
+    prompt: |
+      Verify Services.yaml properly wires adapter interfaces for DI:
+      1. Find all interface files in Classes/Adapter/ or Classes/Service/ directories
+      2. Check Configuration/Services.yaml for explicit alias or factory wiring for
+         each adapter interface
+      3. Verify that constructor parameters throughout the codebase type-hint the
+         interface, NOT the concrete adapter implementation
+      4. If a factory pattern is used, verify the factory class exists and has a
+         create() method that performs version detection
+      5. Flag: interfaces without Services.yaml wiring, concrete type-hints where
+         interface exists, missing factory implementations
+    severity: error
+    desc: "Adapter interfaces must be wired in Services.yaml and type-hinted in constructors (not concrete classes)"
+    tags: [architecture, di, services-yaml, adapter, assessment]
+
+  - id: TC-100e
+    name: domain-model-validation
+    domain: architecture
+    prompt: |
+      Check domain models with cryptographic or hash fields for proper validation:
+      1. Find domain model classes in Classes/Domain/Model/ that contain properties
+         for hashes, checksums, signatures, tokens, or cryptographic values
+      2. Check if these models have a named constructor (static factory method)
+         that validates field consistency (e.g. verifying a checksum matches its
+         source data, or a signature is valid for its payload)
+      3. If models only have a default constructor with setters, there is no
+         guarantee of field consistency at creation time
+      4. Flag models with crypto fields that lack validation in their construction
+      5. Recommend implementing a named constructor pattern like
+         ::createVerified() or ::fromPayload() that enforces invariants
+    severity: warning
+    desc: "Domain models with cryptographic fields should have a named constructor that validates field consistency"
+    tags: [architecture, domain-model, validation, security, assessment]
+
+  # === PSR-3 LOGGING COMPLIANCE (relocated from php-modernization PM-26) ===
+  - id: TC-180
+    name: psr3-logger-aware-nulllogger-default
+    domain: code-quality
+    prompt: |
+      Review the TYPO3 extension codebase for PSR-3 logging compliance.
+
+      Check for:
+      1. Classes implementing LoggerAwareInterface should use LoggerAwareTrait
+      2. Constructor should set $this->logger = new NullLogger() as default
+      3. A private getLogger(): LoggerInterface helper should exist to narrow
+         the nullable trait property for PHPStan
+      4. No nullable $logger properties with null checks scattered in methods
+      5. Logger should NOT be a required constructor parameter
+
+      Examine files in Classes/ directory. Report specific violations.
+    severity: warning
+    desc: "TYPO3 services must use LoggerAwareInterface with NullLogger default (not nullable)"
+    tags: [psr-3, logging, logger-aware, null-logger, typo3]
+
+  # === PSR-14 EVENT DISPATCH SAFETY (relocated from php-modernization PM-27) ===
+  - id: TC-181
+    name: psr14-event-dispatch-try-catch
+    domain: code-quality
+    prompt: |
+      Review the TYPO3 extension codebase for PSR-14 event dispatch safety.
+
+      Check for:
+      1. Event dispatch calls that are NOT wrapped in try/catch for post-processing
+         or notification events (listener failures must not break main flow)
+      2. Validation events that correctly do NOT catch exceptions (listeners may
+         legitimately stop flow)
+      3. Caught exceptions should be logged with context (event class, exception)
+      4. Event classes should be final with readonly constructor properties
+
+      Examine files in Classes/ directory. Report unguarded dispatches that should
+      be guarded, and guarded dispatches that should not be.
+    severity: warning
+    desc: "PSR-14 event dispatch must be try/catch guarded for non-validation events"
+    tags: [psr-14, events, event-dispatcher, typo3]
+
+  # === FACTORY PATTERN + PHPSTAN BASELINE PRACTICES (relocated from php-modernization PM-28) ===
+  - id: TC-182
+    name: factory-capability-fallback-baseline
+    domain: code-quality
+    prompt: |
+      Review the TYPO3 extension for factory pattern and PHPStan baseline practices.
+
+      Check for:
+      1. Factory classes that select implementations at runtime should have explicit
+         fallback chains (e.g., Imagick -> GD -> RuntimeException)
+      2. Services.yaml should wire factories correctly using the factory key
+      3. PHPStan baseline (phpstan-baseline.neon) should be shrinking, not growing
+      4. No new baseline entries should be added — issues should be fixed immediately
+      5. ProcessorInterface pattern: services with process() + canProcess() for
+         middleware-style decoupling
+
+      Report specific issues with factory wiring, baseline growth, or missing
+      processor interfaces.
+    severity: info
+    desc: "Factory patterns must have capability fallback; PHPStan baseline must shrink"
+    tags: [factory, services-yaml, phpstan, baseline, processor-interface, typo3]
+
+  # === MAKEINSTANCE TO DEPENDENCY INJECTION (relocated from php-modernization PM-33) ===
+  - id: TC-183
+    name: makeinstance-in-di-managed-classes
+    domain: code-quality
+    prompt: |
+      Review the codebase for GeneralUtility::makeInstance() calls in classes
+      that are registered in Configuration/Services.yaml (or Services.php).
+
+      Classes managed by the DI container should use constructor injection instead
+      of GeneralUtility::makeInstance(). Check for:
+      1. Classes listed in Services.yaml that call GeneralUtility::makeInstance()
+      2. Suggest constructor injection for each dependency resolved via makeInstance()
+      3. EXCEPTION: Scheduler task classes extending AbstractTask — these are
+         unserialized by the TYPO3 scheduler, so constructor DI is incompatible.
+         Do NOT flag makeInstance() in AbstractTask subclasses.
+      4. Also acceptable: makeInstance() for value objects or non-service classes
+         that are not in the DI container (e.g., DataHandler, FlashMessage).
+
+      Report specific files and line numbers where makeInstance() should be
+      replaced with constructor injection.
+    severity: warning
+    desc: "GeneralUtility::makeInstance() in DI-managed classes should use constructor injection (except AbstractTask)"
+    tags: [di, dependency-injection, makeinstance, typo3, services]

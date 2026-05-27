@@ -7,9 +7,9 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 118
-- Total findings: 10
-- Skills with pass 1 findings: 10
+- Skills audited: 133
+- Total findings: 11
+- Skills with pass 1 findings: 11
 - Skills with pass 2 findings: 0
 - Skills with pass 3 findings: 0
 
@@ -40,7 +40,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: ad-creative
-- SKILL.md lines: 373
+- SKILL.md lines: 375
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -56,7 +56,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: ads
-- SKILL.md lines: 328
+- SKILL.md lines: 421
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -104,7 +104,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: ai-seo
-- SKILL.md lines: 496
+- SKILL.md lines: 498
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -120,7 +120,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: analytics
-- SKILL.md lines: 320
+- SKILL.md lines: 322
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -152,7 +152,23 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: aso
-- SKILL.md lines: 323
+- SKILL.md lines: 325
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `caveman`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: caveman
+- SKILL.md lines: 60
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -168,7 +184,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: churn-prevention
-- SKILL.md lines: 435
+- SKILL.md lines: 437
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -200,7 +216,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: co-marketing
-- SKILL.md lines: 301
+- SKILL.md lines: 303
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -216,7 +232,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: cold-email
-- SKILL.md lines: 169
+- SKILL.md lines: 172
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -232,7 +248,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: community-marketing
-- SKILL.md lines: 174
+- SKILL.md lines: 176
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -248,7 +264,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: competitor-profiling
-- SKILL.md lines: 422
+- SKILL.md lines: 425
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -264,7 +280,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: competitors
-- SKILL.md lines: 267
+- SKILL.md lines: 269
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -280,7 +296,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: content-strategy
-- SKILL.md lines: 376
+- SKILL.md lines: 378
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -312,7 +328,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: copy-editing
-- SKILL.md lines: 468
+- SKILL.md lines: 470
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -328,7 +344,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: copywriting
-- SKILL.md lines: 263
+- SKILL.md lines: 265
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -344,7 +360,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: corey-ab-testing
-- SKILL.md lines: 364
+- SKILL.md lines: 366
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -360,7 +376,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: corey-programmatic-seo
-- SKILL.md lines: 249
+- SKILL.md lines: 251
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -376,7 +392,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: cro
-- SKILL.md lines: 198
+- SKILL.md lines: 200
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -408,7 +424,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: customer-research
-- SKILL.md lines: 281
+- SKILL.md lines: 284
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -435,12 +451,28 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 **Pass 3: Optimization**
 - No pass 3 issues found.
 
+## `diagnose`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: diagnose
+- SKILL.md lines: 132
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
 ## `directory-submissions`
 
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: directory-submissions
-- SKILL.md lines: 392
+- SKILL.md lines: 394
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -472,7 +504,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: emails
-- SKILL.md lines: 322
+- SKILL.md lines: 324
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -488,7 +520,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/enterprise-readiness-skill
 - Frontmatter name: enterprise-readiness
-- SKILL.md lines: 81
+- SKILL.md lines: 84
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -536,7 +568,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Firecrawl
 - Source URL: https://github.com/firecrawl/cli
 - Frontmatter name: firecrawl
-- SKILL.md lines: 159
+- SKILL.md lines: 277
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -552,7 +584,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: free-tools
-- SKILL.md lines: 190
+- SKILL.md lines: 192
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -582,9 +614,25 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 ## `grill-me`
 
 - Source owner: Matt Pocock
-- Source URL: https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
+- Source URL: https://github.com/mattpocock/skills
 - Frontmatter name: grill-me
 - SKILL.md lines: 25
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `grill-with-docs`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: grill-with-docs
+- SKILL.md lines: 103
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -600,7 +648,23 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: gsap
-- SKILL.md lines: 226
+- SKILL.md lines: 255
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `handoff`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: handoff
+- SKILL.md lines: 29
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -616,10 +680,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes
-- SKILL.md lines: 379
+- SKILL.md lines: 506
 
 **Pass 1: Structure**
-- No pass 1 issues found.
+- SKILL.md is 506 lines; skill-creator recommends keeping it under 500
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -632,7 +696,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: hyperframes-cli
-- SKILL.md lines: 165
+- SKILL.md lines: 159
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -664,7 +728,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: image
-- SKILL.md lines: 351
+- SKILL.md lines: 353
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -681,6 +745,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source URL: https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7
 - Frontmatter name: impeccable
 - SKILL.md lines: 189
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `improve-codebase-architecture`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: improve-codebase-architecture
+- SKILL.md lines: 96
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -728,7 +808,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: launch
-- SKILL.md lines: 364
+- SKILL.md lines: 366
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -760,7 +840,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: lead-magnets
-- SKILL.md lines: 321
+- SKILL.md lines: 323
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -808,7 +888,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: marketing-ideas
-- SKILL.md lines: 178
+- SKILL.md lines: 180
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -824,7 +904,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: marketing-psychology
-- SKILL.md lines: 466
+- SKILL.md lines: 468
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -840,7 +920,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: marketing-skills
-- SKILL.md lines: 229
+- SKILL.md lines: 231
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -856,7 +936,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Dylan Tarre
 - Source URL: https://github.com/dylantarre/animation-principles
 - Frontmatter name: micro-interactions
-- SKILL.md lines: 130
+- SKILL.md lines: 129
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -872,7 +952,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: wondelai
 - Source URL: https://github.com/wondelai/skills
 - Frontmatter name: microinteractions
-- SKILL.md lines: 255
+- SKILL.md lines: 250
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -904,7 +984,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: onboarding
-- SKILL.md lines: 231
+- SKILL.md lines: 233
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -920,7 +1000,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: paywalls
-- SKILL.md lines: 238
+- SKILL.md lines: 240
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -936,7 +1016,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/php-modernization-skill
 - Frontmatter name: php-modernization
-- SKILL.md lines: 89
+- SKILL.md lines: 79
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -952,7 +1032,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: popups
-- SKILL.md lines: 465
+- SKILL.md lines: 467
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -984,7 +1064,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: pricing
-- SKILL.md lines: 242
+- SKILL.md lines: 244
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1000,7 +1080,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: product-marketing
-- SKILL.md lines: 252
+- SKILL.md lines: 254
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1020,6 +1100,38 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 **Pass 1: Structure**
 - SKILL.md is 639 lines; skill-creator recommends keeping it under 500
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `prospecting`
+
+- Source owner: Corey Haines
+- Source URL: https://github.com/coreyhaines31/marketingskills
+- Frontmatter name: prospecting
+- SKILL.md lines: 269
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `prototype`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: prototype
+- SKILL.md lines: 45
+
+**Pass 1: Structure**
+- No pass 1 issues found.
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -1096,7 +1208,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: referrals
-- SKILL.md lines: 268
+- SKILL.md lines: 270
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1112,7 +1224,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: remotion-dev
 - Source URL: https://github.com/remotion-dev/skills
 - Frontmatter name: remotion-best-practices
-- SKILL.md lines: 106
+- SKILL.md lines: 351
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1128,7 +1240,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: revops
-- SKILL.md lines: 356
+- SKILL.md lines: 358
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1144,7 +1256,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: sales-enablement
-- SKILL.md lines: 370
+- SKILL.md lines: 372
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1160,7 +1272,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: schema
-- SKILL.md lines: 190
+- SKILL.md lines: 192
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1208,10 +1320,26 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: seo-audit
-- SKILL.md lines: 508
+- SKILL.md lines: 510
 
 **Pass 1: Structure**
-- SKILL.md is 508 lines; skill-creator recommends keeping it under 500
+- SKILL.md is 510 lines; skill-creator recommends keeping it under 500
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `setup-matt-pocock-skills`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: setup-matt-pocock-skills
+- SKILL.md lines: 135
+
+**Pass 1: Structure**
+- No pass 1 issues found.
 
 **Pass 2: Source**
 - No pass 2 issues found.
@@ -1224,7 +1352,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Giuseppe Trisciuoglio
 - Source URL: https://github.com/giuseppe-trisciuoglio/developer-kit
 - Frontmatter name: shadcn-ui
-- SKILL.md lines: 421
+- SKILL.md lines: 323
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1240,7 +1368,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: signup
-- SKILL.md lines: 370
+- SKILL.md lines: 372
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1256,7 +1384,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: site-architecture
-- SKILL.md lines: 368
+- SKILL.md lines: 370
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1283,12 +1411,92 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 **Pass 3: Optimization**
 - No pass 3 issues found.
 
+## `sms`
+
+- Source owner: Corey Haines
+- Source URL: https://github.com/coreyhaines31/marketingskills
+- Frontmatter name: sms
+- SKILL.md lines: 351
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
 ## `social`
 
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: social
-- SKILL.md lines: 420
+- SKILL.md lines: 422
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `tdd`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: tdd
+- SKILL.md lines: 124
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `to-issues`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: to-issues
+- SKILL.md lines: 98
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `to-prd`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: to-prd
+- SKILL.md lines: 91
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `triage`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: triage
+- SKILL.md lines: 118
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1352,7 +1560,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-conformance-skill
 - Frontmatter name: typo3-conformance
-- SKILL.md lines: 95
+- SKILL.md lines: 96
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1432,7 +1640,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-docs-skill
 - Frontmatter name: typo3-docs
-- SKILL.md lines: 93
+- SKILL.md lines: 97
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1448,7 +1656,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Netresearch
 - Source URL: https://github.com/netresearch/typo3-extension-upgrade-skill
 - Frontmatter name: typo3-extension-upgrade
-- SKILL.md lines: 92
+- SKILL.md lines: 93
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1784,7 +1992,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: Corey Haines
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: video
-- SKILL.md lines: 353
+- SKILL.md lines: 355
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1896,7 +2104,39 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: HeyGen
 - Source URL: https://github.com/heygen-com/hyperframes
 - Frontmatter name: website-to-hyperframes
-- SKILL.md lines: 138
+- SKILL.md lines: 154
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `write-a-skill`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: write-a-skill
+- SKILL.md lines: 132
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `zoom-out`
+
+- Source owner: Matt Pocock
+- Source URL: https://github.com/mattpocock/skills
+- Frontmatter name: zoom-out
+- SKILL.md lines: 21
 
 **Pass 1: Structure**
 - No pass 1 issues found.

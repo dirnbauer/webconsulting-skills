@@ -1,9 +1,11 @@
 ---
 name: "enterprise-readiness"
-description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA provenance, cosign signing, SBOMs), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
+description: "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA, cosign, SBOMs, pnpm), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines."
 ---
 
 # Enterprise Readiness Assessment
+
+> Production/enterprise tier only — see `references/tier-framing.md`.
 
 ## When to Use
 
@@ -24,7 +26,7 @@ description: "Use when evaluating projects for production or enterprise readines
 
 ## Mandatory Workflows & Badges
 
-Coverage required: CI, CodeQL, OpenSSF Scorecard, dependency review, security (composer audit + SBOM). Each may be a dedicated `.github/workflows/<name>.yml` OR a job that calls the netresearch reusable workflow. Badges: CI, Codecov, Scorecard, Best Practices, Baseline. See `references/badges-and-workflows.md`.
+Required coverage: CI, CodeQL, Scorecard, dependency review, composer audit, SBOM — as dedicated workflows or jobs calling the netresearch reusable. Badges: CI, Codecov, Scorecard, Best Practices, Baseline. See `references/badges-and-workflows.md`.
 
 ## Key Hardening Patterns
 
@@ -62,6 +64,7 @@ Coverage required: CI, CodeQL, OpenSSF Scorecard, dependency review, security (c
 | `references/openssf-badge-baseline.md` | OSPS Baseline |
 | `references/harden-runner-guide.md` | Harden-Runner |
 | `references/solo-maintainer-guide.md` | N/A criteria |
+| `references/npm-pnpm-supply-chain.md` | pnpm |
 
 Related skills: `go-development`, `github-project`, `security-audit`, `git-workflow`.
 

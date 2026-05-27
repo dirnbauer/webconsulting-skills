@@ -1,10 +1,6 @@
 ---
-name: microinteractions
-description: 'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions "microinteraction", "button feedback", "loading state", "toggle design", "animation detail", "interaction polish", "state transitions", or "input feedback". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For Disney-12-principles micro-interaction motion, see micro-interactions. For overall UI polish, see refactoring-ui.'
-license: MIT
-metadata:
-  author: wondelai
-  version: "1.1.0"
+name: "microinteractions"
+description: "'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions \"microinteraction\", \"button feedback\", \"loading state\", \"toggle design\", \"animation detail\", \"interaction polish\", \"state transitions\", or \"input feedback\". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For overall UI polish, see refactoring-ui. For affordance design, see design-everyday-things.'"
 ---
 
 # Microinteractions Framework
@@ -243,12 +239,11 @@ This skill is based on Dan Saffer's definitive guide to designing the details th
 ## Credits & Attribution
 
 This skill is based on the excellent work by
-**[wondelai](https://github.com/wondelai/skills)**.
+**[wondelai](https://github.com/wondelai)**.
 
 Original repository: https://github.com/wondelai/skills
-Original path: `microinteractions/SKILL.md`
 
-**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's "Microinteractions: Designing with Details" (MIT License)
+**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)
 
 Special thanks to [wondelai](https://github.com/wondelai) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

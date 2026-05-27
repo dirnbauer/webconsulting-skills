@@ -84,7 +84,7 @@ OWNER_COPYRIGHT = {
         "registry, and website-to-video workflows (Apache 2.0)"
     ),
     "Matt Pocock": (
-        "**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)"
+        "**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)"
     ),
     "GitHub": (
         "**Copyright (c) GitHub** - Code refactoring patterns and best practices"
