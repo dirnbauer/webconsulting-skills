@@ -145,11 +145,13 @@ https://github.com/softaworks/agent-toolkit
 
 ---
 
-We also thank **[Matt Pocock](https://github.com/mattpocock)** for the excellent `grill-me` skill.
-The `grill-me` skill is adapted from their open-source repository:
-https://github.com/mattpocock/skills/tree/main/skills/productivity/grill-me
+We also thank **[Matt Pocock](https://github.com/mattpocock)** for the excellent real engineering
+skills collection. The `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`,
+`improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`,
+`to-prd`, `triage`, `write-a-skill`, and `zoom-out` skills are adapted from his open-source repository:
+https://github.com/mattpocock/skills
 
-**Copyright (c) Matt Pocock** - `grill-me` planning and design stress-test workflow (MIT License)
+**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)
 
 ---
 
@@ -211,7 +213,20 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
+| `caveman` | Ultra-compressed communication mode for lower-token technical conversation | 1.0.0 | caveman mode, talk like caveman, use caveman, less tokens, be brief |
 | `grill-me` | Stress-test a plan or design through relentless one-at-a-time interview questions | 1.0.0 | grill me, stress-test plan, stress-test design, challenge my plan |
+| `diagnose` | Disciplined diagnosis loop for hard bugs and performance regressions | 1.0.0 | diagnose this, debug this, bug, broken, failing, performance regression |
+| `grill-with-docs` | Challenge plans against domain docs, CONTEXT.md, and ADRs | 1.0.0 | grill with docs, stress-test with docs, context.md, adr, domain model |
+| `handoff` | Compact the current conversation into a handoff document | 1.0.0 | handoff, hand off, continue later, another agent, summarize context |
+| `improve-codebase-architecture` | Find architecture deepening opportunities in a codebase | 1.0.0 | improve architecture, refactoring opportunities, testable codebase, deep modules |
+| `prototype` | Build throwaway prototypes for logic, state, or UI questions | 1.0.0 | prototype, sanity-check, data model, state machine, mock up ui, try a few designs |
+| `setup-matt-pocock-skills` | Scaffold issue tracker, triage labels, and domain doc config | 1.0.0 | setup matt pocock skills, issue tracker, triage labels, domain docs, agent skills block |
+| `tdd` | Test-driven development with a red-green-refactor loop | 1.0.0 | tdd, red-green-refactor, test-first, integration tests, failing test |
+| `to-issues` | Break plans and PRDs into independently grabbable issues | 1.0.0 | to issues, create issues, implementation tickets, break down work, vertical slices |
+| `to-prd` | Turn current context into a PRD issue | 1.0.0 | to prd, create prd, product requirements, current context |
+| `triage` | Triage issues through a role-driven state machine | 1.0.0 | triage, issue workflow, incoming bugs, feature requests, ready for agent |
+| `write-a-skill` | Create new skills with progressive disclosure and bundled resources | 1.0.0 | write a skill, create skill, build a new skill, agent skill, bundled resources |
+| `zoom-out` | Ask for broader system context around unfamiliar code | 1.0.0 | zoom out, broader context, high-level perspective, unfamiliar code |
 | **Video & Animation** | | | |
 | `remotion-best-practices` | Video creation in React with Remotion | 1.0.0 | remotion, video, react, animation, composition |
 | `hyperframes` | HTML-based video compositions, captions, voiceovers, audio-reactive visuals, transitions | 1.0.0 | hyperframes, video composition, captions, subtitles, tts, audio reactive |
@@ -271,6 +286,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `popups` | Popup, modal, overlay, slide-in, and banner conversion optimization | 2.0.0 | popup, modal, exit intent, slide-in, banner |
 | `pricing` | Pricing, packaging, value metrics, and monetization strategy | 2.0.0 | pricing, pricing tiers, freemium, packaging, monetization |
 | `product-marketing` | Product marketing context, positioning, and messaging foundation | 2.0.0 | product marketing, positioning, messaging, marketing context |
+| `prospecting` | Prospect list building, qualification, and outbound lead research | 1.0.0 | prospecting, build a prospect list, find prospects, find leads, target account list, qualified leads |
 | `referrals` | Referral, affiliate, ambassador, and word-of-mouth programs | 2.0.0 | referral, affiliate, ambassador, word of mouth, viral loop |
 | `revops` | Revenue operations, lead lifecycle, scoring, and handoff processes | 2.0.0 | revops, lead scoring, lead routing, mql, sql, crm automation |
 | `sales-enablement` | Sales collateral, pitch decks, one-pagers, and demo scripts | 2.0.0 | sales enablement, sales deck, pitch deck, one-pager, demo script |
@@ -278,6 +294,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `seo-audit` | Technical SEO, on-page SEO, and content quality audits | 2.0.0 | seo audit, technical seo, indexing issues, core web vitals |
 | `signup` | Signup, registration, account creation, and trial activation optimization | 2.0.0 | signup, registration, trial activation, signup abandonment |
 | `site-architecture` | Website hierarchy, navigation, URL structure, and internal linking | 2.0.0 | site architecture, sitemap, site structure, navigation, internal linking |
+| `sms` | SMS and MMS marketing flows, campaigns, compliance, and optimization | 1.0.0 | sms marketing, text message campaigns, sms sequence, sms automation, abandoned cart text, tcpa, a2p 10dlc |
 | `social` | Social media content, calendars, repurposing, and short-form scripts | 2.0.0 | social media, linkedin post, twitter thread, content calendar, reels |
 | `video` | Marketing video production with AI and programmatic video tools | 2.0.1 | video, ai video, remotion, hyperframes, heygen, product demo video |
 | **CRO & Growth (AgentKits)** | | | |
@@ -290,7 +307,20 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
+| `caveman` | Ultra-compressed communication mode for lower-token technical conversation | 1.0.0 | caveman mode, talk like caveman, use caveman, less tokens, be brief |
 | `grill-me` | Stress-test a plan or design through relentless one-at-a-time interview questions | 1.0.0 | grill me, stress-test plan, stress-test design, challenge my plan |
+| `diagnose` | Disciplined diagnosis loop for hard bugs and performance regressions | 1.0.0 | diagnose this, debug this, bug, broken, failing, performance regression |
+| `grill-with-docs` | Challenge plans against domain docs, CONTEXT.md, and ADRs | 1.0.0 | grill with docs, stress-test with docs, context.md, adr, domain model |
+| `handoff` | Compact the current conversation into a handoff document | 1.0.0 | handoff, hand off, continue later, another agent, summarize context |
+| `improve-codebase-architecture` | Find architecture deepening opportunities in a codebase | 1.0.0 | improve architecture, refactoring opportunities, testable codebase, deep modules |
+| `prototype` | Build throwaway prototypes for logic, state, or UI questions | 1.0.0 | prototype, sanity-check, data model, state machine, mock up ui, try a few designs |
+| `setup-matt-pocock-skills` | Scaffold issue tracker, triage labels, and domain doc config | 1.0.0 | setup matt pocock skills, issue tracker, triage labels, domain docs, agent skills block |
+| `tdd` | Test-driven development with a red-green-refactor loop | 1.0.0 | tdd, red-green-refactor, test-first, integration tests, failing test |
+| `to-issues` | Break plans and PRDs into independently grabbable issues | 1.0.0 | to issues, create issues, implementation tickets, break down work, vertical slices |
+| `to-prd` | Turn current context into a PRD issue | 1.0.0 | to prd, create prd, product requirements, current context |
+| `triage` | Triage issues through a role-driven state machine | 1.0.0 | triage, issue workflow, incoming bugs, feature requests, ready for agent |
+| `write-a-skill` | Create new skills with progressive disclosure and bundled resources | 1.0.0 | write a skill, create skill, build a new skill, agent skill, bundled resources |
+| `zoom-out` | Ask for broader system context around unfamiliar code | 1.0.0 | zoom out, broader context, high-level perspective, unfamiliar code |
 | **PHP & Tools** | | | |
 | `php-modernization` | PHP 8.x patterns, PHPStan level 10, DTOs, enums | 1.0.0 | php, modernization, phpstan, rector |
 | `cli-tools` | CLI tool management and auto-installation | 1.0.0 | cli, tools, installation |
@@ -399,7 +429,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - `ad-creative`, `ads`, `ai-seo`, `analytics`, `aso`, `churn-prevention`, `co-marketing`, `cold-email`, `community-marketing`
   - `competitor-profiling`, `competitors`, `content-strategy`, `copy-editing`, `copywriting`, `cro`, `customer-research`, `directory-submissions`
   - `emails`, `free-tools`, `image`, `launch`, `lead-magnets`, `marketing-ideas`, `marketing-psychology`, `onboarding`, `paywalls`, `popups`
-  - `pricing`, `product-marketing`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `social`, `video`
+  - `pricing`, `product-marketing`, `prospecting`, `referrals`, `revops`, `sales-enablement`, `schema`, `seo-audit`, `signup`, `site-architecture`, `sms`, `social`, `video`
   - Collision-safe imports: `corey-ab-testing` and `corey-programmatic-seo` preserve existing AITYTech `ab-testing` and `programmatic-seo`
 
 ### CRO & Growth (AgentKits Marketing)
@@ -429,10 +459,42 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - Progressive disclosure: keep essentials at root, organize rest into linked files
   - 5-phase process: Find contradictions → Extract essentials → Categorize → Structure → Prune
   - Templates for root file and linked category files
+- **caveman**: Ultra-compressed communication mode
+  - Drop filler while keeping technical terms and code exact
+  - Stays active until the user asks for normal mode
 - **grill-me**: Stress-test plans and designs through one-question-at-a-time interviews
   - Walk the decision tree branch by branch until the design is resolved
   - Ask only one question at a time and provide a recommended answer
   - Explore the codebase directly when the answer can be discovered locally
+- **diagnose**: Disciplined debugging loop for hard bugs and performance regressions
+  - Reproduce, minimize, hypothesize, instrument, fix, and regression-test
+  - Keep diagnosis evidence-driven instead of jumping to likely fixes
+- **grill-with-docs**: Stress-test plans against the codebase language and decisions
+  - Use `CONTEXT.md` and ADRs while resolving design branches
+  - Update project documentation as terminology and decisions crystallize
+- **handoff**: Compact the current conversation into a continuation document
+  - Save the handoff outside the workspace and reference existing artifacts instead of duplicating them
+  - Include suggested skills for the next agent
+- **improve-codebase-architecture**: Find architecture deepening opportunities
+  - Use domain language and ADRs to identify shallow modules and coupling
+  - Propose refactors that improve testability and agent navigation
+- **prototype**: Build throwaway prototypes to answer design questions
+  - Choose terminal prototypes for logic/state questions
+  - Choose toggleable UI variations for interface exploration
+- **setup-matt-pocock-skills**: Configure project context for Matt Pocock's engineering skills
+  - Scaffold issue tracker, triage labels, and domain documentation locations
+- **tdd**: Test-driven development with red-green-refactor
+  - Write failing behavioral tests first, then implement the smallest slice
+- **to-issues**: Break plans or PRDs into independently grabbable issues
+  - Use vertical slices that an agent can pick up without hidden dependencies
+- **to-prd**: Turn current context into a PRD issue
+  - Synthesize known requirements without restarting the interview
+- **triage**: Move issues through a role-driven triage state machine
+  - Prepare bugs and feature requests for agent-ready implementation
+- **write-a-skill**: Create new skills with progressive disclosure
+  - Draft concise `SKILL.md` entry points plus references, scripts, and assets as needed
+- **zoom-out**: Ask for broader system context around unfamiliar code
+  - Map relevant modules and callers before diving back into details
 - **refactor**: Code refactoring patterns and best practices from GitHub
   - 10 common code smells with before/after fixes
   - Safe refactoring process (prepare → identify → refactor → verify → clean up)

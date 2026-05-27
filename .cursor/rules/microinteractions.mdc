@@ -246,12 +246,11 @@ This skill is based on Dan Saffer's definitive guide to designing the details th
 ## Credits & Attribution
 
 This skill is based on the excellent work by
-**[wondelai](https://github.com/wondelai/skills)**.
+**[wondelai](https://github.com/wondelai)**.
 
 Original repository: https://github.com/wondelai/skills
-Original path: `microinteractions/SKILL.md`
 
-**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's "Microinteractions: Designing with Details" (MIT License)
+**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)
 
 Special thanks to [wondelai](https://github.com/wondelai) for their generous open-source contributions, which helped shape this skill collection.
 Adapted by webconsulting.at for this skill collection

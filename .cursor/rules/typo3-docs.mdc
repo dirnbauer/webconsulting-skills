@@ -43,16 +43,16 @@ Create and maintain TYPO3 extension documentation following official docs.typo3.
 
 ## Critical Rules
 
-- **UTF-8**, **4-space** indent, **80 char** line length, **LF** endings
-- **CamelCase** file/directory names, **sentence case** headings
-- **Permalink anchors** (`.. _label:`) before **every** section heading
-- **Index.rst** required in every subdirectory
+- **UTF-8**, **4-space** indent, **80 char** lines, **LF**
+- **CamelCase** files, **sentence case** headings
+- **Permalink anchors** (`.. _label:`) before every heading
+- **Index.rst** in every subdirectory
 - **PNG** screenshots with `:alt:` and `:zoom: lightbox`
-- **.editorconfig** required in `Documentation/`
-- **Screenshots MANDATORY** for backend modules, config screens, UI workflows
-- **Max 250 lines per RST page** -- split with `toctree` if exceeded
-- **No `mailto:` links** -- use GitHub Issues/Discussions URLs
-- **PHP domain**: never use `?Type` or `Type|null` in `php:method::` signatures; use `:returntype:` instead
+- **.editorconfig** in `Documentation/`
+- **Screenshots MANDATORY** for backend modules, config, workflows
+- **Max 250 lines** per RST -- split with `toctree`
+- **No `mailto:`** -- use GitHub Issues/Discussions
+- **PHP domain**: no `?Type`/`Type|null` in `php:method::`; use `:returntype:`
 
 ## Code Example Validation
 
@@ -83,6 +83,10 @@ verify API signatures match. See `references/extraction-patterns.md`.
 - `references/rendering.md` -- Docker commands, live preview
 - `references/intercept-deployment.md` -- webhook, build triggers
 - `references/asset-templates-guide.md` -- templates, screenshot workflow
+- `references/architecture-decision-records.md` -- ADR patterns
+- `references/documentation-coverage-analysis.md` -- coverage scoring
+- `references/scripts-guide.md` -- script options
+- `references/typo3-extension-architecture.md` -- extension layout
 
 ---
 

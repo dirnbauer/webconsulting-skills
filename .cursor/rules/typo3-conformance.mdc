@@ -28,25 +28,25 @@ Testing -> `typo3-testing` | Docs -> `typo3-docs` | OpenSSF -> `enterprise-readi
 
 ### Step 0: Context
 
-Read ext_emconf.php + composer.json for TYPO3/PHP version, type, scope.
+Read ext_emconf.php + composer.json for version, type, scope.
 
 ### Steps 1-11: Checks
 
-1. **Metadata** -- Extension key, TYPO3 version, type
+1. **Metadata** -- key, TYPO3 version, type
 2. **Structure** -- composer.json, ext_emconf.php, Classes/, Configuration/, Resources/
 3. **Coding** -- strict_types, PSR-12, PHP 8.4 explicit nullable, PHP 8.5 float-to-int
-4. **Prohibited** -- No `$GLOBALS`, no `GeneralUtility::makeInstance()` for services
-5. **Architecture** -- Constructor DI, Services.yaml, PSR-14 events
-6. **Backend** -- ES6 modules, Modal API, CSRF, CSP (v13+)
+4. **Prohibited** -- no `$GLOBALS`, no `GeneralUtility::makeInstance()` for services
+5. **Architecture** -- constructor DI, Services.yaml, PSR-14 events (try/catch), PSR-3 logging (LoggerAware+NullLogger), factory fallback
+6. **Backend** -- ES6, Modal API, CSRF, CSP (v13+)
 7. **Testing** -- PHPUnit, Playwright E2E, coverage >70%
-8. **Practices** -- DDEV, runTests.sh, CI/CD, quality tools
-9. **TER** -- Publish workflow, upload comment format
-10. **Audit** -- PHPStan baseline, TCA searchFields/default_sortby, XLIFF completeness, cache has()+get() anti-pattern, Extbase query property names, multi-version adapters
-11. **v14 readiness** -- no `ext_tables.php`/`HashService`/magic repo finders; Fluid VHs strict-typed; XLF 2-space. See `references/v14-deprecations.md`.
+8. **Practices** -- DDEV, runTests.sh, CI/CD
+9. **TER** -- publish workflow, upload comment
+10. **Audit** -- PHPStan baseline, TCA searchFields, XLIFF, cache has()+get(), query properties, multi-version adapters
+11. **v14 readiness** -- no `ext_tables.php`/`HashService`/magic finders; Fluid VHs strict; XLF 2-space. See `references/v14-deprecations.md`.
 
 ### Step 12: Verify
 
-Re-run after fixes. Document score delta ("58 -> 82").
+Re-run after fixes. Document score delta.
 
 ## Quick Grep Recipes
 
@@ -77,12 +77,13 @@ grep -rn 'HashService\|GeneralUtility::hmac(\|->findBy[A-Z]\|->findOneBy[A-Z]\|-
 
 ## References
 
-See `references/` for deep-dives:
+See `references/`:
 
-- **Architecture & code:** `extension-architecture.md`, `php-architecture.md`, `coding-guidelines.md`, `best-practices.md`
-- **Validation:** `composer-validation.md`, `ext-emconf-validation.md`, `version-requirements.md`, `testing-standards.md`
+- **Architecture & code:** `extension-architecture.md`, `directory-structure.md`, `php-architecture.md`, `coding-guidelines.md`, `best-practices.md`, `hooks-and-events.md`
+- **Validation:** `composer-validation.md`, `ext-emconf-validation.md`, `ext-files-validation.md`, `runtests-validation.md`, `version-requirements.md`, `testing-standards.md`
 - **Multi-version:** `dual-version-compatibility.md` (v12+v13), `v13-v14-dual-compatibility.md` (v13+v14), `multi-version-dependency-compatibility.md`, `v13-deprecations.md`, `v14-deprecations.md`
-- **Backend & publishing:** `backend-module-v13.md`, `ter-publishing.md`, `report-template.md`, `excellence-indicators.md`, `localization-coverage.md`
+- **Practices & environment:** `development-environment.md` (DDEV)
+- **Backend & publishing:** `backend-module-v13.md`, `ter-publishing.md`, `report-template.md`, `excellence-indicators.md`, `localization-coverage.md`, `crowdin-integration.md`
 
 Asset templates in `assets/Build/`: PHPStan, PHP-CS-Fixer, Rector, ESLint, Stylelint, TypoScript lint.
 

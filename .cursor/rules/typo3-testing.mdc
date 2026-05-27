@@ -14,24 +14,24 @@ Read `.cursor/skills/typo3-testing/SKILL.md` and any referenced `references/`, `
 
 ## Assessment-First Rule
 
-**When enhancing an existing test suite** (not setting up from scratch), run FIRST:
+**When enhancing an existing test suite** (not from scratch), run FIRST:
 
 ```bash
 automated-assessment typo3-testing
 ```
 
-> Install additional skills (e.g. `typo3-conformance`, `enterprise-readiness`) for broader assessment coverage.
+> Install other skills (e.g. `typo3-conformance`, `enterprise-readiness`) for broader coverage.
 
-This generates a gap report from 73+ checkpoints covering PHPUnit config, PHPStan level, runTests.sh, CaptainHook hooks, architecture tests, mutation thresholds, CI matrix, and coverage per class.
+Generates a gap report from 73+ checkpoints (PHPUnit, PHPStan, runTests.sh, CaptainHook, architecture, mutation, CI matrix, coverage).
 
-**Use the assessment report as the task list.** Resolve mechanical checkpoint failures before manual test writing.
+**Use the report as the task list.** Resolve mechanical failures before manual test writing.
 
-### When This Rule Applies
-- "enhance/improve/strengthen tests", "increase coverage/mutation score"
+### Applies
+- "enhance/improve/strengthen tests", "increase coverage/mutation"
 - "enterprise grade", "A+ testing", "fix all findings"
 
-### When This Rule Does NOT Apply
-- Setting up from scratch, writing a specific test, debugging a failing test
+### Does NOT Apply
+- From scratch, writing a specific test, debugging a failure
 
 ---
 
@@ -74,16 +74,16 @@ Verify tests fail before fix, pass after. Bug fixes use the strict TDD loop in `
 
 Unit tests required (70%+ coverage). Functional tests required for DB operations. **phpat required** for architecture points. PHPStan level 10.
 
-## References (in `references/`)
+## References (in `references/`, `.md` implied)
 
-`unit-testing.md` | `functional-testing.md` | `functional-test-patterns.md` | `integration-testing.md` | `e2e-testing.md` | `accessibility-testing.md` | `ddev-testing.md` | `test-runners.md` | `architecture-testing.md` | `ci-debugging.md` | `ci-cd.md` | `quality-tools.md` | `mutation-testing.md` | `fuzz-testing.md` | `performance-testing.md` | `typo3-v14-final-classes.md` | `mock-validity.md` | `javascript-testing.md` | `captainhook-setup.md` | `enforcement-rules.md` | `event-dispatch-testing.md` | `crypto-testing.md` | `test-environment-guards.md` | `sonarcloud.md` | `typo3-ci-config-patterns.md` | `tdd-discipline.md` | `ci-workflows-meta-package.md` | `synthetic-secret-fixtures.md` | `release-workflow-validation.md`
+`unit-testing.md` | `functional-testing.md` | `functional-test-patterns.md` | `integration-testing.md` | `e2e-testing.md` | `accessibility-testing.md` | `ddev-testing.md` | `test-runners.md` | `architecture-testing.md` | `ci-debugging.md` | `ci-cd.md` | `quality-tools.md` | `mutation-testing.md` | `fuzz-testing.md` | `performance-testing.md` | `typo3-v14-final-classes.md` | `mock-validity.md` | `javascript-testing.md` | `captainhook-setup.md` | `enforcement-rules.md` | `event-dispatch-testing.md` | `crypto-testing.md` | `test-environment-guards.md` | `sonarcloud.md` | `typo3-ci-config-patterns.md` | `tdd-discipline.md` | `ci-workflows-meta-package.md` | `synthetic-secret-fixtures.md` | `release-workflow-validation.md` | `asset-templates-guide.md`
 
 ### Content Triggers
 
 - CI failures across TYPO3 versions → `ci-debugging.md`
 - Functional tests with TSFE context → `functional-testing.md`
 - Mock failures across dependency versions → `mock-validity.md`
-- Image/extension-dependent tests → `test-environment-guards.md`
+- Image/extension tests, `Environment::initialize`, `NormalizedParams` TypeError, `backupGlobals` → `test-environment-guards.md`
 - Event dispatcher testing with try/catch → `event-dispatch-testing.md`
 - Meta-package, typo3-ci-workflows, no-plugins → `ci-workflows-meta-package.md`
 - Fake secrets, push-protection, cs-fixer concat → `synthetic-secret-fixtures.md`

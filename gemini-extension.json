@@ -110,6 +110,18 @@
       ],
       "path": "${extensionPath}/skills/aso"
     },
+    "caveman": {
+      "name": "caveman",
+      "description": "Ultra-compressed communication mode for lower-token technical conversation",
+      "triggers": [
+        "caveman mode",
+        "talk like caveman",
+        "use caveman",
+        "less tokens",
+        "be brief"
+      ],
+      "path": "${extensionPath}/skills/caveman"
+    },
     "churn-prevention": {
       "name": "churn-prevention",
       "description": "Churn reduction, cancel flows, dunning, and win-back strategy",
@@ -297,6 +309,19 @@
       ],
       "path": "${extensionPath}/skills/deepfake-detection"
     },
+    "diagnose": {
+      "name": "diagnose",
+      "description": "Disciplined diagnosis loop for hard bugs and performance regressions",
+      "triggers": [
+        "diagnose this",
+        "debug this",
+        "bug",
+        "broken",
+        "failing",
+        "performance regression"
+      ],
+      "path": "${extensionPath}/skills/diagnose"
+    },
     "directory-submissions": {
       "name": "directory-submissions",
       "description": "Directory submission strategy for discovery and backlinks",
@@ -412,6 +437,18 @@
       ],
       "path": "${extensionPath}/skills/grill-me"
     },
+    "grill-with-docs": {
+      "name": "grill-with-docs",
+      "description": "Challenge plans against domain docs, CONTEXT.md, and ADRs",
+      "triggers": [
+        "grill with docs",
+        "stress-test with docs",
+        "context.md",
+        "adr",
+        "domain model"
+      ],
+      "path": "${extensionPath}/skills/grill-with-docs"
+    },
     "gsap": {
       "name": "gsap",
       "description": "GSAP animation reference for HyperFrames compositions",
@@ -424,6 +461,18 @@
         "quickTo"
       ],
       "path": "${extensionPath}/skills/gsap"
+    },
+    "handoff": {
+      "name": "handoff",
+      "description": "Compact the current conversation into a handoff document",
+      "triggers": [
+        "handoff",
+        "hand off",
+        "continue later",
+        "another agent",
+        "summarize context"
+      ],
+      "path": "${extensionPath}/skills/handoff"
     },
     "hyperframes": {
       "name": "hyperframes",
@@ -489,6 +538,17 @@
         "live UI"
       ],
       "path": "${extensionPath}/skills/impeccable"
+    },
+    "improve-codebase-architecture": {
+      "name": "improve-codebase-architecture",
+      "description": "Find architecture deepening opportunities in a codebase",
+      "triggers": [
+        "improve architecture",
+        "refactoring opportunities",
+        "testable codebase",
+        "deep modules"
+      ],
+      "path": "${extensionPath}/skills/improve-codebase-architecture"
     },
     "ios-design": {
       "name": "ios-design",
@@ -739,6 +799,33 @@
       ],
       "path": "${extensionPath}/skills/programmatic-seo"
     },
+    "prospecting": {
+      "name": "prospecting",
+      "description": "Prospect list building, qualification, and outbound lead research",
+      "triggers": [
+        "prospecting",
+        "build a prospect list",
+        "find prospects",
+        "find leads",
+        "lead gen list",
+        "target account list",
+        "qualified leads"
+      ],
+      "path": "${extensionPath}/skills/prospecting"
+    },
+    "prototype": {
+      "name": "prototype",
+      "description": "Build throwaway prototypes for logic, state, or UI questions",
+      "triggers": [
+        "prototype",
+        "sanity-check",
+        "data model",
+        "state machine",
+        "mock up ui",
+        "try a few designs"
+      ],
+      "path": "${extensionPath}/skills/prototype"
+    },
     "react-best-practices": {
       "name": "react-best-practices",
       "description": "React/Next.js performance optimization from Vercel (57 rules)",
@@ -878,6 +965,18 @@
       ],
       "path": "${extensionPath}/skills/seo-audit"
     },
+    "setup-matt-pocock-skills": {
+      "name": "setup-matt-pocock-skills",
+      "description": "Scaffold issue tracker, triage labels, and domain doc config",
+      "triggers": [
+        "setup matt pocock skills",
+        "issue tracker",
+        "triage labels",
+        "domain docs",
+        "agent skills block"
+      ],
+      "path": "${extensionPath}/skills/setup-matt-pocock-skills"
+    },
     "shadcn-ui": {
       "name": "shadcn-ui",
       "description": "shadcn/ui component patterns with Radix UI, Tailwind CSS, Zod forms",
@@ -927,6 +1026,21 @@
       ],
       "path": "${extensionPath}/skills/skill-creator"
     },
+    "sms": {
+      "name": "sms",
+      "description": "SMS and MMS marketing flows, campaigns, compliance, and optimization",
+      "triggers": [
+        "sms marketing",
+        "text message campaigns",
+        "sms sequence",
+        "sms automation",
+        "abandoned cart text",
+        "tcpa",
+        "a2p 10dlc",
+        "twilio"
+      ],
+      "path": "${extensionPath}/skills/sms"
+    },
     "social": {
       "name": "social",
       "description": "Social media content, calendars, repurposing, and short-form scripts",
@@ -938,6 +1052,53 @@
         "reels"
       ],
       "path": "${extensionPath}/skills/social"
+    },
+    "tdd": {
+      "name": "tdd",
+      "description": "Test-driven development with a red-green-refactor loop",
+      "triggers": [
+        "tdd",
+        "red-green-refactor",
+        "test-first",
+        "integration tests",
+        "failing test"
+      ],
+      "path": "${extensionPath}/skills/tdd"
+    },
+    "to-issues": {
+      "name": "to-issues",
+      "description": "Break plans and PRDs into independently grabbable issues",
+      "triggers": [
+        "to issues",
+        "create issues",
+        "implementation tickets",
+        "break down work",
+        "vertical slices"
+      ],
+      "path": "${extensionPath}/skills/to-issues"
+    },
+    "to-prd": {
+      "name": "to-prd",
+      "description": "Turn current context into a PRD issue",
+      "triggers": [
+        "to prd",
+        "create prd",
+        "product requirements",
+        "current context"
+      ],
+      "path": "${extensionPath}/skills/to-prd"
+    },
+    "triage": {
+      "name": "triage",
+      "description": "Triage issues through a role-driven state machine",
+      "triggers": [
+        "triage",
+        "issue workflow",
+        "incoming bugs",
+        "feature requests",
+        "ready for agent"
+      ],
+      "path": "${extensionPath}/skills/triage"
     },
     "tvos-design": {
       "name": "tvos-design",
@@ -1386,6 +1547,29 @@
         "product tour"
       ],
       "path": "${extensionPath}/skills/website-to-hyperframes"
+    },
+    "write-a-skill": {
+      "name": "write-a-skill",
+      "description": "Create new skills with progressive disclosure and bundled resources",
+      "triggers": [
+        "write a skill",
+        "create skill",
+        "build a new skill",
+        "agent skill",
+        "bundled resources"
+      ],
+      "path": "${extensionPath}/skills/write-a-skill"
+    },
+    "zoom-out": {
+      "name": "zoom-out",
+      "description": "Ask for broader system context around unfamiliar code",
+      "triggers": [
+        "zoom out",
+        "broader context",
+        "high-level perspective",
+        "unfamiliar code"
+      ],
+      "path": "${extensionPath}/skills/zoom-out"
     }
   }
 }
