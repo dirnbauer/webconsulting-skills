@@ -38,6 +38,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "owner": "ehmo",
         "url": "https://github.com/ehmo/platform-design-skills",
     },
+    "autoreview": {
+        "owner": "Peter Steinberger",
+        "url": "https://github.com/openclaw/agent-skills",
+    },
     "cli-tools": {
         "owner": "Netresearch",
         "url": "https://github.com/netresearch/cli-tools-skill",
@@ -505,6 +509,7 @@ GITHUB_OWNER_LABELS = {
     "heygen-com": "HeyGen",
     "mattpocock": "Matt Pocock",
     "netresearch": "Netresearch",
+    "openclaw": "Peter Steinberger",
     "openhands": "OpenHands",
     "ooiyeefei": "ooiyeefei",
     "pbakaus": "pbakaus",

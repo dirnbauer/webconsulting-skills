@@ -38,6 +38,7 @@ OWNER_LINKS = {
     "Softaworks": "https://github.com/softaworks",
     "HeyGen": "https://www.heygen.com/",
     "Matt Pocock": "https://github.com/mattpocock",
+    "Peter Steinberger": "https://github.com/steipete",
     "GitHub": "https://github.com/github",
     "sickn33": "https://github.com/sickn33",
     "ehmo": "https://github.com/ehmo",
@@ -86,6 +87,9 @@ OWNER_COPYRIGHT = {
     "Matt Pocock": (
         "**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)"
     ),
+    "Peter Steinberger": (
+        "**Copyright (c) 2026 openclaw** - Auto Review structured review workflow and helper scripts (MIT License)"
+    ),
     "GitHub": (
         "**Copyright (c) GitHub** - Code refactoring patterns and best practices"
     ),
@@ -124,6 +128,7 @@ OWNER_ORDER = [
     "Softaworks",
     "HeyGen",
     "Matt Pocock",
+    "Peter Steinberger",
     "GitHub",
     "sickn33",
     "ehmo",

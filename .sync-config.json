@@ -11,6 +11,14 @@
       "note": "Agent instruction file refactoring with progressive disclosure"
     },
     {
+      "name": "autoreview",
+      "source": "https://github.com/openclaw/agent-skills.git",
+      "branch": "main",
+      "enabled": true,
+      "path": "skills/autoreview",
+      "note": "Structured closeout code-review workflow and helper scripts from Peter Steinberger's OpenClaw agent skills"
+    },
+    {
       "name": "ab-testing",
       "source": "https://github.com/aitytech/agentkits-marketing.git",
       "branch": "main",
@@ -810,5 +818,5 @@
     }
   ],
   "syncSchedule": "weekly",
-  "lastSync": "2026-05-27T11:09:20Z"
+  "lastSync": "2026-05-31T16:04:50Z"
 }

@@ -201,6 +201,20 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
             done
         )
     }
+
+    restore_script_executables() {
+        local target_dir="$1"
+        [ -d "$target_dir/scripts" ] || return 0
+        find "$target_dir/scripts" -type f \( \
+            -name "*.sh" -o \
+            -name "*.py" -o \
+            -name "*.rb" -o \
+            -name "*.js" -o \
+            -name "*.mjs" -o \
+            -name "*.ps1" -o \
+            ! -name "*.*" \
+        \) -exec chmod u+x {} +
+    }
     
     for skill_b64 in $SKILLS; do
         skill=$(echo "$skill_b64" | base64 --decode)
@@ -265,6 +279,8 @@ if [ -f "$SCRIPT_DIR/.sync-config.json" ]; then
                             cp -r "$SOURCE_DIR/$subdir" "$TARGET_DIR/"
                         fi
                     done
+
+                    restore_script_executables "$TARGET_DIR"
 
                     echo "    ✓ Synced successfully"
                     SYNCED=$((SYNCED + 1))

@@ -30,6 +30,7 @@ LINK_OVERRIDES = {
     "Corey Haines": "https://coreyhaines.com/",
     "Dylan Tarre": "https://github.com/dylantarre",
     "Matt Pocock": "https://github.com/mattpocock",
+    "Peter Steinberger": "https://github.com/steipete",
     "pbakaus": "https://github.com/pbakaus",
     "wondelai": "https://github.com/wondelai",
 }
@@ -42,6 +43,7 @@ COPYRIGHT_LINES = {
     "Corey Haines": "**Copyright (c) Corey Haines** - Marketing frameworks and best practices (MIT License)",
     "Dylan Tarre": "**Copyright (c) 2024 Dylan Tarre** - Disney's 12 Animation Principles applied to UI micro-interactions (MIT License)",
     "Matt Pocock": "**Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)",
+    "Peter Steinberger": "**Copyright (c) 2026 openclaw** - Auto Review structured review workflow and helper scripts (MIT License)",
     "wondelai": "**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)",
 }
 FOOTER_LINE_PATTERNS = (

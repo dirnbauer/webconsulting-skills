@@ -155,6 +155,14 @@ https://github.com/mattpocock/skills
 
 ---
 
+We also thank **[Peter Steinberger](https://github.com/steipete)** for the excellent `autoreview` skill.
+The `autoreview` skill is adapted from the OpenClaw agent skills repository:
+https://github.com/openclaw/agent-skills
+
+**Copyright (c) 2026 openclaw** - Auto Review structured review workflow and helper scripts (MIT License)
+
+---
+
 We also thank **[GitHub](https://github.com/github)** for the excellent refactoring skill from their
 awesome-copilot collection. The `refactor` skill is adapted from their open-source repository:
 https://github.com/github/awesome-copilot
@@ -210,6 +218,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 |-------|-------------|---------|----------|
 | **Code Quality & Refactoring** | | | |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | 1.0.0 | refactor agents.md, split instructions, organize claude.md |
+| `autoreview` | Structured closeout code review workflow with bundled helper scripts (OpenClaw) | 1.0.0 | autoreview, Codex review, Claude review, second-model review, closeout review |
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
@@ -304,6 +313,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `ab-testing` | A/B test design, sample size, statistical significance | 1.0.0 | ab test, split test, experiment, hypothesis |
 | **Code Quality & Refactoring** | | | |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | 1.0.0 | refactor agents.md, split instructions, organize claude.md |
+| `autoreview` | Structured closeout code review workflow with bundled helper scripts (OpenClaw) | 1.0.0 | autoreview, Codex review, Claude review, second-model review, closeout review |
 | `refactor` | Code refactoring patterns, code smells, design patterns (GitHub) | 1.0.0 | refactor, clean up, code smell, improve code, extract method |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | 1.0.0 | refactor, clean code, solid, maintainability, testability |
 | `find-skills` | Discover and install skills from skills.sh ecosystem (Vercel) | 1.0.0 | find skill, install skill, npx skills, skills.sh, skill search |
@@ -459,6 +469,9 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - Progressive disclosure: keep essentials at root, organize rest into linked files
   - 5-phase process: Find contradictions → Extract essentials → Categorize → Structure → Prune
   - Templates for root file and linked category files
+- **autoreview**: Structured closeout code review workflow
+  - Run the bundled helper against local, branch, PR, or commit diffs before commit or ship
+  - Treat review output as advisory; verify every accepted finding in the code path before fixing
 - **caveman**: Ultra-compressed communication mode
   - Drop filler while keeping technical terms and code exact
   - Stays active until the user asks for normal mode

@@ -7,7 +7,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 133
+- Skills audited: 134
 - Total findings: 11
 - Skills with pass 1 findings: 11
 - Skills with pass 2 findings: 0
@@ -153,6 +153,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source URL: https://github.com/coreyhaines31/marketingskills
 - Frontmatter name: aso
 - SKILL.md lines: 325
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `autoreview`
+
+- Source owner: Peter Steinberger
+- Source URL: https://github.com/openclaw/agent-skills
+- Frontmatter name: autoreview
+- SKILL.md lines: 229
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -1832,7 +1848,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-shadcn-content-elements
-- SKILL.md lines: 182
+- SKILL.md lines: 204
 
 **Pass 1: Structure**
 - No pass 1 issues found.

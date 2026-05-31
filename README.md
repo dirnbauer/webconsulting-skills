@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **133 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **134 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -24,7 +24,7 @@ care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
 ## Skill Categories
 
-This repository currently ships **133 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **134 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
@@ -35,14 +35,14 @@ Category-specific add-ons are not counted as top-level skills.
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
 | **Marketing** | 43 skills | Marketing Skills plus split growth, SEO, ads, lifecycle, research, prospecting, SMS, and sales enablement skills (Corey Haines) |
 | **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
-| **Code Quality & Refactoring** | 18 skills | Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me and engineering/productivity workflow skills (Matt Pocock) |
+| **Code Quality & Refactoring** | 19 skills | Auto Review (Peter Steinberger), Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me and engineering/productivity workflow skills (Matt Pocock) |
 | **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
 | **Frontend & Design** | 9 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Impeccable (pbakaus), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
 | **Platform Design** | 8 skills | Android Design (ehmo), iOS Design (ehmo), iPadOS Design (ehmo), macOS Design (ehmo), tvOS Design (ehmo), visionOS Design (ehmo), watchOS Design (ehmo), Web Platform Design (ehmo) |
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **133 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **134 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -247,6 +247,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | Skill | Trigger Keywords | Example Prompt |
 |-------|------------------|----------------|
 | `agent-md-refactor` | refactor agents.md, split instructions, organize claude.md | "Refactor my AGENTS.md - it's too long" or "Split my CLAUDE.md into focused files" |
+| `autoreview` | autoreview, Codex review, Claude review, second-model review, closeout review | "Run autoreview before I commit" or "Run a Codex review on this branch" |
 | `refactor` | refactor, clean up, code smell, improve code, extract method | "Refactor this function" or "Clean up this code and remove duplication" |
 | `refactor-clean` | refactor, clean code, solid, maintainability | "Apply SOLID principles to this module" or "Find code smells and fix them" |
 | `find-skills` | find skill, install skill, npx skills, skills.sh | "Find a skill for React performance" or "Search skills.sh for testing tools" |
@@ -2351,6 +2352,7 @@ grep -r "DataHandler" skills/
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | **Code Quality & Refactoring** | | |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | Softaworks |
+| `autoreview` | Structured closeout code review workflow with bundled helper scripts | Peter Steinberger |
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
 | `refactor-clean` | Clean code principles, SOLID patterns, incremental refactoring | sickn33 |
 | `find-skills` | Discover and install skills from skills.sh ecosystem | Vercel |
@@ -2483,7 +2485,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │  133 SKILL.md     │
+                        │  134 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2689,6 +2691,9 @@ The following repositories are the source for skills in this collection:
 ### Matt Pocock (14 skills)
 - `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
+### Peter Steinberger (1 skill)
+- `autoreview`: https://github.com/openclaw/agent-skills
+
 ### GitHub (1 skill)
 - `refactor`: https://github.com/github/awesome-copilot
 
@@ -2762,6 +2767,7 @@ Each retains its original copyright and license terms:
 - **platform-design-skills** — Apple HIG and Material Design guidelines (MIT)
 - **AITYTech** — AgentKits Marketing automation (MIT)
 - **Matt Pocock** — Agent skills for real engineering workflows (MIT)
+- **Peter Steinberger / openclaw** — `autoreview` structured review workflow and helper scripts (MIT)
 - **Dylan Tarre** — `micro-interactions` Disney animation principles for UI feedback (MIT)
 - **wondelai** — `microinteractions` Dan Saffer framework (Trigger / Rules / Feedback / Loops & Modes) (MIT)
 
@@ -2905,6 +2911,18 @@ Original repositories:
 - `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
 **Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)
+
+---
+
+We also thank **[Peter Steinberger](https://github.com/steipete)** for their excellent open-source work.
+The `autoreview` skill in this collection builds on that contribution.
+
+Adapted skill: `autoreview`
+
+Original repositories:
+- `autoreview`: https://github.com/openclaw/agent-skills
+
+**Copyright (c) 2026 openclaw** - Auto Review structured review workflow and helper scripts (MIT License)
 
 ---
 

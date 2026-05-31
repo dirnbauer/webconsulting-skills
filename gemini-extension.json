@@ -110,6 +110,18 @@
       ],
       "path": "${extensionPath}/skills/aso"
     },
+    "autoreview": {
+      "name": "autoreview",
+      "description": "Structured closeout code review workflow with bundled helper scripts (OpenClaw)",
+      "triggers": [
+        "autoreview",
+        "Codex review",
+        "Claude review",
+        "second-model review",
+        "closeout review"
+      ],
+      "path": "${extensionPath}/skills/autoreview"
+    },
     "caveman": {
       "name": "caveman",
       "description": "Ultra-compressed communication mode for lower-token technical conversation",
