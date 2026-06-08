@@ -5,7 +5,7 @@
     "description": "When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions \\\"A/B test,\\\" \\\"split test,\\\" \\\"experiment,\\\" \\\"test this change,\\\" \\\"variant copy,\\\" \\\"multivariate test,\\\" or \\\"hypothesis.\\\" For tracking implementation, see analytics-tracking.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ab-testing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ab-testing/SKILL.md",
     "line_count": 521,
     "frontmatter_keys": [
       "name",
@@ -23,7 +23,7 @@
     "description": "When the user wants to generate, iterate, or scale ad creative \\u2014 headlines, descriptions, primary text, or full ad variations \\u2014 for any paid advertising platform. Also use when the user mentions 'ad copy variations,' 'ad creative,' 'generate headlines,' 'RSA headlines,' 'bulk ad copy,' 'ad iterations,' 'creative testing,' 'ad performance optimization,' 'write me some ads,' 'Facebook ad copy,' 'Google ad headlines,' 'LinkedIn ad text,' or 'I need more ad variations.' Use this whenever someone needs to produce ad copy at scale or iterate on existing ads. For campaign strategy and targeting, see ads. For landing page copy, see copywriting.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ad-creative/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ad-creative/SKILL.md",
     "line_count": 375,
     "frontmatter_keys": [
       "name",
@@ -39,7 +39,7 @@
     "description": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' or 'should I run ads.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ads/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ads/SKILL.md",
     "line_count": 421,
     "frontmatter_keys": [
       "name",
@@ -55,7 +55,7 @@
     "description": "Refactor bloated AGENTS.md, CLAUDE.md, or similar agent instruction files to follow progressive disclosure principles. Splits monolithic files into organized, linked documentation.",
     "source_owner": "Softaworks",
     "source_url": "https://github.com/softaworks/agent-toolkit",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/agent-md-refactor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/agent-md-refactor/SKILL.md",
     "line_count": 299,
     "frontmatter_keys": [
       "name",
@@ -71,7 +71,7 @@
     "description": "Optimizes content for Answer Engine Optimization (AEO) and Generative Engine Optimization (GEO), including schema, llms.txt, AI crawler rules, conversational query targeting, and visibility measurement. Use when the user asks about AI search visibility, ChatGPT Search, Perplexity, Google AI Overviews, AI crawlers, AEO, GEO, llms.txt, or making a site easier for answer engines to cite.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ai-search-optimization/SKILL.md",
     "line_count": 306,
     "frontmatter_keys": [
       "name",
@@ -89,7 +89,7 @@
     "description": "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' or 'optimize for Claude/Gemini.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ai-seo/SKILL.md",
     "line_count": 498,
     "frontmatter_keys": [
       "name",
@@ -105,7 +105,7 @@
     "description": "When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions \\\"set up tracking,\\\" \\\"GA4,\\\" \\\"Google Analytics,\\\" \\\"conversion tracking,\\\" \\\"event tracking,\\\" \\\"UTM parameters,\\\" \\\"tag manager,\\\" \\\"GTM,\\\" \\\"analytics implementation,\\\" \\\"tracking plan,\\\" \\\"how do I measure this,\\\" \\\"track conversions,\\\" \\\"attribution,\\\" \\\"Mixpanel,\\\" \\\"Segment,\\\" \\\"are my events firing,\\\" or \\\"analytics isn't working.\\\" Use this whenever someone asks how to know if something is working or wants to measure marketing results. For A/B test measurement, see ab-testing.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/analytics/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/analytics/SKILL.md",
     "line_count": 322,
     "frontmatter_keys": [
       "name",
@@ -121,7 +121,7 @@
     "description": "Material Design 3 and Android platform guidelines. Use when building Android apps with Jetpack Compose or XML layouts, implementing Material You, navigation, or accessibility. Triggers on tasks involving Android UI, Compose components, dynamic color, or Material Design compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/android-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/android-design/SKILL.md",
     "line_count": 1060,
     "frontmatter_keys": [
       "name",
@@ -139,7 +139,7 @@
     "description": "When the user wants to audit or optimize an App Store or Google Play listing. Also use when the user mentions 'ASO audit,' 'app store optimization,' 'optimize my app listing,' 'improve app visibility,' 'app store ranking,' 'audit my listing,' 'why aren't people downloading my app,' 'improve my app conversion,' 'keyword optimization for app,' or 'compare my app to competitors.' Use when the user shares an App Store or Google Play URL and wants to improve it.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/aso/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/aso/SKILL.md",
     "line_count": 325,
     "frontmatter_keys": [
       "name",
@@ -155,8 +155,8 @@
     "description": "Run a structured code review (Codex default, Claude optional) as a closeout check on a local or PR branch before commit or ship.",
     "source_owner": "Peter Steinberger",
     "source_url": "https://github.com/openclaw/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/autoreview/SKILL.md",
-    "line_count": 229,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/autoreview/SKILL.md",
+    "line_count": 236,
     "frontmatter_keys": [
       "name",
       "description"
@@ -171,7 +171,7 @@
     "description": "Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler, articles, and pleasantries while keeping full technical accuracy. Use when user says \\\"caveman mode\\\", \\\"talk like caveman\\\", \\\"use caveman\\\", \\\"less tokens\\\", \\\"be brief\\\", or invokes /caveman.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/caveman/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/caveman/SKILL.md",
     "line_count": 60,
     "frontmatter_keys": [
       "name",
@@ -187,7 +187,7 @@
     "description": "When the user wants to reduce churn, build cancellation flows, set up save offers, recover failed payments, or implement retention strategies. Also use when the user mentions 'churn,' 'cancel flow,' 'offboarding,' 'save offer,' 'dunning,' 'failed payment recovery,' 'win-back,' 'retention,' 'exit survey,' 'pause subscription,' 'involuntary churn,' 'people keep canceling,' 'churn rate is too high,' 'how do I keep users,' or 'customers are leaving.' Use this whenever someone is losing subscribers or wants to build systems to prevent it. For post-cancel win-back email sequences, see emails. For in-app upgrade paywalls, see paywalls.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/churn-prevention/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/churn-prevention/SKILL.md",
     "line_count": 437,
     "frontmatter_keys": [
       "name",
@@ -203,7 +203,7 @@
     "description": "Use when ANY command fails with 'command not found', when installing CLI tools (ripgrep, fd, jq, yq, bat, etc.), auditing project environments, or batch-updating tools. Triggers on: command not found, install tool, missing binary, environment audit, update tools, which, apt install, brew install.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/cli-tools-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cli-tools/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cli-tools/SKILL.md",
     "line_count": 90,
     "frontmatter_keys": [
       "name",
@@ -219,7 +219,7 @@
     "description": "When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. Use when the user says 'co-marketing,' 'partner marketing,' 'joint campaign,' 'who should we partner with,' 'integration marketing,' 'cross-promotion,' 'collaborate with another company,' 'partnership ideas,' or 'co-brand.' For customer referral programs, see referrals. For launch-specific partnerships, see launch.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/co-marketing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/co-marketing/SKILL.md",
     "line_count": 303,
     "frontmatter_keys": [
       "name",
@@ -235,7 +235,7 @@
     "description": "Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development emails, or SDR emails. Also use when the user mentions \\\"cold outreach,\\\" \\\"prospecting email,\\\" \\\"outbound email,\\\" \\\"email to leads,\\\" \\\"reach out to prospects,\\\" \\\"sales email,\\\" \\\"follow-up email sequence,\\\" \\\"nobody's replying to my emails,\\\" or \\\"how do I write a cold email.\\\" Covers subject lines, opening lines, body copy, CTAs, personalization, and multi-touch follow-up sequences. For warm/lifecycle email sequences, see emails. For sales collateral beyond emails, see sales-enablement.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cold-email/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cold-email/SKILL.md",
     "line_count": 172,
     "frontmatter_keys": [
       "name",
@@ -251,7 +251,7 @@
     "description": "Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: \\\\\\\"build a community,\\\\\\\" \\\\\\\"community strategy,\\\\\\\" \\\\\\\"Discord community,\\\\\\\" \\\\\\\"Slack community,\\\\\\\" \\\\\\\"community-led growth,\\\\\\\" \\\\\\\"brand advocates,\\\\\\\" \\\\\\\"user community,\\\\\\\" \\\\\\\"forum strategy,\\\\\\\" \\\\\\\"community engagement,\\\\\\\" \\\\\\\"grow our community,\\\\\\\" \\\\\\\"ambassador program,\\\\\\\" \\\\\\\"community flywheel.\\\\",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/community-marketing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/community-marketing/SKILL.md",
     "line_count": 176,
     "frontmatter_keys": [
       "name",
@@ -267,7 +267,7 @@
     "description": "When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this competitor,' 'analyze competitor,' 'competitive intelligence,' 'competitor deep dive,' 'who are my competitors,' 'competitor landscape,' 'competitor dossier,' 'competitive audit,' or 'research these competitors.' Input is a list of competitor URLs. Output is structured competitor profile markdown files. For creating comparison/alternative pages from profiles, see competitors. For sales-specific battle cards, see sales-enablement.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitor-profiling/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/competitor-profiling/SKILL.md",
     "line_count": 425,
     "frontmatter_keys": [
       "name",
@@ -283,7 +283,7 @@
     "description": "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/competitors/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/competitors/SKILL.md",
     "line_count": 269,
     "frontmatter_keys": [
       "name",
@@ -299,7 +299,7 @@
     "description": "When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions \\\"content strategy,\\\" \\\"what should I write about,\\\" \\\"content ideas,\\\" \\\"blog strategy,\\\" \\\"topic clusters,\\\" \\\"content planning,\\\" \\\"editorial calendar,\\\" \\\"content marketing,\\\" \\\"content roadmap,\\\" \\\"what content should I create,\\\" \\\"blog topics,\\\" \\\"content pillars,\\\" or \\\"I don't know what to write.\\\" Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/content-strategy/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/content-strategy/SKILL.md",
     "line_count": 378,
     "frontmatter_keys": [
       "name",
@@ -315,7 +315,7 @@
     "description": "Use when looking up library documentation, API references, framework patterns, or code examples for ANY library (React, Next.js, Vue, Django, Laravel, etc.). Fetches current docs via Context7 REST API. Triggers on: how to use library, API docs, framework pattern, import usage, library example.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/context7-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/context7/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/context7/SKILL.md",
     "line_count": 102,
     "frontmatter_keys": [
       "name",
@@ -331,7 +331,7 @@
     "description": "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. For writing new copy, see copywriting.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copy-editing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/copy-editing/SKILL.md",
     "line_count": 470,
     "frontmatter_keys": [
       "name",
@@ -347,7 +347,7 @@
     "description": "When the user wants to write, rewrite, or improve marketing copy for any page \\u2014 including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \\\"write copy for,\\\" \\\"improve this copy,\\\" \\\"rewrite this page,\\\" \\\"marketing copy,\\\" \\\"headline help,\\\" \\\"CTA copy,\\\" \\\"value proposition,\\\" \\\"tagline,\\\" \\\"subheadline,\\\" \\\"hero section copy,\\\" \\\"above the fold,\\\" \\\"this copy is weak,\\\" \\\"make this more compelling,\\\" or \\\"help me describe my product.\\\" Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copywriting/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/copywriting/SKILL.md",
     "line_count": 265,
     "frontmatter_keys": [
       "name",
@@ -363,7 +363,7 @@
     "description": "When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. Also use when the user mentions \\\"A/B test,\\\" \\\"split test,\\\" \\\"experiment,\\\" \\\"test this change,\\\" \\\"variant copy,\\\" \\\"multivariate test,\\\" \\\"hypothesis,\\\" \\\"should I test this,\\\" \\\"which version is better,\\\" \\\"test two versions,\\\" \\\"statistical significance,\\\" \\\"how long should I run this test,\\\" \\\"growth experiments,\\\" \\\"experiment velocity,\\\" \\\"experiment backlog,\\\" \\\"ICE score,\\\" \\\"experimentation program,\\\" or \\\"experiment playbook.\\\" Use this whenever someone is comparing two approaches and wants to measure which performs better, or when they want to build a systematic experimentation practice. For tracking implementation, see analytics. For page-level conversion optimization, see cro.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-ab-testing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/corey-ab-testing/SKILL.md",
     "line_count": 366,
     "frontmatter_keys": [
       "name",
@@ -379,7 +379,7 @@
     "description": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \\\"programmatic SEO,\\\" \\\"template pages,\\\" \\\"pages at scale,\\\" \\\"directory pages,\\\" \\\"location pages,\\\" \\\"[keyword] + [city] pages,\\\" \\\"comparison pages,\\\" \\\"integration pages,\\\" \\\"building many pages for SEO,\\\" \\\"pSEO,\\\" \\\"generate 100 pages,\\\" \\\"data-driven pages,\\\" or \\\"templated landing pages.\\\" Use this whenever someone wants to create many similar pages targeting different keywords or locations. For auditing existing SEO issues, see seo-audit. For content strategy planning, see content-strategy.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/corey-programmatic-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/corey-programmatic-seo/SKILL.md",
     "line_count": 251,
     "frontmatter_keys": [
       "name",
@@ -395,7 +395,7 @@
     "description": "When the user wants to optimize, improve, or increase conversions on any marketing page or form \\u2014 including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't converting,' 'improve conversions,' 'why isn't this page working,' 'my landing page sucks,' 'form abandonment,' 'nobody's converting,' 'low conversion rate,' or 'this page needs work.' Use this even if the user just shares a URL and asks for feedback. For signup/registration flows, see signup. For post-signup activation, see onboarding. For popups/modals, see popups.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cro/SKILL.md",
     "line_count": 200,
     "frontmatter_keys": [
       "name",
@@ -411,7 +411,7 @@
     "description": "Full-funnel Conversion Rate Optimization (CRO) for SaaS and web apps. Covers page CRO, form optimization, signup flow, onboarding activation, popup/modal design, and paywall/upgrade screens. Use when optimizing any part of the conversion funnel.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/cro-funnel/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/cro-funnel/SKILL.md",
     "line_count": 360,
     "frontmatter_keys": [
       "name",
@@ -429,8 +429,8 @@
     "description": "When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \\\"customer research,\\\" \\\"ICP research,\\\" \\\"talk to customers,\\\" \\\"analyze transcripts,\\\" \\\"customer interviews,\\\" \\\"survey analysis,\\\" \\\"support ticket analysis,\\\" \\\"voice of customer,\\\" \\\"VOC,\\\" \\\"build personas,\\\" \\\"customer personas,\\\" \\\"jobs to be done,\\\" \\\"JTBD,\\\" \\\"what do customers say,\\\" \\\"what are customers struggling with,\\\" \\\"Reddit mining,\\\" \\\"G2 reviews,\\\" \\\"review mining,\\\" \\\"digital watering holes,\\\" \\\"community research,\\\" \\\"forum research,\\\" \\\"competitor reviews,\\\" \\\"customer sentiment,\\\" or \\\"find out why customers churn/convert/buy.\\\" Use for both analyzing existing research assets AND gathering new research from online sources. For writing copy informed by research, see copywriting. For acting on research to improve pages, see cro.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/customer-research/SKILL.md",
-    "line_count": 284,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/customer-research/SKILL.md",
+    "line_count": 285,
     "frontmatter_keys": [
       "name",
       "description"
@@ -445,7 +445,7 @@
     "description": "Guides multimodal media authentication and deepfake forensics using provenance checks, metadata review, PRNU/noise analysis, temporal consistency, semantic forensics, and evidence reporting. Use when the user asks to verify images, audio, or video, investigate synthetic media, assess fake or manipulated content, or prepare a media authenticity report.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/deepfake-detection/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/deepfake-detection/SKILL.md",
     "line_count": 346,
     "frontmatter_keys": [
       "name",
@@ -463,7 +463,7 @@
     "description": "Disciplined diagnosis loop for hard bugs and performance regressions. Reproduce \\u2192 minimise \\u2192 hypothesise \\u2192 instrument \\u2192 fix \\u2192 regression-test. Use when user says \\\"diagnose this\\\" / \\\"debug this\\\", reports a bug, says something is broken/throwing/failing, or describes a performance regression.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/diagnose/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/diagnose/SKILL.md",
     "line_count": 132,
     "frontmatter_keys": [
       "name",
@@ -479,7 +479,7 @@
     "description": "When the user wants to submit their product to startup, SaaS, AI, agent, MCP, no-code, or review directories for backlinks, domain rating, and discovery. Also use when the user mentions \\\"directory submissions,\\\" \\\"submit to directories,\\\" \\\"backlinks from directories,\\\" \\\"list my product,\\\" \\\"submit to Product Hunt,\\\" \\\"BetaList,\\\" \\\"TAAFT,\\\" \\\"Futurepedia,\\\" \\\"G2 listing,\\\" \\\"Capterra listing,\\\" \\\"AlternativeTo,\\\" \\\"SaaSHub,\\\" \\\"AI directories,\\\" \\\"MCP registry,\\\" \\\"agent directory,\\\" \\\"dofollow backlinks,\\\" \\\"launch directories,\\\" or \\\"directory tracker.\\\" Use this whenever someone is planning the directory layer of a product launch or an ongoing backlink campaign. For the broader launch moment, see launch. For programmatic SEO pages that should live behind these backlinks, see programmatic-seo. For AI citation optimization, see ai-seo.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/directory-submissions/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/directory-submissions/SKILL.md",
     "line_count": 394,
     "frontmatter_keys": [
       "name",
@@ -495,7 +495,7 @@
     "description": "Create, edit, and analyze office documents (PDF, DOCX, PPTX, XLSX). Use when working with PDFs, Word documents, PowerPoint presentations, or Excel spreadsheets. Covers text extraction, form filling, document creation, and data analysis.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/document-processing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/document-processing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/document-processing/SKILL.md",
     "line_count": 651,
     "frontmatter_keys": [
       "name",
@@ -515,7 +515,7 @@
     "description": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \\\"email sequence,\\\" \\\"drip campaign,\\\" \\\"nurture sequence,\\\" \\\"onboarding emails,\\\" \\\"welcome sequence,\\\" \\\"re-engagement emails,\\\" \\\"email automation,\\\" \\\"lifecycle emails,\\\" \\\"trigger-based emails,\\\" \\\"email funnel,\\\" \\\"email workflow,\\\" \\\"what emails should I send,\\\" \\\"welcome series,\\\" or \\\"email cadence.\\\" Use this for any multi-email automated flow. For cold outreach emails, see cold-email. For in-app onboarding, see onboarding.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/emails/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/emails/SKILL.md",
     "line_count": 324,
     "frontmatter_keys": [
       "name",
@@ -531,7 +531,7 @@
     "description": "Use when evaluating projects for production or enterprise readiness, implementing supply chain security (SLSA, cosign, SBOMs, pnpm), hardening CI/CD pipelines, establishing quality gates (TYPO3: CI matrix PHP 8.2-8.5 x TYPO3 12.4/13.4/14.3 LTS), pursuing OpenSSF Best Practices Badge (Passing/Silver/Gold) or OSPS Baseline levels, reviewing code quality, writing ADRs, or configuring Git hooks and CI pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/enterprise-readiness-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/enterprise-readiness/SKILL.md",
     "line_count": 84,
     "frontmatter_keys": [
       "name",
@@ -547,7 +547,7 @@
     "description": "Generate architecture diagrams as .excalidraw files from codebase analysis, with optional PNG/SVG export. Use when the user asks to create architecture diagrams, system diagrams, visualize codebase structure, generate excalidraw files, export excalidraw diagrams to PNG or SVG, or convert .excalidraw files to image formats.",
     "source_owner": "ooiyeefei",
     "source_url": "https://github.com/ooiyeefei/ccc/tree/main/skills/excalidraw",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/excalidraw/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/excalidraw/SKILL.md",
     "line_count": 292,
     "frontmatter_keys": [
       "name",
@@ -563,7 +563,7 @@
     "description": "Helps users discover and install agent skills when they ask questions like \\\"how do I do X\\\", \\\"find a skill for X\\\", \\\"is there a skill that can...\\\", or express interest in extending capabilities. This skill should be used when the user is looking for functionality that might exist as an installable skill.",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/find-skills/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/find-skills/SKILL.md",
     "line_count": 155,
     "frontmatter_keys": [
       "name",
@@ -579,8 +579,8 @@
     "description": "Search, scrape, and interact with the web via the Firecrawl CLI. Use this skill whenever the user wants to search the web, find articles, research a topic, look something up online, scrape a webpage, grab content from a URL, get data from a website, crawl documentation, download a site, or interact with pages that need clicks or logins. Also use when they say \\\"fetch this page\\\", \\\"pull the content from\\\", \\\"get the page at https://\\\", or reference external websites. This provides real-time web search with full page content and interact capabilities \\u2014 beyond what Claude can do natively with built-in tools. Do NOT trigger for local file operations, git commands, deployments, or code editing tasks.",
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
-    "line_count": 277,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/firecrawl/SKILL.md",
+    "line_count": 309,
     "frontmatter_keys": [
       "name",
       "description"
@@ -595,7 +595,7 @@
     "description": "When the user wants to plan, evaluate, or build a free tool for marketing purposes \\u2014 lead generation, SEO value, or brand awareness. Also use when the user mentions \\\"engineering as marketing,\\\" \\\"free tool,\\\" \\\"marketing tool,\\\" \\\"calculator,\\\" \\\"generator,\\\" \\\"interactive tool,\\\" \\\"lead gen tool,\\\" \\\"build a tool for leads,\\\" \\\"free resource,\\\" \\\"ROI calculator,\\\" \\\"grader tool,\\\" \\\"audit tool,\\\" \\\"should I build a free tool,\\\" or \\\"tools for lead gen.\\\" Use this whenever someone wants to build something useful and give it away to attract leads or earn links. For downloadable content lead magnets (ebooks, checklists, templates), see lead-magnets.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/free-tools/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/free-tools/SKILL.md",
     "line_count": 192,
     "frontmatter_keys": [
       "name",
@@ -611,7 +611,7 @@
     "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/frontend-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/frontend-design/SKILL.md",
     "line_count": 54,
     "frontmatter_keys": [
       "name",
@@ -627,7 +627,7 @@
     "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \\\"grill me\\\".",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-me/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/grill-me/SKILL.md",
     "line_count": 25,
     "frontmatter_keys": [
       "name",
@@ -643,7 +643,7 @@
     "description": "Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-with-docs/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/grill-with-docs/SKILL.md",
     "line_count": 103,
     "frontmatter_keys": [
       "name",
@@ -659,7 +659,7 @@
     "description": "GSAP animation reference for HyperFrames. Covers gsap.to(), from(), fromTo(), easing, stagger, defaults, timelines (gsap.timeline(), position parameter, labels, nesting, playback), and performance (transforms, will-change, quickTo). Use when writing GSAP animations in HyperFrames compositions.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/gsap/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/gsap/SKILL.md",
     "line_count": 255,
     "frontmatter_keys": [
       "name",
@@ -675,7 +675,7 @@
     "description": "Compact the current conversation into a handoff document for another agent to pick up.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/handoff/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/handoff/SKILL.md",
     "line_count": 29,
     "frontmatter_keys": [
       "name",
@@ -691,7 +691,7 @@
     "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For dev-loop CLI commands (init, lint, inspect, preview, render) see the hyperframes-cli skill; for asset preprocessing commands (tts, transcribe, remove-background) see the hyperframes-media skill.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes/SKILL.md",
     "line_count": 506,
     "frontmatter_keys": [
       "name",
@@ -709,7 +709,7 @@
     "description": "HyperFrames CLI dev loop \\u2014 `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
     "line_count": 159,
     "frontmatter_keys": [
       "name",
@@ -725,7 +725,7 @@
     "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
     "line_count": 119,
     "frontmatter_keys": [
       "name",
@@ -741,7 +741,7 @@
     "description": "When the user wants to create, generate, edit, or optimize images for marketing \\u2014 blog heroes, social graphics, product mockups, profile banners, listing visuals, or brand assets. Also use when the user mentions 'AI image generation,' 'generate an image,' 'create a graphic,' 'product mockup,' 'hero image,' 'social media graphic,' 'banner image,' 'cover photo,' 'profile banner,' 'listing screenshot,' 'Flux,' 'Flux Kontext,' 'Midjourney,' 'DALL-E,' 'GPT Image,' 'ChatGPT Images,' 'Ideogram,' 'Gemini image,' 'Nano Banana,' 'Recraft,' 'Stable Diffusion,' 'Canva,' 'Figma,' 'image optimization,' 'compress images,' 'WebP,' or 'OG image.' Use this for general-purpose marketing image creation and optimization. For paid ad image creative and platform-specific ad specs, see ad-creative. For video production, see video.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/image/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/image/SKILL.md",
     "line_count": 353,
     "frontmatter_keys": [
       "name",
@@ -757,7 +757,7 @@
     "description": "Use when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface. Covers websites, landing pages, dashboards, product UI, app shells, components, forms, settings, onboarding, and empty states. Handles UX review, visual hierarchy, information architecture, cognitive load, accessibility, performance, responsive behavior, theming, anti-patterns, typography, fonts, spacing, layout, alignment, color, motion, micro-interactions, UX copy, error states, edge cases, i18n, and reusable design systems or tokens. Also use for bland designs that need to become bolder or more delightful, loud designs that should become quieter, live browser iteration on UI elements, or ambitious visual effects that should feel technically extraordinary. Not for backend-only or non-UI tasks.",
     "source_owner": "pbakaus",
     "source_url": "https://github.com/pbakaus/impeccable/releases/tag/skill-v3.0.7",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/impeccable/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/impeccable/SKILL.md",
     "line_count": 189,
     "frontmatter_keys": [
       "name",
@@ -773,7 +773,7 @@
     "description": "Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/improve-codebase-architecture/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/improve-codebase-architecture/SKILL.md",
     "line_count": 96,
     "frontmatter_keys": [
       "name",
@@ -789,7 +789,7 @@
     "description": "Apple Human Interface Guidelines for iPhone. Use when building, reviewing, or refactoring SwiftUI/UIKit interfaces for iOS. Triggers on tasks involving iPhone UI, iOS components, accessibility, Dynamic Type, Dark Mode, or HIG compliance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ios-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ios-design/SKILL.md",
     "line_count": 1092,
     "frontmatter_keys": [
       "name",
@@ -807,7 +807,7 @@
     "description": "Apple Human Interface Guidelines for iPad. Use when building iPad-optimized interfaces, implementing multitasking, pointer support, keyboard shortcuts, or responsive layouts. Triggers on tasks involving iPad, Split View, Stage Manager, sidebar navigation, or trackpad support.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ipados-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ipados-design/SKILL.md",
     "line_count": 684,
     "frontmatter_keys": [
       "name",
@@ -825,7 +825,7 @@
     "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/launch/SKILL.md",
     "line_count": 366,
     "frontmatter_keys": [
       "name",
@@ -841,7 +841,7 @@
     "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch-strategy/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/launch-strategy/SKILL.md",
     "line_count": 357,
     "frontmatter_keys": [
       "name",
@@ -857,7 +857,7 @@
     "description": "When the user wants to create, plan, or optimize a lead magnet for email capture or lead generation. Also use when the user mentions \\\"lead magnet,\\\" \\\"gated content,\\\" \\\"content upgrade,\\\" \\\"downloadable,\\\" \\\"ebook,\\\" \\\"cheat sheet,\\\" \\\"checklist,\\\" \\\"template download,\\\" \\\"opt-in,\\\" \\\"freebie,\\\" \\\"PDF download,\\\" \\\"resource library,\\\" \\\"content offer,\\\" \\\"email capture content,\\\" \\\"Notion template,\\\" \\\"spreadsheet template,\\\" or \\\"what should I give away for emails.\\\" Use this for planning what to create and how to distribute it. For interactive tools as lead magnets, see free-tools. For writing the actual content, see copywriting. For the email sequence after capture, see emails.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/lead-magnets/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/lead-magnets/SKILL.md",
     "line_count": 323,
     "frontmatter_keys": [
       "name",
@@ -873,7 +873,7 @@
     "description": "Creates and reviews Austrian Impressum and disclosure content for websites, including ECG, UGB, GewO, MedienG, Offenlegung, and company-form-specific templates. Use when the user mentions Impressum, legal notice, imprint, Austria, Oesterreich, Mediengesetz, Offenlegung, or website operator disclosure.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/legal-impressum/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/legal-impressum/SKILL.md",
     "line_count": 390,
     "frontmatter_keys": [
       "name",
@@ -891,7 +891,7 @@
     "description": "Apple Human Interface Guidelines for Mac. Use when building macOS apps with SwiftUI or AppKit, implementing menu bars, toolbars, window management, or keyboard shortcuts. Triggers on tasks involving Mac UI, desktop apps, or Mac Catalyst.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/macos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/macos-design/SKILL.md",
     "line_count": 1131,
     "frontmatter_keys": [
       "name",
@@ -909,8 +909,8 @@
     "description": "When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' 'ideas to grow,' 'what else can I try,' 'I don't know how to market this,' 'brainstorm marketing,' or 'what marketing should I do.' Use this as a starting point whenever someone is stuck or looking for inspiration on how to grow. For specific channel execution, see the relevant skill (ads, social, emails, etc.).",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-ideas/SKILL.md",
-    "line_count": 180,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/marketing-ideas/SKILL.md",
+    "line_count": 181,
     "frontmatter_keys": [
       "name",
       "description"
@@ -925,7 +925,7 @@
     "description": "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-psychology/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/marketing-psychology/SKILL.md",
     "line_count": 468,
     "frontmatter_keys": [
       "name",
@@ -941,7 +941,7 @@
     "description": "Marketing skills for AI agents. CRO, copywriting, SEO, analytics, pricing, and growth engineering. From Corey Haines' Marketing Skills collection. Use when working with marketing, cro, conversion, copywriting, seo, landing page, pricing, growth.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-skills/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/marketing-skills/SKILL.md",
     "line_count": 231,
     "frontmatter_keys": [
       "name",
@@ -959,7 +959,7 @@
     "description": "Use when designing small UI feedback moments like button states, toggles, form validation, loading indicators, or notification badges.",
     "source_owner": "Dylan Tarre",
     "source_url": "https://github.com/dylantarre/animation-principles",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/micro-interactions/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/micro-interactions/SKILL.md",
     "line_count": 129,
     "frontmatter_keys": [
       "name",
@@ -975,7 +975,7 @@
     "description": "'Design the small details -- triggers, rules, feedback, loops and modes -- that separate good products from great ones. Use when the user mentions \\\"microinteraction\\\", \\\"button feedback\\\", \\\"loading state\\\", \\\"toggle design\\\", \\\"animation detail\\\", \\\"interaction polish\\\", \\\"state transitions\\\", or \\\"input feedback\\\". Also trigger when designing form validation responses, progress indicators, confirmation dialogs, or any UI element where the user expects immediate feedback. Covers trigger design, state rules, feedback mechanisms, and progressive loops. For overall UI polish, see refactoring-ui. For affordance design, see design-everyday-things.'",
     "source_owner": "wondelai",
     "source_url": "https://github.com/wondelai/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/microinteractions/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/microinteractions/SKILL.md",
     "line_count": 250,
     "frontmatter_keys": [
       "name",
@@ -991,7 +991,7 @@
     "description": "Generate social media preview images (Open Graph) and configure meta tags. Creates a screenshot-optimized page using the project's existing design system, captures it at 1200x630, and sets up all social sharing meta tags.",
     "source_owner": "Stevy Smith",
     "source_url": "https://github.com/stevysmith/og-image-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/og-image/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/og-image/SKILL.md",
     "line_count": 213,
     "frontmatter_keys": [
       "name",
@@ -1007,7 +1007,7 @@
     "description": "When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions \\\"onboarding flow,\\\" \\\"activation rate,\\\" \\\"user activation,\\\" \\\"first-run experience,\\\" \\\"empty states,\\\" \\\"onboarding checklist,\\\" \\\"aha moment,\\\" \\\"new user experience,\\\" \\\"users aren't activating,\\\" \\\"nobody completes setup,\\\" \\\"low activation rate,\\\" \\\"users sign up but don't use the product,\\\" \\\"time to value,\\\" or \\\"first session experience.\\\" Use this whenever users are signing up but not sticking around. For signup/registration optimization, see signup. For ongoing email sequences, see emails.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/onboarding/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/onboarding/SKILL.md",
     "line_count": 233,
     "frontmatter_keys": [
       "name",
@@ -1023,7 +1023,7 @@
     "description": "When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions \\\"paywall,\\\" \\\"upgrade screen,\\\" \\\"upgrade modal,\\\" \\\"upsell,\\\" \\\"feature gate,\\\" \\\"convert free to paid,\\\" \\\"freemium conversion,\\\" \\\"trial expiration screen,\\\" \\\"limit reached screen,\\\" \\\"plan upgrade prompt,\\\" \\\"in-app pricing,\\\" \\\"free users won't upgrade,\\\" \\\"trial to paid conversion,\\\" or \\\"how do I get users to pay.\\\" Use this for any in-product moment where you're asking users to upgrade. Distinct from public pricing pages (see cro) \\u2014 this focuses on in-product upgrade moments where the user has already experienced value. For pricing decisions, see pricing.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/paywalls/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/paywalls/SKILL.md",
     "line_count": 240,
     "frontmatter_keys": [
       "name",
@@ -1039,7 +1039,7 @@
     "description": "Use when modernizing PHP code: PHP 8.1-8.5 features, PSR/PHP-FIG/PER-CS compliance, PHPStan/Rector/PHP-CS-Fixer/PHPat tooling, DTOs/enums/readonly/property hooks, type safety. Triggers: PHP modernization, type safety, PHPStan, Rector, PHP-CS-Fixer, enum, DTO, readonly, strict_types, property hooks, PHP 8.4, PHP 8.5.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/php-modernization-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/php-modernization/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/php-modernization/SKILL.md",
     "line_count": 79,
     "frontmatter_keys": [
       "name",
@@ -1055,7 +1055,7 @@
     "description": "When the user wants to create or optimize popups, modals, overlays, slide-ins, or banners for conversion purposes. Also use when the user mentions \\\"exit intent,\\\" \\\"popup conversions,\\\" \\\"modal optimization,\\\" \\\"lead capture popup,\\\" \\\"email popup,\\\" \\\"announcement banner,\\\" \\\"overlay,\\\" \\\"collect emails with a popup,\\\" \\\"exit popup,\\\" \\\"scroll trigger,\\\" \\\"sticky bar,\\\" or \\\"notification bar.\\\" Use this for any overlay or interrupt-style conversion element. For forms outside of popups, see cro. For general page conversion optimization, see cro.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/popups/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/popups/SKILL.md",
     "line_count": 467,
     "frontmatter_keys": [
       "name",
@@ -1071,7 +1071,7 @@
     "description": "Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.",
     "source_owner": "Supabase",
     "source_url": "https://github.com/supabase/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/postgres-best-practices/SKILL.md",
     "line_count": 70,
     "frontmatter_keys": [
       "name",
@@ -1087,7 +1087,7 @@
     "description": "When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' or 'should I offer a free plan.' Use this whenever someone is figuring out what to charge or how to structure their plans. For in-app upgrade screens, see paywalls.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/pricing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/pricing/SKILL.md",
     "line_count": 244,
     "frontmatter_keys": [
       "name",
@@ -1103,7 +1103,7 @@
     "description": "When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' 'who is my target audience,' 'describe my product,' 'ICP,' 'ideal customer profile,' or wants to avoid repeating foundational information across marketing tasks. Use this at the start of any new project before using other marketing skills \\u2014 it creates `.agents/product-marketing.md` that all other skills reference for product, audience, and positioning context.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/product-marketing/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/product-marketing/SKILL.md",
     "line_count": 254,
     "frontmatter_keys": [
       "name",
@@ -1119,7 +1119,7 @@
     "description": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \\\"programmatic SEO,\\\" \\\"template pages,\\\" \\\"pages at scale,\\\" \\\"directory pages,\\\" \\\"location pages,\\\" \\\"[keyword] + [city] pages,\\\" \\\"comparison pages,\\\" \\\"integration pages,\\\" or \\\"building many pages for SEO.\\\" For auditing existing SEO issues, see seo-audit.",
     "source_owner": "AITYTech",
     "source_url": "https://github.com/aitytech/agentkits-marketing",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/programmatic-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/programmatic-seo/SKILL.md",
     "line_count": 639,
     "frontmatter_keys": [
       "name",
@@ -1137,7 +1137,7 @@
     "description": "When the user wants to find, qualify, and build a list of prospects to reach out to \\u2014 across B2B SaaS, general B2B, or local small businesses. Also use when the user mentions \\\"prospecting,\\\" \\\"build a prospect list,\\\" \\\"find prospects,\\\" \\\"find leads,\\\" \\\"lead gen list,\\\" \\\"find SaaS companies that,\\\" \\\"find B2B companies,\\\" \\\"find local businesses,\\\" \\\"ICP-fit accounts,\\\" \\\"who should we go after,\\\" \\\"outbound list,\\\" \\\"target account list,\\\" \\\"find clients near me,\\\" \\\"businesses without websites,\\\" \\\"prospect research,\\\" or \\\"qualified leads.\\\" Use this for the list-building and qualification phase. For writing the outbound copy after the list is built, see cold-email. For deep competitive research on specific accounts, see competitor-profiling.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/prospecting/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/prospecting/SKILL.md",
     "line_count": 269,
     "frontmatter_keys": [
       "name",
@@ -1153,7 +1153,7 @@
     "description": "Build a throwaway prototype to flesh out a design before committing to it. Routes between two branches \\u2014 a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route. Use when the user wants to prototype, sanity-check a data model or state machine, mock up a UI, explore design options, or says \\\"prototype this\\\", \\\"let me play with it\\\", \\\"try a few designs\\\".",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/prototype/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/prototype/SKILL.md",
     "line_count": 45,
     "frontmatter_keys": [
       "name",
@@ -1169,7 +1169,7 @@
     "description": "React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patterns. Triggers on tasks involving React components, Next.js pages, data fetching, bundle optimization, or performance improvements.",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/react-best-practices/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/react-best-practices/SKILL.md",
     "line_count": 158,
     "frontmatter_keys": [
       "name",
@@ -1185,7 +1185,7 @@
     "description": "Evaluate how well a codebase supports autonomous AI-assisted development. Analyzes repositories across five pillars (Agent Instructions, Feedback Loops, Workflows & Automation, Policy & Governance, Build & Dev Environment) covering 74 features. Use when users want to assess how agent-ready a repository is.",
     "source_owner": "OpenHands",
     "source_url": "https://github.com/OpenHands/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/readiness-report/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/readiness-report/SKILL.md",
     "line_count": 132,
     "frontmatter_keys": [
       "name",
@@ -1201,7 +1201,7 @@
     "description": "'Surgical code refactoring to improve maintainability without changing behavior. Covers extracting functions, renaming variables, breaking down god functions, improving type safety, eliminating code smells, and applying design patterns. Less drastic than repo-rebuilder; use for gradual improvements.'",
     "source_owner": "GitHub",
     "source_url": "https://github.com/github/awesome-copilot",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/refactor/SKILL.md",
     "line_count": 657,
     "frontmatter_keys": [
       "name",
@@ -1219,7 +1219,7 @@
     "description": "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance.",
     "source_owner": "sickn33",
     "source_url": "https://github.com/sickn33/antigravity-awesome-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/refactor-clean/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/refactor-clean/SKILL.md",
     "line_count": 69,
     "frontmatter_keys": [
       "name",
@@ -1235,7 +1235,7 @@
     "description": "When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' 'partner program,' 'referral incentive,' 'how to get referrals,' 'customers referring customers,' or 'affiliate payout.' Use this whenever someone wants existing users or partners to bring in new customers. For launch-specific virality, see launch.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/referrals/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/referrals/SKILL.md",
     "line_count": 270,
     "frontmatter_keys": [
       "name",
@@ -1251,7 +1251,7 @@
     "description": "Best practices for Remotion - Video creation in React",
     "source_owner": "remotion-dev",
     "source_url": "https://github.com/remotion-dev/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/remotion-best-practices/SKILL.md",
     "line_count": 351,
     "frontmatter_keys": [
       "name",
@@ -1267,7 +1267,7 @@
     "description": "When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes. Also use when the user mentions 'RevOps,' 'revenue operations,' 'lead scoring,' 'lead routing,' 'MQL,' 'SQL,' 'pipeline stages,' 'deal desk,' 'CRM automation,' 'marketing-to-sales handoff,' 'data hygiene,' 'leads aren't getting to sales,' 'pipeline management,' 'lead qualification,' or 'when should marketing hand off to sales.' Use this for anything involving the systems and processes that connect marketing to revenue. For cold outreach emails, see cold-email. For email drip campaigns, see emails. For pricing decisions, see pricing.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/revops/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/revops/SKILL.md",
     "line_count": 358,
     "frontmatter_keys": [
       "name",
@@ -1283,7 +1283,7 @@
     "description": "When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sales-enablement/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/sales-enablement/SKILL.md",
     "line_count": 372,
     "frontmatter_keys": [
       "name",
@@ -1299,7 +1299,7 @@
     "description": "When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions \\\"schema markup,\\\" \\\"structured data,\\\" \\\"JSON-LD,\\\" \\\"rich snippets,\\\" \\\"schema.org,\\\" \\\"FAQ schema,\\\" \\\"product schema,\\\" \\\"review schema,\\\" \\\"breadcrumb schema,\\\" \\\"Google rich results,\\\" \\\"knowledge panel,\\\" \\\"star ratings in search,\\\" or \\\"add structured data.\\\" Use this whenever someone wants their pages to show enhanced results in Google. For broader SEO issues, see seo-audit. For AI search optimization, see ai-seo.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/schema/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/schema/SKILL.md",
     "line_count": 192,
     "frontmatter_keys": [
       "name",
@@ -1315,7 +1315,7 @@
     "description": "Use when conducting security assessments \\u2014 OWASP Top 10 / API / LLM, CWE Top 25, CVSS scoring \\u2014 auditing PHP/TYPO3 (v14.3 LTS: #109585, HashService removal, Authorize/RateLimit), APIs, frontend, Terraform/K8s/Docker IaC, AWS/Azure/GCP cloud, AI agent configs, or scanning dependencies.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/security-audit-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-audit/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/security-audit/SKILL.md",
     "line_count": 105,
     "frontmatter_keys": [
       "name",
@@ -1331,7 +1331,7 @@
     "description": "Builds security incident reports, DDoS post-mortems, timelines, IoC sections, CVE correlation, severity scoring, and blameless root cause analysis. Use when the user needs an incident report, post-mortem, forensics summary, security timeline, DDoS analysis, SIR, root cause analysis, or communication for a security event.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/security-incident-reporting/SKILL.md",
     "line_count": 376,
     "frontmatter_keys": [
       "name",
@@ -1349,7 +1349,7 @@
     "description": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \\\"SEO audit,\\\" \\\"technical SEO,\\\" \\\"why am I not ranking,\\\" \\\"SEO issues,\\\" \\\"on-page SEO,\\\" \\\"meta tags review,\\\" \\\"SEO health check,\\\" \\\"my traffic dropped,\\\" \\\"lost rankings,\\\" \\\"not showing up in Google,\\\" \\\"site isn't ranking,\\\" \\\"Google update hit me,\\\" \\\"page speed,\\\" \\\"core web vitals,\\\" \\\"crawl errors,\\\" or \\\"indexing issues.\\\" Use this even if the user just says something vague like \\\"my SEO is bad\\\" or \\\"help with SEO\\\" \\u2014 start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/seo-audit/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/seo-audit/SKILL.md",
     "line_count": 510,
     "frontmatter_keys": [
       "name",
@@ -1367,7 +1367,7 @@
     "description": "Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label vocabulary, and domain doc layout. Run before first use of `to-issues`, `to-prd`, `triage`, `diagnose`, `tdd`, `improve-codebase-architecture`, or `zoom-out` \\u2014 or if those skills appear to be missing context about the issue tracker, triage labels, or domain docs.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/setup-matt-pocock-skills/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/setup-matt-pocock-skills/SKILL.md",
     "line_count": 135,
     "frontmatter_keys": [
       "name",
@@ -1383,7 +1383,7 @@
     "description": "Provides complete shadcn/ui component library patterns including installation, configuration, and implementation of accessible React components. Use when setting up shadcn/ui, installing components, building forms with React Hook Form and Zod, customizing themes with Tailwind CSS, or implementing UI patterns like buttons, dialogs, dropdowns, tables, and complex form layouts.",
     "source_owner": "Giuseppe Trisciuoglio",
     "source_url": "https://github.com/giuseppe-trisciuoglio/developer-kit",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/shadcn-ui/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/shadcn-ui/SKILL.md",
     "line_count": 323,
     "frontmatter_keys": [
       "name",
@@ -1399,7 +1399,7 @@
     "description": "When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions \\\"signup conversions,\\\" \\\"registration friction,\\\" \\\"signup form optimization,\\\" \\\"free trial signup,\\\" \\\"reduce signup dropoff,\\\" \\\"account creation flow,\\\" \\\"people aren't signing up,\\\" \\\"signup abandonment,\\\" \\\"trial conversion rate,\\\" \\\"nobody completes registration,\\\" \\\"too many steps to sign up,\\\" or \\\"simplify our signup.\\\" Use this whenever the user has a signup or registration flow that isn't performing. For post-signup onboarding, see onboarding. For lead capture forms (not account creation), see cro.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/signup/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/signup/SKILL.md",
     "line_count": 372,
     "frontmatter_keys": [
       "name",
@@ -1415,7 +1415,7 @@
     "description": "When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal linking. Also use when the user mentions \\\"sitemap,\\\" \\\"site map,\\\" \\\"visual sitemap,\\\" \\\"site structure,\\\" \\\"page hierarchy,\\\" \\\"information architecture,\\\" \\\"IA,\\\" \\\"navigation design,\\\" \\\"URL structure,\\\" \\\"breadcrumbs,\\\" \\\"internal linking strategy,\\\" \\\"website planning,\\\" \\\"what pages do I need,\\\" \\\"how should I organize my site,\\\" or \\\"site navigation.\\\" Use this whenever someone is planning what pages a website should have and how they connect. NOT for XML sitemaps (that's technical SEO \\u2014 see seo-audit). For SEO audits, see seo-audit. For structured data, see schema.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/site-architecture/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/site-architecture/SKILL.md",
     "line_count": 370,
     "frontmatter_keys": [
       "name",
@@ -1431,7 +1431,7 @@
     "description": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/skill-creator/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/skill-creator/SKILL.md",
     "line_count": 498,
     "frontmatter_keys": [
       "name",
@@ -1447,7 +1447,7 @@
     "description": "When the user wants to plan, build, or optimize SMS or MMS marketing \\u2014 including welcome flows, abandoned cart texts, post-purchase, win-back, promotional sends, or transactional/auth SMS. Also use when the user mentions \\\"SMS marketing,\\\" \\\"text message campaigns,\\\" \\\"SMS sequence,\\\" \\\"SMS automation,\\\" \\\"abandoned cart text,\\\" \\\"post-purchase SMS,\\\" \\\"Klaviyo SMS,\\\" \\\"Postscript,\\\" \\\"Attentive,\\\" \\\"Twilio,\\\" \\\"A2P 10DLC,\\\" \\\"TCPA,\\\" \\\"SMS compliance,\\\" \\\"short code,\\\" \\\"toll-free SMS,\\\" \\\"MMS campaign,\\\" \\\"should I do SMS,\\\" or \\\"SMS vs email.\\\" For email sequences, see emails. For SMS copy framing, see copywriting. For opt-in popups that capture phone numbers, see popups.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sms/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/sms/SKILL.md",
     "line_count": 351,
     "frontmatter_keys": [
       "name",
@@ -1463,7 +1463,7 @@
     "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' or 'create a reel.' Use this for social media content creation, repurposing, scheduling, and short-form video scripting. For broader content strategy, see content-strategy. For paid video ads, see ad-creative.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/social/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/social/SKILL.md",
     "line_count": 422,
     "frontmatter_keys": [
       "name",
@@ -1479,7 +1479,7 @@
     "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \\\"red-green-refactor\\\", wants integration tests, or asks for test-first development.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tdd/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/tdd/SKILL.md",
     "line_count": 124,
     "frontmatter_keys": [
       "name",
@@ -1495,7 +1495,7 @@
     "description": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-issues/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/to-issues/SKILL.md",
     "line_count": 98,
     "frontmatter_keys": [
       "name",
@@ -1511,8 +1511,8 @@
     "description": "Turn the current conversation context into a PRD and publish it to the project issue tracker. Use when user wants to create a PRD from the current context.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-prd/SKILL.md",
-    "line_count": 91,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/to-prd/SKILL.md",
+    "line_count": 89,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1527,7 +1527,7 @@
     "description": "Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/triage/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/triage/SKILL.md",
     "line_count": 118,
     "frontmatter_keys": [
       "name",
@@ -1543,7 +1543,7 @@
     "description": "Apple Human Interface Guidelines for Apple TV. Use when building tvOS apps with focus-based navigation, Siri Remote input, or living room viewing experiences. Triggers on tasks involving Apple TV, tvOS, 10-foot UI, or media playback.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tvos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/tvos-design/SKILL.md",
     "line_count": 388,
     "frontmatter_keys": [
       "name",
@@ -1559,7 +1559,7 @@
     "description": "Audits and implements TYPO3 accessibility patterns for WCAG 2.2 AA, including Fluid templates, PHP helpers, JavaScript widgets, forms, focus states, ARIA, and go-live checks. Use when building or reviewing TYPO3 templates, content elements, extensions, or frontend code for accessibility, keyboard support, screen readers, WCAG, ARIA, or a11y readiness.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
     "line_count": 291,
     "frontmatter_keys": [
       "name",
@@ -1578,7 +1578,7 @@
     "description": "Plans and executes batch TYPO3 migrations and large-scale refactors across hooks, PSR-14 events, TCA, dependency injection, Fluid, namespaces, ext_localconf, Content Blocks, localization, and PHP upgrades. Use when the user asks for bulk migration, mass refactor, codemod-style TYPO3 updates, repeated fixes across an extension, or coordinated v14 modernization.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-batch/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-batch/SKILL.md",
     "line_count": 352,
     "frontmatter_keys": [
       "name",
@@ -1597,7 +1597,7 @@
     "description": "Use when assessing TYPO3 extension quality, conformance checking, standards compliance, modernization to v12/v13/v14 (v14.3 LTS is the default/gold standard), TER readiness, or best practices review. Also triggers on: extension audit, quality score, full assessment, fix all findings, conformance audit, Fluid 5 strict ViewHelpers, ext_tables.php removal, Extbase attributes (Authorize/RateLimit), HashService removal, Bootstrap 5 migration, CSP compliance, ViewHelper security, XLIFF hygiene, PHP 8.4/8.5 compat.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-conformance-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-conformance/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-conformance/SKILL.md",
     "line_count": 96,
     "frontmatter_keys": [
       "name",
@@ -1613,7 +1613,7 @@
     "description": "Guides TYPO3 Content Blocks modeling for Content Elements, Record Types, Page Types, and File Types as the single source of truth. Use when creating, migrating, auditing, or debugging Content Blocks config.yaml files, make:content-block output, content elements, record types, page types, file types, collections, IRRE, labels, previews, or friendsoftypo3/content-blocks behavior.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-content-blocks/SKILL.md",
     "line_count": 277,
     "frontmatter_keys": [
       "name",
@@ -1632,7 +1632,7 @@
     "description": "Use when analyzing TYPO3 Forge issues, submitting patches to Gerrit, contributing core bug fixes, documentation contributions, cherry-pick workflows, or CI debugging on Gerrit. Core `main` branch is v15-in-progress (PHP 8.4/8.5); v14.3 LTS bugfixes land on branch `14.3` and are backported via cherry-pick. Also triggers on: forge.typo3.org, core patch, Gerrit review, TYPO3 Core contribution.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-core-contributions-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-core-contributions/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-core-contributions/SKILL.md",
     "line_count": 98,
     "frontmatter_keys": [
       "name",
@@ -1648,7 +1648,7 @@
     "description": "Guides transactional TYPO3 record manipulation with DataHandler, including datamaps, cmdmaps, backend user context, reference index handling, workspace-aware operations, hooks, and PSR-14 events. Use when creating, updating, moving, localizing, deleting, or extending TYPO3 records, pages, content, categories, IRRE children, or backend data operations.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
     "line_count": 326,
     "frontmatter_keys": [
       "name",
@@ -1667,8 +1667,8 @@
     "description": "Use when providing DDEV URLs, accessing TYPO3 backend in browser, performing any ddev command (e.g. start, stop, restart, describe, exec), setting up DDEV for TYPO3 extension development, or testing across multiple TYPO3 versions. Triggers on: ddev URLs, backend URLs, local development, docker environment, PHP version management, multi-version testing.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-ddev-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-ddev/SKILL.md",
-    "line_count": 109,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-ddev/SKILL.md",
+    "line_count": 111,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1683,7 +1683,7 @@
     "description": "Use when creating, editing, or reviewing TYPO3 extension documentation (Documentation/*.rst, guides.xml, README.md, XLF translations), rendering docs with Docker, using TYPO3 RST directives, adding screenshots, deploying to docs.typo3.org, improve docs, fix documentation, or XLIFF 2-space indentation (TYPO3 v14+).",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-docs-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-docs/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-docs/SKILL.md",
     "line_count": 97,
     "frontmatter_keys": [
       "name",
@@ -1699,7 +1699,7 @@
     "description": "Use when upgrading TYPO3 extensions to newer LTS versions (v11->v12, v12->v13, v13->v14 - v14.3 LTS is the current target), running Extension Scanner, Rector, Fractor, PHPStan, fixing deprecated APIs, or resolving compatibility issues. Also triggers on: migration, version upgrade, deprecated API, dual-version compatibility, Fluid 5 strict VHs, HashService removal, ext_tables.php split.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-extension-upgrade-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
     "line_count": 93,
     "frontmatter_keys": [
       "name",
@@ -1715,7 +1715,7 @@
     "description": "Automates non-PHP TYPO3 upgrade migrations with Fractor for FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when running or configuring Fractor, upgrading non-PHP TYPO3 files, migrating FlexForms or TypoScript, modernizing Fluid templates, or combining Rector and Fractor for v14 work.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-fractor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-fractor/SKILL.md",
     "line_count": 280,
     "frontmatter_keys": [
       "name",
@@ -1734,7 +1734,7 @@
     "description": "Designs and migrates TYPO3 extension icons to the v14 line-art style, including source SVG cleanup, light/dark behavior, IconRegistry naming, backend module icons, and verification. Use when the user asks for TYPO3 v14 icons, backend module icon migration, extension icon modernization, SVG icon rules, or icon registration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-icon14/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-icon14/SKILL.md",
     "line_count": 212,
     "frontmatter_keys": [
       "name",
@@ -1753,7 +1753,7 @@
     "description": "Evaluates external ideas for TYPO3 extension potential, builds the extension, and drafts the companion German webconsulting.at MDX article. Use when the user shares a link, product, article, paper, or concept and asks whether it can become a TYPO3 extension, wants a GitHub-ready implementation, or needs a publication-ready TYPO3 blog post.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
     "line_count": 244,
     "frontmatter_keys": [
       "name",
@@ -1772,7 +1772,7 @@
     "description": "Prepare, verify, review, tag, and document the first official release of a TYPO3 14.3+ extension. Use when the user asks for an initial release, version 1.0.0, release readiness, final release review, TER/Packagist/GitHub release preparation, release tagging, PHP/TYPO3 CI matrix hardening, composer.json release metadata, or pre-release checks for a TYPO3 14.3+ extension.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-initial-release/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-initial-release/SKILL.md",
     "line_count": 375,
     "frontmatter_keys": [
       "name",
@@ -1790,7 +1790,7 @@
     "description": "Bulk-generates thematic tags for georgringer/news (EXT:news) and assigns them to existing news records via keyword matching. Use when tagging large news corpora, defining a generic tag catalogue, building a Symfony console command for tag assignment, working with tx_news_domain_model_tag / tx_news_domain_model_news_tag_mm, or installing b13/tag as a generic site-wide tagging capability alongside news tags.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-news-tags/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-news-tags/SKILL.md",
     "line_count": 360,
     "frontmatter_keys": [
       "name",
@@ -1809,7 +1809,7 @@
     "description": "Guides Powermail 13+ form development for TYPO3, including form setup, finishers, validators, spam protection, ViewHelpers, PSR-14 events, TypoScript, email templates, conditional visibility, and extension points. Use when creating, debugging, or extending powermail forms, mail handling, validation, finishers, powermail_cond behavior, or tx_powermail data.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-powermail/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-powermail/SKILL.md",
     "line_count": 262,
     "frontmatter_keys": [
       "name",
@@ -1827,7 +1827,7 @@
     "description": "Configures TYPO3 v14 Records module list types and custom backend views, including grid, compact, teaser, kanban-style, timeline-style, TSconfig, Fluid templates, icons, and accessibility. Use when the user mentions records list types, backend record cards, custom Records module views, grid view, compact view, teaser view, or TSconfig-driven record presentation.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-records-list-types/SKILL.md",
     "line_count": 330,
     "frontmatter_keys": [
       "name",
@@ -1845,7 +1845,7 @@
     "description": "Applies TYPO3 Rector upgrade patterns for PHP migrations toward TYPO3 v14, including Rector configuration, dry runs, rule sets, ViewFactory, Extbase responses, PSR-14 events, backend modules, TCA, and manual follow-up checks. Use when running Rector, fixing deprecations, upgrading TYPO3 PHP code, or preparing extensions for v14.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-rector/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-rector/SKILL.md",
     "line_count": 345,
     "frontmatter_keys": [
       "name",
@@ -1864,7 +1864,7 @@
     "description": "Hardens TYPO3 v14 installations and extensions with secure configuration, trusted hosts, file permissions, Install Tool protection, backend user security, MFA, CSP, QueryBuilder usage, XSS defenses, and CSRF checks. Use when the user asks about TYPO3 security, hardening, permissions, authentication, CSP, SQL injection, XSS, CSRF, or go-live security readiness.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-security/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-security/SKILL.md",
     "line_count": 474,
     "frontmatter_keys": [
       "name",
@@ -1883,7 +1883,7 @@
     "description": "Configures TYPO3 SEO for EXT:seo, metadata, hreflang, XML sitemaps, robots.txt, canonical URLs, structured data, Core Web Vitals, SEO extensions, and monitoring. Use when working on TYPO3 SEO, sitemap setup, meta tags, robots rules, Open Graph, schema.org, canonical URLs, hreflang, or search visibility.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-seo/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-seo/SKILL.md",
     "line_count": 312,
     "frontmatter_keys": [
       "name",
@@ -1902,7 +1902,7 @@
     "description": "Produces, audits, and overhauls TYPO3 Content Blocks content elements styled with shadcn/ui presets, semantic tokens, Fluid atoms, backend previews, icons, and seed data. Use when the user asks to create, restyle, review, seed, iconize, or preview TYPO3 Content Blocks with shadcn/ui, Tailwind v4 tokens, no-hardcoded-style rules, or local registry presets.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-shadcn-content-elements/SKILL.md",
     "line_count": 204,
     "frontmatter_keys": [
       "name",
@@ -1921,7 +1921,7 @@
     "description": "Simplify and refine TYPO3 extension code for clarity, consistency, and maintainability while preserving functionality. Reviews PHP classes, Fluid templates, TCA, Services.yaml, and ext_localconf/ext_tables for TYPO3 v14 best practices. Run after implementing a feature or before merging a PR. Use when working with simplify, clean up, refine, code quality, reduce complexity, readability, maintainability, review code, polish, TYPO3 code review.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/claude-plugins-official/tree/main/plugins/code-simplifier",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-simplify/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-simplify/SKILL.md",
     "line_count": 251,
     "frontmatter_keys": [
       "name",
@@ -1940,7 +1940,7 @@
     "description": "Configures and debugs Apache Solr search for TYPO3, including EXT:solr, configsets, indexing queues, Tika/file indexing, facets, suggest, routing, PSR-14 events, custom indexers, vector search, and frontend search UI. Use when the user mentions Solr, EXT:solr, indexing, facets, autocomplete, suggest, Tika, solrfal, search debugging, or vector search in TYPO3.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-solr/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-solr/SKILL.md",
     "line_count": 333,
     "frontmatter_keys": [
       "name",
@@ -1959,8 +1959,8 @@
     "description": "Use when setting up TYPO3 extension test infrastructure, writing unit/functional/E2E tests, configuring PHPUnit 11/12/13, mutation testing, mocking final classes (v14), CI/CD matrix across TYPO3 12/13/14.3 LTS, dev-dependency consolidation via typo3-ci-workflows meta-package, or debugging CI failures. Also triggers on: testing-framework setup, ensure proper testing, test matrix, integration testing, e2e testing, coverage, test generation.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-testing-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-testing/SKILL.md",
-    "line_count": 105,
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-testing/SKILL.md",
+    "line_count": 106,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1975,7 +1975,7 @@
     "description": "Guides TYPO3 13/14 localization with locallang.xlf, labels.xlf, XLIFF 1.2 and 2.0, ICU MessageFormat, LLL references, translation domains, Content Blocks labels, paths, namespaces, and migration checks. Use when the user mentions TYPO3 translations, localization, labels, XLIFF, ICU, LLL, missing keys, duplicate units, or v13-to-v14 translation migration.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-translations/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-translations/SKILL.md",
     "line_count": 350,
     "frontmatter_keys": [
       "name",
@@ -1994,7 +1994,7 @@
     "description": "Guides TYPO3 v14 extension development and upgrades, including version constraints, PHP requirements, controllers, ViewFactory, Fluid, events, backend modules, TCA, QueryBuilder, CLI commands, tests, and v14-only manual changes. Use when the user asks about TYPO3 v14, upgrades, migrations, extension modernization, LTS constraints, or current Core APIs.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-update/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-update/SKILL.md",
     "line_count": 332,
     "frontmatter_keys": [
       "name",
@@ -2013,7 +2013,7 @@
     "description": "Installs, configures, removes, and migrates TYPO3 sitepackages for FriendsOfTYPO3 Visual Editor, including inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, record transformation, PAGEVIEW content areas, colPos migration, and template readiness. Use when the user mentions Visual Editor, inline editing, frontend editing, content areas, Fluid template migration, or visual editing readiness in TYPO3 13/14.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-visual-editor/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-visual-editor/SKILL.md",
     "line_count": 363,
     "frontmatter_keys": [
       "name",
@@ -2031,7 +2031,7 @@
     "description": "Use when configuring Vite 7 for TYPO3 v13/v14 LTS projects, setting up SCSS architecture with Bootstrap 5.3 theming, creating entrypoints per content element, optimizing SVGs, configuring PostCSS (autoprefixer, cssnano), loading local fonts, or customizing Bootstrap variables. v14 removed core asset concat/compression (#108055) \\u2014 external build tool is now mandatory. Also triggers for: vite-asset-collector, asset hashing, Gzip/Brotli compression, SCSS import chain, selective Bootstrap imports, CSP compliance, post-v14 frontend build pipelines.",
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-vite-skill",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-vite/SKILL.md",
     "line_count": 61,
     "frontmatter_keys": [
       "name",
@@ -2047,7 +2047,7 @@
     "description": "Guides TYPO3 Workspaces versioning, staging, publishing, overlays, workspace-aware queries, file limitations, permissions, frontend preview, diagnostics, repair, and tests. Use when the user works with TYPO3 workspaces, draft content, staged publishing, versioning, workspace overlays, review workflows, file collections, or workspace-specific bugs.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/typo3-workspaces/SKILL.md",
     "line_count": 343,
     "frontmatter_keys": [
       "name",
@@ -2066,7 +2066,7 @@
     "description": "Provides practical UI design patterns for hierarchy, spacing, typography, color, depth, imagery, UI copy, forms, navigation, tables, empty states, loading states, accessibility, and responsive behavior. Use when designing, reviewing, polishing, or refactoring web interfaces, layouts, components, dashboards, forms, or visual systems.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/ui-design-patterns/SKILL.md",
     "line_count": 293,
     "frontmatter_keys": [
       "name",
@@ -2084,7 +2084,7 @@
     "description": "When the user wants to create, generate, or produce video content using AI tools or programmatic frameworks. Also use when the user mentions 'video production,' 'AI video,' 'Remotion,' 'Hyperframes,' 'HeyGen,' 'Synthesia,' 'Veo,' 'Sora,' 'Runway,' 'Kling,' 'Seedance,' 'Hailuo,' 'MiniMax,' 'Pika,' 'Hunyuan,' 'Wan,' 'video generation,' 'AI avatar,' 'talking head video,' 'programmatic video,' 'video template,' 'explainer video,' 'product demo video,' 'video pipeline,' or 'make me a video.' Use this for video creation, generation, and production workflows. For video content strategy and what to post, see social. For paid video ad creative, see ad-creative.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/video/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/video/SKILL.md",
     "line_count": 355,
     "frontmatter_keys": [
       "name",
@@ -2100,7 +2100,7 @@
     "description": "Apple Human Interface Guidelines for Apple Vision Pro. Use when building spatial computing apps, implementing eye/hand input, or designing immersive experiences. Triggers on tasks involving visionOS, RealityKit, spatial UI, or mixed reality.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/visionos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/visionos-design/SKILL.md",
     "line_count": 384,
     "frontmatter_keys": [
       "name",
@@ -2116,7 +2116,7 @@
     "description": "Apple Human Interface Guidelines for Apple Watch. Use when building watchOS apps, complications, or workout features. Triggers on tasks involving Watch UI, Digital Crown, glanceable interfaces, or wrist-based interactions.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/watchos-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/watchos-design/SKILL.md",
     "line_count": 376,
     "frontmatter_keys": [
       "name",
@@ -2132,7 +2132,7 @@
     "description": "Review UI code for Web Interface Guidelines compliance. Use when asked to \\\"review my UI\\\", \\\"check accessibility\\\", \\\"audit design\\\", \\\"review UX\\\", or \\\"check my site against best practices\\\".",
     "source_owner": "Vercel",
     "source_url": "https://github.com/vercel-labs/agent-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-design-guidelines/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/web-design-guidelines/SKILL.md",
     "line_count": 48,
     "frontmatter_keys": [
       "name",
@@ -2148,7 +2148,7 @@
     "description": "Web platform design and accessibility guidelines. Use when building web interfaces, auditing accessibility, implementing responsive layouts, or reviewing web UI code. Triggers on tasks involving HTML, CSS, web components, WCAG compliance, responsive design, or web performance.",
     "source_owner": "ehmo",
     "source_url": "https://github.com/ehmo/platform-design-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/web-platform-design/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/web-platform-design/SKILL.md",
     "line_count": 1463,
     "frontmatter_keys": [
       "name",
@@ -2166,7 +2166,7 @@
     "description": "Applies the webconsulting.at brand system, including voice, colors, typography, MDX components, Mermaid theming, accessibility, responsive breakpoints, spacing, buttons, dark mode, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, MDX content, frontend components, TYPO3 templates, brand tokens, or visual consistency.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
     "line_count": 310,
     "frontmatter_keys": [
       "name",
@@ -2185,7 +2185,7 @@
     "description": "Creates product documentation systems with help pages, AI-generated screenshots, Remotion product tours, GSAP animation, narration scripts, TTS, background music, README visuals, and deployment steps. Use when the user asks for product docs, help pages, documentation videos, narrated tours, screenshots, README media, Remotion docs workflows, or webconsulting-style documentation assets.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/webconsulting-create-documentation/SKILL.md",
     "line_count": 281,
     "frontmatter_keys": [
       "name",
@@ -2203,7 +2203,7 @@
     "description": "Capture a website and create a HyperFrames video from it. Use when: (1) a user provides a URL and wants a video, (2) someone says \\\"capture this site\\\", \\\"turn this into a video\\\", \\\"make a promo from my site\\\", (3) the user wants a social ad, product tour, or any video based on an existing website, (4) the user shares a link and asks for any kind of video content. Even if the user just pastes a URL \\u2014 this is the skill to use.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/website-to-hyperframes/SKILL.md",
     "line_count": 154,
     "frontmatter_keys": [
       "name",
@@ -2219,7 +2219,7 @@
     "description": "Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/write-a-skill/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/write-a-skill/SKILL.md",
     "line_count": 132,
     "frontmatter_keys": [
       "name",
@@ -2235,7 +2235,7 @@
     "description": "Tell the agent to zoom out and give broader context or a higher-level perspective. Use when you're unfamiliar with a section of code or need to understand how it fits into the bigger picture.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
-    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/zoom-out/SKILL.md",
+    "file_path": "/home/runner/work/webconsulting-skills/webconsulting-skills/skills/zoom-out/SKILL.md",
     "line_count": 21,
     "frontmatter_keys": [
       "name",

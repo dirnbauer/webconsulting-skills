@@ -546,3 +546,4 @@ Breaking #108054 requires explicit allow-listing via `$GLOBALS['TYPO3_CONF_VARS'
 **Audit:** if the project has an active CSP policy, verify migration from nonce-based allow-lists to hash-based.
 
 ---
+

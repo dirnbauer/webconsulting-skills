@@ -260,3 +260,81 @@ Solutions:
 See: references/index-page-generation.md for complete branding guide
 ```
 
+**13. Backend 500 over HTTPS but 200 over HTTP (trusted hosts)**
+```
+❌ The TYPO3 backend returns HTTP 500 only over https://, while http:// works.
+   Exception #1396795884: "The current host header value does not match the
+   configured trusted hosts pattern!"
+
+Cause: trustedHostsPattern is unset or too narrow. Behind the DDEV router an
+   https:// request reaches TYPO3 with a host header (e.g. v14.<project>.ddev.site)
+   that TYPO3's default SERVER_NAME check rejects — http:// happens to pass.
+
+Fix: the install-v{12,13,14} templates already write a permissive default
+   ($GLOBALS['TYPO3_CONF_VARS']['SYS']['trustedHostsPattern'] = '.*') into
+   config/system/additional.php — verify it landed if you customised them.
+   Narrow it to '.*\.ddev\.site' if you prefer a stricter pattern, then flush
+   caches from the version's docroot (vendor/bin/typo3 lives there, not in
+   /var/www/html):
+
+   ddev exec -d /var/www/html/vXX vendor/bin/typo3 cache:flush
+```
+
+**14. Writing a multi-line file into the container**
+```
+❌ ddev exec "cat > /path/file <<'EOF' ... EOF"  fails with a shell syntax error.
+
+Cause: the nested heredoc is swallowed by the outer double-quotes of
+   ddev exec "...".
+
+Fix: pipe the host file through base64 into ddev exec's stdin. This is portable
+   across GNU and BSD/macOS hosts (no GNU-only `base64 -w0`) and avoids
+   word-splitting (no intermediate variable):
+
+   base64 < local-file | ddev exec "base64 -d > /var/www/html/path/file"
+```
+
+
+## Setup gotchas (from live extension verification)
+
+### `ddev start` panics: "assignment to entry in nil map"
+
+A Go panic in DDEV's remote-config state manager (`pkg/config/state/state_manager.go`) on `ddev start`
+means the global state file is empty/corrupt — common after a DDEV version bump (when
+`~/.ddev/global_config.yaml` `last_started_version` differs from the running binary). Fix by
+initialising it to an empty map:
+
+```bash
+cp ~/.ddev/.state.yaml ~/.ddev/.state.yaml.bak 2>/dev/null || true  # back up first, in case the diagnosis is wrong
+echo '{}' > ~/.ddev/.state.yaml
+ddev start
+```
+
+DDEV repopulates the file on the next successful start.
+
+### `typo3 setup --no-interaction` fails: "The value must not be empty."
+
+With `--no-interaction`, the documented DB defaults (`--host=db`, `--dbname=db`, `--username=db`) are
+NOT auto-applied — pass them ALL explicitly, including `--password`:
+
+```bash
+ddev exec -d /var/www/html/v{VERSION} vendor/bin/typo3 setup --driver=mysqli --host=db --port=3306 --dbname=db \
+  --username=db --password=db --admin-username=admin --admin-user-password='Joh316!!' \
+  --admin-email=admin@example.com --project-name='My Project' \
+  --create-site='https://my-ext.ddev.site/' --server-type=other --no-interaction --force
+```
+
+`--create-site` is optional; v13 and v14 share the same `setup` command.
+
+### `ddev composer require <vendor>/<pkg>:dev-main` fails to clone (SSH auth)
+
+Requiring a dev branch makes Composer prefer the *source* (git clone), which fails inside the web
+container without SSH auth — even for public repos. Force the dist (zip) install:
+
+```bash
+# Target the version's docroot; --prefer-dist alone usually suffices.
+ddev exec -d /var/www/html/v{VERSION} composer require <vendor>/<pkg>:dev-main --prefer-dist -W
+# If Composer still clones source, set it persistently (writes to that composer.json):
+# ddev exec -d /var/www/html/v{VERSION} composer config preferred-install dist
+# alternative: `ddev auth ssh` to forward your host SSH agent into the container
+```

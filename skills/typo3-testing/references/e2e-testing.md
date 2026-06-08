@@ -585,6 +585,42 @@ await page.click('[data-testid="add-to-cart"]');
 await page.click('#product-add-button');
 ```
 
+**Backend module DOM lives in an iframe — `page.locator` can't see it**
+
+TYPO3 backend modules render inside a content iframe (`#typo3-contentIframe`;
+the frame URL carries a `?token=...`). `page.locator()`, `page.getByText()` and
+`page.content()` operate on the **outer shell only** — they do *not* pierce the
+iframe. Asserting on module DOM from the page level **silently returns 0 / not
+found**, even when the element renders perfectly. This is an easy trap: a green
+shell + a failing module assertion reads like a product bug when it is only a
+wrong-frame test.
+
+```typescript
+// Wrong - matches 0 elements in the outer shell, so this just times out
+await expect(page.locator('#my-panel')).toBeVisible();
+
+// Right - enter the module iframe first (see BackendPage.contentFrame above)
+const frame = page.frameLocator('#typo3-contentIframe');
+await expect(frame.locator('#my-panel')).toBeVisible();
+```
+
+Before concluding "the module doesn't render," dump `page.frames()` — you'll see
+the shell plus the `?token=` module frame. Assert inside the latter.
+
+**Fields in a non-active settings tab are attached, not visible**
+
+In tabbed backend forms (e.g. the User Settings / Setup module), every tab pane
+is rendered into the DOM but inactive panes are hidden via CSS. A field in a
+non-default tab is therefore **attached but not visible**. Use `toBeAttached()`
+to assert "the field rendered" without driving the (fragile) tab UI; reserve
+`toBeVisible()` for when the field's tab is actually active.
+
+```typescript
+const frame = page.frameLocator('#typo3-contentIframe');
+// Robust: proves the field rendered regardless of which tab is active
+await expect(frame.locator('#my-field')).toBeAttached();
+```
+
 ## E2E Testing for AJAX Endpoints
 
 Backend modules often use AJAX routes for dynamic functionality. Test these endpoints thoroughly:
