@@ -38,7 +38,7 @@ EXT:news ships **two relations** for news classification:
 | Relation | Table | Purpose | Routing |
 |---|---|---|---|
 | Categories | `sys_category` ← `sys_category_record_mm` | Primary hierarchical taxonomy | Optional |
-| Tags | `tx_news_domain_model_tag` ← `tx_news_domain_model_news_tag_mm` | Flat, slug-routable thematic crosscuts | `PersistedAliasMapper` in site config |
+| Tags | `tx_news_domain_model_tag` ← `tx_news_domain_model_news_tag_mm` | Flat, slug-routable thematic crosscuts | `NewsTag` aspect in site config |
 
 **Categories** answer "what bucket is this in?" — typically a few per news, hierarchical, often
 locale-aware. **Tags** answer "what themes does this touch?" — typically 5–10 per news, flat,
@@ -62,9 +62,9 @@ ddev mysql -e "SELECT COUNT(*) FROM tx_news_domain_model_tag WHERE deleted=0;"
 ddev mysql -e "SELECT COUNT(*) FROM tx_news_domain_model_news_tag_mm;"
 ```
 
-Identify where the readable text actually lives. With `georgringer/news-content-elements`
-or `mask` based content, **`tx_news_domain_model_news.bodytext` is often empty** — the real
-content sits in `tt_content` rows linked via `tx_news_related_news`. Verify:
+Identify where the readable text actually lives. With EXT:news's built-in `contentElementRelation`
+extension configuration or `mask` based content, **`tx_news_domain_model_news.bodytext` is often
+empty** — the real content sits in `tt_content` rows linked via `tx_news_related_news`. Verify:
 
 ```sql
 SELECT AVG(LENGTH(bodytext)) FROM tx_news_domain_model_news WHERE pid=<PID> AND deleted=0;
@@ -143,12 +143,12 @@ routeEnhancers:
           tag-name: overwriteDemand/tags
     aspects:
       tag-name:
-        type: PersistedAliasMapper
-        tableName: tx_news_domain_model_tag
-        routeFieldName: slug
+        type: NewsTag
 ```
 
-If not present, add it before publishing tag URLs.
+If not present, add it before publishing tag URLs. The `NewsTag` aspect type ships with
+EXT:news and is the documented best practice; a plain `PersistedAliasMapper` with
+`tableName: tx_news_domain_model_tag` and `routeFieldName: slug` is a legacy alternative.
 
 ### 4. Build a Symfony Console command
 
@@ -236,8 +236,9 @@ WHERE n.pid=<PID> AND n.deleted=0
 GROUP BY n.uid ORDER BY n.datetime DESC LIMIT 10;
 ```
 
-Backend visual check: open News module → pick a recent news → "Categories & tags" tab shows
-the assigned tags. Frontend route check: visit `https://<site>/<tag-slug>/`.
+Backend visual check: open News module → pick a recent news → the "Relations" tab shows the
+assigned tags (categories sit in the separate "Categories" tab). Frontend route check: visit
+`https://<site>/<tag-slug>/`.
 
 ## Adding b13/tag (optional generic capability)
 
@@ -343,7 +344,7 @@ repeated 50 times should not outweigh four different keywords matching once each
 | Newest news (large UID) have 0 tags despite obvious keywords | DBAL `createNamedParameter(PARAM_INT)` truncation | Switch the affected query to raw SQL, see §8 |
 | Tags exist but slugs are NULL | Created via direct INSERT instead of DataHandler | Use DataHandler with `process_datamap` so TCA slug eval fires |
 | `tx_news_domain_model_news.tags` counter is wrong | Counter not updated after MM writes | Run an `UPDATE news SET tags = (SELECT COUNT(*) FROM mm WHERE mm.uid_local = news.uid)` once, then ensure command writes it |
-| Frontend `/<tag-slug>/` 404s | Route enhancer missing in site config | Add the `News` route with `PersistedAliasMapper` (§3) and flush caches |
+| Frontend `/<tag-slug>/` 404s | Route enhancer missing in site config | Add the `News` route with the `NewsTag` aspect (§3) and flush caches |
 | Identical tag created twice on re-run | Lookup-before-insert missing | `SELECT uid FROM tag WHERE slug = ?` before each DataHandler `NEW_x`; reuse UID if found |
 
 ## Acceptance checklist
