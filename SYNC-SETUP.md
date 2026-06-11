@@ -3,7 +3,7 @@
 This repository uses one canonical skill layout:
 
 - each skill lives once at `skills/<slug>/SKILL.md`
-- optional `agents/`, `reference/`, `references/`, `examples/`, `scripts/`, and `assets/` live next to that skill
+- optional `agents/`, `assets/`, `evals/`, `examples/`, `reference/`, `references/`, `rules/`, `scripts/`, and `templates/` folders live next to that skill
 - `SKILL.md` is the entry point; long examples, templates, troubleshooting, and appendices should be linked from `references/` instead of kept in the main file
 - upstream-managed skills are declared once in `.sync-config.json`
 - `./install.sh` and `./update.sh` fan skills out to the five core clients and the generic project `.agents/skills/` path automatically
@@ -159,7 +159,7 @@ Configuration fields:
 | `note` | No | Human-readable maintenance note |
 
 For skill-mode imports, the updater copies `SKILL.md` plus any `agents/`, `assets/`,
-`examples/`, `reference/`, `references/`, `rules/`, and `scripts/` folders.
+`evals/`, `examples/`, `reference/`, `references/`, `rules/`, `scripts/`, and `templates/` folders.
 Do not keep local-only reference files inside an upstream-managed skill's synced
 subfolders; put local overlays in a repo-owned skill so the next sync does not remove them.
 
