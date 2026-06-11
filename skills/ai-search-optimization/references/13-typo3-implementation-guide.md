@@ -135,30 +135,36 @@ routes:
       User-agent: Bingbot
       Allow: /
       
-      # OpenAI (ChatGPT)
+      # OpenAI - model training
       User-agent: GPTBot
       Allow: /
       
-      User-agent: ChatGPT-User
+      # OpenAI - ChatGPT Search index
+      User-agent: OAI-SearchBot
       Allow: /
       
-      # Perplexity AI
+      # Perplexity AI - search index
       User-agent: PerplexityBot
       Allow: /
       
-      # Anthropic (Claude)
+      # Anthropic (Claude) - model training
       User-agent: ClaudeBot
       Allow: /
       
-      User-agent: anthropic-ai
+      # Anthropic (Claude) - search indexing
+      User-agent: Claude-SearchBot
       Allow: /
       
-      # Google AI (Gemini)
+      # Google AI (Gemini training/grounding)
       User-agent: Google-Extended
       Allow: /
       
-      # Meta AI
-      User-agent: FacebookBot
+      # Meta AI training
+      User-agent: Meta-ExternalAgent
+      Allow: /
+      
+      # Apple (Siri, Spotlight, Apple Intelligence)
+      User-agent: Applebot
       Allow: /
       
       # Common Crawl (used by many AI systems)

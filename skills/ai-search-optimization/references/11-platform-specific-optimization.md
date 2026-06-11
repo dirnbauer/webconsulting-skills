@@ -6,7 +6,7 @@ Continues `ai-search-optimization` from [full guide](full-guide.md).
 
 ### Google AI Overviews
 
-- Pages with schema are up to 40% more likely to appear in AI Overviews
+- Structured data helps machines parse your content, but Google documents no AI Overviews inclusion boost from schema
 - Focus on featured snippet optimization (still relevant)
 - Emphasize E-E-A-T signals
 - Target informational and comparison queries
@@ -20,7 +20,7 @@ Continues `ai-search-optimization` from [full guide](full-guide.md).
 
 ### ChatGPT Search
 
-- Web browsing uses GPTBot and ChatGPT-User
+- Search indexing uses OAI-SearchBot (allow it to appear in ChatGPT Search); ChatGPT-User handles user-initiated visits, GPTBot is training-only
 - Emphasizes recent, authoritative content
 - Good at following citations and references
 - Benefits from clear, structured content

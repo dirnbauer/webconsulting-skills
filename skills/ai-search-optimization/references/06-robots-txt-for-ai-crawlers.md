@@ -18,37 +18,43 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-# OpenAI (ChatGPT)
+# OpenAI - model training
 User-agent: GPTBot
 Allow: /
 
-User-agent: ChatGPT-User
+# OpenAI - ChatGPT Search index (controls visibility in ChatGPT Search)
+User-agent: OAI-SearchBot
 Allow: /
 
-# Perplexity AI
+# Perplexity AI - search index
 User-agent: PerplexityBot
 Allow: /
 
-# Anthropic (Claude)
+# Anthropic (Claude) - model training
 User-agent: ClaudeBot
 Allow: /
-User-agent: anthropic-ai
+
+# Anthropic (Claude) - search indexing
+User-agent: Claude-SearchBot
 Allow: /
 
-# Google AI (Gemini)
+# Google AI (Gemini training/grounding)
 User-agent: Google-Extended
 Allow: /
 
-# Meta AI
-User-agent: FacebookBot
+# Meta AI training
+User-agent: Meta-ExternalAgent
 Allow: /
 
 # Common Crawl (used by many AI systems)
 User-agent: CCBot
 Allow: /
 
-# Microsoft/Bing AI
+# Apple (Siri, Spotlight, Apple Intelligence)
 User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 # Default rule
@@ -69,13 +75,14 @@ Some organizations want to be **cited in AI search results** but don't want thei
 
 | Bot | What it does | Block = |
 |-----|--------------|---------|
-| `GPTBot` | Crawls for **training** OpenAI models | Your content won't train future GPT versions |
-| `ChatGPT-User` | **Live browsing** when users search | ChatGPT can't cite you in real-time answers |
-| `Google-Extended` | Crawls for **training** Gemini AI | Your content won't train Gemini |
-| `PerplexityBot` | **Live search** for Perplexity answers | Perplexity can't cite you |
+| `GPTBot` | Crawls for **training** OpenAI models (training only) | Your content won't train future GPT versions |
+| `OAI-SearchBot` | Indexes content for **ChatGPT Search** | You won't appear or be cited in ChatGPT Search results |
+| `ChatGPT-User` | **User-initiated** page fetches (not bound by robots.txt) | No reliable effect - it fetches on direct user request |
+| `Google-Extended` | Crawls for **training/grounding** Gemini AI | Your content won't train Gemini (Search inclusion and ranking are unaffected) |
+| `PerplexityBot` | Builds Perplexity's **search index** (not used for model training) | You're removed from Perplexity's search index - but `Perplexity-User` can still fetch pages on user request |
 | `CCBot` | Common Crawl - open **training datasets** | Your content won't be in public AI training data |
 
-**Example: Block training, allow live search citations:**
+**Example: Block training, allow AI search citations:**
 
 ```text
 # BLOCK: AI model training (your content won't train future AI)
@@ -85,16 +92,26 @@ Disallow: /
 User-agent: Google-Extended
 Disallow: /
 
+User-agent: Meta-ExternalAgent
+Disallow: /
+
 User-agent: CCBot
 Disallow: /
 
-# ALLOW: Real-time AI search (AI can cite you in answers)
-User-agent: ChatGPT-User
+# ALLOW: AI search indexing (AI can cite you in answers)
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
 ```
+
+> User-initiated fetchers (`ChatGPT-User`, `Claude-User`, `Perplexity-User`, `Meta-ExternalFetcher`)
+> visit pages only when a user asks and are generally **not bound by robots.txt** -
+> robots.txt rules for them are informational at best.
 
 > **Note:** Most businesses focused on AI search visibility should **allow all bots** (Section 6 above).
 > Only use this approach if you have specific concerns about AI training on your content.
@@ -103,11 +120,17 @@ Allow: /
 
 | Bot Name | Company | Purpose |
 |----------|---------|---------|
-| GPTBot | OpenAI | Training data & ChatGPT browsing |
-| ChatGPT-User | OpenAI | ChatGPT web browsing |
-| PerplexityBot | Perplexity | Real-time search & citations |
-| ClaudeBot | Anthropic | Training & retrieval |
-| anthropic-ai | Anthropic | Claude AI training |
-| Google-Extended | Google | Gemini AI training |
-| FacebookBot | Meta | Meta AI training |
+| GPTBot | OpenAI | AI model training (training only) |
+| OAI-SearchBot | OpenAI | ChatGPT Search indexing & citations |
+| ChatGPT-User | OpenAI | User-initiated fetches (not bound by robots.txt) |
+| PerplexityBot | Perplexity | Search index (not used for model training) |
+| Perplexity-User | Perplexity | User-requested fetches (generally ignores robots.txt) |
+| ClaudeBot | Anthropic | AI model training |
+| Claude-SearchBot | Anthropic | Search indexing |
+| Claude-User | Anthropic | User-initiated fetches |
+| anthropic-ai / Claude-Web | Anthropic | Deprecated legacy tokens (superseded by the three above) |
+| Google-Extended | Google | Gemini training/grounding (does not affect Search inclusion or ranking) |
+| Meta-ExternalAgent | Meta | AI training |
+| Meta-ExternalFetcher | Meta | User-requested link fetches |
+| Applebot / Applebot-Extended | Apple | Siri, Spotlight & Apple Intelligence |
 | CCBot | Common Crawl | Open dataset for AI training |
