@@ -99,9 +99,8 @@ extension-name/
 │   ├── Services.yaml
 │   ├── RequestMiddlewares.php
 │   ├── TCA/Overrides/
-│   ├── Capabilities.yaml
 │   └── Sets/
-├── src/
+├── Classes/
 │   ├── Middleware/
 │   ├── Service/
 │   ├── Configuration/
@@ -109,9 +108,8 @@ extension-name/
 │   ├── Command/
 │   └── Domain/Model/
 ├── Resources/Private/Language/
-├── config/
 ├── ext_tables.sql
-├── tests/Unit/
+├── Tests/Unit/
 ├── phpunit.xml.dist
 └── phpstan.neon
 ```
@@ -126,7 +124,7 @@ extension-name/
 - Prefer Symfony DI in `Configuration/Services.yaml`.
 - Use PSR-15 for middleware and PSR-14 for events.
 - Avoid legacy patterns such as `$GLOBALS['TYPO3_DB']`, hard dependencies on `ext_emconf.php`, and old signal-slot patterns.
-- Always include `Configuration/Capabilities.yaml` and keep it honest.
+- Keep `composer.json` metadata honest (description, constraints, dependencies).
 - Add unit tests for value objects, configuration parsing, and core decision logic.
 
 #### Architecture Choices
@@ -230,7 +228,7 @@ Before delivering, verify:
 - `Services.yaml` wires the real services
 - at least 5 unit tests cover core logic
 - `README.md` explains install, config, usage, and architecture
-- `Capabilities.yaml` exists and is honest
+- `composer.json` metadata is honest
 - the blog post includes `Auf einen Blick`, honest assessment, `TechResourceCallout`, and `Timeline`
 - German copy uses gender-neutral colon format
 - no credentials remain on disk after push
