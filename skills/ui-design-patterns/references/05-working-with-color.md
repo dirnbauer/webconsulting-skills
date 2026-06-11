@@ -57,8 +57,8 @@ Saturate greys slightly for personality:
 
 | Text Type | Minimum Ratio |
 |-----------|---------------|
-| Body text (<18px) | 4.5:1 |
-| Large text (18px+ bold or 24px+) | 3:1 |
+| Body text (below large-text threshold) | 4.5:1 |
+| Large text (24px+/18pt regular or 18.66px+/14pt bold) | 3:1 |
 
 **Flip the contrast** when colored backgrounds make white text too dark—use dark colored text on light colored backgrounds instead.
 
@@ -78,9 +78,9 @@ Use traffic light colors with familiar meanings:
 
 Always pair with icons for color blind accessibility.
 
-### APCA: The Future of Contrast Measurement
+### APCA: A Modern Contrast Model
 
-WCAG 3 introduces the **Accessible Perceptual Contrast Algorithm (APCA)**—a more accurate contrast measurement:
+The **Accessible Perceptual Contrast Algorithm (APCA)** by Myndex is a non-normative, perceptually based contrast model. It was an exploratory candidate for WCAG 3 but was removed from the WCAG 3 Working Draft in July 2023; WCAG 3 remains a Working Draft and its contrast method is still undetermined:
 
 | APCA Value | Use For |
 |------------|---------|

@@ -89,8 +89,8 @@ Every interactive element needs clear state feedback:
 | Text contrast (small) | 4.5:1 minimum |
 | Text contrast (large) | 3:1 minimum |
 | UI component contrast | 3:1 minimum |
-| Focus indicators | Visible, 3:1 contrast |
-| Touch targets | 44×44px minimum |
+| Focus indicators | Visible (SC 2.4.7) |
+| Touch targets | 24×24px minimum (WCAG 2.2 SC 2.5.8); 44×44px is AAA/best practice |
 | Color independence | Never color alone |
 | Text resize | Works at 200% zoom |
 
