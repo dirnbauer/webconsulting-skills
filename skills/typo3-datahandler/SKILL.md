@@ -170,7 +170,7 @@ $cmd = [
 
 TYPO3's public DataHandler API for TYPO3 v14 is simply:
 
-1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** or **constructor DI** — avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
+1. Obtain a `DataHandler` via **`GeneralUtility::makeInstance(DataHandler::class)`** per use — DataHandler holds state and must **not** be injected via dependency injection constructors; also avoid `new DataHandler()` so Core wiring (hooks, collaborators) stays consistent.
 2. Call `start($dataMap, $commandMap[, $backendUser[, $referenceIndexUpdater]])` **before** any `process_*` call. The 4th parameter exists but is `@internal`; extension code should normally use only the first 2-3 arguments.
 3. Call `process_datamap()` and / or `process_cmdmap()`
 4. Inspect **`$dataHandler->errorLog`**, verify expected keys in **`$dataHandler->substNEWwithIDs`** for new records, and (in workspaces) review **`$dataHandler->autoVersionIdMap`** when you expect version rows.
@@ -306,7 +306,9 @@ Manual Reference Index updates are primarily relevant for:
 vendor/bin/typo3 referenceindex:update
 ```
 
-### Update a specific record manually (rare)
+### Update a specific record manually (discouraged)
+
+In v14 both `ReferenceIndex` and `updateRefIndexTable()` are `@internal` — extensions shouldn't fiddle with the reference index themselves. Prefer `vendor/bin/typo3 referenceindex:update` or let DataHandler maintain the index. If you still call the internal API, expect it to change without deprecation:
 
 ```php
 <?php
@@ -315,6 +317,7 @@ declare(strict_types=1);
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+// @internal API — discouraged; prefer referenceindex:update or DataHandler
 $referenceIndex = GeneralUtility::makeInstance(ReferenceIndex::class);
 $referenceIndex->updateRefIndexTable('tt_content', 123);
 ```
