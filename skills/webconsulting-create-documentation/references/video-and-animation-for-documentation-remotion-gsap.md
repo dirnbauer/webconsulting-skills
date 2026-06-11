@@ -8,26 +8,21 @@ When generating visual documentation, integrating **Remotion** with **GSAP** all
 
 ### Prerequisites
 
-GSAP must be installed alongside your existing Remotion setup. GSAP's core is free for all use cases; premium plugins require a paid license.
+GSAP must be installed alongside your existing Remotion setup. Since GSAP 3.13 (April 2025, after the Webflow acquisition) the entire library -- including all formerly-premium Club plugins like `SplitText` and `MorphSVGPlugin` -- is 100% free, commercial use included; the paid Club GSAP tiers were discontinued ([announcement](https://gsap.com/blog/3-13/)).
 
-**Install GSAP core:**
+**Install GSAP** (all plugins ship in the public `gsap` npm package):
 
 ```bash
 npm install gsap
 ```
 
-**Optional premium plugins** (require [GSAP Club](https://gsap.com/pricing/) license):
+Import plugins directly from the package, e.g. `import { SplitText } from "gsap/SplitText"`.
 
-```bash
-# Install from GSAP's private registry (requires auth token)
-npm install gsap@npm:@gsap/shockingly
-```
-
-Premium plugins used in this guide:
+Plugins used in this guide:
 - `MorphSVGPlugin` -- morph between SVG shapes (chart transitions)
 - `SplitText` -- split text into characters/words for kinetic typography
 - `Flip` -- animate layout changes (code diff walkthroughs)
-- `MotionPathPlugin` -- animate along SVG paths (included free since GSAP 3.x)
+- `MotionPathPlugin` -- animate along SVG paths
 
 **Register plugins** in your Remotion entry point (e.g., `src/Root.tsx` or the component file):
 

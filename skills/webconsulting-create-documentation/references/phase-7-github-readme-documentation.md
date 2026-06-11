@@ -125,25 +125,10 @@ Keep GIFs under 5MB. For larger animations, use MP4 with GitHub's video support.
 
 GitHub Markdown supports video since 2021. You have three options:
 
-**Option A: Upload to GitHub Release (recommended for open source)**
+**Option A: Drag-and-drop into GitHub Issue/PR (recommended)**
 
-```bash
-# Create a release and attach the video
-gh release create v1.0.0 public/help/product-tour.mp4 \
-  --title "v1.0.0" --notes "Initial release"
-```
-
-Then link in README:
-
-```markdown
-## Product Tour
-
-https://github.com/your-org/your-repo/releases/download/v1.0.0/product-tour.mp4
-```
-
-GitHub auto-embeds the video player when the URL is on its own line.
-
-**Option B: Drag-and-drop into GitHub Issue/PR**
+GitHub only auto-embeds a video player for videos uploaded via the web editor
+(drag-and-drop), which produce `user-attachments` URLs:
 
 1. Create a GitHub issue or PR
 2. Drag the MP4 into the comment editor
@@ -156,9 +141,29 @@ GitHub auto-embeds the video player when the URL is on its own line.
 https://github.com/user-attachments/assets/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 
+**Option B: Upload to GitHub Release (download link only)**
+
+Release-asset URLs do NOT auto-embed a video player in README -- they render
+as plain links. Use this only to offer the video as a download:
+
+```bash
+# Create a release and attach the video
+gh release create v1.0.0 public/help/product-tour.mp4 \
+  --title "v1.0.0" --notes "Initial release"
+```
+
+Then link in README:
+
+```markdown
+## Product Tour
+
+[Download the product tour (MP4)](https://github.com/your-org/your-repo/releases/download/v1.0.0/product-tour.mp4)
+```
+
 **Option C: External host (YouTube, Vimeo)**
 
-If the video is large (>25MB) or you want analytics, upload to YouTube/Vimeo
+If the video exceeds GitHub's attachment limit (10MB on free plans, 100MB on
+paid plans) or you want analytics, upload to YouTube/Vimeo
 and embed a thumbnail with a play button:
 
 ```markdown
@@ -183,7 +188,7 @@ Here's a recommended structure integrating all visual assets:
 
 ## Product Tour
 
-https://github.com/your-org/repo/releases/download/v1.0.0/product-tour.mp4
+https://github.com/user-attachments/assets/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 ## Features
 
