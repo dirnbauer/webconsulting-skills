@@ -136,8 +136,8 @@ fields:
     prefixField: true
     label: Pricing Plans
     labelField: name
-    minItems: 1
-    maxItems: 4
+    minitems: 1
+    maxitems: 4
     fields:
       - identifier: name
         type: Textarea
@@ -152,8 +152,8 @@ fields:
         table: pricing_plan_features
         label: Features
         labelField: text
-        minItems: 1
-        maxItems: 8
+        minitems: 1
+        maxitems: 8
         fields:
           - identifier: text
             type: Textarea
