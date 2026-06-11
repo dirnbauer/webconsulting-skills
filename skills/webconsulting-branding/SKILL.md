@@ -67,7 +67,7 @@ license: "MIT / CC-BY-SA-4.0"
 | Element | Font Family | Weight | Usage |
 |---------|-------------|--------|-------|
 | All Text | Hanken Grotesk | 400-700 | Body, headings, UI |
-| Display | Hanken Grotesk (wide) | 600, 700 | Hero titles, emphasis |
+| Display | Hanken Grotesk | 600, 700 | Hero titles, emphasis |
 | Code | System monospace | 400 | Code blocks, inline code |
 
 **Font Configuration** (Next.js):
@@ -87,7 +87,6 @@ const hankenGrotesk = Hanken_Grotesk({
 ```css
 --font-sans: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
 --font-display: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
---font-display--font-variation-settings: 'wdth' 125;
 ```
 
 ## 3. MDX Component Architecture
@@ -118,7 +117,7 @@ Use `ComparisonTable` for feature matrices. Supports boolean checkmarks:
   headers={['Feature', 'TYPO3 v14']}
   rows={[
     { label: 'Content Blocks 2.x', values: [true] },
-    { label: 'Symfony 7.2', values: [true] },
+    { label: 'Symfony 7.4', values: [true] },
     { label: 'PHP 8.2+', values: [true] }
   ]} 
 />
@@ -209,7 +208,7 @@ graph TD
 ### Contrast Requirements
 
 - Ensure **4.5:1** contrast ratio for all text
-- Large text (18px+ bold, 24px+ regular): **3:1** minimum
+- Large text (18.66px+ (14pt) bold, 24px+ (18pt) regular): **3:1** minimum
 
 ### Interactive Elements
 
