@@ -6,7 +6,7 @@ Continues `typo3-rector` from [full guide](full-guide.md).
 
 | Topic | TYPO3 v14 |
 |-------|-----------|
-| PHP | 8.2 minimum; 8.3/8.4 supported |
+| PHP | 8.2 minimum; 8.3/8.4/8.5 supported (8.2.0–8.5.99) |
 | PSR-14 events | Preferred over legacy hooks |
 | ViewFactory | Preferred over removed StandaloneView patterns |
 | Content Blocks | Current major aligned with v14 (see Packagist) |

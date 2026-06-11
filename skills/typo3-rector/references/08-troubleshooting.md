@@ -7,8 +7,9 @@ Continues `typo3-rector` from [full guide](full-guide.md).
 ### Rector Fails
 
 ```bash
-# Clear Rector cache
-rm -rf .rector_cache/
+# Clear Rector cache (default cache lives in sys_get_temp_dir()/rector_cached_files
+# unless cacheDirectory is configured in rector.php)
+vendor/bin/rector process --clear-cache
 
 # Run with verbose output
 ddev exec vendor/bin/rector process --dry-run -vvv
