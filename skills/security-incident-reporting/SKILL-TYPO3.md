@@ -406,7 +406,7 @@ TYPO3-CORE-SA-2026-004
 | Component | Affected TYPO3 component or extension |
 | Affected Versions | Version range with vulnerability |
 | Severity | Critical / High / Medium / Low |
-| Suggested CVSS | CVSS v3.1 vector and score |
+| Suggested CVSS | CVSS 4.0 vector and score (v3.1 accepted for legacy reports) |
 | Problem Description | Technical explanation |
 | Solution | Update instructions |
 | Credits | Reporters and contributors |
@@ -455,8 +455,8 @@ TYPO3-CORE-SA-2026-004
 
 ### TYPO3 Security
 
-- **Security Team**: https://typo3.org/community/teams/security
-- **Security Bulletins**: https://typo3.org/security/advisory
+- **Security Team**: https://typo3.community/contribute/teams-committees/security
+- **Security Bulletins**: https://typo3.org/security (individual advisories under /security/advisory/<id>)
 - **Security Guide**: https://docs.typo3.org/m/typo3/reference-coreapi/main/en-us/Security/
 - **Report Issues**: security@typo3.org (PGP encrypted)
 
