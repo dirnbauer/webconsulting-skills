@@ -174,7 +174,7 @@ Composer metadata rules:
 - `license` should be a TYPO3-compatible GPL expression for public TYPO3 extensions.
 - `require.php` should match tested support. Use `^8.2` for full TYPO3 v14 PHP support; raise it only if the code uses newer PHP features.
 - `require.typo3/cms-core` must be `^14.3` or a later TYPO3 14-only range. Do not use `^14.0`, `^14.1`, or `^14.2` for this release workflow.
-- Add direct TYPO3 system extension dependencies in `require`, for example `typo3/cms-backend`, `typo3/cms-extbase`, `typo3/cms-fluid`, or `typo3/cms-recordlist`, when the extension directly uses them.
+- Add direct TYPO3 system extension dependencies in `require`, for example `typo3/cms-backend`, `typo3/cms-extbase`, or `typo3/cms-fluid`, when the extension directly uses them.
 - `extra.typo3/cms.extension-key` is required and must match the extension key.
 - `extra.typo3/cms.version` must match the release tag for classic-mode installations, for example `1.0.0` for tag `v1.0.0`.
 - `extra.typo3/cms.Package.providesPackages` must exist for classic-mode compatibility, even when it is an empty object.
@@ -314,7 +314,7 @@ If those scripts do not exist, document the fallback checks that were actually r
 
 ### 7. Final Review Before Tagging
 
-Before creating or pushing a tag, perform a strict review against `origin/main`. If the OpenAI Superpowers `requesting-code-review` skill is available, use it to request an independent reviewer. If no subagent is available, do the same review yourself.
+Before creating or pushing a tag, perform a strict review against `origin/main`. If the `requesting-code-review` skill from the Superpowers skill framework (obra/superpowers by Jesse Vincent) is available, use it to request an independent reviewer. If no subagent is available, do the same review yourself.
 
 Use this reviewer brief:
 
