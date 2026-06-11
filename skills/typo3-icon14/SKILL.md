@@ -96,8 +96,8 @@ force a 64x64 module composition into a 16x16 record or action icon.
 - remove hardcoded white, black, gray, and legacy brand-color backgrounds
 - keep markup minimal: `xmlns` plus `viewBox` only unless a provider truly needs more
 - preserve the semantic shape from the existing icon whenever possible
-- for `module-*` and `Extension.svg`: prefer strong silhouettes, minimum 6-unit outline
-  width, and `.8` opacity for depth fills when needed
+- for `module-*` and `Extension.svg`: prefer strong silhouettes, a 4px stroke on the
+  64x64 canvas (renders 2px at 32x32), and `.4` opacity for depth fills when needed
 - for 16x16 icons: reduce details aggressively; two clear ideas beat five tiny ones
 
 See [references/design-notes.md](references/design-notes.md) for the visual rules and
@@ -132,7 +132,7 @@ How to stay compatible with both schemes:
   `fill="black"`. Any one of these vanishes on one of the two backgrounds.
 - Never draw a solid background rectangle behind the icon. The backend surface color
   must show through so the scheme flip works.
-- Opacity-based depth (`fill-opacity=".8"` on top of `currentColor`) is safe because the
+- Opacity-based depth (`opacity=".4"` on top of `currentColor`) is safe because the
   base tone flips with the scheme.
 - Do not depend on `prefers-color-scheme` media queries inside the SVG. The Core drives
   the scheme via an attribute on the root element, and relying on

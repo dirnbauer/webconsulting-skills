@@ -52,8 +52,8 @@ Module icons render large in source SVG terms but small in the backend menu. Kee
 
 - `viewBox="0 0 64 64"`
 - strong silhouette
-- minimum 6-unit outline width when using outlined shapes
-- `.8` opacity for depth fills when needed
+- 4px stroke width on the 64x64 canvas when using outlined shapes (renders 2px at 32x32)
+- `.4` opacity for depth fills when needed
 - one clear accent strategy, not several competing accents
 
 Accent strategies that work well:
