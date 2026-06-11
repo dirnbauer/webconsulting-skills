@@ -28,7 +28,7 @@ This skill covers German Impressum (Anbieterkennzeichnung) requirements for webs
 
 | Law | Full Name | Scope | Effective |
 |-----|-----------|-------|-----------|
-| § 5 DDG | Digitale-Dienste-Gesetz | All commercial websites | Feb 2024 (replaced TMG) |
+| § 5 DDG | Digitale-Dienste-Gesetz | All commercial websites | May 2024 (replaced TMG) |
 | § 18 MStV | Medienstaatsvertrag | Journalistic content | Nov 2020 |
 | § 2 DL-InfoV | Dienstleistungs-Informationspflichten-VO | Service providers | 2010 |
 | Art. 13-14 DSGVO | Datenschutz-Grundverordnung | Privacy notice | 2018 |
@@ -36,7 +36,7 @@ This skill covers German Impressum (Anbieterkennzeichnung) requirements for webs
 
 ### Note: TMG Replaced by DDG
 
-As of February 2024, the **Telemediengesetz (TMG)** was largely replaced by the **Digitale-Dienste-Gesetz (DDG)**. Impressum requirements are now in **§ 5 DDG**, which is nearly identical to the former § 5 TMG.
+On 14 May 2024, the **Telemediengesetz (TMG)** was largely replaced by the **Digitale-Dienste-Gesetz (DDG)**; only the EU Digital Services Act (DSA) already applied from 17 February 2024. Impressum requirements are now in **§ 5 DDG**, which is nearly identical to the former § 5 TMG.
 
 ---
 

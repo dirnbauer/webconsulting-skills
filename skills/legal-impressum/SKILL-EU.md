@@ -32,7 +32,7 @@ This skill covers EU-wide legal notice requirements based on the eCommerce Direc
 | **Digital Services Act (DSA)** | Various | Platform transparency |
 | **GDPR** | Art. 13-14 | Privacy notices |
 | **Consumer Rights Directive 2011/83/EU** | Art. 6 | B2C online sales |
-| **ODR Regulation 524/2013** | Art. 14 | Dispute resolution link |
+| **ODR Regulation 524/2013** (repealed by Reg. (EU) 2024/3228) | Art. 14 | Link obligation ended 2025-07-20 — remove legacy ODR links |
 | **Services Directive 2006/123/EC** | Art. 22 | Service provider info |
 
 ### eCommerce Directive Art. 5 Requirements
@@ -139,32 +139,21 @@ For B2C cross-border digital services:
 
 ---
 
-## 4. ODR (Online Dispute Resolution)
+## 4. ODR (Online Dispute Resolution) — Discontinued
 
-### Requirement (Regulation 524/2013)
+### Status
 
-For **B2C online sales**, traders must:
+The EU ODR platform was **discontinued on 2025-07-20**: Regulation (EU) 2024/3228 repealed Regulation (EU) 524/2013. The Art. 14 link obligation **no longer exists**.
 
-1. Provide link to EU ODR platform
-2. Display prominently on website
-3. Include if email is used for contracts
+### Required Action
 
-### Template Text
+1. **Remove** any legacy ODR link (https://ec.europa.eu/consumers/odr/) from Impressum, legal notice, and AGB/terms pages
+2. Keeping the dead link is itself an Abmahnung (cease-and-desist) risk
+3. Remove the former ODR template text from email footers and order confirmations
 
-```
-Online Dispute Resolution
+### Still Required (ADR)
 
-The European Commission provides a platform for online dispute resolution (ODR):
-https://ec.europa.eu/consumers/odr/
-
-Our email address: [contact@example.com]
-```
-
-### When NOT Required
-
-- B2B only websites
-- Offline-only businesses
-- Information-only websites (no sales)
+The national alternative-dispute-resolution information duties under the ADR Directive 2013/11/EU remain in force (e.g. VSBG in Germany, AStG in Austria): B2C traders must still state whether they are willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
 
 ---
 
@@ -248,9 +237,11 @@ Professional Regulations: [Reference, access link]
 Responsible for Content: [Name, Address]
 Editorial Direction: [Statement]
 
-Online Dispute Resolution:
-The European Commission provides a platform for online dispute resolution (ODR):
-https://ec.europa.eu/consumers/odr/
+[For B2C — ADR information duty:]
+Dispute Resolution:
+We are [not] willing/obliged to participate in dispute resolution proceedings
+before a consumer arbitration board. [Name/address of board if obliged]
+(Do NOT include a link to the former EU ODR platform — it was discontinued on 2025-07-20.)
 
 Privacy:
 See our Privacy Policy: [Link]
@@ -281,7 +272,8 @@ Since January 2021:
 
 ### B2C Online Sales (Additional)
 
-- [ ] ODR platform link
+- [ ] No legacy ODR platform link (platform discontinued 2025-07-20 — remove if present)
+- [ ] ADR information (willingness/obligation to participate in consumer arbitration)
 - [ ] Clear pricing including VAT
 - [ ] Consumer rights information (withdrawal, etc.)
 
@@ -295,7 +287,6 @@ Since January 2021:
 ## 10. Resources
 
 - **EUR-Lex (EU law)**: https://eur-lex.europa.eu/
-- **EU ODR Platform**: https://ec.europa.eu/consumers/odr/
 - **Your Europe Business**: https://europa.eu/youreurope/business/
 - **ECC-Net (Consumer disputes)**: https://ec.europa.eu/info/ecc-net
 

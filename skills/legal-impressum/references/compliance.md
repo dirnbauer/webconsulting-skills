@@ -19,14 +19,20 @@ Link to separate Datenschutzerklärung required with:
 
 Required consent mechanism for non-essential cookies.
 
-### ODR Link (for B2C)
+### ODR Link (for B2C) — Obsolete, Must Be Removed
 
-Required for businesses selling to consumers online:
+The EU ODR platform was discontinued on 2025-07-20 (Regulation (EU) 2024/3228
+repealed Regulation (EU) 524/2013). The link obligation no longer exists.
+
+- **Remove** any legacy ODR link (https://ec.europa.eu/consumers/odr/) from
+  existing Impressum and AGB pages — keeping it is an Abmahnung risk
+- The alternative-dispute-resolution information duties remain (AStG in
+  Austria, VSBG in Germany): state whether the business is willing or obliged
+  to participate in proceedings before a consumer arbitration board
 
 ```text
-Online-Streitbeilegung gemäß Art. 14 Abs. 1 ODR-VO:
-Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
-(OS) bereit: https://ec.europa.eu/consumers/odr/
+Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren
+vor einer Verbraucherschlichtungsstelle teilzunehmen.
 ```
 
 ## Compliance Checklist
@@ -44,7 +50,8 @@ Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
 - [ ] Professional regulations link (if regulated)
 - [ ] Privacy notice link
 - [ ] Cookie consent (if applicable)
-- [ ] ODR link (if B2C online sales)
+- [ ] No legacy ODR link (platform discontinued 2025-07-20 — remove if present)
+- [ ] ADR participation statement (if B2C online sales)
 
 ### Public Media Website (Offenlegungspflicht)
 

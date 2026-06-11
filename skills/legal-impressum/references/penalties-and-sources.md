@@ -11,7 +11,6 @@
 
 ## Sources
 
-- **WKO Impressum Generator**: https://www.wko.at/service/wirtschaftsrecht-gewerberecht/ecg-service
 - **WKO Impressum Guide**: https://www.wko.at/internetrecht/website-impressum
 - **USP Impressumspflicht**: https://www.usp.gv.at/
 - **RIS (Legal texts)**: https://www.ris.bka.gv.at/

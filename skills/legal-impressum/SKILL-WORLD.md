@@ -30,7 +30,7 @@ This skill covers legal notice requirements for websites outside the EU, includi
 | Law/Regulation | Scope |
 |----------------|-------|
 | **Companies Act 2006** (s.82, s.1139) | Company websites |
-| **Business Names Act 1985** | Trade names |
+| **Companies Act 2006, Part 41 (business names)** | Trade names |
 | **Electronic Commerce (EC Directive) Regulations 2002** | Still applicable |
 | **Consumer Contracts Regulations 2013** | B2C online sales |
 | **UK GDPR + DPA 2018** | Privacy requirements |
@@ -257,7 +257,7 @@ Include all of:
 - Representatives/directors
 - Privacy policy link
 - Cookie consent
-- ODR link (if EU B2C)
+- ADR information (if EU B2C) — note: the EU ODR platform was discontinued 2025-07-20; remove legacy ODR links
 - Professional body info (if regulated)
 
 ---
@@ -324,9 +324,11 @@ Legal:
 Privacy Policy: [Link]
 Terms of Service: [Link]
 
-[For EU B2C:]
-Online Dispute Resolution:
-https://ec.europa.eu/consumers/odr/
+[For EU B2C — ADR information duty:]
+Dispute Resolution:
+We are [not] willing/obliged to participate in dispute resolution
+proceedings before a consumer arbitration board.
+(Do NOT link the former EU ODR platform — discontinued 2025-07-20.)
 ```
 
 ---
@@ -374,7 +376,8 @@ https://ec.europa.eu/consumers/odr/
 
 ### If B2C in EU
 
-- [ ] ODR platform link
+- [ ] No legacy ODR platform link (platform discontinued 2025-07-20 — remove if present)
+- [ ] ADR information (consumer arbitration participation statement)
 - [ ] Consumer rights information
 
 ---
