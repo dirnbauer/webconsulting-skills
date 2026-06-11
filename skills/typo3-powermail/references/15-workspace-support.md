@@ -19,5 +19,5 @@ installed, editors can draft form changes in a workspace and publish them after 
 2. **Stage** for review → `t3ver_stage = 1`
 3. **Publish** via backend module or CLI → records become live (`t3ver_wsid = 0`)
 
-> **Detailed SQL and DataHandler examples:** See [SKILL-EXAMPLES.md](SKILL-EXAMPLES.md#workspace-support)
+> **Detailed SQL and DataHandler examples:** See [SKILL-EXAMPLES.md](../SKILL-EXAMPLES.md#workspace-support)
 > for complete workspace-aware queries, publishing workflows, and CLI options.

@@ -233,10 +233,10 @@ Configure via Extension Manager or `ext_conf_template.txt`.
 
 ## 9. JavaScript Behavior
 
-The frontend JavaScript (`PowermailCondition.min.js`) is auto-included via TypoScript:
+The frontend JavaScript (`PowermailCondition.js`) is auto-included via TypoScript:
 
 ```typoscript
-page.includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.min.js
+page.includeJSFooter.powermailCond = EXT:powermail_cond/Resources/Public/JavaScript/PowermailCondition.js
 page.includeJSFooter.powermailCond.defer = 1
 ```
 
