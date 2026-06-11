@@ -5,7 +5,7 @@ Use this checklist for every `ContentBlocks/ContentElements/<element>`.
 ## Required Files
 
 - `config.yaml`
-- `templates/frontend.html`
+- `templates/frontend.fluid.html` (Content Blocks 2.x default since 2.0.4; plain `frontend.html` is the legacy 1.x name)
 - `templates/backend-preview.fluid.html`
 - `language/labels.xlf`
 - `assets/icon.svg`
@@ -20,7 +20,7 @@ instead of slug-shaped labels: `Text & Media`, `Image Call to Action`, `Logo Clo
 
 For each field in `config.yaml`:
 
-- If it is editor-facing, render it in `frontend.html` or document why it is backend-only.
+- If it is editor-facing, render it in `frontend.fluid.html` or document why it is backend-only.
 - If it is `Select`, `Checkbox`, variant, density, or layout related, set a default.
 - If it is named `variant` or labeled as `Style`, prove that every value changes output through an existing shared shadcn component feature or a real template branch. Good examples are Button/Badge/Alert variants and TabsList `data-variant="default|line"`. Bad examples are values that only produce unused classes such as `accordion--bordered`, `table--striped`, or `tabs--pills`.
 - Remove unsupported style fields instead of adding one-off CSS. A content element should not invent custom visual variants merely because a `variant` field exists.
@@ -32,13 +32,13 @@ For each field in `config.yaml`:
 - If it stores an editor-managed URL, use `type: Link`; keep the visible label in a separate text field such as `cta_text`, `link_1_label`, or `child_1_label`.
 - If it is JSON/data, validate that the template emits a stable `data-*` attribute and the shared JavaScript parses the declared structure.
 
-For each field used in `frontend.html`:
+For each field used in `frontend.fluid.html`:
 
 - It must exist in `config.yaml`, unless it is a TYPO3 system field like `uid`.
 - Use `f:render.text(field: ...)` for Content Blocks transformed text fields where appropriate.
 - Use `f:format.html` only for configured rich text.
 - Format `Date`, `DateTime`, and `Time` fields explicitly with `f:format.date` before passing them to attributes or visual-editor text helpers. Do not render raw `DateTimeImmutable` objects through text ViewHelpers.
-- Put unsupported `f:link.typolink` attributes such as `aria-label` into `additionalAttributes`; the ViewHelper does not accept them as direct arguments.
+- Since Fluid 2.12 (TYPO3 v12+), tag-based ViewHelpers such as `f:link.typolink` accept arbitrary unregistered attributes (for example `aria-label` or `aria="{...}"`) directly; `additionalAttributes` still works but is not required. Pick one style per project and use it consistently.
 - Render `Link` fields with `f:link.typolink parameter="{field}"` after checking `{field.url}`. The field resolves to a TYPO3 typolink object with URL, target, class, title, and additional params.
 - Do not parse link textareas with `f:split(separator: '|')`. A pipe-delimited string such as `Docs|https://example.com/docs` hides URL semantics from TYPO3, weakens editor UX, and breaks previews/seed conversion.
 - Do not parse structural lists with `f:split()` in frontend templates. If a template needs rows, cells, features, people, pages, specs, or tier values, the data should arrive as a Collection or JSON/data field with an explicit parser.
@@ -54,7 +54,7 @@ Use this pattern for charts, dashboards, carousels, counters, and other browser 
   or TYPO3's AssetCollector.
 - Keep Fluid templates declarative: semantic markup, shadcn classes, `data-ce`,
   `data-chart-data`, `data-chart-json`, `data-state`, and ARIA attributes.
-- Do not render inline `<script>` blocks inside `templates/frontend.html`.
+- Do not render inline `<script>` blocks inside `templates/frontend.fluid.html`.
 - Make initializers idempotent by marking enhanced nodes, for example
   `data-chart-rendered="true"`.
 - Read colors from CSS variables such as `--chart-1`, `--chart-2`, `--primary`,
@@ -65,7 +65,7 @@ Use this pattern for charts, dashboards, carousels, counters, and other browser 
 Run this scan after moving scripts:
 
 ```bash
-rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.html
+rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.fluid.html
 ```
 
 ## Link Field Pattern
@@ -106,7 +106,7 @@ Do:
 
 - Store URL targets in `type: Link` fields so TYPO3 can manage page, file, record, external, target, class, and title data.
 - Store visible link copy separately. Visible text is the primary accessible name.
-- Use `additionalAttributes` when a link truly needs an `aria-label`.
+- Add `aria-label` only when a link truly needs one; pass it directly as an attribute (Fluid 2.12+, TYPO3 v12+) or via `additionalAttributes` — both work.
 - Use image/File `alternative` fields for image alt text.
 - Seed structured links as objects, for example `{"label": "Docs", "link": "https://example.com/docs"}`.
 
@@ -114,7 +114,7 @@ Do not:
 
 - Do not use textarea rows like `Docs|https://example.com/docs`.
 - Do not invent `alt` fields for plain links. `alt` belongs to images, not anchors.
-- Do not pass `aria-label` directly to `f:link.typolink`; TYPO3 rejects undeclared ViewHelper arguments.
+- Do not add redundant `aria-label` values that merely repeat the visible link text; the visible text is already the accessible name.
 - Do not render raw URL strings as visible content unless the URL itself is the intended label.
 
 ## Nested Collection Pattern

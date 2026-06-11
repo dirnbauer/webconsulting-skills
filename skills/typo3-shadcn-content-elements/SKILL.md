@@ -24,7 +24,7 @@ The styling rule is strict: content elements should not hardcode colors or theme
 
 When creating or overhauling Desiderio shadcn/ui content elements, respect these project-specific rules before general preferences:
 
-- Use TYPO3 14, Content Blocks 2.x, and Fluid 5.3 templates. Frontend entrypoints stay in `templates/frontend.html`; backend previews stay in `templates/backend-preview.fluid.html`.
+- Use TYPO3 14, Content Blocks 2.x, and Fluid 5.3 templates. Frontend entrypoints stay in `templates/frontend.fluid.html` (the Content Blocks 2.x default since 2.0.4; plain `frontend.html` is the legacy 1.x name); backend previews stay in `templates/backend-preview.fluid.html`.
 - TYPO3 owns rendering. Do not copy React, Radix, or Astro framework components into the runtime. shadcn/ui is the source for tokens, class contracts, states, radius, spacing, focus rings, and component anatomy.
 - Use Desiderio Fluid atoms/molecules/components where they exist, especially `d:layout.section`, `d:layout.container`, `d:atom.typography`, `d:atom.icon`, buttons, badges, cards, form controls, tabs, accordions, tables, alerts, dialogs, and chart wrappers.
 - Respect responsive design in every element: mobile-first grids, stable dimensions for fixed-format UI, no text overflow, no incoherent overlap, and layouts that still read well at narrow and wide widths.
@@ -81,7 +81,7 @@ When creating or overhauling Desiderio shadcn/ui content elements, respect these
 
 5. **Audit each content element against its contract.**
    - Read `references/content-element-contract.md`.
-   - For every element, compare `config.yaml`, `templates/frontend.html`, `language/labels.xlf`, `assets/icon.svg`, CSS/JS assets, backend preview, and seed coverage.
+   - For every element, compare `config.yaml`, `templates/frontend.fluid.html`, `language/labels.xlf`, `assets/icon.svg`, CSS/JS assets, backend preview, and seed coverage.
    - Treat `config.yaml:title` as an editor-facing product name. Prefer names like `Text & Media`, `Image Call to Action`, and `Logo Cloud Hero` over raw slugs such as `textmedia`, `CTA With Image`, or `Hero Logo Cloud`.
    - Use the `typo3-translations` skill for XLIFF format choices, English/German localization, ICU MessageFormat strings, `LLL:` references, and localized wizard group labels.
    - Generate element descriptions from the element purpose and schema so each description explains what editors can build. Do not reuse a single generic sentence across the catalog.
@@ -130,7 +130,7 @@ When creating or overhauling Desiderio shadcn/ui content elements, respect these
    - Run CSS build, PHP unit/static checks, and Content Blocks/TYPO3 cache validation.
    - Run `npx shadcn@latest info --json` and `npx shadcn@latest build --output <public-registry-dir>` when `components.json` or `registry.json` changed.
    - Scan content elements and shared generated preview code for raw color literals; allowed raw preset values should be confined to the shadcn theme token file and generated Tailwind output.
-   - Scan templates for inline scripts when shared JavaScript was introduced: `rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.html`.
+   - Scan templates for inline scripts when shared JavaScript was introduced: `rg -n "<script>|JSON\\.parse" ContentBlocks/ContentElements/*/templates/frontend.fluid.html`.
    - For a user-requested full pass, run the complete content-element audit loop repeatedly over all elements, not just changed files. Ten iterations are acceptable when the user explicitly asks to loop 10 times; report the stable summary and the element count.
    - For large overhauls, commit by layer: preset/theme, primitives, generated previews, icons, per-element fixes, seed data.
    - Browser-check frontend pages and TYPO3 backend layout module previews.
