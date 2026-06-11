@@ -31,7 +31,13 @@ lib.contentElement {
 // config/system/additional.php
 $GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_allowUpscaling'] = false;
 
-// WebP is automatically generated in TYPO3 v14 when supported
+// WebP is NOT automatic in TYPO3 v14: GFX/imageFileConversionFormats (Feature #93981)
+// defaults to keeping the original format. Opt in explicitly, e.g.:
+$GLOBALS['TYPO3_CONF_VARS']['GFX']['imageFileConversionFormats'] = [
+    'jpg' => 'webp',
+];
+// WebP output itself is available since v13 (Feature #88537) when
+// ImageMagick/GraphicsMagick supports it.
 ```
 
 > **Responsive images:** configure image processing via your site package, `fluid_styled_content`, and FAL — there is no stable Core TypoScript path `tt_content.image.settings.responsive_image_rendering`; avoid copy-pasting fabricated keys.

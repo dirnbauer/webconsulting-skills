@@ -9,11 +9,11 @@ Continues `typo3-seo` from [full guide](full-guide.md).
 | Extension | Purpose | TYPO3 v14 Support |
 |-----------|---------|-----------------|
 | `typo3/cms-seo` | Core SEO functionality | ✓ |
-| `yoast-seo-for-typo3/yoast_seo` | Content analysis (historical) | **Verify Packagist** — current 11.x lines target up to **TYPO3 13.4** in published constraints; **no `^14` until declared** |
+| `yoast-seo-for-typo3/yoast_seo` | Content analysis | ✓ — 12.1.0 (2026-05-08) declares `typo3/cms-core ^12.4.25 \|\| ^13.4 \|\| ^14.3` |
 | `brotkrueml/schema` | Advanced structured data | ✓ (verify `require.typo3/cms-core` on Packagist) |
 | `b13/seo_basics` | Legacy package (last targets old TYPO3) — **do not** treat as TYPO3 v14 default; prefer `typo3/cms-seo` |
 
-> **Yoast SEO for TYPO3:** If you need readability scoring on v14, use Core/`cms-seo` features, `brotkrueml/schema`, or another extension that **explicitly** declares `typo3/cms-core: ^14` on Packagist — do not rely on `yoast_seo` without confirming constraints.
+> **Yoast SEO for TYPO3:** Since version 12.1.0 (2026-05-08), `yoast_seo` supports TYPO3 v14 (`typo3/cms-core ^12.4.25 || ^13.4 || ^14.3`). Require at least `^12.1` on v14 projects and verify the installed version's constraints on Packagist as usual.
 
 ### Schema Extension
 
