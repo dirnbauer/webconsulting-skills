@@ -11,6 +11,73 @@ SonarCloud provides automated code analysis for TYPO3 extensions:
 - **Quality gates** to enforce standards
 - **Free for open-source** projects
 
+## Two Analysis Modes — Pick the Right Config File
+
+SonarCloud runs in one of **two mutually exclusive modes**, and they read **different
+config files**. Editing the wrong one is a silent no-op:
+
+| Mode | How it runs | Config file |
+|------|-------------|-------------|
+| **CI-based analysis** | You run the scanner (the GitHub Action below) | `sonar-project.properties` |
+| **Automatic Analysis** | SonarCloud analyses the repo itself on push/PR — no Action, no scanner | **`.sonarcloud.properties`** |
+
+Automatic Analysis is the **zero-config default** when you import a repo and never add
+a scanner step. If your project uses it (no `SonarSource/*` action in the workflows),
+then **`sonar-project.properties` is ignored** — all the CI-based config in this
+document does nothing. Use the section below instead.
+
+## Automatic Analysis (`.sonarcloud.properties`)
+
+Put a `.sonarcloud.properties` at the **repo root**. It honours `sonar.exclusions`,
+`sonar.cpd.exclusions`, and friends:
+
+```properties
+# .sonarcloud.properties  (Automatic Analysis ONLY — NOT sonar-project.properties)
+
+# Exclude vendored/minified assets and Fluid templates from analysis entirely.
+# Fluid partials are HTML *fragments*, not documents — SonarCloud's Web/HTML rules
+# raise false positives (missing DOCTYPE / <html lang> / <title>) that can drag the
+# Reliability rating to C on otherwise-clean code.
+sonar.exclusions=Resources/Public/JavaScript/Vendor/**,Resources/Private/Templates/**,Resources/Private/Partials/**,Resources/Private/Layouts/**
+
+# Copy-paste detection: exclude things that are repetitive by nature.
+# Fix duplication in *real source* by refactoring (DRY) — do NOT blanket-exclude it.
+sonar.cpd.exclusions=Resources/Public/JavaScript/Vendor/**,Resources/Private/Templates/**,Resources/Private/Language/**,Tests/**
+```
+
+### TYPO3 gotchas
+
+- **Duplication on new code → DRY, not exclusion.** A 5%+ duplication finding from
+  near-identical controller loops or repeated query blocks is fixed by extracting a
+  shared helper, not by adding the source path to `cpd.exclusions`. Reserve exclusions
+  for generated/vendored code, XLIFF, and tests.
+- **Fluid templates** belong in `sonar.exclusions` (see above) — the Web/HTML ruleset
+  does not understand partials.
+- **XLIFF** (`Resources/Private/Language/**`) and **`Tests/**`** belong in
+  `cpd.exclusions` — both are legitimately repetitive.
+
+### Verify from the CLI (public projects need no auth)
+
+For a **public** project, SonarCloud's web API is open — check the gate and issues for
+a PR without a token (useful for confirming a fix before relying on the PR decoration):
+
+```bash
+# Unresolved issues on a PR (severity + rule + file)
+curl -s "https://sonarcloud.io/api/issues/search?componentKeys=ORG_PROJECT&pullRequest=PR&resolved=false&ps=50"
+
+# Quality Gate status for a PR
+curl -s "https://sonarcloud.io/api/qualitygates/project_status?projectKey=ORG_PROJECT&pullRequest=PR"
+```
+
+### Annotations are not the gate
+
+Automatic Analysis surfaces **every** issue — including CRITICAL-severity code smells
+(e.g. `php:S1192` duplicated literals, `php:S3011` `setAccessible()` in tests) — as a
+GitHub Checks **annotation**, *regardless* of whether the Quality Gate passes. A
+`failure`-level annotation is **not** the same as a failed gate. The **Quality Gate**
+(its configured new-code conditions) is the merge bar; non-gate code-smell annotations
+do not block a merge. Don't treat a passing-gate-with-annotations PR as "broken".
+
 ## Quick Start
 
 ### 1. Sign Up

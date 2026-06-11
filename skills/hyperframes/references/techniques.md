@@ -181,38 +181,23 @@ The slide distance DECAYS per word (80→12px) — mimics a camera settling.
 Vector animations that play inside a composition. Use for logos, character animations, icons.
 
 ```html
-<!-- The web-component package is `@lottiefiles/dotlottie-wc` (the SDK
-     `@lottiefiles/dotlottie-web` does NOT expose a custom element).
-     The element tag is <dotlottie-wc>. -->
-<script
-  src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc/dist/dotlottie-wc.js"
-  type="module"
-></script>
-<dotlottie-wc
-  class="lottie"
-  src="capture/assets/lottie/animation-0.json"
-  autoplay
-  loop
-  speed="1.5"
-  style="width:500px;height:500px;"
->
-</dotlottie-wc>
+<div id="anim" class="lottie"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
 <script>
-  gsap.set(".lottie", { scale: 0.3, opacity: 0 });
-  tl.to(".lottie", { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.6)" }, 0.2);
+  window.__hfLottie = window.__hfLottie || [];
+
+  const anim = lottie.loadAnimation({
+    container: document.getElementById("anim"),
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: "capture/assets/lottie/animation-0.json",
+  });
+  window.__hfLottie.push(anim);
+
+  gsap.set("#anim", { scale: 0.3, opacity: 0 });
+  tl.to("#anim", { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(1.6)" }, 0.2);
 </script>
-```
-
-Or use lottie-web for more control:
-
-```javascript
-var anim = lottie.loadAnimation({
-  container: document.getElementById("anim"),
-  renderer: "svg",
-  loop: false,
-  autoplay: false,
-  path: "capture/assets/lottie/animation-0.json",
-});
 ```
 
 ---

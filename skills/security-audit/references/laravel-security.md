@@ -325,3 +325,4 @@ $laravelPatterns = [
 ```
 
 ---
+

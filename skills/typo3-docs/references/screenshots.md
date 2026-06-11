@@ -43,6 +43,21 @@ Based on: https://docs.typo3.org/m/typo3/docs-how-to-document/main/en-us/Advance
 
 **Best Practice:** Crop to show only relevant portions rather than entire pages.
 
+### Capture Viewport
+
+Resize the browser to **at least 1440 x 1050** before capturing backend
+screenshots. Narrow viewports (≈780px) collapse the TYPO3 module menu, truncate
+table columns, and cut off modal backgrounds — the result reads as "missing
+context" and gets rejected in review.
+
+```js
+// Playwright (the Playwright MCP exposes this as browser_resize, same dimensions)
+await page.setViewportSize({ width: 1440, height: 1050 });
+```
+
+Capture at the wider viewport, then crop the width down to the 1400px target —
+the 40px of slack is why the floor is 1440, not 1400. Don't shrink the window to crop.
+
 ### File Location
 
 Store images in the `Documentation/Images/` directory, organized by section:

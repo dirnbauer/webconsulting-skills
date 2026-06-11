@@ -11,9 +11,9 @@ description: "Use when providing DDEV URLs, accessing TYPO3 backend in browser, 
 
 `https://v{VERSION}.{sitename}.ddev.site/typo3/` — e.g., `https://v14.my-ext.ddev.site/typo3/`
 
-Landing page: `https://{sitename}.ddev.site/` · Docs: `https://docs.{sitename}.ddev.site/`
+Landing: `https://{sitename}.ddev.site/` · Docs: `https://docs.{sitename}.ddev.site/`
 
-Each version gets its own Apache vhost (`/var/www/html/v{VERSION}`), routed via `additional_hostnames`. Check configured versions before presenting URLs. **Never infer URLs from directory listings.**
+Each version has an Apache vhost (`/var/www/html/v{VERSION}`) via `additional_hostnames`. **Never infer URLs from directory listings.**
 
 **Credentials**: admin / Joh316!!
 
@@ -22,6 +22,8 @@ Each version gets its own Apache vhost (`/var/www/html/v{VERSION}`), routed via 
 1. `.ddev/` exists → `ddev exec`
 2. `docker-compose.yml` → `docker compose exec`
 3. System tools only if no container. Always use project's configured PHP.
+
+**In-container file edits:** `docker cp` in, `ddev exec` — not heredocs/`php -r`. See `references/container-file-editing.md`.
 
 ## Quick Start
 
@@ -61,7 +63,7 @@ See `references/typo3-12-cli-changes.md`.
 - **Valkey 8** (default) or Redis 7: `references/0001-valkey-default-with-redis-alternative.md`
 - **Ofelia** scheduler: TYPO3 scheduler automation
 - `ddev generate-makefile` / `ddev generate-index` / `ddev docs`
-- `ddev xdebug on` / Cache: `ddev exec -d /var/www/html/v13 vendor/bin/typo3 cache:flush`
+- `ddev xdebug on` · cache flush: see Troubleshooting
 
 ## Extension Naming
 

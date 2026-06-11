@@ -249,6 +249,49 @@ For local development:
 3. CSS changes are injected without page reload
 4. TypeScript changes trigger a page reload
 
+## Manifest Mode (No Dev Server)
+
+Not every workflow runs an HMR server. If assets are built at install or
+image-build time (`vite build`) and only the manifest is ever served, force
+manifest mode — the extension default `useDevServer = auto` resolves to
+`Environment::getContext()->isDevelopment()`, so any `Development/*` context
+makes `<vite:asset>` chase a dev server that is not running:
+
+```php
+<?php
+// config/system/settings.php
+return [
+    'EXTENSIONS' => [
+        'vite_asset_collector' => [
+            'useDevServer' => '0',
+            'devServerUri' => 'auto',
+            'defaultManifest' => '_assets/vite/.vite/manifest.json',
+        ],
+    ],
+];
+```
+
+Two non-obvious rules apply:
+
+- **Pre-populate the complete key set** (`useDevServer`, `devServerUri`,
+  `defaultManifest`) — not just the key you override. On sites that keep
+  `settings.php` read-only (e.g. sealed `chmod 0444`, secret-free managed
+  config), `ExtensionConfiguration::get()` with a path missing from
+  `settings.php` triggers a synchronize that **writes** the file; on the sealed
+  file that throws core exception `#1346323822` ("settings.php is not
+  writable") and the frontend returns HTTP 500. A complete block keeps every
+  read path valid, so no write is ever attempted.
+- **The defaults align by design**: `vite-plugin-typo3` project mode outputs to
+  `<web-dir>/_assets/vite/` with the manifest at
+  `_assets/vite/.vite/manifest.json` — exactly the extension's
+  `defaultManifest`. `<vite:asset entry="EXT:..." />` therefore needs no
+  `manifest` argument.
+
+For Docker/deployment images that `COPY` extension or package directories,
+keep `package.json` and `vite.config.js` at the Composer project root (not
+inside an extension): `node_modules` then never sits inside a copied path, and
+only the built `_assets/vite/` output ships.
+
 ## CSP Compliance
 
 The `vite-asset-collector` supports nonce-based asset inclusion for Content Security Policy:

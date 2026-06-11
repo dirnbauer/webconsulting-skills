@@ -1356,3 +1356,28 @@ llm_reviews:
     severity: warning
     desc: "GeneralUtility::makeInstance() in DI-managed classes should use constructor injection (except AbstractTask)"
     tags: [di, dependency-injection, makeinstance, typo3, services]
+
+  - id: TC-184
+    name: exception-handler-public-di-service
+    domain: code-quality
+    prompt: |
+      Check Configuration/Services.yaml for any class that extends
+      TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler
+      or implements TYPO3\CMS\Frontend\ContentObject\Exception\ExceptionHandlerInterface.
+
+      These classes are resolved by GeneralUtility::makeInstance() inside
+      ContentObjectRenderer::createExceptionHandler() with no constructor arguments.
+      makeInstance() only routes through the DI container (and thus performs
+      constructor injection) when the service is declared public: true. Without it,
+      makeInstance() falls back to `new ClassName()` with zero arguments, which
+      throws ArgumentCountError at runtime when a content element exception occurs.
+
+      Verify that every such class is explicitly declared in Configuration/Services.yaml with:
+        public: true
+        shared: false   # matches ProductionExceptionHandler's own declaration
+
+      Report any exception handler class that is missing this explicit declaration,
+      even if it appears to be covered by the namespace wildcard resource glob.
+    severity: error
+    desc: "TYPO3 content exception handler classes must be declared public: true and shared: false in Configuration/Services.yaml (required for GeneralUtility::makeInstance() DI resolution)"
+    tags: [di, dependency-injection, exception-handler, services, makeinstance, typo3]

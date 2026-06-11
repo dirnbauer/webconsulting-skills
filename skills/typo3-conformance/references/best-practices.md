@@ -346,6 +346,65 @@ services:
         description: 'Import data from external source'
 ```
 
+**Conditional DI for optional system extensions (e.g. dashboard widgets):**
+
+When an extension integrates with an optional system extension (`dashboard`,
+`reports`, …), guard the registration so installs without that extension do not
+fail container compilation on unresolvable class references. Two non-obvious
+rules make this work — and each fails differently if you get it wrong (rule #1
+*silently* skips registration, rule #2 throws a hard container-compile error):
+
+1. **Guard interfaces with `interface_exists()`, not `class_exists()`.** PHP's
+   `class_exists()` returns `false` for interfaces and traits, so a guard like
+   `class_exists(WidgetInterface::class)` is *always false* — the body never
+   runs and the feature silently never registers. Use `interface_exists()` for
+   interfaces and `trait_exists()` for traits. (PHPStan ≥ 2.2.2 reports the dead
+   `class_exists()` guard as `function.impossibleType`.)
+
+2. **Import a `.php` config from `Services.php`, never a `.yaml`.** TYPO3 loads
+   `Configuration/Services.php` with a standalone Symfony `PhpFileLoader` whose
+   resolver has no YAML loader, so `$containerConfigurator->import('Foo.yaml')`
+   throws `Cannot load resource "Foo.yaml"`. Convert the optional service
+   definitions to a PHP config file and import it with an absolute path.
+
+```php
+// Configuration/Services.php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use TYPO3\CMS\Dashboard\Widgets\WidgetInterface;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    // interface_exists(): class_exists() is always false for an interface.
+    if (interface_exists(WidgetInterface::class)) {
+        // .php, not .yaml: the PhpFileLoader has no YAML loader in its resolver.
+        $containerConfigurator->import(__DIR__ . '/Services.Dashboard.php');
+    }
+};
+```
+
+```php
+// Configuration/Services.Dashboard.php
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use TYPO3\CMS\Dashboard\Widgets\NumberWithIconWidget;
+
+use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
+
+return static function (ContainerConfigurator $containerConfigurator): void {
+    $services = $containerConfigurator->services();
+    $services->defaults()->autowire()->autoconfigure()->private();
+
+    $services->set(\Vendor\MyExtension\Widgets\DataProvider\CostDataProvider::class);
+    $services->set('dashboard.widget.myext.cost', NumberWithIconWidget::class)
+        ->arg('$dataProvider', service(\Vendor\MyExtension\Widgets\DataProvider\CostDataProvider::class))
+        ->tag('dashboard.widget', ['identifier' => 'myext-cost', 'groupNames' => 'general']);
+};
+```
+
+Add a functional test that loads the optional system extension
+(`$coreExtensionsToLoad[] = 'dashboard';`) and asserts the services register
+(e.g. `WidgetRegistry::getAllWidgets()` contains your identifiers) — extend
+`FunctionalTestCase` directly so a container-compile failure surfaces as a test
+failure rather than being swallowed into a skip.
+
 ### 4. Backend Module Configuration
 
 **Configuration/Backend/Modules.php:**
@@ -371,6 +430,19 @@ return [
         ],
     ],
 ];
+```
+
+**Backend SVG icons** (`Resources/Public/Icons/*.svg`, registered in `Configuration/Icons.php`):
+
+- Use SVG **presentation attributes** — `fill="currentColor"`, `fill-rule="evenodd"`, `<g opacity="...">` — **never inline `style="..."`**. TYPO3 inlines icon SVGs into the backend DOM, so a `style=` attribute depends on `style-src-attr 'unsafe-inline'` and breaks under a hardened CSP. Core icons use presentation attributes exclusively (Illustrator/Figma exports often emit `style=` — strip it).
+- Use `fill="currentColor"` so the icon adapts to the v14 light/dark backend. For a second tone use `var(--icon-color-accent)` (the themeable accent) or a fixed brand hex.
+- The backend **module** icon should differ from the **extension** icon (`Extension.svg`): the extension icon identifies the package, the module icon identifies the feature.
+- When the colored v12/v13 variant and the flat v14 variant differ, version-split the source in `Configuration/Icons.php` via `Typo3Version`:
+
+```php
+$source = (new \TYPO3\CMS\Core\Information\Typo3Version())->getMajorVersion() >= 14
+    ? 'EXT:my_extension/Resources/Public/Icons/Module.svg'        // flat, currentColor
+    : 'EXT:my_extension/Resources/Public/Icons/Module.legacy.svg'; // colored tile
 ```
 
 ### 5. Testing Infrastructure
@@ -1774,3 +1846,28 @@ grep -A 2 'push:' .github/workflows/*.yml | grep -v 'branches:'
 - [ ] Bootstrap 5 classes used (not 3/4)
 - [ ] Proper table semantics (no role="grid" on data tables)
 - [ ] Accessibility attributes on forms, nav, and tables
+- [ ] Custom exception handlers registered in `additional.php` (not `ext_localconf.php`)
+
+## Bootstrap & error-handling gotchas
+
+### Custom exception handlers belong in `additional.php`, not `ext_localconf.php`
+
+TYPO3 reads `$GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler']` and
+`$GLOBALS['TYPO3_CONF_VARS']['SYS']['productionExceptionHandler']` during EARLY bootstrap (`Bootstrap::initializeErrorHandling()`),
+which runs BEFORE any extension's `ext_localconf.php` is loaded. Registering a custom exception
+handler in `ext_localconf.php` is therefore **silently ignored** — the override never takes effect.
+
+Register it in the project's `config/system/additional.php` instead:
+
+```php
+// Register for both contexts so the override applies in Development and Production.
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler']
+    = \Vendor\Ext\Error\MyExceptionHandler::class;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['productionExceptionHandler']
+    = \Vendor\Ext\Error\MyExceptionHandler::class;
+```
+
+This only manifests at runtime in a booted instance — a static scan or `php -l` will not catch it.
+
+**Audit:** if an extension ships an exception-handler subclass, verify its registration is documented
+for `additional.php`, not (ineffectively) placed in `ext_localconf.php`.

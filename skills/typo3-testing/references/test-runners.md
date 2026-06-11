@@ -348,6 +348,25 @@ docker ps
 ./Build/Scripts/runTests.sh -s functional -d sqlite
 ```
 
+### SQLite functional tests fail with "unable to open database file" (rootless / WSL2)
+
+On **rootless Docker** or **WSL2** hosts, the SQLite functional run can fail with
+`unable to open database file` even though the same command works on a standard
+Docker-CE host. Cause: `runTests.sh` mounts the SQLite working directory as a `tmpfs`,
+but the container process runs as a non-root user that has no write permission on the
+default-mode tmpfs.
+
+Fix: add `,mode=1777` (world-writable, sticky — like `/tmp`) to the SQLite `tmpfs`
+mount option in `Build/Scripts/runTests.sh` (every occurrence):
+
+```diff
+- --tmpfs ${CORE_ROOT}/.Build/Web/typo3temp/var/tests/functional-sqlite-dbs/:rw,noexec,nosuid
++ --tmpfs ${CORE_ROOT}/.Build/Web/typo3temp/var/tests/functional-sqlite-dbs/:rw,noexec,nosuid,mode=1777
+```
+
+This is CI-safe (standard Docker hosts are unaffected) and unblocks local functional
+testing on rootless/WSL2.
+
 ### Root-owned Files
 ```bash
 # Remove root-owned files (requires sudo)

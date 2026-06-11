@@ -69,7 +69,7 @@ Unit tests required (70%+ coverage). Functional tests required for DB operations
 
 ## References (in `references/`, `.md` implied)
 
-`unit-testing.md` | `functional-testing.md` | `functional-test-patterns.md` | `integration-testing.md` | `e2e-testing.md` | `accessibility-testing.md` | `ddev-testing.md` | `test-runners.md` | `architecture-testing.md` | `ci-debugging.md` | `ci-cd.md` | `quality-tools.md` | `mutation-testing.md` | `fuzz-testing.md` | `performance-testing.md` | `typo3-v14-final-classes.md` | `mock-validity.md` | `javascript-testing.md` | `captainhook-setup.md` | `enforcement-rules.md` | `event-dispatch-testing.md` | `crypto-testing.md` | `test-environment-guards.md` | `sonarcloud.md` | `typo3-ci-config-patterns.md` | `tdd-discipline.md` | `ci-workflows-meta-package.md` | `synthetic-secret-fixtures.md` | `release-workflow-validation.md` | `asset-templates-guide.md`
+`unit-testing.md` | `functional-testing.md` | `functional-test-patterns.md` | `integration-testing.md` | `e2e-testing.md` | `accessibility-testing.md` | `ddev-testing.md` | `test-runners.md` | `architecture-testing.md` | `ci-debugging.md` | `ci-cd.md` | `quality-tools.md` | `mutation-testing.md` | `fuzz-testing.md` | `performance-testing.md` | `typo3-v14-final-classes.md` | `mock-validity.md` | `javascript-testing.md` | `captainhook-setup.md` | `enforcement-rules.md` | `event-dispatch-testing.md` | `crypto-testing.md` | `test-environment-guards.md` | `sonarcloud.md` | `typo3-ci-config-patterns.md` | `tdd-discipline.md` | `ci-workflows-meta-package.md` | `synthetic-secret-fixtures.md` | `release-workflow-validation.md` | `asset-templates-guide.md` | `backend-module-render-verification.md`
 
 ### Content Triggers
 
@@ -81,6 +81,7 @@ Unit tests required (70%+ coverage). Functional tests required for DB operations
 - Meta-package, typo3-ci-workflows, no-plugins → `ci-workflows-meta-package.md`
 - Fake secrets, push-protection, cs-fixer concat → `synthetic-secret-fixtures.md`
 - Burned tag, validate before tagging → `release-workflow-validation.md`
+- Backend module 500 / wrong ViewHelper namespace / runaway canvas → `backend-module-render-verification.md`
 
 ## Links
 

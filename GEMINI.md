@@ -12,7 +12,7 @@ Skills are registered in `gemini-extension.json` with trigger-based activation. 
 
 ## Skills Location
 
-All skills live in `skills/<skill-name>/SKILL.md`. Installers symlink the whole skill directory, not just `SKILL.md`, so optional `agents/`, `assets/`, `evals/`, `examples/`, `reference/`, `references/`, `rules/`, and `scripts/` folders remain available to clients that support them.
+All skills live in `skills/<skill-name>/SKILL.md`. Installers symlink the whole skill directory, not just `SKILL.md`, so optional `agents/`, `assets/`, `evals/`, `examples/`, `reference/`, `references/`, `rules/`, `scripts/`, and `templates/` folders remain available to clients that support them.
 
 To use a skill, read `skills/<skill-name>/SKILL.md` and follow its instructions. Load referenced files only when the skill asks for them.
 

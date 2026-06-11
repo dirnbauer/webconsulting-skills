@@ -152,11 +152,11 @@
   {
     "directory": "autoreview",
     "skill_name": "autoreview",
-    "description": "Run a structured code review (Codex default, Claude optional) as a closeout check on a local or PR branch before commit or ship.",
+    "description": "Run a structured code review (Codex default, optional Claude, Pi, Droid, Copilot, or OpenCode) as a closeout check on a local or PR branch before commit or ship.",
     "source_owner": "Peter Steinberger",
     "source_url": "https://github.com/openclaw/agent-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/autoreview/SKILL.md",
-    "line_count": 229,
+    "line_count": 323,
     "frontmatter_keys": [
       "name",
       "description"
@@ -430,7 +430,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/customer-research/SKILL.md",
-    "line_count": 284,
+    "line_count": 285,
     "frontmatter_keys": [
       "name",
       "description"
@@ -580,7 +580,7 @@
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
-    "line_count": 277,
+    "line_count": 309,
     "frontmatter_keys": [
       "name",
       "description"
@@ -608,11 +608,11 @@
   {
     "directory": "frontend-design",
     "skill_name": "frontend-design",
-    "description": "Create distinctive, production-grade frontend interfaces with high design quality. Use this skill when the user asks to build web components, pages, artifacts, posters, or applications (examples include websites, landing pages, dashboards, React components, HTML/CSS layouts, or when styling/beautifying any web UI). Generates creative, polished code and UI design that avoids generic AI aesthetics.",
+    "description": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
     "source_owner": "Anthropic",
     "source_url": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/frontend-design/SKILL.md",
-    "line_count": 54,
+    "line_count": 67,
     "frontmatter_keys": [
       "name",
       "description"
@@ -910,7 +910,7 @@
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/marketing-ideas/SKILL.md",
-    "line_count": 180,
+    "line_count": 181,
     "frontmatter_keys": [
       "name",
       "description"
@@ -976,7 +976,7 @@
     "source_owner": "wondelai",
     "source_url": "https://github.com/wondelai/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/microinteractions/SKILL.md",
-    "line_count": 250,
+    "line_count": 227,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1460,11 +1460,11 @@
   {
     "directory": "social",
     "skill_name": "social",
-    "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' or 'create a reel.' Use this for social media content creation, repurposing, scheduling, and short-form video scripting. For broader content strategy, see content-strategy. For paid video ads, see ad-creative.",
+    "description": "When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' or 'find people asking for.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/social/SKILL.md",
-    "line_count": 422,
+    "line_count": 424,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1512,7 +1512,7 @@
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-prd/SKILL.md",
-    "line_count": 91,
+    "line_count": 89,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1649,7 +1649,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-datahandler/SKILL.md",
-    "line_count": 326,
+    "line_count": 329,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1668,7 +1668,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-ddev-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-ddev/SKILL.md",
-    "line_count": 109,
+    "line_count": 111,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1754,7 +1754,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-idea-extension-blog/SKILL.md",
-    "line_count": 244,
+    "line_count": 242,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1791,7 +1791,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-news-tags/SKILL.md",
-    "line_count": 360,
+    "line_count": 361,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1865,7 +1865,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-security/SKILL.md",
-    "line_count": 474,
+    "line_count": 476,
     "frontmatter_keys": [
       "name",
       "description",
@@ -1960,7 +1960,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-testing-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-testing/SKILL.md",
-    "line_count": 105,
+    "line_count": 106,
     "frontmatter_keys": [
       "name",
       "description"
@@ -2167,7 +2167,7 @@
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
-    "line_count": 310,
+    "line_count": 309,
     "frontmatter_keys": [
       "name",
       "description",
