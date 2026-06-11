@@ -12,7 +12,7 @@ license: "MIT / CC-BY-SA-4.0"
 
 Comprehensive framework for detecting synthetic media, analyzing manipulation artifacts, and establishing media provenance in the post-empirical era.
 
-> **Key Insight**: Traditional detection methods (PRNU, IGH, DQ) are like **fingerprints**—helpful, but disputable. Cryptographic provenance (C2PA) is like a **DNA match**—mathematically certain (collision probability 2⁻²⁵⁶).
+> **Key Insight**: Traditional detection methods (PRNU, IGH, DQ) are like **fingerprints**—helpful, but disputable. Cryptographic provenance (C2PA) is like a **DNA match**—cryptographically secure (SHA-256, ~2¹²⁸ collision resistance).
 
 ## When to Use
 
@@ -120,7 +120,7 @@ Detection Accuracy:    █████████████░░░░░░
                        ↑ Gap widening over time
 ```
 
-**Key Insight**: We are transitioning from a world where "seeing is believing" to one where "cryptographic proof is believing." The future lies not in perfect detection, but in **provenance infrastructure** (C2PA v2.3) that proves authenticity at creation [[15, 16]](#references). Traditional detection methods (PRNU, IGH, DQ) are like fingerprints—helpful, but disputable. Cryptographic provenance (C2PA) is like a DNA match—mathematically certain.
+**Key Insight**: We are transitioning from a world where "seeing is believing" to one where "cryptographic proof is believing." The future lies not in perfect detection, but in **provenance infrastructure** (C2PA v2.3) that proves authenticity at creation [[15, 16]](#references). Traditional detection methods (PRNU, IGH, DQ) are like fingerprints—helpful, but disputable. Cryptographic provenance (C2PA) is like a DNA match—cryptographically secure (SHA-256, ~2¹²⁸ collision resistance).
 
 ---
 
@@ -226,8 +226,9 @@ brew install c2patool
 sudo apt update
 sudo apt install ffmpeg libimage-exiftool-perl imagemagick jq
 
-# Optional: C2PA verification tool (from GitHub releases)
-curl -L https://github.com/contentauth/c2patool/releases/latest/download/c2patool-linux-x86_64.tar.gz | tar xz
+# Optional: C2PA verification tool (CLI now lives in contentauth/c2pa-rs; assets are named c2patool-vX.Y.Z-x86_64-unknown-linux-gnu.tar.gz)
+# Pick the latest c2patool release from: https://github.com/contentauth/c2pa-rs/releases
+curl -L https://github.com/contentauth/c2pa-rs/releases/download/c2patool-v0.26.65/c2patool-v0.26.65-x86_64-unknown-linux-gnu.tar.gz | tar xz
 sudo mv c2patool /usr/local/bin/
 ```
 
@@ -286,7 +287,7 @@ exiftool -json input.jpg | jq .
 exiftool -Software -CreatorTool -HistorySoftwareAgent input.jpg
 
 # Compare metadata between original and suspected fake
-exiftool -g1 -a -u original.jpg suspected.jpg | diff -y - 
+diff -y <(exiftool -g1 -a -u original.jpg) <(exiftool -g1 -a -u suspected.jpg)
 
 # Find GPS coordinates (if present)
 exiftool -gps:all -c "%.6f" input.jpg
@@ -312,14 +313,20 @@ magick input.jpg -resize 200% -resize 50% resample_test.jpg
 #### C2PA Tool for Provenance
 
 ```bash
-# Verify C2PA manifest
-c2patool verify input.jpg
+# Show the C2PA manifest (default action)
+c2patool input.jpg
 
-# Extract manifest details as JSON
-c2patool manifest input.jpg -o manifest.json
+# Detailed manifest report
+c2patool input.jpg -d
 
-# Check certificate chain
-c2patool trust input.jpg
+# Quick manifest info
+c2patool input.jpg --info
+
+# Show certificate chain
+c2patool input.jpg --certs
+
+# Configure trust lists for validation
+c2patool input.jpg trust --help
 ```
 
 #### C2PA Test Files for Validation

@@ -10,8 +10,8 @@ Continues `deepfake-detection` from [full guide](full-guide.md).
 |------|------|-------------|
 | [FaceForensics++](https://github.com/ondyari/FaceForensics) | Dataset & Benchmark | Standard deepfake detection benchmark |
 | [Sensity](https://sensity.ai/) | Commercial | Enterprise deepfake detection API |
-| [Microsoft Video Authenticator](https://www.microsoft.com/en-us/ai/ai-lab-video-authenticator) | Tool | Frame-by-frame manipulation scoring |
-| [C2PA Tool](https://c2pa.org/c2patool/) | CLI | Content provenance verification |
+| Microsoft Video Authenticator | Tool | Frame-by-frame manipulation scoring (announced 2020; never generally released, discontinued) |
+| [C2PA Tool](https://github.com/contentauth/c2pa-rs/tree/main/cli) | CLI | Content provenance verification |
 | [Content Credentials Verify](https://contentcredentials.org/verify) | Web | Online C2PA verification (CAI) |
 | [webconsulting Forensik-Tool](https://www.webconsulting.at/blog/deepfakes-erkennen-verstehen) | Web | Multi-layer analysis (EXIF, C2PA, Signal, AI) |
 

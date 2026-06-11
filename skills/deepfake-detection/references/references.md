@@ -6,16 +6,16 @@ Continues `deepfake-detection` from [full guide](full-guide.md).
 
 ### Academic Research (2024-2025)
 
-1. **Ramanaharan, R. et al. (2025)**. "DeepFake video detection: Insights into model generalisation." *Forensic Science International: Digital Investigation*, Vol. 52. [DOI: 10.1016/j.fsidi.2025.301875](https://www.sciencedirect.com/science/article/pii/S2543925125000075)
+1. **Ramanaharan, R. et al. (2025)**. "DeepFake video detection: Insights into model generalisation — A Systematic review." *Data and Information Management*, Vol. 9, No. 4, 100099. [DOI: 10.1016/j.dim.2025.100099](https://www.sciencedirect.com/science/article/pii/S2543925125000075)
    - Systematic review of generalizability in deepfake detection techniques
 
-2. **Ahmed, N. et al. (2024)**. "Visual Deepfake Detection: Review of Techniques, Tools, and Datasets." *IEEE Access*, Vol. 12, pp. 180234-180261. [DOI: 10.1109/ACCESS.2024.3511641](https://ieeexplore.ieee.org/document/10816641)
+2. **Ahmed, N. et al. (2024)**. "Visual Deepfake Detection: Review of Techniques, Tools, Limitations, and Future Prospects." *IEEE Access*, Vol. 12. [DOI: 10.1109/ACCESS.2024.3523288](https://ieeexplore.ieee.org/document/10816641)
    - Comprehensive review covering 2018-2024 with 16+ citations
 
 3. **Cassia, M. et al. (2025)**. "Deepfake Forensic Analysis: Source Dataset Attribution and Legal Implications." *arXiv:2505.11110*. [arXiv](https://arxiv.org/abs/2505.11110)
    - Dataset attribution for legal proceedings
 
-4. **Nature Scientific Reports (2025)**. "Deepfake video deception detection using visual attention mechanisms." *Sci Rep* 15, 23920. [DOI: 10.1038/s41598-025-23920-0](https://www.nature.com/articles/s41598-025-23920-0)
+4. **Nature Scientific Reports (2025)**. "Deepfake video deception detection using visual attention-based method." *Sci Rep* 15, 40089. [DOI: 10.1038/s41598-025-23920-0](https://www.nature.com/articles/s41598-025-23920-0)
    - Novel attention-based detection methods
 
 5. **Nature Scientific Reports (2025)**. "Detection of AI generated images using combined uncertainty estimation." *Sci Rep* 15, 28572. [DOI: 10.1038/s41598-025-28572-8](https://www.nature.com/articles/s41598-025-28572-8)
@@ -29,7 +29,7 @@ Continues `deepfake-detection` from [full guide](full-guide.md).
 7. **PMC/NIH (2024)**. "Audio Deepfake Detection: What Has Been Achieved and What Lies Ahead." *PMCID: PMC11991371*. [PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC11991371/)
    - Comprehensive review of audio synthesis detection
 
-8. **Forensic Science International (2025)**. "Forensic deepfake audio detection using segmental speech features." [DOI: 10.1016/j.forsciint.2025.112345](https://www.sciencedirect.com/science/article/abs/pii/S0379073825004128)
+8. **Forensic Science International (2025)**. "Forensic deepfake audio detection using segmental speech features." [DOI: 10.1016/j.forsciint.2025.112768](https://www.sciencedirect.com/science/article/abs/pii/S0379073825004128)
    - Acoustic feature analysis for voice clone detection
 
 9. **UC Berkeley I-School (2025)**. "FairVoice: An Equitable Audio Deepfake Detector." [Project Page](https://www.ischool.berkeley.edu/projects/2025/fairvoice-equitable-audio-deepfake-detector)

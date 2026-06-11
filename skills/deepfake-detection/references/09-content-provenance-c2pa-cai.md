@@ -11,6 +11,7 @@ The Coalition for Content Provenance and Authenticity is governed by major techn
 | Member | Role |
 |--------|------|
 | **Adobe** | Founding member, CAI lead |
+| **Amazon** | Cloud and AI integration (AWS, Titan) |
 | **BBC** | Media organization representative |
 | **Google** | Platform integration |
 | **Meta** | Social platform adoption |
