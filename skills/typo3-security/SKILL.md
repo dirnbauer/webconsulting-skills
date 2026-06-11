@@ -44,7 +44,7 @@ return [
         'debug' => false,
         'lockIP' => 0,                    // Common for frontend sessions; mobile users / proxies often change IPs
         'sessionTimeout' => 86400,
-        // `FE.lockSSL` was removed in v12 — enforce HTTPS at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
+        // `lockSSL` is BE-only (there is no `FE.lockSSL`) — enforce HTTPS for the frontend at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
         'passwordHashing' => [
             'className' => \TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2idPasswordHash::class,
             'options' => [],
@@ -119,9 +119,11 @@ return [
 
 Keep Core’s deny list strict — extend only when you understand the risk:
 
+> **Warning:** setting `fileDenyPattern` **replaces** Core’s default pattern entirely. Always start from the v14 default (`\\.(php[3-8]?|phpsh|phtml|pht|phar|shtml|cgi)(\\..*)?$|\\.pl$|^\\.htaccess$`) and append — never drop `pht`, `phpsh`, `shtml`, or `^\.htaccess$`.
+
 ```php
-// Example: tighten executable uploads (adjust to your policy)
-$GLOBALS['TYPO3_CONF_VARS']['BE']['fileDenyPattern'] = '\\.(php[0-9]?|phtml|phar|sh|bash|cgi|pl|py|asp|aspx|jsp)(\\..*)?$';
+// Example: keep Core's v14 default and append extra executable extensions (adjust to your policy)
+$GLOBALS['TYPO3_CONF_VARS']['BE']['fileDenyPattern'] = '\\.(php[3-8]?|phpsh|phtml|pht|phar|shtml|cgi|sh|bash|py|asp|aspx|jsp)(\\..*)?$|\\.pl$|^\\.htaccess$';
 ```
 
 ### Directory Permissions

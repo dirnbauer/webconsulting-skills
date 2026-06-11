@@ -20,7 +20,7 @@ $GLOBALS['TYPO3_CONF_VARS']['BE']['loginRateLimit'] = 5;  // max attempts per de
 - [ ] `debug` = false (BE and FE)
 - [ ] `trustedHostsPattern` configured
 - [ ] Install Tool disabled
-- [ ] HTTPS enforced at the edge (web server / proxy); `FE.lockSSL` no longer exists
+- [ ] HTTPS enforced at the edge (web server / proxy); `BE.lockSSL` set for the backend (`lockSSL` is BE-only)
 - [ ] Strong backend passwords (12+ chars)
 - [ ] MFA enabled for admins
 - [ ] File permissions correct
