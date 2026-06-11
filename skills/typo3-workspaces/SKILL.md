@@ -61,7 +61,7 @@ Offline (workspace) versions live in the **same database table** as live records
 | `t3ver_stage` | Workflow stage (0=editing, -10=ready to publish) |
 | `pid` | Real page ID (same as the live record's pid) |
 
-> **Note:** Before TYPO3 v11, offline versions had `pid = -1`. Since v11 (Breaking #92497), workspace records store their **real pid**. If you encounter `pid = -1` in legacy code or documentation, it is outdated.
+> **Note:** Before TYPO3 v10.4, offline versions had `pid = -1`. Since v10.4 (Important #89555, "Workspace-related database records contain the proper Page ID"), workspace records store their **real pid**; the separate v11 change (Breaking #92497) removed move placeholders. If you encounter `pid = -1` in legacy code or documentation, it is outdated.
 
 **t3ver_state values (TYPO3 v14):**
 
