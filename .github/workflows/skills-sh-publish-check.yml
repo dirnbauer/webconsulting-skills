@@ -4,6 +4,13 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/**"
+      - "README.md"
+      - "AGENTS.md"
+      - ".sync-config.json"
   workflow_dispatch:
     inputs:
       skill_name:
@@ -46,6 +53,35 @@ jobs:
             echo "ERROR: .sync-config.json missing"
             exit 1
           fi
+
+      - name: Validate all skill frontmatter
+        shell: bash
+        run: |
+          set -euo pipefail
+          fail=0
+          for f in skills/*/SKILL.md; do
+            dir="$(basename "$(dirname "$f")")"
+            if ! head -1 "$f" | grep -q '^---$'; then
+              echo "ERROR: $f missing YAML frontmatter"
+              fail=1
+              continue
+            fi
+            fm="$(awk '/^---$/{n++; next} n==1{print} n>=2{exit}' "$f")"
+            name="$(printf '%s\n' "$fm" | sed -n 's/^name:[[:space:]]*//p' | head -1 | tr -d '"'"'"'')"
+            if [ -z "$name" ]; then
+              echo "ERROR: $f has no frontmatter name"
+              fail=1
+            elif [ "$name" != "$dir" ]; then
+              echo "ERROR: $f frontmatter name '$name' != directory '$dir'"
+              fail=1
+            fi
+            if ! printf '%s\n' "$fm" | grep -q '^description:'; then
+              echo "ERROR: $f has no frontmatter description"
+              fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "All $(ls -d skills/*/ | wc -l | tr -d ' ') skills have valid frontmatter."
+          exit "$fail"
 
       - name: Run attribution guardrails
         shell: bash
