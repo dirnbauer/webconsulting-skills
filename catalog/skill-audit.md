@@ -456,7 +456,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: deepfake-detection
-- SKILL.md lines: 346
+- SKILL.md lines: 353
 
 **Pass 1: Structure**
 - No pass 1 issues found.
@@ -872,7 +872,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: legal-impressum
-- SKILL.md lines: 390
+- SKILL.md lines: 391
 
 **Pass 1: Structure**
 - No pass 1 issues found.
