@@ -4,12 +4,22 @@ Continues `typo3-records-list-types` from [full guide](full-guide.md).
 
 ## 12. PSR-14 Events
 
+The extension dispatches a single PSR-14 event:
+
 | Event | Purpose |
 |-------|---------|
 | `RegisterViewModesEvent` | Register, remove, or modify view types |
-| `GridViewButtonBarListener` | Injects toggle buttons into DocHeader |
-| `GridViewQueryListener` | Modifies database queries |
-| `GridViewRecordActionsListener` | Collects record action buttons |
+
+It also ships listeners for TYPO3 Core events:
+
+| Listener | Core event listened to | Purpose |
+|----------|------------------------|---------|
+| `GridViewButtonBarListener` | `ModifyButtonBarEvent` | Injects view toggle buttons into DocHeader |
+| `GridViewQueryListener` | `ModifyDatabaseQueryForRecordListingEvent` | Modifies database queries for record listings |
+| `GridViewRecordActionsListener` | `ModifyRecordListRecordActionsEvent` | Collects record action buttons |
+| `RecordFilterButtonBarListener` | `ModifyButtonBarEvent` | Adds filter controls to DocHeader |
+| `RecordFilterQueryListener` | `ModifyDatabaseQueryForRecordListingEvent` | Applies active filters to record queries |
+| `RecordFilterAdditionalContentListener` | `RenderAdditionalContentToRecordListEvent` | Renders the filter UI above the record list |
 
 ### Register a View Type via Event
 

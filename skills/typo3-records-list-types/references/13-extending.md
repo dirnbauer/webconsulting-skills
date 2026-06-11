@@ -4,16 +4,16 @@ Continues `typo3-records-list-types` from [full guide](full-guide.md).
 
 ## 13. Extending
 
-### Override Templates via TypoScript
+### Override Templates via TSconfig
 
-TypoScript goes under the **plugin namespace** `module.tx_recordsgridview` (historical key from the extension’s early name). The extension key remains `records_list_types`.
+Template, partial, and layout overrides are configured per view type in page TSconfig via `templateRootPath` / `partialRootPath` / `layoutRootPath` (resolved by `ViewTypeRegistry::getTemplatePaths()`; custom paths are prepended before the extension's own `Resources/Private/` defaults).
 
-```typoscript
-module.tx_recordsgridview {
-    view {
-        templateRootPaths.100 = EXT:your_extension/Resources/Private/Templates/RecordsListTypes/
-        partialRootPaths.100 = EXT:your_extension/Resources/Private/Partials/RecordsListTypes/
-        layoutRootPaths.100 = EXT:your_extension/Resources/Private/Layouts/RecordsListTypes/
+```tsconfig
+mod.web_list.viewMode.types {
+    grid {
+        templateRootPath = EXT:your_extension/Resources/Private/Templates/
+        partialRootPath = EXT:your_extension/Resources/Private/Partials/
+        layoutRootPath = EXT:your_extension/Resources/Private/Layouts/
     }
 }
 ```
@@ -59,15 +59,27 @@ final class CustomRecordActionListener
 
 ### Custom Thumbnail Logic
 
+`ThumbnailService` exposes this public API:
+
+```php
+public function getFirstImage(string $table, int $uid, string $fieldName): ?FileInterface
+public function getAllImages(string $table, int $uid, string $fieldName): array
+public function getThumbnailUrl(FileInterface $file, int $width = self::DEFAULT_WIDTH, int $height = self::DEFAULT_HEIGHT): ?string
+public function getThumbnailData(string $table, int $uid, string $fieldName): array  // {file, url, exists}
+public function getFirstFileReference(string $table, int $uid, string $fieldName): ?FileReference
+```
+
+Override an entry point, e.g.:
+
 ```php
 class CustomThumbnailService extends ThumbnailService
 {
-    public function getThumbnailForRecord(string $table, array $record, string $imageField): ?FileInterface
+    public function getFirstImage(string $table, int $uid, string $fieldName): ?FileInterface
     {
         if ($table === 'tx_yourext_domain_model_item') {
-            return $this->getFromExternalSource($record);
+            return $this->getFromExternalSource($table, $uid);
         }
-        return parent::getThumbnailForRecord($table, $record, $imageField);
+        return parent::getFirstImage($table, $uid, $fieldName);
     }
 }
 ```
@@ -82,9 +94,17 @@ services:
 
 ### JavaScript Hooks
 
+The extension does not dispatch custom namespaced events. The shipped modules (`GridViewActions.js`, `HistoryOverlay.js`, `RecordFilters.js`) dispatch standard TYPO3/DOM events you can listen to:
+
 ```javascript
-// Event prefix `recordsGridview:` matches the historical extension codename (same story as TypoScript `module.tx_recordsgridview`).
-document.addEventListener('recordsGridview:viewModeChanged', (event) => {
-    console.log('View mode changed to:', event.detail.mode);
+// Fired on the top document after drag-drop moves a page record
+top.document.addEventListener('typo3:pagetree:refresh', () => {
+    console.log('Page tree refreshed after record move');
 });
+
+// Fired on the clipboard panel after clipboard actions
+document.querySelector('typo3-backend-clipboard-panel')
+    ?.addEventListener('typo3:clipboard:update', () => {
+        console.log('Clipboard contents changed');
+    });
 ```

@@ -39,14 +39,13 @@ records_list_types/
 │   ├── Private/
 │   │   ├── Language/ (en, de)
 │   │   ├── Layouts/
-│   │   ├── Partials/ (Card, CompactRow, Pagination, RecordActions, SortingDropdown, TeaserCard, ViewSwitcher)
+│   │   ├── Partials/ (Card, CompactRow, EmptyRecordsNotice, Pagination, RecordActionDropdown, RecordActions, RecordFilters, SortableColumnHeader, SortingDropdown, SortingModeToggle, TableHeading, TeaserCard, TranslationRow*)
 │   │   └── Templates/ (CompactView, GenericView, GridView, TeaserView)
 │   └── Public/
 │       ├── Css/ (base, grid-view, compact-view, teaser-view, view-mode-toggle)
 │       ├── Icons/
-│       └── JavaScript/ (GridViewActions, view-switcher)
+│       └── JavaScript/ (GridViewActions, HistoryOverlay, RecordFilters)
 ├── Tests/ (Unit, Functional, Architecture)
 ├── composer.json
-├── ext_emconf.php
 └── ext_localconf.php
 ```

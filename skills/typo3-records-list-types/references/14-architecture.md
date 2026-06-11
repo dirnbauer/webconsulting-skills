@@ -38,7 +38,8 @@ Custom view types automatically receive `base.css`.
 | Module | Purpose |
 |--------|---------|
 | `GridViewActions.js` | Drag-drop, record actions, sorting, search, pagination, ARIA |
-| `view-switcher.js` | View mode switching with AJAX persistence |
+| `HistoryOverlay.js` | Record history overlay in the backend |
+| `RecordFilters.js` | Filter controls for record listings |
 
 ### AJAX Routes
 
