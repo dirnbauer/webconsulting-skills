@@ -66,7 +66,7 @@ USER_ONLY=false
 PROJECT_ONLY=false
 NO_SYNC=false
 GENERATE_ONLY=false
-SYNC_SUBDIRS=(agents assets evals examples reference references rules scripts)
+SYNC_SUBDIRS=(agents assets evals examples reference references rules scripts templates)
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -284,7 +284,7 @@ Follow the instructions in $agents_link — it is the single source of truth for
 $extra_section
 ## Skills Location
 
-All skills live in \`skills/<skill-name>/SKILL.md\`. Installers symlink the whole skill directory, not just \`SKILL.md\`, so optional \`agents/\`, \`assets/\`, \`evals/\`, \`examples/\`, \`reference/\`, \`references/\`, \`rules/\`, and \`scripts/\` folders remain available to clients that support them.
+All skills live in \`skills/<skill-name>/SKILL.md\`. Installers symlink the whole skill directory, not just \`SKILL.md\`, so optional \`agents/\`, \`assets/\`, \`evals/\`, \`examples/\`, \`reference/\`, \`references/\`, \`rules/\`, \`scripts/\`, and \`templates/\` folders remain available to clients that support them.
 
 To use a skill, read \`skills/<skill-name>/SKILL.md\` and follow its instructions. Load referenced files only when the skill asks for them.
 
