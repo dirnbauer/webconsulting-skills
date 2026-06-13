@@ -130,7 +130,7 @@ Reference it with :ref:`my-section-label` or :ref:`custom text <my-section-label
 
 ```rst
 :php:`ClassName` - PHP class
-:ts:`config.tx_myext` - TypoScript
+:typoscript:`config.tx_myext` - TypoScript
 :file:`Configuration/TCA/` - File path
 :bash:`composer require` - Shell command
 ```
@@ -206,15 +206,14 @@ Term
 ### Render Documentation
 
 ```bash
-# Using Docker (recommended)
-cd Documentation
+# Using Docker (recommended) - run from the project root
 docker run --rm --pull always \
   -v $(pwd):/project \
   ghcr.io/typo3-documentation/render-guides:latest \
   --config=Documentation
 
 # View output
-open Documentation-GENERATED-temp/Result/project/0.0.0/Index.html
+open Documentation-GENERATED-temp/Index.html
 ```
 
 ### Validate Documentation

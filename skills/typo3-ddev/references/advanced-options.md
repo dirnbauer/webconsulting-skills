@@ -191,7 +191,7 @@ database:
 - Latest features (+40% performance vs 10.11)
 - Forward compatibility testing
 
-**For detailed rationale**, see: `docs/adr/0002-mariadb-default-with-database-alternatives.md`
+**For detailed rationale**, see: `references/0002-mariadb-default-with-database-alternatives.md`
 
 ### XDebug Setup
 
@@ -277,7 +277,7 @@ Valkey is wire-protocol compatible with Redis but offers:
 
 **Configuration**: Both use identical TYPO3 configuration. Add cache backend to `AdditionalConfiguration.php` (see `.ddev/config.redis.php.example`)
 
-**For detailed rationale**, see: `docs/adr/0001-valkey-default-with-redis-alternative.md`
+**For detailed rationale**, see: `references/0001-valkey-default-with-redis-alternative.md`
 
 #### MailPit (Email Testing)
 

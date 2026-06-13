@@ -576,13 +576,13 @@ Create tabbed content for multiple options.
 ```rst
 .. tabs::
 
-   .. tab:: Composer
+   .. group-tab:: Composer
 
       .. code-block:: bash
 
          composer require netresearch/rte-ckeditor-image
 
-   .. tab:: Extension Manager
+   .. group-tab:: Extension Manager
 
       Install via TYPO3 Extension Manager:
 
