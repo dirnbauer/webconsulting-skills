@@ -69,8 +69,8 @@ jobs:
       - name: Run PHPStan
         run: Build/Scripts/runTests.sh -s phpstan
 
-  rector:
-    name: Rector (dry-run)
+  cgl:
+    name: CGL (dry-run)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -81,8 +81,8 @@ jobs:
           php-version: '8.3'
           tools: composer:v2
 
-      - name: Run Rector dry-run
-        run: Build/Scripts/runTests.sh -s rector -n
+      - name: Run CGL dry-run
+        run: Build/Scripts/runTests.sh -s cgl -n
 
   # ==========================================================================
   # Unit Tests
@@ -107,14 +107,14 @@ jobs:
           tools: composer:v2
 
       - name: Run unit tests with coverage
-        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s unit -x
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s unitCoverage
 
       - name: Upload coverage to Codecov
         if: matrix.php == '8.3'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: .Build/coverage/clover.xml
+          files: .Build/coverage/unit.xml
           flags: unittests
           fail_ci_if_error: false
           verbose: true
@@ -170,8 +170,9 @@ jobs:
   #         php-version: '8.3'
   #         tools: composer:v2
   #
+  #     # PHPat rules run as a PHPStan extension, not a separate suite
   #     - name: Run architecture tests
-  #       run: Build/Scripts/runTests.sh -s architecture
+  #       run: Build/Scripts/runTests.sh -s phpstan
 
   # ==========================================================================
   # Mutation Testing (Optional - runs on schedule or manual trigger)

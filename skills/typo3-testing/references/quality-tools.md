@@ -134,7 +134,7 @@ parameters:
 
 ```bash
 # Via runTests.sh
-Build/Scripts/runTests.sh phpstan
+Build/Scripts/runTests.sh -s phpstan
 
 # Directly
 .Build/bin/phpstan analyse -c Build/phpstan.neon
@@ -362,13 +362,9 @@ return RectorConfig::configure()
 
 ```bash
 # Dry run (show changes)
-Build/Scripts/runTests.sh rector
+.Build/bin/rector process --dry-run
 
 # Apply changes
-Build/Scripts/runTests.sh rector:fix
-
-# Directly
-.Build/bin/rector process --dry-run
 .Build/bin/rector process
 ```
 
@@ -445,10 +441,10 @@ return (new PhpCsFixer\Config())
 
 ```bash
 # Check only (dry run)
-Build/Scripts/runTests.sh cgl
+Build/Scripts/runTests.sh -s cgl -n
 
 # Fix files
-Build/Scripts/runTests.sh cgl:fix
+Build/Scripts/runTests.sh -s cgl
 
 # Directly
 .Build/bin/php-cs-fixer fix --config=Build/.php-cs-fixer.php --dry-run --diff
@@ -507,7 +503,7 @@ extensions:
 vendor/bin/phplint
 
 # Via runTests.sh
-Build/Scripts/runTests.sh lint
+Build/Scripts/runTests.sh -s lint
 
 # Specific directory
 vendor/bin/phplint Classes/
@@ -520,13 +516,13 @@ With typo3-ci-workflows, use `Build/Scripts/runTests.sh` as the entry point:
 ```json
 {
     "scripts": {
-        "ci:cgl": "Build/Scripts/runTests.sh cgl:fix",
-        "ci:test:php:cgl": "Build/Scripts/runTests.sh cgl",
-        "ci:test:php:phpstan": "Build/Scripts/runTests.sh phpstan",
-        "ci:test:php:unit": "Build/Scripts/runTests.sh unit",
-        "ci:test:php:functional": "Build/Scripts/runTests.sh functional",
-        "ci:test:php:fuzz": "Build/Scripts/runTests.sh fuzz",
-        "ci:mutation": "Build/Scripts/runTests.sh mutation",
+        "ci:cgl": "Build/Scripts/runTests.sh -s cgl",
+        "ci:test:php:cgl": "Build/Scripts/runTests.sh -s cgl -n",
+        "ci:test:php:phpstan": "Build/Scripts/runTests.sh -s phpstan",
+        "ci:test:php:unit": "Build/Scripts/runTests.sh -s unit",
+        "ci:test:php:functional": "Build/Scripts/runTests.sh -s functional",
+        "ci:test:php:fuzz": "Build/Scripts/runTests.sh -s fuzz",
+        "ci:mutation": "Build/Scripts/runTests.sh -s mutation",
         "ci:test:php:all": [
             "@ci:test:php:unit",
             "@ci:test:php:functional"
