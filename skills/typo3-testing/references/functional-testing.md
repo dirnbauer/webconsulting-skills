@@ -170,7 +170,7 @@ protected array $testExtensionsToLoad = [
 ];
 ```
 
-**Important:** Always use the `vendor/extension-name` pattern matching the `name` field in the extension's `composer.json`. This is the only format that works reliably across all testing setups (local, CI, DDEV). The legacy `typo3conf/ext/my_extension` path format is deprecated and should not be used in new tests.
+**Important:** Use the `vendor/extension-name` pattern matching the `name` field in the extension's `composer.json`. The `typo3conf/ext/<key>` path format is also a standard, supported format for `testExtensionsToLoad`. Note the difference: `testExtensionsToLoad` takes either the Composer package name or the `typo3conf/ext/<key>` path, whereas `coreExtensionsToLoad` takes bare extension keys (e.g. `'form'`).
 
 ### Core Extensions
 
@@ -832,9 +832,9 @@ protected function tearDown(): void
 }
 ```
 
-## Site Configuration (TYPO3 v12+)
+## Site Configuration (TYPO3 v13+)
 
-Use `SiteWriter` instead of the deprecated `writeSiteConfiguration()`:
+`SiteWriter` (v13+) is the current API for creating site configuration in tests:
 
 ```php
 use TYPO3\CMS\Core\Configuration\SiteWriter;
@@ -845,10 +845,10 @@ protected function setUp(): void
 
     $this->importCSVDataSet(__DIR__ . '/Fixtures/pages.csv');
 
-    // ❌ Deprecated in TYPO3 v12
+    // Older API (still used on v12)
     // $this->writeSiteConfiguration('test', ['rootPageId' => 1, 'base' => '/']);
 
-    // ✅ TYPO3 v12+ with SiteWriter
+    // ✅ TYPO3 v13+ with SiteWriter
     $siteWriter = $this->get(SiteWriter::class);
     $siteWriter->createNewBasicSite('website-local', 1, 'http://localhost/');
 

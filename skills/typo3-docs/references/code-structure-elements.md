@@ -373,16 +373,17 @@ Document PHP APIs with structured directives.
 
     Manages secure storage and retrieval of secrets.
 
-    ..  php:method:: store(string $identifier, string $secret, array $options = []): void
+    ..  php:method:: store(string $identifier, string $secret, array $options = [])
 
         Store a secret in the vault.
 
         :param string $identifier: Unique identifier for the secret
         :param string $secret: The secret value to store
         :param array $options: Additional storage options
+        :returntype: void
         :throws: \Vendor\Extension\Exception\VaultException
 
-    ..  php:method:: retrieve(string $identifier): ?string
+    ..  php:method:: retrieve(string $identifier)
 
         Retrieve a secret from the vault.
 

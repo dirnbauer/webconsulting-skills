@@ -112,8 +112,10 @@ strategy:
 - **Cache interface strict-typing (#107315)**: test doubles for
   `BackendInterface`/`FrontendInterface` must match the new typed
   signatures.
-- **FAL strict-typing (#106427)**: `AbstractFile::getIdentifier()` is
-  gone; test doubles for `File`/`Folder` must use concrete methods.
+- **FAL strict-typing (#106427)**: FAL method signatures gained strict
+  return types, so test doubles for `File`/`Folder` must match the new
+  typed signatures. (`ResourceInterface::getIdentifier(): string` still
+  exists — it was not removed.)
 - **Extbase argument strict-typing (#107777)**: `Argument` now enforces
   strict types; replace `setValue(mixed)` mocks.
 - See `typo3-v14-final-classes.md` for the full list of v14 `final` classes

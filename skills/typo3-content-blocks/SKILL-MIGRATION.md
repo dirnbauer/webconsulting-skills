@@ -642,6 +642,8 @@ fields:
 
 defined('TYPO3') or die();
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 // Register CType in tt_content selector (avoid deprecated addPlugin for new code)
 $GLOBALS['TCA']['tt_content']['columns']['CType']['config']['items'][] = [
     'label' => 'LLL:EXT:my_ext/Resources/Private/Language/locallang.xlf:ce.hero.title',

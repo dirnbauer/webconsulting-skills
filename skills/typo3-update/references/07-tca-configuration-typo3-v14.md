@@ -53,7 +53,6 @@ return [
                 'size' => 50,
                 'max' => 255,
                 'required' => true,
-                'searchable' => true,
             ],
         ],
         'description' => [
@@ -63,12 +62,16 @@ return [
                 'cols' => 40,
                 'rows' => 5,
                 'enableRichtext' => true,
-                'searchable' => true,
+                // All suitable fields are searchable by default in v14 —
+                // set 'searchable' => false to EXCLUDE a field from backend search.
+                'searchable' => false,
             ],
         ],
     ],
 ];
 ```
+
+> **`searchable` in v14:** `ctrl.searchFields` was removed (#106972). All suitable fields are now searchable by default, so there is no opt-in `'searchable' => true`. The key is only used as `'searchable' => false` on the few columns you want to **exclude** from backend search (e.g. large richtext bodies or technical/identifier fields).
 
 ### Auto-Created Columns from ctrl
 

@@ -1713,11 +1713,24 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 final class XxeProtectionTest extends UnitTestCase
 {
     #[Test]
-    public function libxmlDisablesExternalEntityLoading(): void
+    public function externalEntitiesAreNotExpanded(): void
     {
-        // This tests PHP/libxml behavior, not application code
-        $previousValue = libxml_disable_entity_loader(true);
-        self::assertTrue($previousValue || true);
+        // This tests PHP/libxml behavior, not application code.
+        // Since PHP 8.0 external entities are not loaded by default and
+        // libxml_disable_entity_loader() is deprecated. Verify that loading
+        // with LIBXML_NONET does not expand an external entity.
+        $xml = <<<'XML'
+<?xml version="1.0"?>
+<!DOCTYPE root [<!ENTITY xxe SYSTEM "file:///etc/hostname">]>
+<root>&xxe;</root>
+XML;
+
+        $document = new \DOMDocument();
+        $loaded = $document->loadXML($xml, LIBXML_NONET);
+
+        self::assertTrue($loaded);
+        // The external entity must not have been resolved into the node value.
+        self::assertSame('', trim((string)$document->documentElement?->textContent));
     }
 }
 ```

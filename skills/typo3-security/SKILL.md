@@ -243,10 +243,27 @@ Set the hashed password via the Install Tool or an environment-specific `config/
 
 ### IP Restriction for Install Tool
 
-```php
-// config/system/additional.php
-$GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = '$argon2id$...'; // hashed
+Restrict the Install Tool entry point (`/typo3/install.php` on Composer-based v14) to trusted IPs at the web-server level:
+
+```apacheconf
+# Apache: in the vhost or .htaccess
+<LocationMatch "^/typo3/install\.php">
+    Require ip 203.0.113.0/24
+    Require ip 198.51.100.42
+</LocationMatch>
 ```
+
+```nginx
+# Nginx
+location = /typo3/install.php {
+    allow 203.0.113.0/24;
+    allow 198.51.100.42;
+    deny  all;
+    # ...existing fastcgi_pass / include snippet...
+}
+```
+
+> Note: `$GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask']` only governs exposure of dev/debug tooling (e.g. the admin panel and debug output) — it does **not** restrict or authenticate the Install Tool. Lock the Install Tool down at the web server (above) in addition to setting a strong `installToolPassword`.
 
 ## 5. Backend User Security
 

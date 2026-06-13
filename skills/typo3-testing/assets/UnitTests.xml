@@ -12,10 +12,18 @@
     failOnRisky="true"
     colors="true">
     <testsuites>
-        <testsuite name="Unit tests">
+        <testsuite name="Unit">
             <directory>../../Tests/Unit/</directory>
         </testsuite>
+        <testsuite name="Fuzz">
+            <directory>../../Tests/Fuzz/</directory>
+        </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory>../../Classes</directory>
+        </include>
+    </source>
     <coverage>
         <report>
             <clover outputFile="../../var/log/coverage/clover.xml"/>

@@ -103,7 +103,6 @@ namespace MyVendor\MyExtension\Tests\Functional;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\WorkspaceAspect;
-use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -134,7 +133,6 @@ final class WorkspaceAwareTest extends FunctionalTestCase
 
         // Initialize backend user (uid=1 from fixture, must be admin for DataHandler)
         $this->setUpBackendUser(1);
-        Bootstrap::initializeLanguageObject();
     }
 
     /**

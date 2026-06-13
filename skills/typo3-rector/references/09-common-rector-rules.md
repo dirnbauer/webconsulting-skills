@@ -12,13 +12,15 @@ Rector automatically handles namespace changes between versions.
 
 ```php
 <?php
-// ❌ Old (deprecated)
+// ❌ Old (deprecated since v14.3)
 GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
 
-// ✅ New (TYPO3 v14)
-$request = $GLOBALS['TYPO3_REQUEST'];
-$normalizedParams = $request->getAttribute('normalizedParams');
-$host = $normalizedParams->getRequestHost();
+// ✅ New (TYPO3 v14) — inject the PSR-7 request, don't read $GLOBALS
+public function doSomething(ServerRequestInterface $request): void
+{
+    $normalizedParams = $request->getAttribute('normalizedParams');
+    $host = $normalizedParams->getRequestHost();
+}
 ```
 
 ### ObjectManager Removal

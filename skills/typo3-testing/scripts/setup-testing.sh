@@ -58,11 +58,7 @@ else
     echo -e "${GREEN}✓ typo3/testing-framework already present${NC}"
 fi
 
-# Install PHPUnit if not present
-if ! grep -q "phpunit/phpunit" "${PROJECT_DIR}/composer.json"; then
-    composer require --dev "phpunit/phpunit:^10.5 || ^11.0" --no-update
-    echo -e "${GREEN}✓ Added phpunit/phpunit${NC}"
-fi
+# PHPUnit is pulled in transitively by typo3/testing-framework — do not pin it directly.
 
 composer update --no-progress
 
