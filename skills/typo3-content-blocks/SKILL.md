@@ -1,7 +1,7 @@
 ---
 name: "typo3-content-blocks"
 description: "Guides TYPO3 Content Blocks modeling for Content Elements, Record Types, Page Types, and File Types as the single source of truth. Use when creating, migrating, auditing, or debugging Content Blocks config.yaml files, make:content-block output, content elements, record types, page types, file types, collections, IRRE, labels, previews, or friendsoftypo3/content-blocks behavior."
-compatibility: "TYPO3 14.x — `friendsoftypo3/content-blocks` 2.x (verify on [Packagist](https://packagist.org/packages/friendsoftypo3/content-blocks))"
+compatibility: "TYPO3 v14.3+ — `friendsoftypo3/content-blocks` 2.x (verify on [Packagist](https://packagist.org/packages/friendsoftypo3/content-blocks))"
 metadata:
   version: "1.5.0"
   related_skills: "typo3-content-blocks-migration, shadcn-ui, typo3-vite"
@@ -12,7 +12,7 @@ license: "MIT / CC-BY-SA-4.0"
 
 > Source: https://github.com/dirnbauer/webconsulting-skills
 
-> **Compatibility:** This skill targets **TYPO3 v14.x** with **Content Blocks 2.x**. Always match the [Packagist `friendsoftypo3/content-blocks`](https://packagist.org/packages/friendsoftypo3/content-blocks) constraint to your Core version.
+> **Compatibility:** This skill targets **TYPO3 v14.3+** with **Content Blocks 2.x**. Always match the [Packagist `friendsoftypo3/content-blocks`](https://packagist.org/packages/friendsoftypo3/content-blocks) constraint to your Core version.
 > For **Content Blocks 1.x on TYPO3 v13**, upstream requires **TYPO3 ≥ 13.4** (`typo3/cms-core: ^13.4`) — confirm on Packagist.
 > Examples use TYPO3 v14 APIs and CB 2.x; adjust `composer.json` if upstream constraints differ.
 

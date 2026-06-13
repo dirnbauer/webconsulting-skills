@@ -73,21 +73,22 @@ tx_solr_ajaxPage {
         userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
         extensionName = Solr
         pluginName = pi_results
-        vendorName = ApacheSolrForTypo3
+        # v14: a single controller/action only. `switchableControllerActions` was
+        # removed in v12.4 (ignored on v14) and `vendorName` is a no-op — both dropped.
         controller = Search
         action = results
-        switchableControllerActions {
-            Search {
-                1 = results
-                2 = form
-            }
-        }
         view < plugin.tx_solr.view
         persistence < plugin.tx_solr.persistence
         settings < plugin.tx_solr.settings
     }
 }
 ```
+
+> Note: prefer the extension's bundled Ajaxify/results configuration over hand-rolled
+> TypoScript — include EXT:solr's shipped example (`EXT:solr/Configuration/TypoScript/Examples/Ajaxify/setup.typoscript`)
+> and trim the legacy `switchableControllerActions`/`vendorName` keys if your installed
+> version still ships them. The results plugin is registered as `extensionName = Solr`,
+> `pluginName = pi_results`, controller `Search`.
 
 ## 2. Suggest / Autocomplete with Vanilla JS
 

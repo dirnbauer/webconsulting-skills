@@ -122,7 +122,8 @@ plugin.tx_solr.index.queue {
 
     news {
         attachments {
-            fields = related_files
+            # news v14: FAL relation column is `fal_related_files` (no plain `related_files` column)
+            fields = fal_related_files
         }
     }
 }

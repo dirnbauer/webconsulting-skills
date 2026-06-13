@@ -294,7 +294,7 @@ exhibit the issue. The reference command applies this workaround throughout.
 
 ## 9. Performance notes
 
-- **Tag upsert via DataHandler** for the 25 tag rows (slug eval, refindex) — negligible cost.
+- **Tag upsert via DataHandler** for the ~65 tag rows (slug eval, refindex) — negligible cost.
 - **MM inserts via direct multi-row SQL** (batch 500). DataHandler MM writes are O(n²) per
   record and unnecessary for MM tables that have no TCA semantics.
 - **Sort by `datetime DESC`** with `LIMIT N` to get the latest N news — index it if cold.

@@ -63,7 +63,9 @@ foreach (glob($elementsRoot . '/*', GLOB_ONLYDIR) ?: [] as $dir) {
     $summary['elements']++;
 
     $configFile = $dir . '/config.yaml';
-    $frontendFile = $dir . '/templates/frontend.html';
+    $frontendFile = is_file($dir . '/templates/frontend.fluid.html')
+        ? $dir . '/templates/frontend.fluid.html'
+        : $dir . '/templates/frontend.html';
     $previewFile = $dir . '/templates/backend-preview.fluid.html';
     $iconFile = $dir . '/assets/icon.svg';
     $labelsFile = $dir . '/language/labels.xlf';
