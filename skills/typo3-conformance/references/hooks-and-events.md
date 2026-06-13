@@ -271,10 +271,9 @@ $GLOBALS['TYPO3_REQUEST']
 
 // Backend user context (framework-provided)
 $GLOBALS['BE_USER']
-
-// Frontend user context (framework-provided)
-$GLOBALS['TSFE']
 ```
+
+> **Note:** `$GLOBALS['TSFE']` (`TypoScriptFrontendController`) is **removed in v14** (#107831) and is **not** acceptable. Use the PSR-7 request instead: `$request->getAttribute('frontend.controller')` and the other `frontend.*` request attributes.
 
 ### ❌ Avoid $GLOBALS
 

@@ -528,23 +528,35 @@ class MyProcessor
 
 **Note**: No Rector rule exists for this change. Manual review of TypoScript configurations required.
 
-### ExtensionConfiguration::getAll() Removed (Critical)
+### ExtensionConfiguration::getAll() Not Available (Critical)
 
 **Search Pattern**
 ```bash
 grep -rn "ExtensionConfiguration::getAll\|->getAll()" Classes/
 ```
 
-**Replace**
+**Replace** — `getAll()` is not available; inject `ExtensionConfiguration` and read each extension's configuration with `->get()` rather than touching `$GLOBALS` directly.
 ```php
-// Before (removed in v14)
-$allConfig = GeneralUtility::makeInstance(ExtensionConfiguration::class)->getAll();
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 
-// After - use $GLOBALS directly
-$allConfig = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS'] ?? [];
+class MyService
+{
+    public function __construct(
+        private readonly ExtensionConfiguration $extensionConfiguration,
+    ) {}
 
-// Or for specific extension
-$extConfig = $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['my_extension'] ?? [];
+    public function readConfig(): void
+    {
+        // Before (no longer available)
+        // $allConfig = GeneralUtility::makeInstance(ExtensionConfiguration::class)->getAll();
+
+        // After - fetch per extension
+        $extConfig = $this->extensionConfiguration->get('my_extension');
+
+        // A specific key/path within the extension's configuration
+        $value = $this->extensionConfiguration->get('my_extension', 'features/enableFoo');
+    }
+}
 ```
 
 ### Doctrine DBAL 4.x Type::getName() Removed

@@ -342,15 +342,15 @@ grep -A 5 "'depends' =>" ext_emconf.php | grep -q "'php'" && echo "✅ PHP depen
 **Format:** `major.minor.patch-major.minor.patch`
 
 **TYPO3 Compatibility:**
-- TYPO3 12 LTS: PHP 8.1-8.5
+- TYPO3 12 LTS: PHP 8.1-8.4
 - TYPO3 13 LTS: PHP 8.2-8.5
-- TYPO3 14: PHP 8.3-8.5
+- TYPO3 14: PHP 8.2-8.5
 
 **Example:**
 ```php
 'php' => '8.1.0-8.5.99',  // For v12/v13 compatibility
 'php' => '8.2.0-8.5.99',  // For v13 only
-'php' => '8.3.0-8.5.99',  // For v14 only
+'php' => '8.2.0-8.5.99',  // For v14
 ```
 
 ---

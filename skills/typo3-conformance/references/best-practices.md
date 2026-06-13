@@ -1754,7 +1754,6 @@ Add proper accessibility attributes to interactive elements:
 </table>
 ```
 
-||||||| parent of 4cac7a1 (feat: add learnings from 60+ agent review cycles):references/best-practices.md
 ## XLIFF Translation Hygiene
 
 Periodically audit for unused translation keys defined in `locallang.xlf` (and language variants like `de.locallang.xlf`) but never referenced in PHP or Fluid templates. Dead keys accumulate during refactoring and clutter translation files.
