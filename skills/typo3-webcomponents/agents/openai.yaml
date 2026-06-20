@@ -1,0 +1,4 @@
+interface:
+  display_name: "TYPO3 Web Components"
+  short_description: "Build TYPO3 v14 backend web components"
+  default_prompt: "Use $typo3-webcomponents to build or review a TYPO3 v14 backend web component."

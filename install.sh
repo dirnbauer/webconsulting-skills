@@ -12,6 +12,8 @@
 #   • Optionally add one .sync-config.json entry for upstream-managed skills
 #   • Do not add per-client symlink code for individual skills
 #   • The installer fans every skill out to supported clients automatically
+#   • Local skills such as typo3-webcomponents are included by discovery after
+#     README.md/AGENTS.md trigger metadata and generated manifests are refreshed
 #
 # Options:
 #   --user-only     Only install user-level skills (skip project-level)

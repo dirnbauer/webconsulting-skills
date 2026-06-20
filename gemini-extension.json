@@ -1454,6 +1454,22 @@
       ],
       "path": "${extensionPath}/skills/typo3-vite"
     },
+    "typo3-webcomponents": {
+      "name": "typo3-webcomponents",
+      "description": "TYPO3 v14 backend Web Components with Lit, import maps, backend modules, Form Editor, AJAX routes, reusable backend components, frontend usage decisions, examples, how-tos, dos and donts, and speed guidance",
+      "triggers": [
+        "web components",
+        "Lit",
+        "LitElement",
+        "backend JavaScript",
+        "JavaScriptModules.php",
+        "f:asset.module",
+        "@typo3 modules",
+        "backend module UI",
+        "Form Editor"
+      ],
+      "path": "${extensionPath}/skills/typo3-webcomponents"
+    },
     "typo3-workspaces": {
       "name": "typo3-workspaces",
       "description": "Workspaces versioning, staging, publishing workflows, debugging",

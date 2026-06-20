@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **135 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **136 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -22,14 +22,19 @@ deserves clear credit. Thank you, Netresearch, and thank you as well to the engi
 maintainers, and contributors behind that work. This collection is better because of the
 care, clarity, and generosity you brought to the TYPO3 ecosystem.
 
+Thank you also to **[ochorocho](https://github.com/ochorocho)** for the
+[Camino: Camp Vienna "Lit it Up!"](https://dev.ochorocho.dev/camp-vienna#/) material and
+[lit_demo](https://github.com/ochorocho/lit_demo) examples, which informed the practical
+TYPO3 backend Lit guidance in the `typo3-webcomponents` skill.
+
 ## Skill Categories
 
-This repository currently ships **134 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **136 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 29 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Desiderio Teach (Matt Pocock), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **TYPO3 CMS** | 30 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Desiderio Teach (Matt Pocock), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Web Components (webconsulting), Vite (Netresearch), Solr (webconsulting) |
 | **Video & Animation** | 9 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting), Micro-interactions (Dylan Tarre), Microinteractions (wondelai) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
@@ -42,7 +47,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **134 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **136 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -118,6 +123,7 @@ GEMINI.md                  ← Gemini CLI primary instructions (→ AGENTS.md)
 3. Keep the main `SKILL.md` concise. Put optional deep guidance in `references/`, deterministic helpers in `scripts/`, reusable input/output material in `assets/`, and runnable examples in `examples/`.
 4. If the skill is upstream-managed, add one entry to `.sync-config.json`.
 5. Run `npx -y skills-ref validate skills/<slug>` and `./install.sh --generate-only` to refresh the catalog, README-derived manifest data, and client files. Run `./install.sh` when you also want to deploy symlinks.
+6. For local skills such as `typo3-webcomponents`, do not add per-skill install/update rules. `install.sh`, `update.sh`, `scripts/audit_skills.py`, and `scripts/generate_gemini_manifest.py` discover top-level skill directories automatically once the README/AGENTS trigger tables are updated.
 
 Do not create manual per-client symlinks, duplicate `SKILL.md` files, or client-specific install rules for an individual skill. The installer loops over `skills/*` and populates every core client location automatically.
 
@@ -292,6 +298,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
 | `typo3-visual-editor` | visual editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW, colPos | "Install and configure FriendsOfTYPO3 Visual Editor" or "Update my Fluid templates for f:render.contentArea and f:render.text" |
+| `typo3-webcomponents` | web components, Lit, LitElement, backend JavaScript, JavaScriptModules.php, f:asset.module, @typo3 modules, backend module UI, Form Editor | "Create a TYPO3 v14 backend Web Component with Lit" or "Should I use TYPO3 backend Web Components in the frontend?" |
 | `typo3-vite` | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp | "Set up Vite for my TYPO3 sitepackage" or "Configure vite-asset-collector with Bootstrap theming" |
 | `typo3-records-list-types` | records list types, grid view backend, compact view, teaser view | "Set Grid View as default" or "Create custom Timeline view" |
 | `typo3-solr` | solr, search, indexing, facets, suggest, autocomplete, vector search | "Set up EXT:solr with DDEV" or "Debug Solr indexing issues" |
@@ -2343,6 +2350,7 @@ grep -r "DataHandler" skills/
 | `typo3-records-list-types` | Grid, Compact, Teaser view modes for Records module | webconsulting |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows | webconsulting |
 | `typo3-visual-editor` | FriendsOfTYPO3 Visual Editor installation, Fluid template migration, inline editing, content areas, FAQ, and troubleshooting | webconsulting |
+| `typo3-webcomponents` | TYPO3 v14 backend Web Components with Lit, import maps, backend modules, Form Editor, AJAX routes, and frontend usage decisions | webconsulting |
 | `typo3-vite` | Vite build setup for TYPO3 with vite-asset-collector, SCSS, Bootstrap, SVG optimization, and CSP compliance | Netresearch |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search | webconsulting |
 | `security-audit` | Security audit patterns (OWASP, XXE, SQLi, XSS) | Netresearch |
@@ -2487,7 +2495,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │  134 SKILL.md     │
+                        │  136 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐
@@ -2776,6 +2784,11 @@ Each retains its original copyright and license terms:
 See individual SKILL.md files for per-skill attribution and license details.
 
 ## Acknowledgements
+
+Special thanks to **[ochorocho](https://github.com/ochorocho)** for
+[Camino: Camp Vienna "Lit it Up!"](https://dev.ochorocho.dev/camp-vienna#/) and the
+[ochorocho/lit_demo](https://github.com/ochorocho/lit_demo) examples. They provided the
+practical TYPO3 backend Lit reference material behind the `typo3-webcomponents` skill.
 
 <!-- ACKNOWLEDGEMENTS:START -->
 We are deeply grateful to **[Netresearch DTT GmbH](https://www.netresearch.de/)** for their

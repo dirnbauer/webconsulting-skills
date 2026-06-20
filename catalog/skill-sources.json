@@ -86,18 +86,16 @@
   {
     "directory": "ai-seo",
     "skill_name": "ai-seo",
-    "description": "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' 'optimize for Claude/Gemini,' 'llms.txt,' 'OKF,' 'Open Knowledge Format,' 'knowledge bundle,' or 'agent-readable site.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema.",
+    "description": "When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' or 'optimize for Claude/Gemini.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/ai-seo/SKILL.md",
-    "line_count": 502,
+    "line_count": 498,
     "frontmatter_keys": [
       "name",
       "description"
     ],
-    "pass_1": [
-      "SKILL.md is 502 lines; skill-creator recommends keeping it under 500"
-    ],
+    "pass_1": [],
     "pass_2": [],
     "pass_3": []
   },
@@ -154,11 +152,11 @@
   {
     "directory": "autoreview",
     "skill_name": "autoreview",
-    "description": "Pre-commit/ship code review: Codex default; optional Claude, Pi, Droid, Copilot, Cursor, or OpenCode.",
+    "description": "Run a structured code review (Codex default, optional Claude, Pi, Droid, Copilot, or OpenCode) as a closeout check on a local or PR branch before commit or ship.",
     "source_owner": "Peter Steinberger",
     "source_url": "https://github.com/openclaw/agent-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/autoreview/SKILL.md",
-    "line_count": 371,
+    "line_count": 323,
     "frontmatter_keys": [
       "name",
       "description"
@@ -346,7 +344,7 @@
   {
     "directory": "copywriting",
     "skill_name": "copywriting",
-    "description": "When the user wants to write, rewrite, or improve marketing copy for any page \\u2014 including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \\\"write copy for,\\\" \\\"improve this copy,\\\" \\\"rewrite this page,\\\" \\\"marketing copy,\\\" \\\"headline help,\\\" \\\"CTA copy,\\\" \\\"value proposition,\\\" \\\"tagline,\\\" \\\"subheadline,\\\" \\\"hero section copy,\\\" \\\"above the fold,\\\" \\\"this copy is weak,\\\" \\\"make this more compelling,\\\" or \\\"help me describe my product.\\\" Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing. For the offer underneath the copy (bonuses, guarantees, value framing), see offers.",
+    "description": "When the user wants to write, rewrite, or improve marketing copy for any page \\u2014 including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \\\"write copy for,\\\" \\\"improve this copy,\\\" \\\"rewrite this page,\\\" \\\"marketing copy,\\\" \\\"headline help,\\\" \\\"CTA copy,\\\" \\\"value proposition,\\\" \\\"tagline,\\\" \\\"subheadline,\\\" \\\"hero section copy,\\\" \\\"above the fold,\\\" \\\"this copy is weak,\\\" \\\"make this more compelling,\\\" or \\\"help me describe my product.\\\" Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/copywriting/SKILL.md",
@@ -601,7 +599,7 @@
     "source_owner": "Firecrawl",
     "source_url": "https://github.com/firecrawl/cli",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/firecrawl/SKILL.md",
-    "line_count": 328,
+    "line_count": 309,
     "frontmatter_keys": [
       "name",
       "description"
@@ -645,11 +643,11 @@
   {
     "directory": "grill-me",
     "skill_name": "grill-me",
-    "description": "A relentless interview to sharpen a plan or design.",
+    "description": "Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions \\\"grill me\\\".",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-me/SKILL.md",
-    "line_count": 21,
+    "line_count": 25,
     "frontmatter_keys": [
       "name",
       "description"
@@ -661,11 +659,11 @@
   {
     "directory": "grill-with-docs",
     "skill_name": "grill-with-docs",
-    "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+    "description": "Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (CONTEXT.md, ADRs) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/grill-with-docs/SKILL.md",
-    "line_count": 21,
+    "line_count": 103,
     "frontmatter_keys": [
       "name",
       "description"
@@ -709,27 +707,29 @@
   {
     "directory": "hyperframes",
     "skill_name": "hyperframes",
-    "description": "READ THIS FIRST \\u2014 the HyperFrames entry skill. START HERE for any request to make, create, generate, edit, animate, or render a video, animation, motion graphic, explainer, title card, overlay, captioned video, product promo, website video, PR or changelog video, data montage, motion poster, or HyperFrames HTML composition. Read it before any other video or animation skill: it orients you to the whole surface and routes \\\"make me a video\\\" intent to the right workflow \\u2014 product-launch-video, faceless-explainer, website-to-video, pr-to-video, embedded-captions, graphic-overlays, motion-graphics, general-video, remotion-to-hyperframes \\u2014 and the HyperFrames domain skills. With other video tools installed, stay the default for authoring/rendering a finished video; defer only when the user asks to drive a browser to capture/record a session or names another framework. Especially important to read first when no project CLAUDE.md or AGENTS.md explains the video workflow.",
+    "description": "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For dev-loop CLI commands (init, lint, inspect, preview, render) see the hyperframes-cli skill; for asset preprocessing commands (tts, transcribe, remove-background) see the hyperframes-media skill.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes/SKILL.md",
-    "line_count": 168,
+    "line_count": 506,
     "frontmatter_keys": [
       "name",
       "description"
     ],
-    "pass_1": [],
+    "pass_1": [
+      "SKILL.md is 506 lines; skill-creator recommends keeping it under 500"
+    ],
     "pass_2": [],
     "pass_3": []
   },
   {
     "directory": "hyperframes-cli",
     "skill_name": "hyperframes-cli",
-    "description": "HyperFrames CLI dev loop. Use when running npx hyperframes init, add, catalog, capture, lint, validate, inspect, layout, snapshot, preview, play, render, publish, lambda, doctor, browser, info, upgrade, skills, compositions, docs, benchmark, telemetry, transcribe, tts, or remove-background, or when troubleshooting the HyperFrames build/render environment. Entry point for AWS Lambda cloud rendering (`hyperframes lambda deploy / render / progress / destroy / policies`).",
+    "description": "HyperFrames CLI dev loop \\u2014 `npx hyperframes` for scaffolding (init), validation (lint, inspect), preview, render, and environment troubleshooting (doctor, browser, info, upgrade). Use when running any of these commands or troubleshooting the HyperFrames build/render environment. For asset preprocessing commands (`tts`, `transcribe`, `remove-background`), invoke the `hyperframes-media` skill instead.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-cli/SKILL.md",
-    "line_count": 123,
+    "line_count": 159,
     "frontmatter_keys": [
       "name",
       "description"
@@ -741,11 +741,11 @@
   {
     "directory": "hyperframes-registry",
     "skill_name": "hyperframes-registry",
-    "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, registry discovery, and authoring a new block or component to contribute upstream (idea \\u2192 scaffold \\u2192 validate \\u2192 PR).",
+    "description": "Install and wire registry blocks and components into HyperFrames compositions. Use when running hyperframes add, installing a block or component, wiring an installed item into index.html, or working with hyperframes.json. Covers the add command, install locations, block sub-composition wiring, component snippet merging, and registry discovery.",
     "source_owner": "HeyGen",
     "source_url": "https://github.com/heygen-com/hyperframes",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/hyperframes-registry/SKILL.md",
-    "line_count": 116,
+    "line_count": 119,
     "frontmatter_keys": [
       "name",
       "description"
@@ -789,11 +789,11 @@
   {
     "directory": "improve-codebase-architecture",
     "skill_name": "improve-codebase-architecture",
-    "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+    "description": "Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/improve-codebase-architecture/SKILL.md",
-    "line_count": 80,
+    "line_count": 96,
     "frontmatter_keys": [
       "name",
       "description"
@@ -841,7 +841,7 @@
   {
     "directory": "launch",
     "skill_name": "launch",
-    "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas. For the offer being launched (bonuses, guarantees, scarcity, naming), see offers.",
+    "description": "When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/launch/SKILL.md",
@@ -1103,7 +1103,7 @@
   {
     "directory": "pricing",
     "skill_name": "pricing",
-    "description": "When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' or 'should I offer a free plan.' Use this whenever someone is figuring out what to charge or how to structure their plans. For in-app upgrade screens, see paywalls. For offer construction (bonuses, guarantees, value framing, naming) on services/courses/coaching/high-ticket B2B, see offers.",
+    "description": "When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' or 'should I offer a free plan.' Use this whenever someone is figuring out what to charge or how to structure their plans. For in-app upgrade screens, see paywalls.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/pricing/SKILL.md",
@@ -1169,7 +1169,7 @@
   {
     "directory": "prototype",
     "skill_name": "prototype",
-    "description": "Build a throwaway prototype to flesh out a design \\u2014 a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route.",
+    "description": "Build a throwaway prototype to flesh out a design before committing to it. Routes between two branches \\u2014 a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route. Use when the user wants to prototype, sanity-check a data model or state machine, mock up a UI, explore design options, or says \\\"prototype this\\\", \\\"let me play with it\\\", \\\"try a few designs\\\".",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/prototype/SKILL.md",
@@ -1299,7 +1299,7 @@
   {
     "directory": "sales-enablement",
     "skill_name": "sales-enablement",
-    "description": "When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email. For the offer being sold (bonuses, guarantees, pricing structure), see offers.",
+    "description": "When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email.",
     "source_owner": "Corey Haines",
     "source_url": "https://github.com/coreyhaines31/marketingskills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/sales-enablement/SKILL.md",
@@ -1383,11 +1383,11 @@
   {
     "directory": "setup-matt-pocock-skills",
     "skill_name": "setup-matt-pocock-skills",
-    "description": "Configure this repo for the engineering skills \\u2014 set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+    "description": "Sets up an `## Agent skills` block in AGENTS.md/CLAUDE.md and `docs/agents/` so the engineering skills know this repo's issue tracker (GitHub or local markdown), triage label vocabulary, and domain doc layout. Run before first use of `to-issues`, `to-prd`, `triage`, `diagnose`, `tdd`, `improve-codebase-architecture`, or `zoom-out` \\u2014 or if those skills appear to be missing context about the issue tracker, triage labels, or domain docs.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/setup-matt-pocock-skills/SKILL.md",
-    "line_count": 141,
+    "line_count": 135,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1495,11 +1495,11 @@
   {
     "directory": "tdd",
     "skill_name": "tdd",
-    "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \\\"red-green-refactor\\\", or wants integration tests.",
+    "description": "Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions \\\"red-green-refactor\\\", wants integration tests, or asks for test-first development.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/tdd/SKILL.md",
-    "line_count": 123,
+    "line_count": 124,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1511,7 +1511,7 @@
   {
     "directory": "to-issues",
     "skill_name": "to-issues",
-    "description": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices.",
+    "description": "Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices. Use when user wants to convert a plan into issues, create implementation tickets, or break down work into issues.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-issues/SKILL.md",
@@ -1527,7 +1527,7 @@
   {
     "directory": "to-prd",
     "skill_name": "to-prd",
-    "description": "Turn the current conversation into a PRD and publish it to the project issue tracker \\u2014 no interview, just synthesis of what you've already discussed.",
+    "description": "Turn the current conversation context into a PRD and publish it to the project issue tracker. Use when user wants to create a PRD from the current context.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/to-prd/SKILL.md",
@@ -1543,11 +1543,11 @@
   {
     "directory": "triage",
     "skill_name": "triage",
-    "description": "Move issues and external PRs through a state machine of triage roles \\u2014 categorise, verify, grill if needed, and write agent-ready briefs.",
+    "description": "Triage issues through a state machine driven by triage roles. Use when user wants to create an issue, triage issues, review incoming bugs or feature requests, prepare issues for an AFK agent, or manage issue workflow.",
     "source_owner": "Matt Pocock",
     "source_url": "https://github.com/mattpocock/skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/triage/SKILL.md",
-    "line_count": 126,
+    "line_count": 118,
     "frontmatter_keys": [
       "name",
       "description"
@@ -1719,7 +1719,7 @@
     "source_owner": "Netresearch",
     "source_url": "https://github.com/netresearch/typo3-extension-upgrade-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-extension-upgrade/SKILL.md",
-    "line_count": 94,
+    "line_count": 93,
     "frontmatter_keys": [
       "name",
       "description"
@@ -2052,6 +2052,22 @@
     "source_url": "https://github.com/netresearch/typo3-vite-skill",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-vite/SKILL.md",
     "line_count": 61,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
+    "directory": "typo3-webcomponents",
+    "skill_name": "typo3-webcomponents",
+    "description": "Build, review, or migrate TYPO3 v14 backend Web Components with Lit, ES module import maps, AssetCollector/f:asset.module, backend modules, FormEngine/Form Editor integrations, AJAX routes, and reusable TYPO3 backend components. Use whenever the user mentions TYPO3 backend JavaScript, Web Components, Lit, LitElement, custom elements, @typo3/* modules, JavaScriptModules.php, backend module UI, Form Editor stage components, Camp Vienna Lit examples, component performance, or whether TYPO3 backend Web Components should be used in the frontend.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-webcomponents/SKILL.md",
+    "line_count": 81,
     "frontmatter_keys": [
       "name",
       "description"

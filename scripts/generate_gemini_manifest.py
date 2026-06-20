@@ -4,6 +4,9 @@
 The manifest should expose every top-level `skills/*/SKILL.md` directory. Trigger
 phrases are catalog metadata, so this script reads the richer README skill
 reference first and falls back to AGENTS.md when needed.
+
+For local skills such as `typo3-webcomponents`, add the skill directory and
+README/AGENTS trigger rows; this generator will include it automatically.
 """
 
 from __future__ import annotations

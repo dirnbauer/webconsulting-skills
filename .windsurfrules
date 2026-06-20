@@ -1,6 +1,6 @@
 # webconsulting Agent Skills
 
-This repository contains 135 Agent Skills for AI-augmented software development.
+This repository contains 136 Agent Skills for AI-augmented software development.
 
 ## Instructions
 

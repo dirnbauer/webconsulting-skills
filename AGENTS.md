@@ -12,6 +12,10 @@ A curated collection of Agent Skills for AI-augmented software development. Skil
 > **[Netresearch DTT GmbH](https://www.netresearch.de/)** whose open-source skill repositories
 > taught me a lot about structuring effective agent skills and whose work forms the foundation
 > for many of the TYPO3 and PHP skills in this collection.
+> Thank you also to **[ochorocho](https://github.com/ochorocho)** for the
+> [Camino: Camp Vienna "Lit it Up!"](https://dev.ochorocho.dev/camp-vienna#/) material and
+> [lit_demo](https://github.com/ochorocho/lit_demo) examples that informed the
+> `typo3-webcomponents` skill.
 
 > **TYPO3 Skills:** TYPO3-related skills primarily target **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where XLIFF format choices affect upgrades. Third-party extensions may lag Core — always verify `require.typo3/cms-core` on Packagist for your project.
 
@@ -212,6 +216,13 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 
 ---
 
+We also thank **[ochorocho](https://github.com/ochorocho)** for
+[Camino: Camp Vienna "Lit it Up!"](https://dev.ochorocho.dev/camp-vienna#/) and the
+[ochorocho/lit_demo](https://github.com/ochorocho/lit_demo) examples. They provided practical
+TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
+
+---
+
 ## Skills Overview
 
 | Skill | Description | Version | Triggers |
@@ -393,6 +404,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | `typo3-records-list-types/CUSTOM-VIEWS` | Custom view types with TSconfig + Fluid (zero PHP) | 1.0.0 | custom view type, records list template, kanban view, timeline view |
 | `typo3-workspaces` | Workspaces versioning, staging, publishing workflows, debugging | 2.0.0 | workspace, versioning, staging, publishing, review, draft content |
 | `typo3-visual-editor` | FriendsOfTYPO3 Visual Editor installation, configuration, removal, Fluid template migration, inline editing, content areas, FAQ, and troubleshooting | 1.0.0 | visual editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW, colPos |
+| `typo3-webcomponents` | TYPO3 v14 backend Web Components with Lit, import maps, backend modules, Form Editor, AJAX routes, reusable backend components, frontend usage decisions, examples, how-tos, dos and donts, and speed guidance | 1.0.0 | web components, Lit, LitElement, backend JavaScript, JavaScriptModules.php, f:asset.module, @typo3 modules, backend module UI, Form Editor, Camp Vienna |
 | `typo3-vite` | Vite build setup for TYPO3 v13+ with vite-asset-collector, SCSS architecture, Bootstrap 5 theming, SVG optimization, code splitting, and CSP compliance | 1.0.0 | vite, vite-asset-collector, scss, bootstrap, svg, postcss, csp |
 | `typo3-solr` | Apache Solr search: indexing, facets, suggest, vector search, debugging | 1.0.0 | solr, search, indexing, facets, suggest, autocomplete, vector search |
 | `typo3-solr/SOLRFAL` | File indexing with solrfal and Apache Tika | 1.0.0 | solrfal, file indexing, tika, pdf search, file search |
@@ -660,6 +672,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
   - `SKILL-CUSTOM-VIEWS.md`: Custom view types (zero PHP), template variables, real-world examples, PSR-14 registration
 - **typo3-workspaces**: Workspaces versioning, staging, publishing workflows, and debugging
 - **typo3-visual-editor**: FriendsOfTYPO3 Visual Editor install/config/remove workflow, Fluid template migration to `f:render.text` and `f:render.contentArea`, `f:mark.contentArea` fallbacks, FAQ, do/don'ts, and troubleshooting
+- **typo3-webcomponents**: TYPO3 v14 backend Web Components with Lit, import maps, backend modules, Form Editor, AJAX routes, examples, frontend decisions, and speed guidance
 - **typo3-vite**: Vite build setup for TYPO3 sitepackages with `praetorius/vite-asset-collector`, SCSS architecture, Bootstrap theming, SVG optimization, and CSP-safe asset loading
 - **typo3-solr**: Apache Solr search integration (Index Queue, facets, suggest, vector search, debugging)
   - `SKILL-SOLRFAL.md`: File indexing with solrfal and Apache Tika
@@ -1500,7 +1513,7 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `desiderio-teach`, `typo3-translations`, `typo3-news-tags`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `desiderio-teach`, `typo3-translations`, `typo3-news-tags`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-webcomponents`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
 Use case: Extension development, Content Blocks, Desiderio teaching pages, localization, news tagging, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
 
 ### Release Session
@@ -1618,6 +1631,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-records-list-types | ✓ | ✓ | ✓ | ✓ |
 | typo3-workspaces | ✓ | ✓ | ✓ | ✓ |
 | typo3-visual-editor | ✓ | ✓ | ✓ | ✓ |
+| typo3-webcomponents | ✓ | ✓ | ✓ | ✓ |
 | typo3-vite | ✓ | ✓ | ✓ | ✓ |
 | typo3-solr | ✓ | ✓ | ✓ | ✓ |
 | ai-search-optimization | ✓ | ✓ | ✓ | ✓ |

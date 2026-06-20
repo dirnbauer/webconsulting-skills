@@ -18,6 +18,10 @@
 # attribution blocks, and optionally reinstalls the core client mirrors through
 # install.sh.
 #
+# Local skills, including typo3-webcomponents, are not listed one-by-one here.
+# They are picked up from skills/*/SKILL.md when update.sh delegates catalog,
+# manifest, and installation refreshes to install.sh.
+#
 # License: MIT (code) / CC-BY-SA-4.0 (content)
 # Third-party skills retain their original licenses — see LICENSE for details.
 # ============================================================================
