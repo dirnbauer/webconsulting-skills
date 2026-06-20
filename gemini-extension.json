@@ -321,6 +321,17 @@
       ],
       "path": "${extensionPath}/skills/deepfake-detection"
     },
+    "desiderio-teach": {
+      "name": "desiderio-teach",
+      "description": "Teaching workspaces and TYPO3 lesson pages built with Desiderio content elements",
+      "triggers": [
+        "add topic to teach",
+        "create lesson content",
+        "Desiderio learning page",
+        "teach in TYPO3"
+      ],
+      "path": "${extensionPath}/skills/desiderio-teach"
+    },
     "diagnose": {
       "name": "diagnose",
       "description": "Disciplined diagnosis loop for hard bugs and performance regressions",

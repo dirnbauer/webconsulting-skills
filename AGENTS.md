@@ -146,7 +146,7 @@ https://github.com/softaworks/agent-toolkit
 ---
 
 We also thank **[Matt Pocock](https://github.com/mattpocock)** for the excellent real engineering
-skills collection. The `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`,
+skills collection. The `caveman`, `desiderio-teach`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`,
 `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`,
 `to-prd`, `triage`, `write-a-skill`, and `zoom-out` skills are adapted from his open-source repository:
 https://github.com/mattpocock/skills
@@ -366,6 +366,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 | **TYPO3 CMS** | | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth config | 1.0.0 | content-blocks, content-element, record-type, irre |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, Fluid atoms/molecules, backend previews, icons, and seed data for TYPO3 Content Blocks | 1.0.0 | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script |
+| `desiderio-teach` | Teaching workspaces and TYPO3 lesson pages built with Desiderio content elements | 1.0.0 | add topic to teach, create lesson content, Desiderio learning page, teach in TYPO3 |
 | `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | 2.1.0 | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | 1.0.0 | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog |
 | `typo3-news-tags` | Bulk-generate and assign thematic tags for georgringer/news (EXT:news) | 1.0.0 | news tags, EXT:news, thematic tags, bulk tagging, tx_news_domain_model_tag, b13/tag |
@@ -630,6 +631,7 @@ See: https://github.com/vkemeter/webconsulting-skills/commit/ed03ef0
 ### TYPO3 CMS
 - **typo3-content-blocks**: Content Elements & Record Types with single YAML config (no duplicate TCA/SQL)
 - **typo3-shadcn-content-elements**: Preset-driven shadcn/ui content element overhauls for Content Blocks, Fluid templates, backend previews, icons, and seed data
+- **desiderio-teach**: Add a teaching topic, create mission-grounded lesson content, and publish it as a TYPO3 page using Desiderio content elements
 - **typo3-translations**: TYPO3 13/14 labels, XLIFF 1.2 compatibility, XLIFF 2.0 migration, localization keys, ICU strings, paths, translation domains, and `LLL:` reference hygiene
 - **typo3-idea-extension-blog**: Turn a link or concept into TYPO3 analysis, a GitHub-ready extension, and a German MDX article
 - **typo3-news-tags**: Bulk-generate thematic tags for EXT:news and assign them to existing news records by corpus analysis and keyword matching
@@ -695,6 +697,11 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 - "Apply a new shadcn/create preset to the TYPO3 Fluid component layer and keep tokens scoped by preset id"
 - "Regenerate backend previews so editors see headings, repeatable items, CTAs, thumbnails, and chart summaries"
 - "Update the seed script so every top-level and repeatable field has useful text, links, images, alt text, and chart JSON"
+
+**📚 Desiderio Teaching Pages (desiderio-teach)**
+- "Add a topic to teach and create a TYPO3 lesson page with Desiderio content elements"
+- "Create teaching content for schema markup, choose the matching Desiderio elements by description, and fill the page content"
+- "Turn this learning topic into a mission, resources, a reference sheet, and a Desiderio page"
 
 **💡 Idea -> Extension -> Blog (typo3-idea-extension-blog)**
 - "Read this product announcement and tell me if it is genuinely useful for TYPO3"
@@ -1493,8 +1500,8 @@ Active: `document-processing`, `enterprise-readiness`
 Use case: PDF manipulation, Word document creation, PowerPoint presentations, Excel analysis
 
 ### Backend Session
-Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `typo3-translations`, `typo3-news-tags`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
-Use case: Extension development, Content Blocks, localization, news tagging, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
+Active: `typo3-content-blocks`, `typo3-shadcn-content-elements`, `desiderio-teach`, `typo3-translations`, `typo3-news-tags`, `typo3-datahandler`, `typo3-powermail`, `typo3-records-list-types`, `typo3-visual-editor`, `typo3-solr`, `typo3-ddev`, `typo3-update`, `typo3-testing`
+Use case: Extension development, Content Blocks, Desiderio teaching pages, localization, news tagging, database operations, forms, search, backend views, visual editing, TYPO3 v14 code
 
 ### Release Session
 Active: `typo3-initial-release`, `typo3-conformance`, `typo3-testing`, `typo3-security`, `typo3-docs`, `typo3-ddev`
@@ -1586,6 +1593,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 |-------|-------------|---------|---------|---------|
 | typo3-content-blocks | ✓ | ✓ | ✓ | ✓ |
 | typo3-shadcn-content-elements | ✓ | ✓ | ✓ | ✓ |
+| desiderio-teach | ✓ | ✓ | ✓ | ✓ |
 | typo3-translations | ✓ | ✓ | ✓ | ✓ |
 | typo3-idea-extension-blog | ✓ | ✓ | ✓ | ✓ |
 | typo3-news-tags | ✓ | ✓ | ✓ | ✓ |

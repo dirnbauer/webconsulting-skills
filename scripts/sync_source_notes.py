@@ -46,6 +46,9 @@ COPYRIGHT_LINES = {
     "Peter Steinberger": "**Copyright (c) 2026 openclaw** - Auto Review structured review workflow and helper scripts (MIT License)",
     "wondelai": "**Copyright (c) wondelai** - Microinteractions framework adaptation of Dan Saffer's *Microinteractions: Designing with Details* (MIT License)",
 }
+THANKS_PRONOUNS = {
+    "Matt Pocock": "his",
+}
 FOOTER_LINE_PATTERNS = (
     r"^## Credits & Attribution$",
     r"^Adapted from ",
@@ -70,8 +73,9 @@ def display_name(owner: str) -> str:
 def canonical_thanks_line(owner: str, source_url: str) -> str:
     if owner == "Netresearch":
         return NETRESEARCH_LINE
+    pronoun = THANKS_PRONOUNS.get(owner, "their")
     return (
-        f"Special thanks to [{display_name(owner)}]({upstream_link(owner, source_url)}) for their "
+        f"Special thanks to [{display_name(owner)}]({upstream_link(owner, source_url)}) for {pronoun} "
         "generous open-source contributions, which helped shape this skill collection."
     )
 

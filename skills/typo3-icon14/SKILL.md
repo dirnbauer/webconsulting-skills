@@ -3,7 +3,7 @@ name: "typo3-icon14"
 description: "Designs and migrates TYPO3 extension icons to the v14 line-art style, including source SVG cleanup, light/dark behavior, IconRegistry naming, backend module icons, and verification. Use when the user asks for TYPO3 v14 icons, backend module icon migration, extension icon modernization, SVG icon rules, or icon registration."
 compatibility: "TYPO3 14.x"
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   origin: "webconsulting"
 license: "MIT / CC-BY-SA-4.0"
 ---
@@ -36,11 +36,17 @@ file names, and render contexts that already exist in the codebase.
    communicate?
 5. Load live TYPO3 v14 references for the matching icon family. See
    [references/live-sources.md](references/live-sources.md).
-6. Redraw or modernize the SVG in the correct TYPO3 v14 style.
-7. Update `Configuration/Icons.php` and every `iconIdentifier` / `pluginIcon` /
+6. *(Optional)* Generate a raster **reference** with an image model (GPT Image 2 or
+   Gemini) when a metaphor is non-obvious or you want to explore a family look. The
+   raster is a guide only — see
+   [references/image-reference-pipeline.md](references/image-reference-pipeline.md).
+7. Redraw or modernize the SVG in the correct TYPO3 v14 style (author by hand to
+   spec — never ship the raster or a naive auto-trace).
+8. Run `scripts/verify-icon.sh <file> <type>` — it must print `RESULT: PASS`.
+9. Update `Configuration/Icons.php` and every `iconIdentifier` / `pluginIcon` /
    `typeicon_classes` consumer.
-8. Verify the icon in its real backend context and clear TYPO3 cache plus browser
-   local storage if the old SVG still appears.
+10. Verify the icon in its real backend context (both light and dark) and clear
+    TYPO3 cache plus browser local storage if the old SVG still appears.
 
 ## Start With Meaning, Not Shapes
 
@@ -59,6 +65,40 @@ ask for a short mapping such as:
 - `plugin-myext-list` -> "frontend list plugin"
 
 The user can describe usage, not geometry. Translate usage into icon semantics.
+
+## Optional: Image-Model Reference Stage
+
+You can use an image model — **OpenAI GPT Image 2** or **Google Gemini ("Nano
+Banana")** — to *ideate* an icon, then **redraw the result as a clean v14 SVG**.
+The raster is a design reference, never the shipped asset: TYPO3 backend icons are
+monochrome line-art (`currentColor`, transparent, dark-mode-safe), and shipping a
+raster or a naive auto-trace produces fuzzy, scheme-breaking junk. This stage is
+optional — for simple glyphs, authoring the SVG directly is faster and cleaner.
+
+```bash
+# 1. Generate a reference (auto-selects the model from whichever key is present:
+#    OPENAI_API_KEY -> GPT Image 2, else GEMINI_API_KEY/GOOGLE_API_KEY -> Gemini)
+scripts/generate-icon-reference.sh "agent streaming events into a UI bubble" \
+    /tmp/module-agui.ref.png --accent "one spark mark, top-right" \
+    --family "centered glyph, 8px padding on a 64 grid, 4px stroke"
+
+# 2. Redraw it by hand as a conformant v14 SVG, then gate it:
+scripts/verify-icon.sh packages/agui_integration/Resources/Public/Icons/module-agui.svg module
+```
+
+Key facts (verified mid-2026; re-check live docs):
+
+- **`gpt-image-2`** is the current OpenAI image model but does **not** support
+  transparent backgrounds — prompt it for a flat white background and drop it in the
+  redraw. Use `--transparent` (→ `gpt-image-1-mini`) only when you truly need an alpha
+  raster. GPT-image returns base64 at `data[0].b64_json`; the org may need API
+  verification.
+- **Gemini** returns base64 at `candidates[0].content.parts[].inlineData.data`, has
+  no transparent option, and watermarks with SynthID.
+
+No key? Skip this stage and author the SVG directly — the result is just as good for
+line-art icons. Full details and the prompt template:
+[references/image-reference-pipeline.md](references/image-reference-pipeline.md).
 
 ## Source Of Truth
 
@@ -189,6 +229,9 @@ Use [references/migration-steps.md](references/migration-steps.md) for the check
 
 Before finishing:
 
+- run `scripts/verify-icon.sh <file> <type>` and confirm `RESULT: PASS` (it gates
+  viewBox, embedded raster, scheme-breaking fills, missing `currentColor`,
+  background rects, and `prefers-color-scheme`)
 - verify the file path matches the registered source
 - verify the icon type uses the correct viewBox
 - verify there is no solid background layer
@@ -207,5 +250,9 @@ Before finishing:
 - [references/design-notes.md](references/design-notes.md): visual rules, icon-family
   guidance, and common mistakes
 - [references/migration-steps.md](references/migration-steps.md): migration checklist
+- [references/image-reference-pipeline.md](references/image-reference-pipeline.md):
+  optional GPT Image 2 / Gemini reference stage, model facts, prompt template, gates
+- `scripts/generate-icon-reference.sh`: dual-model reference generator (GPT Image 2 / Gemini)
+- `scripts/verify-icon.sh`: hard conformance gate for authored icons
 
 Source: https://github.com/dirnbauer/webconsulting-skills

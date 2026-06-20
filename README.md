@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **134 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **135 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -29,7 +29,7 @@ Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 28 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **TYPO3 CMS** | 29 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Desiderio Teach (Matt Pocock), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Vite (Netresearch), Solr (webconsulting) |
 | **Video & Animation** | 9 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting), Micro-interactions (Dylan Tarre), Microinteractions (wondelai) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
@@ -270,6 +270,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-batch` | batch, migrate, bulk, mass refactor, codemod | "Batch migrate all hooks to PSR-14 events" or "Batch modernize all TCA files" |
 | `typo3-content-blocks` | content-blocks, content-element, record-type, migrate tca | "Create a Content Block for a hero banner" or "Migrate my TCA to Content Blocks" |
 | `typo3-shadcn-content-elements` | shadcn, content elements, Content Blocks, Fluid, backend previews, icons, seed script | "Overhaul EXT:desiderio content elements for shadcn preset b4hb38Fyj" or "Audit Content Blocks field coverage and seed data" |
+| `desiderio-teach` | add topic to teach, create lesson content, Desiderio learning page, teach in TYPO3 | "Create a TYPO3 lesson page that teaches editors how to use schema markup with Desiderio content elements" |
 | `typo3-translations` | xliff, translations, localization, labels.xlf, locallang.xlf, lll, icu messageformat, translation domains | "Audit my TYPO3 13/14 labels before upgrading to XLIFF 2.0" or "Convert v14-only Content Blocks labels to XLIFF 2.0 with German targets" |
 | `typo3-idea-extension-blog` | idea to extension, product announcement, adapt to TYPO3, blog post pipeline, MDX blog | "Turn this product announcement into a TYPO3 extension and German blog post" or "Assess this article for TYPO3 and build the useful parts" |
 | `typo3-news-tags` | news tags, EXT:news, thematic tags, bulk tagging, tx_news_domain_model_tag, b13/tag | "Generate thematic EXT:news tags for this corpus" or "Build a command to assign news tags in bulk" |
@@ -2315,6 +2316,7 @@ grep -r "DataHandler" skills/
 | **TYPO3 Development** | | |
 | `typo3-content-blocks` | Content Elements & Record Types with single source of truth | webconsulting |
 | `typo3-shadcn-content-elements` | Preset-driven shadcn/ui styling, previews, icons, and seed coverage for TYPO3 Content Blocks | webconsulting |
+| `desiderio-teach` | Teaching workspaces and TYPO3 lesson pages built with Desiderio content elements | Matt Pocock |
 | `typo3-translations` | TYPO3 13/14 labels, XLIFF 1.2 baseline, XLIFF 2.0 upgrades, ICU strings, paths, domains, and migration checklists | webconsulting |
 | `typo3-idea-extension-blog` | Assess ideas for TYPO3, build an extension, and draft the companion German MDX post | webconsulting |
 | `typo3-news-tags` | Bulk-generate and assign thematic tags for georgringer/news | webconsulting |
@@ -2688,8 +2690,8 @@ The following repositories are the source for skills in this collection:
 ### HeyGen (5 skills)
 - `gsap`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, and `website-to-hyperframes`: https://github.com/heygen-com/hyperframes
 
-### Matt Pocock (14 skills)
-- `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
+### Matt Pocock (15 skills)
+- `caveman`, `desiderio-teach`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
 ### Peter Steinberger (1 skill)
 - `autoreview`: https://github.com/openclaw/agent-skills
@@ -2903,12 +2905,12 @@ Original repositories:
 ---
 
 We also thank **[Matt Pocock](https://github.com/mattpocock)** for their excellent open-source work.
-The `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out` skills in this collection build on that contribution.
+The `caveman`, `desiderio-teach`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out` skills in this collection build on that contribution.
 
-Adapted skills: `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`
+Adapted skills: `caveman`, `desiderio-teach`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`
 
 Original repositories:
-- `caveman`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
+- `caveman`, `desiderio-teach`, `diagnose`, `grill-me`, `grill-with-docs`, `handoff`, `improve-codebase-architecture`, `prototype`, `setup-matt-pocock-skills`, `tdd`, `to-issues`, `to-prd`, `triage`, `write-a-skill`, and `zoom-out`: https://github.com/mattpocock/skills
 
 **Copyright (c) Matt Pocock** - Agent skills for real engineering workflows (MIT License)
 
