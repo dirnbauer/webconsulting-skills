@@ -225,6 +225,30 @@ protected function tearDown(): void
 }
 ```
 
+## Recovering from Root-Owned Test Artifacts (Docker Leftovers)
+
+A functional run inside a Docker container that runs as **root** (no `--user` flag) writes `public/typo3temp/var/tests/` (and `.Build/`, `var/`) as root. A later run on the host (or as a non-root user) then can't remove or recreate those dirs, and every test errors in `setUp()`/bootstrap:
+
+```
+TYPO3\TestingFramework\Core\Exception: Can not remove folder:
+  .../public/typo3temp/var/tests/functional-XXXXXXX
+Directory ".../public/typo3temp/var/tests" could not be created
+```
+
+This is a **cascade** — one permission fatal aborts the whole class, so you see N identical `setUp()` errors, not N real failures. Read the *first* one.
+
+**Prevent:** always pass `--user "$(id -u):$(id -g)"` to `docker run` for test containers (the skill's `runTests.sh` does this on Linux; see `test-runners.md`).
+
+**Recover** (the dirs already exist root-owned and the host can't touch them) — delete or chown via a throwaway root container, then re-run:
+
+```bash
+# Remove the root-owned test dirs
+docker run --rm -v "$PWD:/app" -w /app alpine rm -rf public/typo3temp/var/tests
+
+# ...or hand ownership of the whole tree back to your user
+docker run --rm -v "$PWD:/app" -w /app alpine chown -R "$(id -u):$(id -g)" public/typo3temp
+```
+
 ## PHPUnit Version Compatibility: createMock vs createStub
 
 ### AllowMockObjectsWithoutExpectations Is PHPUnit 12 Only

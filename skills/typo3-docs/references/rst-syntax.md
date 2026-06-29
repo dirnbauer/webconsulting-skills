@@ -409,7 +409,7 @@ Using |TYPO3| in documentation...
 ## Whitespace Rules
 
 1. **Blank lines**: Required before and after directives
-2. **Indentation**: Use 4 spaces for directive content
+2. **Indentation**: Use 3 spaces for directive content
 3. **No trailing whitespace**: Remove all trailing spaces
 4. **Consistent indentation**: Maintain same level within blocks
 

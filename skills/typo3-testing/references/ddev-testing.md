@@ -139,9 +139,9 @@ for combo in "${MATRIX[@]}"; do
     ddev composer require "typo3/cms-core:^${TYPO3_VERSION}" --no-update
     ddev composer update --no-progress
 
-    # Run tests against the same binaries CI uses (NOT via `ddev exec`)
-    .Build/bin/phpunit -c Build/phpunit/UnitTests.xml
-    .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml
+    # Run tests
+    ddev exec vendor/bin/phpunit -c Build/phpunit/UnitTests.xml
+    ddev exec vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml
 
     echo "TYPO3 v${TYPO3_VERSION} + PHP ${PHP_VERSION}: PASSED"
 done
@@ -303,29 +303,25 @@ test.describe('Backend Module', () => {
 
 ## Running Tests in DDEV (Local)
 
-### Via the CI binaries (NOT `ddev exec`)
-
-As stated above, do **not** wrap unit/functional/phpstan/cgl runs in `ddev exec` —
-run the same `.Build/bin/*` binaries CI uses, directly on the host:
+### Via DDEV Exec
 
 ```bash
 # Unit tests
-.Build/bin/phpunit -c Build/phpunit/UnitTests.xml
+ddev exec vendor/bin/phpunit -c Build/phpunit/UnitTests.xml
 
 # Functional tests
-.Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml
+ddev exec vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml
 
 # PHPStan
-.Build/bin/phpstan analyse -c Build/phpstan.neon
+ddev exec vendor/bin/phpstan analyse -c phpstan.neon
 
 # PHP-CS-Fixer
-.Build/bin/php-cs-fixer fix --dry-run --diff
+ddev exec vendor/bin/php-cs-fixer fix --dry-run --diff
 ```
 
 ### Via Custom DDEV Commands
 
-A DDEV host command is a convenient shortcut, but it must invoke the CI binaries
-directly (not `ddev exec`) so behavior matches CI. Create `.ddev/commands/host/test`:
+Create `.ddev/commands/host/test`:
 
 ```bash
 #!/bin/bash
@@ -335,21 +331,21 @@ directly (not `ddev exec`) so behavior matches CI. Create `.ddev/commands/host/t
 
 case "$1" in
   unit)
-    .Build/bin/phpunit -c Build/phpunit/UnitTests.xml
+    ddev exec vendor/bin/phpunit -c Build/phpunit/UnitTests.xml
     ;;
   functional)
-    .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml
+    ddev exec vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml
     ;;
   phpstan)
-    .Build/bin/phpstan analyse -c Build/phpstan.neon
+    ddev exec vendor/bin/phpstan analyse -c phpstan.neon
     ;;
   cgl)
-    .Build/bin/php-cs-fixer fix --dry-run --diff
+    ddev exec vendor/bin/php-cs-fixer fix --dry-run --diff
     ;;
   all|*)
-    .Build/bin/phpunit -c Build/phpunit/UnitTests.xml
-    .Build/bin/phpunit -c Build/phpunit/FunctionalTests.xml
-    .Build/bin/phpstan analyse -c Build/phpstan.neon
+    ddev exec vendor/bin/phpunit -c Build/phpunit/UnitTests.xml
+    ddev exec vendor/bin/phpunit -c Build/phpunit/FunctionalTests.xml
+    ddev exec vendor/bin/phpstan analyse -c phpstan.neon
     ;;
 esac
 ```
@@ -394,10 +390,10 @@ For running E2E tests via `runTests.sh`, use the `TYPO3_BASE_URL` environment va
 
 ```bash
 # Local development (DDEV)
-./Build/Scripts/runTests.sh -s e2e
+./Build/Scripts/runTests.sh playwright
 
 # Or explicitly set the URL
-TYPO3_BASE_URL=https://my-extension.ddev.site ./Build/Scripts/runTests.sh -s e2e
+TYPO3_BASE_URL=https://my-extension.ddev.site ./Build/Scripts/runTests.sh playwright
 ```
 
 The script should check if TYPO3 is accessible and fail if not (unless `PLAYWRIGHT_FORCE=1` is set):

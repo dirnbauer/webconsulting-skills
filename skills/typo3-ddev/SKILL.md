@@ -39,7 +39,7 @@ ddev install-v13                  # v13.4 LTS
 
 ## PHP Management
 
-`php_version: "8.2"` in config.yaml. Upgrade via `.ddev/web-build/Dockerfile` (`apt-get dist-upgrade`). Custom settings: `.ddev/php/custom.ini`. See `references/0003-php-version-management.md`.
+`php_version: "8.3"` in config.yaml. Upgrade via `.ddev/web-build/Dockerfile` (`apt-get dist-upgrade`). Custom settings: `.ddev/php/custom.ini`. See `references/0003-php-version-management.md`.
 
 ## TYPO3 Version Differences
 

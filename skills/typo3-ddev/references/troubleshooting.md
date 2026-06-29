@@ -338,3 +338,26 @@ ddev exec -d /var/www/html/v{VERSION} composer require <vendor>/<pkg>:dev-main -
 # ddev exec -d /var/www/html/v{VERSION} composer config preferred-install dist
 # alternative: `ddev auth ssh` to forward your host SSH agent into the container
 ```
+### Stale caches after a branch switch or extension-code change
+
+Because the extension is mounted via a Composer path repo (symlink), its source can change
+underneath caches TYPO3 built earlier. Two non-obvious failure modes:
+
+- **Stale compiled DI container** (`var/cache/code/`) → backend 500 with
+  `ArgumentCountError: Too few arguments to ...::__construct()` (a service gained a
+  constructor dependency since the install).
+- **Stale language (l10n) cache** → pages render with EMPTY `f:translate` output (blank
+  labels, or only the non-translated literals around a label) after switching the worktree
+  to a branch with different XLF files and back without re-flushing.
+
+A plain `cache:flush` misses the compiled DI container most often — clear it explicitly:
+
+```bash
+ddev exec -d /var/www/html/v{VERSION} bash -c 'rm -rf var/cache/code/* && \
+  vendor/bin/typo3 cache:flush && vendor/bin/typo3 extension:setup'
+# extension:setup only if DI/schema changed
+```
+
+Flush BEFORE trusting (or screenshotting) the rendered backend after a branch switch, or
+when the extension's PHP/templates/XLF changed — "it rendered before the switch" is not
+evidence about the current state.
