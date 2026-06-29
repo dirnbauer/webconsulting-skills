@@ -32,7 +32,7 @@ DDEV base images are periodically updated but often lag behind the latest PHP pa
 
 ### TYPO3 Constraints
 
-TYPO3 v14 requires PHP >= 8.2 (supported range 8.2–8.5). Extension developers need:
+TYPO3 v14 requires PHP 8.5+. Extension developers need:
 
 - Latest PHP 8.5.x patch version
 - Consistent version across dev/CI/production
@@ -212,13 +212,11 @@ Add to project for CI/local consistency checking:
 #!/bin/bash
 # scripts/check-php-version.sh
 
-# TYPO3 v14 supports PHP 8.2–8.5. Set this to the version your project targets
-# (8.5 is the newest supported patch line, optional).
-EXPECTED_VERSION="8.5"
+REQUIRED_VERSION="8.5"
 CURRENT_VERSION=$(php -r 'echo PHP_MAJOR_VERSION . "." . PHP_MINOR_VERSION;')
 
-if [[ "$CURRENT_VERSION" != "$EXPECTED_VERSION" ]]; then
-    echo "ERROR: PHP $EXPECTED_VERSION expected, found $CURRENT_VERSION"
+if [[ "$CURRENT_VERSION" != "$REQUIRED_VERSION" ]]; then
+    echo "ERROR: PHP $REQUIRED_VERSION required, found $CURRENT_VERSION"
     exit 1
 fi
 
@@ -227,9 +225,7 @@ echo "PHP version: $(php -v | head -n1)"
 
 ### composer.json Platform Constraint
 
-Ensure Composer respects the PHP version. Pin to whichever supported patch you
-run locally (8.5.1 here is the newest supported patch, optional — TYPO3 v14
-supports 8.2–8.5):
+Ensure Composer respects the PHP version:
 
 ```json
 {
