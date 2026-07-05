@@ -2,7 +2,7 @@
 
 > **TYPO3 skills:** Guidance here primarily targets **TYPO3 v14.x**. `typo3-translations` also covers TYPO3 13 compatibility where translation format choices affect upgrades. These skills **will change** as v14 evolves — **through and after** the v14 LTS release. Always verify third-party extensions on Packagist (`require.typo3/cms-core`) for your project.
 
-A curated collection of **136 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
+A curated collection of **137 Agent Skills** from **webconsulting** for AI-augmented software development. Some skills are built in-house, others are carefully imported, adapted, and maintained from strong open-source foundations. Together they give your AI coding assistant a practical, production-focused toolkit for TYPO3, frontend work, security, legal compliance, video, documentation, and enterprise engineering.
 
 > **Core installer:** Cursor, Claude Code, Gemini CLI, OpenAI Codex, and Windsurf. Other tools such as GitHub Copilot, Cline, Aider, and Kiro can be added with native instruction files or a manual skills-directory link.
 
@@ -29,12 +29,12 @@ TYPO3 backend Lit guidance in the `typo3-webcomponents` skill.
 
 ## Skill Categories
 
-This repository currently ships **136 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **137 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| **TYPO3 CMS** | 30 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Desiderio Teach (Matt Pocock), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Web Components (webconsulting), Vite (Netresearch), Solr (webconsulting) |
+| **TYPO3 CMS** | 31 skills | Content Blocks (webconsulting), shadcn Content Elements (webconsulting), Desiderio Teach (Matt Pocock), Translations (webconsulting), Idea -> Extension -> Blog (webconsulting), News Tags (webconsulting), DataHandler (webconsulting), DDEV (Netresearch), Testing (Netresearch), Conformance (Netresearch), Docs (Netresearch), Core Contributions (Netresearch), Initial Release (webconsulting), Rector (webconsulting), Update (webconsulting), Extension Upgrade (Netresearch), Fractor (webconsulting), Icon14 (webconsulting), Security (webconsulting), SEO (webconsulting), Accessibility (webconsulting), WCAG 2.2 AA Agentic Accessibility (webconsulting), Simplify (Anthropic), Batch (webconsulting), Powermail (webconsulting), Records List Types (webconsulting), Workspaces (webconsulting), Visual Editor (webconsulting), Web Components (webconsulting), Vite (Netresearch), Solr (webconsulting) |
 | **Video & Animation** | 9 skills | Remotion Best Practices (remotion-dev), HyperFrames (HeyGen), HyperFrames CLI (HeyGen), HyperFrames Registry (HeyGen), Website to HyperFrames (HeyGen), GSAP (HeyGen), Create Documentation (webconsulting), Micro-interactions (Dylan Tarre), Microinteractions (wondelai) |
 | **Security & Enterprise** | 4 skills | Security Audit (Netresearch), Security Incident Reporting (webconsulting), Deepfake Detection (webconsulting), Enterprise Readiness (Netresearch) |
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
@@ -47,7 +47,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Documents & Office** | 1 skill | Document Processing (Anthropic) |
 | **Legal & Compliance** | 1 skill | Legal Impressum (webconsulting) |
 | **AI & SEO** | 2 skills | AI Search Optimization (webconsulting), Readiness Report (OpenHands) |
-| **Total** | **136 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
+| **Total** | **137 skills** | Top-level skills in `skills/`; shared root guides and add-ons are not counted |
 
 ---
 
@@ -295,6 +295,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-security` | security, hardening, permissions | "Harden my TYPO3 installation" |
 | `typo3-seo` | seo, sitemap, meta, opengraph | "Configure SEO with sitemaps and meta tags" |
 | `typo3-simplify` | simplify, clean up, refine, code quality, reduce complexity | "Simplify my TYPO3 code" or "Replace GeneralUtility::makeInstance with DI" |
+| `typo3-wcag22-aa-agentic` | wcag 2.2 aa, accessibility audit, axe-core, playwright, deque mcp, accessibility statement, eaa, bafg, bfsg | "Run an agentic WCAG 2.2 AA audit on this TYPO3 site" or "Scaffold accessibility tooling and statement drafts for a DACH TYPO3 project" |
 | `typo3-powermail` | powermail, mailform, form extension, tx_powermail | "Create a contact form with custom finisher" or "Configure spam shield" |
 | `typo3-workspaces` | workspace, versioning, staging, publishing, draft content | "Set up workspace workflow" or "Debug workspace overlay" |
 | `typo3-visual-editor` | visual editor, inline editing, f:render.text, f:render.contentArea, f:mark.contentArea, PAGEVIEW, colPos | "Install and configure FriendsOfTYPO3 Visual Editor" or "Update my Fluid templates for f:render.contentArea and f:render.text" |
@@ -2344,6 +2345,7 @@ grep -r "DataHandler" skills/
 | `typo3-security` | Security hardening checklist | webconsulting |
 | `typo3-seo` | SEO configuration with EXT:seo | webconsulting |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | webconsulting |
+| `typo3-wcag22-aa-agentic` | Agentic WCAG 2.2 AA audits, Playwright/axe tooling, manual review helper, and accessibility statement drafts for TYPO3 | webconsulting |
 | `typo3-simplify` | Simplify TYPO3 code for clarity and maintainability | Anthropic |
 | `typo3-batch` | Batch operations for large-scale TYPO3 migrations | webconsulting |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events | webconsulting |
@@ -2495,7 +2497,7 @@ The repository keeps a small number of category-specific add-on files alongside 
 ```
                         ┌──────────────────┐
                         │  skills/ (source) │
-                        │  136 SKILL.md     │
+                        │  137 SKILL.md     │
                         └────────┬─────────┘
                                  │ symlinks
            ┌─────────────────────┼─────────────────────┐

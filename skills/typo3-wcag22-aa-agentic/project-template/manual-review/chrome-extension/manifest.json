@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "TYPO3 WCAG 2.2 AA Manual Review Helper",
+  "description": "Human-review helper for WCAG 2.2 AA checks, TYPO3 template evidence and accessibility-statement issue exports.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "downloads",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "action": {
+    "default_title": "Open WCAG 2.2 AA Manual Review Helper"
+  }
+}

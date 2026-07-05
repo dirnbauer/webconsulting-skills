@@ -55,6 +55,10 @@ SOURCE_MAP: dict[str, dict[str, str | None]] = {
         "url": "https://github.com/aitytech/agentkits-marketing",
     },
     "deepfake-detection": {"owner": "webconsulting", "url": None},
+    "typo3-wcag22-aa-agentic": {
+        "owner": "webconsulting",
+        "url": "https://github.com/dirnbauer/webconsulting-skills",
+    },
     "document-processing": {
         "owner": "Anthropic",
         "url": "https://github.com/anthropics/skills/tree/main/skills/document-processing",
@@ -502,6 +506,7 @@ GITHUB_OWNER_LABELS = {
     "aitytech": "AITYTech",
     "anthropics": "Anthropic",
     "coreyhaines31": "Corey Haines",
+    "dirnbauer": "webconsulting",
     "dylantarre": "Dylan Tarre",
     "ehmo": "ehmo",
     "firecrawl": "Firecrawl",

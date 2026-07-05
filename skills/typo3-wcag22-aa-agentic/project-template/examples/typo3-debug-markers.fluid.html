@@ -1,0 +1,17 @@
+<!-- Use only in local/staging output. Do not expose internal template paths on public production unless approved. -->
+<nav
+  class="main-navigation"
+  aria-label="Hauptnavigation"
+  data-a11y-component="navigation.main"
+  data-a11y-template="EXT:sitepackage/Resources/Private/Partials/Navigation/Main.html"
+>
+  <f:render partial="Navigation/MainItems" arguments="{items: mainNavigation}" />
+</nav>
+
+<main
+  id="main-content"
+  data-a11y-component="layout.main"
+  data-a11y-template="EXT:sitepackage/Resources/Private/Layouts/Default.html"
+>
+  <f:render section="Main" />
+</main>

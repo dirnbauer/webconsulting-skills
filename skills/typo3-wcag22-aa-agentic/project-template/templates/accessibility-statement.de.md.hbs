@@ -1,0 +1,164 @@
+# Erklärung zur Barrierefreiheit — Entwurf
+
+> **Entwurf, nicht ungeprüft veröffentlichen.** Diese Erklärung wurde aus automatisierten Tests, statischen Template-Prüfungen und konfigurierten Angaben erzeugt. Vor Veröffentlichung ist eine fachliche und rechtliche Endprüfung erforderlich.
+
+{{or statement.organizationName "[Name der Organisation]"}} ist bemüht, {{or statement.websiteName site.name}} im Einklang mit den anwendbaren Barrierefreiheitsanforderungen barrierefrei zugänglich zu machen.
+
+Diese Erklärung zur Barrierefreiheit gilt für:
+
+- Website/App: {{or statement.websiteName site.name}}
+- URL: {{or statement.websiteUrl site.productionUrl}}
+- Geltungsbereich: {{or site.scope "Website"}}
+- Angestrebter Standard: {{or legal.targetStandard "WCAG 2.2 AA"}}
+- Referenzrahmen: {{or legal.enStandard "EN 301 549"}}
+- Rechtsprofil laut Projektkonfiguration: {{or legal.profile "[bitte prüfen]"}}
+{{#if hasLegalExample}}- Profilbeschreibung: {{legalExample.label}}{{/if}}
+{{#if legal.jurisdiction}}- Jurisdiktion laut Projektkonfiguration: {{legal.jurisdiction}}{{/if}}
+
+{{#if hasLegalExample}}
+## Rechtlicher Arbeitsrahmen laut Konfiguration
+
+Dieses Profil wurde für die Entwurfserstellung ausgewählt: **{{legalExample.label}}**.
+
+Typische Referenzen laut Konfiguration:
+
+{{#each legalExample.typicalReferences}}
+- {{this}}
+{{/each}}
+
+Statement-Muster laut Konfiguration: {{legalExample.statementPattern}}
+
+> Dieser Abschnitt ist ein Arbeitsrahmen. Der tatsächliche rechtliche Anwendungsbereich, die zuständige Stelle und die finale Formulierung müssen vor Veröffentlichung geprüft werden.
+{{/if}}
+
+{{#if additionalLegalNotes.length}}
+## Zusätzliche rechtliche Projektnotizen
+
+{{#each additionalLegalNotes}}
+- {{this}}
+{{/each}}
+{{/if}}
+
+## Stand der Vereinbarkeit mit den Anforderungen
+
+Diese Website ist nach der aktuellen, noch zu finalisierenden Prüfung **{{status}}** mit den oben genannten Anforderungen vereinbar.
+
+Grundlage dieses Entwurfs:
+
+{{#each statement.assessmentMethod}}
+- {{this}}
+{{/each}}
+
+Strukturierte Grundlage dieses Entwurfs: `.a11y/open-issues.yml` mit {{structuredIssueCount}} offenen/zu prüfenden Einträgen plus dokumentierten Ausnahmen. Die Erklärung wird nicht frei formuliert, sondern aus dieser Liste abgeleitet.
+
+Technische Zusammenfassung der letzten automatisierten Prüfung:
+
+- Geprüfte URLs: {{reportSummary.scannedUrls}}
+- Geprüfte Seitenzustände: {{reportSummary.scannedStates}}
+- Automatisierte axe-Problemtypen: {{reportSummary.axeIssueTypes}}
+- Automatisierte axe-Vorkommen: {{reportSummary.axeOccurrences}}
+- Statische Template-/Code-Funde: {{reportSummary.templateStaticFindings}}
+
+## Nicht barrierefreie Inhalte
+
+Die nachstehend aufgeführten Inhalte sind aus folgenden Gründen noch nicht vollständig barrierefrei.
+
+{{#if hasBlockingIssues}}
+### a) Unvereinbarkeit mit den Barrierefreiheitsbestimmungen
+
+{{#each blockingIssues}}
+- **{{title}}**{{#if wcag}} — {{wcag}}{{/if}}
+  Quelle: {{source}}, Auswirkung: {{impact}}{{#if humanReviewRequired}}, manuelle Prüfung erforderlich{{/if}}
+  Betroffen: {{#if affectedPages}}{{affectedPages}}{{else}}{{file}}:{{line}}{{/if}}
+  Öffentlich beschreibbarer Stand: {{#if publicText}}{{publicText}}{{else}}[aus `.a11y/open-issues.yml` ergänzen]{{/if}}
+  Geplante Maßnahme: {{#if plannedFix}}{{plannedFix}}{{else}}[bitte geplante Maßnahme ergänzen]{{/if}}
+{{/each}}
+{{else}}
+### a) Unvereinbarkeit mit den Barrierefreiheitsbestimmungen
+
+In den automatisierten Prüfungen wurden derzeit keine schwerwiegenden technischen Verstöße in den geprüften Seitenzuständen gefunden. Die manuelle Prüfung ist dennoch erforderlich, insbesondere für Alternativtexte, Tastaturbedienung, Screenreader-Verständlichkeit sowie Dokumente und Medien.
+{{/if}}
+
+{{#if hasAdvisoryIssues}}
+### Weitere Prüfpunkte / manuell zu bewertende Punkte
+
+{{#each advisoryIssues}}
+- **{{title}}**{{#if wcag}} — {{wcag}}{{/if}} — {{source}}, {{impact}}{{#if humanReviewRequired}}, manuelle Prüfung erforderlich{{/if}}
+{{/each}}
+{{/if}}
+
+{{#if knownNonAccessibleContent.length}}
+### Projektseitig bekannte nicht barrierefreie Inhalte
+
+{{#each knownNonAccessibleContent}}
+- {{this}}
+{{/each}}
+{{/if}}
+
+{{#if disproportionateBurden.length}}
+### b) Unverhältnismäßige Belastung
+
+{{#each disproportionateBurden}}
+- {{this}}
+{{/each}}
+{{else}}
+### b) Unverhältnismäßige Belastung
+
+[Bitte nur verwenden, wenn sachlich und rechtlich geprüft. Andernfalls diesen Abschnitt entfernen.]
+{{/if}}
+
+{{#if outsideScope.length}}
+### c) Inhalte außerhalb des Anwendungsbereichs
+
+{{#each outsideScope}}
+- {{this}}
+{{/each}}
+{{else}}
+### c) Inhalte außerhalb des Anwendungsbereichs
+
+[Bitte prüfen und nicht zutreffende Inhalte entfernen. Beispiele können ältere Dateiformate, Drittinhalte oder Archivmaterial sein, abhängig vom Rechtsrahmen.]
+{{/if}}
+
+## Erstellung dieser Erklärung zur Barrierefreiheit
+
+Diese Erklärung wurde am {{today}} erstellt.
+
+Methode der Erstellung:
+
+{{#each statement.assessmentMethod}}
+- {{this}}
+{{/each}}
+
+Letzte technische Generierung: {{generatedAt}}
+
+Die Erklärung sollte zumindest jährlich und nach wesentlichen Änderungen an Website, Templates, Designsystem, Funktionen oder Rechtsrahmen überprüft werden.
+
+## Feedback und Kontakt
+
+Sind Ihnen Barrieren aufgefallen, die in dieser Erklärung nicht beschrieben sind? Bitte kontaktieren Sie uns:
+
+- Zuständige Stelle: {{or statement.responsibleTeam "[zuständige Stelle ergänzen]"}}
+- E-Mail: {{or statement.contactEmail "[E-Mail ergänzen]"}}
+{{#if statement.contactPhone}}- Telefon: {{statement.contactPhone}}{{/if}}
+{{#if statement.feedbackUrl}}- Feedback-Formular: {{statement.feedbackUrl}}{{/if}}
+
+Bitte beschreiben Sie das Problem und führen Sie die URL der betroffenen Seite oder des betroffenen Dokuments an.
+
+## Durchsetzungsverfahren
+
+Wenn Sie mit der Antwort aus dem oben genannten Kontakt nicht zufrieden sind, können Sie sich an die zuständige Beschwerde- bzw. Durchsetzungsstelle wenden.
+
+- Zuständige Stelle laut Projektkonfiguration: {{or statement.enforcementBody "[FFG-Beschwerdestelle oder zuständige Landesstelle ergänzen]"}}
+{{#if statement.enforcementUrl}}- Link: {{statement.enforcementUrl}}{{/if}}
+
+## HITL-Freigabe vor Veröffentlichung
+
+Vor Veröffentlichung bitte mindestens bestätigen:
+
+{{#each hitl.required}}
+- [ ] {{this}}
+{{/each}}
+
+- [ ] Rechtlicher Anwendungsbereich geprüft: {{or legal.profile "[Profil ergänzen]"}}
+- [ ] Statusformulierung geprüft: {{status}}
+- [ ] Nicht zutreffende Platzhalter und Hinweise entfernt

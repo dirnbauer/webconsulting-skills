@@ -1,0 +1,32 @@
+# Accessibility agent instructions for TYPO3
+
+Use the local skill `typo3-wcag22-aa-agentic` for all accessibility work.
+
+Workflow:
+
+1. Read `.a11y/a11y.config.yml` and confirm `legal.profile`.
+2. Run `npm run a11y:discover`.
+3. Run `npm run a11y:test:report-only` and `npm run a11y:templates`.
+4. Read `.a11y/report.md` and `.a11y/open-issues.yml`.
+5. Map issues to TYPO3 Fluid/SCSS/JS/TCA/RTE source files.
+6. Patch source files with native HTML-first fixes.
+7. Re-run the failing URLs/states.
+8. Update `.a11y/report.md`, `.a11y/open-issues.yml`, and `.a11y/accessibility-statement-draft.de.md`.
+
+Legal profiles:
+
+- `at-public-wzg` — Austria public sector.
+- `at-private-bafg` — Austria private sector / BaFG-EAA when in scope.
+- `de-public-bgg-bitv` — Germany public sector / BGG + BITV 2.0.
+- `de-private-bfsg` — Germany private sector / BFSG-EAA when in scope.
+- `ch-public-behig-ech0059` — Switzerland public sector / BehiG/BehiV + eCH-0059.
+- `voluntary-wcag22aa` — internal or contractual WCAG 2.2 AA target.
+
+Rules:
+
+- Never claim full WCAG compliance from automation alone.
+- Never commit secrets or Deque API keys.
+- Prefer button/link/native HTML over ARIA workarounds.
+- Avoid suppressions unless documented with reason, owner and expiry.
+- Keep HITL review items explicit.
+- Treat statement/legal wording as draft until human/legal review approves it.

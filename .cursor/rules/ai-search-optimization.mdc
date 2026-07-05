@@ -181,7 +181,7 @@ AI engines prefer structured data formats:
 
 Research shows structured data significantly improves AI search visibility:
 
-- Pages with schema are **up to 40% more likely** to appear in Google AI Overviews ([zarkx.com](https://www.zarkx.com/insights/ai-first-schema-implementation-rich-results))
+- Structured data helps machines parse and interpret your content; note that Google documents **no AI Overviews inclusion boost** from schema markup
 - **Organization schema**: 2.8x increase in citation frequency
 - **FAQPage schema**: 2.5x rise in answer inclusion
 - **Article schema**: 2.2x boost in content citations

@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "axe-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--add-host=host.docker.internal:host-gateway",
+        "-i",
+        "--rm",
+        "-e",
+        "AXE_SERVER_URL",
+        "-e",
+        "AXE_API_KEY",
+        "dequesystems/axe-mcp-server:latest"
+      ],
+      "env": {
+        "AXE_API_KEY": "${env:AXE_API_KEY}"
+      }
+    }
+  }
+}

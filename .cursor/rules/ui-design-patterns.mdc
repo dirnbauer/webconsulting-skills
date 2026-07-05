@@ -86,8 +86,8 @@ Meet **WCAG 2.1 Level AA** at minimum:
 
 | Requirement | Minimum Ratio |
 |-------------|---------------|
-| Small text (≤18px) | 4.5:1 contrast |
-| Large text (>18px bold or >24px) | 3:1 contrast |
+| Small text (below large-text threshold) | 4.5:1 contrast |
+| Large text (24px+/18pt regular or 18.66px+/14pt bold) | 3:1 contrast |
 | UI elements (borders, icons) | 3:1 contrast |
 
 **Never rely on color alone**—always pair with icons, patterns, or text for color blind users.

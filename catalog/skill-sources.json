@@ -2061,6 +2061,25 @@
     "pass_3": []
   },
   {
+    "directory": "typo3-wcag22-aa-agentic",
+    "skill_name": "typo3-wcag22-aa-agentic",
+    "description": "Use this skill to audit, fix, and document accessibility for TYPO3 websites and Fluid sitepackages. It orchestrates Playwright, axe-core, optional Deque axe MCP, TYPO3 template mapping, manual/HITL checks, CI baselines, and DACH/EAA-aware accessibility statement drafts for WCAG 2.2 AA targets.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-wcag22-aa-agentic/SKILL.md",
+    "line_count": 377,
+    "frontmatter_keys": [
+      "name",
+      "description",
+      "license",
+      "compatibility",
+      "metadata"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "typo3-webcomponents",
     "skill_name": "typo3-webcomponents",
     "description": "Build, review, or migrate TYPO3 v14 backend Web Components with Lit, ES module import maps, AssetCollector/f:asset.module, backend modules, FormEngine/Form Editor integrations, AJAX routes, and reusable TYPO3 backend components. Use whenever the user mentions TYPO3 backend JavaScript, Web Components, Lit, LitElement, custom elements, @typo3/* modules, JavaScriptModules.php, backend module UI, Form Editor stage components, Camp Vienna Lit examples, component performance, or whether TYPO3 backend Web Components should be used in the frontend.",

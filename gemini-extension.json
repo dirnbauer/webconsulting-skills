@@ -1454,6 +1454,22 @@
       ],
       "path": "${extensionPath}/skills/typo3-vite"
     },
+    "typo3-wcag22-aa-agentic": {
+      "name": "typo3-wcag22-aa-agentic",
+      "description": "Agentic WCAG 2.2 AA audits for TYPO3 with Playwright, axe-core, optional Deque MCP, manual review helper, CI baselines, and DACH/EAA-aware accessibility statement drafts",
+      "triggers": [
+        "wcag 2.2 aa",
+        "accessibility audit",
+        "axe-core",
+        "playwright",
+        "deque mcp",
+        "accessibility statement",
+        "eaa",
+        "bafg",
+        "bfsg"
+      ],
+      "path": "${extensionPath}/skills/typo3-wcag22-aa-agentic"
+    },
     "typo3-webcomponents": {
       "name": "typo3-webcomponents",
       "description": "TYPO3 v14 backend Web Components with Lit, import maps, backend modules, Form Editor, AJAX routes, reusable backend components, frontend usage decisions, examples, how-tos, dos and donts, and speed guidance",

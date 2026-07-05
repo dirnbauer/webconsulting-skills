@@ -1,0 +1,33 @@
+{
+  "name": "typo3-wcag22-aa-a11y-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Playwright + axe-core accessibility tooling for TYPO3 WCAG 2.2 AA workflows.",
+  "scripts": {
+    "a11y:discover": "node scripts/discover-urls.mjs --config .a11y/a11y.config.yml",
+    "a11y:test": "playwright test tests/accessibility.spec.js",
+    "a11y:test:report-only": "A11Y_REPORT_ONLY=1 playwright test tests/accessibility.spec.js",
+    "a11y:templates": "node scripts/check-templates.mjs --config .a11y/a11y.config.yml",
+    "a11y:report": "node scripts/generate-report.mjs --config .a11y/a11y.config.yml",
+    "a11y:statement": "node scripts/generate-statement.mjs --config .a11y/a11y.config.yml",
+    "a11y:all": "bash scripts/run-a11y.sh",
+    "a11y:clean": "rm -rf .a11y/raw .a11y/report.json .a11y/report.md .a11y/open-issues.yml .a11y/template-lint.json .a11y/template-lint.md .a11y/accessibility-statement-draft.de.md .a11y/playwright-report test-results",
+    "a11y:manual:merge": "node scripts/merge-manual-review.mjs",
+    "a11y:manual:merge:file": "node scripts/merge-manual-review.mjs --file"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "latest",
+    "@playwright/test": "latest",
+    "axe-core": "latest",
+    "fast-xml-parser": "latest",
+    "glob": "latest",
+    "handlebars": "latest",
+    "html-validate": "latest",
+    "picocolors": "latest",
+    "yaml": "latest"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

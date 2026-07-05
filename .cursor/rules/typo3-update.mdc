@@ -66,7 +66,7 @@ $EM_CONF[$_EXTKEY] = [
 }
 ```
 
-> **Content Blocks:** `friendsoftypo3/content-blocks` may require **`typo3/cms-core` ^14.1** or higher — match the [Packagist constraint](https://packagist.org/packages/friendsoftypo3/content-blocks) before pinning `^14.0` only.
+> **Content Blocks:** `friendsoftypo3/content-blocks` may require **`typo3/cms-core` ^14.3** or higher (current 2.4.5 requires `^14.3`) — match the [Packagist constraint](https://packagist.org/packages/friendsoftypo3/content-blocks) before pinning `^14.0` only.
 
 ## 2. PHP Requirements
 

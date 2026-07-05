@@ -1,0 +1,172 @@
+site:
+  name: "Example TYPO3 Website"
+  baseUrl: "https://example.ddev.site"
+  sitemapUrl: "https://example.ddev.site/sitemap.xml"
+  locale: "de-AT"
+  scope: "Website"
+  productionUrl: "https://www.example.at"
+
+legal:
+  # Choose one profile and keep the rest as examples.
+  # Austria:
+  #   at-public-wzg       Austrian public-sector WZG / EN 301 549 context
+  #   at-private-bafg     Austrian BaFG / European Accessibility Act context, if the service is in scope
+  # Germany:
+  #   de-public-bgg-bitv  German public-sector BGG + BITV 2.0 context
+  #   de-private-bfsg     German BFSG / European Accessibility Act context, if the product/service is in scope
+  # Switzerland:
+  #   ch-public-behig-ech0059  Swiss public-sector BehiG/BehiV + eCH-0059 context
+  # Voluntary / contractual:
+  #   voluntary-wcag22aa  Internal or contractual WCAG 2.2 AA target without specific statutory claim
+  profile: "at-public-wzg"
+  targetStandard: "WCAG 2.2 AA"
+  enStandard: "EN 301 549"
+  jurisdiction: "AT"
+  legalNotice: "This generated content is project guidance and not legal advice. Verify the applicable statute, enforcement body and statement wording before publication."
+  examples:
+    - id: "at-public-wzg"
+      label: "Austria public sector"
+      typicalReferences:
+        - "WZG / applicable state accessibility rules"
+        - "EN 301 549"
+        - "WCAG evidence, preferably WCAG 2.2 AA as project target"
+      statementPattern: "Erklärung zur Barrierefreiheit with feedback and enforcement procedure"
+    - id: "at-private-bafg"
+      label: "Austria private sector / EAA"
+      typicalReferences:
+        - "BaFG / European Accessibility Act, only if service/product is in scope"
+        - "EN 301 549 and WCAG evidence"
+      statementPattern: "Accessibility information / compliance notes; do not automatically use WZG wording"
+    - id: "de-public-bgg-bitv"
+      label: "Germany public sector"
+      typicalReferences:
+        - "BGG"
+        - "BITV 2.0"
+        - "EN 301 549"
+      statementPattern: "Erklärung zur Barrierefreiheit with feedback mechanism and Schlichtungsstelle / relevant state body"
+    - id: "de-private-bfsg"
+      label: "Germany private sector / EAA"
+      typicalReferences:
+        - "BFSG / BFSGV, only if the covered product/service is in scope"
+        - "EN 301 549 and WCAG evidence"
+      statementPattern: "Accessibility information for covered products/services; verify market surveillance body and obligations"
+    - id: "ch-public-behig-ech0059"
+      label: "Switzerland public sector"
+      typicalReferences:
+        - "BehiG / BehiV"
+        - "eCH-0059 Accessibility Standard Version 3"
+        - "WCAG 2.1 AA legal baseline; WCAG 2.2 AA may be used as stricter internal project target"
+      statementPattern: "Accessibility statement with exceptions and contact/escalation notes"
+    - id: "voluntary-wcag22aa"
+      label: "Voluntary / contractual"
+      typicalReferences:
+        - "WCAG 2.2 AA"
+        - "Project contract / internal policy"
+      statementPattern: "Voluntary accessibility statement; avoid statutory claims unless reviewed"
+
+crawler:
+  maxPages: 80
+  include:
+    - "/"
+    - "/kontakt/"
+    - "/suche/"
+  exclude:
+    - "^/typo3/"
+    - "^/typo3conf/"
+    - "[?&]type="
+    - "[?&]tx_"
+    - "#"
+  samplePatterns:
+    homepage: ["^/$"]
+    search: ["/suche"]
+    contactOrForm: ["kontakt", "formular"]
+    newsList: ["news/?$", "aktuelles/?$"]
+    newsDetail: ["news/.+", "aktuelles/.+"]
+
+browser:
+  cookieBannerDismissSelectors:
+    - "button:has-text('Alle akzeptieren')"
+    - "button:has-text('Akzeptieren')"
+    - "button:has-text('OK')"
+    - "#cookie-dismiss"
+  waitForSelector: "body"
+  waitUntil: "networkidle"
+  maxDynamicActionsPerPage: 10
+
+auth:
+  useStorageState: false
+  storageStatePath: ".a11y/auth-state.json"
+  loginInstructions: "Optional: create auth-state manually with Playwright if the site requires login."
+
+axe:
+  tags:
+    - "wcag2a"
+    - "wcag2aa"
+    - "wcag21a"
+    - "wcag21aa"
+    - "wcag22aa"
+  advisoryTags:
+    - "best-practice"
+  failImpacts:
+    - "critical"
+    - "serious"
+  disabledRules: []
+  excludedSelectors: []
+
+typo3:
+  sitepackagePaths:
+    - "packages/sitepackage"
+    - "public/typo3conf/ext/sitepackage"
+    - "web/typo3conf/ext/sitepackage"
+  debugMarkers:
+    componentAttribute: "data-a11y-component"
+    templateAttribute: "data-a11y-template"
+
+statement:
+  organizationName: "[Name der Organisation]"
+  websiteName: "Example TYPO3 Website"
+  websiteUrl: "https://www.example.at"
+  responsibleTeam: "[Team / Stelle]"
+  contactEmail: "barrierefreiheit@example.at"
+  contactPhone: ""
+  feedbackUrl: ""
+  enforcementBody: "[zuständige Beschwerde-, Schlichtungs- oder Durchsetzungsstelle ergänzen]"
+  enforcementUrl: ""
+  assessmentMethod:
+    - "Automatisierte Prüfung mit Playwright und axe-core"
+    - "Statische Prüfung von TYPO3 Fluid Templates, SCSS und JavaScript"
+    - "Manuelle Stichprobenprüfung von Tastaturbedienung, Alternativtexten und ausgewählten Inhaltsseiten"
+  statusOverride: "" # e.g. "teilweise vereinbar" after final human/legal decision
+  knownNonAccessibleContent: []
+  disproportionateBurden: []
+  outsideScope: []
+  plannedRemediation: []
+  additionalLegalNotes: []
+
+hitl:
+  required:
+    - "Alternativtexte fachlich prüfen"
+    - "Tastaturbedienung Hauptnavigation, Mobile Navigation, Suche, Formulare prüfen"
+    - "Screenreader Smoke Test mit VoiceOver oder NVDA"
+    - "PDFs, Videos, Karten und Drittanbieter-Embeds klassifizieren"
+    - "Rechtliche Formulierung, Anwendungsbereich und Veröffentlichungsstatus freigeben"
+
+manualReview:
+  chromeExtensionPath: "manual-review/chrome-extension"
+  checkpointFile: ".a11y/checkpoints/wcag22-aa-checkpoints.yml"
+  exportDirectory: ".a11y/manual-review"
+  mergeCommand: "npm run a11y:manual:merge"
+  requiredPageSamples:
+    - "homepage"
+    - "standard content page"
+    - "list/news page"
+    - "detail/news detail page"
+    - "search page"
+    - "contact/form page"
+    - "login/account page if present"
+    - "page with dynamic components such as accordion, modal, slider, map or video"
+  rule:
+    statementSourceOfTruth: ".a11y/open-issues.yml"
+    doNotFreeWriteStatement: true
+    includeAllActiveWcag22AAndAA: true
+    legacyWcag411ParsingOnlyWhenPolicyRequiresWcag20Or21: true

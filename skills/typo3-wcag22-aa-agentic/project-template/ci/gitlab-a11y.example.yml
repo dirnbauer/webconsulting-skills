@@ -1,0 +1,32 @@
+a11y_report:
+  image: mcr.microsoft.com/playwright:v1.55.0-jammy
+  stage: test
+  variables:
+    A11Y_REPORT_ONLY: "1"
+  script:
+    - npm ci
+    - npx playwright install chromium
+    - cp .a11y/a11y.config.example.yml .a11y/a11y.config.yml
+    - npm run a11y:all
+  artifacts:
+    when: always
+    paths:
+      - .a11y/report.md
+      - .a11y/report.json
+      - .a11y/open-issues.yml
+      - .a11y/accessibility-statement-draft.de.md
+      - .a11y/playwright-report/
+      - test-results/
+    expire_in: 14 days
+
+# Later, after baseline cleanup, switch to a blocking job:
+# a11y_blocking:
+#   image: mcr.microsoft.com/playwright:v1.55.0-jammy
+#   stage: test
+#   script:
+#     - npm ci
+#     - npx playwright install chromium
+#     - npm run a11y:discover
+#     - npm run a11y:templates
+#     - npm run a11y:test
+#     - npm run a11y:report

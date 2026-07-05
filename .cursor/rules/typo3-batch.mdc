@@ -66,20 +66,20 @@ into 5–30 independent units, present a plan, then execute each unit with verif
 | `processDatamap_afterDatabaseOperations` / related `SC_OPTIONS` | Keep **`processDatamapClass`** hook methods (no 1:1 Core event) |
 | `processDatamap_preProcessFieldArray` | Keep hook or narrow Core events for your table/field if documented |
 | `processCmdmap_postProcess` | Keep **`processCmdmapClass`** hook methods |
-| `drawHeaderHook` | `ModifyButtonBarEvent` |
-| `drawFooterHook` | `ModifyButtonBarEvent` |
+| `drawHeaderHook` | `ModifyPageLayoutContentEvent` (Breaking #96526) |
+| `drawFooterHook` | `ModifyPageLayoutContentEvent` (Breaking #96526) |
 | `checkFlexFormValue` | Still often a hook; **`AfterFlexFormDataStructureParsedEvent`** is for DS parsing, not a drop-in for validation — confirm in Core for your case |
 | `PageRenderer` render hooks (`render-preProcess`, `render-postProcess`) | No 1:1 PSR-14 replacement; prefer PSR-15 middleware for render-pipeline manipulation |
 | `tslib_fe->contentPostProc` (cached) | `AfterCacheableContentIsGeneratedEvent` |
-| `tslib_fe->contentPostProc` (output) | `AfterCachedPageIsPersistedEvent` — verify name in Core for your TYPO3 version |
-| `tslib_fe->contentPostProc` (all) | No single PSR-14 replacement — split by what the hook actually does |
+| `tslib_fe->contentPostProc` (output) | No PSR-14 event — use a PSR-15 middleware (Deprecation #91012); `AfterCachedPageIsPersistedEvent` replaces `insertPageIncache`, not this hook |
+| `tslib_fe->contentPostProc` (all) | `AfterCacheableContentIsGeneratedEvent` (Breaking #97862; also covers `usePageCache`) |
 | `BackendUtility->getPagesTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 | `generatePageTSconfig` | `ModifyLoadedPageTsConfigEvent` |
 
 **Not 1:1 replacements (verify before batch-rewriting):**
 
-- **`drawHeaderHook` / `drawFooterHook`** — Legacy backend doc-header integration points. `ModifyButtonBarEvent` covers the **button bar** only; full header/footer chrome may need a different Core event or a documented alternative for your module type.
-- **`tslib_fe->contentPostProc`** — Sub-hooks (`all`, `cached`, `output`) run at different FE pipeline stages. Map **cached** → `AfterCacheableContentIsGeneratedEvent`, **output** → `AfterCachedPageIsPersistedEvent` where applicable; **`all`** has no drop-in event — re-check Core docs.
+- **`drawHeaderHook` / `drawFooterHook`** — Page module header/footer integration points. Replaced by `ModifyPageLayoutContentEvent` (Breaking #96526), which lets listeners add or change header and footer content; `ModifyButtonBarEvent` covers the **button bar** only and is not the migration target.
+- **`tslib_fe->contentPostProc`** — Sub-hooks (`all`, `cached`, `output`) run at different FE pipeline stages. Map **cached** and **all** (plus `usePageCache`) → `AfterCacheableContentIsGeneratedEvent`, and `insertPageIncache` → `AfterCachedPageIsPersistedEvent` (Breaking #97862); **`output`** has no PSR-14 event — use a PSR-15 middleware instead.
 
 ### 2. TCA modernization (cumulative toward v14 target)
 

@@ -74,7 +74,7 @@ Comprehensive framework for documenting and analyzing security incidents, drawin
 
 ### CVSS Integration
 
-For vulnerability-based incidents, include CVSS v3.1 base score from the [security-audit](../security-audit/SKILL.md) skill.
+For vulnerability-based incidents, include CVSS 4.0 base score (v3.1 accepted for legacy reports) from the [security-audit](../security-audit/SKILL.md) skill.
 
 ---
 
@@ -214,7 +214,7 @@ Map attack signatures to known vulnerabilities for threat intelligence.
 |-------------|------|---------------------|-----|-------------|
 | NTP Monlist | UDP/123 | 556x | CVE-2013-5211 | NTP mode 7 monlist |
 | Memcached | UDP/11211 | 51,000x | CVE-2018-1000115 | UDP reflection |
-| CLDAP | UDP/389 | 70x | CVE-2020-9490 | LDAP reflection |
+| CLDAP | UDP/389 | 70x | Various | LDAP reflection |
 | SLP | UDP/427 | 2,200x | CVE-2023-29552 | Service Location Protocol |
 | DNS | UDP/53 | 54x | Various | Open resolver abuse |
 | SSDP | UDP/1900 | 30x | Various | UPnP reflection |
@@ -359,7 +359,7 @@ SLP reflectors. Recommend:
 
 ## References
 
-- [NIST SP 800-61 Rev. 2](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final)
+- [NIST SP 800-61 Rev. 3](https://csrc.nist.gov/pubs/sp/800/61/r3/final) (April 2025, CSF 2.0-aligned; Rev. 2 withdrawn 2025-04-03)
 - [SANS Incident Response](https://www.sans.org/white-papers/33901/)
 - [MITRE ATT&CK](https://attack.mitre.org/)
 - [DDoS Resiliency Score](https://www.ddosresiliencyscore.org/)

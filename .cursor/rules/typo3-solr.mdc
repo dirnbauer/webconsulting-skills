@@ -104,23 +104,23 @@ sequenceDiagram
 | **14.0.x** (see matrix / Packagist) | **14.x** | per matrix | `ext_solr_14_0_0` (when used) | **^8.2** | per matrix | per matrix |
 | 13.1.x | *(not a target for this collection)* | 9.10.1 | `ext_solr_13_1_0` | ^8.2 | 13.1 | 13.0 |
 
-When **14.0.x** is not yet on Packagist, follow the **TYPO3 v14 Readiness** subsection below (`dev-main` / docs workflow) until a stable tag ships.
+While **14.0.x** has no stable tag on Packagist (betas are published), follow the **TYPO3 v14 Readiness** subsection below (`^14.0@beta` / docs workflow) until a stable tag ships.
 
 ### TYPO3 v14 Readiness
 
-The [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) targets **TYPO3 14.3 + EXT:solr 14.0 + Solr 9.10.1 + `ext_solr_14_0_0`**. Upstream development is on [`main`](https://github.com/TYPO3-Solr/ext-solr/tree/main):
+The [Version Matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) targets **TYPO3 14.3 + EXT:solr 14.0 + Apache Solr 10.0.0 + `ext_solr_14_0_0`** (Solr 9.10.1 belongs to EXT:solr 13.1/12.1). Upstream development is on [`main`](https://github.com/TYPO3-Solr/ext-solr/tree/main):
 
-- `main` requires `typo3/cms-core: 14.*.*@dev` (see `composer.json` on `main`)
+- `main` requires `typo3/cms-core: ^v14.3.0` (see `composer.json` on `main`)
 - branch alias **`dev-main` -> `14.0.x-dev`**
-- **Composer reality check:** if Packagist has no `14.0.x` stable yet, use `dev-main` (often requires `minimum-stability: dev` + `prefer-stable: true`) or the GitHub release ZIP workflow documented by EXT:solr for non-TER packages.
+- **Composer reality check:** `14.0.0-beta1`–`beta3` are published on Packagist; no stable `14.0` tag exists yet, so install via the `@beta` stability flag (or fall back to `dev-main` for the bleeding edge).
 
-**Until `14.0` is published on Packagist:**
+**Until a stable `14.0` is published on Packagist:**
 
 ```bash
-composer require apache-solr-for-typo3/solr:dev-main
+composer require apache-solr-for-typo3/solr:^14.0@beta
 ```
 
-> **Warning:** Re-check Packagist/GitHub when you upgrade — switch from `dev-main` to a tagged `^14.0` constraint as soon as stable releases exist.
+> **Warning:** Re-check Packagist/GitHub when you upgrade — switch from `^14.0@beta` to a plain `^14.0` constraint as soon as stable releases exist.
 
 ### CVE-2025-24814 Migration
 
@@ -143,7 +143,7 @@ ddev add-on get ddev/ddev-typo3-solr
 ddev restart
 ```
 
-> **Solr image version:** the DDEV Solr add-on defaults `SOLR_BASE_IMAGE` to `solr:9.10`, and the generated compose file is `.ddev/docker-compose.typo3-solr.yaml`. For explicit control, override via `.ddev/.env.solr` (for example: `ddev dotenv set .ddev/.env.solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
+> **Solr image version:** the DDEV Solr add-on defaults `SOLR_BASE_IMAGE` to `solr:9.10`, and the generated compose file is `.ddev/docker-compose.typo3-solr.yaml`. For explicit control, override via `.ddev/.env.typo3-solr` (for example: `ddev dotenv set .ddev/.env.typo3-solr --solr-base-image="solr:9.10.1"`) and rebuild the Solr service.
 
 Configure `.ddev/typo3-solr/config.yaml`:
 

@@ -46,7 +46,7 @@ return [
         'debug' => false,
         'lockIP' => 0,                    // Common for frontend sessions; mobile users / proxies often change IPs
         'sessionTimeout' => 86400,
-        // `FE.lockSSL` was removed in v12 — enforce HTTPS at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
+        // `lockSSL` is BE-only (there is no `FE.lockSSL`) — enforce HTTPS for the frontend at the **web server / proxy** and send **HSTS** (`Strict-Transport-Security: max-age=31536000; includeSubDomains`) for production hosts
         'passwordHashing' => [
             'className' => \TYPO3\CMS\Core\Crypto\PasswordHashing\Argon2idPasswordHash::class,
             'options' => [],
@@ -121,9 +121,11 @@ return [
 
 Keep Core’s deny list strict — extend only when you understand the risk:
 
+> **Warning:** setting `fileDenyPattern` **replaces** Core’s default pattern entirely. Always start from the v14 default (`\\.(php[3-8]?|phpsh|phtml|pht|phar|shtml|cgi)(\\..*)?$|\\.pl$|^\\.htaccess$`) and append — never drop `pht`, `phpsh`, `shtml`, or `^\.htaccess$`.
+
 ```php
-// Example: tighten executable uploads (adjust to your policy)
-$GLOBALS['TYPO3_CONF_VARS']['BE']['fileDenyPattern'] = '\\.(php[0-9]?|phtml|phar|sh|bash|cgi|pl|py|asp|aspx|jsp)(\\..*)?$';
+// Example: keep Core's v14 default and append extra executable extensions (adjust to your policy)
+$GLOBALS['TYPO3_CONF_VARS']['BE']['fileDenyPattern'] = '\\.(php[3-8]?|phpsh|phtml|pht|phar|shtml|cgi|sh|bash|py|asp|aspx|jsp)(\\..*)?$|\\.pl$|^\\.htaccess$';
 ```
 
 ### Directory Permissions
@@ -243,10 +245,27 @@ Set the hashed password via the Install Tool or an environment-specific `config/
 
 ### IP Restriction for Install Tool
 
-```php
-// config/system/additional.php
-$GLOBALS['TYPO3_CONF_VARS']['BE']['installToolPassword'] = '$argon2id$...'; // hashed
+Restrict the Install Tool entry point (`/typo3/install.php` on Composer-based v14) to trusted IPs at the web-server level:
+
+```apacheconf
+# Apache: in the vhost or .htaccess
+<LocationMatch "^/typo3/install\.php">
+    Require ip 203.0.113.0/24
+    Require ip 198.51.100.42
+</LocationMatch>
 ```
+
+```nginx
+# Nginx
+location = /typo3/install.php {
+    allow 203.0.113.0/24;
+    allow 198.51.100.42;
+    deny  all;
+    # ...existing fastcgi_pass / include snippet...
+}
+```
+
+> Note: `$GLOBALS['TYPO3_CONF_VARS']['SYS']['devIPmask']` only governs exposure of dev/debug tooling (e.g. the admin panel and debug output) — it does **not** restrict or authenticate the Install Tool. Lock the Install Tool down at the web server (above) in addition to setting a strong `installToolPassword`.
 
 ## 5. Backend User Security
 

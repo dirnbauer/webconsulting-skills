@@ -42,7 +42,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 - [ ] No auto-playing media with sound
 
 ### Color & Contrast
-- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.5px bold)
+- [ ] Text contrast >= 4.5:1 (normal) / 3:1 (large text >= 24px / 18.66px bold)
 - [ ] UI components and graphical objects >= 3:1 contrast
 - [ ] Information not conveyed by color alone (add icon, text, or pattern)
 - [ ] Dark mode (if implemented) maintains contrast ratios

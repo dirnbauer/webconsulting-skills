@@ -1,0 +1,32 @@
+name: Accessibility report
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: cp .a11y/a11y.config.example.yml .a11y/a11y.config.yml
+      - run: npm run a11y:all
+        env:
+          A11Y_REPORT_ONLY: "1"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: accessibility-report
+          path: |
+            .a11y/report.md
+            .a11y/report.json
+            .a11y/open-issues.yml
+            .a11y/accessibility-statement-draft.de.md
+            .a11y/playwright-report/
+            test-results/

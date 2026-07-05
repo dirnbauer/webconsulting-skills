@@ -396,6 +396,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
 | `typo3-accessibility` | WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist | 1.0.0 | accessibility, a11y, wcag, aria, screen reader, keyboard |
+| `typo3-wcag22-aa-agentic` | Agentic WCAG 2.2 AA audits for TYPO3 with Playwright, axe-core, optional Deque MCP, manual review helper, CI baselines, and DACH/EAA-aware accessibility statement drafts | 1.0.0 | wcag 2.2 aa, accessibility audit, axe-core, playwright, deque mcp, accessibility statement, eaa, bafg, bfsg |
 | `typo3-simplify` | Simplify TYPO3 code: API reuse, quality, efficiency (Boris Cherny) | 1.0.0 | simplify, clean up, refine, code quality, reduce complexity |
 | `typo3-batch` | Batch TYPO3 migrations: hooks→events, TCA, DI, namespaces (Boris Cherny) | 1.0.0 | batch, migrate, bulk, mass refactor, codemod, upgrade all |
 | `typo3-powermail` | Powermail 13+ forms, finishers, validators, events, spam shield | 1.0.0 | powermail, mailform, form extension, tx_powermail |
@@ -662,6 +663,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 - **typo3-security**: Production hardening checklist for TYPO3 v14
 - **typo3-seo**: Search engine optimization with EXT:seo
 - **typo3-accessibility**: WCAG 2.2 AA accessibility audit, Fluid/PHP/JS patterns, go-live checklist
+- **typo3-wcag22-aa-agentic**: Agentic WCAG 2.2 AA audits with Playwright/axe, optional Deque MCP, manual review helper, CI baselines, and DACH/EAA-aware statement drafts
 - **typo3-simplify**: Simplify TYPO3 code for clarity and maintainability (adapted from Boris Cherny/Anthropic)
 - **typo3-batch**: Batch operations for large-scale TYPO3 migrations and refactoring (adapted from Boris Cherny/Anthropic)
 - **typo3-powermail**: Powermail 13+ form extension (finishers, validators, events, spam shield, emails)
@@ -848,6 +850,9 @@ Skills are automatically loaded by Claude when relevant keywords are detected in
 
 **♿ Accessibility (typo3-accessibility)**
 - "Run WCAG 2.2 AA accessibility audit on my TYPO3 site"
+- "Run an agentic WCAG 2.2 AA audit with Playwright, axe-core, and manual review exports"
+- "Scaffold TYPO3 accessibility tooling with CI baselines and an accessibility statement draft"
+- "Use Deque axe MCP guidance to remediate this rendered TYPO3 page state"
 - "Add skip-to-content link and landmark elements to my Fluid layout"
 - "Create accessible accordion with keyboard navigation"
 - "Create accessible tabs component for TYPO3"
@@ -1501,12 +1506,12 @@ Active: `frontend-design`, `ui-design-patterns`, `webconsulting-branding`, `og-i
 Use case: Distinctive UI design, creative interfaces, anti-AI-slop aesthetics, memorable user experiences
 
 ### Accessibility Audit Session
-Active: `web-design-guidelines`, `ui-design-patterns`, `react-best-practices`, `typo3-accessibility`
-Use case: WCAG compliance, accessibility audits, semantic HTML, ARIA patterns, keyboard navigation
+Active: `web-design-guidelines`, `ui-design-patterns`, `react-best-practices`, `typo3-accessibility`, `typo3-wcag22-aa-agentic`
+Use case: WCAG compliance, accessibility audits, semantic HTML, ARIA patterns, keyboard navigation, automated/manual evidence
 
 ### TYPO3 Accessibility Session
-Active: `typo3-accessibility`, `typo3-content-blocks`, `typo3-seo`, `web-design-guidelines`
-Use case: TYPO3 WCAG 2.2 AA compliance, accessible Fluid templates, keyboard navigation, form a11y
+Active: `typo3-accessibility`, `typo3-wcag22-aa-agentic`, `typo3-content-blocks`, `typo3-seo`, `web-design-guidelines`
+Use case: TYPO3 WCAG 2.2 AA compliance, accessible Fluid templates, keyboard navigation, form a11y, DACH/EAA statement drafts
 
 ### Document Processing Session
 Active: `document-processing`, `enterprise-readiness`  
@@ -1625,6 +1630,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-security | ✓ | ✓ | ✓ | ✓ |
 | typo3-seo | ✓ | ✓ | ✓ | ✓ |
 | typo3-accessibility | ✓ | ✓ | ✓ | ✓ |
+| typo3-wcag22-aa-agentic | ✓ | ✓ | ✓ | ✓ |
 | typo3-simplify | ✓ | ✓ | ✓ | ✓ |
 | typo3-batch | ✓ | ✓ | ✓ | ✓ |
 | typo3-powermail | ✓ | ✓ | ✓ | ✓ |

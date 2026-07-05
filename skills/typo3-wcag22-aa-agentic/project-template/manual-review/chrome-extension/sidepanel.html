@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WCAG 2.2 AA Manual Review</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>WCAG 2.2 AA Manual Review</h1>
+      <p id="page-meta">No page connected yet.</p>
+    </div>
+    <button id="connect" type="button">Connect page</button>
+  </header>
+
+  <section class="notice">
+    <strong>Purpose:</strong> capture human review evidence for criteria automation cannot safely decide. Export failures into <code>.a11y/open-issues.yml</code>; generate the accessibility statement from that structured list.
+  </section>
+
+  <section class="toolbar" aria-label="Page helper tools">
+    <button id="scan" type="button">Run page helper scan</button>
+    <button id="highlight-headings" type="button">Headings</button>
+    <button id="highlight-landmarks" type="button">Landmarks</button>
+    <button id="highlight-images" type="button">Images</button>
+    <button id="highlight-forms" type="button">Forms</button>
+    <button id="highlight-links" type="button">Links</button>
+    <button id="highlight-focusables" type="button">Focusable</button>
+    <button id="highlight-targets" type="button">Small targets</button>
+    <button id="clear-highlights" type="button">Clear</button>
+  </section>
+
+  <section class="toolbar" aria-label="Keyboard focus tools">
+    <button id="start-focus" type="button">Start focus recorder</button>
+    <button id="stop-focus" type="button">Stop recorder</button>
+    <button id="get-focus" type="button">Get focus order</button>
+  </section>
+
+  <section id="scan-summary" class="scan-summary" aria-live="polite"></section>
+
+  <section class="filters" aria-label="Checklist filters">
+    <label>
+      Search
+      <input id="search" type="search" placeholder="e.g. focus, forms, 2.4.7">
+    </label>
+    <label>
+      Status
+      <select id="status-filter">
+        <option value="all">All</option>
+        <option value="not_tested">Not tested</option>
+        <option value="pass">Pass</option>
+        <option value="fail">Fail</option>
+        <option value="not_applicable">Not applicable</option>
+        <option value="cannot_determine">Cannot determine</option>
+        <option value="needs_expert_review">Needs expert review</option>
+      </select>
+    </label>
+    <label>
+      Level
+      <select id="level-filter">
+        <option value="all">A + AA</option>
+        <option value="A">A</option>
+        <option value="AA">AA</option>
+      </select>
+    </label>
+  </section>
+
+  <section class="review-meta" aria-label="Review metadata">
+    <label>
+      Reviewer
+      <input id="reviewer" type="text" placeholder="Name or initials">
+    </label>
+    <label>
+      Legal profile
+      <select id="legal-profile">
+        <option value="at-public-wzg">Austria public WZG</option>
+        <option value="at-private-bafg">Austria private BaFG / EAA</option>
+        <option value="de-public-bgg-bitv">Germany public BGG / BITV 2.0</option>
+        <option value="de-private-bfsg">Germany private BFSG / EAA</option>
+        <option value="ch-public-behig-ech0059">Switzerland BehiG / eCH-0059</option>
+        <option value="voluntary-wcag22aa">Voluntary WCAG 2.2 AA</option>
+      </select>
+    </label>
+  </section>
+
+  <main id="checklist" class="checklist" aria-live="polite"></main>
+
+  <footer class="export-bar">
+    <button id="export-session" type="button">Export session JSON</button>
+    <button id="export-issues" type="button">Export open-issues.yml</button>
+    <button id="copy-codex" type="button">Copy Codex prompt</button>
+    <button id="reset-page" type="button" class="danger">Reset page review</button>
+  </footer>
+
+  <template id="checkpoint-template">
+    <article class="checkpoint">
+      <header>
+        <div>
+          <h2></h2>
+          <p class="meta"></p>
+        </div>
+        <a class="official" target="_blank" rel="noopener noreferrer">W3C</a>
+      </header>
+      <p class="question"></p>
+      <p class="focus"></p>
+      <div class="fields">
+        <label>Status
+          <select class="status">
+            <option value="not_tested">Not tested</option>
+            <option value="pass">Pass</option>
+            <option value="fail">Fail</option>
+            <option value="not_applicable">Not applicable</option>
+            <option value="cannot_determine">Cannot determine</option>
+            <option value="needs_expert_review">Needs expert review</option>
+          </select>
+        </label>
+        <label>Severity
+          <select class="severity">
+            <option value="serious">Serious</option>
+            <option value="critical">Critical</option>
+            <option value="moderate">Moderate</option>
+            <option value="minor">Minor</option>
+          </select>
+        </label>
+        <label>Statement category
+          <select class="statement-category">
+            <option value="non_conformance">Non-conformance</option>
+            <option value="disproportionate_burden">Disproportionate burden</option>
+            <option value="outside_scope">Outside scope</option>
+            <option value="third_party_content">Third-party content</option>
+            <option value="archived_content">Archived content</option>
+            <option value="accessible_alternative_available">Accessible alternative available</option>
+            <option value="not_applicable">Not applicable</option>
+          </select>
+        </label>
+      </div>
+      <label>Evidence / actual result
+        <textarea class="evidence" rows="3" placeholder="What did you observe? Include page area, selector, component, screenshot reference or keyboard path."></textarea>
+      </label>
+      <label>Expected / planned fix / public statement text
+        <textarea class="expected" rows="3" placeholder="What should happen? Optional public wording for the accessibility statement."></textarea>
+      </label>
+      <label>TYPO3 template/component hint
+        <input class="typo3" type="text" placeholder="EXT:sitepackage/... or data-a11y-component value">
+      </label>
+    </article>
+  </template>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
