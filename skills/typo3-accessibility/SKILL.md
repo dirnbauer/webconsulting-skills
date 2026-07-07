@@ -1,10 +1,10 @@
 ---
 name: "typo3-accessibility"
 description: "Audits and implements TYPO3 accessibility patterns for WCAG 2.2 AA, including Fluid templates, PHP helpers, JavaScript widgets, forms, focus states, ARIA, and go-live checks. Use when building or reviewing TYPO3 templates, content elements, extensions, or frontend code for accessibility, keyboard support, screen readers, WCAG, ARIA, or a11y readiness."
-compatibility: "TYPO3 14.x"
 metadata:
   version: "1.0.0"
   origin: "webconsulting"
+  compatibility: "TYPO3 14.x"
 license: "MIT / CC-BY-SA-4.0"
 ---
 # TYPO3 Accessibility (WCAG 2.2 AA)
@@ -82,9 +82,24 @@ Run through this checklist before every deployment. Mark items as you fix them.
 - [ ] Fluid templates use `<f:link.page>` / `<f:link.typolink>` (not `<a>` with manual hrefs)
 - [ ] Content Block / Content Element templates follow accessible patterns below
 
-## 2. Fluid Template Patterns
+## 2. WCAG 2.2 Conformance Audit Workflow
 
-### 2.1 Page Layout with Landmarks
+When asked for a WCAG 2.2 audit, do the work that can be done by the agent before handing anything back:
+
+1. Identify audited URLs, languages, viewports, forms, dialogs, menus, media, downloads, and third-party embeds.
+2. Run `scripts/wcag22_audit.cjs` against the rendered pages with axe-core tags for WCAG 2.0/2.1/2.2 A/AA.
+3. Review and either fix or document all automated violations and `incomplete` items. The audit script computes contrast for `color-contrast` incomplete nodes where possible; use that evidence before escalating. Do not treat unresolved `incomplete` as a pass.
+4. Verify semantic structure, page language, landmarks, one `<h1>`, heading order, skip link, image `alt`, image dimensions, viewport zoom, footer/header navigation, focusability, target-size candidates, and target-size exceptions for inline text links.
+5. Probe keyboard order with real Tab navigation where possible. Fix clear template/component defects immediately.
+6. Write an audit report with two sections:
+   - **Agent-completed evidence:** commands, URLs, viewport, tool versions, violations, fixes, residual technical risks.
+   - **Human/user follow-up only:** screen reader confirmation, legal statement approval, and only applicable device-only, third-party/PDF/media, or user-testing tasks.
+
+Use the detailed procedure in [Testing & Tools](references/07-testing-and-tools.md) when a conformance audit is requested. A successful automated run is not a WCAG conformance claim; it is evidence for the parts that automation and code inspection can cover.
+
+## 3. Fluid Template Patterns
+
+### 3.1 Page Layout with Landmarks
 
 ```html
 <!-- EXT:site_package/Resources/Private/Layouts/Default.html -->
@@ -119,7 +134,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 </f:section>
 ```
 
-### 2.2 Skip Link CSS
+### 3.2 Skip Link CSS
 
 ```css
 .skip-link {
@@ -138,7 +153,7 @@ Run through this checklist before every deployment. Mark items as you fix them.
 }
 ```
 
-### 2.3 Accessible Image Rendering
+### 3.3 Accessible Image Rendering
 
 ```html
 <!-- Partial: Resources/Private/Partials/Media/Image.html -->
@@ -166,7 +181,7 @@ For decorative images (no informational value):
 <f:image image="{image}" alt="" />
 ```
 
-### 2.4 Accessible Content Element Wrapper
+### 3.4 Accessible Content Element Wrapper
 
 ```html
 <!-- Partial: Resources/Private/Partials/ContentElement/Header.html -->
@@ -182,7 +197,7 @@ For decorative images (no informational value):
 </f:if>
 ```
 
-### 2.5 Accessible Navigation Partial
+### 3.5 Accessible Navigation Partial
 
 ```html
 <!-- Partial: Resources/Private/Partials/Navigation/MainMenu.html -->
@@ -218,7 +233,7 @@ For decorative images (no informational value):
 </nav>
 ```
 
-### 2.6 Accessible Accordion (Content Blocks / Custom CE)
+### 3.6 Accessible Accordion (Content Blocks / Custom CE)
 
 ```html
 <div class="accordion" data-accordion>
@@ -251,7 +266,7 @@ For decorative images (no informational value):
 </div>
 ```
 
-### 2.7 Accessible Tab Component
+### 3.7 Accessible Tab Component
 
 ```html
 <div class="tabs" data-tabs>

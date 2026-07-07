@@ -8,7 +8,7 @@ Read only the section that matches the current task. These files continue the ma
 - [4. JavaScript: Accessible Widgets](04-javascript-accessible-widgets.md)
 - [5. CSS: Focus & Contrast Essentials](05-css-focus-and-contrast-essentials.md)
 - [6. TYPO3-Specific Configuration](06-typo3-specific-configuration.md)
-- [7. Testing & Tools](07-testing-and-tools.md)
+- [7. Testing & Tools / WCAG 2.2 Audit Workflow](07-testing-and-tools.md)
 - [8. Accessibility Extensions](08-accessibility-extensions.md)
 - [9. WCAG 2.2 Quick Reference](09-wcag-2-2-quick-reference.md)
 - [10. Anti-Patterns (Flag These in Reviews)](10-anti-patterns-flag-these-in-reviews.md)
