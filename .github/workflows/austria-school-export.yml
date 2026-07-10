@@ -1,0 +1,37 @@
+name: Complete Austrian school export
+
+on:
+  push:
+    branches:
+      - tmp/austria-register-source-probe-20260710
+    paths:
+      - 'tools/austria_school_export.py'
+      - '.github/workflows/austria-school-export.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tools/austria_school_export.py'
+      - '.github/workflows/austria-school-export.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export-schools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests beautifulsoup4 lxml
+      - run: python tools/austria_school_export.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: austria-school-export
+          path: school-export/**
+          if-no-files-found: warn
+          retention-days: 2
