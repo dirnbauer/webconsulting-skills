@@ -29,6 +29,7 @@ jobs:
       - run: python -m pip install requests beautifulsoup4 lxml pyshp
       - run: python tmp/austria_register/test_school.py
       - run: python tmp/austria_register/inspect_municipalities.py
+      - run: python tmp/austria_register/download_picker_js.py
       - if: always()
         uses: actions/upload-artifact@v4
         with:
