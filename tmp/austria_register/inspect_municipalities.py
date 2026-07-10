@@ -13,6 +13,8 @@ OUT = Path("out")
 OUT.mkdir(exist_ok=True)
 URLS = {
     "picker": "https://www.oesterreich.gv.at/de/orgsearch/gemeindeauswahl/orgtypegroup/2",
+    "picker-a": "https://www.oesterreich.gv.at/de/orgsearch/gemeindeauswahl/orgtypegroup/2?q=A",
+    "eisenstadt": "https://www.oesterreich.gv.at/de/orgsearch/orgtypegroup/2?gkz=10101",
     "gemeindebund": "https://gemeindebund.at/gemeinden/",
 }
 
@@ -36,9 +38,10 @@ for name, url in URLS.items():
     soup = BeautifulSoup(text, "lxml")
     print(name, "title", soup.title.get_text(" ", strip=True) if soup.title else "")
     print(name, "scripts", len(soup.find_all("script")))
+    print(name, "headings", [h.get_text(" ", strip=True) for h in soup.find_all(["h1", "h2", "h3"])][:40])
     for script in soup.find_all("script", src=True):
         print(name, "SCRIPT", urljoin(r.url, script.get("src")))
-    for term in ["api", "autocomplete", "municip", "gemeinde", "orgsearch", "suggest", "search", "__next_f.push", "wp-json"]:
+    for term in ["api", "autocomplete", "municip", "gemeinde", "orgsearch", "suggest", "search", "__next_f.push", "wp-json", "gkz", "regions", "homepage"]:
         positions = [m.start() for m in re.finditer(term, text, re.I)][:5]
         print(name, "TERM", term, positions)
         for pos in positions[:2]:
