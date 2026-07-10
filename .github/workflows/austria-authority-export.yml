@@ -1,0 +1,37 @@
+name: Complete Austrian authority export
+
+on:
+  push:
+    branches:
+      - tmp/austria-register-source-probe-20260710
+    paths:
+      - 'tools/austria_authority_export.py'
+      - '.github/workflows/austria-authority-export.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tools/austria_authority_export.py'
+      - '.github/workflows/austria-authority-export.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export-authorities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests beautifulsoup4 lxml
+      - run: python tools/austria_authority_export.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: austria-authority-export
+          path: authority-export/**
+          if-no-files-found: warn
+          retention-days: 2
