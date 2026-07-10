@@ -13,7 +13,8 @@ if not html_path.exists():
     raise SystemExit("picker.html missing")
 
 base = "https://www.oesterreich.gv.at/de/orgsearch/gemeindeauswahl/orgtypegroup/2"
-soup = BeautifulSoup(html_path.read_text(encoding="utf-8"), "lxml")ns = requests.Session()
+soup = BeautifulSoup(html_path.read_text(encoding="utf-8"), "lxml")
+s = requests.Session()
 s.headers["User-Agent"] = "Mozilla/5.0"
 for index, script in enumerate(soup.find_all("script", src=True), start=1):
     url = urljoin(base, script.get("src"))
