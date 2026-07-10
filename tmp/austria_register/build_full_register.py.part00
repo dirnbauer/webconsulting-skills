@@ -1,0 +1,330 @@
+#!/usr/bin/env python3
+"""Build a source-aware register of Austrian public web presences.
+
+Live sources:
+- oesterreich.gv.at municipality picker and authority directory
+- Schulen-Online national school directory
+
+Output deliberately separates organizations from websites. Missing homepages remain
+visible as missing; no domain is guessed.
+"""
+from __future__ import annotations
+
+import csv
+import hashlib
+import html
+import json
+import re
+import sqlite3
+import sys
+import time
+import unicodedata
+import urllib.parse
+from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Iterable
+
+import requests
+from bs4 import BeautifulSoup, NavigableString, Tag
+from openpyxl import Workbook
+from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl.utils import get_column_letter
+from openpyxl.worksheet.table import Table, TableStyleInfo
+
+OUT = Path("out")
+RAW = OUT / "raw-samples"
+OUT.mkdir(parents=True, exist_ok=True)
+RAW.mkdir(parents=True, exist_ok=True)
+NOW = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/126.0 Safari/537.36 "
+    "AustriaPublicWebsiteRegister/1.0"
+)
+HEADERS = {"User-Agent": USER_AGENT, "Accept-Language": "de-AT,de;q=0.9,en;q=0.5"}
+
+SCHOOL_URL = "https://www.schulen-online.at/sol/oeff_suche_schulen.jsf"
+ORGSEARCH_URL = "https://www.oesterreich.gv.at/de/orgsearch"
+MUNICIPALITY_PICKER = (
+    "https://www.oesterreich.gv.at/de/orgsearch/gemeindeauswahl/orgtypegroup/2"
+)
+MUNICIPALITY_RESULTS = "https://www.oesterreich.gv.at/de/orgsearch/orgtypegroup/2?gkz={gkz}"
+
+FEDERAL_STATES = {
+    "1": "Burgenland",
+    "2": "Kärnten",
+    "3": "Niederösterreich",
+    "4": "Oberösterreich",
+    "5": "Salzburg",
+    "6": "Steiermark",
+    "7": "Tirol",
+    "8": "Vorarlberg",
+    "9": "Wien",
+}
+
+AUTHORITY_TYPES = {
+    "23": "Notrufnummern",
+    "24": "Servicenummern",
+    "2": "Arbeitsinspektion",
+    "3": "Arbeitsmarktservice",
+    "4": "Bezirkshauptmannschaft",
+    "8": "Bundesministerium",
+    "9": "Finanzamt",
+    "10": "Gemeindeamt/Magistrat",
+    "11": "Gericht",
+    "16": "Landesregierung",
+    "17": "Polizei",
+    "19": "Standesamt",
+    "21": "Verkehrsamt",
+    "22": "Volksanwaltschaft",
+    "35": "Zollamt",
+    "1": "Agrarmarkt Austria",
+    "5": "Österreichische Nationalbibliothek",
+    "14": "Sozialversicherungsträger",
+    "18": "Rechnungshof",
+    "27": "Bundesdenkmalamt",
+    "30": "Europäische und internationale Einrichtungen",
+    "34": "Technisches Museum Wien",
+}
+
+SOURCE_ROWS = [
+    {
+        "source_id": "SRC-OEGV-MUNICIPALITIES",
+        "source_name": "Behördensuche – Gemeindeauswahl und Abfrageergebnis",
+        "publisher": "oesterreich.gv.at / Bundeskanzleramt",
+        "source_url": MUNICIPALITY_PICKER,
+        "scope": "Gemeinden, Gemeindekennziffern, lokale und regional zuständige Behörden, Homepages",
+        "retrieved_at": NOW,
+        "license": "",
+        "notes": "Öffentlich zugängliches Behördenverzeichnis; Daten werden nicht geraten.",
+    },
+    {
+        "source_id": "SRC-OEGV-ORGSEARCH",
+        "source_name": "Behördensuche – Behördentypen",
+        "publisher": "oesterreich.gv.at / Bundeskanzleramt",
+        "source_url": ORGSEARCH_URL,
+        "scope": "Bundesministerien, Bundes- und Landesbehörden, Sozialversicherung und weitere öffentliche Stellen",
+        "retrieved_at": NOW,
+        "license": "",
+        "notes": "Direkte Ergebnislisten der öffentlich zugänglichen Behördensuche.",
+    },
+    {
+        "source_id": "SRC-BMB-SCHULENONLINE",
+        "source_name": "Schulen-Online – Suche nach Schulen",
+        "publisher": "Bundesministerium für Bildung",
+        "source_url": SCHOOL_URL,
+        "scope": "Schulkennzahl, Titel, Adresse, Träger, Aufsicht, Schulart, Kontakt und Homepage",
+        "retrieved_at": NOW,
+        "license": "",
+        "notes": "Öffentlich zugängliches nationales Schulverzeichnis.",
+    },
+]
+
+
+def log(message: str) -> None:
+    print(f"[{datetime.now().strftime('%H:%M:%S')}] {message}", flush=True)
+
+
+def clean(value: Any) -> str:
+    if value is None:
+        return ""
+    value = html.unescape(str(value)).replace("\u00a0", " ")
+    return re.sub(r"\s+", " ", value).strip()
+
+
+def normalize_name(value: str) -> str:
+    value = unicodedata.normalize("NFKD", clean(value).casefold())
+    value = "".join(char for char in value if not unicodedata.combining(char))
+    return re.sub(r"[^a-z0-9]+", " ", value).strip()
+
+
+def stable_id(prefix: str, *parts: str) -> str:
+    payload = "|".join(clean(part).casefold() for part in parts)
+    digest = hashlib.sha1(payload.encode("utf-8")).hexdigest()[:14].upper()
+    return f"{prefix}-{digest}"
+
+
+def canonical_url(value: str, base: str = "") -> str:
+    value = clean(value).strip(".,;()[]<>\"'")
+    if not value:
+        return ""
+    if base:
+        value = urllib.parse.urljoin(base, value)
+    if value.startswith("www."):
+        value = "https://" + value
+    parsed = urllib.parse.urlsplit(value)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        return ""
+    host = parsed.netloc.lower()
+    if host.endswith(":80") and parsed.scheme == "http":
+        host = host[:-3]
+    if host.endswith(":443") and parsed.scheme == "https":
+        host = host[:-4]
+    path = re.sub(r"/{2,}", "/", parsed.path or "/")
+    return urllib.parse.urlunsplit((parsed.scheme.lower(), host, path, parsed.query, ""))
+
+
+def domain_of(url: str) -> str:
+    try:
+        return urllib.parse.urlsplit(url).netloc.lower().removeprefix("www.")
+    except Exception:
+        return ""
+
+
+def request(session: requests.Session, method: str, url: str, attempts: int = 4, **kwargs: Any) -> requests.Response:
+    last: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            response = session.request(method, url, timeout=90, **kwargs)
+            if response.status_code in {429, 500, 502, 503, 504} and attempt < attempts:
+                time.sleep(attempt * 1.5)
+                continue
+            response.raise_for_status()
+            return response
+        except Exception as exc:  # noqa: BLE001
+            last = exc
+            if attempt < attempts:
+                time.sleep(attempt * 1.5)
+    raise RuntimeError(f"Request failed: {method} {url}: {last}")
+
+
+def new_session() -> requests.Session:
+    session = requests.Session()
+    session.headers.update(HEADERS)
+    return session
+
+
+def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str] | None = None) -> None:
+    if fieldnames is None:
+        fieldnames = []
+        seen: set[str] = set()
+        for row in rows:
+            for key in row:
+                if key not in seen:
+                    fieldnames.append(key)
+                    seen.add(key)
+    with path.open("w", encoding="utf-8-sig", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def municipality_regions() -> list[dict[str, str]]:
+    log("Loading municipality master from the official municipality picker")
+    session = new_session()
+    regions: dict[str, dict[str, str]] = {}
+    pattern = re.compile(
+        r'\{\\"id\\":(?P<id>\d+),\\"title\\":\\"(?P<title>(?:\\.|[^"\\])*)\\",'
+        r'\\"plz\\":\\"(?P<plz>(?:\\.|[^"\\])*)\\",\\"gkz\\":\\"(?P<gkz>\d+)\\"\}'
+    )
+    queries = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + ["Ä", "Ö", "Ü"]
+    for query in queries:
+        response = request(session, "GET", MUNICIPALITY_PICKER, params={"q": query})
+        if query == "A":
+            (RAW / "municipality-picker-A.html").write_text(response.text, encoding="utf-8")
+        for match in pattern.finditer(response.text):
+            title = json.loads('"' + match.group("title") + '"')
+            plz = json.loads('"' + match.group("plz") + '"')
+            gkz = match.group("gkz").zfill(5)
+            regions[gkz] = {
+                "directory_id": match.group("id"),
+                "name": title,
+                "postal_code": plz,
+                "municipality_code": gkz,
+            }
+    rows = sorted(regions.values(), key=lambda row: row["municipality_code"])
+    log(f"Municipalities discovered: {len(rows)}")
+    if len(rows) < 2080:
+        raise RuntimeError(f"Municipality picker returned only {len(rows)} unique municipalities")
+    return rows
+
+
+def label_value(card: Tag, label: str) -> str:
+    node = card.find(string=lambda text: clean(text).casefold() == label.casefold())
+    if not node:
+        return ""
+    parent = node.parent if isinstance(node.parent, Tag) else None
+    candidate = parent.find_next() if parent else None
+    for _ in range(8):
+        if not isinstance(candidate, Tag):
+            return ""
+        if card not in candidate.parents and candidate is not card:
+            return ""
+        value = clean(candidate.get_text(" ", strip=True))
+        if value and value.casefold() != label.casefold():
+            return value
+        candidate = candidate.find_next()
+    return ""
+
+
+def homepage_from_card(card: Tag, base_url: str) -> str:
+    node = card.find(string=lambda text: clean(text).casefold() in {"homepage:", "homepage"})
+    if node:
+        candidate = node.parent.find_next("a", href=True) if isinstance(node.parent, Tag) else None
+        if isinstance(candidate, Tag) and (card in candidate.parents or candidate is card):
+            url = canonical_url(candidate.get("href", ""), base_url)
+            if url:
+                return url
+    return ""
+
+
+def address_from_card(card: Tag, heading: Tag) -> tuple[str, str, str]:
+    strings = [clean(value) for value in card.stripped_strings if clean(value)]
+    name = clean(heading.get_text(" ", strip=True))
+    if strings and strings[0] == name:
+        strings = strings[1:]
+    street = ""
+    postal_code = ""
+    locality = ""
+    for index, value in enumerate(strings[:8]):
+        match = re.match(r"^(\d{4})\s+(.+)$", value)
+        if match:
+            postal_code = match.group(1)
+            locality = match.group(2)
+            if index > 0:
+                street = strings[index - 1]
+            break
+    return street, postal_code, locality
+
+
+def classify_authority(name: str, type_label: str = "") -> tuple[str, str, str]:
+    text = f"{name} {type_label}".casefold()
+    if "bundesministerium" in text or name.casefold() == "bundeskanzleramt":
+        return "ministry", "federal", "public"
+    if re.search(r"\b(gemeindeamt|stadtgemeinde|marktgemeinde|magistrat)\b", text):
+        return "municipality_office", "municipal", "public"
+    if "standesamt" in text:
+        return "registry_office", "municipal", "public"
+    if "bezirkshauptmann" in text:
+        return "district_authority", "district", "public"
+    if "landesregierung" in text:
+        return "state_government", "state", "public"
+    if "bildungsdirektion" in text:
+        return "education_authority", "state", "public"
+    if any(word in text for word in ["polizeiinspektion", "polizeidirektion", "polizeikommando", "polizei"]):
+        return "police_authority", "federal", "public"
+    if any(word in text for word in ["gericht", "staatsanwaltschaft", "verfassungsgerichtshof", "verwaltungsgerichtshof"]):
+        return "judiciary", "federal_or_state", "public"
+    if "finanzamt" in text or "zollamt" in text or "bundesfinanzgericht" in text:
+        return "financial_authority", "federal", "public"
+    if "arbeitsinspekt" in text:
+        return "labour_inspectorate", "federal", "public"
+    if "arbeitsmarktservice" in text:
+        return "employment_service", "federal", "public_law"
+    if any(word in text for word in ["sozialversicherung", "gesundheitskasse", "pensionsversicherung", "unfallversicherung", "bvaeb"]):
+        return "social_insurance", "statutory", "public_law"
+    if "volksanwaltschaft" in text:
+        return "ombudsman", "federal", "public"
+    if "rechnungshof" in text:
+        return "audit_institution", "federal_or_state", "public"
+    if "nationalbibliothek" in text or "museum" in text or "denkmalamt" in text:
+        return "cultural_institution", "federal_or_state", "public_or_attached"
+    if "universität" in text or "hochschule" in text:
+        return "higher_education", "federal_or_state", "public_or_private"
+    if "kammer" in text:
+        return "chamber", "statutory", "public_law"
+    if "notruf" in text or "servicenummer" in text:
+        return "public_service_contact", "service", "public"
+    return "public_body", "unknown", "public_or_attached"
