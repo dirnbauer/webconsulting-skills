@@ -1,0 +1,37 @@
+name: Complete Austrian municipality website export
+
+on:
+  push:
+    branches:
+      - tmp/austria-municipality-websites-20260710
+    paths:
+      - 'tools/austria_municipality_export.py'
+      - '.github/workflows/austria-municipality-export.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'tools/austria_municipality_export.py'
+      - '.github/workflows/austria-municipality-export.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  export-municipalities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests pyshp
+      - run: python tools/austria_municipality_export.py
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: austria-municipality-export
+          path: municipality-export/**
+          if-no-files-found: warn
+          retention-days: 2
