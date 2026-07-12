@@ -17,15 +17,15 @@
     "a11y:manual:merge:file": "node scripts/merge-manual-review.mjs --file"
   },
   "devDependencies": {
-    "@axe-core/playwright": "latest",
-    "@playwright/test": "latest",
-    "axe-core": "latest",
-    "fast-xml-parser": "latest",
-    "glob": "latest",
-    "handlebars": "latest",
-    "html-validate": "latest",
-    "picocolors": "latest",
-    "yaml": "latest"
+    "@axe-core/playwright": "^4.12.1",
+    "@playwright/test": "^1.61.1",
+    "axe-core": "^4.12.1",
+    "fast-xml-parser": "^5.10.0",
+    "glob": "^13.0.6",
+    "handlebars": "^4.7.9",
+    "html-validate": "^11.5.6",
+    "picocolors": "^1.1.1",
+    "yaml": "^2.9.0"
   },
   "engines": {
     "node": ">=20"
