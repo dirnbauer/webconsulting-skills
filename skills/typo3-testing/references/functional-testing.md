@@ -170,7 +170,7 @@ protected array $testExtensionsToLoad = [
 ];
 ```
 
-**Important:** Use the `vendor/extension-name` pattern matching the `name` field in the extension's `composer.json`. The `typo3conf/ext/<key>` path format is also a standard, supported format for `testExtensionsToLoad`. Note the difference: `testExtensionsToLoad` takes either the Composer package name or the `typo3conf/ext/<key>` path, whereas `coreExtensionsToLoad` takes bare extension keys (e.g. `'form'`).
+**Important:** Always use the `vendor/extension-name` pattern matching the `name` field in the extension's `composer.json`. This is the only format that works reliably across all testing setups (local, CI, DDEV). The legacy `typo3conf/ext/my_extension` path format is deprecated and should not be used in new tests.
 
 ### Core Extensions
 
@@ -180,6 +180,29 @@ protected array $coreExtensionsToLoad = [
     'workspaces',
 ];
 ```
+
+### Load ALL hard dependencies (or the bootstrap fails cryptically)
+
+`coreExtensionsToLoad` / `testExtensionsToLoad` must include **every** TYPO3
+extension your extension hard-depends on — both the `ext_emconf.php`
+`constraints.depends` AND every `typo3/cms-*` in the composer `require`
+(composer-only extensions on v14.3 derive their dependencies from `require`; see
+the typo3-conformance skill's ext_emconf migration notes).
+
+If a declared dependency is not loaded, the package graph is unsatisfiable, the
+DI container falls back to the **failsafe container**, and the real cause is
+hidden behind a misleading error:
+
+```
+TYPO3\CMS\Core\DependencyInjection\NotFoundException:
+  Container entry "TYPO3\CMS\Core\Configuration\Extension\ExtTablesFactory" is not available.
+```
+
+When you see that `ExtTablesFactory` / failsafe-container error, the fix is almost
+always "a declared dependency is not loaded" — add it to `coreExtensionsToLoad`.
+(Example: an extension that requires `typo3/cms-reports` for a Reports status
+provider must list `'reports'` in **every** functional test's `coreExtensionsToLoad`,
+not just one.)
 
 ## Site Configuration
 
@@ -605,6 +628,13 @@ public function uploadsFile(): void
 - **`beStrictAboutOutputDuringTests="false"`**: Required when testing ViewHelpers via `StandaloneView`, since rendering output triggers PHPUnit's output-during-tests strictness check. Without this, ViewHelper E2E tests will fail as risky.
 - **`typo3DatabaseDriver` env var**: Use `pdo_sqlite` for fast local/CI testing without requiring a database server. SQLite is sufficient for most functional tests and eliminates external service dependencies. Use `mysqli` or `pdo_mysql` only when testing database-specific behavior.
 
+> **⚠️ SQLite hides MySQL/MariaDB strict-mode bugs — don't claim "cross-DBMS green" from an SQLite-only run.** SQLite is permissive where a production MySQL/MariaDB in strict mode rejects. A functional/E2E suite that passes on SQLite can fail on MySQL for bugs SQLite never surfaces:
+> - **Overlong values**: SQLite silently truncates a value longer than a `varchar(N)` column; MySQL strict mode rejects the insert (error → often a 500 on an AJAX-persist path that bypasses FormEngine's `max` eval). The test only fails on MySQL.
+> - **`decimal(p,s)` scale**: SQLite stores the full float; MySQL rounds to the column scale, so the same entity round-trips a *different* value per DBMS (`0.123456789` → `0.12`). Assertions pinned to the full value pass on SQLite, fail on MySQL.
+> - **Error-path coverage**: an insert that *only* fails under strict mode runs an error branch SQLite never reaches — where an uninitialized property (e.g. a reflection-constructed controller's injected logger) then fatals. The bug is real in production but invisible to SQLite tests.
+>
+> For any code with DB-specific behavior (length limits, decimal columns, strict-mode-sensitive inserts), run the **full functional + e2e suite on MariaDB** locally — `runTests.sh -s functional -d mariadb` — before asserting it's cross-DBMS clean, and add a MariaDB leg to CI (see `ci-workflows-meta-package.md`). A suite that has *only ever* run on SQLite silently rots for MySQL.
+
 ### Bootstrap (Build/phpunit/FunctionalTestsBootstrap.php)
 
 ```php
@@ -618,100 +648,6 @@ call_user_func(static function () {
     $testbase->createDirectory(ORIGINAL_ROOT . 'typo3temp/var/tests');
     $testbase->createDirectory(ORIGINAL_ROOT . 'typo3temp/var/transient');
 });
-```
-
-## Fixture Strategy
-
-### Minimal Fixtures
-
-Keep fixtures focused on test requirements:
-
-```php
-// ❌ Too much data
-$this->importCSVDataSet(__DIR__ . '/../Fixtures/AllProducts.csv'); // 500 records
-
-// ✅ Minimal test data
-$this->importCSVDataSet(__DIR__ . '/../Fixtures/ProductsByCategory.csv'); // 3 records
-```
-
-### Reusable Fixtures
-
-Create shared fixtures for common scenarios:
-
-```
-Tests/Functional/Fixtures/
-├── pages.csv              # Basic page tree
-├── be_users.csv           # Test backend users
-├── Products/
-│   ├── BasicProducts.csv  # 3 simple products
-│   ├── ProductsWithCategories.csv
-│   └── ProductsWithImages.csv
-```
-
-### Fixture Documentation
-
-Document fixture purpose in test or AGENTS.md:
-
-```php
-/**
- * @test
- */
-public function findsProductsByCategory(): void
-{
-    // Fixture contains: 3 products in category 1, 2 products in category 2
-    $this->importCSVDataSet(__DIR__ . '/../Fixtures/ProductsByCategory.csv');
-
-    $products = $this->subject->findByCategory(1);
-
-    self::assertCount(3, $products);
-}
-```
-
-## Best Practices
-
-1. **Use setUp() for Common Setup**: Import shared fixtures in setUp()
-2. **One Test Database**: Each test gets clean database instance
-3. **Test Isolation**: Don't depend on other test execution
-4. **Minimal Fixtures**: Only data required for specific test
-5. **Clear Assertions**: Test specific behavior, not implementation
-6. **Cleanup**: Testing framework handles cleanup automatically
-
-## Common Pitfalls
-
-❌ **Large Fixtures**
-```php
-// Don't import unnecessary data
-$this->importCSVDataSet('AllData.csv'); // 10,000 records
-```
-
-❌ **No Fixtures**
-```php
-// Don't expect data to exist
-$products = $this->subject->findAll();
-self::assertCount(0, $products); // Always true without fixtures
-```
-
-❌ **Missing Extensions**
-```php
-// Don't forget to load extension under test
-// Missing: protected array $testExtensionsToLoad = ['typo3conf/ext/my_extension'];
-```
-
-✅ **Focused, Well-Documented Tests**
-```php
-/**
- * @test
- */
-public function findsByCategory(): void
-{
-    // Fixture: 3 products in category 1
-    $this->importCSVDataSet(__DIR__ . '/../Fixtures/CategoryProducts.csv');
-
-    $products = $this->subject->findByCategory(1);
-
-    self::assertCount(3, $products);
-    self::assertSame('Product A', $products[0]->getTitle());
-}
 ```
 
 ## Running Functional Tests with DDEV
@@ -832,9 +768,9 @@ protected function tearDown(): void
 }
 ```
 
-## Site Configuration (TYPO3 v13+)
+## Site Configuration (TYPO3 v12+)
 
-`SiteWriter` (v13+) is the current API for creating site configuration in tests:
+Use `SiteWriter` instead of the deprecated `writeSiteConfiguration()`:
 
 ```php
 use TYPO3\CMS\Core\Configuration\SiteWriter;
@@ -845,10 +781,10 @@ protected function setUp(): void
 
     $this->importCSVDataSet(__DIR__ . '/Fixtures/pages.csv');
 
-    // Older API (still used on v12)
+    // ❌ Deprecated in TYPO3 v12
     // $this->writeSiteConfiguration('test', ['rootPageId' => 1, 'base' => '/']);
 
-    // ✅ TYPO3 v13+ with SiteWriter
+    // ✅ TYPO3 v12+ with SiteWriter
     $siteWriter = $this->get(SiteWriter::class);
     $siteWriter->createNewBasicSite('website-local', 1, 'http://localhost/');
 

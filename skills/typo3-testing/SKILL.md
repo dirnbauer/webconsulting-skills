@@ -21,7 +21,7 @@ Generates a gap report from 73+ checkpoints (PHPUnit, PHPStan, runTests.sh, Capt
 
 ### Applies
 - "enhance/improve/strengthen tests", "increase coverage/mutation"
-- "enterprise grade", "A+ testing", "fix all findings"
+- "enterprise grade", "A+ testing"
 
 ### Does NOT Apply
 - From scratch, writing a specific test, debugging a failure

@@ -55,12 +55,12 @@ Use `assets/Build/Scripts/runTests.sh` as starting point. Customize:
 
 | Option | Description | Values |
 |--------|-------------|--------|
-| `-s` | Test suite | `unit`, `functional`, `functionalParallel`, `e2e`, `lint`, `phpstan`, `cgl`, `fuzz`, `mutation` |
+| `-s` | Test suite | `unit`, `functional`, `functionalParallel`, `e2e`, `lint`, `phpstan`, `cgl`, `rector`, `fuzz`, `mutation` |
 | `-d` | Database | `sqlite` (default), `mariadb`, `mysql`, `postgres` |
 | `-i` | DB version | mariadb: 10.11, mysql: 8.0, postgres: 16 |
 | `-p` | PHP version | `8.2`, `8.3`, `8.4`, `8.5` |
 | `-x` | Enable Xdebug | |
-| `-n` | Dry-run | For cgl |
+| `-n` | Dry-run | For cgl, rector |
 | `-u` | Update images | |
 
 ## Test Parallelization
@@ -103,6 +103,27 @@ find Tests/Functional -name '*Test.php' | xargs -P${PARALLEL_JOBS} ...
 ### Unit Tests
 
 Unit tests are typically fast enough (<1s) that parallelization overhead would be counterproductive. PHPUnit's native parallelization (ParaTest) doesn't support PHPUnit 12 yet.
+
+## Gotcha: Single-Process PHPUnit OOMs on Large Functional Suites
+
+Running the whole functional suite through plain single-process PHPUnit (`vendor/bin/phpunit -c phpunit.xml.dist`, no parallelization) accumulates every test's compiled DI container and TYPO3 bootstrap in one PHP process. On a few hundred functional tests this exhausts `memory_limit` — typically a fatal deep in Symfony's container dumper:
+
+```
+PHP Fatal error:  Allowed memory size of 536870912 bytes exhausted ...
+  in .../symfony/dependency-injection/Dumper/PhpDumper.php
+```
+
+The symptom is misleading: progress dots stop part-way with **no PHPUnit summary line**, and a `timeout`/wrapper around the call may still report exit 0 — so it looks like "passed" when it actually died mid-run.
+
+**Fix:** run the suite the way the project's entry point does — in **isolated worker processes**, one slice per worker, so container compilation never accumulates:
+
+```bash
+./Build/Scripts/runTests.sh -s functionalParallel   # xargs -P, one phpunit process per test file
+# or, for a paratest-based project entry point:
+composer test
+```
+
+Reserve plain `phpunit --filter=SomeClass` for a single class. (This is the concrete reason behind Best Practice "Single Entry Point — all tests via `runTests.sh`, not direct PHPUnit".)
 
 ## Database Support
 
@@ -388,6 +409,32 @@ sudo rm -rf node_modules .Build
 6. **Makefile Shortcuts**: Provide `make test`, `make ci` for convenience
 7. **Update Images**: Run `-u` periodically to get latest TYPO3 images
 8. **Keep Versions Synced**: Playwright versions in package.json and runTests.sh
+
+## Gotcha: `-s unit` Green ≠ Safe When You Touch a Shared Type
+
+`./Build/Scripts/runTests.sh -s unit` covers **only** `Tests/Unit/`. When you
+change a **widely-consumed** type — a shared value object, DTO, enum, or a
+method on a public service interface — its consumers and their assertions live
+in the **functional** suite (and integration/e2e), which `-s unit` never runs.
+
+A green unit run then hides a real break, and it surfaces later in CI or a
+reviewer's comment instead of on your machine. (Real case: a change to a
+`ToolSpec` value object passed `-s unit` locally but broke a functional test
+asserting the old shape — caught by CI + the PR bot, not the local unit run.)
+
+Before pushing a change to a shared type:
+
+```bash
+# Find who depends on it, then run the suites that exercise them.
+# Use -e per pattern (portable across GNU/BSD grep; escaped \| is not).
+grep -rn -e 'YourValueObject' -e '->yourChangedMethod' Classes/ Tests/
+./Build/Scripts/runTests.sh -s unit
+./Build/Scripts/runTests.sh -s functional     # the assertions on the old shape live here
+```
+
+If the extension's CI runs functional tests (it should — a functional job that
+is silently skipped is its own bug), treat "did I run the same suites CI will?"
+as the pre-push checklist, not "is unit green?".
 
 ## Resources
 
