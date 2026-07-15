@@ -29,7 +29,7 @@ TYPO3 backend Lit guidance in the `typo3-webcomponents` skill.
 
 ## Skill Categories
 
-This repository currently ships **137 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
+This repository currently ships **138 top-level skills** (`skills/*/SKILL.md`) across **13 categories**.
 Category-specific add-ons are not counted as top-level skills.
 
 | Category | Skills | Description |
@@ -40,7 +40,7 @@ Category-specific add-ons are not counted as top-level skills.
 | **Database** | 1 skill | Postgres Best Practices (Supabase) |
 | **Marketing** | 43 skills | Marketing Skills plus split growth, SEO, ads, lifecycle, research, prospecting, SMS, and sales enablement skills (Corey Haines) |
 | **CRO & Growth** | 4 skills | CRO Funnel (AITYTech), Programmatic SEO (AITYTech), Launch Strategy (AITYTech), A/B Testing (AITYTech) |
-| **Code Quality & Refactoring** | 19 skills | Auto Review (Peter Steinberger), Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me and engineering/productivity workflow skills (Matt Pocock) |
+| **Code Quality & Refactoring** | 20 skills | Architecture Decision Records (webconsulting), Auto Review (Peter Steinberger), Agent MD Refactor (Softaworks), Refactor (GitHub), Refactor Clean (sickn33), Find Skills (Vercel), Grill Me and engineering/productivity workflow skills (Matt Pocock) |
 | **PHP & Tools** | 5 skills | PHP Modernization (Netresearch), CLI Tools (Netresearch), Context7 (Netresearch), Firecrawl (Firecrawl), Skill Creator (Anthropic) |
 | **Frontend & Design** | 9 skills | Branding (webconsulting), UI Design Patterns (webconsulting), Frontend Design (Anthropic), Impeccable (pbakaus), Web Design Guidelines (Vercel), Excalidraw (ooiyeefei), OG Image (Stevy Smith), React Best Practices (Vercel), shadcn/ui (Giuseppe Trisciuoglio) |
 | **Platform Design** | 8 skills | Android Design (ehmo), iOS Design (ehmo), iPadOS Design (ehmo), macOS Design (ehmo), tvOS Design (ehmo), visionOS Design (ehmo), watchOS Design (ehmo), Web Platform Design (ehmo) |
@@ -252,6 +252,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 
 | Skill | Trigger Keywords | Example Prompt |
 |-------|------------------|----------------|
+| `architecture-decision-records` | adr, architecture decision record, decision log, retrospective adr, superseded decision | "Reconstruct and validate ADRs from this repository's Git history" |
 | `agent-md-refactor` | refactor agents.md, split instructions, organize claude.md | "Refactor my AGENTS.md - it's too long" or "Split my CLAUDE.md into focused files" |
 | `autoreview` | autoreview, Codex review, Claude review, second-model review, closeout review | "Run autoreview before I commit" or "Run a Codex review on this branch" |
 | `refactor` | refactor, clean up, code smell, improve code, extract method | "Refactor this function" or "Clean up this code and remove duplication" |
@@ -2363,6 +2364,7 @@ grep -r "DataHandler" skills/
 | `ai-search-optimization` | AEO/GEO for AI search (schema, llms.txt, TYPO3, MDX) | webconsulting |
 | `readiness-report` | AI agent readiness assessment (9 pillars, 5 maturity levels) | OpenHands |
 | **Code Quality & Refactoring** | | |
+| `architecture-decision-records` | Create and review ADRs with verifiable evidence and lifecycle guidance | webconsulting |
 | `agent-md-refactor` | Refactor bloated AGENTS.md/CLAUDE.md with progressive disclosure | Softaworks |
 | `autoreview` | Structured closeout code review workflow with bundled helper scripts | Peter Steinberger |
 | `refactor` | Code refactoring patterns, code smells, design patterns | GitHub |
