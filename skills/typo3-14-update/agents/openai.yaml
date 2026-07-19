@@ -1,0 +1,4 @@
+interface:
+  display_name: "TYPO3 14 Update"
+  short_description: "Upgrade TYPO3 projects safely to 14.3 LTS"
+  default_prompt: "Use $typo3-14-update to upgrade this TYPO3 extension or project to 14.3 LTS and verify code, deployment, and production readiness."

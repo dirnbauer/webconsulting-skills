@@ -290,6 +290,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `typo3-initial-release` | initial release, 1.0.0, release readiness, release tag, TER, Packagist | "Prepare this TYPO3 14.3+ extension for v1.0.0" or "Run final release readiness review before tagging" |
 | `typo3-rector` | rector, refactoring, deprecation | "Use Rector to fix deprecations" |
 | `typo3-update` | update, upgrade, v14, migration, TYPO3 core | "Follow TYPO3 v14 patterns for my extension" |
+| `typo3-14-update` | complete v14 update, v14-only, production rollout, post-upgrade SEO, post-upgrade security, post-upgrade Solr | "Upgrade this project end-to-end to TYPO3 14.3 LTS and verify production readiness" |
 | `typo3-extension-upgrade` | extension upgrade, fractor | "Upgrade my extension to TYPO3 v14" |
 | `typo3-fractor` | fractor, flexform, typoscript migration, fluid migration | "Use Fractor to migrate FlexForms and TypoScript" |
 | `typo3-icon14` | icons, module icons, plugin icons, record icons, action icons, icon migration, Configuration/Icons.php | "Design or migrate TYPO3 v14 extension icons with live Core references" |
@@ -2339,6 +2340,7 @@ grep -r "DataHandler" skills/
 | **Upgrade & Migration** | | |
 | `typo3-rector` | TYPO3 upgrade patterns with Rector | webconsulting |
 | `typo3-update` | TYPO3 TYPO3 v14 migration guide (prefers v14) | webconsulting |
+| `typo3-14-update` | End-to-end TYPO3 14.3 LTS project and extension updater with production-readiness gates | webconsulting |
 | `typo3-extension-upgrade` | Systematic extension upgrades (Rector, Fractor) | Netresearch |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | webconsulting |
 | `typo3-icon14` | Design and migrate TYPO3 v14 extension icons | webconsulting |

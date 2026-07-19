@@ -134,6 +134,24 @@
     "pass_3": []
   },
   {
+    "directory": "architecture-decision-records",
+    "skill_name": "architecture-decision-records",
+    "description": "Creates and reviews architecture decision records (ADRs), decision logs, and supersession histories using established conventions and verifiable evidence. Use when users ask to write, reconstruct, audit, standardize, validate, or maintain ADRs, architecture decisions, decision logs, or ADR templates in Markdown or reStructuredText.",
+    "source_owner": "webconsulting",
+    "source_url": null,
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/architecture-decision-records/SKILL.md",
+    "line_count": 63,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [
+      "no explicit source note; current assumption is webconsulting-original"
+    ],
+    "pass_3": []
+  },
+  {
     "directory": "aso",
     "skill_name": "aso",
     "description": "When the user wants to audit or optimize an App Store or Google Play listing. Also use when the user mentions 'ASO audit,' 'app store optimization,' 'optimize my app listing,' 'improve app visibility,' 'app store ranking,' 'audit my listing,' 'why aren't people downloading my app,' 'improve my app conversion,' 'keyword optimization for app,' or 'compare my app to competitors.' Use when the user shares an App Store or Google Play URL and wants to improve it.",
@@ -1573,17 +1591,32 @@
     "pass_3": []
   },
   {
+    "directory": "typo3-14-update",
+    "skill_name": "typo3-14-update",
+    "description": "Upgrade TYPO3 extensions, sitepackages, and full projects from v12 or v13 to TYPO3 14.3 LTS as v14-only code, including Composer metadata, Rector and Fractor migrations, PHPStan, workspaces, security, frontend performance, tests, documentation, deployment checks, and production-readiness verification. Use when asked for a complete TYPO3 v14 upgrade, a reusable v14 updater prompt, removal of legacy or dual-version compatibility, a production rollout, post-upgrade SEO or security verification, or a publication-ready TYPO3 14.3 extension.",
+    "source_owner": "webconsulting",
+    "source_url": "https://github.com/dirnbauer/webconsulting-skills",
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-14-update/SKILL.md",
+    "line_count": 159,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [],
+    "pass_3": []
+  },
+  {
     "directory": "typo3-accessibility",
     "skill_name": "typo3-accessibility",
     "description": "Audits and implements TYPO3 accessibility patterns for WCAG 2.2 AA, including Fluid templates, PHP helpers, JavaScript widgets, forms, focus states, ARIA, and go-live checks. Use when building or reviewing TYPO3 templates, content elements, extensions, or frontend code for accessibility, keyboard support, screen readers, WCAG, ARIA, or a11y readiness.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/typo3-accessibility/SKILL.md",
-    "line_count": 291,
+    "line_count": 306,
     "frontmatter_keys": [
       "name",
       "description",
-      "compatibility",
       "metadata",
       "license"
     ],

@@ -99,6 +99,18 @@
       ],
       "path": "${extensionPath}/skills/android-design"
     },
+    "architecture-decision-records": {
+      "name": "architecture-decision-records",
+      "description": "Create and review ADRs with verifiable evidence and lifecycle guidance",
+      "triggers": [
+        "adr",
+        "architecture decision record",
+        "decision log",
+        "retrospective adr",
+        "superseded decision"
+      ],
+      "path": "${extensionPath}/skills/architecture-decision-records"
+    },
     "aso": {
       "name": "aso",
       "description": "App Store and Google Play listing optimization",
@@ -1134,6 +1146,19 @@
       ],
       "path": "${extensionPath}/skills/tvos-design"
     },
+    "typo3-14-update": {
+      "name": "typo3-14-update",
+      "description": "End-to-end v12/v13 to TYPO3 14.3 LTS project and extension updater with production-readiness gates",
+      "triggers": [
+        "complete v14 update",
+        "v14-only",
+        "production rollout",
+        "post-upgrade SEO",
+        "post-upgrade security",
+        "post-upgrade Solr"
+      ],
+      "path": "${extensionPath}/skills/typo3-14-update"
+    },
     "typo3-accessibility": {
       "name": "typo3-accessibility",
       "description": "WCAG 2.2 AA audit, Fluid/PHP/JS patterns, go-live checklist",
@@ -1570,7 +1595,7 @@
     },
     "webconsulting-branding": {
       "name": "webconsulting-branding",
-      "description": "Borderless square webconsulting design, header-only notices, and logo-first project identity",
+      "description": "Borderless square webconsulting design, header-only notices, logo-first project identity",
       "triggers": [
         "branding",
         "no borders",

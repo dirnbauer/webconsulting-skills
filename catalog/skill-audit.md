@@ -7,10 +7,10 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 2. Source attribution and provenance drift
 3. Repository optimization gaps
 
-- Skills audited: 137
-- Total findings: 11
+- Skills audited: 139
+- Total findings: 12
 - Skills with pass 1 findings: 11
-- Skills with pass 2 findings: 0
+- Skills with pass 2 findings: 1
 - Skills with pass 3 findings: 0
 
 ## High-Signal Repo Findings
@@ -143,6 +143,22 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 
 **Pass 2: Source**
 - No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
+## `architecture-decision-records`
+
+- Source owner: webconsulting
+- Source URL: webconsulting-original / no external upstream recorded
+- Frontmatter name: architecture-decision-records
+- SKILL.md lines: 63
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- no explicit source note; current assumption is webconsulting-original
 
 **Pass 3: Optimization**
 - No pass 3 issues found.
@@ -1555,12 +1571,28 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 **Pass 3: Optimization**
 - No pass 3 issues found.
 
+## `typo3-14-update`
+
+- Source owner: webconsulting
+- Source URL: https://github.com/dirnbauer/webconsulting-skills
+- Frontmatter name: typo3-14-update
+- SKILL.md lines: 159
+
+**Pass 1: Structure**
+- No pass 1 issues found.
+
+**Pass 2: Source**
+- No pass 2 issues found.
+
+**Pass 3: Optimization**
+- No pass 3 issues found.
+
 ## `typo3-accessibility`
 
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: typo3-accessibility
-- SKILL.md lines: 291
+- SKILL.md lines: 306
 
 **Pass 1: Structure**
 - No pass 1 issues found.

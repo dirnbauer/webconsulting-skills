@@ -390,6 +390,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 | `typo3-initial-release` | First official TYPO3 14.3+ extension release workflow, final review, CI/tooling verification, and tagging | 1.0.0 | initial release, 1.0.0, release readiness, release tag, TER, Packagist |
 | `typo3-rector` | TYPO3 v14 upgrade patterns using Rector | 2.0.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v14 development guide (constraints, APIs, upgrades) | 2.0.0 | update, upgrade, v14, migration |
+| `typo3-14-update` | End-to-end v12/v13 to TYPO3 14.3 LTS project and extension updater with production-readiness gates | 1.0.0 | complete v14 update, v14-only, production rollout, post-upgrade SEO, post-upgrade security, post-upgrade Solr |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
 | `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | 1.0.0 | fractor, flexform, typoscript migration, fluid migration |
 | `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | 1.0.0 | icons, backend module icons, icon migration, SVG icons, icon registry |
@@ -657,6 +658,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 - **typo3-initial-release**: First official TYPO3 14.3+ extension release workflow with Composer metadata, CI/tooling, final review, and tagging gates
 - **typo3-rector**: Automated code refactoring with Rector for TYPO3 v14
 - **typo3-update**: Version migration and compatibility strategies for TYPO3 v14
+- **typo3-14-update**: End-to-end v14.3-only upgrade orchestration, workspaces, deployment, and production-readiness verification
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
 - **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, Htaccess)
 - **typo3-icon14**: Migrate extension icons from solid-background to v14 line-art style (currentColor, CSS custom properties)
@@ -1530,7 +1532,7 @@ Active: `typo3-security`, `security-audit`, `security-incident-reporting`, `ente
 Use case: Server configuration, deployment, hardening, security audits, incident response
 
 ### Upgrade Session
-Active: `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `typo3-visual-editor`, `php-modernization`
+Active: `typo3-14-update`, `typo3-rector`, `typo3-fractor`, `typo3-update`, `typo3-extension-upgrade`, `typo3-batch`, `typo3-icon14`, `typo3-visual-editor`, `php-modernization`
 Use case: TYPO3 version migrations, PHP upgrades, non-PHP migrations, Fluid template migrations, icon modernization, TYPO3 v14 upgrades, batch migrations
 
 ### Code Quality Session
@@ -1624,6 +1626,7 @@ Use case: Designing for multiple platforms, ensuring platform-appropriate patter
 | typo3-initial-release | ✓ | ✓ | ✓ | ✓ |
 | typo3-rector | ✓ | ✓ | ✓ | ✓ |
 | typo3-update | ✓ | ✓ | ✓ | ✓ |
+| typo3-14-update | ✓ | ✓ | ✓ | ✓ |
 | typo3-extension-upgrade | ✓ | ✓ | ✓ | ✓ |
 | typo3-fractor | ✓ | ✓ | ✓ | ✓ |
 | typo3-icon14 | ✓ | ✓ | ✓ | ✓ |
