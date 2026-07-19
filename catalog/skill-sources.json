@@ -2217,11 +2217,11 @@
   {
     "directory": "webconsulting-branding",
     "skill_name": "webconsulting-branding",
-    "description": "Applies the webconsulting.at brand system, including voice, colors, typography, MDX components, Mermaid theming, accessibility, responsive breakpoints, spacing, buttons, dark mode, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, MDX content, frontend components, TYPO3 templates, brand tokens, or visual consistency.",
+    "description": "Applies the current webconsulting.at design system: borderless square surfaces, Hanken Grotesk typography, teal/ink color tokens, invoice-led information hierarchy, a header-only brand notice, logo-first project icons, MDX patterns, dark mode, accessibility, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, internal tools, tracker/GitLab themes, project catalogs, TYPO3 templates, brand assets, or visual consistency.",
     "source_owner": "webconsulting",
     "source_url": "https://github.com/dirnbauer/webconsulting-skills",
     "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/webconsulting-branding/SKILL.md",
-    "line_count": 309,
+    "line_count": 417,
     "frontmatter_keys": [
       "name",
       "description",

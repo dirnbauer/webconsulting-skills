@@ -349,7 +349,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 | `firecrawl` | Firecrawl CLI for LLM-optimized web scraping, search, and research | 1.0.0 | scrape, crawl, search web, research, fetch url |
 | `skill-creator` | Guide for creating and packaging effective Agent Skills (Anthropic) | 1.0.0 | create skill, new skill, skill creator, package skill, SKILL.md |
 | **Frontend & Design** | | | |
-| `webconsulting-branding` | webconsulting.at design system, colors, typography, MDX | 1.0.0 | frontend, design, branding, ui |
+| `webconsulting-branding` | Borderless square webconsulting design, header-only notices, logo-first project identity | 3.0.0 | frontend, design, branding, no borders, project icons |
 | `ui-design-patterns` | Practical UI design patterns, accessibility, usability | 1.1.0 | ui, design, accessibility, usability |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns, creative interfaces | 1.0.0 | frontend, design, creative, beautiful, distinctive, aesthetics |
 | `impeccable` | Production-grade frontend design, critique, polish, shaping, and live UI iteration | 3.0.7 | impeccable, design, redesign, shape, critique, audit, polish, craft, live UI |
@@ -549,7 +549,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
   - `references/output-patterns.md`: Template and example output patterns
 
 ### Frontend & Design
-- **webconsulting-branding**: Design tokens, colors, typography, MDX components
+- **webconsulting-branding**: Borderless square surfaces, header-only notices, typography, tokens, and logo-first project identity
 - **ui-design-patterns**: Visual hierarchy, spacing, color, typography, accessibility
 - **frontend-design**: Distinctive UI aesthetics that avoid generic "AI slop"
   - Bold aesthetic directions: brutalist, maximalist, luxury, editorial

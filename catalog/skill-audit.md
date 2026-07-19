@@ -2136,7 +2136,7 @@ This is a three-pass audit inspired by Anthropic's `skill-creator` skill:
 - Source owner: webconsulting
 - Source URL: https://github.com/dirnbauer/webconsulting-skills
 - Frontmatter name: webconsulting-branding
-- SKILL.md lines: 309
+- SKILL.md lines: 417
 
 **Pass 1: Structure**
 - No pass 1 issues found.

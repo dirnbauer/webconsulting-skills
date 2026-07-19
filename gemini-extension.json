@@ -1570,11 +1570,11 @@
     },
     "webconsulting-branding": {
       "name": "webconsulting-branding",
-      "description": "webconsulting.at design system, colors, typography, MDX",
+      "description": "Borderless square webconsulting design, header-only notices, and logo-first project identity",
       "triggers": [
         "branding",
-        "design",
-        "components"
+        "no borders",
+        "project icons"
       ],
       "path": "${extensionPath}/skills/webconsulting-branding"
     },

@@ -1,308 +1,416 @@
 ---
 name: "webconsulting-branding"
-description: "Applies the webconsulting.at brand system, including voice, colors, typography, MDX components, Mermaid theming, accessibility, responsive breakpoints, spacing, buttons, dark mode, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, MDX content, frontend components, TYPO3 templates, brand tokens, or visual consistency."
+description: "Applies the current webconsulting.at design system: borderless square surfaces, Hanken Grotesk typography, teal/ink color tokens, invoice-led information hierarchy, a header-only brand notice, logo-first project icons, MDX patterns, dark mode, accessibility, and shadcn/ui integration. Use when building or reviewing webconsulting.at pages, internal tools, tracker/GitLab themes, project catalogs, TYPO3 templates, brand assets, or visual consistency."
 compatibility: "TYPO3 14.x"
 metadata:
-  version: "2.0.0"
+  version: "3.0.0"
   origin: "webconsulting"
 license: "MIT / CC-BY-SA-4.0"
 ---
+
 # webconsulting Design System
 
 > Source: https://github.com/dirnbauer/webconsulting-skills
 
-## 1. Brand Identity & Voice
+The current webconsulting language is flat, square, precise, and content-led. It
+uses typography, spacing, surface color, and filled emphasis to create hierarchy.
+Decorative borders and rounded cards are legacy styling.
 
-**Persona**: Innovative, Technical, Professional ("Senior Solutions Architect")
+## 1. Reference hierarchy
 
-**Tone**: Clear, concise, authoritative. Avoid marketing fluff.
+When references disagree, use this order:
 
-**Language**: German (Primary) / English (Technical documentation)
+1. The current invoice UI for dense information, forms, tables, and document hierarchy.
+2. Current internal products such as `track.webconsulting.at` and the GitLab theme.
+3. The current public `webconsulting.at` site for editorial layout, marketing pages, and large-scale composition.
+4. This skill for reusable tokens and implementation rules.
 
-## 2. Visual Design Tokens (Strict Adherence)
+Inspect the live surface when it is available. Do not reintroduce an older pattern
+merely because it already exists in a component library.
 
-### Brand Color Palette
+## 2. Non-negotiable visual rules
 
-| Token | Light Mode | Dark Mode | Tailwind Class | Usage |
-|-------|------------|-----------|----------------|-------|
-| Primary | `#1b7a95` | `#66c4e1` | `text-webcon-primary` | Links, primary buttons, active states |
-| Primary Light | `#66c4e1` | `#9dd8eb` | `text-webcon-primary-light` | Hover states, accents |
-| Primary 50 | `#e8f4f8` | `#0f3d4a` | `bg-webcon-primary-50` | Light backgrounds |
-| Primary 100 | `#c5e4ed` | `#155d73` | `bg-webcon-primary-100` | Subtle backgrounds |
-| Primary 200 | `#9dd2e2` | `#1b7a95` | `bg-webcon-primary-200` | Borders, highlights |
-| Primary 700 | `#1b7a95` | `#66c4e1` | `text-webcon-primary-700` | Primary text |
-| Primary 800 | `#155d73` | `#9dd8eb` | `text-webcon-primary-800` | Strong emphasis |
-| Primary 900 | `#0f4555` | `#c5e8f2` | `text-webcon-primary-900` | Maximum contrast |
+- Use square corners: `border-radius: 0` and Tailwind `rounded-none`.
+- Use no decorative borders around cards, panels, callouts, buttons, tables, or sections.
+- Create separation with whitespace, background changes, type weight, zebra rows, and alignment.
+- Use shadows only for temporary elevation such as menus, dialogs, and sticky overlays.
+- Keep one brand notice or accent at the top of the header. Never repeat it above or inside the footer.
+- Keep the footer open and quiet: no top border, accent stripe, duplicated system notice, or boxed columns.
+- Use a filled teal or near-black control for the primary action. Do not outline the secondary action.
+- Keep focus indicators. A keyboard focus outline is an accessibility affordance, not a decorative border.
+- Use actual project identity assets. Prefer the project logo; use the project favicon when no logo is available.
 
-### Semantic State Colors
+### Legacy patterns to remove
 
-| State | Color | Light BG | Border | Tailwind Prefix |
-|-------|-------|----------|--------|-----------------|
-| Success | `#16a34a` / `#4ade80` | `#dcfce7` / `#14532d` | `#86efac` / `#22c55e` | `webcon-success` |
-| Error | `#dc2626` / `#f87171` | `#fee2e2` / `#450a0a` | `#fca5a5` / `#ef4444` | `webcon-error` |
-| Warning | `#d97706` / `#fbbf24` | `#fef3c7` / `#451a03` | `#fcd34d` / `#f59e0b` | `webcon-warning` |
-| Info | `#1b7a95` / `#66c4e1` | `#e8f4f8` / `#0f3d4a` | `#66c4e1` / `#1b7a95` | `webcon-info` |
+Do not generate:
 
-### Using Brand Colors
+- `border`, `border-*`, `divide-*`, or card outlines for visual grouping
+- `rounded`, `rounded-md`, `rounded-lg`, pill cards, or rounded table shells
+- duplicate header and footer announcement bars
+- a footer `border-top`, signature rule, or cyan/teal stripe
+- generic Lucide pictograms when a project logo or favicon exists
+- bordered secondary buttons or bordered callouts
+- framed content inside framed content
 
-```jsx
-// Primary button
-<button className="bg-webcon-primary text-white hover:bg-webcon-primary-800">
-  Action
-</button>
+Native document separators, chart axes, diagram edges, underlined text links, and
+focus outlines are not decorative container borders. Use them only when they carry
+meaning.
 
-// Info callout
-<div className="bg-webcon-info-light border border-webcon-info-border text-webcon-info">
-  Information message
-</div>
+## 3. Brand identity and voice
 
-// Success state
-<div className="bg-webcon-success-light border border-webcon-success-border">
-  <CheckIcon className="text-webcon-success" />
-</div>
+**Persona:** innovative, technical, professional; a senior solutions architect.
+
+**Tone:** clear, concise, specific, and authoritative. Avoid marketing fluff.
+
+**Language:** German for public and business-facing content; English for technical
+documentation unless the project specifies otherwise.
+
+## 4. Visual tokens
+
+### Core palette
+
+| Token | Light | Dark | Use |
+|---|---:|---:|---|
+| `--webcon-primary` | `#1b7a95` | `#66c4e1` | Primary actions, links, active states |
+| `--webcon-primary-dark` | `#155d73` | `#9dd8eb` | Hover states, strong teal text |
+| `--webcon-primary-strong` | `#0f4555` | `#c5e8f2` | Deep brand surfaces |
+| `--webcon-accent` | `#66c4e1` | `#66c4e1` | Header signature, non-text accents |
+| `--webcon-primary-pale` | `#e8f4f8` | `#0f3d4a` | Selected and informational surfaces |
+| `--webcon-canvas` | `#f5f8f9` | `#071f26` | App background |
+| `--webcon-surface` | `#ffffff` | `#0f252c` | Main reading surface |
+| `--webcon-surface-muted` | `#eef2f3` | `#16343d` | Navigation and metadata bands |
+| `--webcon-ink` | `#171a1d` | `#f8fafb` | Primary text |
+| `--webcon-muted` | `#5e6870` | `#b8c5ca` | Secondary text |
+
+Light cyan is an accent, not body text on white. Verify contrast before using any
+brand color for text.
+
+### Semantic states
+
+| State | Foreground | Light surface | Dark surface |
+|---|---:|---:|---:|
+| Success | `#166534` | `#dcfce7` | `#14532d` |
+| Error | `#b42318` | `#fee2e2` | `#450a0a` |
+| Warning | `#9a4a00` | `#fef3c7` | `#451a03` |
+| Info | `#155d73` | `#e8f4f8` | `#0f3d4a` |
+
+Express state with a filled surface, icon, label, and text. Do not use a colored
+border as the only signal.
+
+### CSS foundation
+
+```css
+:root {
+  --webcon-primary: #1b7a95;
+  --webcon-primary-dark: #155d73;
+  --webcon-primary-strong: #0f4555;
+  --webcon-accent: #66c4e1;
+  --webcon-primary-pale: #e8f4f8;
+  --webcon-canvas: #f5f8f9;
+  --webcon-surface: #ffffff;
+  --webcon-surface-muted: #eef2f3;
+  --webcon-ink: #171a1d;
+  --webcon-muted: #5e6870;
+  --radius: 0;
+}
+
+*, *::before, *::after {
+  border-radius: 0;
+}
 ```
 
-### Typography
+Do not apply a global `border: 0`; that can erase meaningful controls, focus
+indicators, chart axes, and third-party widgets. Remove decorative borders at the
+component level.
 
-| Element | Font Family | Weight | Usage |
-|---------|-------------|--------|-------|
-| All Text | Hanken Grotesk | 400-700 | Body, headings, UI |
-| Display | Hanken Grotesk | 600, 700 | Hero titles, emphasis |
-| Code | System monospace | 400 | Code blocks, inline code |
+## 5. Typography
 
-**Font Configuration** (Next.js):
+Use Hanken Grotesk throughout the product and public site.
+
+| Role | Weight | Guidance |
+|---|---:|---|
+| Body | 400 | 16px base, 1.5-1.65 line height |
+| Display and page headings | 500-650 | Tight tracking, compact line height |
+| UI labels and secondary headings | 600-650 | Short and scannable |
+| Primary actions and table headers | 650-700 | Reserve for emphasis |
+| Code and identifiers | 400-700 | JetBrains Mono or system monospace |
 
 ```typescript
 import { Hanken_Grotesk } from 'next/font/google'
 
-const hankenGrotesk = Hanken_Grotesk({
+export const hankenGrotesk = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-hanken-grotesk',
   display: 'swap',
 })
 ```
 
-**CSS Variables**:
-
 ```css
 --font-sans: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
---font-display: var(--font-hanken-grotesk), ui-sans-serif, system-ui, sans-serif;
+--font-mono: "JetBrains Mono", ui-monospace, monospace;
 ```
 
-## 3. MDX Component Architecture
+For public-page hero headings, use approximately `clamp(2.5rem, 5vw, 4.75rem)`,
+weight 500, and slight negative tracking. Internal tools should remain denser.
 
-When generating content or frontend components, use the following structure. **Do NOT use raw HTML**.
+## 6. Layout and spacing
 
-### Interactive Tabs
+Use a 4px base grid.
 
-Use for topic tabs (e.g., “Public site” vs “Editor guide”); for TYPO3, this collection targets **v14 only**:
+| Token | Value | Use |
+|---|---:|---|
+| `space-1` | 4px | Tight icon/text alignment |
+| `space-2` | 8px | Inline groups |
+| `space-3` | 12px | Compact controls |
+| `space-4` | 16px | Component padding |
+| `space-6` | 24px | Related blocks |
+| `space-8` | 32px | Page groups |
+| `space-12` | 48px | Compact sections |
+| `space-16` | 64px | Standard public sections |
+| `space-24` | 96px | Large section rhythm |
+| `space-32` | 128px | Editorial/hero separation |
+
+- Public pages: generous whitespace, full-width black/white or pale surface changes,
+  and a readable content measure.
+- Internal tools: a pale canvas with one open white work surface and restrained density.
+- Avoid grids of identical bordered cards. Use open columns, bands, and typographic groups.
+- Keep alignment exact. The square system looks poor when baselines and edges drift.
+
+## 7. Header and footer
+
+The system may use one header announcement or one thin accent rule. It must occur
+once, at the top of the experience.
+
+```jsx
+<header className="bg-white text-webcon-ink">
+  <div aria-hidden="true" className="h-1 w-full bg-webcon-accent" />
+  <nav className="mx-auto flex max-w-7xl items-center px-6 py-5">
+    {/* logo, navigation, utilities */}
+  </nav>
+</header>
+
+<main>{/* page */}</main>
+
+<footer className="bg-webcon-ink px-6 py-16 text-white">
+  {/* no top border, no accent rule, no repeated announcement */}
+</footer>
+```
+
+For systems such as GitLab that expose both a header and footer notice, configure
+the header notice only and leave the footer notice empty. Do not duplicate security
+or platform copy at both edges of every page.
+
+## 8. Component patterns
+
+### Buttons
+
+```html
+<button class="bg-webcon-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-webcon-primary-dark focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-webcon-primary-dark">
+  Primary action
+</button>
+
+<button class="bg-neutral-100 px-6 py-3 font-semibold text-webcon-ink transition-colors hover:bg-webcon-primary-pale focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-webcon-primary-dark">
+  Secondary action
+</button>
+
+<button class="bg-transparent px-4 py-2 font-semibold text-webcon-muted hover:bg-neutral-100 hover:text-webcon-primary-dark focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-webcon-primary-dark">
+  Ghost action
+</button>
+```
+
+All buttons are `border-0 rounded-none shadow-none`. A subtle shadow is acceptable
+for the single primary action when it needs elevation from a busy background.
+
+### Forms
+
+- Put form controls on a contrasting filled surface instead of drawing a box around them.
+- Use `bg-neutral-100 border-0 rounded-none` for light inputs.
+- Use persistent labels; placeholders do not replace labels.
+- Use a 3px focus outline with at least 3:1 contrast.
+- Group related fields with spacing and a heading, not a surrounding fieldset border.
+- Keep native checkbox/radio affordances or use `accent-color: #1b7a95`.
+
+### Tables and lists
+
+- Use a filled teal table header with white text for ledger-like tables.
+- Use white and `#f8fafb` zebra rows; use pale teal for hover and selection.
+- Do not use an outer table border, cell grid, or rounded table shell.
+- Align numbers to the right and identifiers in monospace.
+- Keep row actions compact and visually quiet until hover or focus.
+- For mobile, choose horizontal scrolling, a priority-column view, or a semantic list.
+
+### Cards and panels
+
+- Prefer no card. Let content sit on the page or a full-width surface band.
+- When grouping is necessary, use `bg-white` or `bg-webcon-primary-pale` with padding.
+- Do not add a border or radius to compensate for weak hierarchy.
+- Use no shadow for static content.
+
+### Tabs and navigation
+
+- Use typography, filled selection, or a short active indicator.
+- Do not draw a full rectangle around every tab.
+- Keep the header accent distinct from tab selection; do not create another page-wide line.
+
+### Callouts, code, and overlays
+
+- Callouts: tinted square surface, clear icon, title, and text; no border.
+- Code: near-black square surface, syntax color, filename label; no decorative frame.
+- Menus/dialogs: square surfaces with a restrained shadow; no persistent card border.
+
+## 9. Project identity and icons
+
+Project icons must represent the project, not the category chosen by the interface.
+
+Use this source order:
+
+1. Official project logo from the project repository, brand kit, or deployed site.
+2. Product/app icon supplied by the project.
+3. Highest-quality favicon declared by the deployed site (`SVG`, web manifest, Apple touch icon, then PNG/ICO).
+4. A neutral webconsulting fallback only when no logo or favicon can be found.
+
+Rules:
+
+- Do not replace an available logo with a generic Lucide, emoji, letter, or category pictogram.
+- Do not redraw, recolor, crop, or add a teal tile behind a third-party logo unless its brand guidance permits it.
+- Prefer SVG. Otherwise use the largest clean raster source and keep its aspect ratio.
+- Normalize project avatars to a square canvas with `object-fit: contain` and 12-16% safe space.
+- Use a transparent or quiet neutral canvas; no border and no rounded mask.
+- Keep the logo optically centered. Do not force wordmarks to fill the square.
+- Record the source URL or repository path so the asset can be refreshed later.
+- If the icon is immediately followed by the visible project name, use empty alt text;
+  otherwise use the project name as the accessible label.
+
+Favicon resolution must use the page metadata or web manifest when possible. Do not
+default to a third-party favicon proxy when the project site can supply its own asset.
+
+## 10. MDX components
+
+Use the project MDX components instead of raw HTML when a component exists.
 
 ```jsx
 <Tabs defaultValue="v14">
   <TabsList>
     <TabsTrigger value="v14">TYPO3 v14</TabsTrigger>
   </TabsList>
-  <TabsContent value="v14">
-    Content for TYPO3 v14...
-  </TabsContent>
+  <TabsContent value="v14">Content for TYPO3 v14...</TabsContent>
 </Tabs>
 ```
 
-### Data & Comparison Tables
-
-Use `ComparisonTable` for feature matrices. Supports boolean checkmarks:
-
 ```jsx
-<ComparisonTable 
+<ComparisonTable
   headers={['Feature', 'TYPO3 v14']}
   rows={[
     { label: 'Content Blocks 2.x', values: [true] },
     { label: 'Symfony 7.4', values: [true] },
-    { label: 'PHP 8.2+', values: [true] }
-  ]} 
+  ]}
 />
 ```
-
-### Code Blocks with Syntax Highlighting
-
-```jsx
-<CodeBlock 
-  language="php" 
-  filename="Classes/Controller/PageController.php"
-  highlightLines={[3, 7]}
->
-{`<?php
-declare(strict_types=1);
-
-namespace Vendor\\Extension\\Controller;
-
-use Psr\\Http\\Message\\ResponseInterface;
-use TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ActionController;
-
-final class PageController extends ActionController
-{
-    public function indexAction(): ResponseInterface
-    {
-        return $this->htmlResponse();
-    }
-}`}
-</CodeBlock>
-```
-
-### Callout Boxes
 
 ```jsx
 <Callout type="info" title="Best Practice">
-  Always use `declare(strict_types=1);` in PHP files.
-</Callout>
-
-<Callout type="warning" title="Breaking Change">
-  This API changed in TYPO3 v14.
-</Callout>
-
-<Callout type="danger" title="Security">
-  Never expose sensitive configuration files.
+  Use a filled semantic surface without a border.
 </Callout>
 ```
 
-### MDX Images
-
 ```jsx
-<MDXImage 
-  src="/images/architecture-diagram.png" 
-  alt="TYPO3 Extension Architecture"
-  caption="Figure 1: Domain-Driven Design in TYPO3 Extensions"
+<MDXImage
+  src="/images/architecture-diagram.png"
+  alt="TYPO3 extension architecture"
+  caption="Figure 1: Domain-driven TYPO3 architecture"
 />
 ```
 
-## 4. Mermaid Diagrams (Theming)
+Implement these components with square, borderless surfaces even if an upstream
+component ships with a border or radius.
 
-All diagrams must explicitly override the theme to match the webconsulting palette:
+## 11. Mermaid diagrams
+
+Keep semantic graph edges, but remove decorative node and cluster strokes.
 
 ```markdown
-%%{init: {'theme': 'base', 'themeVariables': { 
-  'primaryColor': '#1b7a95', 
+%%{init: {'theme': 'base', 'themeVariables': {
+  'primaryColor': '#1b7a95',
   'primaryTextColor': '#ffffff',
-  'primaryBorderColor': '#155d73',
-  'lineColor': '#404040',
-  'secondaryColor': '#d97706',
-  'tertiaryColor': '#fef3c7',
+  'primaryBorderColor': '#1b7a95',
+  'lineColor': '#5e6870',
+  'secondaryColor': '#e8f4f8',
+  'tertiaryColor': '#f5f8f9',
+  'clusterBorder': '#f5f8f9',
   'edgeLabelBackground': '#ffffff'
 }}}%%
 graph TD
-    A[Client Request] -->|HTTP| B(Load Balancer)
-    B --> C{TYPO3 Backend}
-    C -->|Cache Hit| D[Response]
-    C -->|Cache Miss| E[Database]
-    E --> D
+    A[Client request] --> B[TYPO3]
+    B --> C[Response]
 ```
 
-**CSS enhancements** (automatically applied via base.css):
-- Nodes have 10px border-radius for modern look
-- 2px stroke width for better definition
-- White text with shadow on mindmap nodes
-- Cluster/subgraph backgrounds use light gray (`#f0f0f0`)
+Apply `rx: 0`, `ry: 0`, and `stroke-width: 0` to rectangular nodes and clusters.
+Do not remove arrows and relationship lines; they carry information.
 
-## 5. Accessibility Guidelines (WCAG 2.1 AA)
+## 12. Accessibility (WCAG 2.2 AA)
 
-### Contrast Requirements
+- Normal text: at least 4.5:1 contrast.
+- Large text and essential UI graphics: at least 3:1.
+- Use `:focus-visible` with a 3px high-contrast outline and 2px offset.
+- Keep a logical DOM and tab order; never use positive `tabindex`.
+- Provide skip links for content, navigation, and footer where appropriate.
+- Give every informative image meaningful alt text; use `alt=""` for decorative images.
+- Do not communicate state through color alone.
+- Keep touch targets at least 24×24 CSS px; prefer 44×44 for primary controls.
+- Ensure reflow at 320 CSS px without two-dimensional page scrolling.
 
-- Ensure **4.5:1** contrast ratio for all text
-- Large text (18.66px+ (14pt) bold, 24px+ (18pt) regular): **3:1** minimum
+## 13. Responsive behavior
 
-### Interactive Elements
+| Breakpoint | Width | Tailwind |
+|---|---:|---|
+| Mobile | `< 640px` | default |
+| Tablet | `>= 640px` | `sm:` |
+| Desktop | `>= 1024px` | `lg:` |
+| Wide | `>= 1280px` | `xl:` |
 
-- All interactive elements must have visible **focus states**
-- Use ring: `focus:ring-2 focus:ring-webcon-primary focus:ring-offset-2`
-- Outline for scrollable regions: `outline: 2px solid #1B7A95`
+Reduce columns before reducing readable type. Preserve surface hierarchy and avoid
+turning each mobile item into a rounded bordered card.
 
-### Images and Media
+## 14. Dark mode
 
-- All images MUST include `alt` text
-- Use `caption` prop in MDXImage component
-- Decorative images: use `alt=""`
+Dark mode keeps the same square, borderless hierarchy. Use near-black/navy canvases,
+slightly lighter work surfaces, light cyan for interactive emphasis, and light text.
+Do not reveal structure by adding borders that do not exist in light mode.
 
-### Keyboard Navigation
+## 15. shadcn/ui integration
 
-- All interactive elements must be keyboard accessible
-- Logical tab order (no positive tabindex)
-- Skip links for main content (styled with dark background, white text)
+Map semantic tokens, then remove the default card treatment:
 
-## 6. Responsive Breakpoints
-
-| Breakpoint | Width | Tailwind Prefix |
-|------------|-------|-----------------|
-| Mobile | < 640px | (default) |
-| Tablet | ≥ 640px | `sm:` |
-| Desktop | ≥ 1024px | `lg:` |
-| Wide | ≥ 1280px | `xl:` |
-
-## 7. Component Spacing Scale
-
-Use consistent spacing based on 4px grid:
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| `space-1` | 4px | Icon gaps |
-| `space-2` | 8px | Inline elements |
-| `space-4` | 16px | Component padding |
-| `space-6` | 24px | Section gaps |
-| `space-8` | 32px | Major sections |
-| `space-12` | 48px | Page sections |
-
-## 8. Button Styles
-
-### Primary Button
-
-```html
-<button class="bg-webcon-primary hover:bg-webcon-primary-800 text-white font-medium px-6 py-3 rounded-lg transition-colors focus:ring-2 focus:ring-webcon-primary focus:ring-offset-2">
-  Primary Action
-</button>
+```css
+:root {
+  --radius: 0rem;
+  --background: 195 20% 97%;
+  --foreground: 210 11% 10%;
+  --primary: 193 69% 35%;
+  --primary-foreground: 0 0% 100%;
+  --muted: 195 17% 94%;
+  --accent: 195 61% 94%;
+  --ring: 193 69% 27%;
+}
 ```
 
-### Secondary Button
+- Add `rounded-none border-0 shadow-none` to cards, buttons, fields, tabs, and callouts.
+- Rebuild field boundaries with filled surfaces and focus outlines.
+- Retain Radix semantics, keyboard behavior, and focus management.
+- Do not globally hide focus rings or native disabled states.
 
-```html
-<button class="border-2 border-webcon-primary text-webcon-primary hover:bg-webcon-primary-50 font-medium px-6 py-3 rounded-lg transition-colors">
-  Secondary Action
-</button>
-```
+## 16. Review checklist
 
-### Ghost Button
+Before shipping, verify:
 
-```html
-<button class="text-muted-foreground hover:text-webcon-primary hover:bg-muted px-4 py-2 rounded transition-colors">
-  Ghost Action
-</button>
-```
-
-## 9. Dark Mode Support
-
-The design system supports automatic dark mode via the `.dark` class. All `webcon-*` colors automatically invert:
-
-| Token | Light | Dark |
-|-------|-------|------|
-| `--webcon-primary` | `#1b7a95` | `#66c4e1` |
-| `--webcon-success` | `#16a34a` | `#4ade80` |
-| `--webcon-error` | `#dc2626` | `#f87171` |
-| `--webcon-warning` | `#d97706` | `#fbbf24` |
-
-**Usage**: Apply `dark` class to a parent element (usually `<html>`) to enable dark mode.
-
-## 10. shadcn/ui Integration
-
-The design system is compatible with shadcn/ui components. Semantic tokens map to shadcn conventions:
-
-| shadcn Token | webconsulting Equivalent |
-|--------------|--------------------------|
-| `--background` | Light: white, Dark: neutral-950 |
-| `--foreground` | Light: neutral-950, Dark: white |
-| `--primary` | `--webcon-primary` |
-| `--destructive` | `--webcon-error` |
-| `--muted` | Neutral grays |
-| `--accent` | Light backgrounds |
-| `--ring` | Focus ring color |
-
-
+- All radii are zero except inherently circular data or icon geometry.
+- Static containers use no decorative borders.
+- Header notice/accent appears once; footer notice/accent is absent.
+- Footer has no top rule and does not duplicate header copy.
+- Primary action is visually obvious without an outline button.
+- Hierarchy remains clear through surfaces, spacing, and type alone.
+- Project icons use real logos or favicon fallbacks with recorded sources.
+- Focus remains visible after border removal.
+- Light/dark contrast and 320px reflow pass.
 
 Source: https://github.com/dirnbauer/webconsulting-skills

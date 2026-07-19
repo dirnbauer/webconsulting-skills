@@ -311,7 +311,7 @@ The Composer plugin will automatically run `install.sh` after installation to de
 | `php-modernization` | php, phpstan, dto, enum | "Modernize my PHP code to 8.3 patterns" |
 | `cli-tools` | cli, tools, command not found | "Install missing CLI tools" |
 | `context7` | documentation, api, libraries | "Look up current Symfony documentation" |
-| `webconsulting-branding` | branding, design, components | "Apply webconsulting design system" |
+| `webconsulting-branding` | branding, no borders, project icons | "Apply the borderless webconsulting design system" |
 | `ui-design-patterns` | ui, design, layout, typography | "Improve the visual hierarchy of my UI" |
 | `remotion-best-practices` | remotion, video, react, animation, composition | "Create a video intro with fade-in text animation" |
 | `hyperframes` | hyperframes, video composition, captions, subtitles, voiceover, audio reactive, transitions | "Create a 10-second HTML-based product intro with captions and scene transitions" |
@@ -2437,7 +2437,7 @@ grep -r "DataHandler" skills/
 | `social` | Social media content, calendars, repurposing, and short-form scripts | Corey Haines |
 | `video` | Marketing video production with AI and programmatic video tools | Corey Haines |
 | **Frontend & Design** | | |
-| `webconsulting-branding` | Design tokens, MDX components, brand guidelines | webconsulting |
+| `webconsulting-branding` | Borderless square surfaces, header-only notices, logo-first project identity | webconsulting |
 | `ui-design-patterns` | Practical UI design patterns, accessibility | webconsulting |
 | `frontend-design` | Distinctive UI aesthetics, anti-AI-slop patterns | Anthropic |
 | `impeccable` | Production-grade frontend design, critique, polish, and live iteration | pbakaus |
