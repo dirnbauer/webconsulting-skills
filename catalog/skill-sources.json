@@ -1233,6 +1233,24 @@
     "pass_3": []
   },
   {
+    "directory": "redmine-agent-ready-tickets",
+    "skill_name": "redmine-agent-ready-tickets",
+    "description": "Turn vague, mixed-scope, or underspecified Redmine issues into implementation contracts that Claude, ChatGPT, Codex, or another coding agent can execute with minimal clarification. Use when auditing a Redmine backlog; rewriting todos, bugs, features, spikes, or epics; splitting or merging tickets; defining parent/child relationships and dependencies; adding acceptance criteria and verification commands; preparing tickets for autonomous implementation; or reviewing whether existing tickets are agent-ready.",
+    "source_owner": "webconsulting",
+    "source_url": null,
+    "file_path": "/Users/dirnbauer/projects/webconsulting-skills/skills/redmine-agent-ready-tickets/SKILL.md",
+    "line_count": 107,
+    "frontmatter_keys": [
+      "name",
+      "description"
+    ],
+    "pass_1": [],
+    "pass_2": [
+      "no explicit source note; current assumption is webconsulting-original"
+    ],
+    "pass_3": []
+  },
+  {
     "directory": "refactor",
     "skill_name": "refactor",
     "description": "'Surgical code refactoring to improve maintainability without changing behavior. Covers extracting functions, renaming variables, breaking down god functions, improving type safety, eliminating code smells, and applying design patterns. Less drastic than repo-rebuilder; use for gradual improvements.'",

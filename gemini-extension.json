@@ -884,6 +884,12 @@
       ],
       "path": "${extensionPath}/skills/readiness-report"
     },
+    "redmine-agent-ready-tickets": {
+      "name": "redmine-agent-ready-tickets",
+      "description": "Turn vague, mixed-scope, or underspecified Redmine issues into implementation contracts that Claude, ChatGPT, Codex, or another coding agent can execute with minimal clarification. Use when auditing a Redmine backlog; rewriting todos, bugs, features, spikes, or epics; splitting or merging tickets; defining parent/child relationships and dependencies; adding acceptance criteria and verification commands; preparing tickets for autonomous implementation; or reviewing whether existing tickets are agent-ready.",
+      "triggers": [],
+      "path": "${extensionPath}/skills/redmine-agent-ready-tickets"
+    },
     "refactor": {
       "name": "refactor",
       "description": "Code refactoring patterns, code smells, design patterns (GitHub)",

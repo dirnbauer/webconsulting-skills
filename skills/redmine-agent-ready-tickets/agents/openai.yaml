@@ -1,0 +1,4 @@
+interface:
+  display_name: "Redmine Agent-Ready Tickets"
+  short_description: "Turn vague Redmine todos into build-ready tickets"
+  default_prompt: "Use $redmine-agent-ready-tickets to audit and rewrite these Redmine issues for autonomous implementation."
