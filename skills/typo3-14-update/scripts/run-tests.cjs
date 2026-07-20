@@ -3,17 +3,19 @@
 /**
  * T3 Updater Enhanced - Playwright Test Runner
  *
- * This script provides four main actions for comprehensive website testing:
+ * This script provides five main actions for comprehensive website testing:
  * 1. get-urls: Fetch URLs from sitemaps and combine with golden path URLs
- * 2. take-screenshots: Capture screenshots on multiple devices
+ * 2. take-screenshots: Capture screenshots on multiple device viewports (Chromium)
  * 3. compare-screenshots: Compare before/after screenshots and generate diffs
  * 4. smoke-test: Perform functional testing with random link clicking
+ * 5. lighthouse-test: Run Lighthouse against the homepage plus random sitemap pages
  *
  * Usage:
- *   node run-tests.js --action=get-urls --domain="https://example.com" --output="urls.txt"
- *   node run-tests.js --action=take-screenshots --url-file="urls.txt" --output="screenshots/"
- *   node run-tests.js --action=compare-screenshots --before-dir="before/" --after-dir="after/" --output-dir="diff/" --json-output="comparison.json"
- *   node run-tests.js --action=smoke-test --domain="https://example.com" --json-output="smoke-test.json"
+ *   node run-tests.cjs --action=get-urls --domain="https://example.com" --output="urls.txt"
+ *   node run-tests.cjs --action=take-screenshots --url-file="urls.txt" --output="screenshots/"
+ *   node run-tests.cjs --action=compare-screenshots --before-dir="before/" --after-dir="after/" --output-dir="diff/" --json-output="comparison.json"
+ *   node run-tests.cjs --action=smoke-test --domain="https://example.com" --json-output="smoke-test.json"
+ *   node run-tests.cjs --action=lighthouse-test --domain="https://example.com" --json-output="lighthouse.json"
  */
 
 const { chromium, devices } = require('@playwright/test');
@@ -93,8 +95,8 @@ function getChromiumLaunchOptions() {
     return { ...base, headless: true };
 }
 
-// Load updater configuration from this repository, independent of the caller cwd.
-// The bash wrapper runs this script from each TYPO3 project directory.
+// Load configuration from .env/.env.local one level above this script,
+// independent of the caller cwd. Real environment variables win.
 function loadUpdaterEnvironment() {
     const updaterRoot = path.resolve(__dirname, '..');
     const mergedEnv = {};
@@ -163,19 +165,28 @@ function getOdiffBinaryPath() {
         return process.env.ODIFF_BIN;
     }
 
-    const localBinary = path.join(
-        path.resolve(__dirname, '..'),
-        'node_modules',
-        '.bin',
-        process.platform === 'win32' ? 'odiff.cmd' : 'odiff'
-    );
-
-    if (fs.existsSync(localBinary)) {
-        return localBinary;
+    const binaryName = process.platform === 'win32' ? 'odiff.cmd' : 'odiff';
+    const candidates = [
+        path.join(__dirname, 'node_modules', '.bin', binaryName),
+        path.join(path.resolve(__dirname, '..'), 'node_modules', '.bin', binaryName),
+    ];
+    for (const localBinary of candidates) {
+        if (fs.existsSync(localBinary)) {
+            return localBinary;
+        }
     }
 
     try {
-        return require.resolve('odiff-bin/bin/odiff.exe');
+        const packageDir = path.dirname(require.resolve('odiff-bin/package.json'));
+        const platformBinary = path.join(
+            packageDir,
+            'bin',
+            process.platform === 'win32' ? 'odiff.exe' : 'odiff'
+        );
+        if (fs.existsSync(platformBinary)) {
+            return platformBinary;
+        }
+        return 'odiff';
     } catch {
         return 'odiff';
     }
