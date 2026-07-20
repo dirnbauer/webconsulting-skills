@@ -3,18 +3,19 @@ name: typo3-14-update
 description: >-
   Update a TYPO3 v12 or v13 site to TYPO3 14.3 LTS as v14-only code inside a
   local DDEV project, wrapped in a visual regression main loop with a bundled
-  Playwright harness: validate sitemap.xml for all languages, run an
-  accessibility loop to green, baseline a random sitemap sample, update —
+  Playwright harness: validate sitemap.xml for all languages, update Bootstrap
+  5, run an accessibility loop to green, baseline a random sitemap sample,
+  update —
   extension strategy (Packagist, local packages/, forks, uninstall checks),
   Composer, PHP 8.4+, Rector/Fractor, PHPStan, upgrade wizards, workspaces,
   plain Vite build, plus Solr, Visual Editor, CKEditor RTE, and security-header
   upgrades — then repair until rendering is identical, and finish with a
-  backend module sweep, Lighthouse over up to 100 sitemap pages, and a
-  webconsulting-CI Word KPI report. Never deploys to staging or live. Use when
-  asked for a complete TYPO3 v14 update of a v12/v13 site, updating all
-  extensions to v14, visual regression testing around an update, pre-update
-  sitemap or accessibility checks, a DDEV-local upgrade run, a reusable v14
-  updater prompt, or a publication-ready TYPO3 14.3 extension.
+  backend module sweep, Lighthouse over up to 100 pages, and a
+  webconsulting Word KPI report. Never deploys to staging or live. Use for a
+  complete TYPO3 v14 update of a v12/v13 site, updating all extensions to v14,
+  visual regression testing around an update, pre-update sitemap, Bootstrap or
+  accessibility work, a DDEV-local upgrade run, a reusable v14 updater prompt,
+  or a publication-ready TYPO3 14.3 extension.
 ---
 
 # TYPO3 14 update
@@ -53,7 +54,7 @@ An update must not change what visitors see: the same content on the same databa
 
 - Baselines come from a random but reproducible sample of the validated sitemaps, never from all pages (Phase 2).
 - After the upgrade, every unexplained pixel difference is a defect: find the cause, fix it, re-shoot, and repeat until the full sample passes (Phase 8).
-- Accessibility reaches green before the baselines are captured (Phase 2), so the update must preserve both pixels and accessibility. Lighthouse optimization happens at the very end (Phase 9); its deliberate changes are measured and re-baselined only with user approval. Site feature upgrades — Solr, Visual Editor, CKEditor RTE, security headers — run between the core upgrade and the loop closure (Phase 7) under the same re-baseline rule.
+- The harness runs before the update too: the Bootstrap 5 upgrade is verified with a reference set, small verified steps, and a full comparison pass, and accessibility then reaches green — both before the baselines are captured (Phase 2), so the update must preserve corrected markup, pixels, and accessibility alike. Lighthouse optimization happens at the very end (Phase 9); its deliberate changes are measured and re-baselined only with user approval. Site feature upgrades — Solr, Visual Editor, CKEditor RTE, security headers — run between the core upgrade and the loop closure (Phase 7) under the same re-baseline rule.
 - The harness ships with this skill: `scripts/run-tests.cjs` provides the actions `get-urls` (main and per-language sitemap discovery combined with golden-path URLs, random sampling, 100-URL cap), `take-screenshots` (desktop, tablet, and phone viewports), `compare-screenshots` (odiff with pixelmatch fallback and a small minor-diff tolerance), `smoke-test`, and `lighthouse-test`. Install its dependencies with `npm install` in `scripts/`, run it inside the DDEV web container, and provide in-container browsers through the public `codingsasi/ddev-playwright` add-on (`ddev add-on get codingsasi/ddev-playwright`, then `ddev install-playwright`). A second bundled script, `scripts/backend-module-sweep.cjs`, proves after the upgrade that every backend module opens without errors (Phase 9). Read `references/visual-regression.md` for commands, thresholds, and tuning before the first run. When the bundled harness cannot run, scaffold Playwright `toHaveScreenshot` tests instead, with animations disabled and dynamic regions (dates, carousels, consent banners) masked or stabilized.
 
 ## Route the existing skills
@@ -96,8 +97,13 @@ Select additional TYPO3 skills after inventory: `typo3-batch`, `typo3-content-bl
 ## Phase 2: Gate the site before the update
 
 1. Validate `sitemap.xml` for every configured site language before any update work: each language has its own reachable sitemap variant at the DDEV URL, entries use the correct base and language prefixes, hreflang and canonical configuration are consistent, every listed URL answers 200 and is indexable, and the expected page tree is covered without excluded types leaking in. Fix site configuration and `EXT:seo` settings first — the sitemaps are the sampling source for every following loop.
-2. Run the accessibility loop until green: audit representative pages per language with `typo3-wcag22-aa-agentic` (axe-core through Playwright), apply fixes using `typo3-accessibility` patterns, and re-audit until WCAG 2.2 AA passes with zero critical axe violations. Accessibility fixes change markup, which is why they land before the visual baselines: the baselines then capture the corrected state, and the update must preserve both pixels and accessibility.
-3. Capture the visual baselines: randomly sample the validated sitemaps — not all pages. Run the harness's `get-urls` action against the DDEV URL (per-language sitemaps plus golden-path URLs, random fill, capped at 100), make sure the homepage and every distinct page type or template are represented, and persist the resulting URL file, device/viewport matrix (the harness shoots with Chromium), and settings so the identical sample re-runs after the update. Then shoot the baselines with `take-screenshots`.
+2. Update Bootstrap to the latest 5.x release before anything else touches the frontend, because it moves markup and CSS that both accessibility and the baselines depend on. Resolve the current version at execution time (npm `bootstrap` `latest` on the 5.3 line) and build it through the project's Vite pipeline with the `typo3-vite` skill. This is the one deliberate rendering change in the skill, so it runs as its own miniature regression loop:
+   - Shoot a reference set of the sample URLs with the harness first, so every later comparison has something to compare against.
+   - Work in small, individually verifiable steps — dependency bump, then removed or renamed utilities, then component markup, then custom SCSS overrides — and re-shoot the affected pages after each step instead of making one large jump.
+   - Inspect the output in detail at every step and at every breakpoint: grid and container behavior, spacing utilities, typography scale, buttons, forms, navigation, modals, tables, and any component whose Bootstrap classes changed. Read the diffs, do not skim the pass/fail count.
+   - Finish with one overall comparison across the full sample. Unlike the TYPO3 update, intended differences are expected here — but each one must be explained and approved, and anything unexplained is a defect to fix before continuing.
+3. Run the accessibility loop until green — after the Bootstrap work, so it audits the final markup: audit representative pages per language with `typo3-wcag22-aa-agentic` (axe-core through Playwright), apply fixes using `typo3-accessibility` patterns, and re-audit until WCAG 2.2 AA passes with zero critical axe violations. Accessibility fixes change markup too, which is why both land before the visual baselines: the baselines then capture the corrected state, and the update must preserve both pixels and accessibility.
+4. Capture the visual baselines: randomly sample the validated sitemaps — not all pages. Run the harness's `get-urls` action against the DDEV URL (per-language sitemaps plus golden-path URLs, random fill, capped at 100), make sure the homepage and every distinct page type or template are represented, and persist the resulting URL file, device/viewport matrix (the harness shoots with Chromium), and settings so the identical sample re-runs after the update. Then shoot the baselines with `take-screenshots`.
 
 ## Phase 3: Set the supported target, environment, and dependencies
 
@@ -189,6 +195,7 @@ Finish only when all applicable items are true:
 
 - The updated site runs on TYPO3 14.3 LTS in the local DDEV project: backend login, representative frontend pages, and CLI all verified.
 - Sitemaps for every site language were validated before the update, and the persisted sample lists exist for visual regression and Lighthouse.
+- Bootstrap runs the latest 5.x release, every rendering difference it caused was reviewed in detail and approved, and no unexplained difference remained when the baselines were captured.
 - The visual regression loop is closed: the persisted sample renders identically before and after the update with zero unexplained differences, and accessibility is green both before the baselines and after the update.
 - Every backend module opens without errors in the automated module sweep, and the sweep report is recorded.
 - When the site uses `EXT:solr`, the resolved extension is the newest 14 release (release candidates allowed through a per-package stability flag, never through global `minimum-stability`), the local Solr server runs the matrix-supported version, the index is fully rebuilt, and the Info module shows the site as active.
