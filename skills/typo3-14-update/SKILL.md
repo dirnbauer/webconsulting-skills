@@ -1,6 +1,19 @@
 ---
 name: typo3-14-update
-description: "Update a TYPO3 v12 or v13 site to TYPO3 14.3 LTS as v14-only code entirely inside a local DDEV project, wrapped in a visual regression main loop with a bundled Playwright harness: validate sitemap.xml for all languages, run an accessibility loop to green, capture baseline screenshots of a random sitemap sample, update — with a strategy for every installed extension (Packagist, local packages/, forks, uninstall checks), Composer, PHP 8.4+, Rector/Fractor, PHPStan, upgrade wizards, workspaces, and a plain Vite frontend build — then repair until rendering is identical, and finish with Lighthouse over up to 100 sitemap pages plus a webconsulting-CI Word KPI report. Never deploys to staging or live. Use when asked for a complete TYPO3 v14 update of a v12/v13 site, updating all extensions to v14, visual regression testing around an update, pre-update sitemap or accessibility checks, a DDEV-local upgrade run, a reusable v14 updater prompt, or a publication-ready TYPO3 14.3 extension."
+description: >-
+  Update a TYPO3 v12 or v13 site to TYPO3 14.3 LTS as v14-only code entirely
+  inside a local DDEV project, wrapped in a visual regression main loop with a
+  bundled Playwright harness: validate sitemap.xml for all languages, run an
+  accessibility loop to green, capture baseline screenshots of a random sitemap
+  sample, update — with a strategy for every installed extension (Packagist,
+  local packages/, forks, uninstall checks), Composer, PHP 8.4+, Rector/Fractor,
+  PHPStan, upgrade wizards, workspaces, and a plain Vite frontend build — then
+  repair until rendering is identical, and finish with Lighthouse over up to 100
+  sitemap pages plus a webconsulting-CI Word KPI report. Never deploys to
+  staging or live. Use when asked for a complete TYPO3 v14 update of a v12/v13
+  site, updating all extensions to v14, visual regression testing around an
+  update, pre-update sitemap or accessibility checks, a DDEV-local upgrade run,
+  a reusable v14 updater prompt, or a publication-ready TYPO3 14.3 extension.
 ---
 
 # TYPO3 14 update
