@@ -1,20 +1,20 @@
 ---
 name: typo3-14-update
 description: >-
-  Update a TYPO3 v12 or v13 site to TYPO3 14.3 LTS as v14-only code entirely
-  inside a local DDEV project, wrapped in a visual regression main loop with a
-  bundled Playwright harness: validate sitemap.xml for all languages, run an
-  accessibility loop to green, capture baseline screenshots of a random sitemap
-  sample, update — with a strategy for every installed extension (Packagist,
-  local packages/, forks, uninstall checks), Composer, PHP 8.4+, Rector/Fractor,
-  PHPStan, upgrade wizards, workspaces, and a plain Vite frontend build — then
-  repair until rendering is identical, and finish with a backend module sweep,
-  Lighthouse over up to 100 sitemap pages, and a webconsulting-CI Word KPI
-  report. Never deploys to
-  staging or live. Use when asked for a complete TYPO3 v14 update of a v12/v13
-  site, updating all extensions to v14, visual regression testing around an
-  update, pre-update sitemap or accessibility checks, a DDEV-local upgrade run,
-  a reusable v14 updater prompt, or a publication-ready TYPO3 14.3 extension.
+  Update a TYPO3 v12 or v13 site to TYPO3 14.3 LTS as v14-only code inside a
+  local DDEV project, wrapped in a visual regression main loop with a bundled
+  Playwright harness: validate sitemap.xml for all languages, run an
+  accessibility loop to green, baseline a random sitemap sample, update —
+  extension strategy (Packagist, local packages/, forks, uninstall checks),
+  Composer, PHP 8.4+, Rector/Fractor, PHPStan, upgrade wizards, workspaces,
+  plain Vite build, plus Solr, Visual Editor, CKEditor RTE, and security-header
+  upgrades — then repair until rendering is identical, and finish with a
+  backend module sweep, Lighthouse over up to 100 sitemap pages, and a
+  webconsulting-CI Word KPI report. Never deploys to staging or live. Use when
+  asked for a complete TYPO3 v14 update of a v12/v13 site, updating all
+  extensions to v14, visual regression testing around an update, pre-update
+  sitemap or accessibility checks, a DDEV-local upgrade run, a reusable v14
+  updater prompt, or a publication-ready TYPO3 14.3 extension.
 ---
 
 # TYPO3 14 update
@@ -39,9 +39,9 @@ Update one extension, sitepackage, or full project from TYPO3 v12/v13 to support
 An update must not change what visitors see: the same content on the same database renders identically by definition. The whole migration therefore runs inside one visual regression loop — baseline the synced site before touching code, update, re-shoot the same pages, and repair until the output matches:
 
 - Baselines come from a random but reproducible sample of the validated sitemaps, never from all pages (Phase 2).
-- After the upgrade, every unexplained pixel difference is a defect: find the cause, fix it, re-shoot, and repeat until the full sample passes (Phase 7).
-- Accessibility reaches green before the baselines are captured (Phase 2), so the update must preserve both pixels and accessibility. Lighthouse optimization happens at the very end (Phase 8); its deliberate changes are measured and re-baselined only with user approval.
-- The harness ships with this skill: `scripts/run-tests.cjs` provides the actions `get-urls` (main and per-language sitemap discovery combined with golden-path URLs, random sampling, 100-URL cap), `take-screenshots` (desktop, tablet, and phone viewports), `compare-screenshots` (odiff with pixelmatch fallback and a small minor-diff tolerance), `smoke-test`, and `lighthouse-test`. Install its dependencies with `npm install` in `scripts/`, run it inside the DDEV web container, and provide in-container browsers through the public `codingsasi/ddev-playwright` add-on (`ddev add-on get codingsasi/ddev-playwright`, then `ddev install-playwright`). A second bundled script, `scripts/backend-module-sweep.cjs`, proves after the upgrade that every backend module opens without errors (Phase 8). Read `references/visual-regression.md` for commands, thresholds, and tuning before the first run. When the bundled harness cannot run, scaffold Playwright `toHaveScreenshot` tests instead, with animations disabled and dynamic regions (dates, carousels, consent banners) masked or stabilized.
+- After the upgrade, every unexplained pixel difference is a defect: find the cause, fix it, re-shoot, and repeat until the full sample passes (Phase 8).
+- Accessibility reaches green before the baselines are captured (Phase 2), so the update must preserve both pixels and accessibility. Lighthouse optimization happens at the very end (Phase 9); its deliberate changes are measured and re-baselined only with user approval. Site feature upgrades — Solr, Visual Editor, CKEditor RTE, security headers — run between the core upgrade and the loop closure (Phase 7) under the same re-baseline rule.
+- The harness ships with this skill: `scripts/run-tests.cjs` provides the actions `get-urls` (main and per-language sitemap discovery combined with golden-path URLs, random sampling, 100-URL cap), `take-screenshots` (desktop, tablet, and phone viewports), `compare-screenshots` (odiff with pixelmatch fallback and a small minor-diff tolerance), `smoke-test`, and `lighthouse-test`. Install its dependencies with `npm install` in `scripts/`, run it inside the DDEV web container, and provide in-container browsers through the public `codingsasi/ddev-playwright` add-on (`ddev add-on get codingsasi/ddev-playwright`, then `ddev install-playwright`). A second bundled script, `scripts/backend-module-sweep.cjs`, proves after the upgrade that every backend module opens without errors (Phase 9). Read `references/visual-regression.md` for commands, thresholds, and tuning before the first run. When the bundled harness cannot run, scaffold Playwright `toHaveScreenshot` tests instead, with animations disabled and dynamic regions (dates, carousels, consent banners) masked or stabilized.
 
 ## Route the existing skills
 
@@ -131,7 +131,16 @@ Every installed extension gets updated — third-party and local alike. The site
 3. Log in to the TYPO3 backend at the DDEV URL. Work through the Admin Tools environment and upgrade status, database analyzer state, and remaining wizard list until they are clean.
 4. If a step fails, restore the snapshot, fix the cause, and rerun; never continue on a half-migrated local database.
 
-## Phase 7: Close the visual regression loop
+## Phase 7: Upgrade site features inside the main loop
+
+Run each applicable feature block after the core upgrade and before closing the visual loop. After every block, re-shoot the affected sample pages: an intentional rendering change needs explicit user approval and a recorded baseline refresh; everything else must stay pixel-identical.
+
+1. **Solr** — when the site uses `EXT:solr`: read the [EXT:solr version matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) for the release row matching TYPO3 14.3, update the local DDEV Solr service through the official `ddev/ddev-solr` add-on to that Apache Solr version with the matching configset, and update EXT:solr, search templates, and configuration following the `typo3-solr` skill. Rebuild the index queue and reindex fully; the backend Info module must show the site as active, and frontend search — including empty and paginated results — is re-verified.
+2. **Visual Editor**: require the latest v14-compatible `friendsoftypo3/visual-editor` release, verified on Packagist at execution time, and migrate the Fluid templates with the `typo3-visual-editor` skill (`f:render.text`, content areas, colPos migration). Verify inline editing works on a representative page in the backend; the migration must not change frontend rendering — the visual sample proves it.
+3. **CKEditor RTE**: migrate old RTE presets into the current v14 `rte_ckeditor` YAML — import the old settings, drop obsolete keys, and verify every option against the installed version. Enable text part language so editors can mark passages with `<span lang="…">` for the site's configured languages, and add abbreviation support through a maintained CKEditor 5 plugin extension found on TER or Packagist and verified against v14 — never guess plugin package names. Align the editor's content styles with the live site's frontend styles, but scale down oversized elements (for example very large h2 headings) for editing ergonomics. Then verify live in the backend: open a rich-text content element and confirm the preset loads with the language and abbreviation controls and the intended styling.
+4. **Security headers and checklist**: apply the `typo3-security` skill's checklist — security headers (HSTS, `X-Content-Type-Options`, `X-Frame-Options`/`frame-ancestors`, `Referrer-Policy`, `Permissions-Policy`), `trustedHostsPattern`, backend hardening, and CSP through the TYPO3 v14 CSP API — configured at a single layer without conflicting duplicates. Verify the header values on DDEV responses; differences that only exist on production layers (proxy, CDN) belong in the deployment handover and are never applied to live from here.
+
+## Phase 8: Close the visual regression loop
 
 1. Re-shoot the persisted URL sample against the updated site with `take-screenshots`, using the identical URL file, browser/device matrix, and settings.
 2. Compare with the baselines via `compare-screenshots`. The engine's minor-diff tolerance absorbs sub-pixel anti-aliasing noise; anything above it — layout, spacing, font, color, or content — is a defect, because the same content on the same database must render identically by definition.
@@ -139,7 +148,7 @@ Every installed extension gets updated — third-party and local alike. The site
 4. Never re-baseline to make a defect disappear. An intentional rendering change requires explicit user approval and a recorded baseline refresh.
 5. Re-run the accessibility checks on the sample to prove the pre-update green state survived the update.
 
-## Phase 8: Raise quality gates
+## Phase 9: Raise quality gates
 
 1. Run PHPStan at level 9 or higher; never lower an existing stricter level. Do not add suppressions or a new baseline for new or touched code. Existing baselines may remain only for untouched legacy findings and must shrink when findings are fixed.
 2. Run PHP lint, code style, Rector dry-run, Fractor dry-run, static analysis, unit tests, functional/integration tests, and E2E tests through the repository's canonical commands inside DDEV.
@@ -148,11 +157,12 @@ Every installed extension gets updated — third-party and local alike. The site
 5. Verify PHP 8.4 support across the whole extension set after the update: `ddev composer why-not php 8.4` must name no blocker, every local or forked extension in `packages/` declares the PHP target in its own `composer.json`, PHPStan runs with `phpVersion` set to the target, and lint plus all test suites execute in the PHP 8.4 (or newer) container while the TYPO3 deprecation log stays clean. Any extension that blocks the PHP target goes back through the extension update strategy — upgraded, forked and patched in `packages/`, or removed with approval.
 6. Smoke-test the site at the DDEV URL: homepage, a standard content page, news or detail pages when present, search including empty and paginated results (through the project's local Solr service when `EXT:solr` is used), login and password recovery, forms, the 404 response, `robots.txt`, and every sitemap entry point; the harness's `smoke-test` action (random link clicking) adds broad-coverage navigation on top. DDEV routes all outgoing mail to Mailpit (`ddev launch -m`), so form finishers and recovery mails are verified there and no real recipient is ever contacted.
 7. Run the automated backend module sweep with the bundled `scripts/backend-module-sweep.cjs`: it logs in at the DDEV URL, discovers every module from the module menu, opens each one, and fails on exception output, server errors, or severe console errors, writing a JSON report for the KPI report. Every module must pass; trace a failing module to its owning extension and route it back through the extension update strategy, and check the TYPO3 log for entries the sweep triggered.
-8. Verify local SEO rendering on representative page types: canonicals, unique page titles, meta descriptions, Open Graph and X card metadata, and JSON-LD, using `EXT:seo` and TYPO3 rendering APIs where they cover the requirement. Expect DDEV-local URLs in the output; flag absolute-URL configuration that must change per environment in the handover notes.
-9. Optimize with Lighthouse at the final stage: randomly sample up to 100 pages from the validated sitemaps across all languages (persist the list from `get-urls`; the harness's `lighthouse-test` action covers a quick pass over the homepage plus a few random sitemap pages — loop Lighthouse over the persisted URL list for the full sample) and run it against the DDEV URL in a clean, extension-free browser profile, recording version, URLs, viewport, timestamp, scores, and Core Web Vitals. Loop — fix, re-measure the affected pages — until findings are resolved or explicitly justified: enable AVIF through `GFX/imageFileConversionFormats` and `avif_quality` when the installed processor reports AVIF write support, preload only resources critical to the measured LCP with exactly matching URLs, give the LCP image eager loading and `fetchpriority="high"`, and keep minification in the Vite build (Phase 5 owns that pipeline; v14 removed the core equivalents). Treat local absolute scores as indicative; act on concrete findings, and re-baseline approved visual changes per the main loop rules.
-10. Reusable extensions keep a CI matrix with a TYPO3 14.3 job and every PHP version they claim to support.
+8. Verify the operational subsystems: run due scheduler tasks (`ddev typo3 scheduler:run`) and confirm they succeed with any mail landing in Mailpit; check that `EXT:redirects` entries resolve without loops or dead targets; run linkvalidator where installed and triage broken links; review sys_log and the deprecation log for errors raised since the update.
+9. Verify local SEO rendering on representative page types: canonicals, unique page titles, meta descriptions, Open Graph and X card metadata, and JSON-LD, using `EXT:seo` and TYPO3 rendering APIs where they cover the requirement. Expect DDEV-local URLs in the output; flag absolute-URL configuration that must change per environment in the handover notes.
+10. Optimize with Lighthouse at the final stage: randomly sample up to 100 pages from the validated sitemaps across all languages (persist the list from `get-urls`; the harness's `lighthouse-test` action covers a quick pass over the homepage plus a few random sitemap pages — loop Lighthouse over the persisted URL list for the full sample) and run it against the DDEV URL in a clean, extension-free browser profile, recording version, URLs, viewport, timestamp, scores, and Core Web Vitals. Loop — fix, re-measure the affected pages — until findings are resolved or explicitly justified: enable AVIF through `GFX/imageFileConversionFormats` and `avif_quality` when the installed processor reports AVIF write support, preload only resources critical to the measured LCP with exactly matching URLs, give the LCP image eager loading and `fetchpriority="high"`, and keep minification in the Vite build (Phase 5 owns that pipeline; v14 removed the core equivalents). Treat local absolute scores as indicative; act on concrete findings, and re-baseline approved visual changes per the main loop rules.
+11. Reusable extensions keep a CI matrix with a TYPO3 14.3 job and every PHP version they claim to support.
 
-## Phase 9: Finish documentation, report, and handover
+## Phase 10: Finish documentation, report, and handover
 
 1. Rewrite `README.md` as the concise entry point: purpose, features, TYPO3/PHP requirements, installation, quick start, configuration, workspace behavior, testing, limitations, and links to detailed docs. Update `Documentation/` using TYPO3 conventions with a v12/v13-to-v14 upgrade guide, migration commands, data upgrade steps, breaking changes, and removed features.
 2. Add a `CHANGELOG.md` entry describing the v14.3-only requirement, dropped versions, dependency changes, workspace support, and migrations. Do not invent a release date or tag.
@@ -168,6 +178,11 @@ Finish only when all applicable items are true:
 - Sitemaps for every site language were validated before the update, and the persisted sample lists exist for visual regression and Lighthouse.
 - The visual regression loop is closed: the persisted sample renders identically before and after the update with zero unexplained differences, and accessibility is green both before the baselines and after the update.
 - Every backend module opens without errors in the automated module sweep, and the sweep report is recorded.
+- When the site uses `EXT:solr`, the local Solr server runs the matrix-supported version, the index is fully rebuilt, and the Info module shows the site as active.
+- When Visual Editor is installed, inline editing is verified on a representative page and frontend rendering stayed identical.
+- The migrated RTE preset loads in the backend with language and abbreviation controls and live-matching styles.
+- Security headers follow the applied checklist at a single layer and are verified on DDEV responses.
+- Scheduler tasks, redirect health, and link checks pass where those subsystems are installed.
 - A fresh `ddev composer install` from the lockfile resolves against TYPO3 14.3 and the claimed PHP versions; `composer validate --strict` and `composer audit` pass.
 - The resolved extension set supports at least PHP 8.4 after the update: `composer why-not php 8.4` names no blocker, and lint, PHPStan, and all tests ran in the PHP 8.4 (or newer) container with a clean deprecation log.
 - Database schema comparison is clean and every core and extension upgrade wizard has run or is consciously skipped with a recorded reason.

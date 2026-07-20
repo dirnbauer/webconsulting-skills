@@ -5,6 +5,8 @@ Two bundled scripts drive the skill's automated checks — self-contained Node.j
 - [`scripts/run-tests.cjs`](../scripts/run-tests.cjs) — the main-loop harness: URL discovery from sitemaps, before/after screenshots, comparison, smoke navigation, and a quick Lighthouse pass. **Chromium only** (three device viewports, not multiple browsers).
 - [`scripts/backend-module-sweep.cjs`](../scripts/backend-module-sweep.cjs) — the backend module sweep: proves every backend module opens without errors after the update.
 
+Site feature upgrades (Solr, Visual Editor, CKEditor RTE, security headers — Phase 7 of the skill) run between the core upgrade and the final loop closure: re-shoot the affected sample pages after each feature and re-baseline only approved intentional changes.
+
 ## Setup
 
 ```bash
