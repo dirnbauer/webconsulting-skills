@@ -56,7 +56,7 @@ git diff
 ### 5. Test on TYPO3 v14
 
 ```bash
-ddev composer require "typo3/cms-core:^14.0" --no-update
+ddev composer require "typo3/cms-core:^14.3" --no-update
 ddev composer update
 ddev typo3 cache:flush
 ddev exec vendor/bin/phpunit

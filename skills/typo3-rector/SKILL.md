@@ -3,7 +3,7 @@ name: "typo3-rector"
 description: "Applies TYPO3 Rector upgrade patterns for PHP migrations toward TYPO3 v14, including Rector configuration, dry runs, rule sets, ViewFactory, Extbase responses, PSR-14 events, backend modules, TCA, and manual follow-up checks. Use when running Rector, fixing deprecations, upgrading TYPO3 PHP code, or preparing extensions for v14."
 compatibility: "TYPO3 14.x"
 metadata:
-  version: "2.1.0"
+  version: "2.2.0"
   origin: "webconsulting"
 license: "MIT / CC-BY-SA-4.0"
 ---
@@ -30,8 +30,9 @@ ddev composer require --dev ssch/typo3-rector
 
 > **Important:** Rector loads your project's autoloader. For TYPO3 v14 projects, Rector
 > **must** run on PHP 8.2+ because TYPO3 v14 packages use `readonly` classes and other
-> PHP 8.2 syntax. If your local PHP is older, always use DDEV or a container:
-> `ddev exec vendor/bin/rector process --dry-run`
+> PHP 8.2 syntax — and webconsulting projects target PHP 8.4+, so run Rector on the same
+> PHP version the project requires. If your local PHP is older, always use DDEV or a
+> container: `ddev exec vendor/bin/rector process --dry-run`
 
 > **Always run Rector, never skip it.** Manual replacements (e.g. `strpos` -> `str_starts_with`)
 > miss edge cases that Rector rules handle correctly. Rector also catches deprecated TYPO3
@@ -59,15 +60,24 @@ return RectorConfig::configure()
         __DIR__ . '/public/typo3conf/ext/*/Resources/',
         __DIR__ . '/public/typo3conf/ext/*/Tests/',
     ])
-    ->withPhpVersion(PhpVersion::PHP_82)
+    ->withPhpVersion(PhpVersion::PHP_84)
     ->withSets([
-        LevelSetList::UP_TO_PHP_82,
+        LevelSetList::UP_TO_PHP_84,
         Typo3LevelSetList::UP_TO_TYPO3_14,
     ])
     ->withImportNames();
 ```
 
-> **Incremental upgrades:** On a very old codebase you may run `UP_TO_TYPO3_13` in a dedicated step first, then `UP_TO_TYPO3_14`. Published extensions should still declare **`typo3/cms-core: ^14.0`** once you ship for v14.
+> **Incremental upgrades:** On a very old codebase you may run `UP_TO_TYPO3_13` in a dedicated step first, then `UP_TO_TYPO3_14`. Published extensions should declare **`typo3/cms-core: ^14.3`** once you ship for v14 — 14.0 through 14.2 no longer receive security updates.
+
+### Current state (typo3-rector v3.14, mid-2026)
+
+typo3-rector 3.14 runs on Rector 2.5 and is maintained by Simon Schaufelberger, partly funded through TYPO3 community budgets. Run `composer update ssch/typo3-rector` before each migration pass so the newest v14 rules apply. Notable in 3.14:
+
+- Migrates TYPO3-bundled Fluid class names to standalone Fluid, which TYPO3 v14 uses
+- Migrates `makeCategorizable()` registrations
+- Extends `$GLOBALS['TSFE']->fe_user` migration coverage
+- Hardens the `HashService` and `MailMessage::send()` migrations
 
 ## 2. Running Rector
 
@@ -113,8 +123,8 @@ $EM_CONF[$_EXTKEY] = [
     'state' => 'stable',
     'constraints' => [
         'depends' => [
-            'typo3' => '14.0.0-14.99.99',
-            'php' => '8.2.0-8.5.99',
+            'typo3' => '14.3.0-14.99.99',
+            'php' => '8.4.0-8.5.99',
         ],
         'conflicts' => [],
         'suggests' => [],
@@ -126,8 +136,8 @@ $EM_CONF[$_EXTKEY] = [
 // composer.json
 {
     "require": {
-        "php": "^8.2",
-        "typo3/cms-core": "^14.0"
+        "php": "^8.4",
+        "typo3/cms-core": "^14.3"
     }
 }
 ```

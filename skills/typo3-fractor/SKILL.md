@@ -1,9 +1,9 @@
 ---
 name: "typo3-fractor"
-description: "Automates non-PHP TYPO3 upgrade migrations with Fractor for FlexForms, TypoScript, Fluid, YAML, Htaccess, and composer.json changes. Use when running or configuring Fractor, upgrading non-PHP TYPO3 files, migrating FlexForms or TypoScript, modernizing Fluid templates, or combining Rector and Fractor for v14 work."
+description: "Automates non-PHP TYPO3 upgrade migrations with Fractor for FlexForms, TypoScript, Fluid, YAML, XLIFF translation files, Htaccess, and composer.json changes. Use when running or configuring Fractor, upgrading non-PHP TYPO3 files, migrating FlexForms or TypoScript, modernizing Fluid templates, or combining Rector and Fractor for v14 work."
 compatibility: "TYPO3 14.x"
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
   origin: "webconsulting"
 license: "MIT / CC-BY-SA-4.0"
 ---
@@ -11,7 +11,7 @@ license: "MIT / CC-BY-SA-4.0"
 
 > Source: https://github.com/dirnbauer/webconsulting-skills
 
-Fractor is a generic file refactoring tool that automates non-PHP migrations for TYPO3 upgrades. It complements [Rector](https://github.com/sabbelasichon/typo3-rector) (which handles PHP) by migrating FlexForms, TypoScript, Fluid templates, YAML, Htaccess files, and composer.json.
+Fractor is a generic file refactoring tool that automates non-PHP migrations for TYPO3 upgrades. It complements [Rector](https://github.com/sabbelasichon/typo3-rector) (which handles PHP) by migrating FlexForms, TypoScript, Fluid templates, YAML, XLIFF translation files, Htaccess files, and composer.json. Fractor is stable since v1.0 (July 2026); it is maintained by Simon Schaufelberger and Andreas Wolf and partly funded through TYPO3 community budgets.
 
 **Target:** TYPO3 **v14.x** for this skill collection. Upstream Fractor sets may still be named `TYPO3_12`, `TYPO3_13`, etc. — those are historical bundle identifiers for rules you apply while moving code **toward** a v14 codebase.
 
@@ -44,14 +44,16 @@ ddev composer require --dev a9f/typo3-fractor
 > version-specific patterns that are easy to miss in manual review. Fractor rules are
 > maintained by the TYPO3 community and cover edge cases.
 
-This meta-package installs all TYPO3-specific file processors:
+This meta-package installs all TYPO3-specific file processors (set as of Fractor v1.0):
 - `a9f/fractor` (core engine)
+- `a9f/fractor-extension-installer` (automatic processor registration)
 - `a9f/fractor-xml` (FlexForm/XML processing)
 - `a9f/fractor-fluid` (Fluid template processing)
 - `a9f/fractor-typoscript` (TypoScript/TSconfig processing)
 - `a9f/fractor-yaml` (YAML processing)
 - `a9f/fractor-htaccess` (Htaccess processing)
-- `a9f/fractor-composer-json` (composer.json processing — **not installed as a dependency** of `a9f/typo3-fractor`; add `composer require --dev a9f/fractor-composer-json` if you need it)
+- `a9f/fractor-xliff` (XLIFF translation file processing — new in v1.0; pairs with the `typo3-translations` skill)
+- `a9f/fractor-composer-json` (composer.json processing — **still not part of the meta-package**; add `composer require --dev a9f/fractor-composer-json` when you need it)
 
 ## 2. Configuration
 
@@ -156,6 +158,16 @@ vendor/bin/fractor process --dry-run
 vendor/bin/fractor process
 ```
 
+### Useful CLI Options (since v1.0)
+
+```bash
+vendor/bin/fractor process --dry-run --no-diffs        # summary without diff output
+vendor/bin/fractor process --dry-run --rules-summary   # which rules changed which files
+vendor/bin/fractor process --memory-limit=2G           # raise the limit for large projects
+```
+
+> **Breaking in v1.0:** the `--quiet` CLI option was removed.
+
 ### Run Single Rule from Set
 
 ```bash
@@ -226,6 +238,12 @@ Apply rules for a single version only:
 | `RenameConfigXhtmlDoctypeToDoctypeFractor` | `xhtmlDoctype` → `doctype` |
 | `RenameTcemainLinkHandlerMailKeyFractor` | Rename mail link handler key |
 | `UseConfigArrayForTSFEPropertiesFractor` | TSFE properties → config array |
+
+### Fluid Rules (bundle id `TYPO3_8`)
+
+| Rule | Migration |
+|------|-----------|
+| `ReplaceCaseDefaultWithDefaultCaseFluidFractor` | `<f:case default="true">` → `<f:defaultCase>` (new in v1.0; applied through the cumulative level sets) |
 
 ### Fluid Rules (v12)
 

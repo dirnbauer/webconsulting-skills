@@ -388,11 +388,11 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 | `typo3-docs` | Documentation using docs.typo3.org standards | 1.0.0 | documentation, rst, docs |
 | `typo3-core-contributions` | TYPO3 Core contribution workflow (Gerrit, Forge) | 1.0.0 | core, contributions, gerrit, forge |
 | `typo3-initial-release` | First official TYPO3 14.3+ extension release workflow, final review, CI/tooling verification, and tagging | 1.0.0 | initial release, 1.0.0, release readiness, release tag, TER, Packagist |
-| `typo3-rector` | TYPO3 v14 upgrade patterns using Rector | 2.0.0 | rector, upgrade, migration, refactoring |
+| `typo3-rector` | TYPO3 v14 upgrade patterns using Rector (typo3-rector 3.14, Rector 2.5) | 2.2.0 | rector, upgrade, migration, refactoring |
 | `typo3-update` | TYPO3 v14 development guide (constraints, APIs, upgrades) | 2.0.0 | update, upgrade, v14, migration |
 | `typo3-14-update` | v12/v13 to TYPO3 14.3 LTS updater around a visual regression main loop, finishing as a verified local DDEV site; never deploys to live | 2.0.0 | complete v14 update, v14-only, ddev update, local upgrade run, visual regression, accessibility loop, sitemap check, update all extensions, local packages, php 8.4, upgrade wizards, lighthouse, KPI report |
 | `typo3-extension-upgrade` | Systematic extension upgrades with Rector, Fractor, PHPStan | 1.0.0 | extension, upgrade, fractor |
-| `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML) | 1.0.0 | fractor, flexform, typoscript migration, fluid migration |
+| `typo3-fractor` | Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, XLIFF) with Fractor 1.0 | 1.2.0 | fractor, flexform, typoscript migration, fluid migration, xliff |
 | `typo3-icon14` | Migrate extension icons to TYPO3 v14 line-art style | 1.0.0 | icons, backend module icons, icon migration, SVG icons, icon registry |
 | `typo3-security` | Security hardening checklist and best practices | 2.0.0 | security, hardening, permissions |
 | `typo3-seo` | SEO configuration with EXT:seo, sitemaps, meta tags | 2.0.0 | seo, sitemap, meta, robots |
@@ -660,7 +660,7 @@ TYPO3 backend Lit reference material for the `typo3-webcomponents` skill.
 - **typo3-update**: Version migration and compatibility strategies for TYPO3 v14
 - **typo3-14-update**: End-to-end v14.3-only upgrade orchestration inside local DDEV — visual regression main loop with pre-update sitemap and accessibility gates, strategy for all extensions (Packagist, local packages/, forks, uninstall checks), upgrade wizards, workspaces, plain Vite build, Lighthouse sampling, webconsulting-CI Word KPI report; never deploys to live
 - **typo3-extension-upgrade**: Systematic extension upgrades with Rector, Fractor, PHPStan
-- **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, Htaccess)
+- **typo3-fractor**: Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, XLIFF, Htaccess)
 - **typo3-icon14**: Migrate extension icons from solid-background to v14 line-art style (currentColor, CSS custom properties)
 - **typo3-security**: Production hardening checklist for TYPO3 v14
 - **typo3-seo**: Search engine optimization with EXT:seo
