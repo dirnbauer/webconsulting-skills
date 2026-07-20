@@ -49,7 +49,7 @@ LEVELS = ['passing', 'silver', 'gold', 'baseline-1', 'baseline-2', 'baseline-3']
 
 ```python
 # RECOMMENDED: Read from file to avoid shell quoting issues with special chars
-cookie_file = '/tmp/badge-cookie.txt'
+cookie_file = os.path.expanduser('~/.badge-cookie.txt')
 if os.path.exists(cookie_file):
     with open(cookie_file) as f:
         cookie = f.read().strip()
@@ -85,7 +85,7 @@ often contain `+`, `/`, `=`, and other characters that break shell quoting.
 
 ```python
 # BEST - read from file (no shell quoting issues)
-cookie = open('/tmp/badge-cookie.txt').read().strip()
+cookie = open(os.path.expanduser('~/.badge-cookie.txt')).read().strip()
 
 # OK - environment variable (beware of shell quoting)
 cookie = os.environ.get('BADGE_COOKIE', '')
