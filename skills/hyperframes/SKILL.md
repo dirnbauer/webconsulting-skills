@@ -1,494 +1,157 @@
 ---
 name: "hyperframes"
-description: "Create video compositions, animations, title cards, overlays, captions, voiceovers, audio-reactive visuals, and scene transitions in HyperFrames HTML. Use when asked to build any HTML-based video content, add captions or subtitles synced to audio, generate text-to-speech narration, create audio-reactive animation (beat sync, glow, pulse driven by music), add animated text highlighting (marker sweeps, hand-drawn circles, burst lines, scribble, sketchout), or add transitions between scenes (crossfades, wipes, reveals, shader transitions). Covers composition authoring, timing, media, and the full video production workflow. For dev-loop CLI commands (init, lint, inspect, preview, render) see the hyperframes-cli skill; for asset preprocessing commands (tts, transcribe, remove-background) see the hyperframes-media skill."
+description: "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, explainer, captioned clip, title card, overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing footage, or music. It resumes project state, captures intent when applicable, selects and installs the owning workflow, and routes domain capabilities. HyperFrames is the default output framework unless the user explicitly chooses another framework for the deliverable or asks only to record a browser session."
 ---
 
-# HyperFrames
+# HyperFrames entry point
 
-HTML is the source of truth for video. A composition is an HTML file with `data-*` attributes for timing, a GSAP timeline for animation, and CSS for appearance. The framework handles clip visibility, media playback, and timeline sync.
+HyperFrames **renders video from HTML** — a composition is an HTML file whose DOM declares timing with `data-*` attributes, whose animation runtime is seekable, and whose media playback is owned by the framework. The full authoring contract lives in `/hyperframes-core`; read it before writing composition HTML.
 
-## Approach
+## 1. Start from project state
 
-### Discovery (exploratory requests only)
+Apply the first matching row; do not evaluate lower state rows:
 
-For open-ended requests ("make me a product launch video", "create something for our brand") where the user hasn't committed to a direction, understand intent before picking colors:
+| State                                                                                                                         | Action                                                                                                                                                                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Explicit port of existing Remotion source to HyperFrames                                                                      | Read the `/remotion-to-hyperframes` section of `references/workflow-catalog.md`, then route directly to that workflow. Skip the intent layer.                                                               |
+| Specific operation on an existing HyperFrames project: inspect, diagnose, validate, preview, render, publish, or batch-render | Perform only that operation. Skip intent and workflow routing; load `/hyperframes-cli` and any required domain skills.                                                                                      |
+| Specific edit to an existing project                                                                                          | Make the edit. Do not run the intent layer.                                                                                                                                                                 |
+| `BRIEF.md` exists                                                                                                             | Read `workflow` and `flow`. Execute that workflow; `flow: companion` always executes in `/general-video`. Ask no brief questions.                                                                           |
+| No brief, but `hyperframes.json` or `STORYBOARD.md` exists                                                                    | Resume from project files and recorded preferences. Infer the owning workflow from existing artifacts. If it cannot be determined uniquely, ask one routing-only question; do not run the intent interview. |
+| Fresh creation                                                                                                                | Run the intent layer (§ 4), then route once using the rules below.                                                                                                                                          |
 
-- **Audience** — who watches this? Developers? Executives? General consumers?
-- **Platform** — where does it play? Social (15s), website hero, product demo, internal?
-- **Priority** — what matters most? Motion quality? Content accuracy? Brand fidelity? Speed?
-- **Variations** — does the user want options, or a single best shot?
+Continue with source adapters in § 2. A direct or resumed workflow route skips §§ 3–4 and proceeds to workflow installation in § 5. A specific operation or edit skips §§ 3–5 and loads only the domain skills it needs from § 6.
 
-For specific requests ("add a title card", "fix the timing on scene 3"), skip discovery.
+If a fresh request does not identify the subject or input, ask what the video is about before routing. Check preferences and recipes before asking anything (§ 4, step 1).
 
-For exploratory requests, consider offering 2-3 variations that differ meaningfully — not just color swaps, but different pacing, energy levels, or structural approaches. One safe/expected, one ambitious. Don't mandate this — it's a tool available when appropriate.
+### Keep the project's CLI current
 
-### Step 1: Design system
-
-If a design spec exists in the project, read it first. Look in precedence order: `frame.md` → `design.md` → `DESIGN.md` (`design.md` and `DESIGN.md` are different files on Linux — check both casings; `frame.md` is always lowercase, no `FRAME.md` variant). `frame.md` is the preferred spec for video/hyperframes projects and wins if more than one exists; it uses the same format as `design.md`. It's the source of truth for brand colors, fonts, and constraints. Use its exact values — don't invent colors or substitute fonts. Any format works (YAML frontmatter, prose, tables — just extract the values).
-
-If it names fonts you can't find locally (no `fonts/` directory with `.woff2` files, not a built-in font), warn the user before writing HTML: "the spec specifies [font name] but no font files found. Please add .woff2 files to `fonts/` or I'll fall back to [closest built-in alternative]."
-
-If no `frame.md` or `design.md` exists, offer the user a choice:
-
-1. **User named a style or mood?** → Read [visual-styles.md](./visual-styles.md) for the 8 named presets. Pick the closest match.
-2. **Want to browse options visually?** → Run the design picker: read [references/design-picker.md](references/design-picker.md) for the full workflow. This serves a visual picker page. The user configures mood, palette, typography, and motion in the browser, then copies the generated design.md and pastes it back into the conversation.
-3. **Want to skip and go fast?** → Ask: mood, light or dark, any brand colors/fonts? Then pick a palette from [house-style.md](./house-style.md).
-
-**The design spec defines the brand. It does not define video composition rules.** Those come from [references/video-composition.md](references/video-composition.md) and [house-style.md](./house-style.md). Use brand colors at video-appropriate scale — not at web-UI opacity.
-
-### Step 2: Prompt expansion
-
-Always run on every composition (except single-scene pieces and trivial edits). This step grounds the user's intent against the design spec (`frame.md` or `design.md`) and `house-style.md` and produces a consistent intermediate that every downstream agent reads the same way.
-
-Read [references/prompt-expansion.md](references/prompt-expansion.md) for the full process and output format.
-
-### Step 3: Plan
-
-Before writing HTML, think at a high level:
-
-1. **What** — what should the viewer experience? Identify the narrative arc, key moments, and emotional beats.
-2. **Structure** — how many compositions, which are sub-compositions vs inline, what tracks carry what (video, audio, overlays, captions).
-3. **Rhythm** — declare your scene rhythm before implementing. Which scenes are quick hits, which are holds, where do shaders land, where does energy peak. Name the pattern: fast-fast-SLOW-fast-SHADER-hold. Read [references/beat-direction.md](references/beat-direction.md) for rhythm templates.
-4. **Timing** — which clips drive the duration, where do transitions land, what's the pacing.
-5. **Layout** — build the end-state first. See "Layout Before Animation" below.
-6. **Animate** — then add motion using the rules below.
-
-**Build what was asked.** A request for "a title card" is not a request for "a title card + 3 supporting scenes + ambient music + captions." Every scene, every element, every tween should earn its place. If additional scenes or elements would genuinely improve the piece, propose them — don't add them.
-
-For small edits (fix a color, adjust timing, add one element), skip straight to the rules.
-
-<HARD-GATE>
-Before writing ANY composition HTML — verify you have a visual identity from Step 1. If you're reaching for `#333`, `#3b82f6`, or `Roboto`, you skipped it.
-</HARD-GATE>
-
-## Layout Before Animation
-
-Position every element where it should be at its **most visible moment** — the frame where it's fully entered, correctly placed, and not yet exiting. Write this as static HTML+CSS first. No GSAP yet.
-
-**Why this matters:** If you position elements at their animated start state (offscreen, scaled to 0, opacity 0) and tween them to where you think they should land, you're guessing the final layout. Overlaps are invisible until the video renders. By building the end state first, you can see and fix layout problems before adding any motion.
-
-### The process
-
-1. **Identify the hero frame** for each scene — the moment when the most elements are simultaneously visible. This is the layout you build.
-2. **Write static CSS** for that frame. The `.scene-content` container MUST fill the full scene using `width: 100%; height: 100%; padding: Npx;` with `display: flex; flex-direction: column; gap: Npx; box-sizing: border-box`. Use padding to push content inward — NEVER `position: absolute; top: Npx` on a content container. Absolute-positioned content containers overflow when content is taller than the remaining space. Reserve `position: absolute` for decoratives only.
-3. **Add entrances with `gsap.from()`** — animate FROM offscreen/invisible TO the CSS position. The CSS position is the ground truth; the tween describes the journey to get there. (In sub-compositions loaded via `data-composition-src`, prefer `gsap.fromTo()` — see load-bearing GSAP rules in [references/motion-principles.md](references/motion-principles.md).)
-4. **Add exits with `gsap.to()`** — animate TO offscreen/invisible FROM the CSS position.
-
-### Example
-
-```css
-/* scene-content fills the scene, padding positions content */
-.scene-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 120px 160px;
-  gap: 24px;
-  box-sizing: border-box;
-}
-.title {
-  font-size: 120px;
-}
-.subtitle {
-  font-size: 42px;
-}
-/* Container fills any scene size (1920x1080, 1080x1920, etc).
-   Padding positions content. Flex + gap handles spacing. */
-```
-
-**WRONG — hardcoded dimensions and absolute positioning:**
-
-```css
-.scene-content {
-  position: absolute;
-  top: 200px;
-  left: 160px;
-  width: 1920px;
-  height: 1080px;
-  display: flex; /* ... */
-}
-```
-
-```js
-// Step 3: Animate INTO those positions
-tl.from(".title", { y: 60, opacity: 0, duration: 0.6, ease: "power3.out" }, 0);
-tl.from(".subtitle", { y: 40, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.2);
-tl.from(".logo", { scale: 0.8, opacity: 0, duration: 0.4, ease: "power2.out" }, 0.3);
-
-// Step 4: Animate OUT from those positions
-tl.to(".title", { y: -40, opacity: 0, duration: 0.4, ease: "power2.in" }, 3);
-tl.to(".subtitle", { y: -30, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.1);
-tl.to(".logo", { scale: 0.9, opacity: 0, duration: 0.3, ease: "power2.in" }, 3.2);
-```
-
-### When elements share space across time
-
-If element A exits before element B enters in the same area, both should have correct CSS positions for their respective hero frames. The timeline ordering guarantees they never visually coexist — but if you skip the layout step, you won't catch the case where they accidentally overlap due to a timing error.
-
-### What counts as intentional overlap
-
-Layered effects (glow behind text, shadow elements, background patterns) and z-stacked designs (card stacks, depth layers) are intentional. The layout step is about catching **unintentional** overlap — two headlines landing on top of each other, a stat covering a label, content bleeding off-frame.
-
-## Data Attributes
-
-### All Clips
-
-| Attribute          | Required                          | Values                                                 |
-| ------------------ | --------------------------------- | ------------------------------------------------------ |
-| `id`               | Yes                               | Unique identifier                                      |
-| `data-start`       | Yes                               | Seconds or clip ID reference (`"el-1"`, `"intro + 2"`) |
-| `data-duration`    | Required for img/div/compositions | Seconds. Video/audio defaults to media duration.       |
-| `data-track-index` | Yes                               | Integer. Same-track clips cannot overlap.              |
-| `data-media-start` | No                                | Trim offset into source (seconds)                      |
-| `data-volume`      | No                                | 0-1 (default 1)                                        |
-
-`data-track-index` does **not** affect visual layering — use CSS `z-index`.
-
-### Composition Clips
-
-| Attribute                    | Required | Values                                                            |
-| ---------------------------- | -------- | ----------------------------------------------------------------- |
-| `data-composition-id`        | Yes      | Unique composition ID                                             |
-| `data-start`                 | Yes      | Start time (root composition: use `"0"`)                          |
-| `data-duration`              | Yes      | Takes precedence over GSAP timeline duration                      |
-| `data-width` / `data-height` | Yes      | Pixel dimensions (1920x1080 or 1080x1920)                         |
-| `data-composition-src`       | No       | Path to external HTML file                                        |
-| `data-variable-values`       | No       | JSON object of per-instance variable overrides on a sub-comp host |
-
-On the root `<html>` element:
-
-| Attribute                    | Required | Values                                                                                                                         |
-| ---------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `data-composition-variables` | No       | JSON array of declared variables (id/type/label/default) — drives Studio editing UI and provides defaults for `getVariables()` |
-
-## Composition Structure
-
-Sub-compositions loaded via `data-composition-src` use a `<template>` wrapper. **Standalone compositions (the main index.html) do NOT use `<template>`** — they put the `data-composition-id` div directly in `<body>`. Using `<template>` on a standalone file hides all content from the browser and breaks rendering.
-
-Sub-composition structure:
-
-```html
-<template id="my-comp-template">
-  <div data-composition-id="my-comp" data-width="1920" data-height="1080">
-    <!-- content -->
-    <style>
-      [data-composition-id="my-comp"] {
-        /* scoped styles */
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
-    <script>
-      window.__timelines = window.__timelines || {};
-      const tl = gsap.timeline({ paused: true });
-      // tweens...
-      window.__timelines["my-comp"] = tl;
-    </script>
-  </div>
-</template>
-```
-
-Load in root: `<div id="el-1" data-composition-id="my-comp" data-composition-src="compositions/my-comp.html" data-start="0" data-duration="10" data-track-index="1"></div>`
-
-## Variables (Parametrized Compositions)
-
-Render the same composition with different content — title, theme color, prices, captions — without editing the source HTML.
-
-**Three-step pattern:**
-
-1. **Declare** variables on the composition's `<html>` root with `data-composition-variables`. Each entry needs `id`, `type` (one of `string`, `number`, `color`, `boolean`, `enum`), `label`, and `default`. Enum entries also need `options: [{value, label}, ...]`.
-2. **Read** the resolved values inside the composition's script with `window.__hyperframes.getVariables()`. Returns the merged result of declared defaults + per-instance overrides + CLI overrides.
-3. **Override** at render time with `npx hyperframes render --variables '{...}'` (top-level) or with `data-variable-values='{...}'` on the host element (per-instance for sub-comps).
-
-```html
-<!doctype html>
-<html
-  data-composition-variables='[
-  {"id":"title","type":"string","label":"Title","default":"Hello"},
-  {"id":"theme","type":"enum","label":"Theme","default":"light","options":[
-    {"value":"light","label":"Light"},
-    {"value":"dark","label":"Dark"}
-  ]}
-]'
->
-  <body>
-    <div data-composition-id="root" data-width="1920" data-height="1080">
-      <h1 id="hero" class="clip" data-start="0" data-duration="3"></h1>
-      <script>
-        const { title, theme } = window.__hyperframes.getVariables();
-        document.getElementById("hero").textContent = title;
-        document.body.dataset.theme = theme;
-      </script>
-    </div>
-  </body>
-</html>
-```
+A scaffolded project pins `hyperframes@<version>` in its `package.json` scripts so renders stay reproducible; the pin never advances on its own, and a pinned run of an older CLI prints no warning about it. When resuming a project whose scripts carry a pin, probe once before the first render-affecting command:
 
 ```bash
-# Dev preview uses declared defaults
-npx hyperframes preview
-
-# Render with overrides
-npx hyperframes render --variables '{"title":"Q4 Report","theme":"dark"}' --output q4.mp4
-
-# Or from a JSON file
-npx hyperframes render --variables-file ./vars.json
+npx hyperframes@latest upgrade --project . --check
 ```
 
-**Sub-composition per-instance values:** the same `getVariables()` works inside sub-comps loaded via `data-composition-src`. Each host element passes its own values:
+The probe is read-only and reports the pin against the latest release; keep the explicit `.` — on older CLI releases a bare `--project` followed by another flag consumes that flag as its directory value. When it reports the project behind — or any CLI output already shows it (the stderr notice `This project pins hyperframes@… (latest …)`, or `_meta.updateAvailable: true` in a `--json` result from a pinned script) — apply with `npx hyperframes@latest upgrade --project .`, then verify with `npx hyperframes check`. A passing check confirms the project's compositions still validate on the new version — not that rendered output is frame-identical to the old pin — so a successful bump is never silent: name the old and new version in the run's summary. A project with no composition yet needs no verification. If the check fails, revert the `package.json` change, continue on the pinned version, and report which version the project stays on and why. Act on the signal rather than relaying it to the user; never leave a bumped pin unverified.
 
-```html
-<div
-  data-composition-id="card-pro"
-  data-composition-src="compositions/card.html"
-  data-variable-values='{"title":"Pro","price":"$29"}'
-></div>
-<div
-  data-composition-id="card-enterprise"
-  data-composition-src="compositions/card.html"
-  data-variable-values='{"title":"Enterprise","price":"Custom"}'
-></div>
-```
+## 2. Adapt orthogonal inputs before routing
 
-The runtime layers each host's `data-variable-values` over the sub-comp's declared defaults on a per-instance basis, so the same source can be embedded multiple times with different content.
+A Figma source changes **how assets and design enter the project**, not which workflow owns the deliverable.
 
-**Rules of thumb:**
+If any input is a `figma.com` URL:
 
-- Always provide a sensible `default` for every declared variable. Dev preview uses defaults — without them, the composition won't render correctly until `--variables` is provided.
-- Read variables once at the top of the script (`const { title } = ...`), not inside frame loops or event handlers — `getVariables()` allocates a fresh object per call.
-- Use `--strict-variables` in CI to fail fast on undeclared keys or type mismatches.
-- Variable types are validated at render time. `string`, `number`, `boolean`, and `color` (hex string) check `typeof`; `enum` checks the value is in the declared `options`.
+1. For fresh creation, begin the intent layer (§ 4) and complete its memory and recipe reads.
+2. During input triage, run `/figma` to extract assets, brand tokens, components, and storyboard frames when present. For an existing-project edit, run `/figma` without reopening intent.
+3. Route the requested deliverable using the output from `/figma`, then continue only the selected route's unanswered intent questions.
+4. Do not drive Figma through raw MCP tools. That bypasses SVG sanitization, `.media/manifest.jsonl` provenance, and brand-token `var()` binding.
 
-## Video and Audio
+A GitHub PR URL is not a website source. A named or adopted recipe already carries its workflow; confirm adoption through the intent layer, then route to that workflow.
 
-Video must be `muted playsinline`. Audio is always a separate `<audio>` element:
+## 3. Route fresh creation
 
-```html
-<video
-  id="el-v"
-  data-start="0"
-  data-duration="30"
-  data-track-index="0"
-  src="video.mp4"
-  muted
-  playsinline
-></video>
-<audio
-  id="el-a"
-  data-start="0"
-  data-duration="30"
-  data-track-index="2"
-  src="video.mp4"
-  data-volume="1"
-></audio>
-```
+Use the first matching row. Match the requested **deliverable**, not a word or file type mentioned in passing.
 
-## Timeline Contract
+| Priority | Request                                                                                                            | Workflow                   |
+| -------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| 1        | Explicitly port an existing Remotion source                                                                        | `/remotion-to-hyperframes` |
+| 2        | Author a presentation, pitch deck, or navigable interactive deck                                                   | `/slideshow`               |
+| 3        | Add plain captions or subtitles to existing talking-head footage without changing it                               | `/embedded-captions`       |
+| 4        | Add designed graphic overlays to existing talking-head, interview, or podcast footage without changing the footage | `/talking-head-recut`      |
+| 5        | Build a beat-synced video from a music track, with no narration or website capture                                 | `/music-to-video`          |
+| 6        | Create an explicitly short, unnarrated, motion-first unit, typically under 10s                                     | `/motion-graphics`         |
+| 7        | Explain a GitHub pull request or code change from a PR reference                                                   | `/pr-to-video`             |
+| 8        | Market or showcase a website, product site, app, or company from a URL or site-specific brief                      | `/product-launch-video`    |
+| 9        | Explain a topic, article, or notes with invented visuals and no product or site capture                            | `/faceless-explainer`      |
+| 10       | Any other custom video or composition                                                                              | `/general-video`           |
 
-- All timelines start `{ paused: true }` — the player controls playback
-- Register every timeline: `window.__timelines["<composition-id>"] = tl`
-- Framework auto-nests sub-timelines — do NOT manually add them
-- Duration comes from `data-duration`, not from GSAP timeline length
-- Never create empty tweens to set duration
+Before finalizing the route, read the matching section of `references/workflow-catalog.md`. It is the canonical input/output/trigger contract available before lazy-installed workflow skills are present. If the candidate does not satisfy that entry, continue routing instead of forcing the match.
 
-## Rules (Non-Negotiable)
+### Resolve common ambiguities
 
-**Deterministic:** No `Math.random()`, `Date.now()`, or time-based logic. Use a seeded PRNG if you need pseudo-random values (e.g. mulberry32).
+- A short animated title, logo sting, stat hit, chart hit, map hit, or standalone lower-third is `/motion-graphics` when it is unnarrated and motion is the message. A static title card, narrated sequence, longer montage, or custom loop is `/general-video`.
+- An explicitly short motion graphic may use a URL, tweet, article, or screenshot as source material. A generic “make a video from this site” request is `/product-launch-video`.
+- Existing footage with captions routes to `/embedded-captions`; footage with designed information cards routes to `/talking-head-recut`. Retiming, reordering, recoloring, reframing, or remixing footage is a custom edit and falls through to `/general-video`.
+- A music file selects `/music-to-video` only when its beat grid drives the piece. Music used as a bed does not override the subject-matched route.
+- “I want a storyboard” changes the review process, not the workflow. With no other routing signal, use `/general-video`. A confirmed sketched board may itself be the requested deliverable; the review loop defines that stop point.
+- Specialized narrative workflows support up to about 3 minutes and are strongest around 30–90s. Route a clearly longer piece to `/general-video`. Length never overrides an explicit port, deck, caption, overlay, or music-driven deliverable.
 
-**GSAP:** Only animate visual properties (`opacity`, `x`, `y`, `scale`, `rotation`, `color`, `backgroundColor`, `borderRadius`, transforms). Do NOT animate `visibility`, `display`, or call `video.play()`/`audio.play()`.
+## 4. The intent layer — one conversation, before any workflow runs
 
-**Animation conflicts:** Never animate the same property on the same element from multiple timelines simultaneously.
+Fresh creation only — § 1's state table already decides whether this section runs at all (edits, project operations, briefed and resumable projects, and explicit Remotion ports never enter it). One conversation at the front door turns "make me a video" into a confirmed brief — the route, the must-have answers, the run's shape, and everything else in the user's head — handed to whichever workflow executes and made durable as `BRIEF.md` (shape: `../hyperframes-core/references/brief-format.md`). Workflows own execution; this layer owns understanding. Every workflow's opening rule points back here, so the questions are asked once no matter which door the user came through.
 
-**No `repeat: -1`:** Infinite-repeat timelines break the capture engine. Calculate the exact repeat count from composition duration: `repeat: Math.ceil(duration / cycleDuration) - 1`.
+These reads are mandatory when their condition matches; do not replace them with recollection, and read only the matching section when a reference is organized by workflow:
 
-**Synchronous timeline construction:** Never build timelines inside `async`/`await`, `setTimeout`, or Promises. The capture engine reads `window.__timelines` synchronously after page load. Fonts are embedded by the compiler, so they're available immediately — no need to wait for font loading.
+| Condition                                                   | Read before acting                                         |
+| ----------------------------------------------------------- | ---------------------------------------------------------- |
+| A route is a candidate, before confirming it                | Its section in `references/workflow-catalog.md`            |
+| The route is known, before asking route-specific questions  | Its section in `references/route-briefs.md`                |
+| Triage judged the request unformed, before any concept work | `references/pitch-round.md`                                |
+| Offering optional capabilities or collecting supplied media | The route-filtered rows in `references/capability-menu.md` |
+| Deriving `flow`, `storyboard`, mode, or canonical fields    | `../hyperframes-core/references/brief-contract.md`         |
 
-**Never do:**
+**1 — Memory before questions.** Two reads, both mandatory, before anything is asked:
 
-1. Forget `window.__timelines` registration
-2. Use video for audio — always muted video + separate `<audio>`
-3. Nest video inside a timed div — use a non-timed wrapper
-4. Use `data-layer` (use `data-track-index`) or `data-end` (use `data-duration`)
-5. Animate video element dimensions — animate a wrapper div
-6. Call play/pause/seek on media — framework owns playback
-7. Create a top-level container without `data-composition-id`
-8. Use `repeat: -1` on any timeline or tween — always finite repeats
-9. Build timelines asynchronously (inside `async`, `setTimeout`, `Promise`)
-10. Use `gsap.set()` on clip elements from later scenes — they don't exist in the DOM at page load. Use `tl.set(selector, vars, timePosition)` inside the timeline at or after the clip's `data-start` time instead.
-11. Use `<br>` in content text — forced line breaks don't account for actual rendered font width. Text that wraps naturally + a `<br>` produces an extra unwanted break, causing overlap. Let text wrap via `max-width` instead. Exception: short display titles where each word is deliberately on its own line (e.g., "THE\nIMMORTAL\nGAME" at 130px).
+- **Remembered defaults.** Let `<MEDIA_DIR>` be the installed `/media-use` skill directory. For an existing project, `<MEMORY_ROOT>` is its root. Before scaffolding, use a deliberately nonexistent probe path with no `.media`, such as `/tmp/hyperframes-intent-memory-<run-id>`; never use the current workspace. Run `node <MEDIA_DIR>/scripts/prefs.mjs get --hyperframes <MEMORY_ROOT> --json`. Make each remembered value the recommended option and name its source. The pre-project probe sees only the personal tier; do not claim project provenance.
+- **Recipes.** Run `node <MEDIA_DIR>/scripts/recipe.mjs list --hyperframes <MEMORY_ROOT> --json`. If the user names a recipe, says “like last time,” or a recipe matches the probable route, ask whether to adopt it before other brief questions — and make the offer earn the yes: say why it matches and what adopting saves (“this matches your launch-promo recipe — adopting fills destination, aspect, language, and the design spec; you'd confirm the message and the two run-shape questions”). When several match, list them and include “none.” An adopted recipe locks the fields it contains; ask only its missing fields and the run-shape questions. It does not remove review or render approval gates.
 
-## Scene Transitions (Non-Negotiable)
+**2 — Triage the input.** What is the video about — a website (sold or shown), a PR, a topic, a music track, existing footage? And is the request **formed** — the message, the material, and the occasion readable from what the user gave — or **unformed**, a subject with no take on it? Source material doesn't settle this by itself: a site, document, or PR carries its own thesis, but five tellings of that thesis are five different videos — a request whose only shape comes from its source ("make a video about this URL") is formed about the facts and unformed about the telling, and enters the round to pitch the telling. A formed request runs the layer exactly as it always has; nothing below is added for it. An unformed one goes through the pitch round after routing (step 4) and earns one question here, before anything is generated: what is the user already picturing? Their answer seeds the round (`references/pitch-round.md`). A user who says they don't know video at all gets that reference's decision map instead of a question sequence. For a genuinely exploratory request ("we need a video but I'm not sure what kind"), don't interrogate — establish the subject and what exists to show, one question at a time, then close by **recommending** a route plus how the run will review: a text storyboard first, on a live board, with optional wireframe sketches before the full build (`../hyperframes-core/references/review-loop.md`). The user hears the process before any workflow starts.
 
-Every multi-scene composition MUST follow ALL of these rules. Violating any one of them is a broken composition.
+**3 — Pick the route** (the route table and ambiguity rules in § 3), then open that route's entry in `references/route-briefs.md`. It lists the must-have questions to ask now, the **deferred asks** to announce, whether the two run-shape questions apply, and which fields the pitch round may answer.
 
-1. **ALWAYS use transitions between scenes.** No jump cuts. No exceptions.
-2. **ALWAYS use entrance animations on every scene.** Every element animates IN via `gsap.from()`. No element may appear fully-formed. If a scene has 5 elements, it needs 5 entrance tweens.
-3. **NEVER use exit animations** except on the final scene. This means: NO `gsap.to()` that animates opacity to 0, y offscreen, scale to 0, or any other "out" animation before a transition fires. The transition IS the exit. The outgoing scene's content MUST be fully visible at the moment the transition starts.
-4. **Final scene only:** The last scene may fade elements out (e.g., fade to black). This is the ONLY scene where `gsap.to(..., { opacity: 0 })` is allowed.
+**4 — The pitch round** — unformed requests only; formed requests and recipe adoptions go straight to the must-haves. Sample five concepts along five genuinely different paths, at least two from the distribution's tail, and present them all before recommending one — pick, mix, and redirect are all answers. Each pitch names the capability or two it rides, in the plain language of `references/capability-menu.md` — the toolbox experienced as concepts, not listed as a menu. On an autonomous run the same gate runs internally, and the heads-up names the direction chosen and the typical one left behind. The procedure — the sampling gate, the presentation discipline, and the decision map for users new to video — is `references/pitch-round.md`. The chosen concept answers the route's pitch-eligible fields and lands in `BRIEF.md` under `## Intent`; the capabilities it named are confirmed with it, under `## Customizations`.
 
-**WRONG — exit animation before transition:**
+**5 — The route's must-haves.** One question per field, recommended option first with its receipt (rules: `../hyperframes-core/references/brief-contract.md` § 3). Skip a question only when the request already answered it — inference is not an answer, but a chosen pitch is: fields the pitch round settled are locked with the pitch as their receipt. Then announce the route's deferred asks in one line ("after I probe the clip, I'll offer 2–3 caption identities") so the user hears the run's full shape before it starts.
 
-```js
-// BANNED — this empties the scene before the transition can use it
-tl.to("#s1-title", { opacity: 0, y: -40, duration: 0.4 }, 6.5);
-tl.to("#s1-subtitle", { opacity: 0, duration: 0.3 }, 6.7);
-// transition fires on empty frame
-```
+**6 — The two run-shape questions** — where the route's entry applies them, asked after the must-haves, each on its own:
 
-**RIGHT — entrance only, transition handles exit:**
+- **(a) Storyboard?** Review the plan, wireframe sketches, and the finished piece pass by pass on a live board (`../hyperframes-core/references/review-loop.md`) — recommended for anything beyond a couple of scenes — or skip the board and get one finished video from the confirmed brief.
+- **(b) Automation or companion?** **Automation** — the matched workflow's pipeline executes the brief end to end. **Companion** — build it together in `/general-video` with every HyperFrames capability on the table; the route's answers still describe the video, general-video executes them.
 
-```js
-// Scene 1 entrance animations
-tl.from("#s1-title", { y: 50, opacity: 0, duration: 0.7, ease: "power3.out" }, 0.3);
-tl.from("#s1-subtitle", { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.6);
-// NO exit tweens — transition at 7.2s handles the scene change
-// Scene 2 entrance animations
-tl.from("#s2-heading", { x: -40, opacity: 0, duration: 0.6, ease: "expo.out" }, 8.0);
-```
+These two are **orthogonal — never merge them into one menu.** All four `flow` × `storyboard` combinations are valid user choices (a companion run reviews on the live board too when `storyboard: yes`); a flattened three-option list ("storyboard review / one shot / companion") silently makes companion-with-storyboard unselectable. When a diagram or source material summarizes the outcomes as three branches, that is the derived behavior (`brief-contract.md` § 1), not the question shape. In a form-style question UI, keep (a) and (b) as two separate selects.
 
-## Animation Guardrails
+Signals replace questions, never add them: an ongoing "just build it" / "surprise me" / "don't ask" locks `flow: automation, storyboard: no`, and every unanswered field becomes a decision with a receipt in the heads-up. A storyboard request, however phrased, locks `storyboard: yes`. Remembered `flow` / `storyboard` values reorder the recommendations — they never make either question disappear. The run's collaborative/autonomous execution mode derives from these two answers — the old first question is never asked; the canonical mapping is `../hyperframes-core/references/brief-contract.md` § 1.
 
-- Offset first animation 0.1-0.3s (not t=0)
-- Vary eases across entrance tweens — use at least 3 different eases per scene
-- Don't repeat an entrance pattern within a scene
-- Avoid full-screen linear gradients on dark backgrounds (H.264 banding — use radial or solid + localized glow)
-- 60px+ headlines, 20px+ body, 16px+ data labels for rendered video
-- `font-variant-numeric: tabular-nums` on number columns
+**7 — Nice-to-have: recommend, then show.** Skip this step when the selected route brief says to skip the front-door capability offer. Otherwise, once the must-haves are locked, send one offer, not an interrogation — recommendations first, catalog on request. Capabilities the chosen pitch already named are settled with the concept — this step recommends from what the pitch didn't cover, and after a pitch round it is often just the two open asks and the design ask:
 
-If no `frame.md` or `design.md` exists, follow [house-style.md](./house-style.md) for aesthetic defaults.
+- **One or two rows** of `references/capability-menu.md` that this brief specifically calls for, each traced to something in the confirmed concept — a key number wants the count-up treatment, product shots want staging and a grade, a music bed means cuts on its grid. A suggestion that would fit any video fails that test; drop it. At most one may be a labeled **challenger**: higher ceiling, named cost (“the standard cut carries it; shader transitions would lift the close, at render-time cost”).
+- **Material answered on arrival.** When the user hands over a logo, a clip, or data, answer with its concrete use (“the logo could close the video as a sting — want that?”) rather than silently filing it.
+- **The two open asks stay:** anything here you want, and is there any material of your own (images, clips, logos, data) the video should carry?
+- **The design spec keeps its own three-state ask** — use an existing spec, pick a shipped preset by eye, or leave the decision to the workflow (`capability-menu.md` § The design ask).
 
-## Typography and Assets
+The full route-filtered slice appears only when the user asks what else is possible. An accepted recommendation is a confirmed answer: when it lands on a preference-backed field (a preset, a voice, a caption identity), it records like any other confirmation, and `/media-use`'s promotion rules make it the next run's recommended default. Capture answers verbatim in `BRIEF.md` under `## Assets`, `## Customizations`, or `## Notes`. One round; silence or “no” moves on.
 
-- **Built-in fonts:** Write the `font-family` you want in CSS — the compiler embeds supported fonts automatically.
-- **Custom fonts:** If the spec (`frame.md` or `design.md`) names a font that isn't built-in, the user must provide `.woff2` files in a `fonts/` directory. If missing, warn before writing HTML. When files exist, add `@font-face` declarations pointing to the local files.
-- Add `crossorigin="anonymous"` to external media
-- For dynamic text overflow, use `window.__hyperframes.fitTextFontSize(text, { maxWidth, fontFamily, fontWeight })`
-- All files live at the project root alongside `index.html`; sub-compositions use `../`
+**8 — Hand off.** Three disciplines close the conversation (invariants: `../hyperframes-core/references/brief-contract.md` § 3):
 
-## Editing Existing Compositions
+- **One integration check.** Read the combined answers for a consequence no single answer showed — vertical at 90 seconds with a chart-dense concept means charts a phone can't read — and surface it with a proposed adjustment now, not at the sketch pass.
+- **Stated and inferred, apart.** Present the locked brief as one summary — deferred asks and the run's shape included — with what the user answered and what was inferred or defaulted as two visibly separate groups, receipts on both. The inferred group is where corrections live; an autonomous heads-up is mostly that group.
+- **Revision is not confirmation.** When the user corrects the summary, fold the change in and present it again; never execute an edited-but-unconfirmed brief.
 
-- **Read actual files, don't guess.** When editing, extending, or creating companion compositions, read the existing source. Don't reconstruct hex codes from memory. Don't guess GSAP easing patterns. The composition IS the spec — extract exact values from it.
-- Match existing fonts, colors, animation patterns from what you read
-- Only change what was requested
-- Preserve timing of unrelated clips
+Then enter the workflow (`flow: companion` → `/general-video`; otherwise the matched route), installing it first per § 5. The workflow's Setup writes `BRIEF.md` from this summary as its **first action after `hyperframes init`** (never before — `init` refuses a non-empty directory), using canonical frontmatter values and preserving the user's important wording in the body — the chosen pitch, when there is one, under `## Intent`. It then records the preference-backed fields (`../hyperframes-core/references/brief-format.md` names the subset), and asks no brief question again.
 
-## Output Checklist
+## 5. Install and enter the workflow
 
-**Fast (run immediately, block on results):**
-
-- [ ] `npx hyperframes lint` and `npx hyperframes validate` both pass
-- [ ] Design adherence verified if a design spec (`frame.md` or `design.md`) exists
-
-**Slow (run in parallel while presenting the preview to the user):**
-
-- [ ] `npx hyperframes inspect` passes, or every reported overflow is intentionally marked
-- [ ] Contrast warnings addressed (see Quality Checks below)
-- [ ] Animation choreography verified (see Quality Checks below)
-
-## Quality Checks
-
-### Visual Inspect
-
-`hyperframes inspect` runs the composition in headless Chrome, seeks through the timeline, and maps visual layout issues with timestamps, selectors, bounding boxes, and fix hints. Run it after `lint` and `validate`:
+Before reading the selected workflow, install or refresh it and the core domain skills:
 
 ```bash
-npx hyperframes inspect
-npx hyperframes inspect --json
+npx hyperframes skills update <workflow-name>
 ```
 
-Failures usually mean text is spilling out of a bubble/card, a fixed-size label is clipping dynamic copy, or text has moved off the canvas. Fix by increasing container size or padding, reducing font size or letter spacing, adding a real `max-width` so text wraps inside the container, or using `window.__hyperframes.fitTextFontSize(...)` for dynamic copy.
+Use the bare name without `/`. If the command fails, surface the error; do not reconstruct the workflow from memory. Everything else about installation — the core-vs-lazy split, what `init` refreshes, diagnosis, CI opt-out, and the no-CLI fallback — lives in `references/skill-lifecycle.md`.
 
-Use `--samples 15` for dense videos and `--at 1.5,4,7.25` for specific hero frames. Repeated static issues are collapsed by default to avoid flooding agent context. If overflow is intentional for an entrance/exit animation, mark the element or ancestor with `data-layout-allow-overflow`. If a decorative element should never be audited, mark it with `data-layout-ignore`.
+## 6. Load domain skills on demand
 
-`hyperframes layout` is the compatibility alias for the same check.
+| Need                                                                                                                | Skill                    |
+| ------------------------------------------------------------------------------------------------------------------- | ------------------------ |
+| Composition structure, timing attributes, tracks, variables, determinism                                            | `/hyperframes-core`      |
+| Motion rules, scene blueprints, transitions, runtime adapters                                                       | `/hyperframes-animation` |
+| Seek-safe GSAP, CSS, Anime.js, WAAPI, FLIP, paths, masks, SVG, 3D keyframes, or `hyperframes keyframes` diagnostics | `/hyperframes-keyframes` |
+| Design specs, concept, palette, typography, narration, beat planning                                                | `/hyperframes-creative`  |
+| Images, icons, logos, audio, captions, grades, LUTs, reusable media                                                 | `/media-use`             |
+| Init, lint, check, snapshots, compare, batch render, Studio, render, publish, or diagnostics                        | `/hyperframes-cli`       |
+| Registry blocks and components                                                                                      | `/hyperframes-registry`  |
+| Figma assets, tokens, components, or storyboard frames as reconstructed motion                                      | `/figma`                 |
 
-### Contrast
-
-`hyperframes validate` runs a WCAG contrast audit by default. It seeks to 5 timestamps, screenshots the page, samples background pixels behind every text element, and computes contrast ratios. Failures appear as warnings:
-
-```
-⚠ WCAG AA contrast warnings (3):
-  · .subtitle "secondary text" — 2.67:1 (need 4.5:1, t=5.3s)
-```
-
-If warnings appear:
-
-- On dark backgrounds: brighten the failing color until it clears 4.5:1 (normal text) or 3:1 (large text, 24px+ or 19px+ bold)
-- On light backgrounds: darken it
-- Stay within the palette family — don't invent a new color, adjust the existing one
-- Re-run `hyperframes validate` until clean
-
-Use `--no-contrast` to skip if iterating rapidly and you'll check later.
-
-### Design Adherence
-
-If a design spec (`frame.md` or `design.md`) exists, verify the composition follows it after authoring. Read the HTML and check:
-
-1. **Colors** — every hex value in the composition appears in the spec's palette section (however the user labeled it: Colors, Palette, Theme, etc.). Flag any invented colors.
-2. **Typography** — font families and weights match the spec's type spec. No substitutions.
-3. **Corners** — border-radius values match the declared corner style, if specified.
-4. **Spacing** — padding and gap values fall within the declared density range, if specified.
-5. **Depth** — shadow usage matches the declared depth level, if specified (flat = none, subtle = light, layered = glows).
-6. **Avoidance rules** — if the spec has a section listing things to avoid (commonly "What NOT to Do", "Don'ts", "Anti-patterns", or "Do's and Don'ts"), verify none are present.
-
-Report violations as a checklist. Fix each one before serving.
-
-If no design spec exists (house-style-only path), verify:
-
-1. **Palette consistency** — the same bg, fg, and accent colors are used across all scenes. No per-scene color invention.
-2. **No lazy defaults** — check the composition against house-style.md's "Lazy Defaults to Question" list. If any appear, they must be a deliberate choice for the content, not a default.
-
-### Animation Map
-
-After authoring animations, run the animation map to verify choreography:
-
-```bash
-node skills/hyperframes/scripts/animation-map.mjs <composition-dir> \
-  --out <composition-dir>/.hyperframes/anim-map
-```
-
-Outputs a single `animation-map.json` with:
-
-- **Per-tween summaries**: `"#card1 animates opacity+y over 0.50s. moves 23px up. fades in. ends at (120, 200)"`
-- **ASCII timeline**: Gantt chart of all tweens across the composition duration
-- **Stagger detection**: reports actual intervals (`"3 elements stagger at 120ms"`)
-- **Dead zones**: periods over 1s with no animation — intentional hold or missing entrance?
-- **Element lifecycles**: first/last animation time, final visibility
-- **Scene snapshots**: visible element state at 5 key timestamps
-- **Flags**: `offscreen`, `collision`, `invisible`, `paced-fast` (under 0.2s), `paced-slow` (over 2s)
-
-Read the JSON. Scan summaries for anything unexpected. Check every flag — fix or justify. Verify the timeline shows the intended choreography rhythm. Re-run after fixes.
-
-Skip on small edits (fixing a color, adjusting one duration). Run on new compositions and significant animation changes.
-
----
-
-## References (loaded on demand)
-
-- **[references/captions.md](references/captions.md)** — Captions, subtitles, lyrics, karaoke synced to audio. Tone-adaptive style detection, per-word styling, text overflow prevention, caption exit guarantees, word grouping. Read when adding any text synced to audio timing.
-- **[references/audio-reactive.md](references/audio-reactive.md)** — Audio-reactive animation: map frequency bands and amplitude to GSAP properties. Read when visuals should respond to music, voice, or sound.
-- **[references/css-patterns.md](references/css-patterns.md)** — CSS+GSAP marker highlighting: highlight, circle, burst, scribble, sketchout. Deterministic, fully seekable. Read when adding visual emphasis to text.
-- **[references/video-composition.md](references/video-composition.md)** — Video-medium rules: density, color presence, scale, frame composition, the design spec as brand not layout. **Always read** — these override web instincts.
-- **[references/beat-direction.md](references/beat-direction.md)** — Beat planning: concept, mood, choreography verbs, rhythm templates, transition decisions, depth layers. **Always read for multi-scene compositions.**
-- **[references/typography.md](references/typography.md)** — Typography: font pairing, OpenType features, dark-background adjustments, font discovery script. **Always read** — every composition has text.
-- **[references/motion-principles.md](references/motion-principles.md)** — Motion design principles, image motion treatment, load-bearing GSAP rules. **Always read** — every composition has motion.
-- **[references/techniques.md](references/techniques.md)** — 13 primitive animation techniques with code patterns: SVG drawing, Canvas 2D, CSS 3D, kinetic type, Lottie, video compositing, typing, variable fonts, MotionPath, velocity transitions, audio-reactive, clip-path reveals, WebGL shaders. Adapt the patterns — don't copy-paste. (For pre-built UI templates — terminal chrome, device mockups, moodboard layouts — see `registry/blocks/`.)
-- **[references/html-in-canvas-patterns.md](references/html-in-canvas-patterns.md)** — HTML-in-Canvas patterns: live DOM as GPU texture via `drawElementImage` + `layoutsubtree`. Shared boilerplate + ~6 effect recipes (iPhone/MacBook mockups, liquid glass, magnetic, portal, shatter, text cursor). Use for 1–3 hero beats per video.
-- **[references/narration.md](references/narration.md)** — Pacing, tone, script structure, number pronunciation, opening line patterns. Read when the composition includes voiceover or TTS.
-- **[references/design-picker.md](references/design-picker.md)** — Create a design.md via visual picker. Read when no `frame.md` or `design.md` exists and the user wants to create one.
-- **[visual-styles.md](visual-styles.md)** — 8 named visual styles with hex palettes, GSAP easing signatures, and shader pairings. Read when user names a style or when generating a design spec.
-- **[house-style.md](house-style.md)** — Default motion, sizing, and color palettes when no `frame.md` or `design.md` is specified.
-- **[patterns.md](patterns.md)** — PiP, title cards, slide show patterns.
-- **[data-in-motion.md](data-in-motion.md)** — Data, stats, and infographic patterns.
-- **[references/transcript-guide.md](references/transcript-guide.md)** — Caption-side transcript handling: input formats, mandatory quality check, cleaning JS, OpenAI/Groq API fallback, "if no transcript exists" flow. (For the `transcribe` CLI invocation, model selection rules, and the `.en` gotcha, see the `hyperframes-media` skill.)
-- **[references/dynamic-techniques.md](references/dynamic-techniques.md)** — Dynamic caption animation techniques (karaoke, clip-path, slam, scatter, elastic, 3D).
-
-- **[references/transitions.md](references/transitions.md)** — Scene transitions: crossfades, wipes, reveals, shader transitions. Energy/mood selection, CSS vs WebGL guidance. **Always read for multi-scene compositions** — scenes without transitions feel like jump cuts.
-  - [transitions/catalog.md](references/transitions/catalog.md) — Hard rules, scene template, and routing to per-type implementation code.
-  - Shader transitions are in `@hyperframes/shader-transitions` (`packages/shader-transitions/`) — read package source, not skill files.
-
-GSAP patterns and effects are in the `/gsap` skill.
+Domain skills never take ownership of the end-to-end deliverable. Load only what the active workflow needs.
 
 ---
 

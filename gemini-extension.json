@@ -1154,7 +1154,7 @@
     },
     "typo3-14-update": {
       "name": "typo3-14-update",
-      "description": "End-to-end v12/v13 to TYPO3 14.3 LTS project and extension updater with production-readiness gates",
+      "description": "v12/v13 to TYPO3 14.3 LTS updater around a visual regression main loop, finishing as a verified local DDEV site; never deploys to live",
       "triggers": [
         "complete v14 update",
         "v14-only",
@@ -1265,7 +1265,7 @@
     },
     "typo3-fractor": {
       "name": "typo3-fractor",
-      "description": "Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML)",
+      "description": "Automated non-PHP migrations (FlexForm, TypoScript, Fluid, YAML, XLIFF) with Fractor 1.0",
       "triggers": [
         "fractor",
         "flexform",
@@ -1350,7 +1350,7 @@
     },
     "typo3-rector": {
       "name": "typo3-rector",
-      "description": "TYPO3 v14 upgrade patterns using Rector",
+      "description": "TYPO3 v14 upgrade patterns using Rector (typo3-rector 3.14, Rector 2.5)",
       "triggers": [
         "rector",
         "refactoring",

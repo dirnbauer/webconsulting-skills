@@ -168,6 +168,18 @@ After gathering from multiple sources, synthesize into:
 
 ## Persona Generation
 
+### When there are no reviews yet
+
+Early-stage products (or new categories) lack first-party review data. Don't invent personas — walk outward through proxy sources, in order:
+
+1. **Your own differentiator** — what the product does differently defines who feels that difference most; write the hypothesis down as a hypothesis
+2. **Direct competitors' reviews** — their customers describe the problem space in their words (note what's praised and what's missing)
+3. **Comparable products on marketplaces** — Amazon/app-store reviews for adjacent solutions to the same job
+4. **Adjacent brands sharing the audience** — what else this buyer buys; their reviews reveal the buyer's broader language and values
+
+Personas built this way are provisional: tag each with its proxy source, and replace proxy evidence with first-party evidence as real reviews arrive.
+
+
 Personas should be built from research, not invented. Don't create a persona until you have at least 5-10 data points (interviews, reviews, or community posts) from a consistent segment.
 
 ### Persona Structure

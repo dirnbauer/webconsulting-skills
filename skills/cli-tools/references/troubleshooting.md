@@ -26,6 +26,42 @@ When a tool installs but still shows "command not found":
    exec $SHELL             # Restart shell
    ```
 
+## Node/nvm: global installs land off-PATH (a `node` shim hijacks npm's prefix)
+
+When a global install succeeds (`npm i -g <tool>` reports "added N packages") but
+`command -v <tool>` then fails — or `npm prefix -g` points at a Node version that
+isn't your active/default one — suspect a **manual `node` symlink on PATH ahead of
+nvm** (commonly `~/.local/bin/node`, often created to give another tool a stable
+node).
+
+Because that shim is first on PATH, **every** `node`/`npm` resolves through it, so
+npm's global prefix is locked to that Node's tree — and globals (eslint, pnpm,
+prettier, …) land in a `bin/` that isn't on PATH. npm self-update can also hit the
+wrong tree.
+
+Diagnose:
+
+```bash
+command -v node                 # may show only the shim, e.g. ~/.local/bin/node
+node -p 'process.execPath'      # the REAL node the shim points at
+npm prefix -g                   # the prefix globals install into
+nvm version default             # what nvm thinks the default is
+```
+
+If `process.execPath` / `npm prefix -g` disagree with the nvm default, the shim is
+the cause.
+
+Fix — remove or re-point the shim identified above (the `node` on PATH that is
+**not** under `~/.nvm` — commonly `~/.local/bin/node`, but use the path your
+diagnosis returned), then align the nvm default:
+
+```bash
+SHIM=~/.local/bin/node          # <- replace with the shim path from the diagnosis
+rm "$SHIM"                      # or: ln -sf "$(nvm which default)" "$SHIM"
+nvm alias default node          # point default at the newest installed Node
+hash -r
+```
+
 ## Installation Blocked (Permission/System Restrictions)
 
 When system prevents normal installation, use these alternatives:
@@ -59,3 +95,23 @@ When system prevents normal installation, use these alternatives:
    npm install -g <tool> --prefix ~/.npm-global
    cargo install <tool>  # Installs to ~/.cargo/bin
    ```
+
+## Batch Updaters That "Freeze"
+
+A batch update script that suppresses output (`cmd >/dev/null 2>&1`) but leaves
+stdin attached to the terminal turns any hidden interactive prompt into an
+invisible, indefinite hang — observed with `composer global update` waiting
+hours on an unseen GitHub-token prompt.
+
+When wrapping package-manager commands for unattended runs:
+
+1. **Detach stdin**: run every command `</dev/null` so a prompt hits EOF and
+   fails fast instead of blocking on the terminal.
+2. **Prefer the tool's non-interactive flag** (`composer --no-interaction`,
+   `apt-get -y` + `DEBIAN_FRONTEND=noninteractive`, `npm --yes`).
+3. **Surface failures**: don't `|| true` into silence — capture output to a
+   temp file and print the exit code plus the last ~20 lines when a command
+   fails, or the hang/failure is undiagnosable.
+4. **Diagnose a stuck run** via `/proc/<pid>/fd` (fd 0 → `/dev/pts/*` with
+   fd 1/2 → `/dev/null` = waiting on an invisible prompt) and
+   `/proc/<pid>/wchan` (`wait_woken` ≈ tty read).
