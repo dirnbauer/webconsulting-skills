@@ -23,6 +23,19 @@ description: >-
 
 Update one extension, sitepackage, or full project from TYPO3 v12/v13 to supported TYPO3 14.3 LTS. The deliverable is the updated installation running in the local DDEV project — installable, migrated, wizard-complete, tested, documented, and rendering identically to its pre-update baseline. Produce v14-only code; do not retain v12/v13 compatibility branches or shims.
 
+## The outcome this skill delivers
+
+An old TYPO3 project arrives; a modern v14 site leaves. Four properties define "done", each proven by evidence rather than asserted — when a phase cannot produce its evidence, the update is not finished:
+
+| Goal | Proven by |
+|---|---|
+| **Fast** | Lighthouse over a sampled sitemap set, optimized in a fix-and-re-measure loop (Phase 9) |
+| **Correct** | The visual regression main loop — identical rendering before and after — plus upgrade wizards, tests, static analysis, and the backend module sweep (Phases 2, 8, 9) |
+| **Accessible** | An axe-core-driven WCAG 2.2 AA loop run to green before the baselines and re-verified after the update (Phases 2, 8) |
+| **Easy to use** | Visual Editor inline editing and a migrated CKEditor RTE with language and abbreviation support and live-matching styles (Phase 7) |
+
+Every phase serves one of these four; when a decision is ambiguous, choose the option that best preserves them.
+
 ## Operating contract
 
 - Everything runs inside the local DDEV project: Composer through `ddev composer`, the TYPO3 CLI through `ddev typo3` (or `ddev exec vendor/bin/typo3`), tests and tools through `ddev exec`, and browser verification against the DDEV URL.
@@ -83,7 +96,7 @@ Select additional TYPO3 skills after inventory: `typo3-batch`, `typo3-content-bl
 ## Phase 2: Gate the site before the update
 
 1. Validate `sitemap.xml` for every configured site language before any update work: each language has its own reachable sitemap variant at the DDEV URL, entries use the correct base and language prefixes, hreflang and canonical configuration are consistent, every listed URL answers 200 and is indexable, and the expected page tree is covered without excluded types leaking in. Fix site configuration and `EXT:seo` settings first — the sitemaps are the sampling source for every following loop.
-2. Run the accessibility loop until green: audit representative pages per language with `typo3-wcag22-aa-agentic`, apply fixes using `typo3-accessibility` patterns, and re-audit until WCAG 2.2 AA passes with zero critical violations. Accessibility fixes change markup, which is why they land before the visual baselines: the baselines then capture the corrected state, and the update must preserve both pixels and accessibility.
+2. Run the accessibility loop until green: audit representative pages per language with `typo3-wcag22-aa-agentic` (axe-core through Playwright), apply fixes using `typo3-accessibility` patterns, and re-audit until WCAG 2.2 AA passes with zero critical axe violations. Accessibility fixes change markup, which is why they land before the visual baselines: the baselines then capture the corrected state, and the update must preserve both pixels and accessibility.
 3. Capture the visual baselines: randomly sample the validated sitemaps — not all pages. Run the harness's `get-urls` action against the DDEV URL (per-language sitemaps plus golden-path URLs, random fill, capped at 100), make sure the homepage and every distinct page type or template are represented, and persist the resulting URL file, device/viewport matrix (the harness shoots with Chromium), and settings so the identical sample re-runs after the update. Then shoot the baselines with `take-screenshots`.
 
 ## Phase 3: Set the supported target, environment, and dependencies
@@ -135,7 +148,7 @@ Every installed extension gets updated — third-party and local alike. The site
 
 Run each applicable feature block after the core upgrade and before closing the visual loop. After every block, re-shoot the affected sample pages: an intentional rendering change needs explicit user approval and a recorded baseline refresh; everything else must stay pixel-identical.
 
-1. **Solr** — when the site uses `EXT:solr`: read the [EXT:solr version matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) for the release row matching TYPO3 14.3, update the local DDEV Solr service through the official `ddev/ddev-solr` add-on to that Apache Solr version with the matching configset, and update EXT:solr, search templates, and configuration following the `typo3-solr` skill. Rebuild the index queue and reindex fully; the backend Info module must show the site as active, and frontend search — including empty and paginated results — is re-verified.
+1. **Solr** — when the site uses `EXT:solr`: read the [EXT:solr version matrix](https://docs.typo3.org/p/apache-solr-for-typo3/solr/main/en-us/Appendix/VersionMatrix.html) for the release row matching TYPO3 14.3, update the local DDEV Solr service through the official `ddev/ddev-solr` add-on to that Apache Solr version with the matching configset, and update EXT:solr, search templates, and configuration following the `typo3-solr` skill. Require the 14 line with a per-package stability flag — `ddev composer require apache-solr-for-typo3/solr:"^14.0@RC"` — because that line is currently a release candidate. The flag keeps the project's global `minimum-stability: stable` and `prefer-stable: true` intact, loosening stability for this one package only, and it needs no later edit: Composer prefers the stable 14.0.0 automatically as soon as it ships. Verify the resolved version and its TYPO3 requirement before continuing, and never loosen global stability to install a single package. Rebuild the index queue and reindex fully; the backend Info module must show the site as active, and frontend search — including empty and paginated results — is re-verified.
 2. **Visual Editor**: require the latest v14-compatible `friendsoftypo3/visual-editor` release, verified on Packagist at execution time, and migrate the Fluid templates with the `typo3-visual-editor` skill (`f:render.text`, content areas, colPos migration). Verify inline editing works on a representative page in the backend; the migration must not change frontend rendering — the visual sample proves it.
 3. **CKEditor RTE**: migrate old RTE presets into the current v14 `rte_ckeditor` YAML — import the old settings, drop obsolete keys, and verify every option against the installed version. Enable text part language so editors can mark passages with `<span lang="…">` for the site's configured languages, and add abbreviation support through a maintained CKEditor 5 plugin extension found on TER or Packagist and verified against v14 — never guess plugin package names. Align the editor's content styles with the live site's frontend styles, but scale down oversized elements (for example very large h2 headings) for editing ergonomics. Then verify live in the backend: open a rich-text content element and confirm the preset loads with the language and abbreviation controls and the intended styling.
 4. **Security headers and checklist**: apply the `typo3-security` skill's checklist — security headers (HSTS, `X-Content-Type-Options`, `X-Frame-Options`/`frame-ancestors`, `Referrer-Policy`, `Permissions-Policy`), `trustedHostsPattern`, backend hardening, and CSP through the TYPO3 v14 CSP API — configured at a single layer without conflicting duplicates. Verify the header values on DDEV responses; differences that only exist on production layers (proxy, CDN) belong in the deployment handover and are never applied to live from here.
@@ -178,7 +191,7 @@ Finish only when all applicable items are true:
 - Sitemaps for every site language were validated before the update, and the persisted sample lists exist for visual regression and Lighthouse.
 - The visual regression loop is closed: the persisted sample renders identically before and after the update with zero unexplained differences, and accessibility is green both before the baselines and after the update.
 - Every backend module opens without errors in the automated module sweep, and the sweep report is recorded.
-- When the site uses `EXT:solr`, the local Solr server runs the matrix-supported version, the index is fully rebuilt, and the Info module shows the site as active.
+- When the site uses `EXT:solr`, the resolved extension is the newest 14 release (release candidates allowed through a per-package stability flag, never through global `minimum-stability`), the local Solr server runs the matrix-supported version, the index is fully rebuilt, and the Info module shows the site as active.
 - When Visual Editor is installed, inline editing is verified on a representative page and frontend rendering stayed identical.
 - The migrated RTE preset loads in the backend with language and abbreviation controls and live-matching styles.
 - Security headers follow the applied checklist at a single layer and are verified on DDEV responses.
